@@ -1,0 +1,181 @@
+<div class="manufacturing-Wrap productionView" *ngIf="SwitchUi">
+	<div class="viewdata-title">
+		<h2><img src="assets/images/icon-list.svg" height="25" width="25" alt=""> Production setup</h2>
+		<div class="pull-right right-top-btns">
+            <a class="btn btn-link" [routerLink]="['/main/manufacturing/production-entry']"><img src="assets/images/icon-plus.svg" height="25" width="25" alt=""></a>
+        </div>
+	</div>
+	<div class="contentBox">
+		<div class="leftContent">
+			<div class="card">
+				<div class="productSetupBox" 
+				data-infinite-scroll
+         debounce [infiniteScrollDistance]="scrollDistance" [infiniteScrollUpDistance]="scrollUpDistance" [infiniteScrollThrottle]="throttle" (scrolled)="onScrollDown($event)" [scrollWindow]="false">
+					<table style="width:100%" class="table-hover default-to-custom">
+			           <tbody [@fadeIn]="listrecords?.length"  fxLayout="row wrap" class="list">
+                    <ng-container *ngFor="let i of listrecords; index as j">
+                        <tr style="vertical-align:top;" class="x-animated fadeIn d-1 in" fxFlex="100" fxFlex.lt-sm="200"  >
+                            <td width="64px" class="text-center"><h4 class="rownumber ng-binding">{{j+1}}</h4></td>
+                            <td class="text-left">
+                                <b><span class="ng-binding">{{i?.manufacturingNumber}}</span> &nbsp;</b>
+                                <div class="small help-block line-divider">&nbsp;</div>
+                            </td>
+                            <td class="text-left">
+                                    <b><span class="ng-binding">{{i.product?.title}}</span>&nbsp;</b>
+                                    <div class="small help-block line-divider">&nbsp;</div>
+                            </td>
+                            <td class="text-left">
+                                    <b><span class="ng-binding">{{i.composition?.title}}</span>&nbsp;</b>
+                                    <div class="small help-block line-divider ng-binding" ng-bind="productCategory.title || '&nbsp;'">&nbsp;</div>
+                            </td>
+                            <td class="text-right">
+                                <b><span class="ng-binding">{{i?.quantity}}</span>&nbsp;</b>
+                                <div class="small help-block line-divider">&nbsp;</div>
+                            </td>
+                            <td width="100px" class="text-right">
+                                <a class="btn btn-success btn-sm" (click)="openMakeEntry(i,j)">Make entry</a>
+                            </td>
+                            <td width="100px" class="text-left">
+                                <div class="rowactions">
+                                      <a class="btn btn-link hover-btn" (click)="editItem(i)"><i class="fa fa-pencil"></i></a>
+                                      <a class="btn btn-link hover-btn" (click)="deleteItem(i)"><i class="fa fa-remove text-danger"></i></a>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr *ngIf="i.makeEntryflag" class="manufacturing-entry-form">
+                          <td colspan="7">
+                              <div class="alert alert-success manufacturing-entry">
+                                  <h4>Manufacturing entry</h4>
+                                  <br>
+                                  <div class="row tier-content">
+                                      <div class="col-4">
+                                          <table class="table table-bordered ">
+                                              <tbody><tr>
+                                                  <td width="50%" class="text-right">Product:</td>
+                                                  <td><b ng-bind="vm.record.product.title" class="ng-binding">{{i.product?.title}}</b></td>
+                                              </tr>
+                                              <tr>
+                                                  <td class="text-right">Quantity: </td>
+                                                  <td><b ng-bind="vm.record.quantity" class="ng-binding">{{i?.quantity}}</b></td>
+                                              </tr>
+                                              <tr>
+                                                  <td class="text-right">Composition: </td>
+                                                  <td><b ng-bind="vm.record.composition.title" class="ng-binding">Composition 1</b></td>
+                                              </tr>
+                                          </tbody></table>
+                                      </div>
+                                      <div class="col-5">
+                                        <mat-form-field class="example-full-width">
+                                          <input matInput placeholder="QUANTITY" name="quantity" id="quantity" [(ngModel)]="i.quantity" (keydown)="AllowNumbers($event)" 
+                                          (keyup)="quantitychnge(i.quantity)">  
+                                        </mat-form-field>
+                                        <div>
+                                          <mat-form-field class="example-full-width">
+                                            <input matInput placeholder="Notes" name="notes" id="notes" [(ngModel)]="i.notes">
+                                            
+                                          </mat-form-field>
+                                        </div>
+                                        
+                                      </div>
+                                      <div class="col-3 text-right">
+                                        <div class="btnBox">
+                                            <button type="submit" (click)="editMakeEntry(i)" class="btn btn-success"><i class="fa fa-plus"></i> Complete</button>
+                                            <button type="reset" class="btn btn-default" (click)="closeMakeEntry(i,j)"><i class="fa fa-remove"></i> Cancel</button>
+                                         </div>     
+                                      </div>
+                                  </div>
+                              </div>
+                          </td>
+                        </tr>
+                    </ng-container>
+			            </tbody>
+			        </table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="manufacturing-Wrap" *ngIf="!SwitchUi">
+    <div class="viewdata-title">
+      <h2>Manage Composition</h2>
+    </div>
+    <div class="contentBox">
+      <div class="leftContent">
+        <div class="card">
+          <div class="manageBox">
+            <div class="row">
+              <div class="col-sm-3" style="padding-right:30px;">
+                <div class="form-group">
+                    <!-- <label class="gray-label">Product</label> -->
+                    <ng-select [clearable]="false" [(ngModel)]="productionitem.product" placeholder ="Product" [items]="productNameItem | async" bindLabel="title" [notFoundText]="notFoundText"
+                     name="productName" id="productName" autocomplete="off" (change)="productSelected($event)" [typeahead]="MainSearchdataSource">
+                    </ng-select>
+              
+                </div>
+                  <div class="form-group">
+                     <!-- <label class="gray-label">COMPOSITION</label> -->
+                     <ng-select [clearable]="false"  [items]="compositionrecords" placeholder ="Composition" bindLabel="title" [(ngModel)]="productionitem.composition"
+                     name="composition" id="composition" autocomplete="off" (change)="compositionSelected($event)"
+                     >
+                     </ng-select>
+                  </div>
+                <div class="form-group">
+                  <mat-form-field class="example-full-width">
+                    <input matInput placeholder="QUANTITY" name="quantity" [(ngModel)]="productionitem.quantity" (keydown)="AllowNumbers($event)">
+                  </mat-form-field>
+                </div>
+                <div class="form-group">
+                    <!-- <label>Branch</label> -->
+                    <ng-select [clearable]="false"  [items]="branchrecords" placeholder ="Branch" bindLabel="title" [(ngModel)]="productionitem.branch"
+                        name="branch" id="selectproduct" autocomplete="off">
+                        </ng-select>
+
+                  </div>
+
+              </div>
+              <div class="col-sm-9" style="padding-left: 30px; border-left:2px solid #f0f0f0;" *ngIf="rowRepeatArr.length">
+                <h4>{{productionitem?.composition?.title}} Ingredients</h4>
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th width="20%">Product</th>
+                      <th width="20%">Quantity</th>
+                      <th width="20%">UoM</th>
+                      <th width="20%">Percent</th>
+                      <th width="20%">Price</th>
+                    </tr>
+                  </thead>
+                  <tbody [@fadeIn]="rowRepeatArr?.length"  fxLayout="row wrap">
+                    <tr *ngFor="let i of rowRepeatArr; index as j" class="x-animated fadeIn d-3 in" fxFlex="150" fxFlex.lt-sm="300">
+                      <td>{{i.product.title}}
+                      </td>
+                      <td>{{i.quantity}}
+                      </td>
+                      <td>{{unit}}
+                       </td>
+                      <td>{{i.percent}}
+                       </td>
+                      <td>{{i.price}}
+                      </td>
+                    
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="btn-bar">
+                  <button class="btn btn-success" (click)="editproductionEntry()">
+                    <i class="fa fa-save"></i> Save</button>
+                  <a class="btn btn-default"(click)="changeUi()">
+                    <i class="fa fa-remove"></i> Cancel</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

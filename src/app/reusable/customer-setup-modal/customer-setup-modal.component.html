@@ -1,0 +1,339 @@
+<div class="add-customer-setup-wrap">
+    <div class="viewdata-title">
+      <div class="right-top-btns">
+        <a ng-click="vm.isEditorVisible = false" class="btn btn-link pull-right">
+          <i class="fa fa-remove fa-2w"></i>
+          <span>Close</span>
+        </a>
+      </div>
+      <h2>
+        <i class="fa fa-pencil"></i>
+        Manage
+        <span ng-show="vm.isClient" aria-hidden="false">Client</span>
+        <span ng-show="vm.isVendor" aria-hidden="true" class="ng-hide">Vendor</span>
+      </h2>
+    </div>
+    <div class="contentBox">
+      <div class="card">
+        <div class="row viewdata-wrapper">
+          <div class="col-md-1 tier-menu">
+            <ol class="nav">
+          
+              <li [ngClass]="config.stepOne ? 'active' : ''" (click)="toggle('stepOne')">
+                <a>
+                  <span>Basic profile</span>
+                </a>
+              </li>
+              <li [ngClass]="config.stepTwo ? 'active' : ''" (click)="toggle('stepTwo')">
+                <a>
+                  <span>Notes</span>
+                </a>
+              </li>
+              <li [ngClass]="config.stepThree ? 'active' : ''" (click)="toggle('stepThree')">
+                <a>
+                  <span>Payment terms</span>
+                </a>
+              </li>
+              <!-- <li [ngClass]="blinktitle3 == 'basicprofile'?'active':''"><a><span>Bank information</span></a></li> -->
+              <li [ngClass]="config.stepFour ? 'active' : ''" (click)="toggle('stepFour')">
+                <a>
+                  <span>Sales information</span>
+                </a>
+              </li>
+              <!-- <li class=""><a><span>Sales information</span></a></li> -->
+            </ol>
+          </div>
+          <div class="col-sm-10 tier-content">
+            <form>
+                <div *ngIf="config.stepOne" class="infoBox">
+                    <h3>Basic profile</h3>
+                    <div class="row">
+                      <div class="col-md-8">
+                        <mat-form-field class="example-full-width">
+                          <input matInput placeholder="Client" name="client">
+                        </mat-form-field>
+                      </div>
+                      <div class="col-md-4">
+                        <mat-form-field class="example-full-width">
+                          <input matInput placeholder="Contact Person" name="contactperson">
+                        </mat-form-field>
+        
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-3">
+                        <mat-form-field class="example-full-width">
+                          <input matInput placeholder="Address line 1" name="addressline1">
+                        </mat-form-field>
+                      </div>
+                      <div class="col-md-3">
+                        <mat-form-field class="example-full-width">
+                          <input matInput placeholder="Address line 2" name="addressline2">
+                        </mat-form-field>
+        
+                      </div>
+                      <div class="col-md-3">
+                        <mat-form-field class="example-full-width">
+                          <input matInput placeholder="city" name="city">
+                        </mat-form-field>
+        
+                      </div>
+                      <div class="col-md-3">
+                        <mat-form-field class="example-full-width">
+                          <input matInput placeholder="state" name="state">
+                        </mat-form-field>
+        
+                      </div>
+                    </div>
+        
+                    <div class="row">
+                      <div class="col-md-3">
+                        <mat-form-field>
+                          <mat-label>Country</mat-label>
+                          <mat-select>
+                            <mat-option *ngFor="let i of countryrecords" [value]="i">
+                              {{i.title}}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
+                      <div class="col-md-3">
+                        <mat-form-field class="example-full-width">
+                          <input matInput placeholder="Zipcode" name="zipcode">
+                        </mat-form-field>
+        
+                      </div>
+                      <div class="col-md-3">
+                        <mat-form-field class="example-full-width">
+                          <input matInput placeholder="Email" name="email">
+                        </mat-form-field>
+        
+                      </div>
+                      <div class="col-md-3">
+                        <mat-form-field class="example-full-width">
+                          <input matInput placeholder="Website" name="website">
+                        </mat-form-field>
+                      </div>
+                    </div>
+                  </div>
+                  <div *ngIf="config.stepTwo" class="infoBox">
+                      <h3>Notes</h3>
+                      <div class="row">
+                        <div class="col-md-8">
+                          <mat-form-field class="example-full-width">
+                            <input matInput placeholder="Client" name="client">
+                          </mat-form-field>
+                        </div>
+                        <div class="col-md-4">
+                          <mat-form-field class="example-full-width">
+                            <input matInput placeholder="Contact Person" name="contactperson">
+                          </mat-form-field>
+          
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-3">
+                          <mat-form-field class="example-full-width">
+                            <input matInput placeholder="Address line 1" name="addressline1">
+                          </mat-form-field>
+                        </div>
+                        <div class="col-md-3">
+                          <mat-form-field class="example-full-width">
+                            <input matInput placeholder="Address line 2" name="addressline2">
+                          </mat-form-field>
+          
+                        </div>
+                        <div class="col-md-3">
+                          <mat-form-field class="example-full-width">
+                            <input matInput placeholder="city" name="city">
+                          </mat-form-field>
+          
+                        </div>
+                        <div class="col-md-3">
+                          <mat-form-field class="example-full-width">
+                            <input matInput placeholder="state" name="state">
+                          </mat-form-field>
+          
+                        </div>
+                      </div>
+          
+                      <div class="row">
+                        <div class="col-md-3">
+                          <mat-form-field>
+                            <mat-label>Country</mat-label>
+                            <mat-select>
+                              <mat-option *ngFor="let i of countryrecords" [value]="i">
+                                {{i.title}}
+                              </mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                        </div>
+                        <div class="col-md-3">
+                          <mat-form-field class="example-full-width">
+                            <input matInput placeholder="Zipcode" name="zipcode">
+                          </mat-form-field>
+          
+                        </div>
+                        <div class="col-md-3">
+                          <mat-form-field class="example-full-width">
+                            <input matInput placeholder="Email" name="email">
+                          </mat-form-field>
+          
+                        </div>
+                        <div class="col-md-3">
+                          <mat-form-field class="example-full-width">
+                            <input matInput placeholder="Website" name="website">
+                          </mat-form-field>
+                        </div>
+                      </div>
+                    </div>
+                    <div *ngIf="config.stepThree" class="infoBox">
+                        <h3>Payment terms</h3>
+                        <div class="row">
+                          <div class="col-md-8">
+                            <mat-form-field class="example-full-width">
+                              <input matInput placeholder="Client" name="client">
+                            </mat-form-field>
+                          </div>
+                          <div class="col-md-4">
+                            <mat-form-field class="example-full-width">
+                              <input matInput placeholder="Contact Person" name="contactperson">
+                            </mat-form-field>
+            
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-3">
+                            <mat-form-field class="example-full-width">
+                              <input matInput placeholder="Address line 1" name="addressline1">
+                            </mat-form-field>
+                          </div>
+                          <div class="col-md-3">
+                            <mat-form-field class="example-full-width">
+                              <input matInput placeholder="Address line 2" name="addressline2">
+                            </mat-form-field>
+            
+                          </div>
+                          <div class="col-md-3">
+                            <mat-form-field class="example-full-width">
+                              <input matInput placeholder="city" name="city">
+                            </mat-form-field>
+            
+                          </div>
+                          <div class="col-md-3">
+                            <mat-form-field class="example-full-width">
+                              <input matInput placeholder="state" name="state">
+                            </mat-form-field>
+            
+                          </div>
+                        </div>
+            
+                        <div class="row">
+                          <div class="col-md-3">
+                            <mat-form-field>
+                              <mat-label>Country</mat-label>
+                              <mat-select>
+                                <mat-option *ngFor="let i of countryrecords" [value]="i">
+                                  {{i.title}}
+                                </mat-option>
+                              </mat-select>
+                            </mat-form-field>
+                          </div>
+                          <div class="col-md-3">
+                            <mat-form-field class="example-full-width">
+                              <input matInput placeholder="Zipcode" name="zipcode">
+                            </mat-form-field>
+            
+                          </div>
+                          <div class="col-md-3">
+                            <mat-form-field class="example-full-width">
+                              <input matInput placeholder="Email" name="email">
+                            </mat-form-field>
+            
+                          </div>
+                          <div class="col-md-3">
+                            <mat-form-field class="example-full-width">
+                              <input matInput placeholder="Website" name="website">
+                            </mat-form-field>
+                          </div>
+                        </div>
+                      </div>
+                      <div *ngIf="config.stepFour" class="infoBox">
+                          <h3>Sales information</h3>
+                          <div class="row">
+                            <div class="col-md-8">
+                              <mat-form-field class="example-full-width">
+                                <input matInput placeholder="Client" name="client">
+                              </mat-form-field>
+                            </div>
+                            <div class="col-md-4">
+                              <mat-form-field class="example-full-width">
+                                <input matInput placeholder="Contact Person" name="contactperson">
+                              </mat-form-field>
+              
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-md-3">
+                              <mat-form-field class="example-full-width">
+                                <input matInput placeholder="Address line 1" name="addressline1">
+                              </mat-form-field>
+                            </div>
+                            <div class="col-md-3">
+                              <mat-form-field class="example-full-width">
+                                <input matInput placeholder="Address line 2" name="addressline2">
+                              </mat-form-field>
+              
+                            </div>
+                            <div class="col-md-3">
+                              <mat-form-field class="example-full-width">
+                                <input matInput placeholder="city" name="city">
+                              </mat-form-field>
+              
+                            </div>
+                            <div class="col-md-3">
+                              <mat-form-field class="example-full-width">
+                                <input matInput placeholder="state" name="state">
+                              </mat-form-field>
+              
+                            </div>
+                          </div>
+              
+                          <div class="row">
+                            <div class="col-md-3">
+                              <mat-form-field>
+                                <mat-label>Country</mat-label>
+                                <mat-select>
+                                  <mat-option *ngFor="let i of countryrecords" [value]="i">
+                                    {{i.title}}
+                                  </mat-option>
+                                </mat-select>
+                              </mat-form-field>
+                            </div>
+                            <div class="col-md-3">
+                              <mat-form-field class="example-full-width">
+                                <input matInput placeholder="Zipcode" name="zipcode">
+                              </mat-form-field>
+              
+                            </div>
+                            <div class="col-md-3">
+                              <mat-form-field class="example-full-width">
+                                <input matInput placeholder="Email" name="email">
+                              </mat-form-field>
+              
+                            </div>
+                            <div class="col-md-3">
+                              <mat-form-field class="example-full-width">
+                                <input matInput placeholder="Website" name="website">
+                              </mat-form-field>
+                            </div>
+                          </div>
+                        </div>
+            </form>
+          
+  
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

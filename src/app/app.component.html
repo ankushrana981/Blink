@@ -1,0 +1,17 @@
+<!-- <h1>
+  {{title}}
+</h1>
+<p>Name:{{list?.first_name}} {{list?.last_name}}</p>
+<button class="btn btn-primary" routerLink="/customers">Customers</button>
+<button routerLink="/orders">Orders</button>
+<button routerLink="">Home</button> -->
+
+<router-outlet></router-outlet>
+<ngx-loading-bar color='#37c3e1' height='4px' [includeSpinner]='false'> </ngx-loading-bar>
+<ngx-spinner
+  bdColor="rgba(51,51,51,0.5)"
+  size="medium"
+  color="#fff"
+  type="ball-scale-multiple">
+</ngx-spinner>
+<toaster-container [toasterconfig]="toasterconfig"></toaster-container> 

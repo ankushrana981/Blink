@@ -1,0 +1,85 @@
+<div class="productSetup-Wrap invoiceView">
+	<div class="viewdata-title">
+		<h2>Inventory request</h2>
+	</div>
+	<div class="contentBox"  [ngClass]="icon1?'active':''">
+		<div class="leftContent">
+			<div class="card">
+				<div class="table-box viewTable mb-20" data-infinite-scroll
+                debounce [infiniteScrollDistance]="scrollDistance" [infiniteScrollUpDistance]="scrollUpDistance" [infiniteScrollThrottle]="throttle" (scrolled)="onScrollDown($event)" [scrollWindow]="false">
+					<table style="width:100%" class="table-hover default-to-custom ng-isolate-scope">
+                        <tbody [@fadeIn]="listrecords?.length"  fxLayout="row wrap" class="list">
+                            <tr style="vertical-align:top;" class="x-animated fadeIn d-1 in" *ngFor="let i of listrecords; index as j" fxFlex="100" fxFlex.lt-sm="200" >
+                                <td width="64px" class="text-center"><h4 class="rownumber ng-binding">{{j+1}}</h4></td>
+                                <td class="text-left">
+                                    <b><span class="ng-binding ng-hide"></span>&nbsp;</b>
+                                    <b><span class="ng-binding ng-hide">&nbsp;</span>&nbsp;</b>
+                                    <b><span class="ng-binding ng-hide"></span>&nbsp;</b>
+                                    <div class="small help-block line-divider">&nbsp;</div>
+                                </td>
+                                <td class="text-left">
+                                    <a class="ng-binding ng-hide" (click)="editing(i)">{{i?.docNumber}}</a>
+                                    <div class="small help-block line-divider ng-binding">{{i?.pendingPayment}} </div>
+                                </td>
+                                <td class="text-left">
+                                    <div><span class="ng-binding ng-hide">&nbsp;</span>&nbsp;</div>
+                                    <div class="small help-block line-divider ng-binding">&nbsp;</div>
+                                </td>
+                                <td class="text-right">
+                                    <b><span class="ng-binding ng-hide"></span>&nbsp;</b>
+                                    <div class="small help-block line-divider paymentstatus ng-binding red">{{i?.status?.title}}</div>
+                                </td>
+                                <td width="100px" class="text-left">
+                                    <div class="rowactions">
+                                        <a class="btn btn-link ng-hide" hov-title="View/Edit" (click)="editing(i)" ><i class="fa fa-pencil" ></i></a>
+			                            <a *ngIf="i.status.id == '1'" class="btn btn-link" hov-title="Delete" (click)="deleteRequest(i)"><i class="fa fa-remove text-danger"></i></a>
+
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+				</div>
+			</div>
+		</div>
+		<div class="rightSidebar-wrap rightSide-data-penal">
+			
+			<div class="data-penal-header">
+				<button class="btn open-action-btn" (click)="changeIc('dots')">
+					<img src="assets/images/icon-ellipsis-light.svg" height="25" width="24" alt="">
+				</button>
+				<button class="btn close close-action-btn" (click)="changeIc('arrow')">
+					<!-- <i class="fa fa-arrow-right" aria-hidden="true"></i> -->
+					<img src="assets/images/icon-angle.png" height="25" width="25" alt="">
+				</button>
+			</div>
+			<div class="data-penal-body">
+				<h2 class="title x-animated fadeIn d-3">Details</h2>
+				<div class="v-center-wrap">
+					<div class="infoBox x-animated fadeIn d-5">
+						<label>Total Invoice</label>
+						<h3 class="main-color">0</h3>
+					</div>
+					<div class="infoBox x-animated fadeIn d-6">
+						<label>30 DAY OVERDUE</label>
+						<h3 class="main-color">0</h3>
+					</div>
+					<div class="infoBox3 x-animated fadeIn d-7">
+						<label>TOTAL INVOICE AMOUNT</label>
+						<h3 class="main-color">$0.00</h3>
+					</div>
+					<div class="infoBox3 x-animated fadeIn d-8">
+						<label>PENDING PAYMENT</label>
+						<h3 class="main-color">$0.00</h3>
+					</div>
+				</div>
+			</div>
+			<div class="data-penal-footer">
+				<button class="btn close-btn" (click)="changeIc('close')">Close</button>
+			</div>
+		</div>
+	</div>
+	<div class="rightBtnBox action-bar text-right">
+		<button class="btn btn-success" [routerLink]="['/main/inventory/new-inventory']">+ Add Inventory Request</button>
+	</div>
+</div>

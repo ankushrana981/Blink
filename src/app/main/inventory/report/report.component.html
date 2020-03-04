@@ -1,0 +1,414 @@
+<div class="inventoryreports-Wrap">
+    <div class="viewdata-title">
+        <h2>Inventory Report
+        </h2>
+    </div>
+    <div class="nav-filter-wrap">
+        <div class="nav-filter-header card">
+            <div class="filterednav">
+                <span class="filter-icon"><img src="assets/images/filter.svg" alt="" width="12px;"
+                        (click)="filterReport()"></span>
+                <ul class="selected-tags">
+                    <li *ngFor= "let i of filterData;index as index" id ="{{i?.id}}" class={{i?.class}} [@fadeInOut]>
+                        <h6  (click)="filterReport()"><em>{{i?.title}}:</em> {{i?.value}}</h6>
+                        <span (click)="removeSelected(index,i)">
+                            <img src="assets/images/icon-close-dark.svg" alt=""width="10">
+                        </span>
+                    </li>
+                </ul>
+            </div>
+            <button type="btn" class="dropdown-btn" (click)="filterReport()"></button>
+        </div>
+        <div class="card filternav-dropdown customanimate order-animate1" [hidden]="!filterIReport">
+            <ul class="navlist">
+                <li class="active customanimate order-animate1"><a (click)="activeDropDown('date')">Date</a></li>
+                <li class="customanimate order-animate2"><a (click)="activeDropDown('customer')">Customer</a></li>
+                <li class="customanimate order-animate3"><a (click)="activeDropDown('category')">Costomer Category</a></li>
+                <li class="customanimate order-animate4"><a (click)="activeDropDown('branch')">Branch</a></li>
+                <li class="customanimate order-animate5"><a (click)="activeDropDown('salesrep')">Sales Rep</a></li>
+                <li class="customanimate order-animate6"><a (click)="activeDropDown('brand')">Brand</a></li>
+                <li class="customanimate order-animate7"><a (click)="activeDropDown('product')">Product Cateory</a></li>
+            </ul>
+            <ul class="navlist subnav" *ngIf="dateDropDown">
+                <li class="customanimate order-animate8">
+                    <bs-datepicker-inline [bsValue]="bsInlineValue" [bsConfig]="{ showWeekNumbers:false }">
+                    </bs-datepicker-inline>
+                </li>
+            </ul>
+            <ul class="navlist subnav" *ngIf="customerDropDown">
+                <li class="active customanimate order-animate1"><a>Date</a></li>
+                <li class="customanimate order-animate2"><a>Customer</a></li>
+                <li class="customanimate order-animate3"><a>Costomer Category</a></li>
+                <li class="customanimate order-animate4"><a>Branch</a></li>
+                <li class="customanimate order-animate5"><a>Sales Rep</a></li>
+                <li class="customanimate order-animate6"><a>Brand</a></li>
+                <li class="customanimate order-animate7"><a>Product Cateory</a></li>
+            </ul>
+            <ul class="navlist subnav" *ngIf="branchDropDown">
+                <li class="active customanimate order-animate1"><a>Branch</a></li>
+                <li class="customanimate order-animate2"><a>Sales Rep</a></li>
+                <li class="customanimate order-animate3"><a>Brand</a></li>
+                <li class="customanimate order-animate4"><a>Product Cateory</a></li>
+                <li class="customanimate order-animate5"><a>Date</a></li>
+                <li class="customanimate order-animate6"><a>Costomer Category</a></li>
+            </ul>
+            <ul class="navlist subnav" *ngIf="categoryDropDown">
+                <li class="active customanimate order-animate1"><a>Brand</a></li>
+                <li class="customanimate order-animate2"><a>Product Cateory</a></li>
+                <li class="customanimate order-animate3"><a>Date</a></li>
+                <li class="customanimate order-animate4"><a>Sales Rep</a></li>
+                <li class="customanimate order-animate5"><a>Brand</a></li>
+                <li class="customanimate order-animate6"><a>Costomer Category</a></li>
+            </ul>
+            <ul class="navlist subnav" *ngIf="salesRepDropDown">
+                <li class="active customanimate order-animate1"><a>Date</a></li>
+                <li class="customanimate order-animate2"><a>Customer</a></li>
+                <li class="customanimate order-animate3"><a>Sales Rep</a></li>
+                <li class="customanimate order-animate4"><a>Costomer Category</a></li>
+                <li class="customanimate order-animate5"><a>Brand</a></li>
+                <li class="customanimate order-animate6"><a>Product Cateory</a></li>
+            </ul>
+            <ul class="navlist subnav" *ngIf="productDropDown">
+                <li class="active customanimate order-animate1"><a>Date</a></li>
+                <li class="customanimate order-animate2"><a>Customer</a></li>
+                <li class="customanimate order-animate3"><a>Costomer Category</a></li>
+                <li class="customanimate order-animate4"><a>Brand</a></li>
+                <li class="customanimate order-animate5"><a>Sales Rep</a></li>
+                <li class="customanimate order-animate6"><a>Product Cateory</a></li>
+                <li class="customanimate order-animate7"><a>Sales Rep</a></li>
+            </ul>
+            <ul class="navlist subnav" *ngIf="brandDropDown">
+                <li class="active customanimate order-animate1"><a>Date</a></li>
+                <li class="customanimate order-animate2"><a>Sales Rep</a></li>
+                <li class="customanimate order-animate3"><a>Customer</a></li>
+                <li class="customanimate order-animate4"><a>Brand</a></li>
+                <li class="customanimate order-animate5"><a>Product Cateory</a></li>
+                <li class="customanimate order-animate6"><a>Costomer Category</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="contentBox inventoryreports-content">
+        <div class="row rowBox">
+            <div class="col-xl-8  wow fadeIn">
+                <div class="card globle-inventory-card">
+                    <h5>Global inventory</h5>
+                    <div class="row">
+                        <div class="col-xl-12">
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <div class="card-header">
+                                        <mat-form-field class="custom-selectdropdown">
+                                            <mat-select [(value)]="selected">
+                                                <mat-option value="option1">Physical inventory</mat-option>
+                                                <mat-option value="option2">Physical inventory 1</mat-option>
+                                                <mat-option value="option3">Physical inventory 21</mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="globle-inventory-data">
+                                        <!-- <div class="globle-inventory-data" malihu-scrollbar
+                                        [scrollbarOptions]="scrollbarOptions"> -->
+                                        <table class="table">
+                                            <thead>
+                                                <th>
+                                                    Product 
+                                                    <span class="arrowbox one-arrow">
+                                                        <em class="fa fa-caret-up" aria-hidden="true"></em>
+                                                        <!-- <em class="fa fa-caret-down" aria-hidden="true"></em> -->
+                                                    </span>
+                                                </th>
+                                                <th>
+                                                    Quantity 
+                                                    <span class="arrowbox one-arrow">
+                                                        <em class="fa fa-caret-up" aria-hidden="true"></em>
+                                                        <!-- <em class="fa fa-caret-down" aria-hidden="true"></em> -->
+                                                    </span>
+                                                </th>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>A Component</td>
+                                                    <td>630</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>A Component</td>
+                                                    <td>840</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>A Component</td>
+                                                    <td>578</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>A Component</td>
+                                                    <td>485</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>A Component</td>
+                                                    <td>349</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>A Component</td>
+                                                    <td>813</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>A Component</td>
+                                                    <td>829</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="col-md-7">
+                                    <div class="graphbox" id="container4">
+                                       
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-4  wow fadeIn">
+                <div class="card inventory-value-card">
+                    <h5>inventory Value Report</h5>
+                    <label class="inventory-label"> Inventory Value</label>
+                    <div class="spangroup">
+                        <span><em class="bg-lightpurple"></em>Cost</span>
+                        <span><em class="bg-skyblue"></em>Value</span>                        
+                    </div>
+                    <div class="inventory-valuebox mb-3">
+                        <h5>Physical Inventory</h5>
+                        <div class="progress mb-1">
+                            <div class="progress-bar bg-lightpurple" style="width:100%">22,266,970.00</div>
+                        </div>
+                        <div class="progress mb-1">
+                            <div class="progress-bar bg-skyblue" style="width:100%">22,266,970.00</div>
+                        </div>
+                    </div>
+                    <div class="inventory-valuebox mb-3">
+                        <h5>InTransit Inventory</h5>
+                        <div class="progress mb-1">
+                            <div class="progress-bar bg-lightpurple" style="width:8%">0.00</div>
+                        </div>
+                        <div class="progress mb-1">
+                            <div class="progress-bar bg-skyblue" style="width:70%">18,266,970.70</div>
+                        </div>
+                    </div>
+                    <div class="inventory-valuebox mb-3">
+                        <h5>Total Inventory</h5>
+                        <div class="progress mb-1">
+                            <div class="progress-bar bg-lightpurple" style="width:50%">14,535,440.40</div>
+                        </div>
+                        <div class="progress mb-1">
+                            <div class="progress-bar bg-skyblue" style="width:50%">14,535,440.40</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row rowBox">
+            <div class="col-xl-6  wow fadeIn">
+                <div class="card branch-inventorydata-card">
+                    <h5>Branch Inventory Report</h5>
+                    <div class="row">
+                        <div class="col-xl-12">
+                            <div class="card-header">
+                                <mat-form-field class="custom-selectdropdown">
+                                    <mat-select [(value)]="selected">
+                                        <mat-option value="option1">Physical inventory</mat-option>
+                                        <mat-option value="option2">Physical inventory 1</mat-option>
+                                        <mat-option value="option2">Physical inventory 21</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                                <button type="button" class="btn main-btn-primary">Inventory Count</button>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                     <div class="branch-inventory-data">
+                                   <!--  <div class="branch-inventory-data" malihu-scrollbar
+                                        [scrollbarOptions]="scrollbarOptions"> -->
+                                        <table class="table">
+                                            <thead>
+                                                <th>
+                                                    Product 
+                                                    <span class="arrowbox one-arrow">
+                                                        <em class="fa fa-caret-up" aria-hidden="true"></em>
+                                                        <!-- <em class="fa fa-caret-down" aria-hidden="true"></em> -->
+                                                    </span>
+                                                </th>
+                                                <th>
+                                                    Quantity 
+                                                    <span class="arrowbox one-arrow">
+                                                        <em class="fa fa-caret-up" aria-hidden="true"></em>
+                                                        <!-- <em class="fa fa-caret-down" aria-hidden="true"></em> -->
+                                                    </span>
+                                                </th>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>A Component</td>
+                                                    <td>-854</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>A Component</td>
+                                                    <td>-854</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>A Component</td>
+                                                    <td>-854</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="col-md-5">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-6  wow fadeIn">
+                <div class="card averagecost-report-card">
+                    <h5>Average Receiving Costs</h5>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="averagecost-data">
+                            <!-- <div class="averagecost-data" malihu-scrollbar [scrollbarOptions]="scrollbarOptions"> -->    
+                                <table class="table">
+                                    <thead>
+                                        <th>
+                                            Product
+                                            <span class="arrowbox">
+                                                <em class="fa fa-caret-up" aria-hidden="true"></em>
+                                                <em class="fa fa-caret-down" aria-hidden="true"></em>
+                                            </span>
+                                        </th>
+                                        <th>
+                                            Current
+                                            <span class="arrowbox">
+                                                <em class="fa fa-caret-up" aria-hidden="true"></em>
+                                                <em class="fa fa-caret-down" aria-hidden="true"></em>
+                                            </span>
+                                        </th>
+                                        <th>
+                                            Three Months Ago
+                                            <span class="arrowbox">
+                                                <em class="fa fa-caret-up" aria-hidden="true"></em>
+                                                <em class="fa fa-caret-down" aria-hidden="true"></em>
+                                            </span>
+                                        </th>
+                                        <th>
+                                            Six Months Ago
+                                            <span class="arrowbox">
+                                                <em class="fa fa-caret-up" aria-hidden="true"></em>
+                                                <em class="fa fa-caret-down" aria-hidden="true"></em>
+                                            </span>
+                                        </th>
+                                        <th>
+                                            Nine Months Ago
+                                            <span class="arrowbox">
+                                                <em class="fa fa-caret-up" aria-hidden="true"></em>
+                                                <em class="fa fa-caret-down" aria-hidden="true"></em>
+                                            </span>
+                                        </th>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Item 1</td>
+                                            <td>22,266,970.00</td>
+                                            <td>22,266,970.00</td>
+                                            <td>22,266,970.00</td>
+                                            <td>22,266,970.00</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Item 2</td>
+                                            <td>0</td>
+                                            <td>18,360,667.70</td>
+                                            <td>14,535,440.40</td>
+                                            <td>22,266,970.00</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Item 3</td>
+                                            <td>22,266,970.00</td>
+                                            <td>18,360,667.70</td>
+                                            <td>14,535,440.40</td>
+                                            <td>22,266,970.00</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Item 4</td>
+                                            <td>22,266,970.00</td>
+                                            <td>18,360,667.70</td>
+                                            <td>14,535,440.40</td>
+                                            <td>22,266,970.00</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-6  wow fadeIn">
+                <div class="card adjustment-report-card">
+                    <h5>Adjustment Report</h5>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="adjustment-report">
+                            <!-- <div class="adjustment-report" malihu-scrollbar [scrollbarOptions]="scrollbarOptions"> -->    
+                                <table class="table">
+                                    <thead>
+                                        <th>
+                                            Date
+                                            <span class="arrowbox one-arrow">
+                                                <em class="fa fa-caret-up" aria-hidden="true"></em>
+                                                <!-- <em class="fa fa-caret-down" aria-hidden="true"></em> -->
+                                            </span>
+                                        </th>
+                                        <th>
+                                            Product
+                                            <span class="arrowbox one-arrow">
+                                                <em class="fa fa-caret-up" aria-hidden="true"></em>
+                                                <!-- <em class="fa fa-caret-down" aria-hidden="true"></em> -->
+                                            </span>
+                                        </th>
+                                        <th>
+                                            Adjustment
+                                            <span class="arrowbox one-arrow">
+                                                <em class="fa fa-caret-up" aria-hidden="true"></em>
+                                                <!-- <em class="fa fa-caret-down" aria-hidden="true"></em> -->
+                                            </span>
+                                        </th>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Item 1</td>
+                                            <td>22,266,970.00</td>
+                                            <td>22,266,970.00</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Item 2</td>
+                                            <td>0.00</td>
+                                            <td>18,360,667.70</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Item 3</td>
+                                            <td>14,535,440.40</td>
+                                            <td>14,535,440.40</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Item 4</td>
+                                            <td>14,535,440.40</td>
+                                            <td>18,360,667.70</td>                                            
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

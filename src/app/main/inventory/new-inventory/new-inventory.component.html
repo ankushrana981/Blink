@@ -1,0 +1,292 @@
+<div class="invoiceView invoice-entry">
+  <div *ngIf="isNew" class="page-title col-md-12">
+    <h2>New Inventory Request</h2>
+  </div>
+  <div *ngIf="!isNew" class="page-title col-md-12">
+    <h2>{{user.docNumber}}
+      <small class="title-tag badge alert-warning"> {{statusTilte}}</small>
+    </h2>
+  </div>
+  <div class="contentBox" [ngClass]="icon1?'':'active'">
+
+    <div class="leftContent wow fadeIn" data-wow-delay="100ms">
+      <div class="card">
+        <div class="contentInfo">
+          <div class="table-box">
+            <table width="100%">
+              <tbody>
+                <tr style="vertical-align:text-top">
+                  <td>
+                    <div class="row" style="margin-right:35px" role="button" tabindex="0">
+                      <div class="col-xs-3 col-xl-3 col-md-3 col-3">
+                        <div>
+                          <div class="businessaddress">
+                            <label>to:</label>
+                            <p>{{user.branch?.title}}</p>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-xs-6 col-xl-6 col-md-6 col-6">
+
+                      </div>
+                      <div class="col-xs-3 col-xl-3 col-md-3 text-right col-3">
+                        <div class="companylogo mb-20">
+                          <img src="assets/images/logo-blink.svg" class="mCS_img_loaded" width="50" height="34">
+                        </div>
+
+                        <div class="dateofissue">{{user.dateOfIssue | date}}</div>
+                        <div>
+                          <span class="doctitle" *ngIf="purchaseorder != 'true'">invoice {{user.docNumber}}</span>
+                          <span class="doctitle" *ngIf="purchaseorder == 'true'">Purchase Orders #: {{user.docNumber}}</span>
+
+                        </div>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="height: 100px"></td>
+                </tr>
+                <tr>
+                  <td>
+
+                    <div class="table-box viewTable mb-50">
+                      <table *ngIf="!isNew" style="width:100%" class="table-hover default-to-custom ng-isolate-scope" infinite-scroll="vm.kd_nextPage()">
+                        <tbody>
+                          <tr *ngFor="let item of user.items; let index = index" style="vertical-align:top;" class="x-animated fadeIn d-1 in">
+
+                            <td width="64px" class="text-center">
+                              <h4 class="rownumber">{{index + 1}}</h4>
+                            </td>
+                            <td class="text-left">
+                              <b>{{item.title}}</b>
+                              <div class="small help-block line-divider">{{item.description}}&nbsp;</div>
+                            </td>
+
+                            <td width="15%" class="text-right">
+                              <b>{{item.quantity}}</b>
+                              <div class="small help-block line-divider">
+                                <span>
+                                </span>
+                              </div>
+                            </td>
+                            <td *ngIf="purchaseorder == 'true'" width="15%" class="text-right">
+                              <b>${{item.price}}</b>
+                              <div class="small help-block line-divider">
+                                <span>
+                                </span>
+                              </div>
+                            </td>
+                            <td *ngIf="purchaseorder == 'true'" width="15%" class="text-right">
+                              <b>${{item?.total}}.00</b>
+                              <div class="small help-block line-divider">
+                                <span>
+                                  logistics cost: $ {{item?.logisticsCost}}.00
+                                </span>
+                              </div>
+                            </td>
+                            <td width="100px" class="text-left">
+                              <div class="rowactions">
+                                <a class="btn btn-link" href="javascript:;" *ngIf="purchaseorder != 'true' || requests != true" (click)="editanddelete(item)">
+                                  <i class="fa fa-pencil"></i>
+                                </a>
+
+                              </div>
+                            </td>
+
+                          </tr>
+
+
+                        </tbody>
+                      </table>
+
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+
+                  </td>
+                </tr>
+
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="rightSidebar-wrap rightSide-data-penal" *ngIf="isNew || user.status?.id == '1'">
+      <div class="data-penal-header">
+        <button class="btn open-action-btn" (click)="changeIc('dots')">
+          <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+        </button>
+        <button class="btn close close-action-btn" (click)="changeIc('arrow')">
+          <!-- <i class="fa fa-arrow-right" aria-hidden="true"></i> -->
+          <img src="assets/images/icon-angle.png" height="25" width="25" alt="">
+        </button>
+      </div>
+      <div class="data-penal-body">
+        <div class="row">
+          <div class="col-12">
+            <div class="form-group mb-20">
+              <label>Date of issue</label>
+              <div class="datepickerInputBox">
+                <input class="form-control" [disabled]="!isNew" name="minDatepicker" type="text" id="minDatepicker" [maxDate]="maxDate" [(ngModel)]="user.dateOfIssue"
+                  bsDatepicker placeholder="Date of Issue" (bsValueChange)="ModelDatepicker($event)" [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY' }">
+                <i class="fa fa-calendar" aria-hidden="true"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 mb-30">
+            <h4 *ngIf="isNew" class="invoice-tag">inventoryrequest# <span>{{user.docNumber}}</span></h4>
+             <h4 *ngIf="!isNew" class="invoice-tag">inventoryrequest# <span class="selectedSpanText">{{user.docNumber}}</span></h4>
+          </div>
+        </div>
+
+
+
+        <div class="row">
+          <div class="col-12">
+            <div class="form-group">
+              <!-- <label>Branch</label> -->
+              <ng-select *ngIf="branchrecords" [disabled]="!isNew" [searchable]="false" placeholder ="Branch" [clearable]="false" [items]="branchrecords" [(ngModel)]="user.branch">
+                <ng-template ng-label-tmp let-item="item">
+                  {{item.title}}
+                </ng-template>
+                <ng-template ng-option-tmp let-item="item" let-index="index" let-search="searchTerm">
+                  {{item.title}}
+                </ng-template>
+              </ng-select>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="row">
+          <div class="col-12" *ngIf="!isNew">
+            <div class="form-group mb-10">
+              <!-- <label class="gray-label">Product</label> -->
+              <ng-select [clearable]="false" [(ngModel)]="user.sourceProduct" placeholder ="Product" [items]="productrecords | async" bindLabel="title" [loading]="supplierLoading"
+                [notFoundText]="notFoundText" name="productname" id="productname" autocomplete="off" (change)="productSelected($event)"
+                [typeahead]="MainSearchdataSource">
+              </ng-select>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="row">
+          <div class="col-12" *ngIf="!isNew">
+            <div class="form-group mb-30">
+              <mat-form-field class="example-full-width">
+                <input matInput placeholder="Quantity" (keydown)="AllowNumbers($event)" name="quantity" [(ngModel)]="user.quantity" required>
+              </mat-form-field>
+            </div>
+
+          </div>
+
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <form class="example-form" *ngIf="!isNew">
+              <div class="fieldsBox" [ngClass]="accclose?'more-fields':''">
+                <a href="javascript:;" class="more-fields-btn a-btn mb-20" (click)="accordianview('more')">More
+                  <i class="fa fa-angle-down" aria-hidden="true"></i>
+                </a>
+                <a href="javascript:;" class="less-fields-btn a-btn mb-20" (click)="accordianview('less')">Less
+                  <i class="fa fa-angle-up" aria-hidden="true"></i>
+                </a>
+                <form class="example-form field-form mt-15">
+                  <div class="form-group mb-20">
+                    <mat-form-field class="example-full-width">
+                      <input matInput placeholder="Notes" name="notes" [(ngModel)]="user.description">
+                    </mat-form-field>
+                  </div>
+                  <div class="form-group mb-10">
+                    <!-- <label class="gray-label select-label">Vendor</label> -->
+                    <ng-select [clearable]="false" [(ngModel)]="user.vendor" placeholder ="Vendor" id="vendor" placeholder ="Vendor" [items]="vendorrecords" bindLabel="title" name="vendor"
+                      (change)="vendorSelected($event)">
+                    </ng-select>
+                  </div>
+                  <div class="form-group mb-10">
+                    <mat-form-field class="example-full-width">
+                      <input matInput placeholder="Source Price" name="sourceprice" (keydown)="AllowNumbers($event)" [(ngModel)]="user.price">
+                    </mat-form-field>
+                  </div>
+                  <div class="form-group mb-20">
+                    <mat-form-field class="example-full-width">
+                      <input matInput placeholder="Currency Rate" name="currencyrate" (keydown)="AllowNumbers($event)" [(ngModel)]="user.currencyRate">
+                    </mat-form-field>
+                  </div>
+                </form>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+
+
+
+      <div class="data-penal-footer">
+        <div class="row">
+          <div class="col-12">
+            <button *ngIf="flagfordelete" class="btn close-btn text-danger" style="margin-right: 10px" type="submit" (click)="deleteInventory(user)">
+              <i class="fa fa-times" aria-hidden="true"></i> Delete
+            </button>
+            <button class="btn close-btn" type="submit" (click)="createInventory(user)">
+              <i class="fa fa-floppy-o" aria-hidden="true"></i> Enter
+            </button>
+          </div>
+
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="action-bar">
+      <div class="spanBox" *ngIf="purchaseorder == 'true'">
+        <span>
+          <i class="fa fa-print" aria-hidden="true"></i> Print Preview</span>
+
+        <span>Inventory Total
+          <b> $ {{count1}}.00</b>
+        </span>
+
+      </div>
+      <span *ngIf="user.status?.id == '11' && !isNew">
+        <button class="btn btn-success" [routerLink]="['/main/inventory/purchase-orders']">
+          View Purchase Orders</button>
+      </span>
+      <span *ngIf="user.status?.id == '10' && !isNew">
+        <button class="btn btn-success" (click)="submitInventory(user,'two')">
+          Gererate Purchase Orders</button>
+      </span>
+      <span *ngIf="user.status?.id == '1' && !isNew">
+        <button class="btn btn-success" (click)="submitInventory(user,'one')">
+          Submit</button>
+      </span>
+      <span>
+        <button class="btn btn-success" *ngIf="purchaseorder != 'true'" (click)="newInventoryrew()">
+          + New Inventory Request</button>
+      </span>
+      <span>
+        <!-- <button class="btn btn-success" *ngIf="purchaseorder == 'true'">
+          Mark Recievied</button> -->
+      </span>
+
+
+    </div>
+
+  </div>
+
+  

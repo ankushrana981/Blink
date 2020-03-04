@@ -1,0 +1,188 @@
+<div class="crm-Wrap" [ngClass]="icon1?'active':''">
+  <div class="viewdata-title">
+    <h2>
+      <img src="assets/images/icon-list.svg" height="25" width="25" alt="" class="mr-2"> Tasks Notes</h2>
+    <div class="pull-right right-top-btns">
+
+      <a class="btn btn-link mt-2" (click)="changeIc('dots')">
+        <img src="assets/images/icon-plus.svg" height="25" width="25" alt="" class="mr-2">Add New Task Note
+      </a>
+
+    </div>
+  </div>
+  <div class="contentBox">
+    <div class="leftContent">
+      <div class="card">
+        <div class="table-box viewTable" style="height:650px;overflow-y: scroll;">
+          <table style="width:100%" class="table-hover default-to-custom">
+            <tbody [@fadeIn]="listrecords?.length" fxLayout="row wrap" class="list">
+              <tr style="vertical-align:top;" class="x-animated fadeIn d-1 in" *ngFor="let i of listrecords; index as j" fxFlex="100" fxFlex.lt-sm="200">
+                <td width="64px" class="text-center">
+                  <h4 ng-bind="($index + 1)" class="rownumber ng-binding">{{j+1}}</h4>
+                </td>
+                <td class="text-left">
+                  <b>
+                    <span>{{i.createdOn | date: 'dd.MM.yyyy' }}</span>&nbsp;</b>
+                  <div class="small help-block line-divider">&nbsp;</div>
+                </td>
+                <td class="text-left">
+                  <b>
+                    <span>&nbsp;</span>&nbsp;</b>
+                  <div class="small help-block line-divider">&nbsp;</div>
+                </td>
+                <td class="text-left">
+                  <b>
+                    <span>{{i.type}}</span>&nbsp;</b>
+                  <div class="small help-block line-divider">&nbsp;{{i.businessPartner?.title}}</div>
+                </td>
+                <td class="text-right">
+                  <div>
+                    <span>&nbsp;</span>&nbsp;</div>
+                  <div class="small help-block line-divider">&nbsp;</div>
+                </td>
+                <td class="text-left">
+                  <div>
+                    <span>{{i?.notes}}</span>&nbsp;</div>
+                  <div class="small help-block line-divider">&nbsp;</div>
+                </td>
+                <td class="text-right">
+                  <div>
+                    <span>&nbsp;</span>&nbsp;</div>
+                  <div class="small help-block line-divider">&nbsp;</div>
+                </td>
+                <td class="text-right">
+                  <b>
+                    <span>{{[i.createdBy?.title]}}</span>&nbsp;</b>
+
+                  <div class="small help-block line-divider">&nbsp;</div>
+                </td>
+                <td width="100px" class="text-left">
+                  <div class="rowactions">
+                    <a class="btn btn-link" hov-title="View/Edit" (click)="editCustomerSetup(i)">
+                      <i class="fa fa-pencil"></i>
+                    </a>
+
+                    <a class="btn btn-link" hov-title="Delete" ng-click="vm.deleteItem()" (click)="deletenotes(i)">
+                      <i class="fa fa-remove text-danger"></i>
+                    </a>
+
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div  class="rightSidebar-wrap rightSidebar-wrap-right-0 rightSide-data-penal comman-sidebar">
+   <!--  <div class="data-penal-header">
+      <h3>Manage Note</h3>
+
+    </div> -->
+
+    <div class="data-penal-body">
+      <form class="manageNote-form">
+        <h3 class="rightSidebar-main_title mb-40">
+            Manage Note
+        </h3>
+        <div class="row">
+          <div class="col-12">
+            <div class="form-group mb-50">
+              <ng-select [clearable]="false" placeholder="Title" [(ngModel)]="user.presetActivity" [items]="titleArr" bindLabel="title"
+                name="presetActivity">
+              </ng-select>
+            </div>
+
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <div class="form-group-title mb-20">
+              <label>DATE OF ENTRY</label>
+              <p *ngIf="user.dateOfEntry">{{user.dateOfEntry | date}}</p>
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="form-group datepicker-formGroup mt-8">
+              <label>Next followup</label>
+              <div class="datepickerInputBox">
+                <input class="form-control" name="minDatepicker" type="text" id="minDatepicker" [(ngModel)]="user.dueDate" bsDatepicker (bsValueChange)="ModelDatepicker($event)"
+                  [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY',showWeekNumbers:false }">
+                <i class="fa fa-calendar" aria-hidden="true"></i>
+              </div>
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="form-group mb-20">
+              <!-- <label class="select-label">Type of Note</label> -->
+              <ng-select [items]="tasks" bindLabel="name" bindValue="type" [multiple]="false" name="type" placeholder="Type of Note" [(ngModel)]="user.type"
+                id="notesname" (change)="recordSelected($event)">
+              </ng-select>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="row" *ngIf="user.type =='2'">
+          <div class="col-12">
+            <div class="form-group">
+              <ng-select [clearable]="false" placeholder="Client" [items]="clientNameItem | async" bindLabel="title" [(ngModel)]="user.businessPartner"
+                [loading]="supplierLoading" [notFoundText]="notFoundText" name="businessPartner" id="businessPartner" autocomplete="off"
+                [typeahead]="MainSearchdataSource"  (change)="recordSelected($event)">
+              </ng-select>
+
+            </div>
+          </div>
+        </div>
+        <div class="row" *ngIf="user.type =='3'">
+          <div class="col-12">
+            <div class="form-group">
+              <ng-select [clearable]="false" placeholder="Task" [items]="taskrecords" bindLabel="title" [(ngModel)]="user.crmTask" name="crmTask"
+                id="crmTask" autocomplete="off" id="taskname" (change)="recordSelected($event)"></ng-select>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12">
+            <div class="form-group mb-35">
+              <mat-form-field class="example-full-width">
+                <input matInput placeholder="Notes" value="" name="notes" [(ngModel)]="user.notes">
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12">
+            <div class="form-group">
+              <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" id="defaultChecked2" name="check" (change)="changedCheck($event)" [(ngModel)]="user.isComplete">
+                <label class="custom-control-label" for="defaultChecked2">Mark completed ?</label>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="data-penal-footer">
+      <div class="row">
+        <div class="col-12">
+          <button class="btn close-btn" type="submit" (click)="changeIc('arrow')">
+            <i class="fa fa-remove" aria-hidden="true"></i> Cancel</button>
+          <button *ngIf="!user.id" [disabled]="!user.presetActivity && !user.type" class="btn close-btn" type="submit" (click)="Createdisnote(user)">
+            <i class="fa fa-floppy-o mr-1" aria-hidden="true"></i> save</button>
+          <button *ngIf="user.id" class="btn close-btn" type="submit" (click)="updatedNote(user)">
+            <i class="fa fa-floppy-o mr-1" aria-hidden="true"></i> save</button>
+
+        </div>
+
+
+      </div>
+
+    </div>
+
+  </div>
+</div>

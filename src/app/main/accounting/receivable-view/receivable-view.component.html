@@ -1,0 +1,255 @@
+<div class="invoiceView">
+	<div class="titleWith-filter">
+		<div class="page-title">
+			<h2>Invoice</h2>
+		</div>
+		<div class="filteredOption">
+			<ul>
+				<li *ngFor="let item of tempArr;let index=index;" [@EnterLeave]="'flyIn'">
+						<small class="close">
+								<img src="assets/images/icon-close-dark.svg" alt=""width="10" (click)="resetFilter(item)">
+						 </small>
+					<p>
+						<span>{{item.parentFilter}}</span>
+						<span *ngIf="item.selectedObj.id == 1 || item.selectedObj.id == 2 || item.selectedObj.id == 7">{{ item.secondFilter }}</span>
+					</p>
+					<p *ngIf="item.selectedObj.id == 1">
+						<span>{{ item.childFilter | date }}</span>
+						<span *ngIf="item.selectedObj.id == 1 && item.selectedObj.bindedValue.id == 2">-{{item.subchildrange | date}}</span>
+					</p>
+					<p *ngIf="item.selectedObj.id != 1">
+						<span>{{ item.childFilter }}</span>
+						<span *ngIf="item.selectedObj.id == 2 || item.selectedObj.id == 7">-{{item.subchildrange}}</span>
+					</p>
+
+				</li>
+			</ul>
+			<!-- <small *ngIf="tempArr.length === index+1" class="close"> -->
+					<!-- <small class="close">	
+							<img src="assets/images/icon-close-dark.svg" alt=""width="10" (click)="resetFilter()">
+						</small> -->
+		</div>
+
+
+		<div *ngIf="tempArr.length != 3" class="filter-btnBox" (click)="startingFilter()">
+			<img src="assets/images/icon-filter.svg" height="25" width="25" alt="">
+		</div>
+		<div class="selectBoxList" *ngIf="fliterflag">
+			<div class="form-group">
+				<label class="gray-label">Filter</label>
+				<ng-select [clearable]="false" [items]="filterstart" bindLabel="title" [(ngModel)]="filterData" name="filterName" id="filterName"
+				 autocomplete="off" (change)="changedParentFilter($event)">
+				</ng-select>
+			</div>
+			<div class="form-group" *ngIf="filterData?.option?.length && !filterData.async">
+				<label class="gray-label">{{filterData.labelName}}</label>
+				<ng-select [clearable]="false" [items]="filterData.option" [(ngModel)]="filterData.bindedValue" bindLabel="title" name="secondFilter"
+				 id="secondFilter" autocomplete="off" (change)="changedChildFilter($event)">
+				</ng-select>
+			</div>
+			<ng-container *ngFor="let data of filterData.suboptions;let index=index;">
+				<div class="form-group" *ngIf="data?.options?.length && data.type==='select'">
+					<label class="gray-label">{{data.labelName}}</label>
+					<ng-select [clearable]="false" [items]="data?.options" [(ngModel)]="data.bindvalue" bindLabel="title" name="{{'secondFilter'+index}}"
+					 id="{{'secondFilter'+index}}" autocomplete="off" (change)="changedsubChildFilter($event)">
+					</ng-select>
+				</div>
+			</ng-container>
+			<div class="form-group" *ngIf="filterData?.option?.length && filterData.async">
+				<label class="gray-label">{{filterData.labelName}}</label>
+				<ng-select [clearable]="false" [items]="clientNameItem | async" bindLabel="title" [(ngModel)]="filterData.bindedValue" [loading]="supplierLoading"
+				 [notFoundText]="notFoundText" name="supplierName" id="supplierName" autocomplete="off" [typeahead]="MainSearchdataSource"
+				 (change)="changedChildFilter($event)">
+				</ng-select>
+			</div>
+
+			<div class="form-group" *ngIf="filterData?.date || filterData?.enddate">
+				<label>Start Date</label>
+				<div class="datepickerInputBox">
+					<input class="form-control" name="minDatepicker" type="text" id="minDatepicker" [maxDate]="maxDate" bsDatepicker placeholder=""
+					 [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY' }" (bsValueChange)="modelDatepicker($event,'specific')">
+					<i class="fa fa-calendar" aria-hidden="true"></i>
+				</div>
+			</div>
+			<div class="form-group" *ngIf="filterData?.enddate">
+				<label>End date</label>
+				<div class="datepickerInputBox">
+					<input class="form-control" name="maxDatepicker" type="text" id="maxDatepicker" [maxDate]="maxDate" bsDatepicker placeholder=""
+					 [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY' }" (bsValueChange)="modelDatepicker($event,'range')">
+					<i class="fa fa-calendar" aria-hidden="true"></i>
+				</div>
+			</div>
+
+			<div class="form-group" *ngIf="filterData?.month || filterData?.endmonth">
+				<label>Start Month</label>
+				<div class="datepickerInputBox">
+					<input class="form-control" name="minDatepicker" type="text" id="minMonthDatepicker" bsDatepicker placeholder="" [bsConfig]="{ dateInputFormat: 'MMM' }"
+					 (onShown)="onOpenCalendar($event)" (bsValueChange)="modelDatepickerMonth($event,'specific')">
+					<i class="fa fa-calendar" aria-hidden="true"></i>
+				</div>
+			</div>
+			<div class="form-group" *ngIf="filterData?.endmonth">
+				<label>End Month</label>
+				<div class="datepickerInputBox">
+					<input class="form-control" name="maxDatepicker" type="text" id="maxMonthDatepicker" bsDatepicker placeholder="" [bsConfig]="{ dateInputFormat: 'MMM' }"
+					 (onShown)="onOpenCalendar($event)" (bsValueChange)="modelDatepickerMonth($event,'range')">
+					<i class="fa fa-calendar" aria-hidden="true"></i>
+				</div>
+			</div>
+
+			<div class="form-group" *ngIf="filterData?.year || filterData?.endyear">
+				<label>Start Year</label>
+				<div class="datepickerInputBox">
+					<input class="form-control" name="minDatepicker" type="text" id="minYearDatepicker" bsDatepicker placeholder="" [bsConfig]="{ dateInputFormat: 'YYYY' }"
+					 (onShown)="onOpenyearCalendar($event)" (bsValueChange)="modelDatepickerYear($event,'specific')">
+					<i class="fa fa-calendar" aria-hidden="true"></i>
+				</div>
+			</div>
+			<div class="form-group" *ngIf="filterData?.endyear">
+				<label>End Year</label>
+				<div class="datepickerInputBox">
+					<input class="form-control" name="maxDatepicker" type="text" id="maxYearDatepicker" bsDatepicker placeholder="" [bsConfig]="{ dateInputFormat: 'YYYY' }"
+					 (onShown)="onOpenyearCalendar($event)" (bsValueChange)="modelDatepickerYear($event,'range')">
+					<i class="fa fa-calendar" aria-hidden="true"></i>
+				</div>
+			</div>
+			<div class="form-group" *ngIf="filterData?.invoice || filterData?.invoicerange">
+				<label>Invoice From</label>
+				<div class="datepickerInputBox">
+					<input class="form-control" (keydown.enter)="invoiceSpecific()" type="text" id="invoice" [(ngModel)]="docNumberFrom">
+
+				</div>
+			</div>
+			<div class="form-group" *ngIf="filterData?.invoicerange">
+				<label>Invoice To</label>
+				<div class="datepickerInputBox">
+					<input class="form-control" (keydown.enter)="invoiceSpecific()" type="text" id="invoicerange" [(ngModel)]="docNumberTo">
+
+				</div>
+			</div>
+			<div class="form-group" *ngIf="filterData?.amount || filterData?.amountrange">
+				<label>Amount</label>
+				<div class="datepickerInputBox">
+					<input class="form-control" (keydown)="AllowNumbers($event)" (keydown.enter)="amountSelected()" type="text" id="amount" [(ngModel)]="amountFrom">
+
+				</div>
+			</div>
+			<div class="form-group" *ngIf="filterData?.amountrange">
+				<label>Amount range</label>
+				<div class="datepickerInputBox">
+					<input class="form-control" (keydown)="AllowNumbers($event)" (keydown.enter)="amountSelected()" type="text" id="amountrange" [(ngModel)]="amountTo">
+
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="contentBox" [ngClass]="icon1?'active':''">
+		<div class="leftContent">
+			<div class="card">
+				<div class="table-box" data-infinite-scroll debounce [infiniteScrollDistance]="scrollDistance" [infiniteScrollUpDistance]="scrollUpDistance"
+				 [infiniteScrollThrottle]="throttle" (scrolled)="onScrollDown($event)" (scrolledUp)="onUp($event)" [scrollWindow]="false"
+				 style="overflow-y: scroll;">
+
+					<table style="width:100%" class="table-hover default-to-custom ng-isolate-scope">
+						<tbody [@fadeIn]="listrecords?.length" fxLayout="row wrap" class="list">
+							<tr style="vertical-align:top;" class="x-animated fadeIn d-1 in" *ngFor="let i of listrecords; index as j" fxFlex="100" fxFlex.lt-sm="200">
+								<!-- start tr -->
+								<td width="64px" class="text-center">
+									<h4 class="rownumber">{{j+1}}</h4>
+								</td>
+								<td class="text-left">
+									<b>&nbsp;</b>
+									<b>&nbsp;</b>
+									<b>&nbsp;</b>
+									<div class="small help-block line-divider">&nbsp;</div>
+								</td>
+								<td class="text-left">
+									<b>
+										<span>&nbsp;</span>&nbsp;</b>
+									<div class="small help-block line-divider">&nbsp;</div>
+								</td>
+								<td class="text-left">
+									<a class="ng-binding" href="javascript:;" (click)="Editing(i)">{{i?.docNumber}}</a>
+									<div class="small help-block line-divider">{{i?.productQuantity}}</div>
+								</td>
+								<td class="text-left">
+									<div>
+										<span>{{i?.businessPartner?.title}}</span>&nbsp;</div>
+									<div class="small help-block line-divider">&nbsp;</div>
+								</td>
+								<td class="text-right">
+									<b>
+										<span class="ng-binding"></span>&nbsp;</b>
+									<div class="small help-block line-divider paymentstatus red">{{i?.status.title}}</div>
+								</td>
+								<td width="100px" class="text-left">
+									<div class="rowactions">
+										<a class="btn btn-link" [routerLink]="[ '/main/invoicing/entry']" (click)="Editing(i)" hov-title="View/Edit">
+											<i class="fa fa-pencil"></i>
+										</a>
+										<a *ngIf="i.status.id =='1'" class="btn btn-link" hov-title="Delete">
+											<i class="fa fa-remove text-danger" (click)="deleteItem(i)"></i>
+										</a>
+										<a *ngIf="i.status.id =='4'" class="btn btn-link" hov-title="Reconcile">
+											<i class="fa fa-check"></i>
+										</a>
+									</div>
+								</td>
+							</tr>
+							<!-- end tr -->
+						</tbody>
+						
+					</table>
+				</div>
+				<div *ngIf="total == '0'" class="wow bounceIn text-center" data-wow-delay="1500ms">
+						<p>No records found</p>
+					</div>
+
+			</div>
+		
+		</div>
+		<div class="rightSidebar-wrap rightSide-data-penal">
+
+
+			<div class="data-penal-header">
+				<button class="btn open-action-btn" (click)="changeIc('dots')">
+					<img src="assets/images/icon-ellipsis-light.svg" height="25" width="24" alt="">
+				</button>
+				<button class="btn close close-action-btn" (click)="changeIc('arrow')">
+					<!-- <i class="fa fa-arrow-right" aria-hidden="true"></i> -->
+					<img src="assets/images/icon-angle.png" height="25" width="25" alt="">
+				</button>
+			</div>
+			<div class="data-penal-body">
+				<h2 class="title x-animated fadeIn d-3">Details</h2>
+				<div class="v-center-wrap">
+					<div class="infoBox x-animated fadeIn d-5">
+						<label>Total Invoice</label>
+						<h3 class="main-color">0</h3>
+					</div>
+					<div class="infoBox x-animated fadeIn d-6">
+						<label>30 DAY OVERDUE</label>
+						<h3 class="main-color">0</h3>
+					</div>
+					<div class="infoBox x-animated fadeIn d-7">
+						<label>TOTAL INVOICE AMOUNT</label>
+						<h3 class="main-color">$0.00</h3>
+					</div>
+					<div class="infoBox x-animated fadeIn d-8">
+						<label>PENDING PAYMENT</label>
+						<h3 class="main-color">$0.00</h3>
+					</div>
+				</div>
+			</div>
+			<div class="data-penal-footer">
+				<button class="btn close-btn" (click)="changeIc('close')">Close</button>
+			</div>
+		</div>
+	</div>
+
+
+	<div class="rightBtnBox action-bar text-right">
+		<button class="btn btn-success" [routerLink]="['/main/invoicing/entry']">+ New Invoice</button>
+	</div>
+
+</div>

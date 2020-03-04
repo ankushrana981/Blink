@@ -1,0 +1,99 @@
+<div class="crm-Wrap" *ngIf="SwitchUi">
+	<div class="viewdata-title">
+		<h2> <img src="assets/images/icon-list.svg" height="25" width="25" alt="" class="mr-2">Clients</h2>
+		<div class="pull-right right-top-btns">
+            <a class="btn btn-link" (click)="changeview('goupload')"><img src="assets/images/upload.svg" height="25" width="25" alt=""></a>
+            <a class="btn btn-link" [routerLink]="['/main/crm/customersetup/new-customer-setup']"><img src="assets/images/icon-plus.svg" height="25" width="25" alt=""></a>
+
+        </div>
+	</div>
+	<div class="contentBox">
+		<div class="leftContent">
+			<div class="card">
+				<div class="table-box viewTable mb-20"
+                        data-infinite-scroll
+                        debounce [infiniteScrollDistance]="scrollDistance" [infiniteScrollUpDistance]="scrollUpDistance" [infiniteScrollThrottle]="throttle" (scrolled)="onScrollDown($event)"  (scrolledUp)="onUp($event)" [scrollWindow]="false" >
+					<table style="width:100%" class="table-hover default-to-custom">
+                           <tbody [@fadeIn]="listrecords?.length"  fxLayout="row wrap" class="list">
+                               <tr style="vertical-align:top;" class="x-animated fadeIn d-1 in" *ngFor="let i of listrecords; index as j"  fxFlex="100" fxFlex.lt-sm="200">
+                                   <td width="64px" class="text-center"><h4 ng-bind="($index + 1)" class="rownumber ng-binding">{{j+1}}</h4></td>
+                                   <td class="text-left">
+                                       <b><span>{{i?.title}}</span>&nbsp;</b>
+                                       <div class="small help-block line-divider">&nbsp;</div>
+                                   </td>
+                                   <td class="text-left">
+                                        <b><span> {{i?.contactPerson?.title}} </span>&nbsp;</b>
+                                        <div class="small help-block line-divider">&nbsp;</div>
+                                   </td>
+                                   <td class="text-left">
+                                       <b><span>{{i.area?.title}}</span>&nbsp;</b>
+                                       <div class="small help-block line-divider">&nbsp;</div>
+                                   </td>
+                                   <td class="text-right">
+                                       <div><span>&nbsp;</span>&nbsp;</div>
+                                       <div class="small help-block line-divider">&nbsp;</div>
+                                   </td>
+                                   <td class="text-right">
+                                        <div><span>{{i.establishmentType?.title}}</span>&nbsp;</div>
+                                        <div class="small help-block line-divider">&nbsp;</div>
+                                    </td>
+                                    <td class="text-right">
+                                        <div><span>&nbsp;</span>&nbsp;</div>
+                                        <div class="small help-block line-divider">&nbsp;</div>
+                                    </td>
+                                    <td class="text-right">
+                                        <div><span>{{i.paymentTermDuration}} days</span>&nbsp;</div>
+                                        <div class="small help-block line-divider">&nbsp;</div>
+                                    </td>
+                                   <td width="100px" class="text-left">
+                                       <div class="rowactions">
+                                           <a class="btn btn-link" hov-title="View/Edit" (click)="editCustomerSetup(i)"><i class="fa fa-pencil"></i></a>
+                                           
+                                           <a class="btn btn-link" hov-title="Delete" ng-click="vm.deleteItem()" (click)="deleteCustomerSetup(i)"><i class="fa fa-remove text-danger"></i></a>
+                                           
+                                       </div>
+                                   </td>
+                                  </tr>
+                                                 
+                           </tbody>
+                       </table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="uploadfile" *ngIf="!SwitchUi">
+        <a href="javaScript:;" (click)="changeview('upload')" class="back-btn"><i class="fa fa-angle-left mr-1"></i>Back</a>
+        <div class="page-title">
+                <h2>Client Import</h2>
+        </div>
+    <div class="row">
+    <div class="col-md-6 mb-25">
+    <div class="card">
+        <div class="card-body py-3">
+                <div class="subheader file-upload">
+                    <h4 class="mb-4">Select csv file to upload.</h4>
+                    <div class="row">
+                        <div class="col-md-12 mb-20">
+                                <div class="custom-file">
+                                    <input type="file"  name="file" class="custom-file-input" id="fileInput"  (change)="onFileChange($event)" placeholder="" >
+                                    <label class="custom-file-label" for="inputGroupFile04">Select file to upload</label>
+                                </div>
+                                <button class="btn btn-white ml-2" (click)="UploadFile()"><i class="fa fa-cloud-upload mr-1"></i> Upload file</button>
+                        </div>
+                    </div>
+                    <div class="ng-binding">
+                        {{fileName}}
+                    </div>
+    
+                   <div class="float-right"><a href="javaScript:;" (click)="downloadReport()" class="mr-1">Download</a>Template to import records.</div> 
+                </div>
+                </div>
+            </div>
+    </div>
+       
+</div>
+<div *ngIf="showErr" class="alert alert-danger mt-10 col-md-6" role="alert">
+    Failed to import one or more records
+  </div>
+</div>

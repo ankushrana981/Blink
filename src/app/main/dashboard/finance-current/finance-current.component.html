@@ -1,0 +1,139 @@
+<div class="finance-sales-wrap">
+    <div class="card-header">
+        <h5>Finance /
+            <span>Current Sales</span>
+        </h5>
+    </div>
+    <div class="row">
+        <div class="col-sm-6">
+            <h1>$1950</h1>
+            <div class="division-list show-detail">
+                <ul>
+                    <!-- <li ng-click="vm.showSalesDetails($event)" role="button" tabindex="0" id="saletab1" class="active">
+                        <span class="square-bullet green"></span>
+                        <span class="division-name">Restaurants</span>
+                        <span class="sales-totals">$1033</span>
+                    </li>
+                    <li ng-click="vm.showSalesDetails($event)" role="button" tabindex="0" id="saletab2" class="active">
+                        <span class="square-bullet purple"></span>
+                        <span class="division-name">Hotels</span>
+                        <span class="sales-totals">$409</span>
+                    </li>
+                    <li ng-click="vm.showSalesDetails($event)" role="button" tabindex="0" id="saletab3" class="active">
+                        <span class="square-bullet blue"></span>
+                        <span class="division-name">Commercials</span>
+                        <span class="sales-totals">$350</span>
+                    </li>
+                    <li ng-click="vm.showSalesDetails($event)" role="button" tabindex="0" id="saletab4" class="active">
+                        <span class="square-bullet yellow"></span>
+                        <span class="division-name">Dealerships</span>
+                        <span class="sales-totals">$97</span>
+                    </li>
+                    <li ng-click="vm.showSalesDetails($event)" role="button" tabindex="0" id="saletab5" class="active">
+                        <span class="square-bullet red"></span>
+                        <span class="division-name">Web Service</span>
+                        <span class="sales-totals">$56</span>
+                         [ngClass]="{'inactive' : item.active === false }"[ngClass]="icon1?'active':''"
+                    </li> -->
+                    <li *ngFor="let item of salesConfigs;let index = index" role="button" tabindex="0" id="saletab5" [ngClass]="(item.active === true)? 'active' : 'inactive'"
+                        (click)="toggleClass(index)">
+                        <!-- <li *ngFor="let item of salesConfigs;let index = index" role="button" tabindex="0" id="saletab5" > -->
+                        <span [class]="item.className"></span>
+                        <span class="division-name">{{item.name}}</span>
+                        <span class="sales-totals">${{item.total}}</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="chart-wrap">
+                <mat-form-field>
+
+                    <mat-select [(value)]="selected">
+                        <mat-option value="option1">This month</mat-option>
+                        <mat-option value="option2">This week</mat-option>
+                        <mat-option value="option3">This year</mat-option>
+                    </mat-select>
+
+                </mat-form-field>
+
+            </div>
+            <div *ngIf="showline" class="sales-progress" ng-show="!vm.isSalesDetail" aria-hidden="false">
+                <div class="progress-item">
+                    <div class="progress-info">
+                        <span class="progress-percent green">40%</span>
+                        <span class="progress-average">Average $2200</span>
+                    </div>
+                    <div class="progress">
+                        <div class="progress-bar green" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
+                            <span class="sr-only">40%</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="progress-item">
+                    <div class="progress-info">
+                        <span class="progress-percent purple">70%</span>
+                        <span class="progress-average">Average $650</span>
+                    </div>
+                    <div class="progress">
+                        <div class="progress-bar purple" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 70%">
+                            <span class="sr-only">70%</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="progress-item">
+                    <div class="progress-info">
+                        <span class="progress-percent blue">23%</span>
+                        <span class="progress-average">Average $1260</span>
+                    </div>
+                    <div class="progress">
+                        <div class="progress-bar blue" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 23%">
+                            <span class="sr-only">23%</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="progress-item">
+                    <div class="progress-info">
+                        <span class="progress-percent yellow">114%</span>
+                        <span class="progress-average">Average $90</span>
+                    </div>
+                    <div class="progress">
+                        <div class="progress-bar yellow" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                            <span class="sr-only">114%</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="progress-item">
+                    <div class="progress-info">
+                        <span class="progress-percent red">60%</span>
+                        <span class="progress-average">Average $118</span>
+                    </div>
+                    <div class="progress">
+                        <div class="progress-bar red" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
+                            <span class="sr-only">60%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="!showline" class="sales-detail" ng-show="vm.isSalesDetail" aria-hidden="false">
+                <div class="current-sales-info">
+                    <div class="amount">
+                        <span>Amount Sold</span>
+                        <h3>$409</h3>
+                    </div>
+                    <div class="average">
+                        <span>Monthly Average</span>
+                        <h3>$605</h3>
+                    </div>
+                    <div class="totals">
+                        <h2>70%</h2>
+                    </div>
+                </div>
+                <apx-chart [series]="series1" [chart]="chartx" [responsive]="res" [legend]="legend1" [yaxis]="yaxis" [xaxis]="xaxis1" [grid]="grid" [colors]="colors1">
+                    </apx-chart>
+               <!--  <span class="for-month">August</span> -->
+                <!-- <img src="./Content/Images/salesChart.png" class="img-responsive"> -->
+            </div>
+        </div>
+    </div>
+</div>

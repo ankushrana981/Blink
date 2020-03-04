@@ -1,0 +1,143 @@
+<div class="manufacturing-Wrap" *ngIf="SwitchUi">
+	<div class="viewdata-title">
+		<h2><img src="assets/images/icon-list.svg"  height="25" width="25" alt="" class="mr-2"> Compositions</h2>
+		<div class="pull-right right-top-btns">
+            <a class="btn btn-link" [routerLink]="['/main/manufacturing/composition-entry']"><img src="assets/images/icon-plus.svg" height="25" width="25" alt=""></a>
+        </div>
+	</div>
+	<div class="contentBox">
+		<div class="leftContent">
+			<div class="card">
+				<div class="table-box viewTable mb-20"
+				data-infinite-scroll
+         debounce [infiniteScrollDistance]="scrollDistance" [infiniteScrollUpDistance]="scrollUpDistance" [infiniteScrollThrottle]="throttle" (scrolled)="onScrollDown($event)" [scrollWindow]="false">
+					<table style="width:100%;" class="table-hover default-to-custom">
+                           <tbody [@fadeIn]="listrecords?.length"  fxLayout="row wrap" class="list">
+                       			<tr style="vertical-align:top;"  class="x-animated fadeIn d-1 in" *ngFor="let i of listrecords; index as j" fxFlex="100" fxFlex.lt-sm="200" >
+				                    <td width="64px" class="text-center"><h4 ng-bind="($index + 1)" class="rownumber ng-binding">{{j+1}}</h4></td>
+				                    <td class="text-left">
+				                        <b><span ng-bind="r.product.title || '&nbsp;'" class="ng-binding">{{i.product?.title}}</span>&nbsp;</b>
+				                        <div class="small help-block line-divider">&nbsp;</div>
+				                    </td>
+				                    <td class="text-left">
+				                            <b><span ng-bind="r.title || '&nbsp;'" class="ng-binding">{{i?.title}}</span>&nbsp;</b>
+				                            <div class="small help-block line-divider">&nbsp;</div>
+				                    </td>
+				                    <td width="100px" class="text-left">
+				                        <div class="rowactions">
+			                                <a class="btn btn-link hover-btn" (click)="editItem(i)"><i class="fa fa-pencil"></i></a>
+			                                <a class="btn btn-link hover-btn" (click)="deleteItem(i)"><i class="fa fa-remove text-danger"></i></a>
+				                        </div>
+				                    </td>
+				                </tr>    
+                                         
+                           </tbody>
+                       </table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="manufacturing-Wrap" *ngIf="!SwitchUi">
+		<div class="viewdata-title">
+			<h2>Edit {{editedtitle}}</h2>
+			<!-- <div class="pull-right right-top-btns">
+				<a class="btn btn-link" [routerLink]="['/main/crm/customersetup/new-customer-setup']"><img src="assets/images/icon-plus.svg" height="25" width="25" alt=""></a>
+			</div> -->
+		</div>
+		<div class="contentBox">
+			<div class="leftContent">
+				<div class="card">
+					<div class="manageBox">
+						<div class="row">
+							<div class="col-sm-3" style="padding-right:30px;">
+								<div class="form-group custom-selectBox">
+									<!-- <label class="gray-label">Product</label> -->
+									<ng-select [clearable]="false" [(ngModel)]="user.product" placeholder ="Product" [items]="productNameItem | async" bindLabel="title" [notFoundText]="notFoundText"
+									 name="productName" id="productName" autocomplete="off" (change)="productSelected($event)" [typeahead]="MainSearchdataSource">
+									</ng-select>
+								</div>
+								<div class="form-group">
+									<mat-form-field class="example-full-width">
+										<input matInput placeholder="THRESHOLD PERCENTAGE" name="Percent" [(ngModel)]="user.thresholdPercent" (keydown)="AllowNumbers($event)">
+									</mat-form-field>
+								</div>
+							</div>
+							<div class="col-sm-8" style="padding-left: 30px; border-left:2px solid #f0f0f0;">
+								<h4>Ingredients</h4>
+								<table class="table table-striped">
+									<thead>
+										<tr>
+											<th width="40%">Product</th>
+											<th width="20%">Quantity</th>
+											<th width="20%">UoM</th>
+											<th width="20%">Percent</th>
+											<th width="5px">
+												<a class="btn btn-sm btn-link" ng-click="vm.addIngredient()">
+													<i class="fa fa-plus" (click)="addRow()"></i>
+												</a>
+											</th>
+										</tr>
+									</thead>
+									<tbody  [@fadeIn]="rowRepeatArr?.length"  fxLayout="row wrap" >
+										<tr *ngFor="let i of rowRepeatArr; index as j" class="x-animated fadeIn d-3 in" fxFlex="150" fxFlex.lt-sm="300" >
+											<td>
+												<div class="form-group mb-0 custom-selectBox">
+													<!-- <label class="gray-label">Product</label> -->
+													<ng-select [clearable]="false" [(ngModel)]="i.product" placeholder ="Product" [items]="productNameItem | async" bindLabel="title" [notFoundText]="notFoundText"
+													 name="productName" id="ingredients" autocomplete="off" (change)="ingredientSelected($event)" [typeahead]="MainSearchdataSource">
+													</ng-select>
+												</div>
+											</td>
+											<td>
+												<div class="form-group mb-0">
+													<mat-form-field class="example-full-width">
+														<input matInput placeholder="QUANTITY" name="quantity" id="quantity" [(ngModel)]="i.quantity" (keydown)="AllowNumbers($event)"
+														 (keyup)="quantitychnge(i.quantity)">
+													</mat-form-field>
+												</div>
+											</td>
+											<td>
+												<div class="form-group mb-0 custom-selectBox">
+													<label class="overflow-text-label">UNIT OF MEASURE</label>
+													<div class="datepickerInputBox">
+														<input class="form-control" type="text" id="measure" name="measure" [(ngModel)]="unit" [disabled]="true">
+	
+													</div>
+											
+												</div>
+											</td>
+											<td>
+												<div class="form-group mb-0 custom-selectBox">
+														<label class="overflow-text-label">PERCENT</label>
+														<div class="datepickerInputBox">
+																<input class="form-control" type="text" id="percent" name="percent" [(ngModel)]="i.percent" (keydown)="AllowNumbers($event)" [disabled]="true">
+														</div>
+											
+												</div>
+											</td>
+											<td>
+												<a class="btn-link" (click)="removeRow(j)">
+													<i class="fa fa-remove"></i>
+												</a>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-12">
+								<div class="btn-bar">
+									<button class="btn btn-success" (click)="editCompositionEntry()">
+										<i class="fa fa-save"></i> Save</button>
+									<a class="btn btn-default" (click)="closeView()">
+										<i class="fa fa-remove"></i> Cancel</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>

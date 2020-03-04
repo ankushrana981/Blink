@@ -1,0 +1,93 @@
+<div class="financeexpenceGraph">
+  <div class="card-header">
+      <h5>FINANCE / <span>EXPENCES VIEW</span></h5>    
+  </div>
+  <div class="row">
+    <div class="col-md-2">
+        <mat-form-field>
+            <!-- <mat-label>Last month</mat-label> -->
+
+            <mat-select [(value)]="selected">                                        
+                <mat-option value="option1">Last month</mat-option>
+                <mat-option value="option2">Last week</mat-option>
+                <mat-option value="option3">Last year</mat-option>
+            </mat-select>
+          </mat-form-field>
+    </div>  
+    <div style="margin-left: 500px;">
+        <mat-form-field>
+                   <mat-select>                                        
+                        <mat-option value="option1">Percentage</mat-option>
+                        <mat-option value="option2">Amount</mat-option>
+                       
+                    </mat-select>
+            <!-- <mat-label>Last month</mat-label> -->
+          
+          </mat-form-field>
+    </div> 
+  </div>
+  <div class="row">
+    <div class="col-md-7">
+        <table class="table table-striped">
+            <thead>
+              
+            </thead>
+            <tbody>
+              <tr>
+                <td>5.1.2017</td>
+                <td>$35000</td>
+                <td>Computer repair</td>
+                <td>Maintenanace</td>
+
+              </tr>
+              <tr>
+                  <td>5.1.2017</td>
+                  <td>$35000</td>
+                  <td>Computer repair</td>
+                  <td>Maintenanace</td>
+              </tr>
+              <tr>
+                  <td>5.1.2017</td>
+                  <td>$35000</td>
+                  <td>Computer repair</td>
+                  <td>Maintenanace</td>
+              </tr>
+              <tr>
+                  <td>5.1.2017</td>
+                  <td>$35000</td>
+                  <td>Computer repair</td>
+                  <td>Maintenanace</td>
+              </tr>
+              <tr>
+                  <td>5.1.2017</td>
+                  <td>$35000</td>
+                  <td>Computer repair</td>
+                  <td>Maintenanace</td>
+              </tr>
+              <tr>
+                  <td>5.1.2017</td>
+                  <td>$35000</td>
+                  <td>Computer repair</td>
+                  <td>Maintenanace</td>
+              </tr>
+              <tr>
+                  <td>5.1.2017</td>
+                  <td>$35000</td>
+                  <td>Computer repair</td>
+                  <td>Maintenanace</td>
+              </tr>
+              <tr>
+                  <td>5.1.2017</td>
+                  <td>$35000</td>
+                  <td>Computer repair</td>
+                  <td>Maintenanace</td>
+              </tr>
+            </tbody>
+          </table>
+
+    </div>
+    <div class="col-md-5">
+        <app-highcharts type="invoice"></app-highcharts>
+      </div>
+  </div>
+</div>

@@ -4,7 +4,7 @@ import { BaseComponent } from './../common/commonComponent';
 import { HttpClient, HttpHeaders, HttpResponse, HttpParams } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { delay, map } from 'rxjs/operators';
-import {config} from '../../assets/config/configs';
+import {config} from '../../assets/config/configs-sample';
 import swal from 'sweetalert2';
 import { Router, ActivatedRoute } from "@angular/router";
 

@@ -1,4 +1,4 @@
 export const config = {
-  "apiUrl": "http://34.213.86.163/20180506/",
+  "apiUrl": "http://evolution-erp.systems/staging/",
   "port": "4181"
 }

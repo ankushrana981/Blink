@@ -40,3 +40,10 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+/.vs/ERP%20Web%20Updated/v17/DocumentLayout.json
+/.vs/ProjectSettings.json
+/.vs/slnx.sqlite
+/.vs/VSWorkspaceState.json
+/.vs/ERP%20Web%20Updated/v17/.wsuo
+*.vsidx
+/.vs/ERP%20Web%20Updated/v17

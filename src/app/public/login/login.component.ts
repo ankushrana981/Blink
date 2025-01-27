@@ -18,8 +18,8 @@ export class LoginComponent extends BaseComponent implements OnInit {
   }
   ngOnInit() {  
     this.loginForm = this.fb.group({
-      email: ['Jigar@task.com', [Validators.required, Validators.email]],
-      password: ['jigarjigar', [Validators.required]],
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required]],
     });
   }
 

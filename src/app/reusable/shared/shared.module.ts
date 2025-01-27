@@ -5,8 +5,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { NgSelectModule } from '@ng-select/ng-select';
-// import { SweetAlert2Module } from '@toverux/ngx-sweetalert2';
-// import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
+// import { SweetAlert2Module } from 'ngx-sweetalert2';
+import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 // import { ImageCropperModule } from 'ngx-image-cropper';
 import { MatTooltipModule } from '@angular/material/tooltip';
@@ -15,7 +15,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { BsDropdownDirective } from 'ngx-bootstrap/dropdown';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
-// import { BnDatatableModule } from '../../common/bn-datatable/bn-datatable.module'
+import { BnDatatableModule } from '../../common/bn-datatable/bn-datatable.module'
 import { BaseComponent } from '../../common/commonComponent';
 // import { NgxSpinnerModule } from 'ngx-spinner';
 import { TabsModule } from 'ngx-bootstrap/tabs';
@@ -28,8 +28,8 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatInputModule } from '@angular/material/input';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
-// import { NgxCurrencyModule } from "ngx-currency";
-// import { NgxPrintModule } from 'ngx-print';
+import { NgxCurrencyDirective  } from "ngx-currency";
+import { NgxPrintModule } from 'ngx-print';
 import { IconDownloadComponent } from '../../common/svg/icon-download.component';
 import { IconFilterComponent } from '../../common/svg/icon-filter.component';
 import { IconMoreComponent } from '../../common/svg/icon-more.component';
@@ -100,7 +100,8 @@ import {IconSquareRightComponent} from '../../common/svg/icon-square-right';
     MatInputModule,
     MatFormFieldModule,
     MatSelectModule,
-    //         BsDropdownModule, InfiniteScrollModule, ,
+            BsDropdownModule,
+            //  InfiniteScrollModule, ,
     RouterModule,
     //         AngularResizedEventModule,
     DragDropModule,
@@ -119,16 +120,16 @@ import {IconSquareRightComponent} from '../../common/svg/icon-square-right';
     //         SweetAlert2Module.forRoot(),
     TabsModule.forRoot(),
     //         MalihuScrollbarModule.forRoot(),
-    //         BnDatatableModule,
-    //         LoadingBarHttpClientModule,
+            BnDatatableModule,
+            LoadingBarHttpClientModule,
     PaginationModule.forRoot(),
     //         ImageCropperModule,
     //         // ChartModule,
     MatTooltipModule,
     MatAutocompleteModule,
     ReactiveFormsModule,
-    //         NgxCurrencyModule,
-    //         NgxPrintModule,
+            NgxCurrencyDirective ,
+            NgxPrintModule,
     //         // ImageUploadModule.forRoot(),
     //         // UiSwitchModule
     // NgModalDragg,
@@ -196,7 +197,8 @@ import {IconSquareRightComponent} from '../../common/svg/icon-square-right';
     MatMenuModule,
     MatButtonModule,
     MatInputModule,
-    //         BsDropdownModule, InfiniteScrollModule, ,
+            BsDropdownModule, 
+    // InfiniteScrollModule, ,
     //         AngularResizedEventModule,
     BsDatepickerModule,
     DragDropModule,
@@ -211,16 +213,16 @@ import {IconSquareRightComponent} from '../../common/svg/icon-square-right';
     NgSelectModule,
     //         SweetAlert2Module,
     //         MalihuScrollbarModule,
-    // BnDatatableModule,
-    //         LoadingBarHttpClientModule,
+    BnDatatableModule,
+            LoadingBarHttpClientModule,
     PaginationModule,
     //         ImageCropperModule,
     //         // ChartModule,
     MatTooltipModule,
     MatAutocompleteModule,
     ReactiveFormsModule,
-    //         NgxCurrencyModule,
-    //         NgxPrintModule,
+            NgxCurrencyDirective ,
+            NgxPrintModule,
     // ModalDemoComponent,
             IconDownloadComponent,
             IconFilterComponent,

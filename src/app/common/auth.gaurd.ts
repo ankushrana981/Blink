@@ -1,6 +1,7 @@
-import { Injectable, Injector } from '@angular/core';
+import { Injectable, Injector, APP_ID, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser, isPlatformServer } from '@angular/common';
 import { BaseComponent } from './../common/commonComponent';
-import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, CanActivateChild, CanDeactivate } from '@angular/router';
+import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, CanActivateChild, CanDeactivate } from '@angular/router';
 
 /****************************************************************************
 @PURPOSE      : Dont allow public pages to get accessed. (After Login)

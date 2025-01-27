@@ -6,13 +6,9 @@ import { SharedModule } from './../reusable/shared/shared.module'
 import { MatInputModule } from '@angular/material/input';
 // import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 // import { MatButtonModule, MatSelectModule } from '@angular/material';
-
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { NgCircleProgressModule } from 'ng-circle-progress';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { CommonService } from '../common/common.service';
-import { ErrorMessages } from '../common/errorMessages';
-import { BsModalService } from 'ngx-bootstrap/modal';
 @NgModule({
   declarations: [LoginComponent],
   imports: [
@@ -37,7 +33,6 @@ import { BsModalService } from 'ngx-bootstrap/modal';
         }
       ]
     )
-  ],
-  providers:[CommonService, ErrorMessages,BsModalService]
+  ]
 })
 export class PublicModule { }

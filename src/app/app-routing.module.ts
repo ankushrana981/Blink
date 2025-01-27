@@ -5,12 +5,12 @@ import { CanAuthActivate, CanLoginActivate } from './common/auth.gaurd';
 const routes: Routes = [
   {
     path: 'public',
-    // canActivate: [CanLoginActivate],
+    canActivate: [CanLoginActivate],
     loadChildren: () => import('./public/public.module').then(m => m.PublicModule),
   },
   {
     path: 'main',
-    // canActivate: [CanAuthActivate],
+    canActivate: [CanAuthActivate],
     loadChildren: () => import('./main/main.module').then(m =>m.MainModule)
   },
   {

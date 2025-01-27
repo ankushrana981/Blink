@@ -1,12 +1,11 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule, provideClientHydration, withEventReplay } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-// import { LoginComponent } from './public/login/login.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, provideHttpClient } from '@angular/common/http';
 import { CanAuthActivate, CanLoginActivate } from './common/auth.gaurd';
 import { Broadcaster } from './common/broadCaster';
 import { ErrorMessages } from './common/errorMessages';
@@ -16,6 +15,8 @@ import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
 import { ToastrModule } from 'ngx-toastr';
 import { NgApexchartsModule } from 'ng-apexcharts';
+import { CacheInterceptor } from './common/interceptors/cache.interceptor';
+import { BsModalService } from 'ngx-bootstrap/modal';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,6 @@ import { NgApexchartsModule } from 'ng-apexcharts';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    HttpClientModule,
     LoadingBarHttpClientModule,
     ToastrModule.forRoot({
       timeOut: 3000,
@@ -34,13 +34,20 @@ import { NgApexchartsModule } from 'ng-apexcharts';
     }),
     NgApexchartsModule
   ],
+   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [
+    provideHttpClient(),
     provideClientHydration(withEventReplay()),
     provideAnimationsAsync('noop'),
-    CommonService,
+    CommonService, CanLoginActivate,
+    CanAuthActivate,
     BsDropdownDirective,
     ErrorMessages,
     Broadcaster,
+    CanLoginActivate,
+    BsModalService,
+    CanAuthActivate,
+    { provide: HTTP_INTERCEPTORS, useClass: CacheInterceptor, multi: true},
     {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'fill'}}
   ],
   bootstrap: [AppComponent]

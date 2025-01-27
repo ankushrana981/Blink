@@ -1,0 +1,771 @@
+<div class="d-flex flex-wrap chart-form create-task-from position-relative transcations-popup">
+    <div class="chart-box d-flex flex-wrap w-100">
+        <div class="chart-header w-100 d-flex flex-wrap">
+            <div class="chart-right flex-1 d-flex flex-wrap align-items-center justify-content-between">
+                <h3 class=text-title>Transaction Reconciliation</h3>
+                <!-- <ng-content></ng-content> -->
+                <a href="javascript:void(0)" icon-close (click)="closeTask()"></a>
+            </div>
+        </div>
+        <div class="w-100 create-task-body">
+            <div class="task-body">
+                <!-- <div malihu-scrollbar class="scrollbar"> -->
+                <div class="d-flex flex-wrap ">
+                    <a class="btn-task active" href="javascript:void(0)" (click)="setpOne()">LEdger Setting</a>
+                    <a class="btn-task" href="javascript:void(0)" (click)="setpTwo()"
+                        [ngClass]="[setp2 ? 'active' : '', setp3 ? 'active' : '']">Reconciliation</a>
+                    <a class="btn-task" href="javascript:void(0)" (click)="setpThree()"
+                        [ngClass]="{'active': setp3}">modifier</a>
+                </div>
+                <div class="task-content">
+                    <form class="example-form prduct-form">
+                        <div class="" [hidden]="!setp1">
+                            <div class="transcations-detail">
+                                <ul>
+                                    <li>
+                                        <span class="sub-title">Transaction</span>
+                                        <span class="desc bold">BA JASA E-BANKING</span>
+                                    </li>
+                                    <li>
+                                        <span class="sub-title">Date</span>
+                                        <span class="desc">13.14.2021</span>
+                                    </li>
+                                    <li>
+                                        <span class="sub-title">Amount</span>
+                                        <span class="desc">Rp. 3.501,00</span>
+                                    </li>
+                                    <li>
+                                        <span class="sub-title">Type</span>
+                                        <span class="desc">Debit</span>
+                                    </li>
+                                </ul>
+                                <div class="trailer">
+                                    <span class="sub-title">Trailer</span>
+                                    <span class="desc">1304/ATLG/WS9505118285621 Refund: ULPRWHHPO PPU(JBQDBA00000000Trinawati Eka Putr</span>
+                                </div>
+                            </div>
+                            <div class="transcations-desc"  *ngIf="!ledger">
+                                <h2 class="title">Associated Ledger</h2>
+                                <div class="table-box">
+                                    <div class="table-respons">
+                                        <table style="width:100%"
+                                            class="table-hover task-table-main first-padding-0">
+                                        
+                                            <thead class="thead-none">
+                                                <tr class="x-animated fadeIn d-1 in">
+                                                    <th class="table-date">
+                                                        <b class="table-title">
+                                                            <span>Entry Date</span>&nbsp;
+                                                        </b>
+                                                    </th>
+                                                    <th class="table-number">
+                                                        <b class="table-title">
+                                                            <span>Document Number</span>&nbsp;
+                                                        </b>
+                                                    </th>
+                                                    <th class="table-amount">
+                                                        <b class="table-title">
+                                                            <span>Amount</span>&nbsp;
+                                                        </b>
+                                                    </th>
+                                                    <th class="table-category">
+                                                        <b class="table-title">
+                                                            <span>Category</span>&nbsp;
+                                                        </b>
+                                                    </th>
+                                                    <th class="table-desc">
+                                                        <b class="table-title">
+                                                            <span>description</span>&nbsp;
+                                                        </b>
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody fxLayout="row wrap" class="list">
+                                                <tr class="x-animated fadeIn d-1 in">
+                                                    <td class="text-left">
+                                                        <b class="table-title">
+                                                            <span>13.14.2021</span>
+                                                        </b>
+                                                    </td>
+                                                    <td class="text-left">
+                                                        <b class="table-title">
+                                                            <span>MX-FN-20-000068</span>
+                                                        </b>
+                                                    </td>
+                                                    <td class="text-left">
+                                                        <b class="table-title">
+                                                            <span>Rp. 3.003.000.501,00</span>
+                                                        </b>
+                                                    </td>
+                                                    <td class="text-left">
+                                                        <b class="table-title">
+                                                            <span>Local Charges and Destination Logistics
+                                                            </span>
+                                                        </b>
+                                                    </td>
+                                                    <td class="text-left">
+                                                        <b class="table-title">
+                                                            <span>Local Charges and Destination Logistics MX-PO-19-000365
+                                                            </span>
+                                                        </b>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                            <tbody fxLayout="row wrap" class="list">
+                                                <tr class="x-animated fadeIn d-1 in">
+                                                    <td class="text-left">
+                                                        <b class="table-title">
+                                                            <span>13.14.2021</span>
+                                                        </b>
+                                                    </td>
+                                                    <td class="text-left">
+                                                        <b class="table-title">
+                                                            <span>MX-FN-20-000068</span>
+                                                        </b>
+                                                    </td>
+                                                    <td class="text-left">
+                                                        <b class="table-title">
+                                                            <span>Rp. 3.003.000.501,00</span>
+                                                        </b>
+                                                    </td>
+                                                    <td class="text-left">
+                                                        <b class="table-title">
+                                                            <span>Local Charges and Destination Logistics
+                                                            </span>
+                                                        </b>
+                                                    </td>
+                                                    <td class="text-left">
+                                                        <b class="table-title">
+                                                            <span>Local Charges and Destination Logistics MX-PO-19-000365
+                                                            </span>
+                                                        </b>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                            <tbody fxLayout="row wrap" class="list">
+                                                <tr class="x-animated fadeIn d-1 in">
+                                                    <td class="text-left">
+                                                        <b class="table-title">
+                                                            <span>13.14.2021</span>
+                                                        </b>
+                                                    </td>
+                                                    <td class="text-left">
+                                                        <b class="table-title">
+                                                            <span>MX-FN-20-000068</span>
+                                                        </b>
+                                                    </td>
+                                                    <td class="text-left">
+                                                        <b class="table-title">
+                                                            <span>Rp. 3.003.000.501,00</span>
+                                                        </b>
+                                                    </td>
+                                                    <td class="text-left">
+                                                        <b class="table-title">
+                                                            <span>Advertising
+                                                            </span>
+                                                        </b>
+                                                    </td>
+                                                    <td class="text-left">
+                                                        <b class="table-title">
+                                                            <span>Marketing Tools - Flyers and Banners
+                                                            </span>
+                                                        </b>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                            <tbody fxLayout="row wrap" class="list">
+                                                <tr class="x-animated fadeIn d-1 in">
+                                                    <td class="text-left">
+                                                        <b class="table-title">
+                                                            <span>13.14.2021</span>
+                                                        </b>
+                                                    </td>
+                                                    <td class="text-left">
+                                                        <b class="table-title">
+                                                            <span>MX-FN-20-000068</span>
+                                                        </b>
+                                                    </td>
+                                                    <td class="text-left">
+                                                        <b class="table-title">
+                                                            <span>Rp. 3.003.000.501,00</span>
+                                                        </b>
+                                                    </td>
+                                                    <td class="text-left">
+                                                        <b class="table-title">
+                                                            <span>Advertising
+                                                            </span>
+                                                        </b>
+                                                    </td>
+                                                    <td class="text-left">
+                                                        <b class="table-title">
+                                                            <span>Marketing Tools - Flyers and Banners
+                                                            </span>
+                                                        </b>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                            <tbody fxLayout="row wrap" class="list">
+                                                <tr class="x-animated fadeIn d-1 in">
+                                                    <td class="text-left">
+                                                        <b class="table-title">
+                                                            <span>13.14.2021</span>
+                                                        </b>
+                                                    </td>
+                                                    <td class="text-left">
+                                                        <b class="table-title">
+                                                            <span>MX-FN-20-000068</span>
+                                                        </b>
+                                                    </td>
+                                                    <td class="text-left">
+                                                        <b class="table-title">
+                                                            <span>Rp. 3.003.000.501,00</span>
+                                                        </b>
+                                                    </td>
+                                                    <td class="text-left">
+                                                        <b class="table-title">
+                                                            <span>Advertising
+                                                            </span>
+                                                        </b>
+                                                    </td>
+                                                    <td class="text-left">
+                                                        <b class="table-title">
+                                                            <span>Marketing Tools - Flyers and Banners
+                                                            </span>
+                                                        </b>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                            <tbody fxLayout="row wrap" class="list">
+                                                <tr class="x-animated fadeIn d-1 in">
+                                                    <td class="text-left">
+                                                        <b class="table-title">
+                                                            <span>13.14.2021</span>
+                                                        </b>
+                                                    </td>
+                                                    <td class="text-left">
+                                                        <b class="table-title">
+                                                            <span>MX-FN-20-000068</span>
+                                                        </b>
+                                                    </td>
+                                                    <td class="text-left">
+                                                        <b class="table-title">
+                                                            <span>Rp. 3.003.000.501,00</span>
+                                                        </b>
+                                                    </td>
+                                                    <td class="text-left">
+                                                        <b class="table-title">
+                                                            <span>Advertising
+                                                            </span>
+                                                        </b>
+                                                    </td>
+                                                    <td class="text-left">
+                                                        <b class="table-title">
+                                                            <span>Marketing Tools - Flyers and Banners
+                                                            </span>
+                                                        </b>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <div class="balance-list">
+                                            <div class="balance">
+                                                <span class="price-title text-end">Remaining balance</span>
+                                                <span class="amount">Rp. 3.300.000.000,00</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="transcations-desc ledger" *ngIf="ledger">
+                                <h2 class="title quick-title">Quick Ledger Entry</h2>
+                                <form>
+                                    <div class="ledger-detail">
+                                        <div class="ledger-left">
+                                            <div class="form-group date customanimate order-animate1">
+                                                <label class="sub-title">Date</label>
+                                                <input class="form-control"  #datepickerYMD="bsDatepicker" bsDatepicker formControlName="dateYMD" [bsConfig]="{ dateInputFormat: 'MM-DD-YYYY' }">
+                                                <button class="dateicon" (click)="datepickerYMD.toggle()" [attr.aria-expanded]="datepickerYMD.isOpen" type="button">
+                                                    <img src="assets/images/icon-date.svg">
+                                                </button>
+                                            </div>
+                                            <div class="form-group customanimate order-animate3">
+                                                <mat-form-field class="example-full-width mat-input">
+                                                    <input formControlName="focus" matInput type="text" placeholder="Amount"
+                                                        value="" autocomplete="off">
+                                                </mat-form-field>
+                                                <ul class="amount-type">
+                                                    <li><a (click)="debit = !debit;deposite=false" 
+                                                        [ngClass]="{active: debit, inactive: !debit}">Debit</a></li>
+                                                    <li><a (click)="deposite = !deposite;debit=false" 
+                                                        [ngClass]="{active: deposite, inactive: !deposite}">Credit</a></li>
+                                                </ul>
+                                            </div>
+                                            <div class="form-group customanimate order-animate5">
+                                                <mat-form-field class="example-full-width mat-input">
+                                                    <input formControlName="focus" matInput type="text" placeholder="Description"
+                                                        value="" autocomplete="off">
+                                                </mat-form-field>
+                                            </div>
+                                        </div>
+                                        <div class="ledger-center">
+                                            <a class="more-btn customanimate order-animate7"  [ngClass]="{'active' : more}">More <img src="assets/images/right-icon.svg"></a>
+                                            <div class="customanimate order-animate9">
+                                                <div class="form-group">
+                                                    <ng-select  class="w-100" [items]="tasks"
+                                                        placeholder="Expensed From" bindLabel="name"
+                                                        (change)="chnageTypeValue($event)" bindValue="id" [searchable]="false"
+                                                        [hideSelected]="true" [(ngModel)]="open1" [ngModelOptions]="{standalone: true}">
+                                                        <ng-template ng-label-tmp let-item="item" let-clear="clear">
+                                                            <span class="ng-value-label">{{item.name}}</span>
+                                                            <span class="ng-value-icon right" (click)="clear(item);"
+                                                                aria-hidden="true">×</span>
+                                                        </ng-template>
+                                                        <ng-template ng-option-tmp let-item="item" let-index="index">
+                                                            {{item.name}}
+                                                        </ng-template>
+                                                    </ng-select>
+                                                </div>
+                                            </div>
+                                            <div class="customanimate order-animate11">
+                                                <div class="form-group">
+                                                    <ng-select  class="w-100" [items]="tasks"
+                                                        placeholder="ENTRY tYPE" bindLabel="name"
+                                                        (change)="chnageTypeValue($event)" bindValue="id" [searchable]="false"
+                                                        [hideSelected]="true" [(ngModel)]="open2" [ngModelOptions]="{standalone: true}">
+                                                        <ng-template ng-label-tmp let-item="item" let-clear="clear">
+                                                            <span class="ng-value-label">{{item.name}}</span>
+                                                            <span class="ng-value-icon right" (click)="clear(item);"
+                                                                aria-hidden="true">×</span>
+                                                        </ng-template>
+                                                        <ng-template ng-option-tmp let-item="item" let-index="index">
+                                                            {{item.name}}
+                                                        </ng-template>
+                                                    </ng-select>
+                                                </div>
+                                            </div>
+                                            <div class="customanimate order-animate13">
+                                                <div class="form-group">
+                                                    <ng-select  class="w-100" [items]="tasks"
+                                                        placeholder="lINKED dOCUMENT" bindLabel="name"
+                                                        (change)="chnageTypeValue($event)" bindValue="id" [searchable]="false"
+                                                        [hideSelected]="true" [(ngModel)]="open3" [ngModelOptions]="{standalone: true}">
+                                                        <ng-template ng-label-tmp let-item="item" let-clear="clear">
+                                                            <span class="ng-value-label">{{item.name}}</span>
+                                                            <span class="ng-value-icon right" (click)="clear(item);"
+                                                                aria-hidden="true">×</span>
+                                                        </ng-template>
+                                                        <ng-template ng-option-tmp let-item="item" let-index="index">
+                                                            {{item.name}}
+                                                        </ng-template>
+                                                    </ng-select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="ledger-right" *ngIf="more" >
+                                            <div class="customanimate order-animate1">
+                                                <div class="form-group">
+                                                    <ng-select class="w-100" [items]="tasks"
+                                                        placeholder="cURRENCY" bindLabel="name"
+                                                        (change)="chnageTypeValue($event)" bindValue="id" [searchable]="false"
+                                                        [hideSelected]="true" [(ngModel)]="open4" [ngModelOptions]="{standalone: true}">
+                                                        <ng-template ng-label-tmp let-item="item" let-clear="clear">
+                                                            <span class="ng-value-label">{{item.name}}</span>
+                                                            <span class="ng-value-icon right" (click)="clear(item);"
+                                                                aria-hidden="true">×</span>
+                                                        </ng-template>
+                                                        <ng-template ng-option-tmp let-item="item" let-index="index">
+                                                            {{item.name}}
+                                                        </ng-template>
+                                                    </ng-select>
+                                                </div>
+                                            </div>
+                                            <div class="customanimate order-animate3">
+                                                <div class="form-group">
+                                                    <ng-select  class="w-100" [items]="tasks"
+                                                        placeholder="bRANCH" bindLabel="name"
+                                                        (change)="chnageTypeValue($event)" bindValue="id" [searchable]="false"
+                                                        [hideSelected]="true" [(ngModel)]="open5" [ngModelOptions]="{standalone: true}">
+                                                        <ng-template ng-label-tmp let-item="item" let-clear="clear">
+                                                            <span class="ng-value-label">{{item.name}}</span>
+                                                            <span class="ng-value-icon right" (click)="clear(item);"
+                                                                aria-hidden="true">×</span>
+                                                        </ng-template>
+                                                        <ng-template ng-option-tmp let-item="item" let-index="index">
+                                                            {{item.name}}
+                                                        </ng-template>
+                                                    </ng-select>
+                                                </div>
+                                            </div>
+                                            <div class="customanimate order-animate5">
+                                                <div class="form-group">
+                                                    <ng-select  class="w-100" [items]="tasks"
+                                                        placeholder="dEPARTMENT" bindLabel="name"
+                                                        (change)="chnageTypeValue($event)" bindValue="id" [searchable]="false"
+                                                        [hideSelected]="true" [(ngModel)]="open6" [ngModelOptions]="{standalone: true}">
+                                                        <ng-template ng-label-tmp let-item="item" let-clear="clear">
+                                                            <span class="ng-value-label">{{item.name}}</span>
+                                                            <span class="ng-value-icon right" (click)="clear(item);"
+                                                                aria-hidden="true">×</span>
+                                                        </ng-template>
+                                                        <ng-template ng-option-tmp let-item="item" let-index="index">
+                                                            {{item.name}}
+                                                        </ng-template>
+                                                    </ng-select>
+                                                </div>
+                                            </div>
+                                            <div class="customanimate order-animate7">
+                                                <div class="form-group">
+                                                    <ng-select  class="w-100" [items]="tasks"
+                                                        placeholder="dIVISION" bindLabel="name"
+                                                        (change)="chnageTypeValue($event)" bindValue="id" [searchable]="false"
+                                                        [hideSelected]="true" [(ngModel)]="open7" [ngModelOptions]="{standalone: true}">
+                                                        <ng-template ng-label-tmp let-item="item" let-clear="clear">
+                                                            <span class="ng-value-label">{{item.name}}</span>
+                                                            <span class="ng-value-icon right" (click)="clear(item);"
+                                                                aria-hidden="true">×</span>
+                                                        </ng-template>
+                                                        <ng-template ng-option-tmp let-item="item" let-index="index">
+                                                            {{item.name}}
+                                                        </ng-template>
+                                                    </ng-select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="ledger-btn">
+                                        <a href="#">Save Entry</a>
+                                    </div>
+                                </form>
+                            </div>
+                                
+                            <div class="transcations-btn">
+                                <ul class="list">
+                                    <li><a>Expand Time</a></li>
+                                    <li><a>Expand Amount</a></li>
+                                    <li><a (click)="ledger=true" [ngClass]="{'active' : ledger}">Create Ledger</a></li>   
+                                </ul>
+                                <ul class="list next">
+                                    <li><a href="#">Next</a></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="" [hidden]="!setp2">
+                            <div class="transcations-detail">
+                                <ul>
+                                    <li>
+                                        <span class="sub-title">Transaction</span>
+                                        <span class="desc bold">BA JASA E-BANKING</span>
+                                    </li>
+                                    <li>
+                                        <span class="sub-title">Date</span>
+                                        <span class="desc">13.14.2021</span>
+                                    </li>
+                                    <li>
+                                        <span class="sub-title">Amount</span>
+                                        <span class="desc">Rp. 3.501,00</span>
+                                    </li>
+                                    <li>
+                                        <span class="sub-title">Type</span>
+                                        <span class="desc">Debit</span>
+                                    </li>
+                                </ul>
+                                <div class="trailer">
+                                    <span class="sub-title">Trailer</span>
+                                    <span class="desc">1304/ATLG/WS9505118285621 Refund: ULPRWHHPO PPU(JBQDBA00000000Trinawati Eka Putr</span>
+                                </div>
+                            </div>
+                            <div class="transcations-desc">
+                                <h2 class="title">Selected Ledgers</h2>
+                                <div class="table-box">
+                                    <div class="table-respons reconciliation-table">
+                                        <table style="width:100%"
+                                            class="table-hover task-table-main first-padding-0">
+                                        
+                                            <thead class="thead-none">
+                                                <tr class="x-animated fadeIn d-1 in">
+                                                    <th class="table-date">
+                                                        <b class="table-title">
+                                                            <span>Entry Date</span>&nbsp;
+                                                        </b>
+                                                    </th>
+                                                    <th class="table-number">
+                                                        <b class="table-title">
+                                                            <span>Document Number</span>&nbsp;
+                                                        </b>
+                                                    </th>
+                                                    <th class="table-amount">
+                                                        <b class="table-title">
+                                                            <span>Amount</span>&nbsp;
+                                                        </b>
+                                                    </th>
+                                                    <th class="table-category">
+                                                        <b class="table-title">
+                                                            <span>Category</span>&nbsp;
+                                                        </b>
+                                                    </th>
+                                                    <th class="table-desc">
+                                                        <b class="table-title">
+                                                            <span>description</span>&nbsp;
+                                                        </b>
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody fxLayout="row wrap" class="list">
+                                                <tr class="x-animated fadeIn d-1 in">
+                                                    <td class="text-left">
+                                                        <b class="table-title">
+                                                            <span>13.14.2021</span>
+                                                        </b>
+                                                    </td>
+                                                    <td class="text-left">
+                                                        <b class="table-title">
+                                                            <span>MX-FN-20-000068</span>
+                                                        </b>
+                                                    </td>
+                                                    <td class="text-left">
+                                                        <b class="table-title">
+                                                            <span>Rp. 3.003.000.501,00</span>
+                                                        </b>
+                                                    </td>
+                                                    <td class="text-left">
+                                                        <b class="table-title">
+                                                            <span>Local Charges and Destination Logistics
+                                                            </span>
+                                                        </b>
+                                                    </td>
+                                                    <td class="text-left">
+                                                        <b class="table-title">
+                                                            <span>Local Charges and Destination Logistics MX-PO-19-000365
+                                                            </span>
+                                                        </b>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                            <tbody fxLayout="row wrap" class="list">
+                                                <tr class="x-animated fadeIn d-1 in">
+                                                    <td class="text-left">
+                                                        <b class="table-title">
+                                                            <span>13.14.2021</span>
+                                                        </b>
+                                                    </td>
+                                                    <td class="text-left">
+                                                        <b class="table-title">
+                                                            <span>MX-FN-20-000068</span>
+                                                        </b>
+                                                    </td>
+                                                    <td class="text-left">
+                                                        <b class="table-title">
+                                                            <span>Rp. 3.003.000.501,00</span>
+                                                        </b>
+                                                    </td>
+                                                    <td class="text-left">
+                                                        <b class="table-title">
+                                                            <span>Advertising
+                                                            </span>
+                                                        </b>
+                                                    </td>
+                                                    <td class="text-left">
+                                                        <b class="table-title">
+                                                            <span>Marketing Tools - Flyers and Banners
+                                                            </span>
+                                                        </b>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="balance-list">
+                                        <div class="balance">
+                                            <span class="price-title text-end">Remaining balance</span>
+                                            <span class="amount">Rp. 3.300.000.000,00</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="message text-center">How would you allocate the difference?</div>
+                            <div class="transcations-btn">
+                                <ul class="list">
+                                    <li><a href="#">Back</a></li>
+                                </ul>
+                                <ul class="list next">
+                                    <li><a (click)="addCreditModal(credit);$event.preventDefault();creditactive=true" [ngClass]="creditactive ? 'active' : ''" (clickOutside)="creditactive=false" >Apply to Credit</a></li>
+                                    <li><a (click)="addBalanceModal(balance);$event.preventDefault();adjustactive=true" [ngClass]="adjustactive ? 'active' : ''" (clickOutside)="adjustactive=false">Return to Balance</a></li>
+                                    <li><a (click)="addAdjustModal(adjust);$event.preventDefault();balanceactive=true" [ngClass]="balanceactive ? 'active' : ''" (clickOutside)="balanceactive=false">Adjust</a></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="" [hidden]="!setp3">
+                            <div class="transcations-detail">
+                                <ul>
+                                    <li>
+                                        <span class="sub-title">Transaction</span>
+                                        <span class="desc bold">BA JASA E-BANKING</span>
+                                    </li>
+                                    <li>
+                                        <span class="sub-title">Date</span>
+                                        <span class="desc">13.14.2021</span>
+                                    </li>
+                                    <li>
+                                        <span class="sub-title">Amount</span>
+                                        <span class="desc">Rp. 3.501,00</span>
+                                    </li>
+                                    <li>
+                                        <span class="sub-title">Type</span>
+                                        <span class="desc">Debit</span>
+                                    </li>
+                                </ul>
+                                <div class="trailer">
+                                    <span class="sub-title">Trailer</span>
+                                    <span class="desc">1304/ATLG/WS9505118285621 Refund: ULPRWHHPO PPU(JBQDBA00000000Trinawati Eka Putr</span>
+                                </div>
+                            </div>
+                            <div class="transcations-desc">
+                                <h2 class="title">Reconciliation Confirmation</h2>
+                                <div class="table-box">
+                                    <div class="table-respons">
+                                        <table style="width:100%"
+                                            class="table-hover task-table-main first-padding-0">
+                                        
+                                            <thead class="thead-none">
+                                                <tr class="x-animated fadeIn d-1 in">
+                                                    <th class="table-date">
+                                                        <b class="table-title">
+                                                            <span>Entry Date</span>&nbsp;
+                                                        </b>
+                                                    </th>
+                                                    <th class="table-number">
+                                                        <b class="table-title">
+                                                            <span>Document Number</span>&nbsp;
+                                                        </b>
+                                                    </th>
+                                                    <th class="table-amount">
+                                                        <b class="table-title">
+                                                            <span>Amount</span>&nbsp;
+                                                        </b>
+                                                    </th>
+                                                    <th class="table-category">
+                                                        <b class="table-title">
+                                                            <span>Category</span>&nbsp;
+                                                        </b>
+                                                    </th>
+                                                    <th class="table-desc">
+                                                        <b class="table-title">
+                                                            <span>description</span>&nbsp;
+                                                        </b>
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody fxLayout="row wrap" class="list">
+                                                <tr class="x-animated fadeIn d-1 in">
+                                                    <td class="text-left">
+                                                        <b class="table-title">
+                                                            <span>13.14.2021</span>
+                                                        </b>
+                                                    </td>
+                                                    <td class="text-left">
+                                                        <b class="table-title">
+                                                            <span>MX-FN-20-000068</span>
+                                                        </b>
+                                                    </td>
+                                                    <td class="text-left">
+                                                        <b class="table-title">
+                                                            <span>Rp. 3.003.000.501,00</span>
+                                                        </b>
+                                                    </td>
+                                                    <td class="text-left">
+                                                        <b class="table-title">
+                                                            <span>Local Charges and Destination Logistics
+                                                            </span>
+                                                        </b>
+                                                    </td>
+                                                    <td class="text-left">
+                                                        <b class="table-title">
+                                                            <span>Local Charges and Destination Logistics MX-PO-19-000365
+                                                            </span>
+                                                        </b>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                            <tbody fxLayout="row wrap" class="list">
+                                                <tr class="x-animated fadeIn d-1 in">
+                                                    <td class="text-left">
+                                                        <b class="table-title">
+                                                            <span>13.14.2021</span>
+                                                        </b>
+                                                    </td>
+                                                    <td class="text-left">
+                                                        <b class="table-title">
+                                                            <span>MX-FN-20-000068</span>
+                                                        </b>
+                                                    </td>
+                                                    <td class="text-left">
+                                                        <b class="table-title">
+                                                            <span>Rp. 3.003.000.501,00</span>
+                                                        </b>
+                                                    </td>
+                                                    <td class="text-left">
+                                                        <b class="table-title">
+                                                            <span>Advertising
+                                                            </span>
+                                                        </b>
+                                                    </td>
+                                                    <td class="text-left">
+                                                        <b class="table-title">
+                                                            <span>Marketing Tools - Flyers and Banners
+                                                            </span>
+                                                        </b>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="balance-list">
+                                        <div class="balance">
+                                            <span class="price-title">Balance From selection</span>
+                                            <span class="amount">Rp. 3.300.000.000,00</span>
+                                        </div>
+                                        <div class="balance">
+                                            <span class="price-title">Applied to Credit</span>
+                                            <span class="amount">Rp. 3.300.000.000,00</span>
+                                            <span class="info">Customer: Ace Hardware</span>
+                                        </div>
+                                        <div class="balance modifier-balance">
+                                            <span class="price-title">Ending Balance</span>
+                                            <span class="amount">-</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                            <div class="transcations-btn">
+                                <ul class="list">
+                                    <li><a href="#">Back</a></li>
+                                </ul>
+                                <ul class="list next">
+                                    <li><a href="#" class="confirm-btn">Confirm Reconciliation</a></li>
+                                </ul>
+                            </div>
+
+                        </div>
+                    </form>
+                </div>
+                <!-- </div> -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #credit>
+    <div class="modal-body p-0" app-apply-credit (closeClick)="modalRef.hide()">
+    </div>
+</ng-template>
+<ng-template #balance>
+    <div class="modal-body p-0" app-return-balance (closeClick)="modalRef.hide()">
+    </div>
+</ng-template>
+<ng-template #adjust>
+    <div class="modal-body p-0" app-adjust-amount (closeClick)="modalRef.hide()">
+    </div>
+</ng-template>

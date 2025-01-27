@@ -1,0 +1,1861 @@
+<div class="crm-Wrap notes-wrap crmreladex-wrap-h" [ngClass]="icon1?'active':''">
+  <div class="contentBox task-page">
+    <div class="leftContent overflow-0 task-board reladex-dashboard-main  ">
+      <div class="viewdata-title task-title d-flex align-items-center justify-content-between reladex-title-main-h">
+        <div class="d-flex flex-wrap align-items-center reladex-left-h ">
+          <div class="titleWith-filter reladex-filter">
+            <h2>Reladex</h2>
+            <!-- <h2>
+              <img src="assets/images/icon-list.svg" height="25" width="25" alt="" class="mr-2">Reladex
+            </h2> -->
+            <ng-select [searchable]="false" (change)="changedselectedType($event)" class="reladex-select"
+              [items]="typesArray" bindLabel="name" autofocus bindValue="id" [(ngModel)]="selectedTypeID">
+            </ng-select>
+            <div class="filteredOption mcs-horizontal-scrollbar-notes-filter" malihu-scrollbar
+             >
+              <ul>
+                <li *ngFor="let item of tempArr;let index=index;" class="note-filter-record">
+                  <small class="close">
+                    <img src="assets/images/icon-close-dark.svg" alt="" width="10" (click)="resetFilter(item)">
+                  </small>
+                  <p>
+                    <span>{{item.parentFilter}}</span>
+                  </p>
+                  <p>
+                    <span>
+                      {{ item.secondFilter }}
+                    </span>
+                  </p>
+                </li>
+              </ul>
+            </div>
+            <div class="filter-btnBox" (click)="startingFilter()">
+              <img src="assets/images/icon-filter.svg" height="25" width="25" style="margin-top: -3px;" alt="">
+            </div>
+            <div class="selectBoxList fliter-task" *ngIf="fliterflag">
+              <div class="form-group" (clickOutside)="isOpenFilter = false">
+                <label class="gray-label">Filter</label>
+                <ng-select #filterName [clearable]="false" [items]="filterstart" bindLabel="title"
+                  [(ngModel)]="filterData" [closeOnSelect]="true" name="filterName" id="filterName" autocomplete="off"
+                  (change)="isOpenFilter = false;changedParentFilter($event)" [isOpen]="isOpenFilter"
+                  (focus)="isOpenFilter = true">
+                </ng-select>
+              </div>
+              <div class="form-group" *ngIf="filterData?.option?.length > 0" (clickOutside)="isOpen = false">
+                <label class="gray-label">{{filterData.labelName}}</label>
+                <ng-select [clearable]="false" #secondFilter1 [items]="filterData.option"
+                  [(ngModel)]="filterData.bindedValue" [isOpen]="isOpen" [closeOnSelect]="true" bindLabel="title"
+                  name="secondFilter" id="secondFilter" autocomplete="off"
+                  (change)="isOpen = false;changedChildFilter($event);" (focus)="isOpen = true">
+                </ng-select>
+              </div>
+              <ng-container *ngFor="let data of filterData.suboptions;let index=index;">
+                <div class="form-group"
+                  *ngIf="data?.options?.length && data.type==='select' && !data.async && filterData?.bindedValue?.id > 0">
+                  <label class="gray-label">{{data.labelName}}</label>
+                  <ng-select [clearable]="false" [items]="data?.options" [(ngModel)]="data.bindvalue" bindLabel="title"
+                    name="{{'secondFilter'+index}}" id="{{'secondFilter'+index}}" autocomplete="off"
+                    (change)="changedsubChildFilter($event)">
+                  </ng-select>
+                </div>
+                <div class="form-group" *ngIf="data.type==='select' && data.async && filterData?.bindedValue?.id > 0">
+                  <label class="gray-label">{{data.labelName}}</label>
+                  <ng-select [clearable]="false" [items]="data?.options | async" bindLabel="title"
+                    [(ngModel)]="data.bindvalue"
+                    name="{{'secondFilter'+index}}" id="{{'secondFilter'+index}}" autocomplete="off"
+                    [typeahead]="MainSearchdataSource" (change)="changedsubChildFilter($event)">
+                  </ng-select>
+                </div>
+              </ng-container>
+              <div class=""
+                *ngIf="(filterData.id === 7 || filterData.id === 8) && selectedTypeID === 1 && filterData?.bindedValue?.id === 4">
+                <mat-form-field class="example-full-width mat-input">
+                  <input [(ngModel)]="filterData.numDaysInput" matInput type="number" placeholder="Days" value=""
+                    autocomplete="off" id="numDaysInput" name="numDaysInput"
+                    (keydown.enter)="changedsubChildFilter($event)">
+                </mat-form-field>
+              </div>
+              <div class=""
+                *ngIf="filterData.id === 1 && (selectedTypeID === 2 || selectedTypeID === 3 || selectedTypeID === 4 || selectedTypeID === 5) ">
+                <mat-form-field class="example-full-width mat-input">
+                  <input [(ngModel)]="filterData.name" #notesInput matInput type="text" placeholder="Name" value=""
+                    autocomplete="off" id="txtNotes" name="txtNotes" (keydown.enter)="changedChildFilter($event)">
+                </mat-form-field>
+              </div>
+              <div class="" *ngIf="filterData.id === 3 && selectedTypeID === 1 ">
+                <mat-form-field class="example-full-width mat-input">
+                  <input [(ngModel)]="filterData.name" #notesInput matInput type="text" placeholder="Name" value=""
+                    autocomplete="off" id="txtNotes1" name="txtNotes1" (keydown.enter)="changedChildFilter($event)">
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="d-flex" style="margin-top: -20px;">
+          <a class="icon-task" href="javascript:void(0)" icon-more title="More"></a>
+          <div class="dropdown reladex-add-dropdown">
+            <a class="icon-task" href="javascript:void(0);" id="dropdownMenuButton" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false" icon-pluse></a>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <a class="dropdown-item" href="javascript:void(0);"
+                (click)="showCustomerDetailsPopup(addCustomerPopup)">Customer</a>
+              <a class="dropdown-item" href="javascript:void(0);"
+                (click)="showContactDetailsPopup(addContactPopup)">Contact</a>
+              <a class="dropdown-item" href="javascript:void(0);"
+                (click)="showCompanyDetailsPopup(addCompanyPopup)">Company</a>
+              <a class="dropdown-item" href="javascript:void(0);"
+                (click)="showLeadsDetailsPopup(addLeadsPopup)">Leads</a>
+            </div>
+          </div>
+          <a class="icon-task" href="javascript:void(0)" icon-filter title="Filter" (click)="startingFilter()"></a>
+          <a class="icon-task" href="javascript:void(0)" icon-upload title="Upload"></a>
+          <a class="icon-task" href="javascript:void(0)" icon-download title="Download"></a>
+        </div>
+      </div>
+      <div class="card card-box pl-0 card-attention view-details-table wow fadeIn" data-wow-delay=".3s" #tblDivElem>
+        <div class="table-sticky-header">
+          <table style="width:100%" class="table-hover table-dashboard default-to-custom first-padding-0 reladex-table">
+            <thead>
+              <tr class="x-animated fadeIn d-1 in">
+                <th width="57"></th>
+                <th class="table-date reladex-name-th">
+                  <b class="table-title">
+                    <span>Name</span>&nbsp;
+                  </b>
+                  <div class="small help-block line-divider before-line type">
+                    <span class="table-text">Type</span>
+                  </div>
+                </th>
+                <th class="reladex-middle-th">
+                  <table class="w-100">
+                    <thead>
+                      <tr>
+                        <th class="table-description">
+                          <b class="table-title">
+                            <span>Region</span>&nbsp;
+                          </b>
+                          <div class="small help-block line-divider before-line board">
+                            <span class="table-text">Association</span>
+                          </div>
+                        </th>
+                        <th class="table-cdate reladex-phone-th">
+                          <b class="table-title">
+                            <span>Phone</span>&nbsp;
+                          </b>
+                          <div class="small help-block line-divider before-line board">
+                            <span class="table-text"></span>
+                          </div>
+                        </th>
+                        <th class="table-cdate">
+                          <b class="table-title">
+                            <span>Email</span>&nbsp;
+                          </b>
+                          <div class="small help-block line-divider before-line board">
+                            <span class="table-text"></span>
+                          </div>
+                        </th>
+                      </tr>
+                    </thead>
+                  </table>
+                </th>
+
+                <th class="table-cdate reladex-date-th">
+                  <b class="table-title">
+                    <span>Last Interaction</span>&nbsp;
+                  </b>
+                  <div class="small help-block line-divider before-line board">
+                    <span class="table-text">By</span>
+                  </div>
+                </th>
+                <th class="table-action" width="36"></th>
+              </tr>
+            </thead>
+          </table>
+        </div>
+        <!-- <perfect-scrollbar #perfectScroll *ngIf="type === 'component'" fxFlex="auto" [config]="config"
+          [scrollIndicators]="false" (psXReachEnd)="onScrollEvent($event)" (psYReachEnd)="onScrollDown($event)"
+          (psXReachStart)="onScrollEvent($event)" (psYReachStart)="onScrollUp($event)">
+          <div class="scrollbar">
+            <div class="table-box mb-20">
+              <div class="table-respons task-note-table reladex-table">
+                <table style="width:100%" class="table-hover default-to-custom">
+                  <thead class="thead-none">
+                    <tr class="x-animated fadeIn d-1 in">
+                      <th width="57"></th>
+                      <th class="table-date reladex-name-th">
+                        <b class="table-title">
+                          <span>Name</span>&nbsp;
+                        </b>
+                        <div class="small help-block line-divider before-line type">
+                          <span class="table-text">Type</span>
+                        </div>
+                      </th>
+                      <th class="reladex-middle-th">
+                        <table class="w-100">
+                          <tr>
+                            <th class="table-description">
+                              <b class="table-title">
+                                <span>Region</span>&nbsp;
+                              </b>
+                              <div class="small help-block line-divider before-line board">
+                                <span class="table-text">Association</span>
+                              </div>
+                            </th>
+                            <th class="table-cdate reladex-phone-th">
+                              <b class="table-title">
+                                <span>Phone</span>&nbsp;
+                              </b>
+                              <div class="small help-block line-divider before-line board">
+                                <span class="table-text"></span>
+                              </div>
+                            </th>
+                            <th class="table-cdate">
+                              <b class="table-title">
+                                <span>Email</span>&nbsp;
+                              </b>
+                              <div class="small help-block line-divider before-line board">
+                                <span class="table-text"></span>
+                              </div>
+                            </th>
+                          </tr>
+                        </table>
+                      </th>
+                      <th class="table-cdate reladex-date-th">
+                        <b class="table-title">
+                          <span>Last Interaction</span>&nbsp;
+                        </b>
+                        <div class="small help-block line-divider before-line board">
+                          <span class="table-text">By</span>
+                        </div>
+                      </th>
+                      <th class="table-action" width="36"></th>
+                    </tr>
+                  </thead>
+                  <tbody [@fadeIn]="listrecords?.length" fxLayout="row wrap" class="list">
+                    <tr style="vertical-align:top;" class="x-animated fadeIn d-1 in cursor-pointer"
+                      *ngFor="let record of listrecords; index as j" fxFlex="100" fxFlex.lt-sm="200">
+                      <td width="57px" class="text-center" (click)="showDetails(record)">
+                        <h4 ng-bind="($index + 1)" class="rownumber ng-binding">{{j+1}}</h4>
+                      </td>
+                      <td class="text-left reladex-name-td" (click)="showDetails(record)">
+                        <b class="table-title top-reladex-td-h">
+                          <span>{{record?.title}} </span>
+                        </b>
+                        <div class="small help-block line-divider help-desc bottom-reladex-td-h">
+                          <span class="table-text">
+                            <span>{{typeArray[record?.clientType]}}</span>
+                          </span>
+                        </div>
+                      </td>
+                      <td class="reladex-middle-td">
+                        <table class="w-100">
+                          <tr>
+                            <td (click)="showDetails(record)" class="p-0">
+                              <b class="table-title top-reladex-td-h">
+                                <span *ngIf="record?.branch?.title">{{record?.branch?.title}} </span>
+                                <span *ngIf="!record?.branch?.title">&nbsp;</span>
+                              </b>
+                            </td>
+                            <td (click)="showDetails(record)" class="p-0 reladex-phone-td">
+                              <b class="table-title top-reladex-td-h">
+                                <span *ngIf="record?.phone1">{{record?.phone1}} </span>
+                                <span *ngIf="!record?.phone1">&nbsp;</span>
+                              </b>
+                            </td>
+                            <td class="p-0">
+                              <b class="table-title top-reladex-td-h" (click)="showDetails(record)">
+                                <span *ngIf="record?.email">{{record?.email}} </span>
+                                <span *ngIf="!record?.email">&nbsp;</span>
+                              </b>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td colspan="3" class="reladex-region-des p-0" (click)="showDetails(record)" >
+                              <div class="small help-block line-divider help-desc bottom-reladex-td-h">
+                                <span class="table-text">
+                                  <span *ngIf="record?.clientType === 1">
+                                    <ng-container *ngIf="record?.contactPerson?.title">
+                                      {{record?.contactPerson?.title}}(Contact) -</ng-container>
+                                    <ng-container *ngIf="record?.company?.title">{{record?.company?.title}}(Company)
+                                    </ng-container>
+                                  </span>
+                                  <span *ngIf="record?.clientType === 2">
+                                    <ng-container *ngIf="record?.customer?.title">
+                                      {{record?.customer?.title}}(Customer) -</ng-container>
+                                    <ng-container *ngIf="record?.contactPerson?.title">
+                                      {{record?.contactPerson?.title}}(Contact)
+                                    </ng-container>
+                                  </span>
+                                  <span *ngIf="record?.clientType === 3">
+                                    <ng-container *ngIf="record?.company?.title">
+                                      {{record?.company?.title}}(Company) -</ng-container>
+                                    <ng-container *ngIf="record?.customer?.title">
+                                      {{record?.customer?.title}}(Customer)
+                                    </ng-container>
+                                  </span>
+                                </span>
+                              </div>
+                            </td>
+                          </tr>
+                        </table>
+                      </td>
+
+
+                      <td class="text-left reladex-date-td" (click)="showDetails(record)">
+                        <b class="table-title top-reladex-td-h">
+                          <span>{{record?.lastCRMInteractionDate | date: 'MMM d, y' }} &nbsp;
+                            {{record?.lastCRMInteractionTitle }} </span>
+                        </b>
+                        <div class="small help-block line-divider help-desc bottom-reladex-td-h">
+                          <span class="table-text">
+                            <span>{{record?.lastCRMInteraction}}</span>
+                          </span>
+                        </div>
+                      </td>
+                      <td class="action-td" width="36">
+                        <div class="d-flex justify-content-center">
+                          <div class="btn-group" (clickOutside)="dropdownClose()">
+                            <a *ngIf="showId != record.id" class="icon-more" href="javascript:void(0)" icon-more
+                              (click)="subDropdownClose();$event.stopPropagation();dropdownClick(record.id);$event.stopPropagation()"></a>
+                            <a *ngIf="showId == record.id" class="icon-more" href="javascript:void(0)" icon-more
+                              (click)="subDropdownClose();$event.stopPropagation();dropdownClose();$event.stopPropagation()"></a>
+                            <ul [ngClass]="(showId == record.id) ? 'show' : ''"
+                              class="dropdown-table dark right dropdown-progress d-flex flex-column align-items-center justify-content-center more-dropdown">
+                              <li [ngClass]="{'show': !progressinfo}">
+                                <ul>
+                                  <li role="menuitem" class="new-option">
+                                    <a class="dropdown-item" href="javascript:void(0);"
+                                      (click)="createTaskModal(createTask, record?.title, record)">Create
+                                      Task</a>
+                                  </li>
+                                  <li role="menuitem" class="new-option">
+                                    <a class="dropdown-item" href="javascript:void(0);"
+                                      (click)="$event.preventDefault();editThisRecord(record)">Edit</a>
+                                  </li>
+                                  <li role="menuitem" class="new-option">
+                                    <a class="dropdown-item" href="javascript:void(0);"
+                                      (click)="setDeleteIDAndType(record.id, record?.clientType);openDeletePopup(deleteRecordPopup)">Delete</a>
+                                  </li>
+                                </ul>
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </perfect-scrollbar> -->
+      </div>
+      <div class="notes-btn text-end btn-task-main wow fadeIn" data-wow-delay="500ms">
+        <a *ngIf="showAddNewTaskButton" class="btn btn-main btn-blue" (click)="changeIc('dots')">Add New Task</a>
+      </div>
+    </div>
+  </div>
+  <div class="rightSidebar-wrap rightSide-data-penal" *ngIf="showDummySidebar">
+    <div class="data-penal-header">
+      <a href="jasvscript:void(0);" class="icon-dot" (click)="changeIc('dots');$event.preventDefault()">
+        <i icon-more></i>
+      </a>
+    </div>
+  </div>
+  <div class="rightSidebar-wrap rightSidebar-wrap-right-0 rightSide-data-penal comman-sidebar reladex-sidebar">
+    <div class="data-penal-body">
+      <a href="javascript:void(0);" class="icon-dot icon-notes" (click)="changeIc('')">
+        <i icon-more></i>
+      </a>
+      <ng-container *ngIf="showNoteDetailsDiv">
+        <h3 class="rightSidebar-main_title mb-40 customer-detail-title ">
+          Customer Details
+        </h3>
+        <div class="top50-space-h">
+          <div class="row">
+            <div class="col-12 form-field">
+              <label>Internal Note</label>
+              <p>{{noteDetailsData?.internalNotes}}</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12 form-field"></div>
+          </div>
+          <div class="row">
+            <div class="col-12 form-field address-field">
+              <label>Address</label>
+              <p class="pb-0">{{noteDetailsData?.address1}}</p>
+              <p class="pb-0">{{noteDetailsData?.address2}}</p>
+              <ng-container *ngIf="noteDetailsData?.city">
+                <p class="pb-0">{{noteDetailsData?.city}},&nbsp;</p>
+              </ng-container>
+              <ng-container *ngIf="noteDetailsData?.state">
+                <p class="pb-0">{{noteDetailsData?.state}},&nbsp;</p>
+              </ng-container>
+              <ng-container *ngIf="noteDetailsData?.zip">
+                <p class="pb-0">{{noteDetailsData?.zip}},&nbsp;</p>
+              </ng-container>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12 form-field">
+              <label>Sales Contact</label>
+              <p>{{record?.contactPerson?.title}} {{noteDetailsData?.salesRepresentative?.title}}</p>
+            </div>
+          </div>
+          <div class="row" *ngIf="noteDetailsData?.status !== 0">
+            <div class="col-12 form-field">
+              <label>Status</label>
+              <p>{{displayContactStatusArray[noteDetailsData?.status]}}</p>
+            </div>
+          </div>
+        </div>
+        <h3 class="rightSidebar-main_title mb-40" *ngIf="clientTasks.length > 0 || clientNotes.length > 0">
+          Relevant Info
+        </h3>
+        <div class="row" *ngIf="clientTasks.length > 0">
+          <div class="col-12">
+            <label>Tasks</label>
+            <ng-container *ngFor="let task of clientTasks">
+              <div style="cursor: pointer;" (click)="showTaskDetails(task, crmTaskPopup)">
+                <h5 class="rightSidebar-main_title common-title ">{{task?.presetActivity?.title}}</h5>
+                <p class="common-p">{{task?.createdOn | date: 'MMM d, y hh:mm aaa'}} {{task?.user?.title}}</p>
+              </div>
+            </ng-container>
+            <a href="javascript:void(0);" *ngIf="showTaskShowMore && tempClientTaskArray.length > 3"
+              (click)="redirectToTask(taskDetailBusinessPartnerID)" class="show-more-btn">Show More</a>
+          </div>
+        </div>
+        <div class="row newblock-reladex" *ngIf="clientNotes.length > 0">
+          <div class="col-12">
+            <label>Notes</label>
+            <ng-container *ngFor="let notes of clientNotes">
+              <div style="cursor: pointer;" (click)="showNotesDetails(notes, crmNotePopup)">
+                <h5 class="rightSidebar-main_title common-title ">{{notes?.presetActivity?.title}}</h5>
+                <p class="common-p">{{notes?.dateOfEntry | date: 'MMM d, y hh:mm aaa'}} {{notes?.createdBy?.title}}</p>
+              </div>
+            </ng-container>
+            <a href="javascript:void(0);" *ngIf="showNotesShowMore  && tempClientNotesArray.length > 3 "
+              (click)="redirectToNotes(noteDetailBusinessPartnerID)" class="show-more-btn">Show More</a>
+          </div>
+        </div>
+        <div class="row newblock-reladex" *ngIf="clientDiscounts.length > 0">
+          <div class="col-12 form-field ">
+            <label>Discount</label>
+            <ng-container *ngFor="let discount of clientDiscounts">
+              <div>
+                <p>
+                  <ng-container *ngIf="discount?.productCategory !== null && discount?.productCategory?.title">
+                    {{discount?.productCategory?.title}}-
+                  </ng-container>
+                  <ng-container *ngIf="discount?.productCategory === null && discount?.product?.title">
+                    {{discount?.product?.title}}-
+                  </ng-container>
+                  <ng-container *ngIf="discount?.brand?.title">{{discount?.brand?.title}}-</ng-container>
+                  <ng-container *ngIf="discount?.percent">Rp{{discount?.percent*100}}</ng-container>
+                </p>
+              </div>
+            </ng-container>
+          </div>
+        </div>
+        <div class="row" *ngIf="clientTaxes.length > 0">
+          <div class="col-12 form-field ">
+            <label>Tax</label>
+            <ng-container *ngFor="let tax of clientTaxes">
+              <div>
+                <p>
+                  <ng-container *ngIf="tax?.productCategory?.title">{{tax?.productCategory?.title}}-
+                  </ng-container>
+                  <ng-container *ngIf="tax?.brand?.title">{{tax?.brand?.title}}-</ng-container>
+                  <ng-container *ngIf="tax?.taxValue">{{tax?.taxValue}}%</ng-container>
+                </p>
+              </div>
+            </ng-container>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+    <div class="data-penal-footer">
+
+    </div>
+  </div>
+</div>
+
+
+<ng-template #addCustomerPopup>
+  <div class="modal-body p-0 delete-modal" (closeClick)="modalRef.hide()">
+    <div class="d-flex flex-wrap chart-form create-task-from position-relative">
+      <div class="chart-box d-flex flex-wrap w-100">
+        <div class="chart-header w-100 d-flex flex-wrap">
+          <div class="chart-right flex-1 d-flex flex-wrap align-items-center justify-content-between">
+            <h3 class=text-title>Manage Customer</h3>
+            <a href="javascript:void(0)" icon-close (click)="modalRef.hide()"></a>
+          </div>
+        </div>
+        <div class="task-body w-100">
+          <div class="d-flex flex-wrap ">
+            <a class="btn-task active" href="javascript:void(0)" [ngClass]="{'active': displayStepOne}"
+              (click)="showStepOne()">Basic
+              Profile</a>
+            <a class="btn-task" href="javascript:void(0)" [ngClass]="{'active': displayStepTwo}"
+              (click)="showStepTwo()">Notes</a>
+            <a class="btn-task" href="javascript:void(0)" [ngClass]="{'active': displayStepThree}"
+              (click)="showStepThree()">Payment Terms</a>
+            <a class="btn-task" href="javascript:void(0)" [ngClass]="{'active': displayStepFour}"
+              (click)="showStepFour()">Sales Info</a>
+          </div>
+          <form class="example-form" [formGroup]="addCustomerBasicInfo" (ngSubmit)="addBasicInfo()">
+            <div class="task-content" [ngClass]="{'d-none': !displayStepOne}">
+              <div class="">
+                <div class="step-block d-flex justify-content-between">
+                  <div class="left-section">
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="row">
+                          <div class="col-md-6">
+                            <div class="form-group form-task">
+                              <mat-form-field class="example-full-width mat-input">
+                                <input matInput formControlName="title" type="text" placeholder="Customer Name" value=""
+                                  autocomplete="off">
+                              </mat-form-field>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-12">
+                            <div class="form-group form-task">
+                              <mat-form-field class="example-full-width mat-input">
+                                <input matInput formControlName="address1" type="text" placeholder="Address Line 1"
+                                  value="" autocomplete="off">
+                              </mat-form-field>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-12">
+                            <div class="form-group form-task">
+                              <mat-form-field class="example-full-width mat-input">
+                                <input matInput formControlName="address2" type="text" placeholder="Address Line 2"
+                                  value="" autocomplete="off">
+                              </mat-form-field>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-6">
+                            <div class="form-group form-task">
+                              <mat-form-field class="example-full-width mat-input">
+                                <input matInput formControlName="city" type="text" placeholder="City" value=""
+                                  autocomplete="off">
+                              </mat-form-field>
+                            </div>
+                          </div>
+                          <div class="col-md-6">
+                            <div class="form-group form-task">
+                              <mat-form-field class="example-full-width mat-input">
+                                <input matInput formControlName="state" type="text" placeholder="State" value=""
+                                  autocomplete="off">
+                              </mat-form-field>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-6">
+                            <div class="form-group form-task">
+                              <mat-form-field class="example-full-width mat-input">
+                                <input matInput formControlName="country" type="text" placeholder="Country" value=""
+                                  autocomplete="off">
+                              </mat-form-field>
+                            </div>
+                          </div>
+                          <div class="col-md-6">
+                            <div class="form-group form-task">
+                              <mat-form-field class="example-full-width mat-input">
+                                <input matInput formControlName="zip" type="text" placeholder="Zip" value=""
+                                  autocomplete="off">
+                              </mat-form-field>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-6">
+                            <div class="form-group form-task">
+                              <mat-form-field class="example-full-width mat-input">
+                                <input matInput formControlName="phone1" type="text" placeholder="Phone Number 1"
+                                  value="" autocomplete="off">
+                              </mat-form-field>
+                            </div>
+                          </div>
+                          <div class="col-md-6">
+                            <div class="form-group form-task">
+                              <mat-form-field class="example-full-width mat-input">
+                                <input matInput formControlName="phone2" type="text" placeholder="Phone Number 2"
+                                  value="" autocomplete="off">
+                              </mat-form-field>
+                            </div>
+                          </div>
+                        </div>
+                        <div>
+                          <div class="confiorm-location">
+                            <a href="javascript:void(0);">Confirm Location<i class="location-pin"></i></a>
+                          </div>
+                          <button type="button" class="btn-save">Details</button>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-6">
+                            <div class="form-group form-task">
+                              <mat-form-field class="example-full-width mat-input">
+                                <input matInput formControlName="email" type="text" placeholder="Email" value=""
+                                  autocomplete="off">
+                              </mat-form-field>
+                            </div>
+                          </div>
+                          <div class="col-md-6">
+                            <div class="form-group form-task">
+                              <mat-form-field class="example-full-width mat-input">
+                                <input matInput formControlName="faceBook" type="text" placeholder="FaceBook" value=""
+                                  autocomplete="off">
+                              </mat-form-field>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-6">
+                            <div class="form-group form-task">
+                              <mat-form-field class="example-full-width mat-input">
+                                <input matInput formControlName="instaGram" type="text" placeholder="Instagram" value=""
+                                  autocomplete="off">
+                              </mat-form-field>
+                            </div>
+                          </div>
+                          <div class="col-md-6">
+                            <div class="form-group form-task">
+                              <mat-form-field class="example-full-width mat-input">
+                                <input matInput formControlName="google" type="text" placeholder="Google" value=""
+                                  autocomplete="off">
+                              </mat-form-field>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-6">
+                            <div class="form-group form-task mb-0">
+                              <mat-form-field class="example-full-width mat-input">
+                                <input matInput formControlName="tiktok" type="text" placeholder="Tiktok" value=""
+                                  autocomplete="off">
+                              </mat-form-field>
+                            </div>
+                          </div>
+                          <div class="col-md-6">
+                            <div class="form-group form-task mb-0">
+                              <mat-form-field class="example-full-width mat-input">
+                                <input matInput formControlName="webSite" type="text" placeholder="Website" value=""
+                                  autocomplete="off">
+                              </mat-form-field>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="right-section">
+                    <div>
+                      <h4>Relational Information</h4>
+                      <div class="form-group form-task">
+                        <ng-select [clearable]="false" placeholder="Contact" formControlName="contactPerson"
+                          [items]="contactList" bindLabel="title" name="contact">
+                        </ng-select>
+                      </div>
+                      <div class="form-group form-task">
+                        <ng-select [clearable]="false" placeholder="Company" formControlName="company"
+                          [items]="companyList" bindLabel="title" name="company">
+                        </ng-select>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="task-content small-form " [ngClass]="{'d-none': !displayStepTwo}">
+              <div class="">
+                <div class="step-block d-flex flex-wrap">
+                  <div class="left-section">
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="row">
+                          <div class="col-md-12">
+                            <div class="form-group form-task">
+                              <mat-form-field class="example-full-width mat-input">
+                                <input matInput formControlName="internalNotes" type="text"
+                                  placeholder="Internal Notes (Private)" value="" autocomplete="off">
+                              </mat-form-field>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-12">
+                            <div class="form-group form-task">
+                              <mat-form-field class="example-full-width mat-input">
+                                <input matInput formControlName="externalNotes" type="text"
+                                  placeholder="External Notes (Shows on Invoice)" value="" autocomplete="off">
+                              </mat-form-field>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="task-content small-form " [ngClass]="{'d-none': !displayStepThree}">
+              <div class="">
+                <div class="step-block d-flex flex-wrap">
+                  <div class="left-section">
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="row">
+                          <div class="col-md-12">
+                            <div class="form-group form-task">
+                              <ng-select [clearable]="false" placeholder="Payment Term"
+                                formControlName="paymentTermDuration" [items]="paymentList" bindLabel="displayName"
+                                name="Payment Term">
+                              </ng-select>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-12">
+                            <div class="form-group form-task">
+                              <mat-form-field class="example-full-width mat-input">
+                                <input matInput formControlName="allowedCreditAmount" type="number"
+                                  placeholder="Extendable Credit" value="" autocomplete="off"
+                                  (keypress)="numberOnly($event)">
+                              </mat-form-field>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="task-content small-form " [ngClass]="{'d-none': !displayStepFour}">
+              <div class="">
+                <div class="step-block d-flex flex-wrap">
+                  <div class="left-section">
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="row">
+                          <div class="col-md-12">
+                            <div class="form-group form-task">
+                              <ng-select [clearable]="false" placeholder="Sales Contact"
+                                formControlName="salesRepresentative" [items]="tenantUsers" bindLabel="title"
+                                name="salesRepresentative">
+                              </ng-select>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-12">
+                            <div class="form-group form-task">
+                              <ng-select [clearable]="false" placeholder="Area (ZONE)" formControlName="area"
+                                [items]="areaLookup" bindLabel="title" name="area">
+                              </ng-select>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-12">
+                            <div class="form-group form-task">
+                              <ng-select [clearable]="false" placeholder="Region (Branch)" formControlName="branch"
+                                [items]="regionList" bindLabel="title" name="branch">
+                              </ng-select>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-12">
+                            <div class="form-group form-task">
+                              <ng-select [clearable]="false" placeholder="Establishment Type"
+                                formControlName="establishmentType" [items]="establishmentTypes" bindLabel="title"
+                                name="establishmentType">
+                              </ng-select>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="task-btn-grp d-flex flex-wrap align-items-start justify-content-between">
+              <button type="submit" [ngClass]="addCustomerBasicInfo.valid  ? '' : 'disabled'" class="btn-save"
+                [disabled]="!addCustomerBasicInfo.valid">
+                Save
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #addContactPopup>
+  <div class="modal-body p-0 delete-modal" (closeClick)="modalRef.hide()">
+    <div class="d-flex flex-wrap chart-form create-task-from position-relative">
+      <div class="chart-box d-flex flex-wrap w-100">
+        <div class="chart-header w-100 d-flex flex-wrap">
+          <div class="chart-right flex-1 d-flex flex-wrap align-items-center justify-content-between">
+            <h3 class=text-title>Manage Contact</h3>
+            <a href="javascript:void(0)" icon-close (click)="modalRef.hide()"></a>
+          </div>
+        </div>
+        <div class="task-body w-100">
+          <div class="d-flex flex-wrap ">
+            <a class="btn-task active" href="javascript:void(0)" [ngClass]="{'active': contactDisplayStepOne}"
+              (click)="contactPopupshowStepOne()">Basic
+              Profile</a>
+            <a class="btn-task" href="javascript:void(0)" [ngClass]="{'active': contactDisplayStepTwo}"
+              (click)="contactPopupshowStepTwo()">Notes</a>
+          </div>
+          <form class="example-form" [formGroup]="addContactBasicInfo" (ngSubmit)="submitContactBasicInfo()">
+            <div class="task-content" [ngClass]="{'d-none': !contactDisplayStepOne}">
+              <div class="">
+                <div class="step-block d-flex justify-content-between">
+                  <div class="left-section">
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="row">
+                          <div class="col-md-6">
+                            <div class="form-group form-task">
+                              <mat-form-field class="example-full-width mat-input">
+                                <input matInput formControlName="title" type="text" placeholder="Contact Name" value=""
+                                  autocomplete="off">
+                              </mat-form-field>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-12">
+                            <div class="form-group form-task">
+                              <mat-form-field class="example-full-width mat-input">
+                                <input matInput formControlName="address1" type="text" placeholder="Address Line 1"
+                                  value="" autocomplete="off">
+                              </mat-form-field>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-12">
+                            <div class="form-group form-task">
+                              <mat-form-field class="example-full-width mat-input">
+                                <input matInput formControlName="address2" type="text" placeholder="Address Line 2"
+                                  value="" autocomplete="off">
+                              </mat-form-field>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-6">
+                            <div class="form-group form-task">
+                              <mat-form-field class="example-full-width mat-input">
+                                <input matInput formControlName="city" type="text" placeholder="City" value=""
+                                  autocomplete="off">
+                              </mat-form-field>
+                            </div>
+                          </div>
+                          <div class="col-md-6">
+                            <div class="form-group form-task">
+                              <mat-form-field class="example-full-width mat-input">
+                                <input matInput formControlName="state" type="text" placeholder="State" value=""
+                                  autocomplete="off">
+                              </mat-form-field>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-6">
+                            <div class="form-group form-task">
+                              <!-- <mat-form-field class="example-full-width mat-input">
+                                <input matInput formControlName="country" type="text" placeholder="Country" value=""
+                                  autocomplete="off">
+                              </mat-form-field> -->
+                              <ng-select [clearable]="false" placeholder="Country" formControlName="country"
+                                [items]="countryList" bindLabel="title" name="contact">
+                              </ng-select>
+                            </div>
+                          </div>
+                          <div class="col-md-6">
+                            <div class="form-group form-task">
+                              <mat-form-field class="example-full-width mat-input">
+                                <input matInput formControlName="zip" type="text" placeholder="Zip" value=""
+                                  autocomplete="off">
+                              </mat-form-field>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-6">
+                            <div class="form-group form-task">
+                              <mat-form-field class="example-full-width mat-input">
+                                <input matInput formControlName="phone1" type="text" placeholder="Phone Number 1"
+                                  value="" autocomplete="off">
+                              </mat-form-field>
+                            </div>
+                          </div>
+                          <div class="col-md-6">
+                            <div class="form-group form-task">
+                              <mat-form-field class="example-full-width mat-input">
+                                <input matInput formControlName="phone2" type="text" placeholder="Phone Number 2"
+                                  value="" autocomplete="off">
+                              </mat-form-field>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-6">
+                            <div class="form-group form-task">
+                              <mat-form-field class="example-full-width mat-input">
+                                <input matInput formControlName="email" type="text" placeholder="Email" value=""
+                                  autocomplete="off">
+                              </mat-form-field>
+                            </div>
+                          </div>
+                          <div class="col-md-6">
+                            <div class="form-group form-task">
+                              <mat-form-field class="example-full-width mat-input">
+                                <input matInput formControlName="webSite" type="text" placeholder="Web Site" value=""
+                                  autocomplete="off">
+                              </mat-form-field>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-6">
+                            <div class="form-group form-task">
+                              <ng-select [clearable]="false" placeholder="Status" formControlName="status"
+                                [items]="contactStatusArray" bindLabel="name" name="contact">
+                              </ng-select>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="right-section">
+                    <div>
+                      <h4>Relational Information</h4>
+                      <div class="form-group form-task">
+                        <ng-select [clearable]="false" placeholder="Company" formControlName="company"
+                          [items]="companyList" bindLabel="title" name="company">
+                        </ng-select>
+                      </div>
+                      <div class="form-group form-task">
+                        <ng-select [clearable]="false" placeholder="Customer" formControlName="customer"
+                          [items]="customerList" bindLabel="title" name="contact">
+                        </ng-select>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="task-content small-form " [ngClass]="{'d-none': !contactDisplayStepTwo}">
+              <div class="">
+                <div class="step-block d-flex flex-wrap">
+                  <div class="left-section">
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="row">
+                          <div class="col-md-12">
+                            <div class="form-group form-task">
+                              <mat-form-field class="example-full-width mat-input">
+                                <input matInput formControlName="internalNotes" type="text"
+                                  placeholder="Internal Notes (Private)" value="" autocomplete="off">
+                              </mat-form-field>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-12">
+                            <div class="form-group form-task">
+                              <mat-form-field class="example-full-width mat-input">
+                                <input matInput formControlName="externalNotes" type="text"
+                                  placeholder="External Notes (Shows on Invoice)" value="" autocomplete="off">
+                              </mat-form-field>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="task-btn-grp d-flex flex-wrap align-items-start justify-content-between">
+              <button type="submit" [ngClass]="addContactBasicInfo.valid  ? '' : 'disabled'" class="btn-save"
+                [disabled]="!addContactBasicInfo.valid">
+                Save
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #addCompanyPopup>
+  <div class="modal-body p-0 delete-modal" (closeClick)="modalRef.hide()">
+    <div class="d-flex flex-wrap chart-form create-task-from position-relative">
+      <div class="chart-box d-flex flex-wrap w-100">
+        <div class="chart-header w-100 d-flex flex-wrap">
+          <div class="chart-right flex-1 d-flex flex-wrap align-items-center justify-content-between">
+            <h3 class=text-title>Manage Company</h3>
+            <a href="javascript:void(0)" icon-close (click)="modalRef.hide()"></a>
+          </div>
+        </div>
+        <div class="task-body w-100">
+          <div class="d-flex flex-wrap ">
+            <a class="btn-task active" href="javascript:void(0)" [ngClass]="{'active': companyDisplayStepOne}"
+              (click)="companyShowStepOne()">Basic
+              Profile</a>
+            <a class="btn-task" href="javascript:void(0)" [ngClass]="{'active': companyDisplayStepTwo}"
+              (click)="companyShowStepTwo()">Notes</a>
+            <a class="btn-task" href="javascript:void(0)" [ngClass]="{'active': companyDisplayStepThree}"
+              (click)="companyShowStepThree()">Sales Info</a>
+          </div>
+          <form class="example-form" [formGroup]="addCompanyBasicInfo" (ngSubmit)="submitCompanyBasicInfo()">
+            <div class="task-content" [ngClass]="{'d-none': !companyDisplayStepOne}">
+              <div class="">
+                <div class="step-block d-flex justify-content-between">
+                  <div class="left-section">
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="row">
+                          <div class="col-md-6">
+                            <div class="form-group form-task">
+                              <mat-form-field class="example-full-width mat-input">
+                                <input matInput formControlName="title" type="text" placeholder="Company Name" value=""
+                                  autocomplete="off">
+                              </mat-form-field>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-12">
+                            <div class="form-group form-task">
+                              <mat-form-field class="example-full-width mat-input">
+                                <input matInput formControlName="address1" type="text" placeholder="Address Line 1"
+                                  value="" autocomplete="off">
+                              </mat-form-field>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-12">
+                            <div class="form-group form-task">
+                              <mat-form-field class="example-full-width mat-input">
+                                <input matInput formControlName="address2" type="text" placeholder="Address Line 2"
+                                  value="" autocomplete="off">
+                              </mat-form-field>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-6">
+                            <div class="form-group form-task">
+                              <mat-form-field class="example-full-width mat-input">
+                                <input matInput formControlName="city" type="text" placeholder="City" value=""
+                                  autocomplete="off">
+                              </mat-form-field>
+                            </div>
+                          </div>
+                          <div class="col-md-6">
+                            <div class="form-group form-task">
+                              <mat-form-field class="example-full-width mat-input">
+                                <input matInput formControlName="state" type="text" placeholder="State" value=""
+                                  autocomplete="off">
+                              </mat-form-field>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-6">
+                            <div class="form-group form-task">
+                              <ng-select [clearable]="false" placeholder="Country" formControlName="country"
+                                [items]="countryList" bindLabel="title" name="contact">
+                              </ng-select>
+                              <!-- <mat-form-field class="example-full-width mat-input">
+                                <input matInput formControlName="country" type="text" placeholder="Country" value=""
+                                  autocomplete="off">
+                              </mat-form-field> -->
+                            </div>
+                          </div>
+                          <div class="col-md-6">
+                            <div class="form-group form-task">
+                              <mat-form-field class="example-full-width mat-input">
+                                <input matInput formControlName="zip" type="text" placeholder="Zip" value=""
+                                  autocomplete="off">
+                              </mat-form-field>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-6">
+                            <div class="form-group form-task">
+                              <mat-form-field class="example-full-width mat-input">
+                                <input matInput formControlName="phone1" type="text" placeholder="Phone Number 1"
+                                  value="" autocomplete="off">
+                              </mat-form-field>
+                            </div>
+                          </div>
+                          <div class="col-md-6">
+                            <div class="form-group form-task">
+                              <mat-form-field class="example-full-width mat-input">
+                                <input matInput formControlName="phone2" type="text" placeholder="Phone Number 2"
+                                  value="" autocomplete="off">
+                              </mat-form-field>
+                            </div>
+                          </div>
+                        </div>
+                        <div>
+                          <div class="confiorm-location">
+                            <a href="javascript:void(0);">Confirm Location<i class="location-pin"></i></a>
+                          </div>
+                          <button type="button" class="btn-save">Details</button>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-6">
+                            <div class="form-group form-task">
+                              <mat-form-field class="example-full-width mat-input">
+                                <input matInput formControlName="email" type="text" placeholder="Email" value=""
+                                  autocomplete="off">
+                              </mat-form-field>
+                            </div>
+                          </div>
+                          <div class="col-md-6">
+                            <div class="form-group form-task">
+                              <mat-form-field class="example-full-width mat-input">
+                                <input matInput formControlName="webSite" type="text" placeholder="Website" value=""
+                                  autocomplete="off">
+                              </mat-form-field>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-6">
+                            <div class="form-group form-task">
+                              <ng-select [clearable]="false" placeholder="Status" formControlName="status"
+                                [items]="contactStatusArray" bindLabel="name" name="contact">
+                              </ng-select>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="right-section">
+                    <div>
+                      <h4>Relational Information</h4>
+                      <div class="form-group form-task">
+                        <ng-select [clearable]="false" placeholder="Contact Person" formControlName="contactPerson"
+                          [items]="contactList" bindLabel="title" name="contact">
+                        </ng-select>
+                      </div>
+                      <div class="form-group form-task">
+                        <ng-select [clearable]="false" placeholder="Customer" formControlName="customer"
+                          [items]="customerList" bindLabel="title" name="contact">
+                        </ng-select>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="task-content small-form " [ngClass]="{'d-none': !companyDisplayStepTwo}">
+              <div class="">
+                <div class="step-block d-flex flex-wrap">
+                  <div class="left-section">
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="row">
+                          <div class="col-md-12">
+                            <div class="form-group form-task">
+                              <mat-form-field class="example-full-width mat-input">
+                                <input matInput formControlName="internalNotes" type="text"
+                                  placeholder="Internal Notes (Private)" value="" autocomplete="off">
+                              </mat-form-field>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-12">
+                            <div class="form-group form-task">
+                              <mat-form-field class="example-full-width mat-input">
+                                <input matInput formControlName="externalNotes" type="text"
+                                  placeholder="External Notes (Shows on Invoice)" value="" autocomplete="off">
+                              </mat-form-field>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="task-content small-form " [ngClass]="{'d-none': !companyDisplayStepThree}">
+              <div class="">
+                <div class="step-block d-flex flex-wrap">
+                  <div class="left-section">
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="row">
+                          <div class="col-md-12">
+                            <div class="form-group form-task">
+                              <ng-select [clearable]="false" placeholder="Sales Representative"
+                                formControlName="salesRepresentative" [items]="tenantUsers" bindLabel="title"
+                                name="salesRepresentative">
+                              </ng-select>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-12">
+                            <div class="form-group form-task">
+                              <ng-select [clearable]="false" placeholder="Area (ZONE)" formControlName="area"
+                                [items]="areaLookup" bindLabel="title" name="area">
+                              </ng-select>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-12">
+                            <div class="form-group form-task">
+                              <ng-select [clearable]="false" placeholder="Region (Branch)" formControlName="branch"
+                                [items]="regionList" bindLabel="title" name="branch">
+                              </ng-select>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="task-btn-grp d-flex flex-wrap align-items-start justify-content-between">
+              <button type="submit" [ngClass]="addCompanyBasicInfo.valid  ? '' : 'disabled'" class="btn-save"
+                [disabled]="!addCompanyBasicInfo.valid">
+                Save
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+
+<ng-template #addLeadsPopup>
+  <div class="modal-body p-0 delete-modal" (closeClick)="modalRef.hide()">
+    <div class="d-flex flex-wrap chart-form create-task-from position-relative">
+      <div class="chart-box d-flex flex-wrap w-100">
+        <div class="chart-header w-100 d-flex flex-wrap">
+          <div class="chart-right flex-1 d-flex flex-wrap align-items-center justify-content-between">
+            <h3 class=text-title>Manage Leads</h3>
+            <a href="javascript:void(0)" icon-close (click)="modalRef.hide()"></a>
+          </div>
+        </div>
+        <div class="task-body w-100">
+          <div class="d-flex flex-wrap ">
+            <a class="btn-task active" href="javascript:void(0)" [ngClass]="{'active': leadsDisplayStepOne}"
+              (click)="showLeadsStepOne()">Basic
+              Profile</a>
+            <a class="btn-task" href="javascript:void(0)" [ngClass]="{'active': leadsDisplayStepTwo}"
+              (click)="showLeadsStepTwo()">Notes</a>
+            <a class="btn-task" href="javascript:void(0)" [ngClass]="{'active': leadsDisplayStepThree}"
+              (click)="showLeadsStepThree()">Payment Terms</a>
+            <a class="btn-task" href="javascript:void(0)" [ngClass]="{'active': leadsDisplayStepFour}"
+              (click)="showLeadsStepFour()">Sales Info</a>
+          </div>
+          <form class="example-form" [formGroup]="addLeadsBasicInfo" (ngSubmit)="submitBasicLeadInfo()">
+            <div class="task-content" [ngClass]="{'d-none': !leadsDisplayStepOne}">
+              <div class="">
+                <div class="step-block d-flex justify-content-between">
+                  <div class="left-section">
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="row">
+                          <div class="col-md-6">
+                            <div class="form-group form-task">
+                              <mat-form-field class="example-full-width mat-input">
+                                <input matInput formControlName="title" type="text" placeholder="Customer Name" value=""
+                                  autocomplete="off">
+                              </mat-form-field>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-12">
+                            <div class="form-group form-task">
+                              <mat-form-field class="example-full-width mat-input">
+                                <input matInput formControlName="address1" type="text" placeholder="Address Line 1"
+                                  value="" autocomplete="off">
+                              </mat-form-field>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-12">
+                            <div class="form-group form-task">
+                              <mat-form-field class="example-full-width mat-input">
+                                <input matInput formControlName="address2" type="text" placeholder="Address Line 2"
+                                  value="" autocomplete="off">
+                              </mat-form-field>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-6">
+                            <div class="form-group form-task">
+                              <mat-form-field class="example-full-width mat-input">
+                                <input matInput formControlName="city" type="text" placeholder="City" value=""
+                                  autocomplete="off">
+                              </mat-form-field>
+                            </div>
+                          </div>
+                          <div class="col-md-6">
+                            <div class="form-group form-task">
+                              <mat-form-field class="example-full-width mat-input">
+                                <input matInput formControlName="state" type="text" placeholder="State" value=""
+                                  autocomplete="off">
+                              </mat-form-field>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-6">
+                            <div class="form-group form-task">
+                              <mat-form-field class="example-full-width mat-input">
+                                <input matInput formControlName="country" type="text" placeholder="Country" value=""
+                                  autocomplete="off">
+                              </mat-form-field>
+                            </div>
+                          </div>
+                          <div class="col-md-6">
+                            <div class="form-group form-task">
+                              <mat-form-field class="example-full-width mat-input">
+                                <input matInput formControlName="zip" type="text" placeholder="Zip" value=""
+                                  autocomplete="off">
+                              </mat-form-field>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-6">
+                            <div class="form-group form-task">
+                              <mat-form-field class="example-full-width mat-input">
+                                <input matInput formControlName="phone1" type="text" placeholder="Phone Number 1"
+                                  value="" autocomplete="off">
+                              </mat-form-field>
+                            </div>
+                          </div>
+                          <div class="col-md-6">
+                            <div class="form-group form-task">
+                              <mat-form-field class="example-full-width mat-input">
+                                <input matInput formControlName="phone2" type="text" placeholder="Phone Number 2"
+                                  value="" autocomplete="off">
+                              </mat-form-field>
+                            </div>
+                          </div>
+                        </div>
+                        <div>
+                          <div class="confiorm-location">
+                            <a href="javascript:void(0);">Confirm Location<i class="location-pin"></i></a>
+                          </div>
+                          <button type="button" class="btn-save">Details</button>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-6">
+                            <div class="form-group form-task">
+                              <mat-form-field class="example-full-width mat-input">
+                                <input matInput formControlName="email" type="text" placeholder="Email" value=""
+                                  autocomplete="off">
+                              </mat-form-field>
+                            </div>
+                          </div>
+                          <div class="col-md-6">
+                            <div class="form-group form-task">
+                              <mat-form-field class="example-full-width mat-input">
+                                <input matInput formControlName="webSite" type="text" placeholder="Website" value=""
+                                  autocomplete="off">
+                              </mat-form-field>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-6">
+                            <div class="form-group form-task">
+                              <ng-select [clearable]="false" placeholder="Status" formControlName="status"
+                                [items]="contactStatusArray" bindLabel="name" name="contact">
+                              </ng-select>
+                            </div>
+                          </div>
+                          <div class="col-md-6">
+                            <div class="form-group form-task">
+                              <mat-form-field class="example-full-width mat-input">
+                                <input matInput formControlName="estimatedAmount" type="text"
+                                  placeholder="Estimated Ammount" value="" autocomplete="off">
+                              </mat-form-field>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="right-section">
+                    <div>
+                      <h4>Relational Information</h4>
+                      <div class="form-group form-task">
+                        <ng-select [clearable]="false" placeholder="Contact Person" formControlName="contactPerson"
+                          [items]="contactList" bindLabel="title" name="contact">
+                        </ng-select>
+                      </div>
+                      <div class="form-group form-task">
+                        <ng-select [clearable]="false" placeholder="Company" formControlName="customer"
+                          [items]="companyList" bindLabel="title" name="customer">
+                        </ng-select>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="task-content small-form " [ngClass]="{'d-none': !leadsDisplayStepTwo}">
+              <div class="">
+                <div class="step-block d-flex flex-wrap">
+                  <div class="left-section">
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="row">
+                          <div class="col-md-12">
+                            <div class="form-group form-task">
+                              <mat-form-field class="example-full-width mat-input">
+                                <input matInput formControlName="internalNotes" type="text"
+                                  placeholder="Internal Notes (Private)" value="" autocomplete="off">
+                              </mat-form-field>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-12">
+                            <div class="form-group form-task">
+                              <mat-form-field class="example-full-width mat-input">
+                                <input matInput formControlName="externalNotes" type="text"
+                                  placeholder="External Notes (Shows on Invoice)" value="" autocomplete="off">
+                              </mat-form-field>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="task-content small-form " [ngClass]="{'d-none': !leadsDisplayStepThree}">
+              <div class="">
+                <div class="step-block d-flex flex-wrap">
+                  <div class="left-section">
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="row">
+                          <div class="col-md-12">
+                            <div class="form-group form-task">
+                              <ng-select [clearable]="false" placeholder="Payment Term"
+                                formControlName="paymentTermDuration" [items]="paymentList" bindLabel="displayName"
+                                name="Payment Term">
+                              </ng-select>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-12">
+                            <div class="form-group form-task">
+                              <mat-form-field class="example-full-width mat-input">
+                                <input matInput formControlName="allowedCreditAmount" type="number"
+                                  placeholder="Extendable Credit" value="" autocomplete="off"
+                                  (keypress)="numberOnly($event)">
+                              </mat-form-field>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="task-content small-form " [ngClass]="{'d-none': !leadsDisplayStepFour}">
+              <div class="">
+                <div class="step-block d-flex flex-wrap">
+                  <div class="left-section">
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="row">
+                          <div class="col-md-12">
+                            <div class="form-group form-task">
+                              <ng-select [clearable]="false" placeholder="Sales Contact"
+                                formControlName="salesRepresentative" [items]="tenantUsers" bindLabel="title"
+                                name="salesRepresentative">
+                              </ng-select>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-12">
+                            <div class="form-group form-task">
+                              <ng-select [clearable]="false" placeholder="Area (ZONE)" formControlName="area"
+                                [items]="areaLookup" bindLabel="title" name="area">
+                              </ng-select>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-12">
+                            <div class="form-group form-task">
+                              <ng-select [clearable]="false" placeholder="Region (Branch)" formControlName="branch"
+                                [items]="regionList" bindLabel="title" name="branch">
+                              </ng-select>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-12">
+                            <div class="form-group form-task">
+                              <ng-select [clearable]="false" placeholder="Establishment Type"
+                                formControlName="establishmentType" [items]="establishmentTypes" bindLabel="title"
+                                name="establishmentType">
+                              </ng-select>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="task-btn-grp d-flex flex-wrap align-items-start justify-content-between">
+              <button type="submit" [ngClass]="addLeadsBasicInfo.valid  ? '' : 'disabled'" class="btn-save"
+                [disabled]="!addLeadsBasicInfo.valid">
+                Save
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+
+
+<ng-template #crmNotePopup>
+  <div class="modal-body p-0 delete-modal" (closeClick)="modalRef.hide()">
+    <div class="d-flex flex-wrap position-relative">
+      <div class="chart-box d-flex flex-wrap w-100">
+        <div class="chart-header w-100 d-flex flex-wrap">
+          <div class="chart-right flex-1 d-flex flex-wrap align-items-center justify-content-between">
+            <h3 class=text-title>CRM - NOTE</h3>
+            <a href="javascript:void(0)" icon-close (click)="modalRef.hide(); resetCRMNotesData();"></a>
+          </div>
+        </div>
+        <div class="w-100">
+          <div class="task-body">
+            <div class="parent-notes-div">
+              <div class="left-section">
+                <div>
+                  <label>Note Type</label>
+                  <p class="large-font">{{typeArray[crmNotePopupData?.type]}}</p>
+                </div>
+              </div>
+              <div class="middle-section">
+                <div>
+                  <label>Customer Name</label>
+                  <p class="large-font">{{crmNotePopupData?.businessPartner?.title}}</p>
+                </div>
+                <div class="d-flex two-div">
+                  <div class="title">
+                    <label>Title</label>
+                    <p>{{crmNotePopupData?.presetActivity?.title}}</p>
+                  </div>
+                  <div>
+                    <label>Focus</label>
+                    <p>--</p>
+                  </div>
+                </div>
+                <div>
+                  <label>Entry</label>
+                  <p>{{crmNotePopupData?.dateOfEntry | date: 'MMM d, y - h:mm a'}} </p>
+                </div>
+                <div>
+                  <label>Created</label>
+                  <p>{{crmNotePopupData?.createdBy?.title}} - {{crmNotePopupData?.createdOn | date: 'MMM d,
+                    y h:mm a '}} </p>
+                </div>
+              </div>
+              <div class="right-section">
+                <div class="notes">
+                  <label>NOTE</label>
+                  <p>{{crmNotePopupData?.notes}}</p>
+                </div>
+              </div>
+            </div>
+            <div class="footer-btn">
+              <a href="javascript:void(0);" (click)="modalRef.hide(); resetCRMNotesData();" class="yes">Close</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #crmTaskPopup>
+  <div class="modal-body p-0 delete-modal" (closeClick)="modalRef.hide()">
+    <div class="d-flex flex-wrap position-relative">
+      <div class="chart-box d-flex flex-wrap w-100">
+        <div class="chart-header w-100 d-flex flex-wrap">
+          <div class="chart-right flex-1 d-flex flex-wrap align-items-center justify-content-between">
+            <h3 class=text-title>CRM - TASK</h3>
+            <a href="javascript:void(0)" icon-close (click)="modalRef.hide(); resetCRMTaskData();"></a>
+          </div>
+        </div>
+        <div class="w-100">
+          <div class="task-body">
+            <div class="parent-notes-div">
+              <div class="left-section">
+                <div>
+                  <label>Task Type</label>
+                  <p class="large-font">{{typeArray[crmTaskPopupData?.type]}}</p>
+                </div>
+              </div>
+              <div class="middle-section">
+                <div>
+                  <label>Customer Name</label>
+                  <p class="large-font">{{crmTaskPopupData?.businessPartner?.title}}</p>
+                </div>
+                <div class="d-flex two-div">
+                  <div class="title">
+                    <label>Title</label>
+                    <p>{{crmTaskPopupData?.presetActivity?.title}}</p>
+                  </div>
+                  <div>
+                    <label>Focus</label>
+                    <p>{{crmTaskPopupData?.subTitle}}</p>
+                  </div>
+                </div>
+
+                <div>
+                  <label>Entry</label>
+                  <p>{{crmTaskPopupData?.dateOfEntry | date: 'MMM d, y - h:mm a'}} </p>
+                </div>
+                <div>
+                  <label>Created</label>
+                  <p>{{crmTaskPopupData?.createdBy?.fullname}} - {{crmTaskPopupData?.createdOn | date: 'MMM d,
+                    y h:mm a '}} </p>
+                </div>
+                <div>
+                  <label>Completed?</label>
+                  <p *ngIf="crmTaskPopupData?.isComplete === true" class="pb-0">Yes</p>
+                  <p *ngIf="crmTaskPopupData?.isComplete === false" class="pb-0">No</p>
+                </div>
+              </div>
+              <div class="right-section">
+                <div class="notes">
+                  <label>NOTE</label>
+                  <p>{{crmTaskPopupData?.note}}</p>
+                </div>
+                <div>
+                  <label>Due Date</label>
+                  <p>{{crmTaskPopupData?.dueDate | date: 'MMM d, y' }}</p>
+                </div>
+                <div>
+                  <label>Assigned To</label>
+                  <p>{{crmTaskPopupData?.user?.title }}</p>
+                </div>
+              </div>
+            </div>
+            <div class="footer-btn">
+              <a href="javascript:void(0);" (click)="modalRef.hide(); resetCRMTaskData();" class="yes">Close</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+
+<ng-template #createTask>
+  <div class="modal-body p-0">
+    <div class="d-flex flex-wrap chart-form create-task-from position-relative">
+      <div class="chart-box d-flex flex-wrap w-100" [ngClass]="{'active-task': 'subListTask'}">
+        <div class="chart-header w-100 d-flex flex-wrap">
+          <div class="chart-right flex-1 d-flex flex-wrap align-items-center justify-content-between">
+            <h3 class=text-title>Quick Task Entry</h3>
+            <a href="javascript:void(0)" icon-close (click)="modalRef.hide()"></a>
+          </div>
+        </div>
+        <div class="w-100 create-task-body">
+          <div class="task-body">
+            <div>
+              <form class="example-form" #formDir="ngForm" novalidate #taskform [formGroup]="addForm"
+                (ngSubmit)="submitAddForm()">
+                <div class="">
+                  <div class="step-block d-flex flex-wrap">
+                    <ul class="task-details d-flex flex-column">
+                      <li (clickOutside)="createdDateClose()">
+                        <div class="form-group form-task remove-border">
+                          <mat-form-field class="example-full-width mat-input" (click)="createdDateClick()">
+                            <input formControlName="dateOfEntry" matInput type="text" placeholder="Created Date"
+                              value="" autocomplete="off" readonly>
+                          </mat-form-field>
+                        </div>
+                      </li>
+                      <li (clickOutside)="dueDateClose()" class="bottom-line">
+                        <div class="form-group form-task remove-border">
+                          <mat-form-field class="example-full-width mat-input" (click)="dueDateClick()">
+                            <input formControlName="dueDate" matInput type="text" placeholder="Due" value=""
+                              autocomplete="off" readonly>
+                          </mat-form-field>
+                        </div>
+                      </li>
+                      <li>
+                        <div class="form-group form-task remove-border divide-two">
+                          <mat-form-field class="example-full-width mat-input">
+                            <input matInput type="text" placeholder="Task Type" value="Customer" autocomplete="off"
+                              readonly>
+                          </mat-form-field>
+                          <mat-form-field class="example-full-width mat-input">
+                            <input matInput type="text" placeholder="Customer" [value]="customerNameCreateTask"
+                              autocomplete="off" readonly>
+                          </mat-form-field>
+                        </div>
+                      </li>
+                      <li>
+                        <div class="form-group form-task remove-border bottom-line-title title-control ">
+                          <ng-select (change)="onChangepresetActivity($event)" formControlName="title" class="w-100"
+                            [items]="titleArr" placeholder="Title" bindLabel="title" bindValue="id" [searchable]="false"
+                            [hideSelected]="true">
+                            <ng-template ng-label-tmp let-item="item" let-clear="clear">
+                              <span class="ng-value-label">{{item.title}}</span>
+                              <span class="ng-value-icon right" (click)="clear(item)"
+                                aria-hidden="true">×</span>
+                            </ng-template>
+                            <ng-template ng-option-tmp let-item="item" let-index="index">
+                              {{item.title}}
+                            </ng-template>
+                          </ng-select>
+                        </div>
+                      </li>
+                      <li>
+                        <div class="form-group form-task form-border focus-div">
+                          <mat-form-field class="example-full-width mat-input">
+                            <input name="subTitle" id="subTitle" formControlName="subTitle" matInput type="text"
+                              placeholder="Focus" value="" autocomplete="off">
+                          </mat-form-field>
+                        </div>
+                      </li>
+                      <li>
+                        <div class="form-group form-task form-border">
+                          <mat-form-field class="example-full-width mat-input">
+                            <input matInput type="text" formControlName="note" placeholder="Notes" value=""
+                              autocomplete="off">
+                          </mat-form-field>
+                        </div>
+                      </li>
+                      <li *ngIf="accessLevel > 2">
+                        <div class="form-group form-task remove-border"
+                          [ngStyle]="{'pointer-events': taskDataObj?.id > 0 ? 'none' : '' }">
+                          <ng-select (change)="changeAssignTo($event)" class="w-100" [items]="users"
+                            placeholder="Assign To" [closeOnSelect]="true" bindLabel="title" bindValue="id"
+                            [searchable]="true" [hideSelected]="true">
+                            <ng-template ng-label-tmp let-item="item" let-clear="clear">
+                              <span class="ng-value-label">{{item.title}}</span>
+                              <span class="ng-value-icon right" (click)="clear(item)"
+                                aria-hidden="true">×</span>
+                            </ng-template>
+                            <ng-template ng-option-tmp let-item="item" let-index="index">
+                              {{item.title}}
+                            </ng-template>
+                          </ng-select>
+                        </div>
+                      </li>
+                    </ul>
+                    <div *ngIf="createedDate" class="custom-picker move theme-white theme-green">
+                      <bs-datepicker-inline (bsValueChange)="createdDateValueChange($event,bsConfigCreated_Date)"
+                        [bsConfig]="bsConfigCreated_Date" [bsValue]="created_Date">
+                        <a icon-close (click)="createdDateClose()"></a>
+                        <a icon-close (click)="createdDateClose()"></a>
+                      </bs-datepicker-inline>
+                    </div>
+                    <div *ngIf="dueDate" class="custom-picker move theme-white theme-green">
+                      <bs-datepicker-inline (bsValueChange)="dueDateValueChange($event,bsConfig)" [bsConfig]="bsConfig"
+                        [bsValue]="due_date">
+                        <a icon-close (click)="dueDateClose()"></a>
+                      </bs-datepicker-inline>
+                    </div>
+                  </div>
+                  <div class="task-btn-grp d-flex flex-wrap align-items-start justify-content-between">
+                    <button type="submit" class="btn-save assign-to-btn"
+                      [ngClass]="(addForm.valid && isSaveButtonDisabled == false) ? '' : 'disabled'">
+                      Assign to
+                    </button>
+                    <button type="submit" class="btn-save"
+                      [ngClass]="(addForm.valid && isSaveButtonDisabled == false) ? '' : 'disabled'">
+                      Save
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+
+<ng-template #deleteRecordPopup>
+  <div class="modal-body p-0 delete-modal" (closeClick)="modalRef.hide()">
+    <div class="d-flex flex-wrap position-relative quick-modal">
+      <div class="d-flex flex-wrap w-100">
+        <div class="chart-header w-100 d-flex flex-wrap">
+          <div class="chart-right flex-1 d-flex flex-wrap align-items-center">
+            <h3 class=text-title>Delete Confirmation</h3>
+            <a href="javascript:void(0)" icon-close (click)="modalRef.hide()" class="close-ic"></a>
+          </div>
+        </div>
+        <div class="w-100 ">
+          <div class="task-body reladex-task-body ">
+            <h3>Are you sure you want to delete this record ?</h3>
+            <div class="footer-btn">
+              <a href="javascript:void(0);" (click)="unsetDeleteIdAndType();modalRef.hide()" class="cancel">Cancel</a>
+              <a href="javascript:void(0);" (click)="deleteThisRecord();modalRef.hide()" class="yes">Yes</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>

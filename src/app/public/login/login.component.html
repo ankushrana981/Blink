@@ -1,0 +1,149 @@
+<div class="center">
+  <circle-progress [percent]="100"
+  [radius]="75"
+  [space]="-2" 
+  [outerStrokeWidth]="2"
+  [outerStrokeColor]="'#37c3e1'"
+  [innerStrokeColor]="'#e7e8ea'"
+  [innerStrokeWidth]="2"
+  [startFromZero]="false"
+  [imageSrc]="'assets/images/logo-blink.svg'"
+  [showSubtitle]="false"
+  [animation]="true"
+  [animationDuration]="1700"
+  [showBackground]="false"
+  [showInnerStroke]="false"
+  [imageHeight]="100"
+  [imageWidth]="100"
+  [showImage]="true"
+  [renderOnClick]="false">
+  </circle-progress>
+</div>
+<div class="authentic-page wow zoomIn" data-wow-delay="2200ms">
+  <div class="authentic-wrapper">
+    <div class="row">
+      <div class="col-md-6 p-0 login-logo">
+        <img src="assets/images/logo-blinkred.svg" alt="blink" />
+      </div>
+      <div class="col-md-6 p-0">
+        <div class="login-container">
+          <div class="login-section">
+            <h3>LOGIN</h3>
+            <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+
+              <mat-form-field class="example-full-width">
+                <mat-label>Email</mat-label>
+                <input
+                  matInput
+                  type="email"
+                  formControlName="email"
+                  autocomplete="on"
+                />
+                <!-- <mat-error *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched">
+                  Please enter a valid email.
+                </mat-error> -->
+              </mat-form-field>
+            
+              <mat-form-field class="example-full-width">
+                <mat-label>Password</mat-label>
+                <input
+                  matInput
+                  type="password"
+                  formControlName="password"
+                  autocomplete="on"
+                />
+                <!-- <mat-error *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
+                  Password is required.
+                </mat-error> -->
+              </mat-form-field>
+            
+              <div class="text-end mt-0">
+                <a>Forget Password?</a>
+              </div>
+              <button class="btn btn-group-justified" type="submit">
+                Login
+              </button>
+              <p class="signup-link">Don't have an account? <a>Sign up</a></p>
+            </form>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- <div class="authentic-page wow zoomIn" data-wow-delay="2200ms">
+  <div class="authentic-wrapper">
+      <div class="row">
+          <div class="col-md-6 p-0 login-logo">
+              <img src="assets/images/logo-blinkred.svg" alt="blink" />
+          </div>
+          <div class="col-md-6 p-0">
+              <div class="login-container">
+                  <div class="login-section">
+                      <h3>LOGIN</h3>
+                      <form class="example-form" #loginForm="ngForm" (ngSubmit)="onLogin()"
+                          content-type="application/x-www-form-urlencoded">
+                          <mat-form-field class="example-full-width mb-3">
+                              <input matInput placeholder="Email" type="email" name="email"
+                                  pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" autocomplete="on"
+                                  [(ngModel)]="user.email" value="" id="email" required #email="ngModel" />
+                          </mat-form-field>
+                          <mat-form-field class="example-full-width">
+                              <input matInput placeholder="Password" type="password" name="password"
+                                  [(ngModel)]="user.password"  value="" autocomplete="on" id="password" required
+                                  #password="ngModel" />
+                          </mat-form-field>
+                          <div class="text-end">
+                              <a>Forget Password?</a>
+                          </div>
+                          <button class="btn btn-group-justified" type="submit">Login</button>
+
+                          <p class="signup-link">Don't have an account? <a>Sign up</a></p>
+                      </form>
+                  </div>
+                  <div class="forget-section d-none">
+                      <h3>RESET Password</h3>
+                      <form class="example-form">
+                          <mat-form-field class="example-full-width">
+                              <input matInput placeholder="Email" type="email" value="">
+                          </mat-form-field>
+                          <button class="btn btn-group-justified">Reset</button>
+                          <p class="signup-link">Already have an account? <a>Login</a></p>
+                      </form>
+                  </div>
+                  <div class="signup-section d-none">
+                      <h3>Sign Up</h3>
+                      <form class="example-container">
+                          <mat-form-field class="example-full-width">
+                              <input matInput placeholder="Name" type="text" value="">
+                          </mat-form-field>
+                          <mat-form-field class="example-full-width">
+                              <input matInput placeholder="Email" type="email" value="">
+                          </mat-form-field>
+                          <mat-form-field>
+                              <mat-select placeholder="Country">
+                                  <mat-option value="option">Option</mat-option>
+                              </mat-select>
+                          </mat-form-field>
+                          <mat-form-field>
+                              <mat-select placeholder="INTERESTS" multiple>
+                                  <mat-option>option</mat-option>
+                                  <mat-option>option1</mat-option>
+                              </mat-select>
+                          </mat-form-field>
+                          <mat-form-field class="example-full-width">
+                              <mat-label>Message</mat-label>
+                              <textarea matInput placeholder="Describe your interests"></textarea>
+                          </mat-form-field>
+                          <button class="btn btn-group-justified">Submit Interest Request</button>
+                          <p class="signup-link">already have an account? <a>Login</a></p>
+
+
+                      </form>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div> -->

@@ -1,0 +1,186 @@
+<div class="company-setting-wrap setting-wrap">
+	<div class="viewdata-title">
+		<h2>Company Settings</h2>
+	</div>
+	<div class="contentBox">
+		<div class="card">
+			<div class="row viewdata-wrapper">
+				<div class="col-md-1 tier-menu customanimate order-animate2">
+					<ol class="nav">
+						<li [ngClass]="config.stepOne ? 'active' : ''" id = "stepOne" class="customanimate order-animate1">
+							<a>
+								<span>Tier Title</span>
+							</a>
+						</li>
+						<li [ngClass]="config.stepTwo ? 'active' : ''" id = "stepTwo" class="customanimate order-animate3">
+							<a>
+								<span>Tier Title</span>
+							</a>
+						</li>
+						<li [ngClass]="config.stepThree ? 'active' : ''" id = "stepThree" class="customanimate order-animate5">
+							<a>
+								<span>Tier Title</span>
+							</a>
+						</li>
+						<!-- <li [ngClass]="blinktitle3 == 'basicprofile'?'active':''"><a><span>Bank information</span></a></li> -->
+						<li [ngClass]="config.stepFour ? 'active' : ''"  id = "stepFour" class="customanimate order-animate6">
+							<a>
+								<span>Tier Title</span>
+							</a>
+						</li>
+						<!-- <li class=""><a><span>Sales information</span></a></li> -->
+					</ol>
+				</div>
+				<div class="col-sm-10 tier-content comman-form customanimate order-animate2">
+					<form>
+						<div *ngIf="config.stepOne" class="infoBox">
+							<h3 class="mb-30 customanimate order-animate1">Tier Title</h3>
+							<div class="row">
+								<div class="col-md-6 mb-20">
+									<mat-form-field class="example-full-width customanimate order-animate2">
+										<input matInput placeholder="Address line 1" name="addressline1">
+									</mat-form-field>
+								</div>
+								<div class="col-md-6 mb-20">
+									<mat-form-field class="example-full-width customanimate order-animate2">
+										<input matInput placeholder="Address line 2" name="addressline2">
+									</mat-form-field>
+								</div>
+								<div class="col-md-6 mb-20">
+									<div class="row">
+										<div class="col-md-6">
+											<mat-form-field class="example-full-width customanimate order-animate3">
+												<input matInput placeholder="city" name="city">
+											</mat-form-field>
+										</div>
+										<div class="col-md-6">
+											<mat-form-field class="example-full-width customanimate order-animate4">
+												<input matInput placeholder="Area" name="Area">
+											</mat-form-field>
+										</div>
+									</div>
+								</div>
+								<div class="col-md-6 mb-20">
+									<div class="row">
+										<div class="col-md-4">
+											<mat-form-field class="example-full-width customanimate order-animate5">
+												<input matInput placeholder="Region" name="region">
+											</mat-form-field>
+										</div>
+										<div class="col-md-4">
+											<mat-form-field class="example-full-width customanimate order-animate6">
+												<input matInput placeholder="Type" name="type">
+											</mat-form-field>
+										</div>
+										<div class="col-md-4">
+											<mat-form-field class="example-full-width customanimate order-animate7">
+												<input matInput placeholder="Zip" name="zip">
+											</mat-form-field>
+										</div>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<mat-form-field class="example-full-width customanimate order-animate8">
+										<input matInput placeholder="Outlet Notes(External)" name="oueletnote">
+									</mat-form-field>
+								</div>
+								<div class="col-md-6">
+									<mat-form-field class="example-full-width customanimate order-animate9">
+										<input matInput placeholder="Outlet Notes(Internal)" name="internalnotes">
+									</mat-form-field>
+								</div>
+							</div>
+						</div>
+						<div *ngIf="config.stepTwo" class="infoBox">
+							<h3 class="mb-30 customanimate order-animate1">Tier Title</h3>
+							<div class="row">
+								<div class="col-md-6">
+									<mat-form-field class="example-full-width customanimate order-animate2">
+										<input matInput placeholder="Internal Notes" name="internalnotes">
+									</mat-form-field>
+								</div>
+								<div class="col-md-6">
+									<mat-form-field class="example-full-width customanimate order-animate3">
+										<input matInput placeholder="External Notes" name="externalnotes">
+									</mat-form-field>
+								</div>
+							</div>
+						</div>
+						<div *ngIf="config.stepThree" class="infoBox">
+							<h3 class="mb-30 customanimate order-animate1">Tier Title</h3>
+							<div class="row">
+								<!-- <div class="col-md-4">
+										<label>Has Akias?</label>
+
+										<div class="custom-control custom-checkbox">
+											<input type="checkbox" class="custom-control-input" id="defaultChecked2" name="check" (change)="changedCheck($event)" [(ngModel)]="user.hasAlias">
+											<label class="custom-control-label" for="defaultChecked2"></label>
+										</div>
+									</div> -->
+								<div class="col-md-4">
+									<mat-form-field class="example-full-width customanimate order-animate2">
+										<input matInput placeholder="Alias Name" name="aliasname">
+									</mat-form-field>
+								</div>
+
+							</div>
+						</div>
+						<div *ngIf="config.stepFour" class="infoBox">
+							<h3 class="mb-30 customanimate order-animate1">Tier Title</h3>
+							<div class="form-wrapper">
+								<div class="row">
+									<div class="col-md-4 mb-20 ">
+										<mat-form-field class="example-full-width customanimate order-animate2">
+											<input matInput placeholder="Bank Account Name" name="bankaccountname">
+										</mat-form-field>
+									</div>
+									<div class="col-md-4 mb-20">
+										<mat-form-field class="example-full-width customanimate order-animate3">
+											<input matInput placeholder="Bank Account Number" name="bankaccountnumber">
+										</mat-form-field>
+									</div>
+								</div>
+								<div>
+									<div class="row">
+										<div class="col-md-3 mb-20">
+											<mat-form-field class="example-full-width customanimate order-animate4">
+												<input matInput placeholder="Bank Name" name="bankname">
+											</mat-form-field>
+										</div>
+										<div class="col-md-3 mb-20">
+											<mat-form-field class="example-full-width customanimate order-animate5">
+												<input matInput placeholder="Bank Address" name="bankaddress">
+											</mat-form-field>
+										</div>
+										<div class="col-md-3 mb-20">
+											<mat-form-field class="example-full-width customanimate order-animate6">
+												<input matInput placeholder="Transfer Protocol"
+													name="transferprotocaol">
+											</mat-form-field>
+										</div>
+										<div class="col-md-3 mb-20">
+											<mat-form-field class="example-full-width customanimate order-animate7">
+												<input matInput placeholder="Transfer Code" name="transfercode">
+											</mat-form-field>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-4 mb-20">
+											<!-- <div class="form-group">													
+													<ng-select [clearable]="false" [(ngModel)]="user.sourceCurrency" placeholder="Currenices" [items]="currencies" bindLabel="title" name="currencies"
+													 id="currencies" (change)="currencySelected($event)">
+													</ng-select>
+												</div> -->
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- <!-- <app-modal-demo style="position: relative;z-index: 999999999;"></app-modal-demo> --> -->

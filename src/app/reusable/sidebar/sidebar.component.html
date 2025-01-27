@@ -1,0 +1,293 @@
+<nav id="sidebar" class="active">
+    <div class="toggle-container">
+        <div id="nav-icon2" (click)="toggleSideBar()">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+
+
+    <ul class="list-unstyled components" id="accordionExample" (click)="toggleSideBarInner()">
+        <li class="customanimate order-animate1">
+            <a routerLinkActive="active" [routerLink]="['/main/dashboard']" (click)="activeLink=null;">
+                <i class="fa fa-dashboard fa-fw"></i>
+                <span> Dashboard</span>
+            </a>
+        </li>
+        <li class="customanimate order-animate1" *ngFor="let r of menus; index as i">
+            <!--<a href="#pageSubmenu" id="{{r.title}}" data-toggle="collapse" data-target="#{{r.title}}SubMenu" aria-expanded="false" class="dropdown-toggle" [ngClass]="{'active' : router.url.indexOf('/main/accounting') == 0}">-->
+            <a id="{{r.title.split(' ').join('')}}" data-bs-toggle="collapse" aria-expanded="false" class="dropdown" [attr.data-bs-target]="'#SubMenu'+ i" [ngClass]="{'active' : r.isActive && router.url.indexOf('/main/dashboard') == -1}">
+                <i icon-info-check *ngIf="r.title == 'Enhanced Task'"></i>
+                <i class="fa fa-{{r.icon}}" *ngIf="r.title != 'Enhanced Task'" aria-hidden="true"></i>
+
+                <span> {{r.title}}</span>
+                <!--<p>
+                    <img src="assets/images/icon-submenu1.svg" alt="nav-title-Img">
+                    {{router.url== '/main/accounting/receivable-view'?'Receivable':''}}
+                </p>-->
+                <p *ngIf="checkActiveLink(r,activeLink)">
+                    <img src="assets/images/icon-submenu1.svg" alt="nav-title-Img" style="display:block!important">
+                    {{getActiveLinkText(activeLink)}}
+                </p>
+            </a>
+            <ul class="collapse list-unstyled" id="SubMenu{{i}}" data-bs-parent="#accordionExample" *ngIf="r.subMenus.length > 0">
+                <li class="customanimate order-animate4" (click)="toggleSideBarNav(r.title.split(' ').join(''))" *ngFor="let sm of r.subMenus">
+                    <a *ngIf="sm.feature?.routeURL" routerLinkActive="active" [routerLink]="[sm?.feature?.routeURL]" (click)="subMenuClick(r,sm?.feature?.title)">{{sm?.feature?.title}}</a>
+                    <a *ngIf="!sm.feature?.routeURL">{{sm?.feature?.title}}</a>
+                </li>
+            </ul>
+
+        </li>
+    </ul>
+
+    <!--<li class="customanimate order-animate8">
+            <a href="#pageSubmenu" id="task" data-toggle="collapse" data-target="#tasks" aria-expanded="false"
+               class="dropdown-toggle" [ngClass]="{'active' : router.url.indexOf('/main/task') == 0}">
+                <i icon-info-check></i>
+                <span>Task</span>
+                <p>
+                    <img src="assets/images/icon-submenu1.svg" alt="nav-title-Img">{{
+    router.url=='/main/task/dashboard'?
+                        'Dashboard':router.url=='/main/task/view'?'View': ''
+                    }}
+                </p>
+            </a>
+            <ul class="collapse list-unstyled" id="tasks" data-parent="#accordionExample">
+                <li class="customanimate order-animate4" (click)="toggleSideBarNav('task')">
+                    <a routerLinkActive="active" [routerLink]="[ '/main/task/dashboard']">Task Dashboard</a>
+                </li>
+                <li class="customanimate order-animate4" (click)="toggleSideBarNav('task')">
+                    <a routerLinkActive="active" [routerLink]="[ '/main/task/view']">View Tasks</a>
+                </li>
+            </ul>
+        </li>-->
+    <!--<ul class="list-unstyled components" id="accordionExample" (click)="toggleSideBarInner()">
+        <li class="customanimate order-animate1">
+            <a routerLinkActive="active" [routerLink]="['/main/dashboard']">
+                <i class="fa fa-dashboard fa-fw"></i>
+                <span> Dashboard</span>
+            </a>
+        </li>
+      <li class="customanimate order-animate2">
+            <a data-toggle="collapse" id="invoice" data-target="#collapseOne" aria-expanded="false"
+                class="dropdown-toggle" [ngClass]="{'active' : router.url.indexOf('/main/invoicing') == 0}">
+                <i class="fa fa-files-o" aria-hidden="true"></i>
+                <span> Invoicing</span>
+                <p>
+                    <img src="assets/images/icon-submenu1.svg"
+                        alt="nav-title-Img">{{router.url.indexOf('/main/invoicing/entry') ==
+                    0?'Entry':router.url=='/main/invoicing/view'?'View':router.url=='/main/invoicing/approval'?'Approval':''}}
+                </p>
+            </a>
+            <ul class="collapse list-unstyled" id="collapseOne" data-parent="#accordionExample">
+                <li class="customanimate order-animate4" (click)="toggleSideBarNav('invoice')">
+                    <a routerLinkActive="active" [routerLink]="['/main/invoicing/entry']">Invoice Entry</a>
+                </li>
+                <li class="customanimate order-animate4" (click)="toggleSideBarNav('invoice')">
+                    <a routerLinkActive="active" [routerLink]="['/main/invoicing/view']">Invoice View</a>
+                </li>
+                <li class="customanimate order-animate4" (click)="toggleSideBarNav('invoice')">
+                    <a routerLinkActive="active" [routerLink]="['/main/invoicing/approval']">Invoice Approval </a>
+                </li>
+            </ul>
+        </li>
+        <li class="customanimate order-animate3">
+            <a href="#pageSubmenu" id="account" data-toggle="collapse" data-target="#collapsetwo" aria-expanded="false"
+                class="dropdown-toggle" [ngClass]="{'active' : router.url.indexOf('/main/accounting') == 0}">
+
+                <i class="fa fa-money" aria-hidden="true"></i>
+                <span> Accounting</span>
+                <p>
+                    <img src="assets/images/icon-submenu1.svg" alt="nav-title-Img">{{router.url==
+                    '/main/accounting/receivable-view'?'Receivable':''}}
+                </p>
+
+            </a>
+            <ul class="collapse list-unstyled" id="collapsetwo" data-parent="#accordionExample">
+                <li class="customanimate order-animate4" (click)="toggleSideBarNav('account')">
+                    <a routerLinkActive="active" [routerLink]="[ '/main/accounting/receivable-view']">Account Receivable
+                        View</a>
+                </li>
+                <li class="customanimate order-animate4" (click)="toggleSideBarNav('account')">
+                    <a routerLinkActive="active">Payment View</a>
+                </li>
+            </ul>
+        </li>
+
+
+        <li class="customanimate order-animate4">
+            <a href="#pageSubmenu" id="finance" data-toggle="collapse" data-target="#collapsefive" aria-expanded="false"
+                class="dropdown-toggle" [ngClass]="{'active' : router.url.indexOf('/main/finance') == 0}">
+
+                <i class="fa fa-dollar fa-fw" aria-hidden="true"></i>
+                <span>Finance</span>
+                <p>
+                    <img src="assets/images/icon-submenu1.svg"
+                        alt="nav-title-Img">{{router.url=='/main/finance/expense-view'?'View':router.url=='/main/finance/expense-approval'?'Approval':''}}
+                </p>
+
+            </a>
+            <ul class="collapse list-unstyled" id="collapsefive" data-parent="#accordionExample">
+                <li class="customanimate order-animate4" (click)="toggleSideBarNav('finance')">
+                    <a routerLinkActive="active" [routerLink]="[ '/main/finance/expense-view']">Expense View</a>
+                </li>
+                <li class="customanimate order-animate4" (click)="toggleSideBarNav('finance')">
+                    <a routerLinkActive="active" [routerLink]="[ '/main/finance/expense-approval']">Expense Approval</a>
+                </li>
+                <li class="customanimate order-animate4" (click)="toggleSideBarNav('finance')">
+                    <a routerLinkActive="active">Expense Reconcillation</a>
+
+                </li>
+            </ul>
+        </li>
+        <li class="customanimate order-animate5">
+            <a data-toggle="collapse" data-target="#collapsesix" id="crmmod" aria-expanded="false"
+                class="dropdown-toggle" [ngClass]="{'active' : router.url.indexOf('/main/crm') == 0}">
+                <i class="fa fa-users" aria-hidden="true"></i>
+                <span>CRM</span>
+                <p>
+                    <img src="assets/images/icon-submenu1.svg"
+                        alt="nav-title-Img">{{router.url=='/main/crm/customersetup/customer-setup-list'?'Setup':router.url=='/main/crm/discount'?'Rules':router.url=='/main/crm/tax'?'Chats':router.url=='/main/crm/notes'?'Notes':router.url.indexOf('/main/crm/customersetup/new-customer-setup')
+                    == 0?'Setup':''}}
+                </p>
+            </a>
+            <ul class="collapse list-unstyled" id="collapsesix" data-parent="#accordionExample">
+                <li class="customanimate order-animate4" (click)="toggleSideBarNav('crmmod')">
+                    <a routerLinkActive="active" [routerLink]="[ '/main/crm/customersetup']">Customer Setup</a>
+                </li>
+
+                <li class="customanimate order-animate4" (click)="toggleSideBarNav('crmmod')">
+                    <a routerLinkActive="active" [routerLink]="[ '/main/crm/discount']">Discount Rules</a>
+                </li>
+                <li class="customanimate order-animate4" (click)="toggleSideBarNav('crmmod')">
+                    <a routerLinkActive="active" [routerLink]="[ '/main/crm/tax']">Tax Rules</a>
+                </li>
+                <li class="customanimate order-animate4" (click)="toggleSideBarNav('crmmod')">
+                    <a routerLinkActive="active" [routerLink]="[ '/main/crm/notes']">Notes</a>
+                </li>
+            </ul>
+        </li>
+        <li class="customanimate order-animate6">
+            <a href="#pageSubmenu" id="inventory" data-toggle="collapse" data-target="#collapseseven"
+                aria-expanded="false" class="dropdown-toggle"
+                [ngClass]="{'active' : router.url.indexOf('/main/inventory') == 0}">
+                <i class="fa fa-barcode" aria-hidden="true"></i>
+                <span>Inventory</span>
+                <p>
+                    <img src="assets/images/icon-submenu1.svg"
+                        alt="nav-title-Img">{{router.url=='/main/inventory/vendors'?'Setup':router.url=='/main/inventory/products'?'Setup':router.url=='/main/inventory/requests'?'Requests':router.url=='/main/inventory/purchase-orders'?'Orders':router.url=='/main/inventory/adjustments'?'Adjustments':router.url=='/main/inventory/approve-adjustments'?'Adjustments':router.url=='/main/inventory/report'?'Report':router.url=='/main/inventory/count'?'Count':router.url.indexOf('/main/inventory/new-inventory')==
+                    0?'Requests':''}}
+                </p>
+            </a>
+            <ul class="collapse list-unstyled" id="collapseseven" data-parent="#accordionExample">
+                <li class="customanimate order-animate4" (click)="toggleSideBarNav('inventory')">
+                    <a routerLinkActive="active" [routerLink]="[ '/main/inventory/vendors']">Vendor setup</a>
+                </li>
+                <li class="customanimate order-animate4" (click)="toggleSideBarNav('inventory')">
+                    <a routerLinkActive="active" [routerLink]="[ '/main/inventory/products']">Product setup</a>
+                </li>
+                <li class="customanimate order-animate4" (click)="toggleSideBarNav('inventory')">
+                    <a routerLinkActive="active" [routerLink]="[ '/main/inventory/requests']">Inventory requests</a>
+                </li>
+                <li class="customanimate order-animate4" (click)="toggleSideBarNav('inventory')">
+                    <a routerLinkActive="active" [routerLink]="[ '/main/inventory/purchase-orders']">Purchase orders</a>
+                </li>
+                <li class="customanimate order-animate4" (click)="toggleSideBarNav('inventory')">
+                    <a routerLinkActive="active" [routerLink]="[ '/main/inventory/adjustments']">Adjustments</a>
+                </li>
+                <li class="customanimate order-animate4" (click)="toggleSideBarNav('inventory')">
+                    <a routerLinkActive="active" [routerLink]="[ '/main/inventory/approve-adjustments']">Approve
+                        Adjustments</a>
+                </li>
+                <li class="customanimate order-animate4" (click)="toggleSideBarNav('inventory')">
+                    <a routerLinkActive="active" [routerLink]="[ '/main/inventory/report']">Inventory report</a>
+                </li>
+                <li class="customanimate order-animate4" (click)="toggleSideBarNav('inventory')">
+                    <a routerLinkActive="active">Inventory Count</a>
+                </li>
+                <li class="customanimate order-animate4" (click)="toggleSideBarNav('inventory')">
+                    <a routerLinkActive="active" [routerLink]="[ '/main/product/view']">Products</a>
+                </li>
+            </ul>
+        </li>
+        <li class="customanimate order-animate7">
+            <a data-toggle="collapse" id="manufacturing" data-target="#collapseeight" aria-expanded="false"
+                class="dropdown-toggle" [ngClass]="{'active' : router.url.indexOf('/main/manufacturing') == 0}">
+                <i class="fa fa-industry fa-fw" aria-hidden="true"></i>
+                <span>Manufacturing</span>
+                <p>
+                    <img src="assets/images/icon-submenu1.svg"
+                        alt="nav-title-Img">{{router.url=='/main/manufacturing/composition-entry'?'Entry':router.url=='/main/manufacturing/composition-view'?'View':router.url=='/main/manufacturing/production-entry'?'Entry':router.url=='/main/manufacturing/production-view'?'View':''}}
+                </p>
+            </a>
+            <ul class="collapse list-unstyled" id="collapseeight" data-parent="#accordionExample">
+                <li class="customanimate order-animate4" (click)="toggleSideBarNav('manufacturing')">
+                    <a routerLinkActive="active" [routerLink]="[ '/main/manufacturing/composition-entry']">Composition
+                        entry</a>
+                </li>
+                <li class="customanimate order-animate4" (click)="toggleSideBarNav('manufacturing')">
+                    <a routerLinkActive="active" [routerLink]="[ '/main/manufacturing/composition-view']">Composition
+                        view</a>
+                </li>
+                <li class="customanimate order-animate4" (click)="toggleSideBarNav('manufacturing')">
+                    <a routerLinkActive="active" [routerLink]="[ '/main/manufacturing/production-entry']">Production
+                        entry</a>
+                </li>
+                <li class="customanimate order-animate4" (click)="toggleSideBarNav('manufacturing')">
+                    <a routerLinkActive="active" [routerLink]="[ '/main/manufacturing/production-view']">Production
+                        view</a>
+                </li>
+                <li class="customanimate order-animate4" (click)="toggleSideBarNav('manufacturing')">
+                    <a routerLinkActive="active" [routerLink]="[ '/main/product/composition']">Compositions</a>
+                </li>
+            </ul>
+        </li>
+
+        <li class="customanimate order-animate8">
+            <a href="#pageSubmenu" id="setting" data-toggle="collapse" data-target="#collapsenine" aria-expanded="false"
+                class="dropdown-toggle" [ngClass]="{'active' : router.url.indexOf('/main/settings') == 0}">
+
+                <i class="fa fa-folder-open fa-fw" aria-hidden="true"></i>
+                <span>Settings</span>
+                <p>
+                    <img src="assets/images/icon-submenu1.svg"
+                        alt="nav-title-Img">{{router.url=='/main/settings/companysettings'?'Settings':router.url=='/main/settings/chartofaccount'?'Account':''}}
+                </p>
+            </a>
+            <ul class="collapse list-unstyled" id="collapsenine" data-parent="#accordionExample">
+                <li class="customanimate order-animate4" (click)="toggleSideBarNav('setting')">
+                    <a routerLinkActive="active" [routerLink]="[ '/main/settings/companysettings']">Company Settings</a>
+                </li>
+                <li class="customanimate order-animate4" (click)="toggleSideBarNav('setting')">
+                    <a routerLinkActive="active" [routerLink]="[ '/main/settings/chartofaccount']">Chart Of Account</a>
+                </li>
+            </ul>
+        </li>
+        <li class="customanimate order-animate9">
+            <a href="#pageSubmenu" id="task" data-toggle="collapse" data-target="#tasks" aria-expanded="false"
+                class="dropdown-toggle" [ngClass]="{'active' : router.url.indexOf('/main/task') == 0}">
+                <i icon-info-check></i>
+                <span>Task</span>
+                <p>
+                    <img src="assets/images/icon-submenu1.svg" alt="nav-title-Img">{{router.url=='/main/task/dashboard'?
+                    'Dashboard':router.url=='/main/task/view'?'View': ''}}
+                </p>
+            </a>
+            <ul class="collapse list-unstyled" id="tasks" data-parent="#accordionExample">
+                <li class="customanimate order-animate4" (click)="toggleSideBarNav('task')">
+                    <a routerLinkActive="active" [routerLink]="[ '/main/task/dashboard']">Task Dashboard</a>
+                </li>
+                <li class="customanimate order-animate4" (click)="toggleSideBarNav('task')">
+                    <a routerLinkActive="active" [routerLink]="[ '/main/task/view']">View Tasks</a>
+                </li>
+            </ul>
+        </li>
+
+    </ul>-->
+
+</nav>
+<!-- <app-modal-demo style="position: relative;z-index: 999999999;"></app-modal-demo> -->

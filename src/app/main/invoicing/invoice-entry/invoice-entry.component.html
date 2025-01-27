@@ -1,0 +1,819 @@
+<div class="invoiceView invoice-entry">
+	<div *ngIf="isNew" class="page-title">
+		<h2>New Invoice</h2>
+	</div>
+	<div *ngIf="!isNew" class="page-title">
+		<h2>{{user.docNumber}}
+			<small class="title-tag badge alert-warning"> {{statusTilte}}</small>
+		</h2>
+	</div>
+
+
+
+	<div class="contentBox" [ngClass]="icon1?'':'active'">
+		<div class="leftContent wow fadeIn" data-wow-delay="100ms" id="print-section">
+			<div class="card">
+				<div class="contentInfo">
+					<div class="table-box">
+						<table width="100%">
+							<tbody>
+								<tr style="vertical-align:text-top">
+									<td>
+										<div class="row" style="margin-right:35px" role="button" tabindex="0">
+											<div class="col-xs-3 col-xl-3 col-md-3 col-3">
+												<div>
+													<div class="businessaddress">
+														<label>to:</label>
+														<div class="addcol" *ngIf="user.businessPartner">
+															<b ng-bind="vm.document.businessPartner.title"
+																class="ng-binding">{{user.businessPartner?.title}}</b>
+															<div class="small ng-binding"
+																ng-bind="vm.document.businessPartner.address1">
+																{{user.businessPartner.address1}}</div>
+															<div class="small ng-binding"
+																ng-bind="vm.document.businessPartner.address2">
+																{{user.businessPartner.address2}}</div>
+															<div class="small ng-binding"
+																ng-bind="vm.document.businessPartner.city">
+																{{user.businessPartner.city}}</div>
+															<div class="small ng-binding"
+																ng-bind="vm.document.businessPartner.phone1">
+																{{user.businessPartner.phone1}}</div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div class="col-xs-6 col-xl-6 col-md-6 col-6">
+												<div class="ng-hide" *ngIf="user.notes">
+													<label>note:</label>
+													<div class="ng-binding">{{user.notes}}</div>
+												</div>
+											</div>
+											<div class="col-xs-3 col-xl-3 col-md-3 text-end col-3">
+												<!-- <div class="companylogo mb-20">
+													<img src="assets/images/logo-blink.svg" class="mCS_img_loaded" width="50" height="34">
+												</div> -->
+
+												<div *ngIf="isNew" class="dateofissue">{{user.dateOfIssue | date: 'dd.
+													MM. yyyy'}}</div>
+												<div *ngIf="!isNew" class="dateofissue">{{user.dateOfIssue}}</div>
+
+												<div>
+													<span *ngIf="isNew" (click)="changeIc('arrow')"
+														class="doctitle">Invoice #
+														<span>
+															<i class="text-italic">{{user.docNumber}}</i>
+														</span>
+													</span>
+													<span *ngIf="!isNew" (click)="changeIc('arrow')"
+														class="doctitle">Invoice #
+														<span class="invoice-id">
+															{{user.docNumber}}</span>
+													</span>
+												</div>
+											</div>
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<td style="height: 100px"></td>
+								</tr>
+								<tr>
+									<td>
+										<!-- Pending logistics review -->
+										<div class="table-box viewTable mb-50">
+											<table *ngIf="!isNew" style="width:100%"
+												class="table-hover default-to-custom ng-isolate-scope"
+												infinite-scroll="vm.kd_nextPage()">
+												<tbody>
+													<tr *ngFor="let item of user.items; let index = index"
+														style="vertical-align:top;" class="x-animated fadeIn d-1 in">
+
+														<td width="64px" class="text-center">
+															<h4 class="rownumber">{{index + 1}}</h4>
+														</td>
+														<td class="text-left">
+															<b>{{item.title}}</b>
+															<div class="small help-block line-divider">
+																{{item.description}}&nbsp;</div>
+														</td>
+														<td width="15%" class="text-left">
+															<b class="">{{item.quantity}}</b>
+															<div class="small help-block line-divider">&nbsp;</div>
+														</td>
+														<td width="15%">
+															<b>${{item.price}}</b>
+															<div class="small help-block line-divider">
+																<span>
+																	<span ng-bind="r.discount"
+																		class="ng-binding">{{item.discount}}</span>%
+																</span>
+															</div>
+														</td>
+														<td width="15%" class="text-end">
+															<b>${{item.total}}</b>
+															<div class="small help-block line-divider">
+																<span>
+																	<span>$</span>
+																	<span>{{item.taxValue}}</span>
+																	<span>%</span>
+																	tax
+																</span>
+															</div>
+														</td>
+														<td *ngIf="statusfordiv == '1'" width="50px" class="text-left">
+															<div class="rowactions">
+																<a class="btn btn-link" href="javascript:;"
+																	(click)="editanddelete(item)">
+																	<i class="fa fa-pencil"></i>
+																</a>
+
+															</div>
+														</td>
+
+													</tr>
+												</tbody>
+											</table>
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<div *ngIf="!isNew" class="row justify-content-end" style="margin-right:35px">
+											<div class="align-self-end col-xs-5 col-xl-5 col-md-5 text-end">
+												<table class="table text-end table-totals">
+													<tbody>
+														<tr>
+															<td>Subtotal:</td>
+															<td width="100px" class="text-end ng-binding">
+																<b> ${{SubtotalCount1 | number : '1.2-2'}}</b>
+															</td>
+														</tr>
+														<tr>
+															<td>Discount: </td>
+															<td class="text-end">
+																<b>
+																	<span class="">{{user.discount}}</span> %</b>
+															</td>
+														</tr>
+													</tbody>
+												</table>
+											</div>
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<td>
+
+									</td>
+								</tr>
+								<tr *ngIf="isNew">
+									<td>
+										<div class="row justify-content-end" style="margin-right:35px">
+											<div class="align-self-end col-xs-5 col-xl-5 col-md-5 text-end">
+												<table class="table text-end table-totals">
+													<tbody>
+														<tr>
+															<td class="totalText">Subtotal:
+																<!-- <b>$ 0.00 </b> -->
+															</td>
+															<td width="100px" class="text-end ng-binding">
+																<b>$ 0.00 </b>
+
+																<!-- <b> ${{item.total}}</b> -->
+															</td>
+														</tr>
+														<tr>
+															<td class="totalText">Discount: </td>
+															<td class="text-end">
+																<b>
+																	<span class="">{{user.discount}}</span> %</b>
+															</td>
+														</tr>
+													</tbody>
+												</table>
+											</div>
+										</div>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div *ngIf="statusfordiv == '1' || isNew" class="rightSidebar-wrap rightSide-data-penal"
+			[ngClass]="statusfordiv == '1'?'animated fadeInRight':''">
+			<div class="data-penal-header">
+				<button class="btn open-action-btn" (click)="changeIc('dots')">
+					<img src="assets/images/icon-ellipsis-light.svg" height="25" width="24" alt="">
+				</button>
+				<button class="btn close close-action-btn" (click)="changeIc('arrow')">
+					<!-- <i class="fa fa-arrow-right" aria-hidden="true"></i> -->
+					<img src="assets/images/icon-angle.png" height="25" width="25" alt="">
+				</button>
+			</div>
+			<div class="data-penal-body">
+				<div class="row" *ngIf="isNew">
+					<div class="col-12  x-animated fadeIn d-3">
+						<div class="form-group">
+							<label class="text-uppercase">Date of issue</label>
+							<p-calendar #cal2 [(ngModel)]="user.dateOfIssue" dateFormat="dd.mm.yy" [showIcon]="true"
+								[showButtonBar]="true">
+								<p-footer class="calendar-footer">
+									<button class="close-btn" pButton label="Close"
+										(click)="cal2.overlayVisible = false"></button>
+								</p-footer>
+							</p-calendar>
+							<!-- <div class="datepickerInputBox">
+								<input  class="form-control" name="minDatepicker" type="text" id="minDatepicker" [maxDate]="maxDate" [(ngModel)]="user.dateOfIssue"
+								 bsDatepicker placeholder="Date of Issue" (bsValueChange)="ModelDatepicker($event)" [bsConfig]="{ dateInputFormat: 'DD.MM.YYYY', showWeekNumbers:false }">
+								<i class="fa fa-calendar" aria-hidden="true"></i>
+							</div> -->
+						</div>
+					</div>
+				</div>
+				<div class="row" *ngIf="!isNew">
+					<div class="col-12 x-animated fadeIn d-3">
+						<h4 class="invoice-tag infosubmitted">Date of issue
+							<span>{{user.dateOfIssue}}</span>
+						</h4>
+					</div>
+				</div>
+				<div class="row" *ngIf="isNew">
+					<div class="col-12 x-animated fadeIn d-4">
+						<h4 class="invoice-tag">invoice #
+							<span>{{user.docNumber}}</span>
+						</h4>
+					</div>
+				</div>
+				<div class="row" *ngIf="!isNew">
+					<div class="col-12 x-animated fadeIn d-5">
+						<h4 class="invoice-tag infosubmitted">invoice #
+							<span>{{user.docNumber}}</span>
+						</h4>
+					</div>
+				</div>
+
+
+
+				<div class="row" *ngIf="isNew">
+					<div class="col-12 x-animated fadeIn d-5">
+						<div class="form-group mb-20">
+							<!-- <label>Branch</label> -->
+							<ng-select *ngIf="branchrecords" placeholder="Branch" [searchable]="false"
+								[clearable]="false" [items]="branchrecords" [(ngModel)]="user.branch">
+								<ng-template ng-label-tmp let-item="item">
+									{{item.title}}
+								</ng-template>
+								<ng-template ng-option-tmp let-item="item" let-index="index" let-search="searchTerm">
+									{{item.title}}
+								</ng-template>
+							</ng-select>
+						</div>
+					</div>
+				</div>
+				<div class="row" *ngIf="!isNew">
+					<div class="col-12 x-animated fadeIn d-6">
+						<h4 class="invoice-tag infosubmitted">Branch
+							<span>{{user.branch?.title}}</span>
+						</h4>
+					</div>
+				</div>
+
+				<div class="row" *ngIf="isNew">
+					<div class="col-12 x-animated fadeIn d-6">
+						<div class="form-group mb-20">
+							<!-- <label class="gray-label">Client</label> -->
+							<ng-select [clearable]="false" placeholder="Client" [(ngModel)]="user.businessPartner"
+								[items]="clientNameItem | async" bindLabel="title" [loading]="supplierLoading"
+								[notFoundText]="notFoundText" name="supplierName" id="supplierName" autocomplete="off"
+								(change)="clientNameSelected($event,user)" [typeahead]="MainSearchdataSource"
+								[addTag]="true">
+							</ng-select>
+						</div>
+					</div>
+				</div>
+				<div class="row" *ngIf="!isNew">
+					<div class="col-12 x-animated fadeIn d-7">
+						<h4 class="invoice-tag infosubmitted">Client
+							<span>{{user.businessPartner?.title}}</span>
+						</h4>
+					</div>
+				</div>
+
+
+				<div class="row">
+					<div class="col-12 x-animated fadeIn d-8" *ngIf="!isNew">
+						<div class="form-group mb-10">
+							<!-- <label class="gray-label">Product</label> -->
+							<!-- <h4>Product</h4> -->
+							<ng-select [items]="productrecords" [clearable]="false" placeholder="Product"
+								[(ngModel)]="user.sourceProduct" bindLabel="title" (change)="productSelected($event)">
+								<ng-template ng-label-tmp let-item="item">
+									{{item.title}}
+								</ng-template>
+								<ng-template ng-option-tmp let-item="item" let-index="index" let-search="searchTerm">
+									{{item.title}}
+								</ng-template>
+							</ng-select>
+						</div>
+					</div>
+				</div>
+
+
+
+				<div class="row">
+					<div class="col-12">
+						<form class="example-form" *ngIf="!isNew">
+							<div class=" x-animated fadeIn d-9">
+								<div class=" qtyFormGroup mb-30 ">
+									<mat-form-field class="example-full-width">
+										<input matInput placeholder="Quantity" (keydown)="AllowNumbers($event)"
+											name="quantity" [(ngModel)]="user.quantity" required>
+									</mat-form-field>
+								</div>
+							</div>
+
+							<div class="fieldsBox" [ngClass]="accclose?'more-fields':''">
+								<a href="javascript:;" class="more-fields-btn a-btn mb-30"
+									(click)="accordianview('more')">More
+									<i class="fa fa-angle-down" aria-hidden="true"></i>
+								</a>
+								<a href="javascript:;" class="less-fields-btn a-btn mb-20"
+									(click)="accordianview('less')">Less
+									<i class="fa fa-angle-up" aria-hidden="true"></i>
+								</a>
+								<form class="example-form field-form">
+									<div class="d-block x-animated fadeIn d-3">
+										<mat-form-field class="example-full-width">
+											<!-- <input matInput placeholder="Notes" name="notes" [(ngModel)]="user.productnotes"> -->
+											<textarea matInput placeholder="Notes" name="notes" id="notes"
+												[(ngModel)]="user.productnotes"></textarea>
+										</mat-form-field>
+									</div>
+									<div class="d-block x-animated fadeIn d-4">
+										<mat-form-field class="example-full-width">
+											<input matInput placeholder="Discount" value="0"
+												(keydown)="AllowNumbers($event)" name="productdiscount"
+												[(ngModel)]="user.productdiscount">
+										</mat-form-field>
+									</div>
+									<div class="d-block x-animated fadeIn d-5">
+										<mat-form-field class="example-full-width">
+											<input matInput placeholder="Tax value($)" name="taxvalue"
+												(keydown)="AllowNumbers($event)" [(ngModel)]="user.taxValue"
+												currencyMask >
+										</mat-form-field>
+									</div>
+									<div class="d-block x-animated fadeIn d-6">
+										<mat-form-field class="example-full-width">
+											<input matInput placeholder="Unit price" value="0.00" name="unitprice"
+												(keydown)="AllowNumbers($event)" [(ngModel)]="user.price" currencyMask
+												>
+										</mat-form-field>
+									</div>
+								</form>
+							</div>
+						</form>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-12" *ngIf="isNew">
+						<div class="fieldsBox" [ngClass]="accclose?'more-fields':''">
+							<a href="javascript:;" class="more-fields-btn a-btn mb-10"
+								(click)="accordianview('more')">More
+								<i class="fa fa-angle-down" aria-hidden="true"></i>
+							</a>
+							<a href="javascript:;" class="less-fields-btn a-btn mb-10"
+								(click)="accordianview('less')">Less
+								<i class="fa fa-angle-up" aria-hidden="true"></i>
+							</a>
+							<form class="example-form field-form mt-20">
+								<div class="form-group textareaBox mb-20 x-animated fadeIn d-5">
+									<mat-form-field class="example-full-width">
+										<textarea matInput placeholder="Notes" name="comment" id="comment"
+											[(ngModel)]="user.notes"></textarea>
+									</mat-form-field>
+								</div>
+								<div class="form-group inputBox mb-20 x-animated fadeIn d-6">
+									<mat-form-field class="example-full-width">
+										<input matInput placeholder="Discount" value="0" name="discount"
+											(keydown)="AllowNumbers($event)" [(ngModel)]="user.discount">
+									</mat-form-field>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+
+			</div>
+			<div class="data-penal-footer">
+				<div class="row">
+					<div class="col-12">
+						<button *ngIf="flagfordelete" class="btn close-btn text-danger" style="margin-right: 10px"
+							type="submit" (click)="deleteInvoice()">
+							<i class="fa fa-times" aria-hidden="true"></i> Delete
+						</button>
+						<button class="btn close-btn" [disabled]="!user.businessPartner" type="submit"
+							(click)="createInvoice(user)">
+							<i class="fa fa-floppy-o" aria-hidden="true"></i> Enter
+						</button>
+					</div>
+
+
+				</div>
+
+			</div>
+
+		</div>
+
+		<div class="action-bar">
+			<div class="spanBox">
+				<!-- <button href="javaScript:;" printTitle="Blink" printSectionId="print-section" ngxPrint>print</button>  -->
+				<a href="javaScript:;" class="btn btn-default printBtn">
+					<i class="fa fa-print" aria-hidden="true" printSectionId="print-section" ngxPrint></i> Print
+					Preview</a>
+				<span *ngIf="isNew">Invoice Total
+					<b>$ 0.00</b>
+				</span>
+				<span *ngIf="!isNew">Invoice Total
+					<b> ${{invoiceTotal | number : '1.2-2'}}</b>
+				</span>
+
+			</div>
+			<span *ngIf="!isNew">
+				<button *ngIf="statusfordiv == '1'|| statusfordiv == '4'|| statusfordiv != '5' || statusfordiv == '3'"
+					class="btn btn-danger approveBtn" (click)="statusChanging(statusTilte)">
+					<b *ngIf="statusTilte != 'All'">Approve</b>{{buttontitle}}</button>
+			</span>
+
+		</div>
+
+	</div>
+	<ng-template #template>
+		<div class="new-customer-modal">
+			<div class="modal-header">
+				<h4 class="modal-title text-center">NEW CUSTOMER</h4>
+				<button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<form class="example-form">
+					<div class="form-inner current" *ngIf="outerDetails">
+						<div class="form-group step1 textareaBox mb-10 customanimate order-animate2">
+							<mat-form-field class="example-full-width">
+								<input matInput placeholder="Customer Name" name="customername" id="customername"
+									[(ngModel)]="userClient.title" required>
+							</mat-form-field>
+						</div>
+						<div class="form-group inputBox mb-10 customanimate order-animate3">
+							<mat-form-field class="example-full-width">
+								<input matInput placeholder="Address" name="address" [(ngModel)]="userClient.address1">
+							</mat-form-field>
+						</div>
+						<div class="form-group inputBox mb-10 customanimate order-animate4">
+							<mat-form-field class="example-full-width">
+								<input matInput placeholder="Telephone" name="telephone"
+									(keydown)="AllowNumbers($event)" [(ngModel)]="userClient.phone1">
+							</mat-form-field>
+						</div>
+						<div class="form-group inputBox mb-10 customanimate order-animate5">
+							<mat-form-field class="example-full-width">
+								<input matInput placeholder="City" name="city" [(ngModel)]="userClient.city">
+							</mat-form-field>
+						</div>
+						<div class="form-group inputBox mb-10 customanimate order-animate6">
+							<mat-form-field class="example-full-width">
+								<input matInput placeholder="Zip" name="zip" (keydown)="AllowNumbers($event)"
+									[(ngModel)]="userClient.zip">
+							</mat-form-field>
+						</div>
+					</div>
+					<div class="form-inner" [ngClass]="innerDetails?'current':''" *ngIf="innerDetails">
+						<div class="form-group inputBox mb-10">
+							<mat-form-field class="example-full-width customanimate order-animate2">
+								<input matInput placeholder="Internal Notes" name="internalnotes"
+									[(ngModel)]="userClient.internalNotes">
+							</mat-form-field>
+						</div>
+						<div class="form-group inputBox mb-10">
+							<mat-form-field class="example-full-width customanimate order-animate3">
+								<input matInput placeholder="External Notes" name="externalnotes"
+									[(ngModel)]="userClient.externalNotes">
+							</mat-form-field>
+
+						</div>
+						<div class="form-group inputBox mb-10">
+							<mat-form-field class="example-full-width customanimate order-animate4">
+								<input matInput placeholder="Payment Terms Duration (In Days)"
+									(keydown)="AllowNumbers($event)" name="paymentTermDuration"
+									[(ngModel)]="userClient.paymentTermDuration">
+							</mat-form-field>
+						</div>
+						<div class="form-group inputBox mb-10">
+							<mat-form-field class="example-full-width customanimate order-animate5">
+								<input matInput placeholder="Sales Representative" name="salesRepresentative"
+									[(ngModel)]="userClient.salesRepresentative">
+							</mat-form-field>
+						</div>
+						<div class="form-group inputBox mb-10">
+							<mat-form-field class="example-full-width customanimate order-animate6">
+								<input matInput placeholder="Area" name="area" [(ngModel)]="userClient.area">
+							</mat-form-field>
+
+						</div>
+						<div class="form-group inputBox mb-10">
+							<mat-form-field class="example-full-width customanimate order-animate7">
+								<input matInput placeholder="Region" name="region" [(ngModel)]="userClient.branch">
+							</mat-form-field>
+						</div>
+						<div class="form-group inputBox mb-10">
+							<mat-form-field class="example-full-width customanimate order-animate8">
+								<input matInput placeholder="Establishment Type" name="establishmentType"
+									[(ngModel)]="userClient.establishmentType">
+							</mat-form-field>
+						</div>
+						<!-- <div class="form-group inputBox mb-10 customanimate order-animate5">
+							<ng-select [clearable]="false" [(ngModel)]="userClient.salesRepresentative" placeholder="Sales Representative" [items]="salesRecords"
+							 bindLabel="title" name="salesRepresentative" id="RepresentativeName" (change)="recordSelected($event)">
+							</ng-select>
+						</div>
+						<div class="form-group inputBox mb-10 customanimate order-animate6">
+							<ng-select [clearable]="false" [(ngModel)]="userClient.area" placeholder="Search Area" [items]="areaRecords" bindLabel="title"
+							 name="area" id="areaName" (change)="recordSelected($event)">
+							</ng-select>
+						</div>
+						<div class="form-group inputBox mb-10 customanimate order-animate7">
+							<ng-select [clearable]="false" [(ngModel)]="userClient.branch" placeholder="Region" [items]="regionRecords" bindLabel="title"
+							 name="region" id="regionName" (change)="recordSelected($event)">
+
+							</ng-select>
+						</div>
+						<div class="form-group inputBox mb-10 customanimate order-animate8">
+							<ng-select [clearable]="false" [(ngModel)]="userClient.establishmentType" placeholder="Establishment Type" [items]="establishmentTypeRecords"
+							 bindLabel="title" name="establishmentType" id="typeName" (change)="recordSelected($event)">
+							</ng-select>
+						</div> -->
+
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<div class="slid-nav-btn">
+					<button *ngIf="innerDetails" class="btn">
+						<em class="fa fa-long-arrow-left" aria-hidden="true" (click)="showInnerFeilds('outer')"></em>
+					</button>
+					<div class="spangroup">
+						<span class="active">{{slideCount}}</span>
+						<!-- <span *ngIf="innerDetails" class="active">2</span> -->
+					</div>
+					<button *ngIf="outerDetails" class="btn">
+						<em class="fa fa-long-arrow-right" aria-hidden="true" (click)="showInnerFeilds('inside')"></em>
+					</button>
+				</div>
+				<button [disabled]="!userClient.title" class="btn" (click)="addCustomer()">Submit</button>
+			</div>
+		</div>
+	</ng-template>
+	<ng-template #template1>
+		<div class="modal-header">
+			<h4 class="modal-title text-center">Approve Request</h4>
+			<button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+				<span aria-hidden="true">&times;</span>
+			</button>
+		</div>
+		<div class="modal-body">
+			<!--Accordion wrapper-->
+			<div id="accordion" class="accordion">
+				<!-- Accordion card -->
+				<div class="card info">
+					<!-- Card header -->
+					<div class="card-header" role="tab" id="modal-headingOne">
+						<a data-toggle="collapsed" data-toggle="collapse" data-target="#modal-collapseOne"
+							aria-expanded="false" aria-controls="modal-collapseOne">
+							<h5 class="mb-0">
+								Note
+							</h5>
+							<div class="toggle-btn"><em class="fa fa-chevron-down" aria-hidden="true"></em></div>
+						</a>
+					</div>
+					<!-- Card body -->
+					<div id="modal-collapseOne" class="collapse show accordion-content" data-parent="#accordion"
+						aria-labelledby="-modal-headingOne">
+						<div class="card-body">
+							<div class="content-body">
+								<div class="title-box">
+									<div class="row">
+										<div class="col-md-7 col-7">
+											<div class="title">
+												<span>Note :</span>
+												<p>Lorem ipsum dolor sit</p>
+											</div>
+										</div>
+										<div class="col-md-5 col-5">
+											<div class="btnbox">
+												<button type="button" class="btn">Lorem ipsum dolor sit amet</button>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="replybox" [ngClass]="approveReqFirst ? 'open' : ''">
+									<!-- <div class="toggle-btn" (click)="openClose('notes')"><em class="fa fa-chevron-down" aria-hidden="true"></em></div> -->
+									<span>Re :</span>
+									<p>Lorem ipsum dolor sit amet</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- Accordion card -->
+
+				<!-- Accordion card -->
+				<div class="card info">
+					<!-- Card header -->
+					<div class="card-header" role="tab" id="-modal-headingTwo">
+						<a class="collapsed" data-toggle="collapse" data-target="#modal-collapseTwo"
+							aria-expanded="false" aria-controls="modal-collapseTwo">
+							<h5 class="mb-0">
+								Note
+							</h5>
+							<div class="toggle-btn"><em class="fa fa-chevron-down" aria-hidden="true"></em></div>
+						</a>
+					</div>
+
+					<!-- Card body -->
+					<div id="modal-collapseTwo" class="collapse accordion-content" aria-labelledby="-modal-headingTwo"
+						data-parent="#accordion">
+						<div class="card-body">
+							<div class="content-body">
+								<div class="title-box">
+									<div class="row">
+										<div class="col-md-7 col-7">
+											<div class="title">
+												<span>Note :</span>
+												<p>Lorem ipsum dolor sit</p>
+											</div>
+										</div>
+										<div class="col-md-5 col-5">
+											<div class="btnbox">
+												<button type="button" class="btn">Lorem ipsum dolor sit amet</button>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="replybox" [ngClass]="approveReqSecond ? 'open' : ''">
+									<!-- 
+							<div class="toggle-btn" (click)="openClose('second')"><em class="fa fa-chevron-down" aria-hidden="true"></em></div>					 -->
+									<span>Re :</span>
+									<p>Lorem ipsum dolor</p>
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+				<!-- Accordion card -->
+
+				<!-- Accordion card -->
+				<div class="card info">
+					<!-- Card header -->
+					<div class="card-header" role="tab" id="-modal-headingThree">
+						<a class="collapsed" data-toggle="collapse" data-target="#modal-collapseThree"
+							aria-expanded="false" aria-controls="modal-collapseThree">
+							<h5 class="mb-0">
+								Note
+							</h5>
+							<div class="toggle-btn"><em class="fa fa-chevron-down" aria-hidden="true"></em></div>
+						</a>
+					</div>
+
+					<!-- Card body -->
+					<div id="modal-collapseThree" class="collapse accordion-content"
+						aria-labelledby="-modal-headingThree" data-parent="#accordion">
+						<div class="card-body">
+							<div class="content-body">
+								<div class="title-box">
+									<div class="row">
+										<div class="col-md-12">
+											<div class="title">
+												<span>Note :</span>
+												<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorum
+													autem dignissimos tur iusto laboriosam?</p>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="replybox" [ngClass]="approveReqThird ? 'open' : ''">
+									<!-- <div class="toggle-btn" (click)="openClose('third')"><em class="fa fa-chevron-down" aria-hidden="true"></em></div> -->
+									<span>Re :</span>
+									<p>
+										Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloribus ducimus vel
+										quae omnis iusto architecto obcaecati aperiam impedit, totam esse ratione, illo
+										ab, ut molestias veniam nisi reprehenderit quo quisquam.
+									</p>
+								</div>
+								<div class="inputbox textnote">
+									<em class="fa fa-info-circle" aria-hidden="true"></em>
+									<span>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</span>
+									<!-- <div class="form-group inputBox mb-10">
+									<mat-form-field class="example-full-width">
+										<input matInput placeholder="Enter The reason for deficult values"  name="region">
+									</mat-form-field>
+								</div> -->
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+				<!-- Accordion card -->
+			</div>
+			<!-- Accordion wrapper -->
+			<!-- <div class="info">
+				
+				<div class="content-heading"><h4>Notes</h4></div>
+				<div class="content-body">					
+					<div class="title-box">
+						<div class="row">
+							<div class="col-md-7 col-7">
+								<div class="title">
+									<span>Note :</span> <p>Lorem ipsum dolor sit</p>
+								</div>
+							</div>
+							<div class="col-md-5 col-5">
+								<div class="btnbox">
+									<button type="button" class="btn">Lorem ipsum dolor sit amet</button>
+								</div>
+							</div>	
+						</div>
+					</div>					
+					<div class="replybox" [ngClass]="approveReqFirst ? 'open' : ''">
+						<div class="toggle-btn" (click)="openClose('notes')"><em class="fa fa-chevron-down" aria-hidden="true"></em></div>					
+						<span>Re :</span> <p>Lorem ipsum dolor sit amet</p>
+					</div>
+				</div>
+			</div>
+			<div class="info">
+				<div class="content-heading"><h4>Notes</h4></div>
+				<div class="content-body">
+					<div class="title-box">
+						<div class="row">
+							<div class="col-md-7 col-7">
+								<div class="title">
+									<span>Note :</span> <p>Lorem ipsum dolor sit</p>
+								</div>
+							</div>
+							<div class="col-md-5 col-5">
+								<div class="btnbox">
+									<button type="button" class="btn">Lorem ipsum dolor sit amet</button>
+								</div>
+							</div>	
+						</div>
+					</div>
+					<div class="replybox" [ngClass]="approveReqSecond ? 'open' : ''">
+						<div class="toggle-btn" (click)="openClose('second')"><em class="fa fa-chevron-down" aria-hidden="true"></em></div>					
+						<span>Re :</span> <p>Lorem ipsum dolor</p>
+					</div>
+				</div>
+			</div>
+			<div class="info">
+				<div class="content-heading"><h4>Notes</h4></div>
+				<div class="content-body">
+					<div class="title-box">
+						<div class="row">
+							<div class="col-md-12">
+								<div class="title">
+									<span>Note :</span> <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorum autem dignissimos tur iusto laboriosam?</p>
+								</div>
+							</div>
+						</div>						
+					</div>
+					<div class="replybox" [ngClass]="approveReqThird ? 'open' : ''">
+						<div class="toggle-btn" (click)="openClose('third')"><em class="fa fa-chevron-down" aria-hidden="true"></em></div>					
+						<span>Re :</span> 
+						<p>
+							Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloribus ducimus vel quae omnis iusto architecto obcaecati aperiam impedit, totam esse ratione, illo ab, ut molestias veniam nisi reprehenderit quo quisquam.
+						</p>
+					</div>
+					<div class="inputbox textnote">
+						<em class="fa fa-info-circle" aria-hidden="true"></em>
+						<span>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</span>
+						<div class="form-group inputBox mb-10">
+							<mat-form-field class="example-full-width">
+								<input matInput placeholder="Enter The reason for deficult values"  name="region">
+							</mat-form-field>
+						</div>
+					</div>
+				</div>
+			</div> -->
+
+		</div>
+		<div class="modal-footer">
+			<p>Lorem insum</p>
+			<button type="button" class="btn" (click)="modalRef.hide()">Submit</button>
+		</div>
+	</ng-template>
+
+	<!-- <app-modal-demo style="position: relative;z-index: 999999999;"></app-modal-demo> -->

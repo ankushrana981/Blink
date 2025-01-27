@@ -1,0 +1,48 @@
+import { NgModule } from '@angular/core';
+import { BrowserModule, provideClientHydration, withEventReplay } from '@angular/platform-browser';
+
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+// import { LoginComponent } from './public/login/login.component';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule } from '@angular/common/http';
+import { CanAuthActivate, CanLoginActivate } from './common/auth.gaurd';
+import { Broadcaster } from './common/broadCaster';
+import { ErrorMessages } from './common/errorMessages';
+import { BsDropdownDirective } from 'ngx-bootstrap/dropdown';
+import { CommonService } from './common/common.service';
+import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
+import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
+import { ToastrModule } from 'ngx-toastr';
+import { NgApexchartsModule } from 'ng-apexcharts';
+
+@NgModule({
+  declarations: [
+    AppComponent,
+  ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    HttpClientModule,
+    LoadingBarHttpClientModule,
+    ToastrModule.forRoot({
+      timeOut: 3000,
+      positionClass: 'toast-top-right',
+      preventDuplicates: true,
+    }),
+    NgApexchartsModule
+  ],
+  providers: [
+    provideClientHydration(withEventReplay()),
+    provideAnimationsAsync('noop'),
+    CommonService,
+    BsDropdownDirective,
+    ErrorMessages,
+    Broadcaster,
+    {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'fill'}}
+  ],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }

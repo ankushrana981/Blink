@@ -1,0 +1,251 @@
+<div class="d-flex flex-wrap chart-form create-task-from position-relative product-modal">
+    <div class="chart-box d-flex flex-wrap w-100">
+        <div class="chart-header w-100 d-flex flex-wrap">
+            <div class="chart-right flex-1 d-flex flex-wrap align-items-center justify-content-between">
+                <h3 class=text-title>Product Setting</h3>
+                <!-- <ng-content></ng-content> -->
+                <a href="javascript:void(0)" icon-close (click)="closeTask()"></a>
+            </div>
+        </div>
+        <div class="w-100 create-task-body">
+            <div class="task-body">
+                <!-- <div malihu-scrollbar class="scrollbar" [scrollbarOptions]="scrollbarOptions"> -->
+                <div class="d-flex flex-wrap ">
+                    <a class="btn-task active" href="javascript:void(0)" (click)="setpOne()">setting</a>
+                    <a class="btn-task" href="javascript:void(0)" (click)="setpTwo()"
+                        [ngClass]="[setp2 ? 'active' : '', setp3 ? 'active' : '']">Vendor</a>
+                    <a class="btn-task" href="javascript:void(0)" (click)="setpThree()"
+                        [ngClass]="{'active': setp3}">modifier</a>
+                </div>
+                <div class="task-content">
+                    <form class="example-form prduct-form">
+                        <div class="" [hidden]="!setp1">
+                            <div class="product-list step-list">
+                                <div class="desc">
+                                    <label class="title">product Name</label>
+                                    <input id="productname" type="text" class="form-control remove-border">
+                                        
+                                </div>
+                                <div class="desc">
+                                    <label class="title">Price</label>
+                                    <input id="productname" type="text" class="form-control" prefix="Rp. " mask="separator" thousandSeparator=".">
+                                </div>
+                            </div>
+                            <div class="product-desc">
+                                <div class="desc-detail">
+                                    <label class="title">Product Description</label>
+                                    <input id="productname" type="text" class="form-control">
+                                </div>
+                                <ul class="desc-list">
+                                    <!-- <li><a><i icon-camera></i></a></li>
+                                    <li class="file-input">
+                                        <input type="file" name="file-input" id="file-input" class="file-input__input">
+                                        <label class="file-input__label" for="file-input"><i icon-product-file></i>choose image</label>
+                                    </li> -->
+                                    <li class="file-input file-extra">
+                                        <input type="file" name="file-input" id="file-input" class="file-input__input">
+                                        <label class="file-input__label" for="file-input">or choose from files<i icon-product-file></i></label>
+                                    </li> 
+                                </ul>
+                            </div>
+                            <div class="uplaod-img">
+                                <div class="file-input">
+                                    <input type="file" name="file-input" id="file-input" class="file-input__input">
+                                    <label class="file-input__label" for="file-input"><i icon-camera></i>OPEN CAMERA</label>
+                                </div>
+                            </div>
+
+                            <div class="details-btn">
+                                <button type="button" (click)="assigntoClick()"
+                                    [ngClass]="assignto ? '' : 'unclick'" class="btn-assign">Details</button>
+                            </div>
+                            <div class="detail-desc" *ngIf="assignto">
+                                <ul class="task-detail mt-2 d-flex flex-row">
+                                    <li>
+                                        <div class="form-group form-task remove-border">
+                                            <ng-select formControlName="task_type" class="w-100" [items]="tasks"
+                                                placeholder="Category" bindLabel="name"
+                                                (change)="chnageTypeValue()" bindValue="name" [searchable]="false"
+                                                [hideSelected]="true">
+                                                <ng-template ng-label-tmp let-item="item" let-clear="clear">
+                                                    <span class="ng-value-label">{{item.name}}</span>
+                                                    <span class="ng-value-icon right" (click)="clear(item);"
+                                                        aria-hidden="true">×</span>
+                                                </ng-template>
+                                                <ng-template ng-option-tmp let-item="item" let-index="index">
+                                                    {{item.name}}
+                                                </ng-template>
+                                            </ng-select>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="form-group form-task remove-border">
+                                            <ng-select formControlName="task_type" class="w-100" [items]="tasks"
+                                                placeholder="brand" bindLabel="name" (change)="chnageTypeValue()"
+                                                bindValue="name" [searchable]="false" [hideSelected]="true">
+                                                <ng-template ng-label-tmp let-item="item" let-clear="clear">
+                                                    <span class="ng-value-label">{{item.name}}</span>
+                                                    <span class="ng-value-icon right" (click)="clear(item);"
+                                                        aria-hidden="true">×</span>
+                                                </ng-template>
+                                                <ng-template ng-option-tmp let-item="item" let-index="index">
+                                                    {{item.name}}
+                                                </ng-template>
+                                            </ng-select>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="form-group form-task remove-border">
+                                            <ng-select formControlName="task_type" class="w-100" [items]="tasks"
+                                                placeholder="Packaging" bindLabel="name"
+                                                (change)="chnageTypeValue()" bindValue="name" [searchable]="false"
+                                                [hideSelected]="true">
+                                                <ng-template ng-label-tmp let-item="item" let-clear="clear">
+                                                    <span class="ng-value-label">{{item.name}}</span>
+                                                    <span class="ng-value-icon right" (click)="clear(item);"
+                                                        aria-hidden="true">×</span>
+                                                </ng-template>
+                                                <ng-template ng-option-tmp let-item="item" let-index="index">
+                                                    {{item.name}}
+                                                </ng-template>
+                                            </ng-select>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="form-group form-task form-border">
+                                            <mat-form-field class="example-full-width mat-input">
+                                                <input formControlName="focus" matInput type="text" placeholder="Packaging Note"
+                                                    value="" autocomplete="off">
+                                            </mat-form-field>
+                                        </div>
+                                    </li>
+                                </ul>
+                                <div class="config-desc">
+                                    <h3 class="sub-title">Cofiguration</h3>
+                                    <ul class="check-list">
+                                        <li class="check-grp"> 
+                                            <input type="checkbox" name="check-examle" id="option5">
+                                            <label for="option5">raw material</label>
+                                        </li>
+                                        <div class="form-group form-task form-border">
+                                            <input id="productname" type="text" class="form-control" placeholder="SLD">
+                                        </div>
+                                        <li class="check-grp"> 
+                                            <input type="checkbox" name="check-examle" id="option6">
+                                            <label for="option6">pos product</label>
+                                        </li>
+                                        <li class="check-grp"> 
+                                            <input type="checkbox" name="check-examle" id="option7">
+                                            <label for="option7">Recipe reduction</label>
+                                        </li>
+                                    </ul>
+                                    <ul class="config-detail">
+                                        <li>
+                                            <div class="form-group form-task remove-border">
+                                                <ng-select formControlName="task_type" class="w-100" [items]="tasks"
+                                                    placeholder="Branch Availability" bindLabel="name"
+                                                    (change)="chnageTypeValue()" bindValue="name"
+                                                    [searchable]="false" [hideSelected]="true">
+                                                    <ng-template ng-label-tmp let-item="item" let-clear="clear">
+                                                        <span class="ng-value-label">{{item.name}}</span>
+                                                        <span class="ng-value-icon right" (click)="clear(item);"
+                                                            aria-hidden="true">×</span>
+                                                    </ng-template>
+                                                    <ng-template ng-option-tmp let-item="item" let-index="index">
+                                                        {{item.name}}
+                                                    </ng-template>
+                                                </ng-select>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="form-group form-task remove-border">
+                                                <ng-select formControlName="task_type" class="w-100" [items]="tasks"
+                                                    placeholder="Print to" bindLabel="name"
+                                                    (change)="chnageTypeValue()" bindValue="name"
+                                                    [searchable]="false" [hideSelected]="true">
+                                                    <ng-template ng-label-tmp let-item="item" let-clear="clear">
+                                                        <span class="ng-value-label">{{item.name}}</span>
+                                                        <span class="ng-value-icon right" (click)="clear(item);"
+                                                            aria-hidden="true">×</span>
+                                                    </ng-template>
+                                                    <ng-template ng-option-tmp let-item="item" let-index="index">
+                                                        {{item.name}}
+                                                    </ng-template>
+                                                </ng-select>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="product-save text-end">
+                                <button class="btn-save disabled" type="button">Save</button>
+                            </div>
+                        </div>
+
+                        <div class="" [hidden]="!setp2">
+                            <div class="product-list">
+                                <div class="desc">
+                                    <!-- <label class="title">Preferred Vendor</label> -->
+                                    <div class="form-group task-details remove-dropdown">
+                                        <ng-select class="w-100" [items]="people" [multiple]="false"
+                                            [hideSelected]="true" [closeOnSelect]="true"
+                                            placeholder="Preferred Vendor" bindLabel="name" bindValue="name">
+                                            <ng-template ng-label-tmp let-item="item" let-clear="clear">
+                                                <span class="ng-value-label">{{item.name}}</span>
+                                                <span class="ng-value-icon right" (click)="clear(item)"
+                                                    aria-hidden="true">×</span>
+                                            </ng-template>
+                                            <ng-template ng-option-tmp let-item="item" let-index="index">
+                                                {{item.name}}
+                                            </ng-template>
+                                        </ng-select>
+                                    </div>
+                                </div>
+                                <div class="desc form-group form-task form-border">
+                                    <!-- <label class="title">Source Price</label>
+                                    <input id="productname" type="text" class="form-control"> -->
+                                    <mat-form-field class="example-full-width mat-input">
+                                        <input formControlName="focus" matInput type="text" placeholder="Source Price"
+                                            value="" autocomplete="off" prefix="Rp. " mask="separator" thousandSeparator=".">
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="product-desc">
+                                <div class="desc-detail">
+                                    <!-- <label class="title">Vendor List</label> -->
+                                    <div class="form-group task-details remove-dropdown">
+                                        <ng-select class="w-100" [items]="Vendor" [multiple]="true"
+                                            [hideSelected]="true" [closeOnSelect]="true"
+                                            placeholder="Vendor List" bindLabel="name" bindValue="name">
+                                            <ng-template ng-label-tmp let-item="item" let-clear="clear">
+                                                <span class="ng-value-label">{{item.name}}</span>
+                                                <span class="ng-value-icon right" (click)="clear(item)"
+                                                    aria-hidden="true">×</span>
+                                            </ng-template>
+                                            <ng-template ng-option-tmp let-item="item" let-index="index">
+                                                {{item.name}}
+                                            </ng-template>
+                                        </ng-select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="product-save text-end">
+                                <button class="btn-save disabled" type="button">Save</button>
+                            </div>
+                        </div>
+
+                        <div class="" [hidden]="!setp3">
+                            <div class="modifier-detail">
+                                <i icon-question></i>
+                                <h2 class="modifier-title">Save Product Settings and go to Modifier Setting Screen</h2>
+                                <a class="modifier-btn">Save Product and go to Modifier</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <!-- </div> -->
+            </div>
+        </div>
+    </div>
+</div>

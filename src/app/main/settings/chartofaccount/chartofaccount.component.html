@@ -1,0 +1,130 @@
+<div class="chart-of-account-wrap setting-wrap">
+	<div class="viewdata-title">
+		<h2>Company Settings</h2>
+	</div>
+	<div class="contentBox">
+		<div class="card viewdata-wrapper">
+			<h3 class="mb-4">Chart of Account</h3>
+			<div class="accountsettingbox">
+				<ul class="accounts-categories customanimate order-animate1"  >
+					<li class="customanimate order-animate2" [ngClass]="selectedFirst ? 'active':''" (click)="isSelected('first')"><a href="javascript:;">Invoice Sales <span></span></a></li>
+					<li class="customanimate order-animate3"><a href="javascript:;">Discount <span></span></a></li>
+					<li class="customanimate order-animate4"><a href="javascript:;">Tax <span></span></a></li>
+					<li class="customanimate order-animate5"><a href="javascript:;">Cost of Goods <span></span></a></li>
+					<li class="customanimate order-animate6"><a href="javascript:;">Inventory <span></span></a></li>
+					<li class="customanimate order-animate7"><a href="javascript:;">Office supplies <span></span></a></li>
+					<li class="customanimate order-animate8"><a href="javascript:;">AssetPurchase <span></span></a></li>
+					<li class="customanimate order-animate9"><a href="javascript:;">Car Expenses <span></span></a></li>
+				</ul>
+				<ul class="accounts-categories sublist stage-line customanimate order-animate1" *ngIf="selectedFirst">
+					<li class="secondStage customanimate order-animate1" [ngClass]="selectedSecond ? 'active':''" (click)="isSelected('second')"><a href="javascript:;">Income <span></span></a></li>
+					<li class="secondStage customanimate order-animate2"><a href="javascript:;">Asset <span></span></a></li>
+					<li class="secondStage customanimate order-animate3"><a href="javascript:;">Expense <span></span></a></li>
+				</ul>
+				<ul class="accounts-categories sub-sublist stage-line customanimate order-animate1" *ngIf="selectedSecond">
+					<li class="customanimate order-animate1" [ngClass]="selectedThird ? 'active':''" (click)="isSelected('third')"><a href="javascript:;">Credit <span></span></a></li>
+					<li class="customanimate order-animate2" [ngClass]="selectedFouth ? 'active':''" (click)="isSelected('fourth')"><a href="javascript:;">Debit <span></span></a></li>
+				</ul>
+				<div class="selectedinfo stage-line customanimate order-animate1" *ngIf="selectedThird">
+					<div class="assigned-title customanimate order-animate1">
+						Assigned <span>#MXT007441</span>
+					</div>
+					<div class="infobox customanimate order-animate2">
+						<div class="dropdown">
+						  <button type="button" class="btn dropdown-toggle" data-toggle="dropdown">
+						   <img src="assets/images/icon-ellipsis-light.svg" alt="">
+						  </button>
+						  <div class="dropdown-menu">
+						    <a class="dropdown-item" href="javascript:;">Option 0</a>
+						    <a class="dropdown-item" href="javascript:;">Option 1</a>
+						    <a class="dropdown-item" href="javascript:;">Option 2</a>
+						  </div>
+						</div>
+						<div class="assigned-info mt-4">
+							<div class="datebox text-end">5.1.2017</div>
+							<div class="row">
+								<div class="col-md-4"></div>
+								<div class="col-md-4">
+									<div class="selected-item float-right text-end">
+										<label>Lorem</label>
+										<span>Ipsumon</span>
+									</div>	
+								</div>
+								<div class="col-md-4">
+									<div class="selected-item float-right text-end">
+										<label>Lorem</label>
+										<span>Ipsumon</span>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-4">
+									<div class="selected-item float-right text-end">
+										<label>Lorem</label>
+										<span>Ipsumon</span>
+									</div>	
+								</div>
+								<div class="col-md-4">
+									<div class="selected-item float-right text-end">
+										<label>Lorem</label>
+										<span>Ipsumon</span>
+									</div>	
+								</div>
+								<div class="col-md-4">
+									<div class="selected-item float-right text-end">
+										<label>Lorem</label>
+										<span>Ipsumon</span>
+									</div>
+								</div>
+							</div>
+						</div>
+						<p>
+							Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quae blanditiis odio non, sunt fugit dicta itaque reprehenderit commodi maiores amet eaque unde dolorem doloremque, delectus, laborum! Repellendus repellat architecto doloribus.
+						</p>
+					</div>
+
+				</div>
+				<div class="selectedinfo stage-line customanimate order-animate1" *ngIf="selectedFouth">
+					<div class="infobox customanimate order-animate2">
+						<h5 class="text-end">Manage Branch</h5>
+						<form>
+							<div class="row">
+								<div class="col-md-12">
+									<div class="form-group">
+						                <mat-form-field class="example-full-width">
+						                    <input matInput placeholder="CODE" name="code">
+						                </mat-form-field>
+						            </div>
+						        </div>
+						        <div class="col-md-12">
+						            <div class="form-group">
+						                <mat-form-field class="example-full-width">
+						                    <input matInput placeholder="TITLE" name="Title">
+						                </mat-form-field>
+						            </div>
+					            </div>
+					            <div class="col-md-12">
+					            	<div class="custom-checkbox mb-3 mt-2">
+							            <label class="checkbox-content">Main Branch
+										  <input type="checkbox" />
+										  <span class="checkmark"></span>
+										</label>
+									</div>
+								</div>
+							</div>
+							<div class="btn-box">
+								<button class="btn close-btn" type="submit"><em class="fa fa-times" aria-hidden="true"></em> Cancel </button>
+								<button class="btn close-btn" type="submit"><em aria-hidden="true" class="fa fa-floppy-o"></em> save </button>
+							</div>
+						</form>						
+					</div>
+				</div>				
+			</div>
+			<div class="btn-box contentbox-outer-btn">
+				<button class="btn close-btn" type="submit"><em aria-hidden="true" class="fa fa-floppy-o"></em> save Changes</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- <app-modal-demo style="position: relative;z-index: 999999999;"></app-modal-demo> -->

@@ -1,0 +1,331 @@
+<div *ngIf="!fileUploadflag">
+	<div class="manufacturing-Wrap" *ngIf="SwitchUi">
+		<div class="viewdata-title">
+			<h2>
+				<img src="assets/images/icon-list.svg" height="25" width="25" alt="" class="mr-2"> Vendors</h2>
+			<div class="pull-right right-top-btns">
+				<a class="btn btn-link" (click)="openFileUpload('open')">
+					<img src="assets/images/upload.svg" height="25" width="25" alt="">
+				</a>
+				<a class="btn btn-link" (click)="openNewEditview()">
+					<img src="assets/images/icon-plus.svg" height="25" width="25" alt="">
+				</a>
+			</div>
+		</div>
+		<div class="contentBox">
+			<div class="leftContent">
+				<div class="card">
+					<div class="table-box viewTable mb-20" (scrolled)="onScrollDown($event)">
+						<table style="width:100%" class="table-hover default-to-custom">
+							<tbody  fxLayout="row wrap" class="list">
+								<tr style="vertical-align:top;" *ngFor="let r of usersList; let i = index" class="x-animated fadeIn d-1 in" fxFlex="100"
+								 fxFlex.lt-sm="200">
+									<td width="64px" class="text-center">
+										<h4 class="rownumber ng-binding">{{i+1}}</h4>
+									</td>
+									<td class="text-left">
+										<b>
+											<span class="ng-binding">{{r.title}}</span>&nbsp;</b>
+										<div class="small help-block line-divider">&nbsp;</div>
+									</td>
+									<td class="text-left">
+										<b>
+											<span class="ng-binding">{{r.contactPerson?.title}}</span>&nbsp;</b>
+										<div class="small help-block line-divider">&nbsp;</div>
+									</td>
+									<td class="text-left">
+										<b>
+											<span class="ng-binding ng-hide" aria-hidden="true">{{r.area?.title}}</span>&nbsp;</b>
+										<div class="small help-block line-divider">&nbsp;</div>
+									</td>
+									<td class="text-end">
+										<div>
+											<span ng-show="vm.isClient" ng-bind="r.region.title || '&nbsp;'" class="ng-binding ng-hide" aria-hidden="true">{{r.region?.title}}</span>&nbsp;</div>
+										<div class="small help-block line-divider">&nbsp;</div>
+									</td>
+									<td class="text-end">
+										<div>
+											<span ng-show="vm.isClient" ng-bind="r.establishmentType.title || '&nbsp;'" class="ng-binding ng-hide" aria-hidden="true">&nbsp;</span>&nbsp;</div>
+										<div class="small help-block line-divider">&nbsp;</div>
+									</td>
+									<td class="text-end">
+										<div>
+											<span ng-show="vm.isClient" ng-bind="r.discount || '&nbsp;'" class="ng-binding ng-hide" aria-hidden="true">&nbsp;</span>&nbsp;</div>
+										<div class="small help-block line-divider">&nbsp;</div>
+									</td>
+									<td class="text-end">
+										<div>
+											<span ng-show="vm.isClient" ng-bind="r.paymentTermDuration + ' days' || '&nbsp;'" class="ng-binding ng-hide" aria-hidden="true"></span>&nbsp;</div>
+										<div class="small help-block line-divider">&nbsp;</div>
+									</td>
+									<td width="100px" class="text-left">
+										<div class="rowactions">
+											<a class="btn btn-link" hov-title="View/Edit" (click)="editItem(r)">
+												<i class="fa fa-pencil"></i>
+											</a>
+
+											<a class="btn btn-link" hov-title="Delete" (click)="deleteItem(r)">
+												<i class="fa fa-remove text-danger"></i>
+											</a>
+
+										</div>
+									</td>
+
+									<!--<td ng-show="vm.isDraftMode"><a class="btn btn-link hover-btn" ng-click="vm.editItem(r)"><i class="fa fa-pencil text-muted"></i></a></td>
+								<td ng-show="vm.isDraftMode"><a class="btn btn-link hover-btn" ng-click="vm.deleteItem(r)"><i class="fa fa-trash text-muted"></i></a></td>-->
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="add-customer-setup-wrap" *ngIf="!SwitchUi">
+	<div class="viewdata-title">
+		<div class="right-top-btns">
+			<a ng-click="vm.isEditorVisible = false" class="btn btn-link pull-right" (click)="closeAddEditView()">
+				<!-- <i class="fa fa-remove fa-2w mr-1"></i> -->
+				<img src="assets/images/icon-close-dark.svg" height="13" width="13" alt="" style="margin-right: 8px">
+
+				<span>Close</span>
+			</a>
+		</div>
+		<h2>
+			<img src="assets/images/icon-edit-dark.svg" height="25" width="25" alt="">
+			Manage
+			<span ng-show="vm.isClient" aria-hidden="false">Vendor</span>
+
+		</h2>
+	</div>
+	<div class="contentBox">
+		<div class="card">
+			<div class="row viewdata-wrapper"> 
+				<div class="col-md-1 tier-menu">
+					<ol class="nav">
+						<li [ngClass]="config.stepOne ? 'active' : ''" id="stepOne" class="customanimate order-animate1">
+							<a>
+								<span>Basic profile</span>
+							</a>
+						</li>
+						<li [ngClass]="config.stepTwo ? 'active' : ''" id="stepTwo" class="customanimate order-animate2">
+							<a>
+								<span>Notes</span>
+							</a>
+						</li>
+						<li [ngClass]="config.stepThree ? 'active' : ''" id="stepThree" class="customanimate order-animate3">
+							<a>
+								<span>Alias Inforamtion</span>
+							</a>
+						</li>
+						<!-- <li [ngClass]="blinktitle3 == 'basicprofile'?'active':''"><a><span>Bank information</span></a></li> -->
+						<li [ngClass]="config.stepFour ? 'active' : ''" id="stepFour" class="customanimate order-animate4">
+							<a>
+								<span>Bank information</span>
+							</a>
+						</li>
+						<!-- <li class=""><a><span>Sales information</span></a></li> -->
+					</ol>
+				</div>
+				<div class="col-sm-10 tier-content comman-form customanimate order-animate2">
+					<form>
+						<div *ngIf="config.stepOne" class="infoBox">
+							<h3 class="mb-30 customanimate order-animate1">Basic profile</h3>
+							<div class="row">
+								<div class="col-md-8 mb-20">
+									<mat-form-field class="example-full-width customanimate order-animate2">
+										<input matInput placeholder="Vendor" name="title" [(ngModel)]="user.title" required>
+									</mat-form-field>
+								</div>
+								<div class="col-md-4 mb-20">
+									<ng-select class="customanimate order-animate3" [clearable]="false" [(ngModel)]="user.contactPerson" placeholder="Contact Person" id="contactPersn" [items]="contactPersn"
+									 bindLabel="title" name="contactperson" (change)="Cpersonselected($event)"></ng-select>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-3 mb-20">
+									<mat-form-field class="example-full-width customanimate order-animate4">
+										<input matInput placeholder="Address line 1" name="addressline1" [(ngModel)]="user.address1">
+									</mat-form-field>
+								</div>
+								<div class="col-md-3 mb-20">
+									<mat-form-field class="example-full-width customanimate order-animate5">
+										<input matInput placeholder="Address line 2" name="addressline2" [(ngModel)]="user.address2">
+									</mat-form-field>
+
+								</div>
+								<div class="col-md-3 mb-20">
+									<mat-form-field class="example-full-width customanimate order-animate6">
+										<input matInput placeholder="city" name="city" [(ngModel)]="user.city">
+									</mat-form-field>
+
+								</div>
+								<div class="col-md-3 mb-20">
+									<mat-form-field class="example-full-width customanimate order-animate7">
+										<input matInput placeholder="state" name="state" [(ngModel)]="user.state">
+									</mat-form-field>
+
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="col-md-3 mb-20">								
+									<ng-select class="customanimate order-animate8" [clearable]="false" [(ngModel)]="user.country" placeholder="Country" id="countryName" [items]="countryrecords" bindLabel="title" name="country"
+									 (change)="countrySelected($event)">
+									</ng-select>
+								</div>
+								<div class="col-md-3 mb-20">
+									<mat-form-field class="example-full-width customanimate order-animate9">
+										<input matInput placeholder="Zipcode" name="zipcode" [(ngModel)]="user.zip">
+									</mat-form-field>
+
+								</div>
+								<div class="col-md-3 mb-20">
+									<mat-form-field class="example-full-width customanimate order-animate10">
+										<input matInput placeholder="Email" name="email" [(ngModel)]="user.email">
+									</mat-form-field>
+								</div>
+								<div class="col-md-3 mb-20">
+									<mat-form-field class="example-full-width customanimate order-animate11">
+										<input matInput placeholder="Website" name="website" [(ngModel)]="user.website">
+									</mat-form-field>
+								</div>
+							</div>
+						</div>
+						<div *ngIf="config.stepTwo" class="infoBox">
+							<h3 class="mb-30 customanimate order-animate1">Notes</h3>
+							<div class="row">
+								<div class="col-md-6">
+									<mat-form-field class="example-full-width customanimate order-animate2">
+										<input matInput placeholder="Internal Notes" name="internalnotes" [(ngModel)]="user.internalNotes">
+									</mat-form-field>
+								</div>
+								<div class="col-md-6">
+									<mat-form-field class="example-full-width customanimate order-animate3">
+										<input matInput placeholder="External Notes" name="externalnotes" [(ngModel)]="user.externalNotes">
+									</mat-form-field>
+
+								</div>
+							</div>
+						</div>
+						<div *ngIf="config.stepThree" class="infoBox">
+							<h3 class="mb-30 customanimate order-animate1">Alias Information</h3>
+							<div class="row">
+								<div class="col-md-4 customanimate order-animate2">
+									<label>Has Akias?</label>
+									<div class="custom-control custom-checkbox">
+										<input type="checkbox" class="custom-control-input" id="defaultChecked2" name="check" (change)="changedCheck($event)" [(ngModel)]="user.hasAlias">
+										<label class="custom-control-label" for="defaultChecked2"></label>
+									</div>
+								</div>
+								<div class="col-md-4 customanimate order-animate3">
+									<mat-form-field class="example-full-width">
+										<input matInput placeholder="Alias Name" name="aliasname" [(ngModel)]="user.aliasName">
+									</mat-form-field>
+								</div>
+							</div>
+						</div>
+						<div *ngIf="config.stepFour" class="infoBox">
+							<h3 class="mb-30 customanimate order-animate1">Bank information</h3>
+							<div class="form-wrapper">
+								<div class="row">
+									<div class="col-md-4 mb-20">
+										<mat-form-field class="example-full-width customanimate order-animate2">
+											<input matInput placeholder="Bank Account Name" name="bankaccountname" [(ngModel)]="user.bankAccountName">
+										</mat-form-field>
+									</div>
+									<div class="col-md-4 mb-20">
+										<mat-form-field class="example-full-width customanimate order-animate2">
+											<input matInput placeholder="Bank Account Number" name="bankaccountnumber" [(ngModel)]="user.bankAccountNumber">
+										</mat-form-field>
+									</div>
+								</div>
+								<div>
+									<div class="row">
+										<div class="col-md-3 mb-20">
+											<mat-form-field class="example-full-width customanimate order-animate3">
+												<input matInput placeholder="Bank Name" name="bankname" [(ngModel)]="user.bankName">
+											</mat-form-field>
+										</div>
+										<div class="col-md-3 mb-20">
+											<mat-form-field class="example-full-width customanimate order-animate4">
+												<input matInput placeholder="Bank Address" name="bankaddress" [(ngModel)]="user.bankAddress">
+											</mat-form-field>
+										</div>
+										<div class="col-md-3 mb-20">
+											<mat-form-field class="example-full-width customanimate order-animate5">
+												<input matInput placeholder="Transfer Protocol" name="transferprotocaol" [(ngModel)]="user.bankTransferProtocol">
+											</mat-form-field>
+										</div>
+										<div class="col-md-3 mb-20">
+											<mat-form-field class="example-full-width customanimate order-animate6">
+												<input matInput placeholder="Transfer Code" name="transfercode" [(ngModel)]="user.bankTransferCode">
+											</mat-form-field>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-4 mb-20">
+											<div class="form-group customanimate order-animate7">												
+												<ng-select [clearable]="false" [(ngModel)]="user.sourceCurrency" placeholder="Currenices" [items]="currencies" bindLabel="title" name="currencies"
+												 id="currencies" (change)="currencySelected($event)">
+												</ng-select>
+											</div>
+										</div>
+									</div>
+
+								</div>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+
+	</div>
+	<div class="button-container float-right">
+		<button [disabled]="!user.title" class="btn btn-defult bg-none" (click)="createVendor()">
+			<i class="fa fa-floppy-o mr-1"></i>Save changes </button>
+	</div>
+
+</div>
+
+<div class="uploadfile" *ngIf="fileUploadflag">
+	<a href="javaScript:;" (click)="openFileUpload('close')" class="back-btn mb-10">
+		<i class="fa fa-angle-left mr-1"></i>Back</a>
+	<div class="page-title">
+		<h2>Client Import</h2>
+	</div>
+	<div class="row">
+		<div class="col-md-6 mb-25">
+			<div class="card">
+				<div class="card-body py-3">
+					<div class="subheader file-upload">
+						<h4 class="mb-4 mt-1">Select csv file to upload</h4>
+						<div class="row">
+							<div class="col-md-12 mb-20">
+								<div class="custom-file">
+									<input type="file" name="file" class="custom-file-input" id="fileInput" (change)="onFileChange($event)">
+									<label class="custom-file-label" for="fileInput">Select file to upload</label>
+								</div>
+								<button class="btn btn-white" (click)="UploadFile()">
+									<i class="fa fa-cloud-upload mr-1"></i> Upload file</button>
+							</div>
+
+						</div>
+						<div class="ng-binding">
+							{{fileName}}
+						</div>
+						<div class="float-right">
+							<a href="javaScript:;" (click)="downloadReport()" class="mr-1">Download</a>Template to import records.</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div *ngIf="showErr" class="alert alert-danger mt-10 col-md-6" role="alert">
+		Failed to import one or more records
+	</div>
+</div>
+
+<!-- <app-modal-demo style="position: relative;z-index: 999999999;"></app-modal-demo> -->

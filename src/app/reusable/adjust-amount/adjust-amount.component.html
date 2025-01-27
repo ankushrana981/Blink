@@ -1,0 +1,40 @@
+<div class="d-flex flex-wrap chart-form create-task-from position-relative">
+    <div class="chart-box d-flex flex-wrap w-100">
+        <div class="chart-header w-100 d-flex flex-wrap">
+            <div class="chart-right flex-1 d-flex flex-wrap align-items-center justify-content-between">
+                <h3 class=text-title>Adjust Amount</h3>
+                <!-- <ng-content></ng-content> -->
+                <a href="javascript:void(0)" icon-close (click)="closeTask()"></a>
+            </div>
+        </div>
+        <div class="w-100 create-task-body">
+            <div class="task-body">
+                <div class="task-content">
+                    <form class="example-form prduct-form">
+                        <div class="form-group">
+                            <ng-select formControlName="task_type" class="w-100" [items]="tasks"
+                                placeholder="Choose Customer" bindLabel="name"
+                                bindValue="name" [searchable]="false"
+                                [hideSelected]="true">
+                                <ng-template ng-label-tmp let-item="item" let-clear="clear">
+                                    <span class="ng-value-label">{{item.name}}</span>
+                                    <span class="ng-value-icon right" (click)="clear(item);"
+                                        aria-hidden="true">×</span>
+                                </ng-template>
+                                <ng-template ng-option-tmp let-item="item" let-index="index">
+                                    {{item.name}}
+                                </ng-template>
+                            </ng-select>
+                        </div>
+                        <div class="message">
+                            This was not the original source of funds. Confirm credit assign to customer?
+                        </div>
+                        <div class="common-btn">
+                            <a href="#">Confirm</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

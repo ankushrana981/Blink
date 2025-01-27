@@ -1,0 +1,240 @@
+<div *ngIf="!fileUploadflag">
+<div class="productSetup-Wrap" *ngIf="SwitchUi" >
+	<div class="viewdata-title">
+		<h2><img src="assets/images/icon-list.svg"  height="25" width="25" alt="" class="mr-2"> Products</h2>
+		<div class="pull-right right-top-btns">
+			<a class="btn btn-link" (click)="openFileUpload('open')"><img class="ng-tns-c7-2" alt="" height="25" src="assets/images/upload.svg" width="25"></a>
+			<a class="btn btn-link" (click)="openNewEditview('open')"><img class="ng-tns-c7-2" alt="" height="25" src="assets/images/icon-plus.svg" width="25"></a>
+		</div>
+	</div>
+	<div class="contentBox">
+		<div class="leftContent">
+			<div class="card">
+				<div class="table-box viewTable mb-20" data-infinite-scroll
+				 debounce  (scrolled)="onScrollDown($event)" >
+					<table style="width:100%;" class="table-hover default-to-custom">
+			            <tbody  [@fadeIn]="productList?.length"  fxLayout="row wrap" >
+			                <tr style="vertical-align:top;" *ngFor="let r of productList; let i = index" class="x-animated fadeIn d-1 in" fxFlex="100" fxFlex.lt-sm="200" >
+			                    <td width="64px" class="text-center"><h4 class="rownumber ng-binding">{{i+1}}</h4></td>
+			                    <td class="text-left">
+			                        <b><span class="ng-binding">{{r?.title}}</span>&nbsp;</b>
+			                        <div class="small help-block line-divider">&nbsp;</div>
+			                    </td>
+			                    <td class="text-left">
+			                         <b><span class="ng-binding">{{r.brand?.title}}</span>&nbsp;</b>
+			                         <div class="small help-block line-divider ng-binding">&nbsp;</div>
+			                    </td>
+			                    <td class="text-end">
+			                        <b><span class="ng-binding">Rp {{r?.price}}</span>&nbsp;</b>
+			                        <div class="small help-block line-divider">&nbsp;</div>
+								</td>
+								<td class="text-end">
+										<b><span class="ng-binding">{{r?.vendor?.title}}</span>&nbsp;</b>
+										<div class="small help-block line-divider">&nbsp;</div>
+									</td>
+			                    <td width="100px" class="text-left">
+			                        <div class="rowactions">
+			                            <a class="btn btn-link" hov-title="View/Edit" (click)="editProduct(r)"><i class="fa fa-pencil"></i></a>			                            
+			                            <a class="btn btn-link" hov-title="Delete" (click)="deleteProduct(r)"><i class="fa fa-remove text-danger"></i></a>
+			                        </div>
+			                    </td>
+			                </tr>
+			            </tbody>
+			        </table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+
+<div class="add-customer-setup-wrap" *ngIf="!SwitchUi">
+	<div class="viewdata-title">
+		<div class="right-top-btns">
+			<a ng-click="vm.isEditorVisible = false" class="btn btn-link pull-right" (click)="openNewEditview('close')">
+				<!-- <i class="fa fa-remove fa-2w mr-1"></i> -->
+				<img src="assets/images/icon-close-dark.svg"  height="13" width="13" alt="" style="margin-right: 8px">
+
+				<span>Close</span>
+			</a>
+		</div>
+		<h2>
+				<img src="assets/images/icon-edit-dark.svg"  height="25" width="25" alt="">
+			Manage
+			<span ng-show="vm.isClient" aria-hidden="false">Product</span>
+
+		</h2>
+	</div>
+	<div class="contentBox">
+		<div class="card">
+			<div class="row viewdata-wrapper">
+				<div class="col-md-1 tier-menu">
+					<ol class="nav">
+						<li [ngClass]="config.stepOne ? 'active' : ''" id = "stepOne" class="customanimate order-animate1">
+							<a>
+								<span>Product basics</span>
+							</a>
+						</li>
+						<li [ngClass]="config.stepTwo ? 'active' : ''"  id = "stepTwo" class="customanimate order-animate2">
+							<a>
+								<span>Product details</span>
+							</a>
+						</li>
+						<li [ngClass]="config.stepThree ? 'active' : ''" id = "stepThree" class="customanimate order-animate3">
+							<a>
+								<span>Vendor details</span>
+							</a>
+						</li>
+						<!-- <li [ngClass]="blinktitle3 == 'basicprofile'?'active':''"><a><span>Bank information</span></a></li> -->
+						<!-- <li [ngClass]="config.stepFour ? 'active' : ''" (click)="toggle('stepFour')">
+							<a>
+								<span>Bank information</span>
+							</a>
+						</li> -->
+						<!-- <li class=""><a><span>Sales information</span></a></li> -->
+					</ol>
+				</div>
+				<div class="col-sm-10 tier-content comman-form customanimate order-animate2">
+					<form>
+						<div *ngIf="config.stepOne" class="infoBox">
+							<h3 class="customanimate order-animate1">Product Basic</h3>
+							<div class="row">
+								<div class="col-md-3">
+									<mat-form-field class="example-full-width customanimate order-animate2">
+										<input matInput placeholder="Title" name="title" [(ngModel)]="user.title" required>
+									</mat-form-field>
+								</div>
+								<div class="col-md-3">
+									<mat-form-field class="example-full-width customanimate order-animate3">
+										<input matInput placeholder="Price" name="price" [(ngModel)]="user.price" required>
+									</mat-form-field>
+								</div>
+								<div class="col-md-3">
+									<!-- <mat-form-field class="example-full-width">
+										<input matInput placeholder="Unit of measure" name="unitofmeasure" [(ngModel)]="user.Unitofmeasure">
+									</mat-form-field> -->
+									<!-- <label class="gray-label select-label">Unit of measure </label> -->
+										<ng-select class="customanimate order-animate4" [clearable]="false" [(ngModel)]="user.unitofMeasure" placeholder="Unit of measure" id="measure" [items]="unitOfmeasurerecords" bindLabel="title" name="measure"
+										 (change)="caterogySelected($event)">
+										</ng-select>
+								</div>
+								
+							</div>
+
+						</div>
+						<div *ngIf="config.stepTwo" class="infoBox">
+							<h3 class="customanimate order-animate1">Product details</h3>
+							<div class="row">
+								<div class="col-md-12 mb-20">
+									<mat-form-field class="example-full-width customanimate order-animate2">
+										<input matInput placeholder="Description" name="description" [(ngModel)]="user.description">
+									</mat-form-field>
+								</div>
+
+							</div>
+							<div class="row">
+									<div class="col-md-3 mb-20">
+										<ng-select class="customanimate order-animate3" [clearable]="false" placeholder="Caterogy" [(ngModel)]="user.productCategory" id="caterogy" [items]="categoriesrecords" bindLabel="title" name="caterogy"
+										 (change)="caterogySelected($event)">
+										</ng-select>
+									</div>
+									<div class="col-md-3 mb-20">
+										<ng-select class="customanimate order-animate4" [clearable]="false"  placeholder="Brand" [(ngModel)]="user.brand" id="brand" [items]="brandrecords" bindLabel="title" name="brand"
+										 (change)="caterogySelected($event)">
+										</ng-select>
+									</div>
+							</div>
+							<div class="row">
+									<div class="col-md-3 mb-20">
+								       <ng-select class="customanimate order-animate5" [clearable]="false" placeholder="Packaging Type"  [(ngModel)]="user.packageType" id="packaging" [items]="packagingTypeRecords" bindLabel="dropdownString" name="packaging"
+										 (change)="caterogySelected($event)">
+										</ng-select>
+									</div>
+									<div class="col-md-3 mb-20">
+											<mat-form-field class="example-full-width customanimate order-animate6">
+												<input matInput placeholder="Packaging Details" name="packagingdetails" [(ngModel)]="user.packagingDetails">
+											</mat-form-field>
+										</div>
+							</div>
+						</div>
+						<div *ngIf="config.stepThree" class="infoBox">
+							<h3 class="customanimate order-animate1">Vendor Details</h3>
+							<div class="row">
+									<div class="col-md-4 mb-20">
+											<!-- <label class="gray-label select-label">Default Vendor</label> -->
+											<ng-select class="customanimate order-animate2" [clearable]="false" placeholder="Default Vendor" [(ngModel)]="user.vendor" id="vendor" [items]="defaultVendorRecords" bindLabel="title" name="vendor"
+											 (change)="caterogySelected($event)">
+											</ng-select>
+									</div>
+									<div class="col-md-4 mb-20">
+										<mat-form-field class="example-full-width customanimate order-animate3">
+											<input matInput placeholder="Source Price" name="sourceprice" [(ngModel)]="user.sourcePrice" (keydown)="AllowNumbers($event)">
+										</mat-form-field>
+									</div>
+	
+								</div>
+							<div class="row">
+								<div class="col-md-4 mb-20 customanimate order-animate4">
+									<label>IS COMPONENT ONLY?</label>
+                                    <div class="custom-control custom-checkbox">
+                                      <input type="checkbox" class="custom-control-input" id="defaultChecked2" name="check" (change)="changedCheck($event)" [(ngModel)]="user.isComponentOnly">
+										<label class="custom-control-label" for="defaultChecked2"></label>
+									</div>
+								</div>
+								<div class="col-md-4 mb-20">
+									<mat-form-field class="example-full-width customanimate order-animate5">
+										<input matInput placeholder="Component Code" name="componetcode" [(ngModel)]="user.componentCode">
+									</mat-form-field>
+								</div>
+
+							</div>
+						</div>
+
+					</form>
+				</div>
+			</div>
+		</div>
+
+	</div>
+	<div class="button-container float-right">
+		<button [disabled]="!user.title || !user.price" class="btn btn-defult bg-none" (click)="createProduct()">
+			<i class="fa fa-floppy-o mr-1"></i>Save changes </button>
+
+	</div>
+
+</div>
+<div class="uploadfile" *ngIf="fileUploadflag">
+		<a href="javaScript:;" (click)="openFileUpload('close')" class="back-btn mb-10"><i class="fa fa-angle-left mr-1"></i>Back</a>
+		<div class="page-title">
+				<h2>Product Import</h2>
+		</div>
+	<div class="row">
+	<div class="col-md-6 mb-25">
+	<div class="card">
+		<div class="card-body py-3">
+				<div class="subheader file-upload">
+					<h4 class="mb-4 mt-1">Select csv file to upload</h4>
+					<div class="row">
+						<div class="col-md-12 mb-20">
+							<div class="custom-file">
+								<input type="file"  name="file" class="custom-file-input" id="fileInput"  (change)="onFileChange($event)">
+								<label class="custom-file-label" for="inputGroupFile04">Select file to upload</label>
+							</div>
+							<button class="btn btn-white ml-2" (click)="UploadFile()"><i class="fa fa-cloud-upload mr-1"></i> Upload file</button>
+						</div>
+					</div>
+					<div class="ng-binding">
+	                    {{fileName}}
+	                </div>
+				   <div class="float-right"><a href="javaScript:;" (click)="downloadReport()" class="mr-1">Download</a>Template to import records.</div> 
+				</div>
+				</div>
+			</div>
+	</div>
+	   
+	</div>
+	<div *ngIf="showErr" class="alert alert-danger mt-10 col-md-6" role="alert">
+		Failed to import one or more records <a href="javaScript:;" (click)="downloadedFailedfiles()" ><i class="fa fa-download"></i>downloaded failed records</a>
+	  </div>
+	</div>
+	<!-- <app-modal-demo style="position: relative;z-index: 999999999;"></app-modal-demo> -->

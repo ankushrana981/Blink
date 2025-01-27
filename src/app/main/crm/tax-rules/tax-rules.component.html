@@ -1,0 +1,137 @@
+<div class="crm-Wrap" [ngClass]="icon1?'active':''">
+   <div class="viewdata-title">
+      <h2>
+            <img src="assets/images/icon-list.svg" height="25" width="25" alt="" class="mr-2"> Tax rules
+      </h2>
+   </div>
+   <div class="contentBox">
+      <div class="leftContent">
+         <div class="card">
+            <div class="table-box viewTable comman-table"
+               style="height:650px;overflow-y: scroll;">
+               <table style="width:100%" class="table-hover default-to-custom tax-rules-table">
+                  <thead>
+                     <tr>
+                        <th>CLIENT</th>
+                        <th width="20%">CATEGORY</th>
+                        <th width="20%">BRAND</th>
+                        <th width="20%">PRODUCT</th>
+                        <th width="6%">TAX VALUE	</th>
+                        <th width="70px">&nbsp;</th>
+                        <th width="70px" style="text-align: center"><!-- <i class="fa fa-plus"  ></i> -->
+                           <button class="btn btn-link" (click)="changeIc('dots')"><i class="fa fa-plus"></i></button>
+                        </th>
+                     </tr>
+                  </thead>
+                  <tbody >
+                     <tr class="animated bounceInUp" *ngFor="let i of taxrecords; index as j" >
+                        <td>{{i.businessPartner?.title}}</td>
+                        <td>{{i.productCategory?.title}}</td>
+                        <td>{{i.brand?.title}}</td>
+                        <td>{{i.product?.title}}</td>
+                        <td *ngIf="i.isPercent == false">${{i.taxValue}}</td>
+                        <td *ngIf="i.isPercent == true">{{i.taxValue}}%</td>
+                        <td><a class="btn btn-link hover-btn" (click)="Edittaxdetails(i)"><i class="fa fa-pencil"></i></a></td>
+                        <td><a class="btn btn-link hover-btn" (click)="Deletetaxrulesdetails(i)"><i class="fa fa-remove"></i></a></td>
+                        <!-- <td width="100px" class="text-left">
+                           <div class="rowactions">
+                              <a class="btn btn-link" hov-title="View/Edit" (click)="Edittaxdetails(i)">
+                              <i class="fa fa-pencil"></i>
+                              </a>
+                              <a class="btn btn-link" hov-title="Delete" (click)="Deletetaxrulesdetails(i)" >
+                              <i class="fa fa-remove text-danger"></i>
+                              </a>
+                           </div>
+                        </td> -->
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div>
+      </div>
+      <div  class="rightSidebar-wrap rightSidebar-wrap-right-0 rightSide-data-penal comman-sidebar">
+         <div class="data-penal-header">
+            <h3>Manage Task Rule</h3>
+         </div>
+         <div class="data-penal-body">
+            <form>
+               <div class="row">
+                  <div class="col-12">
+                     <div class="form-group">
+                        
+                        <ng-select [clearable]="false" placeholder="Client" [items]="clientrecords" bindLabel="title" [(ngModel)]="user.businessPartner"
+                        name="businessPartner" id="businessPartner" autocomplete="off" id="taxname" (change)="recordSelected($event)">
+                        </ng-select>
+                     </div>
+                  </div>
+               </div>
+               <div class="row">
+                  <div class="col-12">
+                     <div class="form-group">
+                        
+                        <ng-select [clearable]="false" placeholder="Category" [items]="Categoriesrecords" bindLabel="title" [(ngModel)]="user.productCategory"
+                        name="productCategory" id="productCategory" autocomplete="off" (change)="selectedCategory($event)" >
+                        </ng-select>
+                     </div>
+                  </div>
+               </div>
+               <div class="row">
+                  <div class="col-12">
+                     <div class="form-group">
+                        
+                        <ng-select [clearable]="false" placeholder="Brand"  [items]="taxbrandrecords" bindLabel="title" [(ngModel)]="user.brand"
+                        name="brand" id="brand" autocomplete="off" (change)="selectedBrand($event)"
+                        >
+                        </ng-select>
+                     </div>
+                  </div>
+               </div>
+               <div class="row">
+                  <div class="col-12">
+                     <div class="form-group">
+                        
+                        <ng-select [clearable]="false" placeholder="Produtcs" [items]="taxproductrecords" bindLabel="title" [(ngModel)]="user.product"
+                        name="product" id="product" autocomplete="off" (change)="recordSelected($event)"
+                        >
+                        </ng-select>
+                     </div>
+                  </div>
+               </div>
+               <div class="row">
+                  <div class="col-12">
+                     <div class="form-group">
+                        <div class="custom-control custom-checkbox">
+                           <input type="checkbox" class="custom-control-input" id="defaultChecked2" name="isPercent" (change)="changedCheck($event)" [(ngModel)]="user.isPercent">
+                           <label class="custom-control-label" for="defaultChecked2">Consider value as % <small class="text-italic">( default: $ )</small></label>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="row">
+                  <div class="col-12">
+                     <div class="form-group">
+                        <mat-form-field class="example-full-width">
+                           <input matInput placeholder="Tax value" value="" name="taxValue" (keydown)="AllowNumbers($event)" [(ngModel)]="user.taxValue" required>
+                        </mat-form-field>
+                     </div>
+                  </div>
+               </div>
+            </form>
+         </div>
+         <div class="data-penal-footer">
+            <div class="row">
+               <div class="col-12">
+                  <button class="btn close-btn" type="submit" (click)="changeIc('arrow')" >
+                  <i class="fa fa-remove mr-1" aria-hidden="true"></i> Cancel</button>
+                  <button class="btn close-btn" [disabled]="!user.taxValue || !user.businessPartner" type="submit" (click)="createTax(user)">
+                  <i class="fa fa-floppy-o" aria-hidden="true" ></i> save</button>
+               </div>
+               <div class="col-6">
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+
+<!-- <app-modal-demo style="position: relative;z-index: 999999999;"></app-modal-demo> -->

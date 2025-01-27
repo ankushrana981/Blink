@@ -1,0 +1,525 @@
+<form class="d-flex flex-wrap chart-form position-relative">
+    <aside class="chart-aside">
+        <div class="chart-header w-100 d-flex flex-wrap">
+            <div class="chart-aside small-close d-flex flex-wrap align-items-center justify-content-between" (window:resize)="onResize991()" [ngClass]="{'': responsive}">
+                <ng-container *ngIf="!responsive" (window:resize)="onResize991()">
+                    <div class="seft-details d-flex flex-column">
+                        <span class="user-pic">
+                            <img src="assets/images/user-1.png" alt="user pic">
+                        </span>
+                        <h3>Welcome back, <strong>Tony</strong></h3>
+                        <p>wed, 5th may, 2017</p>
+                    </div>
+                    <a href="javascript:void(0)" icon-bar></a>
+                </ng-container>
+                <a href="javascript:void(0)" icon-minimize (click)="minimizeChat()"></a>
+                <a href="javascript:void(0)" icon-close (click)="closeChat()"></a>
+            </div>
+        </div>
+        <div class="chart-inner">
+            <div class="stream-block d-flex flex-column align-items-end">
+                <h5 class="mb-0">Chat Stream</h5>
+                <a href="javascript:void(0)" (click)="viewClick()">Go to
+                    <ng-container *ngIf="!chatview">
+                        User View
+                    </ng-container>
+                    <ng-container *ngIf="chatview">
+                        Chat Stream
+                    </ng-container>
+                </a>
+            </div>
+            alihu-scrollbar 
+            <!-- [scrollbarOptions]="scrollbarOptions" -->
+            <div mclass="scrollbar" >
+                <ul class="chat-ul" [ngClass]="chatview ? 'chat-stream' : 'user-view'">
+                    <li class="chat-li d-flex flex-wrap" (click)="chatOpen()">
+                        <div>
+                            <span class="user-img user-activation active"
+                                style="background-image: url(assets/images/user-1.png);"></span>
+                        </div>
+                        <div class="flex-1">
+                            <div class="w-100 d-flex flex-wrap justify-content-between align-items-center user-header">
+                                <h4 class="chart-name flex-1">John Doe</h4>
+                                <div class="d-flex flex-wrap align-items-center">
+                                    <time class="chart-date">May 12, 2018</time>
+                                    <time class="chart-time">4:41P</time>
+                                </div>
+                            </div>
+
+                            <div class="chat-message flex-1">
+                                <p>When our power of choice is untrammelled and when nothing
+                                    prevents our being able to do what we like best, every pleasure
+                                    is to be welcomed</p>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="chat-li d-flex flex-wrap" (click)="chatOpen()">
+                        <div>
+                            <span class="user-img user-activation active"
+                                style="background-image: url(assets/images/user-1.png);">
+                            </span>
+                        </div>
+                        <div class="flex-1">
+                            <div class="w-100 d-flex flex-wrap justify-content-between align-items-center user-header">
+                                <h4 class="chart-name flex-1">Bart Stathes</h4>
+                                <div class="d-flex flex-wrap align-items-center">
+                                    <time class="chart-date">May 15, 2018</time>
+                                    <time class="chart-time">9:46P</time>
+                                </div>
+                            </div>
+
+                            <div class="chat-message flex-1">
+                                <p>Long t officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates
+                                    repudiandae</p>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="chat-li d-flex flex-wrap" (click)="chatOpen()">
+                        <div>
+                            <span class="user-img user-activation active"
+                                style="background-image: url(assets/images/user-1.png);"></span>
+                        </div>
+                        <div class="flex-1">
+                            <div class="w-100 d-flex flex-wrap justify-content-between align-items-center user-header">
+                                <h4 class="chart-name flex-1 text-warning">Management Group</h4>
+                                <div class="d-flex flex-wrap align-items-center">
+                                    <time class="chart-date">May 16, 2018</time>
+                                    <time class="chart-time">12:41P</time>
+                                </div>
+                            </div>
+                            <div class="chat-message chart-img flex-1">
+                                <img src="assets/images/chart-img.jpg" alt="Chart Image" *ngIf="!chatview">
+                                <p>Suprele ehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur,
+                                    vel
+                                    illum qui dolorem eum fugiat quo voluptas.</p>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="chat-li d-flex flex-wrap" (click)="chatOpen()">
+                        <div>
+                            <span class="user-img user-activation active"
+                                style="background-image: url(assets/images/user-1.png);"></span>
+                        </div>
+                        <div class="flex-1">
+                            <div class="w-100 d-flex flex-wrap justify-content-between align-items-center user-header">
+                                <h4 class="chart-name flex-1">John Doe</h4>
+                                <div class="d-flex flex-wrap align-items-center">
+                                    <time class="chart-date">May 12, 2018</time>
+                                    <time class="chart-time">4:41P</time>
+                                </div>
+                            </div>
+
+                            <div class="chat-message flex-1">
+                                <p>When our power of choice is untrammelled and when nothing
+                                    prevents our being able to do what we like best, every pleasure
+                                    is to be welcomed</p>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="chat-li d-flex flex-wrap" (click)="chatOpen()">
+                        <div>
+                            <span class="user-img user-activation active"
+                                style="background-image: url(assets/images/user-1.png);">
+                            </span>
+                        </div>
+                        <div class="flex-1">
+                            <div class="w-100 d-flex flex-wrap justify-content-between align-items-center user-header">
+                                <h4 class="chart-name flex-1">Bart Stathes</h4>
+                                <div class="d-flex flex-wrap align-items-center">
+                                    <time class="chart-date">May 15, 2018</time>
+                                    <time class="chart-time">9:46P</time>
+                                </div>
+                            </div>
+
+                            <div class="chat-message flex-1">
+                                <p>Long t officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates
+                                    repudiandae</p>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="chat-li d-flex flex-wrap" (click)="chatOpen()">
+                        <div>
+                            <span class="user-img user-activation active"
+                                style="background-image: url(assets/images/user-1.png);"></span>
+                        </div>
+                        <div class="flex-1">
+                            <div class="w-100 d-flex flex-wrap justify-content-between align-items-center user-header">
+                                <h4 class="chart-name flex-1">John Doe</h4>
+                                <div class="d-flex flex-wrap align-items-center">
+                                    <time class="chart-date">May 12, 2018</time>
+                                    <time class="chart-time">4:41P</time>
+                                </div>
+                            </div>
+
+                            <div class="chat-message flex-1">
+                                <p>When our power of choice is untrammelled and when nothing
+                                    prevents our being able to do what we like best, every pleasure
+                                    is to be welcomed</p>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="chat-li d-flex flex-wrap" (click)="chatOpen()">
+                        <div>
+                            <span class="user-img user-activation active"
+                                style="background-image: url(assets/images/user-1.png);">
+                            </span>
+                        </div>
+                        <div class="flex-1">
+                            <div class="w-100 d-flex flex-wrap justify-content-between align-items-center user-header">
+                                <h4 class="chart-name flex-1">Bart Stathes</h4>
+                                <div class="d-flex flex-wrap align-items-center">
+                                    <time class="chart-date">May 15, 2018</time>
+                                    <time class="chart-time">9:46P</time>
+                                </div>
+                            </div>
+                            <div class="chat-message flex-1">
+                                <p>Long t officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates
+                                    repudiandae</p>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="chat-more d-flex flex-wrap justify-content-between"
+                (clickOutside)="dropdownClose(2); dropdownClose(3); dropdownClose(4); dropdownClose(5); dropdownClose(9);searchClose2();dropdownClose(10)">
+                <ul class="dropdown-atteched left center dropdown-more d-flex flex-wrap justify-content-center"
+                    [ngClass]="dropdownActive2 ? 'show' : ''">
+                    <li class="d-flex flex-wrap new-option">
+                        <a (click)="dropdownClick(3);getWidth();$event.stopPropagation()"
+                            class="d-flex flex-wrap justify-content-end align-items-center" href="javascript:void(0)">
+                            New
+                        </a>
+                        <div class="option-more" [ngClass]="[dropdownActive3 ? 'show' : '',optionWidth ? 'open' : '']"
+                            [ngStyle]="{'width': optionWidth + 'px'}">
+                            <div class="option-block" #optionBlock>
+                                <a href="javascript:void(0)"
+                                    (click)="dropdownClose(2); dropdownClose(3);dropdownClick(4);$event.stopPropagation()"
+                                    class="option-link">Chat</a>
+                                <a href="javascript:void(0)"
+                                    (click)="dropdownClose(2); dropdownClose(3);dropdownClick(5);$event.stopPropagation()"
+                                    class="option-link">Group</a>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                <ul class="dropdown-atteched left center chat-dropdown dropdown-more d-flex flex-wrap align-content-start justify-content-center"
+                    [ngClass]="dropdownActive4 ? 'show' : ''">
+                    <li class="d-flex flex-wrap w-100 position-relative new-chat-modal">
+                        <h5 class="new-chat">New Chat</h5>
+                        <ng-select class="w-100" [items]="people" [closeOnSelect]="false" placeholder="Select User"
+                            bindLabel="name" bindValue="name">
+                            <ng-template ng-label-tmp let-item="item" let-clear="clear">
+                                <span class="ng-value-label">{{item.name}}</span>
+                                <span class="ng-value-icon right" (click)="clear(item);stop($event)"
+                                    aria-hidden="true">×</span>
+                            </ng-template>
+                            <ng-template ng-option-tmp let-item="item" let-index="index">
+                                <span class="img">
+                                    <img [src]="item.avatar" alt="" />
+                                </span>{{item.name}}
+                            </ng-template>
+                        </ng-select>
+                        <div class="option-more open w-auto">
+                            <a href="javascript:void(0)" class="option-link ml-0">Chat</a>
+                        </div>
+                    </li>
+                </ul>
+                <ul class="dropdown-atteched left center group-dropdown dropdown-more d-flex flex-wrap align-content-start justify-content-center"
+                    [ngClass]="dropdownActive5 ? 'show' : ''">
+                    <li class="d-flex flex-wrap w-100">
+                        <h5 class="new-chat">group Chat</h5>
+                        <mat-form-field class="example-full-width mat-input">
+                            <input matInput placeholder="group name" value="" autocomplete="off">
+                        </mat-form-field>
+                        <!-- <ng-select class="w-100" [items]="group" placeholder="group name" bindLabel="name"
+                                bindValue="name">
+                            </ng-select> -->
+                    </li>
+                    <li class="d-flex flex-wrap w-100 group-chat-li">
+                        <ng-select class="w-100 mb-auto" [items]="people" [multiple]="true" [closeOnSelect]="false"
+                            placeholder="participants" bindLabel="name" bindValue="name">
+                            <ng-template ng-label-tmp let-item="item" let-clear="clear">
+                                <!-- <span class="img">
+                                        <img height="15" width="15" [src]="item.avatar" />
+                                    </span> -->
+                                <span class="ng-value-label">{{item.name}}</span>
+                                <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+                            </ng-template>
+                            <ng-template ng-option-tmp let-item="item" let-index="index">
+                                <span class="img">
+                                    <img height="15" width="15" [src]="item.avatar" />
+                                </span>
+                                {{item.name}}
+                            </ng-template>
+                        </ng-select>
+                        <div class="option-more open w-auto ml-auto mt-3 align-self-end">
+                            <a href="javascript:void(0)" class="option-link ml-0">Create Group</a>
+                        </div>
+                    </li>
+                </ul>
+                <ul class="dropdown-atteched left center arrow-center dropdown-more dropdown-filter d-flex flex-wrap justify-content-center"
+                    [ngClass]="[dropdownActive9 ? 'show' : '', dropdownActive10 ? 'show addSearch' : '', searchopen2 ? 'addSearch' : '']">
+                    <li class="d-flex flex-column align-items-center w-100 new-option">
+                        <a href="javascript:void(0)">Date</a>
+                    </li>
+                    <li class="d-flex flex-column align-items-center w-100 new-option"
+                        [ngClass]="[!searchopen2 ? '' : 'addSearch', dropdownActive10 ? 'addSearch' : '']">
+                        <a href="javascript:void(0)">Time</a>
+                    </li>
+                    <li class="d-flex flex-column align-items-center w-100 new-option"
+                        [hidden]="!searchopen2 && !dropdownActive10"
+                        [ngClass]="[searchopen2 ? 'zero-li last-li addSearch' : 'last-li',dropdownActive10 ? 'zero-li addSearch' : '']">
+                        <a href="javascript:void(0)" (click)="searchClick2();stop($event)">search</a>
+                    </li>
+                    <li class="d-flex flex-column align-items-center w-100 new-option position-relative addSearch-li"
+                        [hidden]="searchopen2 || dropdownActive10"
+                        [ngClass]="[searchopen2 ? 'show' : '', dropdownActive10 ? 'show lastzero-li' : '']">
+                        <!-- new-animation -->
+                        <div class="chart-search ">
+                            <input type="search" placeholder="Search" />
+                        </div>
+                        <!-- new-animation -->
+                        <div class="chart-search-button ">
+                            <button type="submit" icon-search></button>
+                        </div>
+                        <!-- new-animation -->
+                        <div class="chart-clear-button ">
+                            <button type="button" icon-close></button>
+                        </div>
+                    </li>
+                </ul>
+
+                <a href="javascript:void(0)" icon-pluse-round
+                    (click)="dropdownClick(2); dropdownClose(4); dropdownClose(5);dropdownClose(9);"></a>
+                <a href="javascript:void(0)"
+                    (click)="dropdownClick(9);dropdownClose(2); dropdownClose(4); dropdownClose(5);searchClose2();dropdownClose(10)"
+                    icon-filter></a>
+                <a href="javascript:void(0)"
+                    (click)="dropdownClick(10);dropdownClose(2); dropdownClose(4); dropdownClose(5);dropdownClose(9)"
+                    icon-search></a>
+            </div>
+        </div>
+    </aside>
+    <div class="chart-box d-flex flex-wrap" [ngClass]="{'mobile-chat': !responsive, 'open': chatopen}"
+        (window:resize)="onResize991()">
+        <div class="chart-header w-100 d-flex flex-wrap">
+            <div class="chart-right flex-1 d-flex flex-wrap align-items-center justify-content-between">
+                <div class="d-flex flex-wrap align-items-center">
+                    <a href="javascript:void(0)" icon-down (click)="chatClose()"></a>
+                    <div class="user-details d-flex flex-column">
+                        <h3 class="chat-name mb-0">John Doe</h3>
+                        <p class="last-seen pb-0">Last seen 12 hours ago</p>
+                    </div>
+                </div>
+                <div class="d-flex flex-wrap" (clickOutside)="dropdownClose(7)">
+                    <a href="javascript:void(0)" icon-minimize (click)="minimizeChat()"></a>
+                    <div class="position-relative d-flex flex-wrap"
+                        (clickOutside)="dropdownClose(6);dropdownClose(8);searchClose()">
+                        <a href="javascript:void(0)" icon-filter
+                            (click)="dropdownClick(6);dropdownClose(7);searchClose()"></a>
+                        <ul class="dropdown-atteched right top dropdown-more dropdown-filter d-flex flex-wrap justify-content-center"
+                            [ngClass]="[dropdownActive6 ? 'show' : '', dropdownActive7 ? 'show addSearch' : '', searchopen ? 'addSearch' : '']">
+                            <li class="d-flex flex-column align-items-center w-100 new-option">
+                                <a href="javascript:void(0)">Date</a>
+                            </li>
+                            <li class="d-flex flex-column align-items-center w-100 new-option"
+                                [ngClass]="[!searchopen ? '' : 'addSearch', dropdownActive7 ? 'addSearch' : '']">
+                                <a href="javascript:void(0)">Time</a>
+                            </li>
+                            <li class="d-flex flex-column align-items-center w-100 new-option"
+                                [hidden]="!searchopen && !dropdownActive7"
+                                [ngClass]="[searchopen ? 'zero-li last-li addSearch' : 'last-li',dropdownActive7 ? 'zero-li addSearch' : '']">
+                                <a href="javascript:void(0)" (click)="searchClick();stop($event)">search</a>
+                            </li>
+                            <li class="d-flex flex-column align-items-center w-100 new-option addSearch-li"
+                                [hidden]="searchopen || dropdownActive7"
+                                [ngClass]="[!searchopen ? 'zero-li' : 'show last-li', dropdownActive7 ? 'show lastzero-li' : '']">
+                                <div class="chart-search">
+                                    <input type="search" placeholder="Search" />
+                                </div>
+                                <div class="chart-search-button">
+                                    <button type="submit" icon-search></button>
+                                </div>
+                                <div class="chart-clear-button">
+                                    <button type="button" icon-close></button>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="position-relative d-flex flex-wrap">
+                        <a href="javascript:void(0)" icon-search (click)="dropdownClick(7);dropdownClose(6);"></a>
+                    </div>
+                    <a href="javascript:void(0)" icon-close (click)="closeChat()"></a>
+                </div>
+            </div>
+        </div>
+        <!-- [scrollbarOptions]="scrollbarOptions" -->
+        <div malihu-scrollbar class="scrollbar scrollbar2" >
+            <ul class="chat-ul d-flex flex-column w-100">
+                <li *ngFor="let chatMessage of chatMessages; let i = index" [ngClass]="(i%2 == 0) ? 'chat-li d-flex flex-wrap' : 'chat-li d-flex flex-wrap ml-auto'">
+                    <time *ngIf="(i == 0)" class="chat-date w-100 mb-8">May 12, 2018</time>
+                    <span *ngIf="(i%2 == 0)" class="user-img user-activation active"
+                        style="background-image: url(assets/images/user-1.png);"></span>
+                    <div [ngClass]="(i%2 == 0) ? 'chat-message flex-1' : 'chat-message chat-self flex-1'">
+                        <p>{{ chatMessage.msg }}</p>
+                        <time class="chat-time">13:10</time>
+                    </div>
+                </li>
+
+                <!-- <li class="chat-li d-flex flex-wrap">
+                    <time class="chat-date w-100 mb-8">May 12, 2018</time>
+                    <span class="user-img user-activation active"
+                        style="background-image: url(assets/images/user-1.png);"></span>
+                    <div class="chat-message flex-1">
+                        <p>When our power of choice is untrammelled and when nothing
+                            prevents our being able to do what we like best, every pleasure
+                            is to be welcomed</p>
+                        <time class="chat-time">13:10</time>
+                    </div>
+                </li>
+                <li class="chat-li d-flex flex-wrap ml-auto">
+                    <div class="chat-message chat-self flex-1">
+                        <p>Nor again is there anyone who loves or pursues or desires to
+                            obtain pain of itself</p>
+                        <time class="chat-time">15:30</time>
+                    </div>
+                </li> -->
+
+                <!-- <li class="chat-li d-flex flex-wrap">
+                    <time class="chat-date w-100 mb-8">May 12, 2018</time>
+                    <span class="user-img user-activation active"
+                        style="background-image: url(assets/images/user-1.png);"></span>
+                    <div class="chat-message flex-1">
+                        <p>When our power of choice is untrammelled and when nothing
+                            prevents our being able to do what we like best, every pleasure
+                            is to be welcomed</p>
+                        <time class="chat-time">13:10</time>
+                    </div>
+                </li>
+                <li class="chat-li d-flex flex-wrap ml-auto">
+                    <div class="chat-message chat-self flex-1">
+                        <p>Nor again is there anyone who loves or pursues or desires to
+                            obtain pain of itself</p>
+                        <time class="chat-time">15:30</time>
+                    </div>
+                </li>
+                <li class="chat-li d-flex flex-wrap">
+                    <span class="user-img user-activation active"
+                        style="background-image: url(assets/images/user-1.png);"></span>
+                    <div class="chat-message flex-1">
+                        <p>Nor again is there anyone who loves or pursues or desires to
+                            obtain pain of itself</p>
+                        <time class="chat-time">15:30</time>
+                    </div>
+                </li>
+                <li class="chat-li d-flex flex-wrap ml-auto">
+                    <div class="chat-message chat-self chart-img flex-1">
+                        <a href="assets/images/chart-img.jpg" data-fancybox="gallery">
+                            <img src="assets/images/chart-img.jpg" alt="Chart Image">
+                        </a>
+                        <p>Suprele ehenderit qui in ea voluptate velit esse</p>
+                        <time class="chat-time">15:30</time>
+                    </div>
+                </li>
+                <li class="chat-li d-flex flex-wrap ml-auto">
+                    <div class="chat-message chat-self chart-document flex-1">
+                        <p class="d-flex flex-wrap">
+                            <span class="file-img rounded-circle" icon-file></span>
+                            <span class="flex-1 d-flex flex-column">
+                                <span class="file-name">File-R2-2018.pdf</span>
+                                <span class="file-size">1,3 MB</span>
+                            </span>
+                        </p>
+                        <time class="chat-time">15:30</time>
+                    </div>
+                </li>
+                <li class="chat-li d-flex flex-wrap">
+                    <span class="user-img user-activation active"
+                        style="background-image: url(assets/images/user-1.png);"></span>
+                    <div class="chat-message chart-img flex-1">
+                        <a href="assets/images/chart-img2.jpg" data-fancybox="gallery">
+                            <img src="assets/images/chart-img2.jpg" alt="Chart Image">
+                        </a>
+                        <p>Suprele ehenderit qui in ea voluptate velit esse</p>
+                        <time class="chat-time">15:30</time>
+                    </div>
+                </li>
+                <li class="chat-li d-flex flex-wrap">
+                    <time class="chat-date w-100 mb-8">May 12, 2018</time>
+                    <span class="user-img user-activation active"
+                        style="background-image: url(assets/images/user-1.png);"></span>
+                    <div class="chat-message flex-1">
+                        <p>When our power of choice is untrammelled and when nothing
+                            prevents our being able to do what we like best, every pleasure
+                            is to be welcomed</p>
+                        <time class="chat-time">13:10</time>
+                    </div>
+                </li>
+                <li class="chat-li d-flex flex-wrap ml-auto">
+                    <div class="chat-message chat-self flex-1">
+                        <p>Nor again is there anyone who loves or pursues or desires to
+                            obtain pain of itself</p>
+                        <time class="chat-time">15:30</time>
+                    </div>
+                </li>
+                <li class="chat-li d-flex flex-wrap">
+                    <span class="user-img user-activation active"
+                        style="background-image: url(assets/images/user-1.png);"></span>
+                    <div class="chat-message flex-1">
+                        <p>Nor again is there anyone who loves or pursues or desires to
+                            obtain pain of itself</p>
+                        <time class="chat-time">15:30</time>
+                    </div>
+                </li> -->
+            </ul>
+        </div>
+        <div class="message-box d-flex flex-wrap w-100">
+            <div class="flex-1 message-type">
+                <input type="text" #message class="message" placeholder="Write a reply...">
+            </div>
+            <div class="d-flex flex-wrap align-items-center">
+                <div class="dropdown-main">
+                    <ul class="dropdown-atteched" [ngClass]="dropdownActive1 ? 'show' : ''">
+                        <li class="new-option">
+                            <a class="d-flex flex-wrap justify-content-end align-items-center"
+                                href="javascript:void(0)">
+                                <span class="text">camera</span> <i icon-camera-line></i>
+                            </a>
+                        </li>
+                        <li class="new-option">
+                            <a class="d-flex flex-wrap justify-content-end align-items-center"
+                                href="javascript:void(0)">
+                                <label class="d-flex flex-wrap justify-content-end align-items-center mb-0">
+                                    <input type="file" class="input-file">
+                                    <span class="text">files</span> <i icon-file-line></i>
+                                </label>
+                            </a>
+                        </li>
+                        <li class="new-option">
+                            <a class="d-flex flex-wrap justify-content-end align-items-center"
+                                href="javascript:void(0)">
+                                <span class="text">documents</span> <i icon-document-line></i>
+                            </a>
+                        </li>
+                        <li class="new-option">
+                            <a class="d-flex flex-wrap justify-content-end align-items-center"
+                                href="javascript:void(0)">
+                                <span class="text">location</span> <i icon-location-line></i>
+                            </a>
+                        </li>
+                        <li class="new-option">
+                            <a class="d-flex flex-wrap justify-content-end align-items-center"
+                                href="javascript:void(0)">
+                                <span class="text">contact</span> <i icon-contact-line></i>
+                            </a>
+                        </li>
+                    </ul>
+                    <a href="javascript:void(0)" (clickOutside)="dropdownClose(1)" (click)="dropdownClick(1)"
+                        icon-atteched class="icon-atteched"></a>
+                </div>
+                <!-- (click)="sendMessage(message.value)" -->
+                <button type="button" icon-send class="icon-send" (click)="sendMessage()"></button>
+            </div>
+        </div>
+    </div>
+</form>

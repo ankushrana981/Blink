@@ -1,0 +1,1056 @@
+<div id="main-div">
+    <div class="d-flex flex-wrap chart-form create-task-from position-relative"
+        [ngClass]="{'modal-backdrop-for-popup fade in show': this.confirmationBoxOpen}">
+        <div class="chart-box d-flex flex-wrap w-100" [ngClass]="{'active-task': subListTask}">
+            <div class="chart-header w-100 d-flex flex-wrap">
+                <div class="chart-right flex-1 d-flex flex-wrap align-items-center justify-content-between">
+                    <h3 class=text-title>{{isEditTask ? "Edit Task" : "Task Entry"}}</h3>
+                    <!-- <ng-content></ng-content> -->
+                    <a href="javascript:void(0)" icon-close (click)="closeTask()"></a>
+                </div>
+            </div>
+            <div class="w-100 create-task-body">
+                <div class="task-body">
+                    <!-- <div malihu-scrollbar class="scrollbar" [scrollbarOptions]="scrollbarOptions"> -->
+                    <div class="d-flex flex-wrap ">
+                        <a class="btn-task active" href="javascript:void(0)" (click)="setpOne()">Details</a>
+
+                        <a *ngIf="subListTask == 'General'" class="btn-task" href="javascript:void(0)"
+                            (click)="setpTwo();tabletask = true"
+                            [ngClass]="[setp2 ? 'active' : '', setp3 ? 'active' : '']">Subtask(s)</a>
+
+                        <a class="btn-task" href="javascript:void(0)" (click)="setpThree()"
+                            [ngClass]="{'active': setp3}">Conditions</a>
+                    </div>
+                    <div class="task-content">
+                        <form class="example-form" [formGroup]="addForm" (ngSubmit)="submitAddForm()" #formDir="ngForm"
+                            novalidate #taskform>
+                            <div class="" [hidden]="!setp1">
+                                <div class="step-block d-flex flex-wrap">
+                                    <ul class="task-details d-flex flex-column">
+                                        <li (clickOutside)="createdDateClose()">
+                                            <div class="form-group form-task">
+                                                <!-- <input id="createdDate" type="text" class="form-control" bsDatepicker
+                                                [bsConfig]="bsConfig" floating-label="Created Date" /> -->
+                                                <mat-form-field class="example-full-width mat-input"
+                                                    (click)="createdDateClick()">
+                                                    <input formControlName="dateOfEntry" matInput type="text"
+                                                        placeholder="Created Date" value="" autocomplete="off" readonly>
+                                                </mat-form-field>
+                                            </div>
+                                        </li>
+                                        <li (clickOutside)="dueDateClose()">
+                                            <div class="form-group form-task">
+                                                <!-- <input id="due" type="text" class="form-control" bsDatepicker bsDatepicker
+                                                [bsConfig]="bsConfig" floating-label="Due" /> -->
+                                                <mat-form-field class="example-full-width mat-input"
+                                                    (click)="dueDateClick()">
+                                                    <input formControlName="dueDate" matInput type="text"
+                                                        placeholder="Due" value="" autocomplete="off" readonly>
+                                                </mat-form-field>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="form-divider"></div>
+                                        </li>
+                                        <li>
+                                            <!-- <div class="form-group form-task">
+                                            <input id="taskType" type="text" floating-label="Task type" class="form-control" />
+                                        </div> -->
+                                            <!--<div class="form-group form-task remove-border" [ngStyle]="{'pointer-events': taskDataObj?.id > 0 ? 'none' : '' }">
+                                            <ng-select formControlName="type" class="w-100" [items]="tasks"
+                                                       placeholder="Task type" bindLabel="title"
+                                                       (change)="chnageTypeValue($event)" bindValue="id" [searchable]="false"
+                                                       [hideSelected]="true">
+                                                <ng-template ng-label-tmp let-item="item" let-clear="clear">
+                                                    <span class="ng-value-label">{{item.title}}</span>
+                                                    <span class="ng-value-icon right" (click)="clear(item);stop($event)"
+                                                          aria-hidden="true">×</span>
+                                                </ng-template>
+                                                <ng-template ng-option-tmp let-item="item" let-index="index">
+                                                    {{item.title}}
+                                                </ng-template>
+                                            </ng-select>
+                                        </div>-->
+                                        </li>
+                                        <li *ngIf="subListTask == ''" [ngClass]="{'d-none': subListTask == ''}">
+                                            <div class="form-group form-task form-border">
+
+                                                <mat-form-field class="example-full-width mat-input">
+                                                    <input formControlName="board" matInput placeholder="Board" value=""
+                                                        autocomplete="off">
+                                                </mat-form-field>
+                                            </div>
+                                        </li>
+                                        <li *ngIf="subListTask == 'General'">
+                                            <div class="form-group form-task form-border">
+                                                <!--<mat-form-field class="example-full-width mat-input"
+                                                            *ngIf="subListTask == 'General'">
+                                                <input formControlName="board" matInput placeholder="Board" value=""
+                                                       autocomplete="off">
+                                            </mat-form-field>-->
+                                                <!--<ng-select [clearable]="false" [items]="boardList | async"
+                                                       bindLabel="title" [(ngModel)]="Board" [loading]="companiesLoading"
+                                                       [notFoundText]="notFoundText" name="businessPartner" id="businessPartner"
+                                                       autocomplete="off" [typeahead]="MainSearchdataSourceClient">
+                                            </ng-select>-->
+                                                <!--[isOpen]="isOpenBoard"-->
+                                                <!--(keydown.enter)="boardEnterClick($event);$event.stopPropagation();"-->
+                                                <ng-select formControlName="board" [hideSelected]="true"
+                                                    [searchable]="true" class="w-100" [items]="boardList"
+                                                    placeholder="Board" [isOpen]="isOpenBoard" bindLabel="board"
+                                                    bindValue="board" (change)="SearchStringChange($event)"
+                                                    (search)="isOpenBoard = true;SearchString($event)"
+                                                    (keydown.enter)="boardEnterClick($event);"
+                                                    (blur)="isOpenBoard = false" [selectOnTab]="true">
+                                                    <ng-template ng-label-tmp let-item="item" let-clear="clear">
+                                                        <span class="ng-value-label">{{item.board}}</span>
+                                                        <span class="ng-value-icon right"
+                                                            (click)="clear(item);stop($event)"
+                                                            aria-hidden="true">×</span>
+                                                    </ng-template>
+                                                    <ng-template ng-option-tmp let-item="item" let-index="index">
+                                                        {{item.board}}
+                                                    </ng-template>
+                                                </ng-select>
+
+
+
+                                                <!-- <div class="form-group">
+                                                <ng-select [(ngModel)]="selectedSubListTaskVal"
+                                                    [ngModelOptions]="{standalone: true}" class="w-100"
+                                                    [items]="subTaskList" [placeholder]="subListTask" bindLabel="title"
+                                                    bindValue="title" [searchable]="false">
+                                                    <ng-template ng-label-tmp let-item="item" let-clear="clear">
+                                                        <span class="ng-value-label">{{item.title}}</span>
+                                                        <span class="ng-value-icon right"
+                                                            (click)="clear(item);stop($event)"
+                                                            aria-hidden="true">×</span>
+                                                    </ng-template>
+                                                    <ng-template ng-option-tmp let-item="item" let-index="index">
+                                                        {{item.title}}
+                                                    </ng-template>
+                                                </ng-select>
+                                            </div> -->
+                                                <!-- <input readonly *ngIf="subListTask == 'General Task'" value="Development"
+                                            id="board" type="text" floating-label="Board" class="form-control" /> -->
+                                            </div>
+                                        </li>
+                                        <li *ngIf="subListTask != '' && subListTask != 'General'">
+
+                                            <div class="form-group form-task form-border">
+                                                <!-- <div class="form-group">
+                                                <ng-select [(ngModel)]="selectedSubListTaskVal"
+                                                    [ngModelOptions]="{standalone: true}" class="w-100"
+                                                    [items]="subTaskList" [placeholder]="subListTask" bindLabel="title"
+                                                    bindValue="title" [searchable]="false">
+                                                    <ng-template ng-label-tmp let-item="item" let-clear="clear">
+                                                        <span class="ng-value-label">{{item.title}}</span>
+                                                        <span class="ng-value-icon right"
+                                                            (click)="clear(item);stop($event)"
+                                                            aria-hidden="true">×</span>
+                                                    </ng-template>
+                                                    <ng-template ng-option-tmp let-item="item" let-index="index">
+                                                        {{item.title}}
+                                                    </ng-template>
+                                                </ng-select>
+                                            </div> -->
+                                                <mat-form-field class="example-full-width mat-input">
+                                                    <input formControlName="selectedSubListTaskVal" matInput
+                                                        [placeholder]="subListTask"
+                                                        [(ngModel)]="selectedSubListTaskVal.title"
+                                                        (click)="openRightSubPart()" readonly autocomplete="off">
+                                                </mat-form-field>
+                                                <!-- <input [value]="selectedSubListTaskVal" id="board" type="text"
+                                                floating-label="Board" class="form-control" /> -->
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="form-divider"></div>
+                                        </li>
+                                        <li *ngIf="subListTask != 'General'">
+                                            <!-- <div class="form-group form-task">
+                                            <input id="title" type="text" floating-label="Title" class="form-control" />
+                                        </div> -->
+                                            <div class="form-group form-task remove-border">
+                                                <ng-select (change)="onChangepresetActivity($event)"
+                                                    formControlName="title" class="w-100" [items]="titles"
+                                                    placeholder="Title" bindLabel="title" bindValue="id"
+                                                    [searchable]="false" [hideSelected]="true">
+                                                    <ng-template ng-label-tmp let-item="item" let-clear="clear">
+                                                        <span class="ng-value-label">{{item.title}}</span>
+                                                        <span class="ng-value-icon right"
+                                                            (click)="clear(item);stop($event)"
+                                                            aria-hidden="true">×</span>
+                                                    </ng-template>
+                                                    <ng-template ng-option-tmp let-item="item" let-index="index">
+                                                        {{item.title}}
+                                                    </ng-template>
+                                                </ng-select>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="form-group form-task form-border">
+                                                <!-- <input formControlName="focus" id="focus" type="text" floating-label="Focus"
+                                                class="form-control" autocomplete="off" /> -->
+                                                <mat-form-field class="example-full-width mat-input">
+                                                    <input formControlName="subTitle" name="subTitle" id="subTitle"
+                                                        matInput type="text" placeholder="Focus" value=""
+                                                        autocomplete="off">
+                                                </mat-form-field>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="form-group form-task form-border">
+                                                <!-- <input formControlName="notes" id="notes" type="text" floating-label="Notes"
+                                                class="form-control" autocomplete="off" /> -->
+                                                <mat-form-field class="example-full-width mat-input">
+                                                    <input formControlName="note" matInput type="text"
+                                                        placeholder="Notes" value="" autocomplete="off">
+                                                </mat-form-field>
+                                            </div>
+                                        </li>
+                                        <li *ngIf="subListTask != 'General' && accessLevel > 2">
+                                            <div class="form-group form-task remove-border"
+                                                [ngStyle]="{'pointer-events': taskDataObj?.id > 0 ? 'none' : '' }">
+                                                <ng-select (change)="changeAssignTo($event)" formControlName="user"
+                                                    class="w-100" [items]="users" placeholder="Assign To"
+                                                    [closeOnSelect]="true" bindLabel="title" bindValue="id"
+                                                    [searchable]="true" [hideSelected]="true">
+                                                    <ng-template ng-label-tmp let-item="item" let-clear="clear">
+                                                        <span class="ng-value-label">{{item.title}}</span>
+                                                        <span class="ng-value-icon right"
+                                                            (click)="clear(item);stop($event)"
+                                                            aria-hidden="true">×</span>
+                                                    </ng-template>
+                                                    <ng-template ng-option-tmp let-item="item" let-index="index">
+                                                        {{item.title}}
+                                                    </ng-template>
+                                                </ng-select>
+                                            </div>
+                                        </li>
+
+                                    </ul>
+                                    <ul *ngIf="subListTask != '' && subListTask != 'General' && showSubTask == true"
+                                        class="product-details d-flex flex-column">
+                                        <li>
+                                            <div class="form-group">
+                                                <ng-select (change)="onSubTaskChange($event)"
+                                                    [(ngModel)]="selectedSubListTaskVal.title" [hideSelected]="true"
+                                                    [ngModelOptions]="{standalone: true}" class="w-100"
+                                                    [items]="subTaskList" [placeholder]="subListTask" bindLabel="title"
+                                                    bindValue="id" [searchable]="false" [isOpen]="true">
+                                                    <ng-template ng-label-tmp let-item="item" let-clear="clear">
+                                                        <span class="ng-value-label">{{item.title}}</span>
+                                                        <span class="ng-value-icon right"
+                                                            (click)="clear(item);stop($event)"
+                                                            aria-hidden="true">×</span>
+                                                    </ng-template>
+                                                    <ng-template ng-option-tmp let-item="item" let-index="index">
+                                                        {{item.title}}
+                                                    </ng-template>
+                                                </ng-select>
+                                            </div>
+                                        </li>
+                                    </ul>
+
+
+
+
+                                    <div *ngIf="createedDate" class="custom-picker move theme-white theme-green">
+                                        <bs-datepicker-inline
+                                            (bsValueChange)="createdDateValueChange($event,bsConfigCreated_Date)"
+                                            [bsConfig]="bsConfigCreated_Date" [bsValue]="created_Date">
+                                            <a icon-close (click)="createdDateClose()"></a>
+                                            <a icon-close (click)="createdDateClose()"></a>
+                                        </bs-datepicker-inline>
+                                    </div>
+                                    <div *ngIf="dueDate" class="custom-picker move theme-white theme-green">
+                                        <bs-datepicker-inline (bsValueChange)="dueDateValueChange($event,bsConfig)"
+                                            [bsConfig]="bsConfig" [bsValue]="due_date">
+                                            <a icon-close (click)="dueDateClose()"></a>
+                                        </bs-datepicker-inline>
+                                    </div>
+
+
+                                </div>
+
+                                <div class="task-btn-grp d-flex flex-wrap align-items-start justify-content-between">
+                                    <div class="task-w-50">
+                                        <button type="button" *ngIf="subListTask == 'General' && accessLevel > 2"
+                                            (click)="assigntoClick();scroll(target)"
+                                            [ngClass]="assignto ? '' : 'unclick'" class="btn-assign">
+                                            Assign to
+                                        </button>
+                                        <ul *ngIf="assignto == true && subListTask == 'General' && accessLevel > 2"
+                                            class="task-details mt-2 d-flex flex-column remove-dropdown">
+                                            <li>
+                                                <div class="form-group">
+                                                    <ng-select class="w-100" [items]="users" [multiple]="true"
+                                                        [hideSelected]="true" [closeOnSelect]="true"
+                                                        placeholder="Assign to" formControlName="associatedUserIds"
+                                                        bindLabel="title" bindValue="id">
+                                                        <ng-template ng-label-tmp let-item="item" let-clear="clear">
+                                                            <!-- <span class="img">
+                                <img height="15" width="15" [src]="item.avatar" />
+                            </span> -->
+                                                            <span class="ng-value-label">{{item.title}}</span>
+                                                            <span class="ng-value-icon right" (click)="clear(item)"
+                                                                aria-hidden="true">×</span>
+                                                        </ng-template>
+                                                        <ng-template ng-option-tmp let-item="item" let-index="index">
+                                                            {{item.title}}
+                                                        </ng-template>
+                                                    </ng-select>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                        <div #target></div>
+                                    </div>
+                                    <button type="submit" class="btn-save"
+                                        [ngClass]="(addForm.valid && isSaveButtonDisabled == false) ? '' : 'disabled'">
+                                        Save
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="" [hidden]="!setp2">
+                                <div [hidden]="!tabletask">
+                                    <div class="create-table-respo">
+                                        <table class="table-expent">
+                                            <thead>
+                                                <tr>
+                                                    <th class="table-subtasks">Subtasks</th>
+                                                    <th class="table-assigned">Assigned to</th>
+                                                    <th class="table-status">Status</th>
+                                                    <th class="table-due">Due Date</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngFor="let k of taskDataObj?.subTaskList; index as p"
+                                                    [ngClass]="(delSubShowId == k.id) ? 'active' : ''">
+                                                    <td>{{k.title}}</td>
+                                                    <td>
+                                                        <span
+                                                            *ngFor="let subuser of k.assignedToIdsIdTitle; index as q">
+                                                            {{subuser?.title}}
+                                                            <br />
+                                                        </span>
+                                                        <!--{{k.assignedToUser?.title}}-->
+                                                    </td>
+                                                    <td *ngIf="k.status == 1">
+                                                        <div class="d-flex flex-column align-items-center ">
+                                                            <span class="status-label status-add">Added</span>
+                                                            <div class="d-flex flex-wrap status-progressbar">
+                                                                <span class="progress-span active"></span>
+                                                                <span class="progress-span"></span>
+                                                                <span class="progress-span"></span>
+                                                                <span class="progress-span"></span>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td *ngIf="k.status == 2">
+                                                        <div class="d-flex flex-column align-items-center ">
+                                                            <span class="status-label status-progress">
+                                                                In
+                                                                Progress
+                                                            </span>
+                                                            <div class="d-flex flex-wrap status-progressbar">
+                                                                <span class="progress-span active"></span>
+                                                                <span class="progress-span active"></span>
+                                                                <span class="progress-span"></span>
+                                                                <span class="progress-span"></span>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td *ngIf="k.status == 3">
+                                                        <div class="d-flex flex-column align-items-center ">
+                                                            <span class="status-label status-query">Query</span>
+                                                            <div class="d-flex flex-wrap status-progressbar">
+                                                                <span class="progress-span active"></span>
+                                                                <span class="progress-span active"></span>
+                                                                <span class="progress-span active"></span>
+                                                                <span class="progress-span"></span>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td *ngIf="k.status == 4">
+                                                        <div class="d-flex flex-column align-items-center ">
+                                                            <span class="status-label status-completed">Completed</span>
+                                                            <div class="d-flex flex-wrap status-progressbar">
+                                                                <span class="progress-span active"></span>
+                                                                <span class="progress-span active"></span>
+                                                                <span class="progress-span active"></span>
+                                                                <span class="progress-span active"></span>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="position-relative table-action">
+                                                            <span class="blanck">
+                                                                {{k.dueDate | date: 'mediumDate'}}
+                                                            </span>
+                                                            <div class="d-flex flex-wrap table-option">
+                                                                <a class="icon-task" href="javascript:void(0)"
+                                                                    icon-pencil (click)="editSubTask(k)"></a>
+                                                                <!-- <a class="icon-task" href="javascript:void(0)"
+                                                                icon-cross></a> -->
+                                                                <div (clickOutside)="subDeleteDropdownClose()"
+                                                                    class="btn-group"
+                                                                    [ngClass]="(delSubShowId == k.id) ? 'active' : ''">
+                                                                    <a *ngIf="delSubShowId != k.id" class="icon-task"
+                                                                        href="javascript:void(0)"
+                                                                        (click)="subDeleteDropdownClick(k.id);$event.stopPropagation()"
+                                                                        icon-cross></a>
+                                                                    <a *ngIf="delSubShowId == k.id" class="icon-task"
+                                                                        href="javascript:void(0)"
+                                                                        (click)="subDeleteDropdownClose();$event.stopPropagation()"
+                                                                        icon-cross></a>
+                                                                    <ul id="dropdown-basic"
+                                                                        class="dropdown-table dark top right"
+                                                                        [ngClass]="(delSubShowId == k.id) ? 'show' : ''">
+                                                                        <li
+                                                                            class="modal-body static text-center modal-revert w-100 new-option">
+                                                                            <p class="modal-name animated-item">
+                                                                                Delete ?
+                                                                            </p>
+                                                                            <div
+                                                                                class="d-flex flex-wrap justify-content-between animated-item">
+                                                                                <button type="button"
+                                                                                    class="btn btn-default btn-sm"
+                                                                                    (click)="subDeleteDropdownClose();$event.stopPropagation()">
+                                                                                    No
+                                                                                </button>
+                                                                                <button type="button"
+                                                                                    class="btn btn-primary btn-sm"
+                                                                                    (click)="subDeleteDropdownClose();deleteSubTask(k);$event.stopPropagation()">
+                                                                                    Yes
+                                                                                </button>
+                                                                            </div>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                                <a class="icon-task" href="javascript:void(0)"
+                                                                    icon-checked></a>
+                                                            </div>
+                                                        </div>
+
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="d-flex flex-wrap add-task-group">
+                                        <a class="d-flex flex-wrap add-task align-items-center"
+                                            href="javascript:void(0)" (click)="createTaskClick()">
+                                            Add a new task <i class="icon-task" href="javascript:void(0)"
+                                                icon-pluse></i>
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <form class="step-block task-description-step-block" [hidden]="tabletask"
+                                    [ngClass]="{'d-flex': !tabletask}" [formGroup]="addTaskForm" #formDir="ngForm"
+                                    (ngSubmit)="submitSubTask()" novalidate>
+                                    <!-- <form class="example-form" > -->
+                                    <ul class="task-details subtaskdetail-padding-right d-flex flex-column">
+                                        <li class="moveSubtaskToText">subtask location</li>
+                                        <ul class="selectTaskForSubtask-ul" style="overflow-y: hidden;"
+                                            (click)="subTaskTabSelection == 'taskSelection'? subTaskTabSelection = '': subTaskTabSelection = 'taskSelection'">
+                                            <li class="selectTaskForSubtask">
+                                                <div *ngIf="taskDataObj.id == undefined || taskDataObj.id == null"
+                                                    class="task-note">Please Select Task</div>
+                                                <div *ngIf="!(taskDataObj.id == undefined || taskDataObj.id == null)"
+                                                    class="task-note">{{taskDataObj.note}}</div>
+                                                <div *ngIf="!(taskDataObj.id == undefined || taskDataObj.id == null)"
+                                                    class="task-board">{{taskDataObj.board}} </div>
+                                            </li>
+                                        </ul>
+                                        <li>
+                                            <div class="form-group form-task form-border">
+                                                <mat-form-field class="example-full-width mat-input">
+                                                    <input formControlName="description" name="txtDescription"
+                                                        id="txtDescription" matInput placeholder="Task Description"
+                                                        autocomplete="off">
+                                                </mat-form-field>
+                                                <!-- <input formControlName="description" id="taskDescription" type="text"
+                                                floating-label="Task Description" class="form-control"
+                                                autocomplete="off" /> -->
+                                            </div>
+                                        </li>
+                                        <li (clickOutside)="taskdueDateClose()">
+                                            <div class="form-group form-task form-border">
+                                                <mat-form-field class="example-full-width mat-input">
+                                                    <input formControlName="dueDate" matInput placeholder="Due Date"
+                                                        value="" autocomplete="off" readonly>
+                                                </mat-form-field>
+                                                <!-- <input id="dueDate" type="text" floating-label="Due Date"
+                                                class="form-control" bsDatepicker [bsConfig]="bsConfig"
+                                                #dp="bsDatepicker" /> -->
+                                                <i icon-calender (click)="taskdueDateClick()"></i>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <!-- [ngClass]="addTaskForm.valid ? '' : 'disabled'" -->
+                                            <div
+                                                class="w-100 task-btn-grp d-flex flex-wrap align-items-center justify-content-between">
+                                                <button type="button" class="btn-assign"
+                                                    [ngClass]="assigntosub ? '' : 'unclick'"
+                                                    (click)="assigntoSubClick()">
+                                                    Assign to
+                                                </button>
+                                            </div>
+                                            <div class="form-group arrow-issue mt-2" *ngIf="assigntosub">
+                                                <ng-select class="w-100" [items]="users" [multiple]="true"
+                                                    [hideSelected]="true" [closeOnSelect]="true" placeholder="Assign to"
+                                                    bindLabel="title" bindValue="id" formControlName="assignedToIds">
+                                                    <ng-template ng-label-tmp let-item="item" let-clear="clear">
+                                                        <!-- <span class="img">
+                                                        <img height="15" width="15" [src]="item.avatar" />
+                                                    </span> -->
+                                                        <span class="ng-value-label">{{item.title}}</span>
+                                                        <span class="ng-value-icon right" (click)="clear(item)"
+                                                            aria-hidden="true">×</span>
+                                                    </ng-template>
+                                                    <ng-template ng-option-tmp let-item="item" let-index="index">
+                                                        {{item.title}}
+                                                    </ng-template>
+                                                </ng-select>
+                                            </div>
+                                            <div
+                                                class="w-100 subtask-btn-grp d-flex flex-wrap align-items-center justify-content-end">
+                                                <!-- [ngClass]="addTaskForm.valid ? '' : 'disabled'" -->
+
+                                            </div>
+                                            <div class="d-flex flex-wrap">
+                                                <a class="btn-task" href="javascript:void(0);"
+                                                    [ngClass]="{'active': subTaskTabSelection === 'details'}"
+                                                    (click)="showPopupDetails('details')">Details</a>
+                                                <a class="btn-task" href="javascript:void(0);"
+                                                    [ngClass]="{'active': subTaskTabSelection === 'query'}"
+                                                    (click)="showPopupDetails('query')">Query</a>
+                                                <a class="btn-task" href="javascript:void(0);"
+                                                    [ngClass]="{'active': subTaskTabSelection === 'chat'}"
+                                                    (click)="showPopupDetails('chat')">Chat</a>
+                                            </div>
+                                            <div
+                                                class="w-100 subtask-btn-grp d-flex flex-wrap align-items-center justify-content-end">
+                                                <!-- [ngClass]="addTaskForm.valid ? '' : 'disabled'" -->
+                                                <a href="javascript:void(0)" (click)="tabletask = true"
+                                                    style="margin-right:30px!important;color:#364A65">Cancel</a>
+
+                                                <button id="subtask-btn-grp" type="submit" class="btn-subtask"
+                                                    [ngClass]="(addTaskForm.valid) && !(taskDataObj.id == undefined || taskDataObj.id == null) ? '' : 'disabled'">
+                                                    Save
+                                                </button>
+                                            </div>
+                                            <div
+                                                class="w-100 subtask-btn-grp subtask-next-btn-grp flex-wrap align-items-center justify-content-end">
+                                                <button id="subtask-next-btn-grp" type="button" class="btn-subtask"
+                                                    (click)="submitSubTask(true)"
+                                                    [ngClass]="(addTaskForm.valid) && !(taskDataObj.id == undefined || taskDataObj.id == null) ? '' : 'disabled'">
+                                                    {{(addTaskForm.value['id'] == undefined || addTaskForm.value['id']
+                                                    =='') ? 'Next' : 'Next' }}
+                                                </button>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                    <ul *ngIf="subTaskTabSelection === 'taskSelection'"
+                                        class="task-details select-task-for-subtask d-flex flex-column">
+                                        <li class="moveSubtaskToText"
+                                            *ngIf="!(taskDataObj.id == undefined || taskDataObj.id == null)">Move
+                                            subtask to</li>
+                                        <li class="moveSubtaskToText"
+                                            *ngIf="taskDataObj.id == undefined || taskDataObj.id == null">Assign subtask
+                                            to</li>
+                                        <ul class="selectTaskForSubtask-ul">
+                                            <li class="selectTaskForSubtask" *ngFor="let task of taskList"
+                                                (click)="taskSelected(task)">
+                                                <div class="task-note" id="table-text-{{task?.id}}">{{task.note}}</div>
+                                                <div class="table-fulldesc"
+                                                    *ngIf="task && task.note && task.note.length>40">
+                                                    <span class="">{{task.note}}</span>
+                                                </div>
+                                                <div class="task-board">{{task.board}} </div>
+                                            </li>
+                                        </ul>
+                                    </ul>
+                                    <div class="task-content task-details select-task-for-subtask d-flex flex-column"
+                                        *ngIf="subTaskTabSelection === 'query'">
+                                        <div class="task-tabing" style="margin-left: 0px; margin-bottom: 30px;">
+                                            <div class="list-div-main subtask-query-process-history">
+                                                <!-- malihu-scrollbar  [scrollbarOptions]="scrollbarOptionsTaskNewUI" -->
+                                                <ul  class="scrollbar"
+                                                   >
+                                                    <li
+                                                        *ngFor="let innerRecords of taskDataObj.relatedTaskList; let index = index">
+                                                        <span class="circle"
+                                                            [ngClass]="{'yellow': 0 === (index+1) % 2}"></span>
+                                                        <div class="date-name">
+                                                            <span>{{innerRecords?.interactionOn |
+                                                                date: 'MMM d, y'}}</span>
+                                                            <span>{{innerRecords?.interactionOn |
+                                                                date: 'H:mm'}}</span>
+                                                            <span>{{innerRecords?.interactionBy}}</span>
+                                                        </div>
+                                                        <div class="small help-block">
+                                                            <div class="button-main-div">
+                                                                <ng-container *ngIf="innerRecords.newStatus !== 7">
+                                                                    <span class="color-tab-span plus"
+                                                                        *ngIf="innerRecords.previousStatus === 0"><i
+                                                                            class="fa fa-plus"></i></span>
+                                                                    <span class="color-tab-span grey"
+                                                                        *ngIf="innerRecords.previousStatus === 1">Added</span>
+                                                                    <span class="color-tab-span"
+                                                                        *ngIf="innerRecords.previousStatus === 2">In
+                                                                        Progress</span>
+                                                                    <span class="color-tab-span yellow"
+                                                                        *ngIf="innerRecords.previousStatus === 3">In
+                                                                        Querry</span>
+                                                                    <span class="color-tab-span green"
+                                                                        *ngIf="innerRecords.previousStatus === 4">Completed</span>
+                                                                </ng-container>
+                                                                <ng-container *ngIf="innerRecords.newStatus === 7">
+                                                                    <span class="color-tab-span plus question"><i
+                                                                            class="fa fa-question"></i></span>
+                                                                </ng-container>
+                                                                <i class="fa fa-angle-right"></i>
+                                                                <span class="color-tab-span plus"
+                                                                    *ngIf="innerRecords.newStatus === 0"><i
+                                                                        class="fa fa-plus"></i></span>
+                                                                <span class="color-tab-span grey"
+                                                                    *ngIf="innerRecords.newStatus === 1">Added</span>
+                                                                <span class="color-tab-span"
+                                                                    *ngIf="innerRecords.newStatus === 2">In
+                                                                    Progress</span>
+                                                                <span class="color-tab-span yellow"
+                                                                    *ngIf="innerRecords.newStatus === 3">In
+                                                                    Querry</span>
+                                                                <span class="color-tab-span green"
+                                                                    *ngIf="innerRecords.newStatus === 4">Completed</span>
+                                                                <div class="hover-icon-h subtask-hover-h">
+                                                                    <span class="text task-querytab-h"
+                                                                        *ngIf="innerRecords.newStatus === 7">{{innerRecords?.queryDetailsString}}</span>
+                                                                    <div class="table-fulldesc"
+                                                                        *ngIf="innerRecords.newStatus === 7 && innerRecords?.queryDetailsString?.length > 50">
+                                                                        {{innerRecords?.queryDetailsString}}
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <form class="example-form" [formGroup]="addTaskQueryForm"
+                                            (ngSubmit)="addTaskQuery()">
+                                            <div class="w-100 ">
+                                                <div class="form-group form-task small-note">
+                                                    <mat-form-field class="example-full-width mat-input">
+                                                        <input formControlName="taskDetailText" id="queryTaskDetailText"
+                                                            matInput type="text" placeholder="Query" value=""
+                                                            autocomplete="off">
+                                                    </mat-form-field>
+                                                </div>
+                                                <div
+                                                    class="task-btn-grp d-flex flex-wrap align-items-start justify-content-end">
+                                                    <button type="submit" class="btn-save"
+                                                        [ngClass]="addTaskQueryForm.valid  ? '' : 'disabled'"
+                                                        [disabled]="!addTaskQueryForm.valid">
+                                                        Save
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="task-content task-details select-task-for-subtask d-flex flex-column"
+                                        *ngIf="subTaskTabSelection === 'chat'">
+                                        <form class="example-form" [formGroup]="addTaskChatForm"
+                                            (ngSubmit)="addTaskChat()">
+                                            <div class="w-100 ">
+                                                <div class="task-tabing popup-task-tabbing subtask-chat-custom">
+                                                    <div class="list-div-main">
+                                                        <!-- [scrollbarOptions]="scrollbarOptionsTaskNewUI" malihu-scrollbar -->
+                                                        <ul class="h-300 scrollbar">
+                                                            <li style="min-height: 61px;"
+                                                                *ngFor="let record of openSubTaskChatData; let index = index">
+                                                                <span class="circle"
+                                                                    [ngClass]="{'yellow': 0 === (index+1) % 2}"></span>
+                                                                <div class="date-name">
+                                                                    <span>{{record?.createdOn | date: 'MMM d,
+                                                                        y'}}</span>
+                                                                    <span>{{record?.createdOn | date: 'H:mm'}}</span>
+                                                                    <span
+                                                                        class="remove-bullet">{{record?.createdBy}}</span>
+                                                                    <div class="chat-action">
+                                                                        <a class="icon-task" href="javascript:void(0)"
+                                                                            (click)="setEditSubTaskChat(record)"
+                                                                            icon-pencil></a>
+                                                                        <!--<div (clickOutside)="subTaskChatDeleteDropdownClose()"
+                                                                         class="chat-delete-div mr-0">-->
+                                                                        <!--[ngClass]="(delSubShowId == k.id) ? 'active' : ''"-->
+                                                                        <a class="icon-delete" href="javascript:void(0)"
+                                                                            (click)="subTaskChatDeleteDropdownClick(record.mqcId)"
+                                                                            icon-cross></a>
+
+                                                                        <ul class="dropdown-table dark left sub-task-progress-delete"
+                                                                            [ngClass]="(delSubTaskChatShowId == record.mqcId) ? 'show' : ''">
+                                                                            <!--style="margin-left:353px;"-->
+                                                                            <li
+                                                                                class="modal-body static text-center modal-revert w-100 new-option">
+                                                                                <!--style="padding: 15px 10px;"-->
+                                                                                <p class="modal-name animated-item"
+                                                                                    style="color:white;">
+                                                                                    Delete ?
+                                                                                </p>
+                                                                                <div
+                                                                                    class="d-flex flex-wrap justify-content-between animated-item">
+                                                                                    <button type="button"
+                                                                                        class="btn btn-default btn-sm"
+                                                                                        (click)="subTaskChatDeleteDropdownClose();$event.stopPropagation()">
+                                                                                        No
+                                                                                    </button>
+                                                                                    <button type="button"
+                                                                                        class="btn btn-primary btn-sm"
+                                                                                        (click)="subTaskChatDelete(record);$event.stopPropagation()">
+                                                                                        Yes
+                                                                                    </button>
+                                                                                </div>
+                                                                            </li>
+                                                                        </ul>
+                                                                        <!--</div>-->
+                                                                    </div>
+                                                                </div>
+                                                                <div class="text-line">
+                                                                    <span>{{record?.note}}</span>
+                                                                </div>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group form-task form-task-new">
+                                                    <mat-form-field class="example-full-width mat-input">
+                                                        <input formControlName="taskDetailText" id="taskChatDetailText"
+                                                            matInput type="text" placeholder="Message" value=""
+                                                            autocomplete="off">
+                                                    </mat-form-field>
+                                                    <div class="task-btn-grp d-flex align-items-start img-btn">
+                                                        <button type="submit" class="btn-save"
+                                                            [ngClass]="addTaskChatForm.valid  ? '' : 'disabled'"
+                                                            [disabled]="!addTaskChatForm.valid">
+                                                            <img src="assets/images/btn-arrow.svg" alt="">
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="task-content task-details select-task-for-subtask task-detail-popup-h d-flex flex-column"
+                                        *ngIf="subTaskTabSelection === 'details'">
+                                        <div class="task-img-h" *ngIf="!showAddTaskDetailsForm">
+                                            <ng-container *ngIf="showAddedTaskDetailsList"> <!--&& imageDataLoaded-->
+                                                <div class="list-div-main folder-div-main">
+                                                    <!-- malihu-scrollbar [scrollbarOptions]="scrollbarOptions" -->
+                                                    <ul class="h-300 scrollbar">
+                                                        <li *ngFor="let details of addedTaskDetailsList">
+                                                            <div class="folder-img">
+                                                                <img *ngIf="details?.src" [src]="details?.src"
+                                                                    style="height: 190px;width:150px;"
+                                                                    (click)="openTaskDetailsView(details, addTaskDetailsViewsPopup)">
+
+                                                            </div>
+                                                            <div class="folder-text">
+                                                                <div class="date-name">
+                                                                    <span>{{details?.createdOn |
+                                                                        date: 'MMM d, y'}}</span>
+                                                                    <span>{{details?.createdOn |
+                                                                        date: 'H:mm'}}</span>
+                                                                    <span>{{details?.createdBy}}</span>
+                                                                </div>
+                                                                <div class="text-line text-line-note">
+                                                                    <span>{{details?.note}}</span>
+                                                                    <div class="text-line-note-onhover"
+                                                                        *ngIf="details && details?.note && details?.note.length>125">
+                                                                        <span class="">{{details?.note}}</span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </ng-container>
+                                        </div>
+                                        <div
+                                            class="task-btn-grp mt-25 d-flex flex-wrap align-items-start justify-content-end">
+                                            <button type="button" class="btn-save" (click)="showAddTaskDetailsDiv()"
+                                                *ngIf="!showAddTaskDetailsForm">
+                                                Add
+                                            </button>
+                                        </div>
+                                        <form class="example-form" [formGroup]="addTaskDetailsForm"
+                                            (ngSubmit)="addTaskDetails()" *ngIf="showAddTaskDetailsForm">
+                                            <div class="w-100 ">
+                                                <div class="task-detail-main">
+                                                    <div class="upload-sec file-input">
+                                                        <div class="camera-sec">
+                                                            <div class="inner-sec">
+                                                                <img src="assets/images/camera-b.svg" alt="">
+                                                                <span>OPEN CAMERA</span>
+                                                            </div>
+                                                        </div>
+                                                        <input type="file" name="file-input" id="file-input"
+                                                            class="file-input__input"
+                                                            (change)="addTaskDetailsImage($event)">
+                                                        <label class="file-input__label" for="file-input">
+                                                            <span>Choose from Files</span>
+                                                            <img src="assets/images/file.svg" class="camera-ic">
+                                                        </label>
+                                                        <div class="after-fill" *ngIf="fileList.length > 0">
+                                                            <img [src]="uploadedFileSource">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group form-task w-100">
+                                                    <mat-form-field class="example-full-width mat-input">
+                                                        <textarea formControlName="taskDetailText"
+                                                            id="taskDetailImageText" matInput matTextareaAutosize
+                                                            type="text" placeholder="Note" value=""
+                                                            autocomplete="off"></textarea>
+                                                    </mat-form-field>
+                                                </div>
+                                                <div
+                                                    class="task-btn-grp mt-25 d-flex flex-wrap align-items-start justify-content-end">
+                                                    <button type="submit" class="btn-save"
+                                                        [ngClass]="addTaskDetailsForm.valid  ? '' : 'disabled'"
+                                                        [disabled]="!addTaskDetailsForm.valid">
+                                                        Save
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div *ngIf="taskdueDate" class="custom-picker move theme-white theme-green">
+                                        <bs-datepicker-inline
+                                            (bsValueChange)="taskDueDateChange($event,bsConfigSubTask)"
+                                            [bsConfig]="bsConfigSubTask" [bsValue]="subTask_due_date">
+                                            <a icon-close (click)="taskdueDateClose()"></a>
+                                        </bs-datepicker-inline>
+                                    </div>
+                                    <!--<div class="task-btn-grp btn-bottom-sticky w-100 d-flex flex-wrap align-items-center justify-content-end">
+                                    <button type="button" class="btn-save" (click)="createTaskClick()">Save</button>
+                                </div>-->
+                                    <!-- </form> -->
+                                </form>
+                            </div>
+
+                            <div class="" [hidden]="!setp3">
+                                <div class="step-block d-flex flex-wrap">
+                                    <ul>
+                                        <li>
+                                            <label class="from-switch d-flex flex-wrap justify-content-between">
+                                                <span class="text flex-1">Team Notification</span>
+                                                <mat-slide-toggle checked></mat-slide-toggle>
+
+                                                <!-- <input type="checkbox" class="form-checkbox">
+                                            <span class="toogle-switch"></span> -->
+                                            </label>
+                                        </li>
+                                        <li>
+                                            <label class="from-switch d-flex flex-wrap justify-content-between">
+                                                <span class="text flex-1">Require Direct Attention</span>
+                                                <mat-slide-toggle checked></mat-slide-toggle>
+                                                <!-- <input type="checkbox" class="form-checkbox">
+                                            <span class="toogle-switch"></span> -->
+                                            </label>
+                                        </li>
+                                        <li>
+                                            <label class="from-switch d-flex flex-wrap justify-content-between">
+                                                <span class="text flex-1">Allow Delete</span>
+                                                <mat-slide-toggle checked></mat-slide-toggle>
+                                                <!-- <input type="checkbox" class="form-checkbox">
+                                            <span class="toogle-switch"></span> -->
+                                            </label>
+                                        </li>
+                                        <li>
+                                            <label class="from-switch d-flex flex-wrap justify-content-between">
+                                                <span class="text flex-1">Persistent Reminder</span>
+                                                <mat-slide-toggle checked></mat-slide-toggle>
+                                                <!-- <input type="checkbox" class="form-checkbox">
+                                            <span class="toogle-switch"></span> -->
+                                            </label>
+                                        </li>
+                                        <li>
+                                            <label class="from-switch d-flex flex-wrap justify-content-between">
+                                                <span class="text flex-1">Associated to Another Task</span>
+                                                <mat-slide-toggle (change)="onChangeAssTask($event)"></mat-slide-toggle>
+                                                <!-- <input type="checkbox" class="form-checkbox">
+                                            <span class="toogle-switch"></span> -->
+                                            </label>
+                                        </li>
+                                        <li *ngIf="isShowAssociatedTask" class="d-flex flex-wrap associated-li">
+                                            <label class="from-switch d-flex flex-wrap justify-content-between">
+                                                <span class="text flex-1">Associated Task</span>
+                                            </label>
+                                            <div class="associated-main flex-1">
+                                                <div class="associated-block position-relative" dropdown>
+                                                    <span class="associated-no" dropdownToggle>MX-CRM-TSK-1045</span>
+                                                    <span class="associated-name">Julia Roberts</span>
+                                                    <ul id="dropdown-basic" *dropdownMenu
+                                                        class="dropdown-menu dark dropdown-create" role="menu"
+                                                        aria-labelledby="button-basic">
+                                                        <li role="menuitem">
+                                                            <a class="dropdown-item" href="#">
+                                                                <span class="associated-board">Board</span>
+                                                                <span class="associated-text">
+                                                                    This is the name of the
+                                                                    task,
+                                                                    limited length...
+                                                                </span>
+                                                                <span class="associated-user">Julia Roberts</span>
+                                                            </a>
+                                                        </li>
+                                                        <li role="menuitem">
+                                                            <a class="dropdown-item" href="#">
+                                                                <span class="associated-board">Board</span>
+                                                                <span class="associated-text">
+                                                                    This is the name of the
+                                                                    task,
+                                                                    limited length...
+                                                                </span>
+                                                                <span class="associated-user">Julia Roberts</span>
+                                                            </a>
+                                                        </li>
+                                                        <li role="menuitem">
+                                                            <a class="dropdown-item" href="#">
+                                                                <span class="associated-board">Board</span>
+                                                                <span class="associated-text">
+                                                                    This is the name of the
+                                                                    task,
+                                                                    limited length...
+                                                                </span>
+                                                                <span class="associated-user">Julia Roberts</span>
+                                                            </a>
+                                                        </li>
+                                                        <li role="menuitem">
+                                                            <a class="dropdown-item" href="#">
+                                                                <span class="associated-board">Board</span>
+                                                                <span class="associated-text">
+                                                                    This is the name of the
+                                                                    task,
+                                                                    limited length...
+                                                                </span>
+                                                                <span class="associated-user">Julia Roberts</span>
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <p class="associated-description">
+                                                    <span class="text">
+                                                        This is the name of the task, limited length This is the name of
+                                                        the
+                                                        task, limited length
+                                                    </span>
+                                                </p>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- </div> -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <ng-template #addTaskDetailsViewsPopup>
+        <div class="modal-body p-0 delete-modal" (closeClick)="closeConfirmationBox()">
+            <div class="d-flex flex-wrap position-relative quick-modal">
+                <div class="d-flex flex-wrap w-100 Query-popup">
+                    <div class="chart-header w-100 d-flex flex-wrap">
+                        <div class="chart-right flex-1 d-flex flex-wrap align-items-center">
+                            <h3 class=text-title>Task Detail View</h3>
+                            <a href="javascript:void(0)" icon-close (click)="closeConfirmationBox()"
+                                class="close-ic"></a>
+                        </div>
+                    </div>
+                    <div class="w-100 ">
+                        <div class="task-body">
+                            <div class="upload-sec file-input">
+                                <div class="after-fill">
+                                    <img *ngIf="taskDetailsViewData?.src" [src]="taskDetailsViewData?.src">
+                                    <img *ngIf="!taskDetailsViewData?.src" src="assets/images/no_image.png"
+                                        style="height: 190px;width:290px;">
+                                </div>
+                            </div>
+                            <div class="task-detail-inner">
+                                <div class="task-board-field">
+                                    <span class="fnt">Board Name</span>
+                                    <p>{{taskDetailsViewData?.board}}</p>
+                                </div>
+                                <div class="task-board-field">
+                                    <span class="fnt">Task Description </span>
+                                    <p>{{taskDetailsViewData?.description}}</p>
+                                </div>
+                            </div>
+                            <div class="task-detail-inner">
+                                <div>
+                                    <span class="fnt">Note</span>
+                                    <p class="with-breaks">{{taskDetailsViewData?.note}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ng-template>
+    <ng-template #closePreventionPopup>
+        <div class="modal-body p-0 delete-modal" (closeClick)="closeConfirmationBox()">
+            <div class="d-flex flex-wrap position-relative quick-modal">
+                <div class="d-flex flex-wrap w-100 Query-popup">
+                    <div class="chart-header w-100 d-flex flex-wrap">
+                        <div class="chart-right flex-1 d-flex flex-wrap align-items-center">
+                            <h3 class=text-title>{{preventionPopupTitle}}</h3>
+                            <a href="javascript:void(0)" icon-close (click)="closeConfirmationBox();"
+                                class="close-ic"></a>
+                        </div>
+                    </div>
+                    <div class="w-100 ">
+                        <div class="task-body">
+                            <div>{{preventionPopupText}}</div>
+                            <div class="close-preventions-btns">
+                                <a href="javascript:void(0)" class="yesExitlink"
+                                    (click)="closeConfirmationBox();closeSubTask()">Yes, Exit!</a>
+                                <button class="btn btn-main btn-yellow" type="button" (click)="closeConfirmationBox()">
+                                    Cancel </button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ng-template>
+    <ng-template #savedPopUp>
+        <div class="modal-body p-0 delete-modal">
+            <div class="d-flex flex-wrap position-relative quick-modal">
+                <div class="d-flex flex-wrap w-100 Query-popup">
+                    <div class="chart-header w-100 d-flex flex-wrap">
+                        <div class="chart-right flex-1 d-flex flex-wrap align-items-center">
+                            <h3 class=text-title>{{preventionPopupTitle}}</h3>
+                        </div>
+                    </div>
+                    <div class="w-100 ">
+                        <div class="task-body">
+                            <div class="save-view-popup-btns">
+                                <button class="btn btn-main save-view-popup-btn" type="button"
+                                    (click)="closeConfirmationBox()"> Ok </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ng-template>
+</div>

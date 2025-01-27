@@ -1,0 +1,7 @@
+<app-header></app-header>
+<div class="wrapper" [ngClass]="isWindowsSystem ? 'window-class': 'non-window-class'">
+  <app-sidebar></app-sidebar>
+  <div id="main-content" class="collapsed">
+    <router-outlet></router-outlet>
+  </div>
+</div>

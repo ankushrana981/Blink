@@ -1,0 +1,164 @@
+<div class="manufacturing-Wrap">
+	<div class="viewdata-title">
+		<h2>Manage Composition</h2>
+		<!-- <div class="pull-right right-top-btns">
+            <a class="btn btn-link" [routerLink]="['/main/crm/customersetup/new-customer-setup']"><img src="assets/images/icon-plus.svg" height="25" width="25" alt=""></a>
+        </div> -->
+	</div>
+	<div class="contentBox">
+		<div class="leftContent">
+			<div class="card">
+				<div class="manageBox ui-manageBox">
+					<div class="row">
+						<div class="col-md-12 col-sm-12 col-12 customanimate order-animate1 selected-option z-index-box">
+							<div class="form-group custom-selectBox">
+								<!-- <label for="custom-selectItem" class="gray-label">Product</label> -->
+								<ng-select id="custom-selectItem" class="form-control " [clearable]="false" [(ngModel)]="user.product" placeholder="Product"
+								 bindLabel="title" [notFoundText]="notFoundText" name="productName" id="productName" autocomplete="off" (change)="productSelected($event)"
+								 [typeahead]="MainSearchdataSource">
+								</ng-select>
+							</div>
+							<div class="form-group">
+								<mat-form-field class="example-full-width">
+									<input class="form-control" matInput placeholder="THRESHOLD PERCENTAGE" name="Percent" [(ngModel)]="user.thresholdPercent" (keydown)="AllowNumbers($event)">
+								</mat-form-field>
+							</div>
+						</div>
+						<div class="col-md-12 col-sm-12 col-12 customanimate order-animate2">
+							<div class="item-info">
+								<ul>
+									<li>
+										<span class="iconbox">
+											<svg width="33" height="27" viewBox="0 0 33 27" fill="none" xmlns="http://www.w3.org/2000/svg">
+											<path d="M32.9156 24.646L27.7397 8.64793C27.5109 7.94064 26.8522 7.46149 26.1089 7.46149H20.6468C21.0895 6.73015 21.3493 5.87625 21.3493 4.96066C21.3493 2.2869 19.1738 0.111328 16.4999 0.111328C13.8262 0.111328 11.6506 2.28685 11.6506 4.96066C11.6506 5.87619 11.9104 6.7301 12.3532 7.46149H6.89117C6.14781 7.46149 5.48916 7.94064 5.26032 8.64793L0.0844937 24.646C-0.273707 25.753 0.551778 26.8877 1.71535 26.8877H31.2846C32.4483 26.8877 33.2737 25.7531 32.9156 24.646ZM13.9361 4.96066C13.9361 3.54678 15.0861 2.3968 16.5 2.3968C17.9139 2.3968 19.0639 3.54678 19.0639 4.96066C19.0639 6.18495 18.2003 7.20822 17.0511 7.46149H15.9489C14.7997 7.20827 13.9361 6.18495 13.9361 4.96066ZM14.2332 21.3199L12.7517 18.4752H12.0458V21.3199H10.3295V14.3072H12.0458V17.0145H12.7517L14.2037 14.3072H16.0477L14.1541 17.6614V17.6813L16.1555 21.3199H14.2332ZM23.2601 21.3199H21.8281V21.1234C21.8281 20.9764 21.8377 20.8295 21.8377 20.8295H21.8186C21.8186 20.8295 21.1413 21.4373 19.9745 21.4373C18.1793 21.4373 16.5317 20.094 16.5317 17.7987C16.5317 15.759 18.0714 14.1897 20.2101 14.1897C22.0046 14.1897 22.9071 15.1209 22.9071 15.1209L22.0829 16.406C22.0829 16.406 21.3673 15.7591 20.3763 15.7591C18.9052 15.7591 18.3071 16.7006 18.3071 17.7396C18.3071 19.0742 19.2287 19.868 20.318 19.868C21.1414 19.868 21.7395 19.3585 21.7395 19.3585V18.8186H20.7492V17.3571H23.2601V21.3199Z" fill="#00ADB5"/>
+											</svg>
+
+										</span>
+										<div class="info">
+											<label>Expected Weignt:</label>
+											<h5>900 - 1000 Gramms</h5>
+										</div>	
+									</li>
+									<li>
+										<span class="iconbox">
+											<svg width="25" height="27" viewBox="0 0 25 27" fill="none" xmlns="http://www.w3.org/2000/svg">
+												<path d="M14.6735 13.7125L13.4635 14.4127V26.9997L24.3587 20.709V8.12207L14.6735 13.7125Z" fill="#00ADB5"/>
+												<path d="M16.6452 2.42552L12.4552 0L1.25745 6.46431L5.45309 8.88983L16.6452 2.42552Z" fill="#00ADB5"/>
+												<path d="M23.6473 6.46428L18.8186 3.71387L7.62653 10.1782L8.26511 10.5087L12.4552 12.9286L16.6228 10.5255L23.6473 6.46428Z" fill="#00ADB5"/>
+												<path d="M6.78071 14.805L4.77532 13.7743V10.5702L0.641296 8.18945V20.6868L11.4581 26.9326V14.4353L6.78071 11.7409V14.805Z" fill="#00ADB5"/>
+												</svg>
+										</span>
+										<div class="info">
+											<label>Pack Size:</label>
+											<h5>1kg</h5>
+										</div>	
+									</li>
+									<li>
+										<span class="iconbox">
+											<svg width="27" height="27" viewBox="0 0 27 27" fill="none" xmlns="http://www.w3.org/2000/svg">
+												<path d="M13.5 27C20.9439 27 27 20.9622 27 13.5408C27 6.11942 20.9439 0 13.5 0C6.05614 0 0 6.11942 0 13.5408C0 20.9622 6.05614 27 13.5 27ZM13.5131 14.4059C11.483 14.4059 9.83129 12.7592 9.83129 10.7352C9.83129 9.1471 10.854 7.80437 12.2727 7.29391V6.1994C12.2727 5.52325 12.8218 4.97583 13.5 4.97583C14.1785 4.97583 14.7273 5.52325 14.7273 6.1994V7.28595C16.1594 7.78876 17.1949 9.13723 17.1949 10.7352C17.1949 11.4113 16.6462 11.9588 15.9676 11.9588C15.2895 11.9588 14.7404 11.4113 14.7404 10.7352C14.7404 10.06 14.1903 9.51162 13.5131 9.51162C12.8362 9.51162 12.2858 10.06 12.2858 10.7352C12.2858 11.4104 12.8362 11.9588 13.5131 11.9588C15.5435 11.9588 17.1949 13.6052 17.1949 15.6294C17.1949 17.2274 16.1594 18.5756 14.7273 19.0787V20.8822C14.7273 21.5583 14.1785 22.1057 13.5 22.1057C12.8218 22.1057 12.2727 21.5583 12.2727 20.8822V19.0704C10.854 18.5603 9.83129 17.2175 9.83129 15.6294C9.83129 14.953 10.3804 14.4059 11.0586 14.4059C11.7371 14.4059 12.2858 14.953 12.2858 15.6294C12.2858 16.3046 12.8362 16.853 13.5131 16.853C14.1903 16.853 14.7404 16.3046 14.7404 15.6294C14.7404 14.9543 14.1903 14.4059 13.5131 14.4059Z" fill="#00ADB5"/>
+												</svg>
+										</span>
+										<div class="info">
+											<label>Cost per item:</label>
+											<h5>$265</h5>
+										</div>	
+									</li>
+								</ul>
+								<div class="cancel-itembox">
+									<button type="button" class="btn">
+										<em class="fa fa-remove"></em>
+									</button>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-12 col-sm-12 col-12  customanimate order-animate3 mt-4">
+							<h4 class="title"><span>Ingredients</span></h4>
+							<!-- <table class="table table-striped"> -->
+							<table class="table">	
+								<!-- <thead>
+									<tr class="customanimate order-animate1">
+										<th width="40%">Product</th>
+										<th width="20%">Quantity</th>
+										<th width="20%">UoM</th>
+										<th width="20%">Percent</th>
+										<th width="5px">
+											<a class="btn btn-sm btn-link" ng-click="vm.addIngredient()">
+												<i class="fa fa-plus" (click)="addRow()"></i>
+											</a>
+										</th>
+									</tr>
+								</thead> -->
+								<tbody fxLayout="row wrap">
+									<tr *ngFor="let i of rowRepeatArr; index as j" class="x-animated fadeIn d-3 in" fxFlex="150" fxFlex.lt-sm="300" [@EnterLeave]="'flyIn'">
+										<td>
+											<div class="form-group custom-selectBox">
+												<!-- <label class="gray-label">Product</label> -->
+												<ng-select data-label="pro" [clearable]="false"  placeholder="Product" [(ngModel)]="i.product"
+												 bindLabel="title" [notFoundText]="notFoundText" name="productName" id="ingredients" autocomplete="off" (change)="ingredientSelected($event)"
+												 [typeahead]="MainSearchdataSource">
+												</ng-select>
+											</div>
+										</td>
+										<td>
+											<div class="form-group">
+												<mat-form-field class="example-full-width">
+													<input matInput placeholder="QUANTITY" name="quantity" id="quantity" [(ngModel)]="i.quantity" (keydown)="AllowNumbers($event)"
+													 (keyup)="quantitychnge(i.quantity)">
+												</mat-form-field>
+											</div>
+										</td>
+										<td>
+											<div class="form-group custom-selectBox">
+												<label class="overflow-text-label">UNIT OF MEASURE</label>
+												<div class="datepickerInputBox">
+													<p class="selectedunit"> {{i?.product?.unitofMeasure?.unit}} </p>
+													<!-- <input class="form-control" type="text" id="measure" name="measure" [(ngModel)]="unit" [disabled]="true"> -->
+												</div>
+
+											</div>
+										</td>
+										<td>
+											<div class="form-group custom-selectBox">
+												<label>PERCENT</label>
+												<div class="datepickerInputBox">
+													<input class="form-control" type="text" id="percent" name="percent" [(ngModel)]="i.percent" (keydown)="AllowNumbers($event)"
+													 [disabled]="true">
+												</div>
+											</div>
+										</td>
+										<td>
+											<a class="btn-link" (click)="removeRow(j)">
+												<em class="fa fa-remove"></em>
+											</a>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<div class="btnbox">
+												<button type="button" class="btn btn-sm btn-link" ng-click="vm.addIngredient()" (click)="addRow()">
+													<span class="mr-2"><em class="fa fa-plus"></em></span> Add Component
+												</button>
+											</div>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>					
+				</div>
+			</div>
+		</div>
+		<div class="contentBox-btnbox">
+			<div class="customanimate order-animate5">
+				<div class="btn-bar">
+					<button class="btn btn-save" ng-disabled="!editor.$valid" (click)="createEntry()"> <i class="fa fa-save"></i> Save</button> 
+					<!-- <a class="btn btn-default" [routerLink]="['/main/manufacturing/composition-view']">
+						<i class="fa fa-remove"></i> Cancel</a> -->
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- <app-modal-demo style="position: relative;z-index: 999999999;"></app-modal-demo> -->

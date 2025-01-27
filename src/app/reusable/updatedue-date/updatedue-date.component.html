@@ -1,0 +1,74 @@
+<div class="d-flex flex-wrap chart-form create-task-from position-relative">
+    <div class="chart-box d-flex flex-wrap w-100" [ngClass]="{'active-task': subListTask}">
+        <div class="chart-header w-100 d-flex flex-wrap">
+            <div class="chart-right flex-1 d-flex flex-wrap align-items-center justify-content-between">
+                <h3 class=text-title>CHANGE DUE DATE OF TASK</h3>
+                <!-- <ng-content></ng-content> -->
+                <a href="javascript:void(0)" icon-close (click)="closeTask()"></a>
+            </div>
+        </div>
+        <div class="w-100 create-task-body">
+            <div class="task-body">
+
+                <div class="task-content">
+
+                    <form class="step-block flex-column"
+                          #formDir="ngForm" novalidate>
+                        <!-- <form class="example-form" > -->
+                        <ul class="task-details d-flex flex-column">
+                            <li>&nbsp;</li>
+                            <li>&nbsp;</li>
+                            <li>&nbsp;</li>
+                            <li>&nbsp;</li>
+                            <li (clickOutside)="dueDateClose()">
+                                <div class="form-group form-task form-border">
+                                    <mat-form-field class="example-full-width mat-input">
+                                        <input [(ngModel)]="due_date" [ngModelOptions]="{standalone: true}" matInput placeholder="Due Date"
+                                               value="" autocomplete="off" readonly>
+                                    </mat-form-field>
+
+                                    <i icon-calender (click)="dueDate = true"></i>
+                                </div>
+                            </li>
+                            <li>&nbsp;</li>
+                            <li>&nbsp;</li>
+                            <li>&nbsp;</li>
+                            <li>&nbsp;</li>
+                            <li>&nbsp;</li>
+                            <li>&nbsp;</li>
+                            <li>
+                                <!-- [ngClass]="addTaskForm.valid ? '' : 'disabled'" -->
+
+                            </li>
+                            <li>&nbsp;</li>
+                            <li>&nbsp;</li>
+                            <li>&nbsp;</li>
+                            <li>&nbsp;</li>
+                            <li>&nbsp;</li>
+                            <li>&nbsp;</li>
+                        </ul>
+
+                      
+                        <div class="w-100 subtask-btn-grp d-flex flex-wrap align-items-center justify-content-end">
+                            <!-- [ngClass]="addTaskForm.valid ? '' : 'disabled'" -->
+                            <a href="javascript:void(0)" (click)="closeTask()" style="margin-right:30px!important;color:#364A65">Cancel</a>
+
+
+                            <button type="submit" (click)="btnSaveDueDate()" class="btn-save">
+                                Save
+                            </button>
+                        </div>
+                        <div *ngIf="dueDate" class="custom-picker move theme-white theme-green">
+                            <bs-datepicker-inline (bsValueChange)="dueDateValueChange($event,bsConfig)"
+                                                  [bsConfig]="bsConfig" [bsValue]="due_date_Temp">
+                                <a icon-close (click)="dueDateClose()"></a>
+                            </bs-datepicker-inline>
+                        </div>
+
+                    </form>
+                </div>
+                <!-- </div> -->
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,435 @@
+<div class="crm-Wrap inventoryreports-Wrap composition-view product-view" >
+  <!-- [ngClass]="(icon1 || icon2 || icon3)?'active':''" -->
+  <div class="">
+    <div class="">
+      <div class="contentBox task-page " >
+        <!-- [ngClass]="(icon1 || icon2 || icon3)?'active':''" -->
+
+        <div class="leftContent overflow-0 task-board">
+          <div class="viewdata-title task-title d-flex flex-wrap align-items-center justify-content-between">
+            <h2>Compositions</h2>
+            <div class="d-flex flex-wrap">
+              <a class="icon-task" href="javascript:void(0)" icon-more title="More"></a>
+              <a class="icon-task" href="javascript:void(0);"
+                (click)="addProductModal(addProduct);$event.preventDefault()" icon-pluse title="Create Task"></a>
+              <a class="icon-task" href="javascript:void(0)" icon-filter title="Filter"></a>
+              <a class="icon-task" href="javascript:void(0)" icon-upload title="Upload"></a>
+              <a class="icon-task" href="javascript:void(0)" icon-download title="Download"></a>
+            </div>
+          </div>
+          <div class="card card-box pl-0 card-attention view-details-table wow fadeIn" data-wow-delay=".3s" #tblDivElem>
+            <div class="table-sticky-header">
+              <table style="width:100%" class="table-hover task-table-main default-to-custom first-padding-0">
+                <thead>
+                  <tr class="x-animated fadeIn d-1 in">
+                    <th width="30"></th>
+                    <th class="table-date">
+                      <b class="table-title">
+                        <span>Product</span>&nbsp;
+                      </b>
+                      <div class="small help-block line-divider before-line type">
+                        <span class="table-text">Compositions Variation</span>
+                      </div>
+                    </th>
+                    <th class="table-description">
+                      <b class="table-title">
+                        <span></span>&nbsp;
+                      </b>
+                      <div class="small help-block line-divider before-line board">
+                        <span class="table-text">Cost of Goods</span>
+                      </div>
+                    </th>
+                    <th class="table-status">
+                      <b class="table-title">
+                        <span>Qty Available</span>&nbsp;
+                      </b>
+                      <div class="small help-block line-divider before-line progress">
+                        <span class="table-text">Packaging</span>
+                      </div>
+                    </th>
+                    <th class="table-created">
+                      <b class="table-title">
+                        <span>Average Uses - 3/6/9 Months</span>&nbsp;
+                      </b>
+                      <div class="small help-block line-divider before-line assigned">
+                        <span class="table-text">Modifiers</span>
+                      </div>
+                    </th>
+                    <th class="table-action"></th>
+                  </tr>
+                </thead>
+              </table>
+            </div>
+            <div malihu-scrollbar class="scrollbar">
+              <div class="table-box mb-20">
+                <div class="table-respons">
+                  <table style="width:100%" class="table-hover task-table-main default-to-custom first-padding-0">
+                    <thead class="thead-none">
+                      <tr class="x-animated fadeIn d-1 in">
+                        <th width="30"></th>
+                        <th class="table-date">
+                          <b class="table-title">
+                            <span>Due Date</span>&nbsp;
+                          </b>
+                          <div class="small help-block line-divider before-line type">
+                            <span class="table-text">Type</span>
+                          </div>
+                        </th>
+                        <th class="table-description">
+                          <b class="table-title">
+                            <span>Description</span>&nbsp;
+                          </b>
+                          <div class="small help-block line-divider before-line board">
+                            <span class="table-text">Board / Customer - Title</span>
+                          </div>
+                        </th>
+                        <th class="table-status">
+                          <b class="table-title">
+                            <span>Status</span>&nbsp;
+                          </b>
+                          <div class="small help-block line-divider before-line progress">
+                            <span class="table-text">Progress</span>
+                          </div>
+                        </th>
+                        <th class="table-created">
+                          <b class="table-title">
+                            <span>Created Date</span>&nbsp;
+                          </b>
+                          <div class="small help-block line-divider before-line assigned">
+                            <span class="table-text">Assigned To</span>
+                          </div>
+                        </th>
+                        <th class="table-action"></th>
+                      </tr>
+                    </thead>
+                    <tbody fxLayout="row wrap" class="list">
+                      <tr class="x-animated fadeIn d-1 in" [ngClass]="{'active':dropdown ? 'active' : '','trActive1':icon1 ? 'trActive1' : ''}" (click)="changeIc2('dots','icon1');$event.preventDefault()">
+                        <td class="text-center">
+                          <h4 class="rownumber ng-binding">1</h4>
+                        </td>
+                        <td class="text-left">
+                          <b class="table-title">
+                            <span>Strawberry Lemonade</span>
+                          </b>
+                          <div class="small help-block line-divider">
+                            <span class="table-text">3</span>
+                          </div>
+                        </td>
+                        <td class="text-left">
+                          <b class="table-title">
+                            <span>--</span>
+                          </b>
+                          <div class="small help-block line-divider">
+                            <span class="table-text">Rp. 23.000</span>
+                          </div>
+                        </td>
+                        <td class="text-left">
+                          <b class="table-title">
+                            <span>343</span>
+                          </b>
+                          <div class="small help-block line-divider">
+                            <span class="table-text">Pack of 1.5kg</span>
+                          </div>
+                        </td>
+                        <td class="text-left">
+                          <div>
+                            <b class="table-title">
+                              <span>124 / 171 / 223
+                              </span>
+                            </b>
+                          </div>
+                          <div class="small help-block line-divider">
+                            <span class="table-text">3 Months</span>
+                          </div>
+                        </td>
+
+                        <td>
+                          <div class="d-flex">
+                            <div class="btn-group" (clickOutside)="dropdownClose()">
+                              <a *ngIf="!dropdown" class="icon-more" href="javascript:void(0)" icon-more
+                                (click)="dropdownClick();$event.stopPropagation()"></a>
+                              <a *ngIf="dropdown" class="icon-more" href="javascript:void(0)" icon-more
+                                (click)="dropdownClose();$event.stopPropagation()"></a>
+                              <ul
+                                class="dropdown-table dark right dropdown-progress d-flex flex-column align-items-center justify-content-center"
+                                [ngClass]="dropdown ? 'show' : ''">
+                                <li [ngClass]="{'show': !progressinfo}">
+                                  <ul>
+                                    <!-- <li role="menuitem" class="new-option">
+                                                                          <a class="dropdown-item"
+                                                                              href="javascript:void(0)">
+                                                                              <span
+                                                                                  (click)="progressClick();$event.stopPropagation()">Progress</span>
+                                                                              /
+                                                                              <span
+                                                                                  (click)="revertClick();$event.stopPropagation()">Revert</span>
+                                                                          </a>
+                                                                      </li> -->
+                                    <li role="menuitem" class="new-option">
+                                      <a class="dropdown-item" href="/"
+                                        (click)="$event.stopPropagation();$event.preventDefault()">Edit</a>
+                                    </li>
+                                    <li role="menuitem" class="new-option">
+                                      <a class="dropdown-item" href="javascript:void(0)"
+                                        (click)="deleteClick();$event.stopPropagation()">Delete</a>
+                                    </li>
+                                    <li role="menuitem" class="new-option">
+                                      <a class="dropdown-item" href="/"
+                                        (click)="$event.stopPropagation();$event.preventDefault()">Modifier</a>
+                                    </li>
+                                    <li role="menuitem" class="new-option">
+                                      <a class="dropdown-item" href="/"
+                                        (click)="$event.stopPropagation();$event.preventDefault()">Query</a>
+                                    </li>
+                                  </ul>
+                                </li>
+                                <li class="modal-body text-center w-100" [ngClass]="{'show': progressinfo}">
+                                  <p class="modal-name">Progress</p>
+                                  <div class="d-flex flex-wrap justify-content-between">
+                                    <button type="button" class="btn btn-default btn-sm"
+                                      (click)="progressClose();$event.stopPropagation()">Cancel</button>
+                                    <button type="button" class="btn btn-primary btn-sm"
+                                      (click)="progressClose();$event.stopPropagation()">Yes</button>
+                                  </div>
+                                </li>
+                                <li class="modal-body text-center w-100" [ngClass]="{'show': revertinfo}">
+                                  <p class="modal-name">Revert</p>
+                                  <div class="d-flex flex-wrap justify-content-between">
+                                    <button type="button" class="btn btn-default btn-sm"
+                                      (click)="revertClose();$event.stopPropagation()">Cancel</button>
+                                    <button type="button" class="btn btn-primary btn-sm"
+                                      (click)="revertClose();$event.stopPropagation()">Yes</button>
+                                  </div>
+                                </li>
+                                <li class="modal-body text-center w-100" [ngClass]="{'show': deleteinfo}">
+                                  <p class="modal-name">Delete?</p>
+                                  <div class="d-flex flex-wrap justify-content-between">
+                                    <button type="button" class="btn btn-default btn-sm"
+                                      (click)="deleteClose();$event.stopPropagation()">No</button>
+                                    <button type="button" class="btn btn-primary btn-sm"
+                                      (click)="deleteClose();$event.stopPropagation()">Yes</button>
+                                  </div>
+                                </li>
+                              </ul>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                    </tbody>
+                    <tbody fxLayout="row wrap" class="list">
+                      <tr class="x-animated fadeIn d-1 in" (click)="changeIc2('dots','icon2');$event.preventDefault()" [ngClass]="icon2 ? 'trActive2' :''">
+                        <td class="text-center">
+                          <h4 class="rownumber ng-binding">2</h4>
+                        </td>
+                        <td class="text-left">
+                          <b class="table-title">
+                            <span>Blueberry Cream</span>
+                          </b>
+                          <div class="small help-block line-divider">
+                            <span class="table-text">1</span>
+                          </div>
+                        </td>
+                        <td class="text-left">
+                          <b class="table-title">
+                            <span>-</span>
+                          </b>
+                          <div class="small help-block line-divider">
+                            <span class="table-text">Rp. 24.200</span>
+                          </div>
+                        </td>
+                        <td class="text-left">
+                          <b class="table-title">
+                            <span>225</span>
+                          </b>
+                          <div class="small help-block line-divider">
+                            <span class="table-text">Pack of 1.5kg</span>
+                          </div>
+                        </td>
+                        <td class="text-left">
+                          <div>
+                            <b class="table-title">
+                              <span>124 / 171 / 223
+                              </span>
+                            </b>
+                          </div>
+                          <div class="small help-block line-divider">
+                            <span class="table-text red">Insufficient</span>
+                          </div>
+                        </td>
+                        <td>
+                          <div class="d-flex">
+                            <div class="btn-group">
+                              <a class="icon-more ng-tns-c4-1 ng-star-inserted" href="javascript:void(0)" icon-more></a>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                    </tbody>
+                    <tbody fxLayout="row wrap" class="list">
+                      <tr class="x-animated fadeIn d-1 in" (click)="changeIc2('dots','icon3');$event.preventDefault()" [ngClass]="icon3 ? 'trActive3' :''">
+                        <td class="text-center">
+                          <h4 class="rownumber ng-binding">3</h4>
+                        </td>
+                        <td class="text-left">
+                          <b class="table-title">
+                            <span>Chocolate Volumpto</span>
+                          </b>
+                          <div class="small help-block line-divider">
+                            <span class="table-text">1</span>
+                          </div>
+                        </td>
+                        <td class="text-left">
+                          <b class="table-title">
+                            <span>-</span>
+                          </b>
+                          <div class="small help-block line-divider">
+                            <span class="table-text">Rp. 35.340</span>
+                          </div>
+                        </td>
+                        <td class="text-left">
+                          <b class="table-title">
+                            <span>183</span>
+                          </b>
+                          <div class="small help-block line-divider">
+                            <span class="table-text">1kg Aluminum Bag</span>
+                          </div>
+                        </td>
+                        <td class="text-left">
+                          <div>
+                            <b class="table-title">
+                              <span>124 / 171 / 223
+                              </span>
+                            </b>
+                          </div>
+                          <div class="small help-block line-divider">
+                            <span class="table-text">2.6 Months</span>
+                          </div>
+                        </td>
+
+                        <td>
+                          <div class="d-flex">
+                            <div class="btn-group">
+                              <a class="icon-more ng-tns-c4-1 ng-star-inserted" href="javascript:void(0)" icon-more></a>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="d-flex flex-wrap justify-content-end align-items-center btn-task-main wow fadeIn"
+            data-wow-delay="500ms" #addNewTskBtn>
+            <h5 class="p-title">Inventory Cost <span>Rp. 23.353.256,45</span></h5>
+            <h5 class="p-title">Inventory Value <span>Rp. 23.353..252.256,45</span></h5>
+            <button type="button" class="btn btn-main btn-green" [routerLink]="[ '/main/manufacturing/manage-compositions']">Add New Composition</button>
+          </div>
+        </div>
+
+
+        <div class="rightSidebar-wrap rightSide-data-penal">
+          <div class="data-penal-header">
+            <a href="/" class="icon-dot" (click)="changeIc('dots');$event.preventDefault()">
+              <i icon-more></i>
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div class="col-xl-3  wow fadeIn">
+      <div class="contentBox task-page">
+        <div class="w-100">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div
+    class="rightSidebar-wrap rightSidebar-wrap-right-0 rightSide-data-penal comman-sidebar right-aside composition-right">
+    <div class="data-penal-body d-flex flex-column">
+      <div class="">
+        <a href="jasvscript:void(0);" class="icon-dot" (click)="changeIc('arrow');$event.preventDefault()">
+          <i icon-more></i>
+        </a>
+      </div>
+      <h3 class="rightSidebar-main_title mb-40">Composition Details</h3>
+      <div class="data-block">
+        <h5 class="data-title">Composition 1</h5>
+        <p class="data-discription"><span class="left">Vanilla Granules</span><span class="right">20 grams 12.50%</span></p>
+        <p class="data-discription"><span class="left">Component T3</span><span class="right">20 grams 12.50%</span></p>
+        <p class="data-discription"><span class="left">Extra Virgin Olive Oil</span><span class="right">120 ml 75%</span></p>
+        <p class="data-discription last-desc"><span class="total">Total Expected Weight</span><span>160 grams</span></p>
+        <ul class="edit-list">
+          <li><a class="edit-btn">Delete</a></li>
+          <li><a class="edit-btn" [routerLink]="[ '/main/manufacturing/manage-compositions']">Edit</a></li>
+        </ul>
+      </div>
+      <div class="data-block">
+        <h5 class="data-title">Named Composition</h5>
+        <p class="data-discription"><span class="left">Vanilla Granules</span><span class="right">20 grams 12.50%</span></p>
+        <p class="data-discription"><span class="left">Component T3</span><span class="right">20 grams 12.50%</span></p>
+        <p class="data-discription"><span class="left">Extra Virgin Olive Oil</span><span class="right">120 ml 75%</span></p>
+        <p class="data-discription last-desc"><span class="total">Total Expected Weight</span><span>160 grams</span></p>
+        <ul class="edit-list">
+          <li><a class="edit-btn">Delete</a></li>
+          <li><a class="edit-btn" [routerLink]="[ '/main/manufacturing/manage-compositions']">Edit</a></li>
+        </ul>
+      </div>
+      <div class="data-block">
+        <h5 class="data-title">Composition 2</h5>
+        <p class="data-discription"><span class="left">Vanilla Granules</span><span class="right">20 grams 12.50%</span></p>
+        <p class="data-discription"><span class="left">Component T3</span><span class="right">20 grams 12.50%</span></p>
+        <p class="data-discription"><span class="left">Extra Virgin Olive Oil</span><span class="right">120 ml 75%</span></p>
+        <p class="data-discription last-desc"><span class="total">Total Expected Weight</span><span>160 grams</span></p>
+        <ul class="edit-list">
+          <li><a class="edit-btn">Delete</a></li>
+          <li><a class="edit-btn" [routerLink]="[ '/main/manufacturing/manage-compositions']">Edit</a></li>
+        </ul>
+      </div>
+
+      <!-- <div class="data-block mt-auto">
+              <h5 class="data-title">Top 5 Customers</h5>
+              <p class="data-discription">Belle Foods</p>
+              <p class="data-discription">Sacramento Sox</p>
+              <p class="data-discription">Baker’s Grill</p>
+              <p class="data-discription">Digg Spot</p>
+              <p class="data-discription">Spike’s Meal</p>
+          </div>
+          <div class="data-block">
+              <h5 class="data-title">Last Invoiced Date</h5>
+              <p class="data-discription">15, November 2020</p>
+          </div>
+          <div class="data-block">
+              <h5 class="data-title">Vendor</h5>
+              <p class="data-discription">Ambient Warehouse</p>
+          </div>
+          <div class="data-block">
+              <h5 class="data-title">Lead Time</h5>
+              <p class="data-discription">37 Days</p>
+          </div>
+          <div class="data-block">
+              <h5 class="data-title">Usage Statistics</h5>
+              <p class="data-discription">132 - 60 Days</p>
+              <p class="data-discription">222 - 90 Days</p>
+              <p class="data-discription">362 - 120 Days</p>
+          </div> -->
+    </div>
+    <div class="data-penal-footer min-h77">
+      <div class="row">
+              <div class="col-12">
+                    <button class="btn add-btn" type="submit" [routerLink]="[ '/main/manufacturing/manage-compositions']">Add Composition</button>
+              </div>
+          </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #addProduct>
+  <div class="modal-body p-0" app-add-product (closeClick)="modalRef.hide()">
+  </div>
+</ng-template>
+
+<!-- <app-modal-demo style="position: relative;z-index: 999999999;"></app-modal-demo> -->

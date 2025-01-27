@@ -1,0 +1,93 @@
+
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@use '@angular/material' as mat;
+
+html {
+  @include mat.theme((
+    color: (
+      theme-type: light,
+      primary: mat.$azure-palette,
+      tertiary: mat.$blue-palette,
+    ),
+    typography: Roboto,
+    density: 0,
+  ));
+}/* You can add global styles to this file, and also import other style files */
+
+/* Importing Bootstrap SCSS file. */
+// @import "./node_modules/bootstrap/scss/bootstrap";
+
+/* Importing Datepicker SCSS file. */
+// @import "node_modules/ngx-bootstrap/datepicker/bs-datepicker";
+@import "primeicons/primeicons.css";
+
+.mat-mdc-form-field{
+  display: flex !important;
+}
+.mdc-text-field--filled, .mat-mdc-text-field-wrapper:hover, .mat-mdc-form-field-focus-overlay {
+  background-color: transparent !important
+}
+.mdc-text-field--filled, .mat-mdc-text-field-wrapper:hover, .mat-mdc-form-field-focus-overlay {
+  background-color: transparent !important;
+}
+
+.mdc-text-field {
+  padding: 0 !important;
+}
+
+.mdc-text-field {
+  height: 50px !important;
+}
+
+.mat-mdc-form-field-hint-wrapper, .mat-mdc-form-field-error-wrapper {
+  padding: 0 !important;
+}
+.mdc-text-field--filled .mdc-floating-label{
+  color: #d2d7db !important;
+  font-size: 16px;
+  text-transform: uppercase;
+}
+.mdc-text-field--filled:not(.mdc-text-field--disabled).mdc-text-field--invalid .mdc-floating-label{
+  color: #f44336 !important;
+}
+.mat-form-field-appearance-legacy .mat-form-field-wrapper {
+  padding-bottom: 0;
+}
+.mdc-text-field--filled:not(.mdc-text-field--disabled) .mdc-line-ripple::before{
+  border-color: #d2d7db !important;
+}
+.swal2-icon.swal2-error.swal2-icon-show {
+  margin: 10px auto;
+  margin-bottom: 18px;
+}
+.mat-mdc-menu-panel,
+div.mat-mdc-select-panel{
+  background: #fff !important;
+}
+.mat-mdc-select-arrow svg,
+div.mat-mdc-select-panel mat-pseudo-checkbox,
+.newMemo-Modal .mat-mdc-form-field-subscript-wrapper{
+  display: none;
+}
+div.mat-mdc-select-panel .mat-mdc-option{
+  line-height: inherit !important;
+  min-height: 34px;
+}
+.mdc-text-field--filled:not(.mdc-text-field--disabled) .mdc-line-ripple::before,
+.mdc-text-field--filled:not(.mdc-text-field--disabled) .mdc-line-ripple::after {
+  border-color: rgb(8, 217, 214) !important;
+}
+.dashboardWrap .card.greenBG-chart {
+  .mdc-text-field--filled:not(.mdc-text-field--disabled) .mdc-line-ripple::before,
+  .mdc-text-field--filled:not(.mdc-text-field--disabled) .mdc-line-ripple::after {
+    border-color: #fff !important;
+  }
+}
+.dashboardWrap .mdc-text-field {
+  height: 34px !important;
+}
+.dashboardWrap .mdc-text-field--no-label .mat-mdc-form-field-infix {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}

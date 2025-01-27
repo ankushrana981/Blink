@@ -1,0 +1,95 @@
+<div class="manufacturing-Wrap pruduction-entry-Wrap">
+    <div class="viewdata-title">
+      <h2>Manage Composition</h2>
+    </div>
+    <div class="contentBox">
+      <div class="leftContent">
+        <div class="card">
+          <div class="manageBox">
+            <div class="row">
+              <div class="col-sm-3" style="padding-right:30px;">
+                <div class="row">
+                  <div class="col-12 customanimate order-animate1 z-index5">
+                    <div class="form-group mb-20">
+                      <!-- <label class="">Product</label> -->
+                      <ng-select [clearable]="false" [(ngModel)]="productionitem.product" placeholder="Product" [items]="productNameItem | async" bindLabel="title" [notFoundText]="notFoundText"
+                       name="productName" id="productName" autocomplete="off" (change)="productSelected($event)" [typeahead]="MainSearchdataSource">
+                      </ng-select>         
+                    </div>
+                  </div>
+                  <div class="col-12 customanimate order-animate2 z-index4">
+                    <div class="form-group mb-10">
+                       <!-- <label class="">COMPOSITION</label> -->
+                       <ng-select [clearable]="false"  [items]="compositionrecords" placeholder="COMPOSITION" bindLabel="title" [(ngModel)]="productionitem.composition"
+                       name="composition" id="composition" autocomplete="off" (change)="compositionSelected($event)">
+                       </ng-select>
+                    </div>
+                  </div>
+                  <div class="col-12 customanimate order-animate3 z-index3">
+                    <div class="form-group mb-20 mt-10">
+                      <mat-form-field class="example-full-width">
+                        <input matInput placeholder="QUANTITY" name="quantity" [(ngModel)]="productionitem.quantity" (keydown)="AllowNumbers($event)">
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <div class="col-12 customanimate order-animate4 z-index2">
+                    <div class="form-group mb-20">
+                      <!-- <label>Branch</label> -->
+                      <ng-select [clearable]="false"  [items]="branchrecords" bindLabel="title" placeholder="Branch" [(ngModel)]="productionitem.branch"
+                          name="branch" id="selectproduct" autocomplete="off">
+                          </ng-select>                   
+                    </div>
+                  </div>
+                </div>
+                
+                
+                
+                
+              </div>
+              <div class="col-sm-8" style="padding-left: 30px; border-left:2px solid #f0f0f0;" *ngIf="rowRepeatArr.length">
+                <h4>{{compositionName}} Ingredients</h4>
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th width="20%">Product</th>
+                      <th width="20%">Quantity</th>
+                      <th width="20%">UoM</th>
+                      <th width="20%">Percent</th>
+                      <th width="20%">Price</th>
+                    </tr>
+                  </thead>
+                  <tbody  [@fadeIn]="rowRepeatArr?.length"  fxLayout="row wrap">
+                    <tr *ngFor="let i of rowRepeatArr; index as j" class="x-animated fadeIn d-3 in" fxFlex="150" fxFlex.lt-sm="300" >
+                      <td>{{i.product.title}}
+                      </td>
+                      <td>{{i.quantity}}
+                      </td>
+                      <td>{{unit}}
+                      </td>
+                      <td>{{i.percent}}
+                      </td>
+                      <td>{{i.price}}
+                      </td>
+                    
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-12 customanimate order-animate5 z-index1">
+                <div class="btn-bar ">
+                  <button class="btn btn-success" (click)="createproductionEntry()">
+                    <i class="fa fa-save"></i> Save</button>
+                  <a class="btn btn-default" [routerLink]="['/main/manufacturing/production-view']">
+                    <i class="fa fa-remove"></i> Cancel</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- <app-modal-demo style="position: relative;z-index: 999999999;"></app-modal-demo> -->

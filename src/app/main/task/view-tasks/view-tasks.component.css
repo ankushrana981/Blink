@@ -1,0 +1,113 @@
+﻿.class-margin-top {
+    margin-top: 5px!important;
+}
+.dropdown-table .show-completeinfo.show {
+    opacity: 1;
+    visibility: visible;
+    height: 100%;
+    vertical-align: central;
+}
+.remove-bullet:after {
+    display: none;
+}
+.remove-bullet:after {
+  display: none;
+}
+.pagination {
+    margin: 2px 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 0px solid darkgray;
+    border-radius: 4px;
+  }
+  
+  .pagination a {
+    color: white;
+    padding: 4px 9px;
+    margin:0px 3px;
+    border-radius: inherit;
+    text-decoration: none;
+    background-color: darkgray;
+  }
+  .orangeOnHover{
+    background-color: orange !important;
+  }
+  .blueOnHover:hover{
+    background-color: blue !important;
+
+  }
+  .redOnHover:hover{
+    background-color: red !important;
+  }
+  .redOnHover, .blueOnHover{
+    background-color: darkgray;
+  }
+  .l2{
+      display: none;
+  }
+  .l1{
+      display: inline-block;
+  }
+  .progressLabel:hover .l2 {
+    display: inline-block;
+  }
+  .progressLabel:hover .l1 {
+    display: none;
+  }
+  .progressLabel .l2{
+      display: none;
+  }
+  .mbot-4{
+    margin-bottom: 4px;
+  }
+  .green{
+    background-color: green !important;
+  }
+  .progressWidth{
+    width: 190px !important;
+    min-height: fit-content !important;
+  }
+  .changeStatusList{
+    margin: 4px 0px 0px;
+    text-align: center;
+  }
+  .ProgressLabelNumbers{
+    margin-top: 8px;
+  }
+  .changeStatus{
+    color: white;
+    font-size: 13px;
+    line-height: 14.32px;
+  }
+  .confirmationBox{
+    margin-top: 3px;
+    min-height: 51px;
+  }
+  /*.progressWidth:has(.progressLabel:hover){
+    width:190px !important
+  }*/
+  .with-breaks{
+    white-space: pre-wrap;
+  }
+  .undoButtonWidth{
+    /* width: 210px !important; */
+    min-height: 36px !important;
+    width: fit-content !important;
+    transition-delay: 300ms;
+    transition: cubic-bezier(0.165, 0.84, 0.44, 1);
+  }
+  .addNewTask{
+    position: absolute;
+    right: 260px;
+    bottom: 125px;
+  }
+  .selectTaskForSubtask{
+    cursor: pointer;
+    line-height: 25px;
+  }
+  @media only screen and (max-width:997px){
+    .addNewTask{
+      right: 180px;
+    }
+  }

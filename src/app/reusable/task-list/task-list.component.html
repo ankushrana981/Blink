@@ -1,0 +1,122 @@
+<form class="d-flex flex-wrap chart-form position-relative">
+    <aside class="chart-aside">
+        <div class="chart-header extra-space w-100 d-flex flex-wrap">
+            <div class="chart-aside d-flex flex-wrap justify-content-between">
+                <div class="seft-details d-flex flex-column">
+                    <span class="user-pic">
+                        <img src="assets/images/user-1.png" alt="user pic">
+                    </span>
+                    <h3>Welcome back, <strong>Tony</strong></h3>
+                    <p>wed, 5th may, 2017</p>
+                </div>
+                <a href="javascript:void(0)" icon-bar></a>
+            </div>
+        </div>
+        <div class="chart-inner">
+            <div class="stream-block d-flex flex-column align-items-end">
+                <h5 class="mb-0">Task</h5>
+            </div>
+            <!-- malihu-scrollbar [scrollbarOptions]="scrollbarOptions" -->
+            <div  class="scrollbar scroll-task-list" >
+                <ul class="task-list">
+                    <li class="task-li d-flex flex-column">
+                        <span class="task-li-line"></span>
+                        <time class="task-list-time">May 5</time>
+                        <div class="d-flex flex-wrap justify-content-between">
+                            <h6 class="task-list-title">McDonalds</h6>
+                            <h6 class="task-list-title">
+                                <a href="javascript:void(0)" (click)="followClick()">Follow Up</a>
+                            </h6>
+                            <div>
+                                <p class="task-list-text">Minim veniam, quis nostrud exercitation ullamco la boris nisit ero italy iquip ex ea voluptate rito</p>
+                                <div class="d-flex flex-wrap align-items-center justify-content-end completed">
+                                    <h5 class="task-list-process">Completed</h5>
+                                    <time class="task-list-date d-flex flex-wrap align-items-center">
+                                        July 08 
+                                        <label class="check-label d-flex flex-wrap align-items-center">                                            
+                                            <input type="checkbox" name="" id="">
+                                            <span class="check-box" icon-checked></span>
+                                        </label>
+                                    </time>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="task-li d-flex flex-column">
+                        <span class="task-li-line"></span>
+                        <time class="task-list-time">May 6</time>
+                        <div class="d-flex flex-wrap justify-content-between">
+                            <h6 class="task-list-title">starbucks</h6>
+                            <h6 class="task-list-title">
+                                <a href="javascript:void(0)" (click)="followClick()">Follow Up</a>
+                            </h6>
+                            <div>
+                                <p class="task-list-text">Minim veniam, quis nostrud exercitation ullamco la boris nisit ero italy iquip ex ea voluptate rito</p>
+                                <div class="d-flex flex-wrap align-items-center justify-content-end completed">
+                                    <h5 class="task-list-process">Completed</h5>
+                                    <time class="task-list-date d-flex flex-wrap align-items-center">
+                                        July  12 
+                                        <label class="check-label d-flex flex-wrap align-items-center">                                            
+                                            <input type="checkbox" name="" id="">
+                                            <span class="check-box" icon-checked></span>
+                                        </label>
+                                    </time>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="task-li d-flex flex-column">
+                        <span class="task-li-line"></span>
+                        <time class="task-list-time">May 6</time>
+                        <div class="d-flex flex-wrap justify-content-between">
+                            <h6 class="task-list-title">ajisen</h6>
+                            <h6 class="task-list-title">
+                                <a href="javascript:void(0)" (click)="followClick()">Follow Up</a>
+                            </h6>
+                            <div>
+                                <p class="task-list-text">Minim veniam, quis nostrud exercitation ullamco la boris nisit ero italy iquip ex ea voluptate rito</p>
+                                <div class="d-flex flex-wrap align-items-center justify-content-end query">
+                                    <h5 class="task-list-process">Query</h5>
+                                    <time class="task-list-date d-flex flex-wrap align-items-center">
+                                        July 19
+                                        <label class="check-label d-flex flex-wrap align-items-center">                                            
+                                            <input type="checkbox" name="" id="">
+                                            <span class="check-box" icon-checked></span>
+                                        </label>
+                                    </time>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="task-li d-flex flex-column">
+                        <span class="task-li-line"></span>
+                        <time class="task-list-time">May 6</time>
+                        <div class="d-flex flex-wrap justify-content-between">
+                            <h6 class="task-list-title">starbucks</h6>
+                            <h6 class="task-list-title">
+                                <a href="javascript:void(0)" (click)="followClick()">Follow Up</a>
+                            </h6>
+                            <div>
+                                <p class="task-list-text">Minim veniam, quis nostrud exercitation ullamco la boris nisit ero italy iquip ex ea voluptate rito</p>
+                                <div class="d-flex flex-wrap align-items-center justify-content-end progress">
+                                    <h5 class="task-list-process">in progress</h5>
+                                    <time class="task-list-date d-flex flex-wrap align-items-center">
+                                        July 21 
+                                        <label class="check-label d-flex flex-wrap align-items-center">                                            
+                                            <input type="checkbox" name="" id="">
+                                            <span class="check-box" icon-checked></span>
+                                        </label>
+                                    </time>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="slide-up">
+                <button type="button" icon-menu></button>
+            </div>
+            <div class="" app-task-progress [ngClass]="{'active': follow}" (click)="followClose('')"></div>
+        </div>
+    </aside>
+</form>

@@ -1,0 +1,832 @@
+<div class="crm-Wrap inventoryreports-Wrap task-view taskview-only-wrap-h" [ngClass]="icon1?'active':''">
+    <div class="contentBox task-page take-view-page-h" [ngClass]="icon1?'active':''">
+        <div class="leftContent overflow-0 task-board">
+
+
+            <div class="viewdata-title task-title d-flex flex-wrap align-items-center justify-content-between">
+                <div class="d-flex flex-wrap align-items-center ">
+
+                    <div class="titleWith-filter">
+                        <h2>Tasks</h2>
+
+                        <div class="filteredOption">
+                            <div malihu-scrollbar class="scrollbar">
+                                <ul>
+                                    <li *ngFor="let item of tempArr;let index=index;" [@EnterLeave]="'flyIn'">
+                                        <small class="close">
+                                            <img src="assets/images/icon-close-dark.svg" alt="" width="10"
+                                                (click)="resetFilter(item)">
+                                        </small>
+                                        <p>
+                                            <span>{{item.parentFilter}}</span>
+                                            <span
+                                                *ngIf="item.selectedObj.id == 1 || item.selectedObj.id == 2 || item.selectedObj.id == 7">
+                                                {{ item.secondFilter }}
+                                            </span>
+                                        </p>
+                                        <p
+                                            *ngIf="(item.selectedObj.id == 1 || item.selectedObj.id == 2) && item.selectedObj.id != 3">
+                                            <span>{{ item.childFilter | date }}</span>
+                                            <span
+                                                *ngIf="(item.selectedObj.id == 1 && item.selectedObj.bindedValue.id == 2) || (item.selectedObj.id == 2 && item.selectedObj.bindedValue.id == 2)">
+                                                -{{item.subchildrange | date }}
+                                            </span>
+                                        </p>
+                                        <p *ngIf="item.selectedObj.id != 1 && item.selectedObj.id != 2">
+                                            <span>{{ item.childFilter }}</span>
+                                            <span
+                                                *ngIf="item.selectedObj.id == 5 && (item.subchildFilter != undefined && item.subchildFilter != '')">
+                                                - {{ item.subchildFilter }}</span>
+                                        </p>
+
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div *ngIf="tempArr.length != 3" class="filter-btnBox" (click)="startingFilter()">
+                            <img src="assets/images/icon-filter.svg" height="25" width="25" style="margin-top: -5px;"
+                                alt="">
+                        </div>
+
+                        <div class="selectBoxList fliter-task" *ngIf="fliterflag">
+                            <div class="form-group" (clickOutside)="isOpenFilter = false">
+                                <label class="gray-label">Filter</label>
+                                <ng-select #filterName [clearable]="false" [items]="filterstart" bindLabel="title"
+                                    [(ngModel)]="filterData" [closeOnSelect]="true" name="filterName" id="filterName"
+                                    autocomplete="off" (change)="isOpenFilter = false;changedParentFilter($event)"
+                                    [isOpen]="isOpenFilter" (focus)="isOpenFilter = true">
+                                </ng-select>
+                            </div>
+                            <div class="form-group" *ngIf="filterData?.option?.length && !filterData.async"
+                                (clickOutside)="isOpen = false">
+
+                                <label class="gray-label">{{filterData.labelName}}</label>
+                                <ng-select [clearable]="false" #secondFilter1 [items]="filterData.option"
+                                    [(ngModel)]="filterData.bindedValue" [isOpen]="isOpen" [closeOnSelect]="true"
+                                    bindLabel="title" name="secondFilter" id="secondFilter" autocomplete="off"
+                                    (change)="isOpen = false;changedChildFilter($event);" (focus)="isOpen = true">
+                                </ng-select>
+                            </div>
+                            <ng-container *ngFor="let data of filterData.suboptions;let index=index;">
+                                <div class="form-group"
+                                    *ngIf="data?.options?.length && data.type==='select' && !data.async && filterData?.bindedValue?.id > 0">
+                                    <label class="gray-label">{{data.labelName}}</label>
+                                    <ng-select [clearable]="false" [items]="data?.options" [(ngModel)]="data.bindvalue"
+                                        bindLabel="title" name="{{'secondFilter'+index}}" id="{{'secondFilter'+index}}"
+                                        autocomplete="off" (change)="changedsubChildFilter($event)">
+                                    </ng-select>
+                                </div>
+                                <div class="form-group"
+                                    *ngIf="data.type==='select' && data.async && filterData?.bindedValue?.id > 0">
+                                    <label class="gray-label">{{data.labelName}}</label>
+                                    <ng-select [clearable]="false" [items]="data?.options | async" bindLabel="title"
+                                        [(ngModel)]="data.bindvalue" [loading]="companiesLoading"
+                                    name="{{'secondFilter'+index}}"
+                                        id="{{'secondFilter'+index}}" autocomplete="off"
+                                        [typeahead]="MainSearchdataSource" (change)="changedsubChildFilter($event)">
+                                    </ng-select>
+                                </div>
+                            </ng-container>
+
+
+                            <div class="form-group" *ngIf="filterData?.date || filterData?.enddate">
+                                <label>Start Date</label>
+                                <div class="datepickerInputBox">
+                                    <input class="form-control" name="minDatepicker" type="text" id="minDatepicker"
+                                        [maxDate]="maxDate" bsDatepicker placeholder=""
+                                        [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY' }"
+                                        (bsValueChange)="modelDatepickerDate($event,'specific')">
+                                    <i class="fa fa-calendar" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                            <div class="form-group" *ngIf="filterData?.enddate">
+                                <label>End date</label>
+                                <div class="datepickerInputBox">
+                                    <input class="form-control" name="maxDatepicker" type="text" id="maxDatepicker"
+                                        [maxDate]="maxDate" bsDatepicker placeholder=""
+                                        [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY' }"
+                                        (bsValueChange)="modelDatepickerDate($event,'range')">
+                                    <i class="fa fa-calendar" aria-hidden="true"></i>
+                                </div>
+                            </div>
+
+                            <div class="form-group" *ngIf="filterData?.month || filterData?.endmonth">
+                                <label>Start Month</label>
+                                <div class="datepickerInputBox">
+                                    <input class="form-control" name="minDatepicker" type="text" id="minMonthDatepicker"
+                                        bsDatepicker placeholder="" [bsConfig]="{ dateInputFormat: 'MMM' }"
+                                        (onShown)="onOpenCalendar($event)"
+                                        (bsValueChange)="modelDatepickerMonth($event,'specific')">
+                                    <i class="fa fa-calendar" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                            <div class="form-group" *ngIf="filterData?.endmonth">
+                                <label>End Month</label>
+                                <div class="datepickerInputBox">
+                                    <input class="form-control" name="maxDatepicker" type="text" id="maxMonthDatepicker"
+                                        bsDatepicker placeholder="" [bsConfig]="{ dateInputFormat: 'MMM' }"
+                                        (onShown)="onOpenCalendar($event)"
+                                        (bsValueChange)="modelDatepickerMonth($event,'range')">
+                                    <i class="fa fa-calendar" aria-hidden="true"></i>
+                                </div>
+                            </div>
+
+                            <div class="form-group" *ngIf="filterData?.year || filterData?.endyear">
+                                <label>Start Year</label>
+                                <div class="datepickerInputBox">
+                                    <input class="form-control" name="minDatepicker" type="text" id="minYearDatepicker"
+                                        bsDatepicker placeholder="" [bsConfig]="{ dateInputFormat: 'YYYY' }"
+                                        (onShown)="onOpenyearCalendar($event)"
+                                        (bsValueChange)="modelDatepickerYear($event,'specific')">
+                                    <i class="fa fa-calendar" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                            <div class="form-group" *ngIf="filterData?.endyear">
+                                <label>End Year</label>
+                                <div class="datepickerInputBox">
+                                    <input class="form-control" name="maxDatepicker" type="text" id="maxYearDatepicker"
+                                        bsDatepicker placeholder="" [bsConfig]="{ dateInputFormat: 'YYYY' }"
+                                        (onShown)="onOpenyearCalendar($event)"
+                                        (bsValueChange)="modelDatepickerYear($event,'range')">
+                                    <i class="fa fa-calendar" aria-hidden="true"></i>
+                                </div>
+                            </div>
+
+                            <div class="form-group class-margin-top" *ngIf="filterData.id === 3">
+                                <div class="custom-control custom-checkbox">
+                                    <label class="custom-control-label" for="defaultChecked2">PAST DUE</label>
+                                    <input type="checkbox" class="custom-control-input" id="defaultChecked2"
+                                        name="check" (change)="changedChildFilter($event)"
+                                        [(ngModel)]="filterData.pastDue">
+
+                                </div>
+                            </div>
+
+
+                            <div class="form-group class-margin-top" *ngIf="filterData.id === 4">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="defaultChecked2"
+                                        name="check" (change)="changedChildFilter($event)"
+                                        [(ngModel)]="isCompletedTask">
+                                    <label class="custom-control-label" for="defaultChecked2">COMPLETED</label>
+                                </div>
+                            </div>
+
+                            <div class="" *ngIf="filterData.id === 9">
+                                <mat-form-field class="example-full-width mat-input">
+                                    <input [(ngModel)]="filterData.note" #notesInput matInput type="text"
+                                        placeholder="Search" value="" autocomplete="off" id="txtNotes" name="txtNotes"
+                                        (keydown.enter)="changedChildFilter($event)">
+                                </mat-form-field>
+                            </div>
+
+                            <div class="form-group" *ngIf="filterData.id === 5">
+                                <!--<mat-form-field class="example-full-width mat-input">
+                                    <input [(ngModel)]="filterData.board" #boardInput matInput type="text"
+                                           placeholder="Board" value="" autocomplete="off" id="txtBoard" name="txtBoard"
+                                           (keydown.enter)="changedChildFilter($event)">
+                                </mat-form-field>-->
+                                <label class="gray-label">Board</label>
+                                <ng-select [(ngModel)]="filterData.board"
+                                           [hideSelected]="true" [searchable]="true" id="txtBoard" name="txtBoard"
+                                           class="w-100" [items]="boardList" placeholder="" [isOpen]="isOpenBoard"
+                                           bindLabel="board" bindValue="board" (change)="changedChildFilter($event)"
+                                           (search)="isOpenBoard = true;SearchString($event)" (blur)="isOpenBoard = false" [selectOnTab]="true">
+                                    <ng-template ng-label-tmp let-item="item" let-clear="clear">
+                                        <span class="ng-value-label">{{item.board}}</span>
+                                        <span class="ng-value-icon right" (click)="clear(item);stop($event)"
+                                              aria-hidden="true">�</span>
+                                    </ng-template>
+                                    <ng-template ng-option-tmp let-item="item" let-index="index">
+                                        {{item.board}}
+                                    </ng-template>
+                                </ng-select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex flex-wrap" style="margin-top: -20px;">
+                    <!-- (click)="taskListModal(tastList)" -->
+                    <a class="icon-task icon-folder" href="javascript:void(0)" icon-folder title="Board View"
+                        (click)="folderView = !folderView;changes(true);"
+                        [ngClass]="{active: folderView, inactive: !folderView}"></a>
+                    <a class="icon-task" href="javascript:void(0)" icon-more title="More"></a>
+
+                    <a class="icon-task icon-square-right" icon-square-right title="Show Completed Task"
+                        (click)="squareView = !squareView" [ngClass]="{active: squareView, inactive: !squareView}"
+                        [ngStyle]="{'background': isCompletedTask == true ? 'rgba(35,103,197,0.14)' : ''}"
+                        style="border-radius: 3px;width: 27px;text-align: center;height: 21px;left: 1196px;top: 139px;"
+                        (click)="taskFilter('CompletedTask')" href="javascript:void(0);"></a>
+
+                    <a class="icon-task icon-square-question" icon-square-question
+                        (click)="questionView = !questionView"
+                        [ngClass]="{active: questionView, inactive: !questionView}"
+                        [ngStyle]="{'background': isSalesChart == false ? 'rgba(35,103,197,0.14)' : ''}"
+                        style="border-radius: 3px;width: 27px;text-align: center;height: 21px;left: 1196px;top: 139px;"
+                        (click)="taskFilter('OverdueTask')" href="javascript:void(0);"></a>
+
+                    <a class="icon-task" href="javascript:void(0);"
+                        (click)="createTaskModal(createTask, {});$event.preventDefault()" icon-pluse
+                        title="Create Task"></a>
+                    <a class="icon-task" href="javascript:void(0)"
+                        [ngStyle]="{'pointer-events': (tempArr?.length == 3) ? 'none' : '' }" (click)="startingFilter()"
+                        icon-filter title="Filter"></a>
+                    <a class="icon-task" href="javascript:void(0)" icon-upload title="Upload"></a>
+                    <a class="icon-task" href="javascript:void(0)" icon-download title="Download"></a>
+                </div>
+            </div>
+
+            <!--<div class="filteredOption">
+                        <ul>
+                            <li *ngFor="let item of tempArr;let index=index;" [@EnterLeave]="'flyIn'">
+                                <small class="close">
+                                    <img src="assets/images/icon-close-dark.svg" alt="" width="10" (click)="resetFilter(item)">
+                                </small>
+                                <p>
+                                    <span>{{item.parentFilter}}</span>
+                                    <span *ngIf="item.selectedObj.id == 1 || item.selectedObj.id == 2 || item.selectedObj.id == 7">
+                                        {{ item.secondFilter }}
+                                    </span>
+                                </p>
+                                <p *ngIf="(item.selectedObj.id == 1 || item.selectedObj.id == 2) && item.selectedObj.id != 3">
+                                    <span>{{ item.childFilter | date }}</span>
+                                    <span *ngIf="(item.selectedObj.id == 1 && item.selectedObj.bindedValue.id == 2) || (item.selectedObj.id == 2 && item.selectedObj.bindedValue.id == 2)">
+                                        -{{item.subchildrange | date }}
+                                    </span>
+                                </p>
+                                <p *ngIf="item.selectedObj.id != 1 && item.selectedObj.id != 2">
+                                    <span>{{ item.childFilter }}</span>
+                                </p>
+                                <p *ngIf="item.selectedObj.id == 5">
+                                    <span>{{ item.subchildFilter }}</span>
+                                </p>
+
+                            </li>
+                        </ul>
+
+
+                    </div>-->
+            <!--<div *ngIf="tempArr.length != 3" class="filter-btnBox" (click)="startingFilter()">
+                        <img src="assets/images/icon-filter.svg" height="25" width="25" alt="">
+                    </div>-->
+            <!--<input class="form-control" name="maxDatepicker" type="text" id="maxyeardatepicker" bsDatepicker
+                           placeholder="" [bsConfig]="{ dateInputFormat: 'YYYY' }">
+                    <i class="fa fa-calendar" aria-hidden="true"></i>-->
+            <!--<input class="form-control" name="maxdatepicker" type="text" id="maxyeardatepicker" bsDaterangepicker
+                           placeholder="" [bsConfig]="{ rangeinputformat : 'dd-mm-yyyy', dateinputformat: 'dd-mm-yyyy'}">-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <div class="card card-box pl-0 card-attention view-details-table wow fadeIn" data-wow-delay=".3s"
+                #tblDivElem>
+                <div class="table-sticky-header">
+                    <table style="width:100%" class="table-hover task-table-main default-to-custom first-padding-0">
+                        <thead>
+                            <tr class="x-animated fadeIn d-1 in">
+                                <th width="30"></th>
+                                <th class="table-date">
+                                    <b class="table-title">
+                                        <span>Due Date</span>&nbsp;
+                                    </b>
+                                    <div class="small help-block line-divider before-line type">
+                                        <!--<span class="table-text">Type</span>-->
+                                    </div>
+                                </th>
+                                <th class="table-description">
+                                    <b class="table-title">
+                                        <span>Description</span>&nbsp;
+                                    </b>
+                                    <div class="small help-block line-divider before-line board">
+                                        <span class="table-text">Board / Customer - Title</span>
+                                    </div>
+                                </th>
+                                <th class="table-status">
+                                    <b class="table-title" style="padding-bottom: 2px;">
+                                        <span>Status</span>
+                                    </b>
+                                    <div class="small help-block line-divider before-line progress">
+                                        <span class="table-text" style="padding-top: 5px;">Progress</span>
+                                    </div>
+                                </th>
+                                <th class="table-created">
+                                    <b class="table-title">
+                                        <span>Created Date</span>&nbsp;
+                                    </b>
+                                    <div class="small help-block line-divider before-line assigned">
+                                        <span class="table-text">Assigned To</span>
+                                    </div>
+                                </th>
+                                <th class="table-action"></th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+          
+            </div>
+            <div class="addNewTask">
+                <ul id="dropdown-basic"
+                class="dropdown-table dark left sub-task-progress-revert progressWidth dropdown-progress d-flex flex-column align-items-center justify-content-center"
+                [ngClass]="{'show':addClicked}">
+                    <li [ngClass]="{'show':addClicked}">
+                        <ul>
+                            <li role="menuitem" class="new-option">
+                                <a (click)="createTaskModal(createTask,{});$event.preventDefault()" class="dropdown-item changeStatus">Add New Task</a>
+                            </li>
+                            <li role="menuitem" class="new-option">
+                                <a (click)="createTaskModal(openSubTask,{});$event.preventDefault()" class="dropdown-item changeStatus">Add New Sub Task</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="d-flex flex-wrap justify-content-end btn-task-main wow fadeIn" data-wow-delay="500ms"
+                #addNewTskBtn>
+                <button id="target5" type="button" class="btn btn-main btn-blue"
+                    (click)="addClicked = !addClicked;$event.preventDefault()">
+                    Add
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="rightSidebar-wrap rightSide-data-penal">
+        <div class="data-penal-header">
+            <a href="jasvscript:void(0);" class="icon-dot" (click)="changeIc('dots');$event.preventDefault()">
+                <i icon-more></i>
+            </a>
+        </div>
+    </div>
+    <div class="rightSidebar-wrap rightSidebar-wrap-right-0 rightSide-data-penal comman-sidebar right-aside taskview-right-aside">
+        <div class="data-penal-body d-flex flex-column">
+            <div class="">
+                <a href="jasvscript:void(0);" class="icon-dot" (click)="changeIc('arrow');$event.preventDefault()">
+                    <i icon-more></i>
+                </a>
+            </div>
+            <h3 class="rightSidebar-main_title mb-40">{{infobarPerticular.infobarName}}</h3>
+            <!--Task Details-->
+            <div class="data-block" *ngIf="infobarPerticular.taskId > 0">
+                <h5 class="data-title">Description</h5>
+                <p class="data-discription">
+                    {{infobarPerticular.note}}
+                </p>
+            </div>
+
+            <div class="data-block" *ngIf="infobarPerticular.taskId > 0">
+                <h5 class="data-title">&nbsp;</h5>
+                <p class="data-discription">
+                    &nbsp;
+                </p>
+            </div>
+            <div class="data-block" *ngIf="infobarPerticular.taskId > 0">
+                <h5 class="data-title">&nbsp;</h5>
+                <p class="data-discription">
+                    &nbsp;
+                </p>
+            </div>
+            <div class="data-block" *ngIf="infobarPerticular.taskId > 0">
+                <h5 class="data-title">&nbsp;</h5>
+                <p class="data-discription">
+                    &nbsp;
+                </p>
+            </div>
+
+
+            <div class="data-block" *ngIf="infobarPerticular.taskId > 0">
+                <h5 class="data-title">Subtasks</h5>
+                <p class="data-discription">
+                    {{infobarPerticular.totalcompleted}} / {{infobarPerticular.totalSubTask}}
+                </p>
+            </div>
+
+
+            <div class="data-block" *ngIf="infobarPerticular.taskId == 0">
+                <h5 class="data-title">&nbsp;</h5>
+                <p class="data-discription">
+                    &nbsp;
+                </p>
+            </div>
+
+            <div class="data-block mt-auto" *ngIf="infobarPerticular.taskId == 0">
+                <h5 class="data-title">Task Type</h5>
+                <table align="right" style="width:164px;height:14px">
+                    <tr>
+                        <td>Added</td>
+                        <td>{{infobar.taskAddedCount}}</td>
+                    </tr>
+                    <tr>
+                        <td>In Progress</td>
+                        <td>{{infobar.taskProgressedCount}}</td>
+                    </tr>
+                    <tr>
+                        <td>Query</td>
+                        <td>{{infobar.taskQueryCount}}</td>
+                    </tr>
+                    <tr>
+                        <td>Completed</td>
+                        <td>{{infobar.taskCompletedCount}}</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="data-block mt-auto" *ngIf="infobarPerticular.taskId == 0">
+                <h5 class="data-title">Overdue Tasks</h5>
+                <p class="data-discription">{{infobar.taskOverdueCount}}</p>
+            </div>
+
+
+            <div class="data-block" *ngIf="infobarPerticular.taskId > 0">
+                <h5 class="data-title">Tasked Users</h5>
+                <p class="data-discription" *ngIf="infobarPerticular.type === 1">
+                    <ng-container *ngFor="let j of infobarPerticular?.associatedUserIdsIdTitle; index as q">
+                        {{j?.title}}{{q === infobarPerticular?.associatedUserIdsIdTitle.length - 1 ? '' : ','}}
+                    </ng-container>
+                </p>
+                <p class="data-discription" *ngIf="infobarPerticular.type != 1">
+                    {{infobarPerticular?.user?.title}}
+                </p>
+            </div>
+
+            <!--<div class="data-block">
+                <h5 class="data-title">Task Group</h5>
+                <p class="data-discription">Billy Bob, Job, Black Adam, Farmer Joe,</p>
+                <span>Jill Jackson</span>
+            </div>-->
+            <div class="data-block" *ngIf="infobarPerticular.taskId == 0">
+                <h5 class="data-title">Associated Task</h5>
+                <!--data-discriptionAssoTask-->
+                <p class="data-discription ">
+                    <ng-container *ngFor="let j of infobar?.lastFiveActiveTasks; index as q">
+
+                        <div class="data-discriptionAssoTask">
+                            <span style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;display:block">
+                                {{(j?.title == undefined || j?.title == '') ? '-' : j?.title}}</span>
+                            <div class="data-discriptionAssoTaskSub">
+                                <span class="text"> {{(j?.title == undefined || j?.title == '') ? '-' :
+                                    j?.title}}</span>
+                            </div>
+                        </div>
+
+
+                    </ng-container>
+                </p>
+            </div>
+            <div class="data-block" *ngIf="infobarPerticular.taskId > 0">
+                <h5 class="data-title">Associated Task</h5>
+                <p class="data-discription">-</p>
+                <!--<p class="data-discription">This is the name of the task, limited length</p>
+                <span>Julia Roberts</span>-->
+            </div>
+        </div>
+        <div class="data-penal-footer min-h77">
+            <!-- <div class="row">
+                <div class="col-12">
+                    <button class="btn close-btn" type="submit" (click)="changeIc('arrow')">
+                        <i class="fa fa-remove mr-1" aria-hidden="true"></i> Cancel</button>
+                    <button *ngIf="!user.id" [disabled]="!user.title || !user.type" class="btn close-btn" type="submit"
+                        (click)="createdisTask(user)">
+                        <i class="fa fa-floppy-o" aria-hidden="true"></i> save</button>
+                    <button *ngIf="user.id" class="btn close-btn" type="submit" (click)="updatediTask(user)">
+                        <i class="fa fa-floppy-o mr-1" aria-hidden="true"></i> save</button>
+                </div>
+                <div class="col-6">
+
+                </div>
+            </div> -->
+        </div>
+    </div>
+</div>
+
+<ng-template #progress>
+    <div class="modal-body text-center">
+        <p class="modal-name">Progress</p>
+        <div class="d-flex flex-wrap justify-content-between">
+            <button type="button" class="btn btn-default btn-sm" (click)="decline()">Cancel</button>
+            <button type="button" class="btn btn-primary btn-sm" (click)="confirm(progress, '')">Yes</button>
+        </div>
+    </div>
+</ng-template>
+
+<ng-template #revert>
+    <div class="modal-body text-center modal-revert">
+        <p class="modal-name">Revert</p>
+        <div class="d-flex flex-wrap justify-content-between">
+            <button type="button" class="btn btn-default btn-sm" (click)="decline()">Cancel</button>
+            <button type="button" class="btn btn-primary btn-sm" (click)="confirm(revert, '')">Yes</button>
+        </div>
+    </div>
+</ng-template>
+<!--
+<div *ngIf="createTask" class="create-task-overlap" (click)="createTaskClose()"></div>
+<div *ngIf="createTask" class="task-modal modal-lg" app-create-task (closeClick)="createTaskClose()">
+</div> -->
+
+
+<ng-template #createTask>
+    <div class="modal-body p-0" app-create-task (updateTheParentGrid)="updateTheParentGrid($event)"
+        (refreshTheParentGrid)="refreshTheParentGriddHandler($event)" (closeClick)="modalRef.hide()">
+    </div>
+</ng-template>
+
+<ng-template #openSubTask>
+    <div class="modal-body p-0" (updateTheParentGrid)="updateTheParentGrid($event)"
+        (refreshTheParentGrid)="refreshTheParentGriddHandler($event)" app-create-task [isSubtaskOpen]="true"
+        [taskData]="taskDetails" (closeClick)="closedSubTask($event)">
+    </div>
+</ng-template>
+
+<ng-template #openEditSubTask>
+    <div class="modal-body p-0" (refreshTheParentGrid)="refreshTheParentGriddHandler($event)"
+        (updateTheParentGrid)="updateTheParentGrid($event)" app-create-task [isEditTask]="true" [isSubtask]="true"
+        (closeClick)="closedSubTask($event)" [taskData]="taskDetails">
+    </div>
+</ng-template>
+
+<ng-template #openEditTask>
+    <div class="modal-body p-0" app-create-task (updateTheParentGrid)="updateTheParentGrid($event)" [isEditTask]="true"
+        [taskData]="taskDetails" (closeClick)="modalRef.hide()">
+    </div>
+</ng-template>
+
+<ng-template #openMoveDueDatePopup>
+    <div class="modal-body p-0" app-updatedue-date (updateTheParentGrid)="updateTheParentGrid($event)"
+        [taskData]="taskDetails" (closeClick)="modalRef.hide()"> </div>
+</ng-template>
+
+<!-- <ng-template #tastList>
+    <div class="modal-body p-0" app-task-list>
+    </div>
+</ng-template> -->
+
+<!-- <app-modal-demo style="position: relative;z-index: 999999999;"></app-modal-demo> -->
+
+<ng-template #subTaskDetailsPopup>
+    <div class="modal-body p-0 delete-modal" (closeClick)="modalRef.hide()">
+        <div class="d-flex flex-wrap position-relative quick-modal">
+            <div class="d-flex flex-wrap w-100 Query-popup">
+                <div class="chart-header w-100 d-flex flex-wrap">
+                    <div class="chart-right flex-1 d-flex flex-wrap align-items-center">
+                        <h3 class=text-title>{{popupDisplayTitle}}</h3>
+                        <a href="javascript:void(0)" icon-close (click)="modalRef.hide(); resetPopupVariables();"
+                            class="close-ic"></a>
+                    </div>
+                </div>
+                <div class="w-100 ">
+                    <div class="task-body">
+                        <div class="d-flex flex-wrap ">
+                            <a class="btn-task" href="javascript:void(0);"
+                                [ngClass]="{'active': selectedTabType === 'details'}"
+                                (click)="showPopupDetails('details')">Details</a>
+                            <a class="btn-task" href="javascript:void(0);"
+                                [ngClass]="{'active': selectedTabType === 'query'}"
+                                (click)="showPopupDetails('query')">Query</a>
+                            <a class="btn-task" href="javascript:void(0);"
+                                [ngClass]="{'active': selectedTabType === 'chat'}"
+                                (click)="showPopupDetails('chat')">Chat</a>
+                        </div>
+                        <div class="task-content" *ngIf="selectedTabType === 'query'">
+                            <form class="example-form" [formGroup]="addTaskQueryForm" (ngSubmit)="addTaskQuery()">
+                                <div class="w-100 ">
+                                    <div class="task-board-field">
+                                        <span class="fnt">Board Name</span>
+                                        <p>{{openPopupBoardName}}</p>
+                                    </div>
+                                    <div class="task-board-field">
+                                        <span class="fnt">Task Description </span>
+                                        <p>{{openPopupTaskDescription}}</p>
+                                    </div>
+                                    <div class="form-group form-task small-note">
+                                        <mat-form-field class="example-full-width mat-input">
+                                            <input formControlName="taskDetailText" id="queryTaskDetailText" matInput type="text"
+                                                placeholder="Query" value="" autocomplete="off">
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="task-btn-grp d-flex flex-wrap align-items-start justify-content-end">
+                                        <button type="submit" class="btn-save"
+                                            [ngClass]="addTaskQueryForm.valid  ? '' : 'disabled'"
+                                            [disabled]="!addTaskQueryForm.valid">
+                                            Save
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="task-content" *ngIf="selectedTabType === 'chat'">
+                            <form class="example-form" [formGroup]="addTaskChatForm" (ngSubmit)="addTaskChat()">
+                                <div class="w-100 ">
+                                    <div class="task-board-field">
+                                        <span class="fnt">Board Name</span>
+                                        <p>{{openPopupBoardName}}</p>
+                                    </div>
+                                    <div class="task-board-field">
+                                        <span class="fnt">Task Description </span>
+                                        <p>{{openPopupTaskDescription}}</p>
+                                    </div>
+                                    <div class="task-tabing popup-task-tabbing">
+                                        <div class="list-div-main">
+                                            <ul malihu-scrollbar class="h-211 scrollbar"
+                                                >
+                                                <li *ngFor="let record of openPopupTaskChatData; let index = index">
+                                                    <span class="circle"
+                                                        [ngClass]="{'yellow': 0 === (index+1) % 2}"></span>
+                                                    <div class="date-name">
+                                                        <span>{{record?.createdOn | date: 'MMM d, y'}}</span>
+                                                        <span>{{record?.createdOn | date: 'H:mm'}}</span>
+                                                        <span class="remove-bullet">{{record?.createdBy}}</span>
+                                                        <div class="chat-action">
+                                                            <a class="icon-task" href="javascript:void(0)"
+                                                               (click)="setEditSubTaskChat(record)" icon-pencil ></a>
+                                                            <!--<div (clickOutside)="subTaskChatDeleteDropdownClose()"
+                                                                 class="chat-delete-div mr-0">-->
+                                                                <!--[ngClass]="(delSubShowId == k.id) ? 'active' : ''"-->
+                                                            <a class="icon-delete" href="javascript:void(0)"
+                                                                (click)="subTaskChatDeleteDropdownClick(record.mqcId)" icon-cross></a>
+                                                           
+                                                            <ul class="dropdown-table dark left sub-task-progress-delete"
+                                                                [ngClass]="(delSubTaskChatShowId == record.mqcId) ? 'show' : ''" > <!--style="margin-left:353px;"-->
+                                                                <li class="modal-body static text-center modal-revert w-100 new-option" ><!--style="padding: 15px 10px;"-->
+                                                                    <p class="modal-name animated-item" style="color:white;">
+                                                                        Delete ?
+                                                                    </p>
+                                                                    <div class="d-flex flex-wrap justify-content-between animated-item">
+                                                                        <button type="button"
+                                                                                class="btn btn-default btn-sm"
+                                                                                (click)="subTaskChatDeleteDropdownClose();$event.stopPropagation()">
+                                                                            No
+                                                                        </button>
+                                                                        <button type="button"
+                                                                                class="btn btn-primary btn-sm"
+                                                                                (click)="subTaskChatDelete(record);$event.stopPropagation()">
+                                                                            Yes
+                                                                        </button>
+                                                                    </div>
+                                                                </li>
+                                                            </ul>
+                                                            <!--</div>-->
+                                                        </div>
+                                                    </div>
+                                                    <div class="text-line">
+                                                        <span>{{record?.note}}</span>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="form-group form-task form-task-new">
+                                        <mat-form-field class="example-full-width mat-input">
+                                            <input formControlName="taskDetailText" id="taskChatDetailText" matInput type="text"
+                                                placeholder="Message" value="" autocomplete="off">
+                                        </mat-form-field>
+                                        <div class="task-btn-grp d-flex align-items-start img-btn">
+                                            <button type="submit" class="btn-save"
+                                                [ngClass]="addTaskChatForm.valid  ? '' : 'disabled'"
+                                                [disabled]="!addTaskChatForm.valid">
+                                                <img src="assets/images/btn-arrow.svg" alt="">
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="task-content" *ngIf="selectedTabType === 'details'">
+                            <div class="task-img-h" *ngIf="!showAddTaskDetailsForm">
+                                <ng-container *ngIf="showAddedTaskDetailsList"> <!--&& imageDataLoaded-->
+                                    <div class="list-div-main folder-div-main">
+                                        <ul malihu-scrollbar class="h-211 scrollbar"
+                                            >
+                                            <li *ngFor="let details of addedTaskDetailsList">
+                                                <div class="folder-img">
+                                                    <img *ngIf="details?.src" [src]="details?.src" style="height: 190px;width:150px;"
+                                                         (click)="openTaskDetailsView(details, addTaskDetailsViewsPopup)">
+                                                    
+                                                </div>
+                                                <div class="folder-text">
+                                                    <div class="date-name">
+                                                        <span>{{details?.createdOn |
+                                                            date: 'MMM d, y'}}</span>
+                                                        <span>{{details?.createdOn |
+                                                            date: 'H:mm'}}</span>
+                                                        <span>{{details?.createdBy}}</span>
+                                                    </div>
+                                                    <div class="text-line">
+                                                        <span>{{details?.note}}</span>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </ng-container>
+                            </div>
+                            <div class="task-btn-grp mt-25 d-flex flex-wrap align-items-start justify-content-end">
+                                <button type="button" class="btn-save" (click)="showAddTaskDetailsDiv()"
+                                    *ngIf="!showAddTaskDetailsForm">
+                                    Add
+                                </button>
+                            </div>
+                            <form class="example-form" [formGroup]="addTaskDetailsForm" (ngSubmit)="addTaskDetails()"
+                                *ngIf="showAddTaskDetailsForm">
+                                <div class="w-100 ">
+                                    <div class="task-detail-main">
+                                        <div class="task-detail-inner">
+                                            <div class="task-board-field">
+                                                <span class="fnt">Board Name</span>
+                                                <p>{{openPopupBoardName}}</p>
+                                            </div>
+                                            <div class="task-board-field">
+                                                <span class="fnt">Task Description </span>
+                                                <p>{{openPopupTaskDescription}}</p>
+                                            </div>
+                                        </div>
+                                        <div class="upload-sec file-input">
+                                            <div class="camera-sec">
+                                                <div class="inner-sec">
+                                                    <img src="assets/images/camera-b.svg" alt="">
+                                                    <span>OPEN CAMERA</span>
+                                                </div>
+                                            </div>
+                                            <input type="file" name="file-input" id="file-input"
+                                                class="file-input__input" (change)="addTaskDetailsImage($event)">
+                                            <label class="file-input__label" for="file-input">
+                                                <span>Choose from Files</span>
+                                                <img src="assets/images/file.svg" class="camera-ic">
+                                            </label>
+                                            <div class="after-fill" *ngIf="fileList.length > 0">
+                                                <img [src]="uploadedFileSource">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group form-task w-100">
+                                        <mat-form-field class="example-full-width mat-input">
+                                            <textarea formControlName="taskDetailText" id="taskDetailImageText" matInput matTextareaAutosize
+                                                type="text" placeholder="Note" value="" autocomplete="off"></textarea>
+                                        </mat-form-field>
+                                    </div>
+                                    <div
+                                        class="task-btn-grp mt-25 d-flex flex-wrap align-items-start justify-content-end">
+                                        <button type="submit" class="btn-save"
+                                            [ngClass]="addTaskDetailsForm.valid  ? '' : 'disabled'"
+                                            [disabled]="!addTaskDetailsForm.valid">
+                                            Save
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>
+<ng-template #addTaskDetailsViewsPopup>
+    <div class="modal-body p-0 delete-modal" (closeClick)="modalRef.hide()">
+        <div class="d-flex flex-wrap position-relative quick-modal">
+            <div class="d-flex flex-wrap w-100 Query-popup">
+                <div class="chart-header w-100 d-flex flex-wrap">
+                    <div class="chart-right flex-1 d-flex flex-wrap align-items-center">
+                        <h3 class=text-title>Task Detail View</h3>
+                        <a href="javascript:void(0)" icon-close (click)="modalRef.hide()" class="close-ic"></a>
+                    </div>
+                </div>
+                <div class="w-100 ">
+                    <div class="task-body">
+                        <div class="upload-sec file-input">
+                            <div class="after-fill">
+                                <img *ngIf="taskDetailsViewData?.src" [src]="taskDetailsViewData?.src">
+                                <img *ngIf="!taskDetailsViewData?.src" src="assets/images/no_image.png" style="height: 190px;width:290px;">
+                            </div>
+                        </div>
+                        <div class="task-detail-inner">
+                            <div class="task-board-field">
+                                <span class="fnt">Board Name</span>
+                                <p>{{taskDetailsViewData?.board}}</p>
+                            </div>
+                            <div class="task-board-field">
+                                <span class="fnt">Task Description </span>
+                                <p>{{taskDetailsViewData?.description}}</p>
+                            </div>
+                        </div>
+                        <div class="task-detail-inner">
+                            <div>
+                                <span class="fnt">Note</span>
+                                <p class="with-breaks">{{taskDetailsViewData?.note}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>

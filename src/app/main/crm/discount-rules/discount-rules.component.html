@@ -1,0 +1,212 @@
+<div class="crm-Wrap" [ngClass]="icon1?'active':''" *ngIf="SwitchUi">
+  <div class="viewdata-title">
+    <h2>
+      <img src="assets/images/icon-list.svg" height="25" width="25" alt=""> Discounts</h2>
+    <div class="pull-right right-top-btns">
+      <a class="btn btn-link" (click)="changeview('goupload')">
+        <img src="assets/images/upload.svg" height="25" width="25" alt="">
+      </a>
+      <a class="btn btn-link"  (click)="changeIc('dots')">
+        <img src="assets/images/icon-plus.svg"  height="25" width="25" alt="">
+      </a>
+
+    </div>
+  </div>
+  <div class="contentBox">
+    <div class="leftContent">
+      <div class="card">
+        <div class="table-box viewTable mb-20" data-infinite-scroll debounce  (scrolled)="onScrollDown($event)" (scrolledUp)="onUp($event)"
+          style="height:700px;overflow-y: scroll;">
+          <table style="width:100%" class="table-hover default-to-custom">
+            <tbody [@fadeIn]="listrecords?.length"  fxLayout="row wrap" class="list">
+              <tr style="vertical-align:top;" class="x-animated fadeIn d-1 in" *ngFor="let i of listrecords; index as j"  fxFlex="100" fxFlex.lt-sm="200">
+                <td width="64px" class="text-center">
+                  <h4 ng-bind="($index + 1)" class="rownumber ng-binding">{{j+1}}</h4>
+                </td>
+                <td class="text-left">
+                  <b>
+                    <span>{{i?.businessPartner?.title}}</span>&nbsp;</b>
+                  <div class="small help-block line-divider">&nbsp;</div>
+                </td>
+                <td class="text-left">
+                  <b>
+                    <span>&nbsp;</span>&nbsp;</b>
+                  <div class="small help-block line-divider">&nbsp;</div>
+                </td>
+                <td class="text-left">
+                  <b>
+                    <span>{{i.brand?.title}}</span>&nbsp;</b>
+                  <div class="small help-block line-divider">&nbsp;</div>
+                </td>
+                <td class="text-end">
+                  <div><span>&nbsp;</span>&nbsp;</div>
+                  <div class="small help-block line-divider">&nbsp;</div>
+                </td>
+                <td class="text-end">
+                  <b> <span>{{i.product?.title}}</span>&nbsp;</b>
+                  <div class="small help-block line-divider">&nbsp;</div>
+                </td>
+                <td class="text-end">
+                  <div>
+                    <span>&nbsp;</span>&nbsp;</div>
+                  <div class="small help-block line-divider">&nbsp;</div>
+                </td>
+                <td class="text-end">
+                  <b>
+                    <span>{{i.percent}}.00</span>&nbsp;</b>
+                  <div class="small help-block line-divider">&nbsp;</div>
+                </td>
+                <td width="100px" class="text-left">
+                  <div class="rowactions">
+                    <a class="btn btn-link" hov-title="View/Edit" (click)="editCustomerSetup(i)">
+                      <i class="fa fa-pencil"></i>
+                    </a>
+
+                    <a class="btn btn-link" hov-title="Delete" ng-click="vm.deleteItem()" (click)="deleteCustomerSetup(i)">
+                      <i class="fa fa-remove text-danger"></i>
+                    </a>
+
+                  </div>
+                </td>
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+   
+
+  </div>
+  <div class="rightSidebar-wrap rightSidebar-wrap-right-0 rightSide-data-penal comman-sidebar">
+    <!-- <div class="data-penal-header mb-20">
+      <h3>Manage discount</h3>        
+    </div> -->
+    <div class="data-penal-body">
+      <h3 class="rightSidebar-main_title">Manage discount</h3>
+      <form class="manageDiscount-rightsidebarForm">
+          <div class="row">
+              <div class="col-12">
+                <div class="form-group">
+                  <!-- <label class="gray-label slelect-label">Client</label> -->
+                  <ng-select [clearable]="false" placeholder="Client" [items]="clientNameItem | async" bindLabel="title" [(ngModel)]="user.businessPartner"
+                   [loading]="supplierLoading" [notFoundText]="'notFoundText'" name="supplierName"  autocomplete="off" 
+                    [typeahead]="MainSearchdataSource"  id="supplierName" (change)="recordSelected($event)">
+                  </ng-select>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-12">
+                  <div class="form-group">
+                 
+
+                <ng-select [clearable]="false" [items]="categoriesrecords" placeholder="Category" name="productCategory" [(ngModel)]="user.productCategory" (change)="slectedCategory(user.productCategory)" bindLabel="title" id="productCategoryName" (change)="recordSelected($event)">
+                  <ng-template ng-label-tmp let-item="item">
+                    {{item.title}}
+                  </ng-template>
+                  <ng-template ng-option-tmp let-item="item" let-index="index" let-search="searchTerm">
+                    {{item.title}}
+                  </ng-template>
+                </ng-select>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="form-group">
+                    
+
+                  <ng-select [clearable]="false" [items]="brandsrecords" name="brand" placeholder="Brand" [(ngModel)]="user.brand" bindLabel="title" id="brandname" (change)="selectedBrand($event)">
+                    <ng-template ng-label-tmp let-item="item">
+                      {{item.title}}
+                    </ng-template>
+                    <ng-template ng-option-tmp let-item="item" let-index="index" let-search="searchTerm">
+                      {{item.title}}
+                    </ng-template>
+                  </ng-select>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                  <div class="col-12">
+                      <div class="form-group">
+                      
+        
+                    <ng-select [clearable]="false" [items]="productrecords" placeholder="Products" name="product" [(ngModel)]="user.product" bindLabel="title" id="productName" (change)="recordSelected($event)">
+                      <ng-template ng-label-tmp let-item="item">
+                        {{item.title}}
+                      </ng-template>
+                      <ng-template ng-option-tmp let-item="item" let-index="index" let-search="searchTerm">
+                        {{item.title}}
+                      </ng-template>
+                    </ng-select>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="form-group">
+                        <mat-form-field class="example-full-width">
+                            <input matInput placeholder="Discount(0.001-100%)" value="" (keydown)="AllowNumbers($event)" name="percent" [(ngModel)]="user.percent" required>
+                          </mat-form-field>
+                          </div>
+                          
+                    </div>
+                  </div>
+      </form>
+    </div>
+    <div class="data-penal-footer">
+        <div class="row">
+          <div class="col-12 text-end">
+            <button class="btn close-btn" type="submit" (click)="changeIc('arrow')" >
+              <i class="fa fa-close" aria-hidden="true"></i> Cancel</button>
+              <button *ngIf="!user.id" [disabled]="!user.percent" class="btn close-btn" type="submit" (click)="Creatediscounts(user)">
+                  <i class="fa fa-floppy-o" aria-hidden="true" ></i> Save</button>
+                <button *ngIf="user.id" class="btn close-btn" type="submit" (click)="Updatediscounts(user)">
+                      <i class="fa fa-floppy-o" aria-hidden="true" ></i> save</button>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+
+
+<div class="uploadfile" *ngIf="!SwitchUi">
+    <a href="javaScript:;" (click)="changeview('upload')" class="back-btn"><i class="fa fa-angle-left mr-1"></i>Back</a>
+    <div class="page-title">
+            <h2>Discount Rules Import</h2>
+    </div>
+<div class="row">
+<div class="col-md-6 mb-25">
+<div class="card">
+    <div class="card-body py-3">
+            <div class="subheader file-upload">
+                <h4 class="mb-4">Select csv file to upload</h4>
+                <div class="row">
+                    <div class="col-md-12 mb-20">
+                            <div class="custom-file">
+                                    <input type="file"  name="file" class="custom-file-input" id="fileInput"  (change)="onFileChange($event)">
+                                    <label class="custom-file-label" for="inputGroupFile04">Select file to upload</label>
+                                  </div>
+                            <button class="btn btn-white ml-2" (click)="UploadFile()"><i class="fa fa-cloud-upload mr-1"></i> Upload file</button>
+                    </div>
+                </div>
+                <div class="ng-binding">
+                  {{fileName}}
+              </div>	
+
+               <div class="float-right"><a href="javaScript:;" (click)="downloadReport()" class="mr-1">Download</a>Template to import records.</div> 
+            </div>
+            </div>
+        </div>
+</div>
+   
+</div>
+<div *ngIf="showErr" class="alert alert-danger mt-10 col-md-6" role="alert">
+  Failed to import one or more records <a href="javaScript:;" (click)="downloadedFailedfiles()" ><i class="fa fa-download"></i>downloaded failed records</a>
+  </div>
+</div>
+
+<!-- <app-modal-demo style="position: relative;z-index: 999999999;"></app-modal-demo> -->

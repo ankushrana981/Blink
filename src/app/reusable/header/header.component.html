@@ -1,0 +1,44 @@
+<nav class="navbar navbar-default fixed-top ng-scope" >
+    <div class="navbar-collapse">
+        <a class="navbar-brand" (click)="closeSidebar()">
+            <!-- <img src="assets/images/logo-blink.svg"> -->
+            <img src="assets/images/blink-logo.svg">
+        </a>
+        <ul class="nav navbar-nav navbar-right pull-right">
+            <!-- <li>
+
+                <button class="btn btn-link  dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fa fa-bell"></i> <b ng-bind="vm.security.currentUser.firstname" class="ng-binding">India</b> <span class="fa fa-chevron-down"></span>
+                  </button>
+                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                      <li><a href="#" (click)="logout()" > <i class="fa fa-power-off fa-lg fa-fw"></i> Logout</a></li>
+                  </div>
+
+            </li> -->
+            <li class="dropdown" [class.show]="isDropdownOpen">
+                <button
+                  class="btn btn-link dropdown-toggle"
+                  type="button"
+                  id="dropdownMenuButton"
+                  (click)="toggleDropdown()"
+                  aria-haspopup="true"
+                  [attr.aria-expanded]="isDropdownOpen"
+                >
+                  <i class="fa fa-bell"></i>
+                  <b>{{currentUser.firstname}}</b>
+                  <span class="fa fa-chevron-down"></span>
+                </button>
+                <div
+                  class="dropdown-menu"
+                  aria-labelledby="dropdownMenuButton"
+                  [class.show]="isDropdownOpen"
+                >
+                  <a class="p-2" href="#" (click)="logout()">
+                    <i class="fa fa-power-off fa-lg fa-fw"></i> Logout
+                  </a>
+                </div>
+              </li>
+              
+        </ul>
+    </div>
+</nav>

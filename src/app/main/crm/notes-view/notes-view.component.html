@@ -1,0 +1,59 @@
+<!-- [ngClass]="(icon1 || icon2 || icon3)?'active':''" -->
+<div class="crm-Wrap inventoryreports-Wrap vendor-wrap transcations">
+  <div class="">
+      <div class="">
+    
+<!-- [ngClass]="(icon1 || icon2 || icon3)?'active':''" -->
+          <div class="contentBox task-page ">
+
+              <div class="leftContent overflow-0 task-board">
+                  <div class="viewdata-title task-title d-flex flex-wrap align-items-center justify-content-between">
+                      <h2>Notes</h2>
+                      <div class="d-flex flex-wrap">
+                          <a class="icon-task" href="javascript:void(0)" icon-more title="More" ></a>
+                          <a class="icon-task" href="javascript:void(0);" icon-pluse
+                              title="Create Task"></a>
+                          <a class="icon-task" href="javascript:void(0)" icon-filter title="Filter"></a>
+                          <a class="icon-task" href="javascript:void(0)" icon-upload title="Upload"></a>
+                          <a class="icon-task" href="javascript:void(0)" icon-download title="Download"></a>
+                      </div>
+                  </div>
+                  <div class="card card-box pl-0 card-attention view-details-table wow fadeIn" data-wow-delay=".3s"
+                      #tblDivElem>
+
+                  </div>
+                  <div class="d-flex flex-wrap justify-content-end align-items-center btn-task-main wow fadeIn"
+                      data-wow-delay="500ms">
+                        <ul class="d-flex align-items-center vendor-btn">
+                            <li>
+                                <a class="btn btn-main btn-blue" (click)="addQuickModal(quickcustomer);$event.preventDefault()">Add New Task</a>
+                            </li>
+                        </ul>
+                  </div>
+              </div>
+
+
+              <div class="rightSidebar-wrap rightSide-data-penal">
+                  <div class="data-penal-header">
+                      <a href="/" class="icon-dot" (click)="changeIc('dots');$event.preventDefault()">
+                          <i icon-more></i>
+                      </a>
+                  </div>
+              </div>
+
+          </div>
+      </div>
+      <div class="col-xl-3  wow fadeIn">
+          <div class="contentBox task-page">
+              <div class="w-100">
+              </div>
+          </div>
+      </div>
+  </div>
+
+<ng-template #quickcustomer>
+    <!-- <div class="modal-body p-0" app-quick-customer (closeClick)="modalRef.hide()">
+    </div> -->
+</ng-template>
+
+<!-- <app-modal-demo style="position: relative;z-index: 999999999;"></app-modal-demo> -->

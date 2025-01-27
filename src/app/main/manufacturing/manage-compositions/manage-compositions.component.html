@@ -1,0 +1,296 @@
+<div class="crm-Wrap inventoryreports-Wrap product-view manage-composition composition-view"
+  [ngClass]="icon1 ? 'active' :''">
+  <div class="">
+    <div class="">
+      <div class="contentBox task-page " [ngClass]="icon1?'active':''">
+
+        <div class="leftContent overflow-0 task-board">
+          <div class="viewdata-title task-title d-flex flex-wrap align-items-center justify-content-between">
+            <h2>Manage Compositions</h2>
+            <div class="d-flex flex-wrap">
+              <a class="icon-task" href="javascript:void(0)" icon-more title="More"></a>
+              <a class="icon-task" href="javascript:void(0);"
+                (click)="addProductModal(addProduct);$event.preventDefault()" icon-pluse title="Create Task"></a>
+              <a class="icon-task" href="javascript:void(0)" icon-filter title="Filter"></a>
+              <a class="icon-task" href="javascript:void(0)" icon-upload title="Upload"></a>
+              <a class="icon-task" href="javascript:void(0)" icon-download title="Download"></a>
+            </div>
+          </div>
+          <div class="card card-box pl-0 card-attention view-details-table wow fadeIn" data-wow-delay=".3s" #tblDivElem>
+            <div class="manage-detail">
+              <div class="left-part">
+                <div class="add-product">
+                  <div class=" all-product">
+                    <button class="all-btn">All Products</button>
+                    <!-- <button class="all-btn" (click)="profileShow = !profileShow">All Products</button> -->
+                    <!-- <ul class="all-list customanimate order-animate1" [ngClass]="{active: profileShow, inactive: !profileShow}"> -->
+                    <ul class="all-list customanimate order-animate1">
+                      <li>
+                        <div class="form-group form-task remove-border">
+                          <ng-select formControlName="task_type" class="w-100" [items]="tasks" placeholder="PRODUCT"
+                            bindLabel="name" (change)="chnageTypeValue()" bindValue="name" [searchable]="false"
+                            [hideSelected]="true">
+                            <ng-template ng-label-tmp let-item="item" let-clear="clear">
+                              <span class="ng-value-label">{{item.name}}</span>
+                              <span class="ng-value-icon right" (click)="clear(item);" aria-hidden="true">×</span>
+                            </ng-template>
+                            <ng-template ng-option-tmp let-item="item" let-index="index">
+                              {{item.name}}
+                            </ng-template>
+                          </ng-select>
+                        </div>
+                      </li>
+                      <li class="customanimate order-animate3" [ngClass]="selectedFirst ? 'active':''">
+                        <!-- <li class="customanimate order-animate3" [ngClass]="selectedFirst ? 'active':''" (click)="isSelected('first')"> -->
+                        <div class="form-group form-task form-border">
+                          <mat-form-field class="example-full-width mat-input">
+                            <input formControlName="focus" matInput type="text" placeholder="COMPOSITION nAME" value=""
+                              autocomplete="off">
+                          </mat-form-field>
+                        </div>
+                      </li>
+                      <li class="customanimate order-animate4">
+                        <div class="form-group form-task form-border">
+                          <mat-form-field class="example-full-width mat-input">
+                            <input formControlName="focus" matInput type="text" placeholder="Error Threshold (%)"
+                              value="" autocomplete="off">
+                          </mat-form-field>
+                        </div>
+                      </li>
+                      <li class="customanimate order-animate5">
+                        <div class="form-group form-task remove-border">
+                          <ng-select formControlName="task_type" class="w-100" [items]="tasks"
+                            placeholder="calculate by" bindLabel="name" (change)="chnageTypeValue()" bindValue="name"
+                            [searchable]="false" [hideSelected]="true">
+                            <ng-template ng-label-tmp let-item="item" let-clear="clear">
+                              <span class="ng-value-label">{{item.name}}</span>
+                              <span class="ng-value-icon right" (click)="clear(item);" aria-hidden="true">×</span>
+                            </ng-template>
+                            <ng-template ng-option-tmp let-item="item" let-index="index">
+                              {{item.name}}
+                            </ng-template>
+                          </ng-select>
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="sub-product customanimate order-animate2" *ngIf="selectedFirst">
+                    <button class="all-btn" (click)="this.sublistShow = !this.sublistShow"
+                      (clickOutside)="this.sublistShow = false">All Products</button>
+                    <div class="sub-modal" [ngClass]="{active: sublistShow, inactive: !sublistShow}">
+                      <h2 class="title">Raw Material</h2>
+                      <ul class="list">
+                        <li><a class="active">All Products</a></li>
+                        <li>Components Only</li>
+                      </ul>
+                    </div>
+                    <!-- <ul class="sub-list customanimate order-animate1"  *ngIf="selectedFirst">
+                      <li class="customanimate order-animate1"><a>Grape</a></li>
+                      <li class="customanimate order-animate2"><a>Lemon</a></li>
+                      <li class="customanimate order-animate3"><a>Strawberry</a></li>
+                      <li class="customanimate order-animate4"><a>Salt</a></li>
+                      <li class="customanimate order-animate5" [ngClass]="selectedSecond ? 'active':''" (click)="isSelected('second')"><a class="active">Sugar</a></li>
+                      <li class="customanimate order-animate6"><a>Vegemite</a></li>
+                    </ul> -->
+                    <!-- <alphabet-filter 
+                        propAlphaOrder="name"
+                        propsSearch="name"
+                        placeholder=""
+                        height="100%"
+                        [data]="items"
+                        (onClick)="selectedItem($event)"
+                        [withTemplate]="true"
+                        (keyup)="change()">
+                        <ng-template let-item>
+                          <div class="search-list-item">
+                            <span [ngClass]="item.name == selectedValue ? 'active' : ''">{{item.name}}</span>
+                          </div>
+                        </ng-template>
+                      </alphabet-filter> -->
+
+                  </div>
+                </div>
+              </div>
+              <div class="right-part">
+                <div class="variable" outsideClick (clickOutside)="this.variableShow = false">
+                  <div class="variable-detail" *ngIf="selectedSecond">
+                    <h2 class="title">Variables</h2>
+                    <ul class="variable-list">
+                      <li><a (click)="variableShow = !variableShow" class="customanimate order-animate2">Amount</a></li>
+                      <li><a class="customanimate order-animate3">Metric</a></li>
+                    </ul>
+                    <div class="variable-modal" [ngClass]="{active: variableShow, inactive: !variableShow}">
+                      <div class="header">Amount</div>
+                      <div class="body">
+                        <h2 class="sub-title">Amount</h2>
+                        <ul class="add-list">
+                          <li>
+                            <div class="from-group">
+                              <input formControlName="focus" placeholder="" value="" autocomplete="off"
+                                class="from-control">
+                              <ul class="list-btn">
+                                <li class="percent"><a class="common-btn">%</a></li>
+                                <li class="percent">
+                                  <a class="common-btn" (click)="this.weightShow = !this.weightShow"
+                                  (clickOutside)="this.weightShow = false"><span>gr</span></a>
+                                  <ul class="sub-weight" [ngClass]="{active: weightShow, inactive: !weightShow}">
+                                      <li><a class="common-btn">ton</a></li>
+                                      <li><a class="common-btn">kg</a>
+                                      <li><a class="common-btn">gr</a></li>
+                                      <li><a class="common-btn">mg</a>
+                                      <li><a class="common-btn">pcs</a></li>
+                                  </ul>
+                                </li>
+                              </ul>
+                            </div>
+                          </li>
+                        </ul>
+                        <a class="add-btn" (click)="variableShow=false;this.selectedthird = true">Add Effect</a>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+                <div class="assign-detail customanimate order-animate2" *ngIf="selectedthird">
+                  <h2 class="title">Assigned ingredients:</h2>
+                  <div class="table-respons">
+                    <table>
+                      <tbody>
+                        <tr>
+                          <td class="number">1.</td>
+                          <td class="name"><span>Onions</span></td>
+                          <td class="desc">ON</td>
+                          <td class="price"><span class="price-title">30</span><span class="p-desc"> gr</span></td>
+                          <td class="percent">11.11%</td>
+                          <td class="close"><span class="ico"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M1 1L15 15M15 1L1 15" stroke="#D2DDEC" stroke-width="2"/>
+                            </svg></span></td>
+                        </tr>
+                        <tr class="active">
+                          <td class="number">2</td>
+                          <td class="name"><span>Cheese</span></td>
+                          <td class="desc">CS1</td>
+                          <td class="price"><span class="price-title">1</span> <span class="p-desc"> Piece</span></td>
+                          <td class="percent">-</td>
+                          <td class="close"><span class="ico"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M1 1L15 15M15 1L1 15" stroke="#D2DDEC" stroke-width="2"/>
+                            </svg></span></td>
+                        </tr>
+                        <tr>
+                          <td class="number">3.</td>
+                          <td class="name"><span>Buns</span></td>
+                          <td class="desc">BUN</td>
+                          <td class="price"><span class="price-title">1</span> <span class="p-desc"> Piece</span></td>
+                          <td class="percent">-</td>
+                          <td class="close"><span class="ico"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M1 1L15 15M15 1L1 15" stroke="#D2DDEC" stroke-width="2"/>
+                            </svg></span></td>
+                        </tr>
+                        <tr>
+                          <td class="number">4.</td>
+                          <td class="name"><span>Ground Beef</span></td>
+                          <td class="desc">GBE</td>
+                          <td class="price"><span class="price-title">240</span> <span class="p-desc"> gr</span></td>
+                          <td class="percent">88.89%</td>
+                          <td class="close"><span class="ico"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M1 1L15 15M15 1L1 15" stroke="#D2DDEC" stroke-width="2"/>
+                            </svg></span></td>
+                        </tr>
+
+                      </tbody>
+                    </table>
+                  </div>
+                  <div class="details">
+                    <h2 class="title">Details</h2>
+                    <ul class="details-list">
+                      <li><span class="number">1.</span>Estimated Cost: Rp. 34,560</li>
+                      <li><span class="number">2.</span>Product Weight: 270gr</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+          </div>
+          <div class="d-flex flex-wrap justify-content-end align-items-center btn-task-main wow fadeIn"
+            data-wow-delay="500ms" #addNewTskBtn>
+            <ul class="d-flex flex-wrap manage-btn">
+              <li><button class="btn btn-cancle">Cancel</button></li>
+              <li><button class="btn btn-save">Save Changes</button></li>
+            </ul>
+          </div>
+        </div>
+
+
+        <!-- <div class="rightSidebar-wrap rightSide-data-penal">
+          <div class="data-penal-header">
+            <a href="/" class="icon-dot" (click)="changeIc('dots');$event.preventDefault()">
+              <i icon-more></i>
+            </a>
+          </div>
+        </div> -->
+
+      </div>
+    </div>
+    <div class="col-xl-3  wow fadeIn">
+      <div class="contentBox task-page">
+        <div class="w-100">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- <div class="rightSidebar-wrap rightSidebar-wrap-right-0 rightSide-data-penal comman-sidebar right-aside composition-right">
+    <div class="data-penal-body d-flex flex-column">
+      <div class="">
+        <a href="jasvscript:void(0);" class="icon-dot" (click)="changeIc('arrow');$event.preventDefault()">
+          <i icon-more></i>
+        </a>
+      </div>
+      <h3 class="rightSidebar-main_title mb-40">Composition Details</h3>
+      <div class="data-block">
+        <h5 class="data-title">Composition 1</h5>
+        <p class="data-discription"><span class="left">Vanilla Granules</span><span class="right">20 grams 12.50%</span></p>
+        <p class="data-discription"><span class="left">Component T3</span><span class="right">20 grams 12.50%</span></p>
+        <p class="data-discription"><span class="left">Extra Virgin Olive Oil</span><span class="right">120 ml75%</span></p>
+        <p class="data-discription last-desc"><span class="total">Total Expected Weight</span><span>160 grams</span></p>
+        <ul class="edit-list">
+          <li><a class="edit-btn">Delete</a></li>
+          <li><a class="edit-btn">Edit</a></li>
+        </ul>
+      </div>
+      <div class="data-block">
+        <h5 class="data-title">Named Composition</h5>
+        <p class="data-discription"><span class="left">Vanilla Granules</span><span class="right">20 grams 12.50%</span></p>
+        <p class="data-discription"><span class="left">Component T3</span><span class="right">20 grams 12.50%</span></p>
+        <p class="data-discription"><span class="left">Extra Virgin Olive Oil</span><span class="right">120 ml 75%</span></p>
+        <p class="data-discription last-desc"><span class="total">Total Expected Weight</span><span>160 grams</span></p>
+        <ul class="edit-list">
+          <li><a class="edit-btn">Delete</a></li>
+          <li><a class="edit-btn">Edit</a></li>
+        </ul>
+      </div>
+      <div class="data-block">
+        <h5 class="data-title">Composition 2</h5>
+        <p class="data-discription"><span class="left">Vanilla Granules</span><span class="right">20 grams 12.50%</span></p>
+        <p class="data-discription"><span class="left">Component T3</span><span class="right">20 grams 12.50%</span></p>
+        <p class="data-discription"><span class="left">Extra Virgin Olive Oil</span><span class="right">120 ml 75%</span></p>
+        <p class="data-discription last-desc"><span class="total">Total Expected Weight</span><span>160 grams</span></p>
+        <ul class="edit-list">
+          <li><a class="edit-btn">Delete</a></li>
+          <li><a class="edit-btn">Edit</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="data-penal-footer min-h77">
+    </div>
+  </div> -->
+</div>
+
+<ng-template #addProduct>
+  <div class="modal-body p-0" app-add-product (closeClick)="modalRef.hide()">
+  </div>
+</ng-template>
+
+<!-- <app-modal-demo style="position: relative;z-index: 999999999;"></app-modal-demo> -->

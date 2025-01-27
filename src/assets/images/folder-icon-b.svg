@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="80px" height="60px" viewBox="0 0 80 60" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>folder-icon</title>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="folder-icon" fill="#3F5270" fill-rule="nonzero">
+            <rect id="Rectangle" x="0" y="0.5" width="58.1778" height="16.0192" rx="8"></rect>
+            <rect id="Rectangle" x="0" y="7.9375" width="79.3333" height="40.9062"></rect>
+            <polygon id="Path" points="0 52.5625 39.6667 52.5625 79.3333 52.5625 79.3333 60 0 60"></polygon>
+        </g>
+    </g>
+</svg>

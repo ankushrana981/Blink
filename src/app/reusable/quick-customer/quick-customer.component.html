@@ -1,0 +1,1816 @@
+<div class="d-flex flex-wrap chart-form create-task-from position-relative quick-modal">
+    <div class="chart-box d-flex flex-wrap w-100">
+        <div class="chart-header w-100 d-flex flex-wrap">
+            <div class="chart-right flex-1 d-flex flex-wrap align-items-center justify-content-between">
+                <h3 class=text-title>Quick Customer analytics report</h3>=
+                <a href="javascript:void(0)" icon-close (click)="closeTask()"></a>
+            </div>
+        </div>
+        <div class="w-100 create-task-body">
+            <div class="task-body">
+                <div class="quick-left">
+                    <!-- <button class="all-btn">Existing Customers</button> -->
+                    <div class="btn-group" dropdown>
+                        <button id="button-animated" dropdownToggle type="button" class="all-btn dropdown-toggle"
+                                aria-controls="dropdown-animated">
+                                {{mainright ? "Potential Customers" : "Existing Customers"}}<span class="caret"></span>
+                        </button>
+                        <ul id="dropdown-animated" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-animated">
+                            <li role="menuitem" (click)="mainright = !mainright"><a class="dropdown-item" href="#">Existing Customers</a></li>
+                            <li role="menuitem" (click)="mainright = !mainright"><a class="dropdown-item" href="#">Potential Customers</a></li>
+                        </ul>
+                    </div>
+                    <div class="customer-list">
+                        <!-- <alphabet-filter 
+                        propAlphaOrder="name"
+                        propsSearch="name"
+                        placeholder=""
+                        height="100%"
+                        [data]="items"
+                        (onClick)="selectedItem($event)"
+                        [withTemplate]="true"
+                        (keyup)="change()"> -->
+                        <!-- <ng-template let-item>
+                          <div class="search-list-item" (click)="tabNum = item.name">
+                            <span [ngClass]="item.name == selectedValue ? 'active' : ''">{{item.name}}</span>
+                            <span class="sub">{{item.subname}}</span>
+                          </div>
+                        </ng-template>
+                      </alphabet-filter> -->
+                    </div>
+                </div>
+                <div class="quick-right" *ngIf="!mainright">
+                    <div *ngIf="tabNum == 'Robert Downey Jr.'">
+                        <div class="quick-top">
+                            <div class="customers-detail">
+                                <div class="top">
+                                    <h2 class="sub-title">Efficiency of Orders</h2>
+                                    <div class="slider">
+                                        <label class="start">0</label>
+                                        <!-- <ngx-slider [(value)]="value" [options]="options" ></ngx-slider> -->
+                                        <label class="end">100%</label>
+                                    </div>
+                                    
+                                </div>
+                                <div class="bottom">
+                                    <h2 class="sub-title">YOY Comparison<Span class="total">Total Purchase</Span></h2>
+                                    <div class="slider">
+                                        <label class="start">0</label>
+                                        <!-- <ngx-slider [(value)]="minValue" [(highValue)]="maxValue" [options]="options2"></ngx-slider> -->
+                                    </div>
+                                </div> 
+                            </div>
+                            <div id="chart">
+                                <apx-chart #chartObj
+                                [series]="chartOptions.series"
+                                [chart]="chartOptions.chart"
+                                [xaxis]="chartOptions.xaxis"
+                                [yaxis]="chartOptions.yaxis"
+                                [dataLabels]="chartOptions.dataLabels"
+                                [grid]="chartOptions.grid"
+                                [stroke]="chartOptions.stroke"
+                                [title]="chartOptions.title"
+                                [markers]="chartOptions.markers"
+                                [legend]="chartOptions.legend"
+                                >
+                                </apx-chart>
+                            </div>
+                        </div>
+                        <div class="scrollbar" malihu-scrollbar>
+                            <div  class="quick-detail ">
+                                <div class="detail-list">
+                                    <ul class="quick-info">
+                                        <li class="date">May 8</li>
+                                        <li class="time">12:25</li>
+                                        <li class="name">Franky</li>
+                                    </ul>
+                                    <div class="title">
+                                        <h2 class="sub-title">Tom hiddleston</h2>
+                                        <span class="follow">Follow Up</span>
+                                    </div>
+                                    <div class="desc">
+                                        <p (click)="showFullText1 = true;showFullText2 = false;showFullText3 = false;showFullText4 = false;">{{(text1 | slice:0:190)}}
+                                            <span *ngIf="!showFullText1">...</span>
+                                            <span *ngIf="showFullText1">{{(text1 | slice:190)}}</span>
+                                        </p>
+                                    </div>
+                                    <div class="gallery">
+                                        <a (click)="iconCameraCheck = !iconCameraCheck" >3 <i icon-camera></i></a>
+                                    </div>
+                                    <div class="quick-gallery" *ngIf="iconCameraCheck">
+                                        <carousel  [showIndicators]="false" [(activeSlide)]="activeSlideIndex">
+                                            <slide>
+                                                <figure>
+                                                    <img src="assets/images/quickimg.jpg" alt="">
+                                                </figure>
+                                                
+                                            </slide>
+                                            <slide>
+                                                <figure>
+                                                    <img src="assets/images/chart-img2.jpg" alt="">
+                                                </figure>
+                                            </slide>
+                                            <slide>
+                                                <figure>
+                                                    <img src="assets/images/hero_img.jpg" alt="">
+                                                </figure>
+                                            </slide>
+                                        </carousel>
+                                        <div class="carousel-number">
+                                            <a>{{(activeSlideIndex + 1)+"/"}}</a>
+                                            <a>3</a>
+                                        </div>
+                                    </div>
+                                        
+                                </div>
+                                <div class="detail-list">
+                                    <ul class="quick-info">
+                                        <li class="date">May 6</li>
+                                        <li class="time">20:50</li>
+                                        <li class="name">Franky</li>
+                                    </ul>
+                                    <div class="title">
+                                        <h2 class="sub-title">Tom hiddleston</h2>
+                                        <span class="follow">Follow Up</span>
+                                    </div>
+                                    <div class="desc">
+                                        <p (click)="showFullText1 = false;showFullText2 = true;showFullText3 = false;showFullText4 = false;">{{(text2 | slice:0:190)}}
+                                            <span *ngIf="!showFullText2">...</span>
+                                            <span *ngIf="showFullText2">{{(text2 | slice:190)}}</span>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="detail-list">
+                                    <ul class="quick-info">
+                                        <li class="date">May 6</li>
+                                        <li class="time">23:13</li>
+                                        <li class="name">Franky</li>
+                                    </ul>
+                                    <div class="title">
+                                        <h2 class="sub-title">Tom hiddleston</h2>
+                                        <span class="follow">Follow Up</span>
+                                    </div>
+                                    <div class="desc">
+                                        <p (click)="showFullText1 = false;showFullText2 = false;showFullText3 = true;showFullText4 = false;">{{(text3 | slice:0:190)}}
+                                            <span *ngIf="!showFullText3">...</span>
+                                            <span *ngIf="showFullText3">{{(text3 | slice:190)}}</span>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="detail-list">
+                                    <ul class="quick-info">
+                                        <li class="date">May 6</li>
+                                        <li class="time">20:50</li>
+                                        <li class="name">Franky</li>
+                                    </ul>
+                                    <div class="title">
+                                        <h2 class="sub-title">Tom hiddleston</h2>
+                                        <span class="follow">Follow Up</span>
+                                    </div>
+                                    <div class="desc">
+                                        <p (click)="showFullText1 = false;showFullText2 = false;showFullText3 = false;showFullText4 = true;">{{(text4 | slice:0:190)}}
+                                            <span *ngIf="!showFullText4">...</span>
+                                            <span *ngIf="showFullText4">{{(text4 | slice:190)}}</span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                            
+                    </div>
+                    <div *ngIf="tabNum == 'Tom Hiddleston'">
+                        <div class="quick-top">
+                            <div class="customers-detail">
+                                <div class="top">
+                                    <h2 class="sub-title">Efficiency of Orders</h2>
+                                    <div class="slider">
+                                        <label class="start">0</label>
+                                        <!-- <ngx-slider [(value)]="value" [options]="options" ></ngx-slider> -->
+                                        <label class="end">100%</label>
+                                    </div>
+                                    
+                                </div>
+                                <div class="bottom">
+                                    <h2 class="sub-title">YOY Comparison<Span class="total">Total Purchase</Span></h2>
+                                    <div class="slider">
+                                        <label class="start">0</label>
+                                        <!-- <ngx-slider [(value)]="minValue" [(highValue)]="maxValue" [options]="options2"></ngx-slider> -->
+                                    </div>
+                                </div> 
+                            </div>
+                            <div id="chart">
+                                <apx-chart #chartObj
+                                [series]="chartOptions.series"
+                                [chart]="chartOptions.chart"
+                                [xaxis]="chartOptions.xaxis"
+                                [yaxis]="chartOptions.yaxis"
+                                [dataLabels]="chartOptions.dataLabels"
+                                [grid]="chartOptions.grid"
+                                [stroke]="chartOptions.stroke"
+                                [title]="chartOptions.title"
+                                [markers]="chartOptions.markers"
+                                [legend]="chartOptions.legend"
+                                >
+                                </apx-chart>
+                            </div>
+                        </div>
+                            
+                        <div class="scrollbar" malihu-scrollbar>
+                            <div  class="quick-detail ">
+                                <div class="detail-list">
+                                    <ul class="quick-info">
+                                        <li class="date">May 8</li>
+                                        <li class="time">12:25</li>
+                                        <li class="name">Franky</li>
+                                    </ul>
+                                    <div class="title">
+                                        <h2 class="sub-title">Tom hiddleston</h2>
+                                        <span class="follow">Follow Up</span>
+                                    </div>
+                                    <div class="desc">
+                                        <p (click)="showFullText1 = true;showFullText2 = false;showFullText3 = false;showFullText4 = false;">{{(text1 | slice:0:190)}}
+                                            <span *ngIf="!showFullText1">...</span>
+                                            <span *ngIf="showFullText1">{{(text1 | slice:190)}}</span>
+                                        </p>
+                                    </div>
+                                    <div class="gallery">
+                                        <a (click)="iconCameraCheck = !iconCameraCheck" >3 <i icon-camera></i></a>
+                                    </div>
+                                    <div class="quick-gallery" *ngIf="iconCameraCheck">
+                                        <carousel  [showIndicators]="false" [(activeSlide)]="activeSlideIndex">
+                                            <slide>
+                                                <figure>
+                                                    <img src="assets/images/quickimg.jpg" alt="">
+                                                </figure>
+                                                
+                                            </slide>
+                                            <slide>
+                                                <figure>
+                                                    <img src="assets/images/chart-img2.jpg" alt="">
+                                                </figure>
+                                            </slide>
+                                            <slide>
+                                                <figure>
+                                                    <img src="assets/images/hero_img.jpg" alt="">
+                                                </figure>
+                                            </slide>
+                                        </carousel>
+                                        <div class="carousel-number">
+                                            <a>{{(activeSlideIndex + 1)+"/"}}</a>
+                                            <a>3</a>
+                                        </div>
+                                    </div>
+                                        
+                                </div>
+                                <div class="detail-list">
+                                    <ul class="quick-info">
+                                        <li class="date">May 6</li>
+                                        <li class="time">20:50</li>
+                                        <li class="name">Franky</li>
+                                    </ul>
+                                    <div class="title">
+                                        <h2 class="sub-title">Tom hiddleston</h2>
+                                        <span class="follow">Follow Up</span>
+                                    </div>
+                                    <div class="desc">
+                                        <p (click)="showFullText1 = false;showFullText2 = true;showFullText3 = false;showFullText4 = false;">{{(text2 | slice:0:190)}}
+                                            <span *ngIf="!showFullText2">...</span>
+                                            <span *ngIf="showFullText2">{{(text2 | slice:190)}}</span>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="detail-list">
+                                    <ul class="quick-info">
+                                        <li class="date">May 6</li>
+                                        <li class="time">23:13</li>
+                                        <li class="name">Franky</li>
+                                    </ul>
+                                    <div class="title">
+                                        <h2 class="sub-title">Tom hiddleston</h2>
+                                        <span class="follow">Follow Up</span>
+                                    </div>
+                                    <div class="desc">
+                                        <p (click)="showFullText1 = false;showFullText2 = false;showFullText3 = true;showFullText4 = false;">{{(text3 | slice:0:190)}}
+                                            <span *ngIf="!showFullText3">...</span>
+                                            <span *ngIf="showFullText3">{{(text3 | slice:190)}}</span>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="detail-list">
+                                    <ul class="quick-info">
+                                        <li class="date">May 6</li>
+                                        <li class="time">20:50</li>
+                                        <li class="name">Franky</li>
+                                    </ul>
+                                    <div class="title">
+                                        <h2 class="sub-title">Tom hiddleston</h2>
+                                        <span class="follow">Follow Up</span>
+                                    </div>
+                                    <div class="desc">
+                                        <p (click)="showFullText1 = false;showFullText2 = false;showFullText3 = false;showFullText4 = true;">{{(text4 | slice:0:190)}}
+                                            <span *ngIf="!showFullText4">...</span>
+                                            <span *ngIf="showFullText4">{{(text4 | slice:190)}}</span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngIf="tabNum == 'Hydra'">
+                        <div class="quick-top">
+                            <div class="customers-detail">
+                                <div class="top">
+                                    <h2 class="sub-title">Efficiency of Orders</h2>
+                                    <div class="slider">
+                                        <label class="start">0</label>
+                                        <!-- <ngx-slider [(value)]="value" [options]="options" ></ngx-slider> -->
+                                        <label class="end">100%</label>
+                                    </div>
+                                    
+                                </div>
+                                <div class="bottom">
+                                    <h2 class="sub-title">YOY Comparison<Span class="total">Total Purchase</Span></h2>
+                                    <div class="slider">
+                                        <label class="start">0</label>
+                                        <!-- <ngx-slider [(value)]="minValue" [(highValue)]="maxValue" [options]="options2"></ngx-slider> -->
+                                    </div>
+                                </div> 
+                            </div>
+                            <div id="chart">
+                                <apx-chart #chartObj
+                                [series]="chartOptions.series"
+                                [chart]="chartOptions.chart"
+                                [xaxis]="chartOptions.xaxis"
+                                [yaxis]="chartOptions.yaxis"
+                                [dataLabels]="chartOptions.dataLabels"
+                                [grid]="chartOptions.grid"
+                                [stroke]="chartOptions.stroke"
+                                [title]="chartOptions.title"
+                                [markers]="chartOptions.markers"
+                                [legend]="chartOptions.legend"
+                                >
+                                </apx-chart>
+                            </div>
+                        </div>
+                            
+                        <div class="scrollbar" malihu-scrollbar>
+                            <div  class="quick-detail ">
+                                <div class="detail-list">
+                                    <ul class="quick-info">
+                                        <li class="date">May 8</li>
+                                        <li class="time">12:25</li>
+                                        <li class="name">Franky</li>
+                                    </ul>
+                                    <div class="title">
+                                        <h2 class="sub-title">Tom hiddleston</h2>
+                                        <span class="follow">Follow Up</span>
+                                    </div>
+                                    <div class="desc">
+                                        <p (click)="showFullText1 = true;showFullText2 = false;showFullText3 = false;showFullText4 = false;">{{(text1 | slice:0:190)}}
+                                            <span *ngIf="!showFullText1">...</span>
+                                            <span *ngIf="showFullText1">{{(text1 | slice:190)}}</span>
+                                        </p>
+                                    </div>
+                                    <div class="gallery">
+                                        <a (click)="iconCameraCheck = !iconCameraCheck" >3 <i icon-camera></i></a>
+                                    </div>
+                                    <div class="quick-gallery" *ngIf="iconCameraCheck">
+                                        <carousel  [showIndicators]="false" [(activeSlide)]="activeSlideIndex">
+                                            <slide>
+                                                <figure>
+                                                    <img src="assets/images/quickimg.jpg" alt="">
+                                                </figure>
+                                                
+                                            </slide>
+                                            <slide>
+                                                <figure>
+                                                    <img src="assets/images/chart-img2.jpg" alt="">
+                                                </figure>
+                                            </slide>
+                                            <slide>
+                                                <figure>
+                                                    <img src="assets/images/hero_img.jpg" alt="">
+                                                </figure>
+                                            </slide>
+                                        </carousel>
+                                        <div class="carousel-number">
+                                            <a>{{(activeSlideIndex + 1)+"/"}}</a>
+                                            <a>3</a>
+                                        </div>
+                                    </div>
+                                        
+                                </div>
+                                <div class="detail-list">
+                                    <ul class="quick-info">
+                                        <li class="date">May 6</li>
+                                        <li class="time">20:50</li>
+                                        <li class="name">Franky</li>
+                                    </ul>
+                                    <div class="title">
+                                        <h2 class="sub-title">Tom hiddleston</h2>
+                                        <span class="follow">Follow Up</span>
+                                    </div>
+                                    <div class="desc">
+                                        <p (click)="showFullText1 = false;showFullText2 = true;showFullText3 = false;showFullText4 = false;">{{(text2 | slice:0:190)}}
+                                            <span *ngIf="!showFullText2">...</span>
+                                            <span *ngIf="showFullText2">{{(text2 | slice:190)}}</span>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="detail-list">
+                                    <ul class="quick-info">
+                                        <li class="date">May 6</li>
+                                        <li class="time">23:13</li>
+                                        <li class="name">Franky</li>
+                                    </ul>
+                                    <div class="title">
+                                        <h2 class="sub-title">Tom hiddleston</h2>
+                                        <span class="follow">Follow Up</span>
+                                    </div>
+                                    <div class="desc">
+                                        <p (click)="showFullText1 = false;showFullText2 = false;showFullText3 = true;showFullText4 = false;">{{(text3 | slice:0:190)}}
+                                            <span *ngIf="!showFullText3">...</span>
+                                            <span *ngIf="showFullText3">{{(text3 | slice:190)}}</span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngIf="tabNum == 'Scarlett Johansson'">
+                        <div class="quick-top">
+                            <div class="customers-detail">
+                                <div class="top">
+                                    <h2 class="sub-title">Efficiency of Orders</h2>
+                                    <div class="slider">
+                                        <label class="start">0</label>
+                                        <!-- <ngx-slider [(value)]="value" [options]="options" ></ngx-slider> -->
+                                        <label class="end">100%</label>
+                                    </div>
+                                    
+                                </div>
+                                <div class="bottom">
+                                    <h2 class="sub-title">YOY Comparison<Span class="total">Total Purchase</Span></h2>
+                                    <div class="slider">
+                                        <label class="start">0</label>
+                                        <!-- <ngx-slider [(value)]="minValue" [(highValue)]="maxValue" [options]="options2"></ngx-slider> -->
+                                    </div>
+                                </div> 
+                            </div>
+                            <div id="chart">
+                                <apx-chart #chartObj
+                                [series]="chartOptions.series"
+                                [chart]="chartOptions.chart"
+                                [xaxis]="chartOptions.xaxis"
+                                [yaxis]="chartOptions.yaxis"
+                                [dataLabels]="chartOptions.dataLabels"
+                                [grid]="chartOptions.grid"
+                                [stroke]="chartOptions.stroke"
+                                [title]="chartOptions.title"
+                                [markers]="chartOptions.markers"
+                                [legend]="chartOptions.legend"
+                                >
+                                </apx-chart>
+                            </div>
+                        </div>
+                            
+                        <div class="scrollbar" malihu-scrollbar>
+                            <div  class="quick-detail ">
+                                <div class="detail-list">
+                                    <ul class="quick-info">
+                                        <li class="date">May 8</li>
+                                        <li class="time">12:25</li>
+                                        <li class="name">Franky</li>
+                                    </ul>
+                                    <div class="title">
+                                        <h2 class="sub-title">Tom hiddleston</h2>
+                                        <span class="follow">Follow Up</span>
+                                    </div>
+                                    <div class="desc">
+                                        <p (click)="showFullText1 = true;showFullText2 = false;showFullText3 = false;showFullText4 = false;">{{(text1 | slice:0:190)}}
+                                            <span *ngIf="!showFullText1">...</span>
+                                            <span *ngIf="showFullText1">{{(text1 | slice:190)}}</span>
+                                        </p>
+                                    </div>
+                                    <div class="gallery">
+                                        <a (click)="iconCameraCheck = !iconCameraCheck" >3 <i icon-camera></i></a>
+                                    </div>
+                                    <div class="quick-gallery" *ngIf="iconCameraCheck">
+                                        <carousel  [showIndicators]="false" [(activeSlide)]="activeSlideIndex">
+                                            <slide>
+                                                <figure>
+                                                    <img src="assets/images/quickimg.jpg" alt="">
+                                                </figure>
+                                                
+                                            </slide>
+                                            <slide>
+                                                <figure>
+                                                    <img src="assets/images/chart-img2.jpg" alt="">
+                                                </figure>
+                                            </slide>
+                                            <slide>
+                                                <figure>
+                                                    <img src="assets/images/hero_img.jpg" alt="">
+                                                </figure>
+                                            </slide>
+                                        </carousel>
+                                        <div class="carousel-number">
+                                            <a>{{(activeSlideIndex + 1)+"/"}}</a>
+                                            <a>3</a>
+                                        </div>
+                                    </div>
+                                        
+                                </div>
+                                <div class="detail-list">
+                                    <ul class="quick-info">
+                                        <li class="date">May 6</li>
+                                        <li class="time">20:50</li>
+                                        <li class="name">Franky</li>
+                                    </ul>
+                                    <div class="title">
+                                        <h2 class="sub-title">Tom hiddleston</h2>
+                                        <span class="follow">Follow Up</span>
+                                    </div>
+                                    <div class="desc">
+                                        <p (click)="showFullText1 = false;showFullText2 = true;showFullText3 = false;showFullText4 = false;">{{(text2 | slice:0:190)}}
+                                            <span *ngIf="!showFullText2">...</span>
+                                            <span *ngIf="showFullText2">{{(text2 | slice:190)}}</span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngIf="tabNum == 'Hulk'">
+                        <div class="quick-top">
+                            <div class="customers-detail">
+                                <div class="top">
+                                    <h2 class="sub-title">Efficiency of Orders</h2>
+                                    <div class="slider">
+                                        <label class="start">0</label>
+                                        <!-- <ngx-slider [(value)]="value" [options]="options" ></ngx-slider> -->
+                                        <label class="end">100%</label>
+                                    </div>
+                                    
+                                </div>
+                                <div class="bottom">
+                                    <h2 class="sub-title">YOY Comparison<Span class="total">Total Purchase</Span></h2>
+                                    <div class="slider">
+                                        <label class="start">0</label>
+                                        <!-- <ngx-slider [(value)]="minValue" [(highValue)]="maxValue" [options]="options2"></ngx-slider> -->
+                                    </div>
+                                </div> 
+                            </div>
+                            <div id="chart">
+                                <apx-chart #chartObj
+                                [series]="chartOptions.series"
+                                [chart]="chartOptions.chart"
+                                [xaxis]="chartOptions.xaxis"
+                                [yaxis]="chartOptions.yaxis"
+                                [dataLabels]="chartOptions.dataLabels"
+                                [grid]="chartOptions.grid"
+                                [stroke]="chartOptions.stroke"
+                                [title]="chartOptions.title"
+                                [markers]="chartOptions.markers"
+                                [legend]="chartOptions.legend"
+                                >
+                                </apx-chart>
+                            </div>
+                        </div>
+                            
+                        <div class="scrollbar" malihu-scrollbar>
+                            <div  class="quick-detail ">
+                                <div class="detail-list">
+                                    <ul class="quick-info">
+                                        <li class="date">May 8</li>
+                                        <li class="time">12:25</li>
+                                        <li class="name">Franky</li>
+                                    </ul>
+                                    <div class="title">
+                                        <h2 class="sub-title">Tom hiddleston</h2>
+                                        <span class="follow">Follow Up</span>
+                                    </div>
+                                    <div class="desc">
+                                        <p (click)="showFullText1 = true;showFullText2 = false;showFullText3 = false;showFullText4 = false;">{{(text1 | slice:0:190)}}
+                                            <span *ngIf="!showFullText1">...</span>
+                                            <span *ngIf="showFullText1">{{(text1 | slice:190)}}</span>
+                                        </p>
+                                    </div>
+                                    <div class="gallery">
+                                        <a (click)="iconCameraCheck = !iconCameraCheck" >3 <i icon-camera></i></a>
+                                    </div>
+                                    <div class="quick-gallery" *ngIf="iconCameraCheck">
+                                        <carousel  [showIndicators]="false" [(activeSlide)]="activeSlideIndex">
+                                            <slide>
+                                                <figure>
+                                                    <img src="assets/images/quickimg.jpg" alt="">
+                                                </figure>
+                                                
+                                            </slide>
+                                            <slide>
+                                                <figure>
+                                                    <img src="assets/images/chart-img2.jpg" alt="">
+                                                </figure>
+                                            </slide>
+                                            <slide>
+                                                <figure>
+                                                    <img src="assets/images/hero_img.jpg" alt="">
+                                                </figure>
+                                            </slide>
+                                        </carousel>
+                                        <div class="carousel-number">
+                                            <a>{{(activeSlideIndex + 1)+"/"}}</a>
+                                            <a>3</a>
+                                        </div>
+                                    </div>
+                                        
+                                </div>
+                                <div class="detail-list">
+                                    <ul class="quick-info">
+                                        <li class="date">May 6</li>
+                                        <li class="time">20:50</li>
+                                        <li class="name">Franky</li>
+                                    </ul>
+                                    <div class="title">
+                                        <h2 class="sub-title">Tom hiddleston</h2>
+                                        <span class="follow">Follow Up</span>
+                                    </div>
+                                    <div class="desc">
+                                        <p (click)="showFullText1 = false;showFullText2 = true;showFullText3 = false;showFullText4 = false;">{{(text2 | slice:0:190)}}
+                                            <span *ngIf="!showFullText2">...</span>
+                                            <span *ngIf="showFullText2">{{(text2 | slice:190)}}</span>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="detail-list">
+                                    <ul class="quick-info">
+                                        <li class="date">May 6</li>
+                                        <li class="time">23:13</li>
+                                        <li class="name">Franky</li>
+                                    </ul>
+                                    <div class="title">
+                                        <h2 class="sub-title">Tom hiddleston</h2>
+                                        <span class="follow">Follow Up</span>
+                                    </div>
+                                    <div class="desc">
+                                        <p (click)="showFullText1 = false;showFullText2 = false;showFullText3 = true;showFullText4 = false;">{{(text3 | slice:0:190)}}
+                                            <span *ngIf="!showFullText3">...</span>
+                                            <span *ngIf="showFullText3">{{(text3 | slice:190)}}</span>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="detail-list">
+                                    <ul class="quick-info">
+                                        <li class="date">May 6</li>
+                                        <li class="time">20:50</li>
+                                        <li class="name">Franky</li>
+                                    </ul>
+                                    <div class="title">
+                                        <h2 class="sub-title">Tom hiddleston</h2>
+                                        <span class="follow">Follow Up</span>
+                                    </div>
+                                    <div class="desc">
+                                        <p (click)="showFullText1 = false;showFullText2 = false;showFullText3 = false;showFullText4 = true;">{{(text4 | slice:0:190)}}
+                                            <span *ngIf="!showFullText4">...</span>
+                                            <span *ngIf="showFullText4">{{(text4 | slice:190)}}</span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngIf="tabNum == 'Chris Evans'">
+                        <div class="quick-top">
+                            <div class="customers-detail">
+                                <div class="top">
+                                    <h2 class="sub-title">Efficiency of Orders</h2>
+                                    <div class="slider">
+                                        <label class="start">0</label>
+                                        <!-- <ngx-slider [(value)]="value" [options]="options" ></ngx-slider> -->
+                                        <label class="end">100%</label>
+                                    </div>
+                                    
+                                </div>
+                                <div class="bottom">
+                                    <h2 class="sub-title">YOY Comparison<Span class="total">Total Purchase</Span></h2>
+                                    <div class="slider">
+                                        <label class="start">0</label>
+                                        <!-- <ngx-slider [(value)]="minValue" [(highValue)]="maxValue" [options]="options2"></ngx-slider> -->
+                                    </div>
+                                </div> 
+                            </div>
+                            <div id="chart">
+                                <apx-chart #chartObj
+                                [series]="chartOptions.series"
+                                [chart]="chartOptions.chart"
+                                [xaxis]="chartOptions.xaxis"
+                                [yaxis]="chartOptions.yaxis"
+                                [dataLabels]="chartOptions.dataLabels"
+                                [grid]="chartOptions.grid"
+                                [stroke]="chartOptions.stroke"
+                                [title]="chartOptions.title"
+                                [markers]="chartOptions.markers"
+                                [legend]="chartOptions.legend"
+                                >
+                                </apx-chart>
+                            </div>
+                        </div>
+                            
+                        <div class="scrollbar" malihu-scrollbar>
+                            <div  class="quick-detail ">
+                                <div class="detail-list">
+                                    <ul class="quick-info">
+                                        <li class="date">May 8</li>
+                                        <li class="time">12:25</li>
+                                        <li class="name">Franky</li>
+                                    </ul>
+                                    <div class="title">
+                                        <h2 class="sub-title">Tom hiddleston</h2>
+                                        <span class="follow">Follow Up</span>
+                                    </div>
+                                    <div class="desc">
+                                        <p (click)="showFullText1 = true;showFullText2 = false;showFullText3 = false;showFullText4 = false;">{{(text1 | slice:0:190)}}
+                                            <span *ngIf="!showFullText1">...</span>
+                                            <span *ngIf="showFullText1">{{(text1 | slice:190)}}</span>
+                                        </p>
+                                    </div>
+                                    <div class="gallery">
+                                        <a (click)="iconCameraCheck = !iconCameraCheck" >3 <i icon-camera></i></a>
+                                    </div>
+                                    <div class="quick-gallery" *ngIf="iconCameraCheck">
+                                        <carousel  [showIndicators]="false" [(activeSlide)]="activeSlideIndex">
+                                            <slide>
+                                                <figure>
+                                                    <img src="assets/images/quickimg.jpg" alt="">
+                                                </figure>
+                                                
+                                            </slide>
+                                            <slide>
+                                                <figure>
+                                                    <img src="assets/images/chart-img2.jpg" alt="">
+                                                </figure>
+                                            </slide>
+                                            <slide>
+                                                <figure>
+                                                    <img src="assets/images/hero_img.jpg" alt="">
+                                                </figure>
+                                            </slide>
+                                        </carousel>
+                                        <div class="carousel-number">
+                                            <a>{{(activeSlideIndex + 1)+"/"}}</a>
+                                            <a>3</a>
+                                        </div>
+                                    </div>
+                                        
+                                </div>
+                                <div class="detail-list">
+                                    <ul class="quick-info">
+                                        <li class="date">May 6</li>
+                                        <li class="time">20:50</li>
+                                        <li class="name">Franky</li>
+                                    </ul>
+                                    <div class="title">
+                                        <h2 class="sub-title">Tom hiddleston</h2>
+                                        <span class="follow">Follow Up</span>
+                                    </div>
+                                    <div class="desc">
+                                        <p (click)="showFullText1 = false;showFullText2 = true;showFullText3 = false;showFullText4 = false;">{{(text2 | slice:0:190)}}
+                                            <span *ngIf="!showFullText2">...</span>
+                                            <span *ngIf="showFullText2">{{(text2 | slice:190)}}</span>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="detail-list">
+                                    <ul class="quick-info">
+                                        <li class="date">May 6</li>
+                                        <li class="time">23:13</li>
+                                        <li class="name">Franky</li>
+                                    </ul>
+                                    <div class="title">
+                                        <h2 class="sub-title">Tom hiddleston</h2>
+                                        <span class="follow">Follow Up</span>
+                                    </div>
+                                    <div class="desc">
+                                        <p (click)="showFullText1 = false;showFullText2 = false;showFullText3 = true;showFullText4 = false;">{{(text3 | slice:0:190)}}
+                                            <span *ngIf="!showFullText3">...</span>
+                                            <span *ngIf="showFullText3">{{(text3 | slice:190)}}</span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngIf="tabNum == 'S.H.I.E.L.D.'">
+                        <div class="quick-top">
+                            <div class="customers-detail">
+                                <div class="top">
+                                    <h2 class="sub-title">Efficiency of Orders</h2>
+                                    <div class="slider">
+                                        <label class="start">0</label>
+                                        <!-- <ngx-slider [(value)]="value" [options]="options" ></ngx-slider> -->
+                                        <label class="end">100%</label>
+                                    </div>
+                                    
+                                </div>
+                                <div class="bottom">
+                                    <h2 class="sub-title">YOY Comparison<Span class="total">Total Purchase</Span></h2>
+                                    <div class="slider">
+                                        <label class="start">0</label>
+                                        <!-- <ngx-slider [(value)]="minValue" [(highValue)]="maxValue" [options]="options2"></ngx-slider> -->
+                                    </div>
+                                </div> 
+                            </div>
+                            <div id="chart">
+                                <apx-chart #chartObj
+                                [series]="chartOptions.series"
+                                [chart]="chartOptions.chart"
+                                [xaxis]="chartOptions.xaxis"
+                                [yaxis]="chartOptions.yaxis"
+                                [dataLabels]="chartOptions.dataLabels"
+                                [grid]="chartOptions.grid"
+                                [stroke]="chartOptions.stroke"
+                                [title]="chartOptions.title"
+                                [markers]="chartOptions.markers"
+                                [legend]="chartOptions.legend"
+                                >
+                                </apx-chart>
+                            </div>
+                        </div>
+                            
+                        <div class="scrollbar" malihu-scrollbar>
+                            <div  class="quick-detail ">
+                                <div class="detail-list">
+                                    <ul class="quick-info">
+                                        <li class="date">May 8</li>
+                                        <li class="time">12:25</li>
+                                        <li class="name">Franky</li>
+                                    </ul>
+                                    <div class="title">
+                                        <h2 class="sub-title">Tom hiddleston</h2>
+                                        <span class="follow">Follow Up</span>
+                                    </div>
+                                    <div class="desc">
+                                        <p (click)="showFullText1 = true;showFullText2 = false;showFullText3 = false;showFullText4 = false;">{{(text1 | slice:0:190)}}
+                                            <span *ngIf="!showFullText1">...</span>
+                                            <span *ngIf="showFullText1">{{(text1 | slice:190)}}</span>
+                                        </p>
+                                    </div>
+                                    <div class="gallery">
+                                        <a (click)="iconCameraCheck = !iconCameraCheck" >3 <i icon-camera></i></a>
+                                    </div>
+                                    <div class="quick-gallery" *ngIf="iconCameraCheck">
+                                        <carousel  [showIndicators]="false" [(activeSlide)]="activeSlideIndex">
+                                            <slide>
+                                                <figure>
+                                                    <img src="assets/images/quickimg.jpg" alt="">
+                                                </figure>
+                                                
+                                            </slide>
+                                            <slide>
+                                                <figure>
+                                                    <img src="assets/images/chart-img2.jpg" alt="">
+                                                </figure>
+                                            </slide>
+                                            <slide>
+                                                <figure>
+                                                    <img src="assets/images/hero_img.jpg" alt="">
+                                                </figure>
+                                            </slide>
+                                        </carousel>
+                                        <div class="carousel-number">
+                                            <a>{{(activeSlideIndex + 1)+"/"}}</a>
+                                            <a>3</a>
+                                        </div>
+                                    </div>
+                                        
+                                </div>
+                                <div class="detail-list">
+                                    <ul class="quick-info">
+                                        <li class="date">May 6</li>
+                                        <li class="time">20:50</li>
+                                        <li class="name">Franky</li>
+                                    </ul>
+                                    <div class="title">
+                                        <h2 class="sub-title">Tom hiddleston</h2>
+                                        <span class="follow">Follow Up</span>
+                                    </div>
+                                    <div class="desc">
+                                        <p (click)="showFullText1 = false;showFullText2 = true;showFullText3 = false;showFullText4 = false;">{{(text2 | slice:0:190)}}
+                                            <span *ngIf="!showFullText2">...</span>
+                                            <span *ngIf="showFullText2">{{(text2 | slice:190)}}</span>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="detail-list">
+                                    <ul class="quick-info">
+                                        <li class="date">May 6</li>
+                                        <li class="time">23:13</li>
+                                        <li class="name">Franky</li>
+                                    </ul>
+                                    <div class="title">
+                                        <h2 class="sub-title">Tom hiddleston</h2>
+                                        <span class="follow">Follow Up</span>
+                                    </div>
+                                    <div class="desc">
+                                        <p (click)="showFullText1 = false;showFullText2 = false;showFullText3 = true;showFullText4 = false;">{{(text3 | slice:0:190)}}
+                                            <span *ngIf="!showFullText3">...</span>
+                                            <span *ngIf="showFullText3">{{(text3 | slice:190)}}</span>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="detail-list">
+                                    <ul class="quick-info">
+                                        <li class="date">May 6</li>
+                                        <li class="time">20:50</li>
+                                        <li class="name">Franky</li>
+                                    </ul>
+                                    <div class="title">
+                                        <h2 class="sub-title">Tom hiddleston</h2>
+                                        <span class="follow">Follow Up</span>
+                                    </div>
+                                    <div class="desc">
+                                        <p (click)="showFullText1 = false;showFullText2 = false;showFullText3 = false;showFullText4 = true;">{{(text4 | slice:0:190)}}
+                                            <span *ngIf="!showFullText4">...</span>
+                                            <span *ngIf="showFullText4">{{(text4 | slice:190)}}</span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="quick-right" *ngIf="mainright">
+                    <div *ngIf="tabNum == 'Robert Downey Jr.'">
+                        <div class="quick-top">
+                            <div class="quick-desc">
+                                <ul class="list">
+                                    <li>Close</li>
+                                    <li>Negotiations</li>
+                                    <li>Negotiations</li>
+                                    <li class="active">Follow Up</li>
+                                    <li class="active">Initial</li>
+                                </ul>
+                                <div class="desc">
+                                    <h2 class="title">Last Activity<span>May 25, 2020</span></h2>
+                                    <h2 class="title">Number of Acitivities<span>8</span></h2>
+                                    <h2 class="title">Days Active<span>37</span></h2>
+                                </div>
+                            </div>
+                            <div id="chart">
+                                <apx-chart #chartObj
+                                [series]="chartOptions.series"
+                                [chart]="chartOptions.chart"
+                                [xaxis]="chartOptions.xaxis"
+                                [yaxis]="chartOptions.yaxis"
+                                [dataLabels]="chartOptions.dataLabels"
+                                [grid]="chartOptions.grid"
+                                [stroke]="chartOptions.stroke"
+                                [title]="chartOptions.title"
+                                [markers]="chartOptions.markers"
+                                [legend]="chartOptions.legend"
+                                >
+                                </apx-chart>
+                            </div>
+                        </div>
+                        <div class="scrollbar" malihu-scrollbar>
+                            <div  class="quick-detail ">
+                                <div class="detail-list">
+                                    <ul class="quick-info">
+                                        <li class="date">May 8</li>
+                                        <li class="time">12:25</li>
+                                        <li class="name">Franky</li>
+                                    </ul>
+                                    <div class="title">
+                                        <h2 class="sub-title">Tom hiddleston</h2>
+                                        <span class="follow">Follow Up</span>
+                                    </div>
+                                    <div class="desc">
+                                        <p (click)="showFullText1 = true;showFullText2 = false;showFullText3 = false;showFullText4 = false;">{{(text1 | slice:0:190)}}
+                                            <span *ngIf="!showFullText1">...</span>
+                                            <span *ngIf="showFullText1">{{(text1 | slice:190)}}</span>
+                                        </p>
+                                    </div>
+                                    <div class="gallery">
+                                        <a (click)="iconCameraCheck = !iconCameraCheck" >3 <i icon-camera></i></a>
+                                    </div>
+                                    <div class="quick-gallery" *ngIf="iconCameraCheck">
+                                        <carousel  [showIndicators]="false" [(activeSlide)]="activeSlideIndex">
+                                            <slide>
+                                                <figure>
+                                                    <img src="assets/images/quickimg.jpg" alt="">
+                                                </figure>
+                                                
+                                            </slide>
+                                            <slide>
+                                                <figure>
+                                                    <img src="assets/images/chart-img2.jpg" alt="">
+                                                </figure>
+                                            </slide>
+                                            <slide>
+                                                <figure>
+                                                    <img src="assets/images/hero_img.jpg" alt="">
+                                                </figure>
+                                            </slide>
+                                        </carousel>
+                                        <div class="carousel-number">
+                                            <a>{{(activeSlideIndex + 1)+"/"}}</a>
+                                            <a>3</a>
+                                        </div>
+                                    </div>
+                                        
+                                </div>
+                                <div class="detail-list">
+                                    <ul class="quick-info">
+                                        <li class="date">May 6</li>
+                                        <li class="time">20:50</li>
+                                        <li class="name">Franky</li>
+                                    </ul>
+                                    <div class="title">
+                                        <h2 class="sub-title">Tom hiddleston</h2>
+                                        <span class="follow">Follow Up</span>
+                                    </div>
+                                    <div class="desc">
+                                        <p (click)="showFullText1 = false;showFullText2 = true;showFullText3 = false;showFullText4 = false;">{{(text2 | slice:0:190)}}
+                                            <span *ngIf="!showFullText2">...</span>
+                                            <span *ngIf="showFullText2">{{(text2 | slice:190)}}</span>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="detail-list">
+                                    <ul class="quick-info">
+                                        <li class="date">May 6</li>
+                                        <li class="time">23:13</li>
+                                        <li class="name">Franky</li>
+                                    </ul>
+                                    <div class="title">
+                                        <h2 class="sub-title">Tom hiddleston</h2>
+                                        <span class="follow">Follow Up</span>
+                                    </div>
+                                    <div class="desc">
+                                        <p (click)="showFullText1 = false;showFullText2 = false;showFullText3 = true;showFullText4 = false;">{{(text3 | slice:0:190)}}
+                                            <span *ngIf="!showFullText3">...</span>
+                                            <span *ngIf="showFullText3">{{(text3 | slice:190)}}</span>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="detail-list">
+                                    <ul class="quick-info">
+                                        <li class="date">May 6</li>
+                                        <li class="time">20:50</li>
+                                        <li class="name">Franky</li>
+                                    </ul>
+                                    <div class="title">
+                                        <h2 class="sub-title">Tom hiddleston</h2>
+                                        <span class="follow">Follow Up</span>
+                                    </div>
+                                    <div class="desc">
+                                        <p (click)="showFullText1 = false;showFullText2 = false;showFullText3 = false;showFullText4 = true;">{{(text4 | slice:0:190)}}
+                                            <span *ngIf="!showFullText4">...</span>
+                                            <span *ngIf="showFullText4">{{(text4 | slice:190)}}</span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                            
+                    </div>
+                    <div *ngIf="tabNum == 'Tom Hiddleston'">
+                        <div class="quick-top">
+                            <div class="quick-desc">
+                                <ul class="list">
+                                    <li>Close</li>
+                                    <li>Negotiations</li>
+                                    <li>Negotiations</li>
+                                    <li>Follow Up</li>
+                                    <li>Initial</li>
+                                </ul>
+                                <div class="desc">
+                                    <h2 class="title">Last Activity<span>May 25, 2020</span></h2>
+                                    <h2 class="title">Number of Acitivities<span>8</span></h2>
+                                    <h2 class="title">Days Active<span>37</span></h2>
+                                </div>
+                            </div>
+                            <div id="chart">
+                                <apx-chart #chartObj
+                                [series]="chartOptions.series"
+                                [chart]="chartOptions.chart"
+                                [xaxis]="chartOptions.xaxis"
+                                [yaxis]="chartOptions.yaxis"
+                                [dataLabels]="chartOptions.dataLabels"
+                                [grid]="chartOptions.grid"
+                                [stroke]="chartOptions.stroke"
+                                [title]="chartOptions.title"
+                                [markers]="chartOptions.markers"
+                                [legend]="chartOptions.legend"
+                                >
+                                </apx-chart>
+                            </div>
+                        </div>
+                            
+                        <div class="scrollbar" malihu-scrollbar>
+                            <div  class="quick-detail ">
+                                <div class="detail-list">
+                                    <ul class="quick-info">
+                                        <li class="date">May 8</li>
+                                        <li class="time">12:25</li>
+                                        <li class="name">Franky</li>
+                                    </ul>
+                                    <div class="title">
+                                        <h2 class="sub-title">Tom hiddleston</h2>
+                                        <span class="follow">Follow Up</span>
+                                    </div>
+                                    <div class="desc">
+                                        <p (click)="showFullText1 = true;showFullText2 = false;showFullText3 = false;showFullText4 = false;">{{(text1 | slice:0:190)}}
+                                            <span *ngIf="!showFullText1">...</span>
+                                            <span *ngIf="showFullText1">{{(text1 | slice:190)}}</span>
+                                        </p>
+                                    </div>
+                                    <div class="gallery">
+                                        <a (click)="iconCameraCheck = !iconCameraCheck" >3 <i icon-camera></i></a>
+                                    </div>
+                                    <div class="quick-gallery" *ngIf="iconCameraCheck">
+                                        <carousel  [showIndicators]="false" [(activeSlide)]="activeSlideIndex">
+                                            <slide>
+                                                <figure>
+                                                    <img src="assets/images/quickimg.jpg" alt="">
+                                                </figure>
+                                                
+                                            </slide>
+                                            <slide>
+                                                <figure>
+                                                    <img src="assets/images/chart-img2.jpg" alt="">
+                                                </figure>
+                                            </slide>
+                                            <slide>
+                                                <figure>
+                                                    <img src="assets/images/hero_img.jpg" alt="">
+                                                </figure>
+                                            </slide>
+                                        </carousel>
+                                        <div class="carousel-number">
+                                            <a>{{(activeSlideIndex + 1)+"/"}}</a>
+                                            <a>3</a>
+                                        </div>
+                                    </div>
+                                        
+                                </div>
+                                <div class="detail-list">
+                                    <ul class="quick-info">
+                                        <li class="date">May 6</li>
+                                        <li class="time">20:50</li>
+                                        <li class="name">Franky</li>
+                                    </ul>
+                                    <div class="title">
+                                        <h2 class="sub-title">Tom hiddleston</h2>
+                                        <span class="follow">Follow Up</span>
+                                    </div>
+                                    <div class="desc">
+                                        <p (click)="showFullText1 = false;showFullText2 = true;showFullText3 = false;showFullText4 = false;">{{(text2 | slice:0:190)}}
+                                            <span *ngIf="!showFullText2">...</span>
+                                            <span *ngIf="showFullText2">{{(text2 | slice:190)}}</span>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="detail-list">
+                                    <ul class="quick-info">
+                                        <li class="date">May 6</li>
+                                        <li class="time">23:13</li>
+                                        <li class="name">Franky</li>
+                                    </ul>
+                                    <div class="title">
+                                        <h2 class="sub-title">Tom hiddleston</h2>
+                                        <span class="follow">Follow Up</span>
+                                    </div>
+                                    <div class="desc">
+                                        <p (click)="showFullText1 = false;showFullText2 = false;showFullText3 = true;showFullText4 = false;">{{(text3 | slice:0:190)}}
+                                            <span *ngIf="!showFullText3">...</span>
+                                            <span *ngIf="showFullText3">{{(text3 | slice:190)}}</span>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="detail-list">
+                                    <ul class="quick-info">
+                                        <li class="date">May 6</li>
+                                        <li class="time">20:50</li>
+                                        <li class="name">Franky</li>
+                                    </ul>
+                                    <div class="title">
+                                        <h2 class="sub-title">Tom hiddleston</h2>
+                                        <span class="follow">Follow Up</span>
+                                    </div>
+                                    <div class="desc">
+                                        <p (click)="showFullText1 = false;showFullText2 = false;showFullText3 = false;showFullText4 = true;">{{(text4 | slice:0:190)}}
+                                            <span *ngIf="!showFullText4">...</span>
+                                            <span *ngIf="showFullText4">{{(text4 | slice:190)}}</span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngIf="tabNum == 'Hydra'">
+                        <div class="quick-top">
+                            <div class="quick-desc">
+                                <ul class="list">
+                                    <li>Close</li>
+                                    <li>Negotiations</li>
+                                    <li>Negotiations</li>
+                                    <li class="active">Follow Up</li>
+                                    <li class="active">Initial</li>
+                                </ul>
+                                <div class="desc">
+                                    <h2 class="title">Last Activity<span>May 25, 2020</span></h2>
+                                    <h2 class="title">Number of Acitivities<span>8</span></h2>
+                                    <h2 class="title">Days Active<span>37</span></h2>
+                                </div>
+                            </div>
+                            <div id="chart">
+                                <apx-chart #chartObj
+                                [series]="chartOptions.series"
+                                [chart]="chartOptions.chart"
+                                [xaxis]="chartOptions.xaxis"
+                                [yaxis]="chartOptions.yaxis"
+                                [dataLabels]="chartOptions.dataLabels"
+                                [grid]="chartOptions.grid"
+                                [stroke]="chartOptions.stroke"
+                                [title]="chartOptions.title"
+                                [markers]="chartOptions.markers"
+                                [legend]="chartOptions.legend"
+                                >
+                                </apx-chart>
+                            </div>
+                        </div>
+                            
+                        <div class="scrollbar" malihu-scrollbar>
+                            <div  class="quick-detail ">
+                                <div class="detail-list">
+                                    <ul class="quick-info">
+                                        <li class="date">May 8</li>
+                                        <li class="time">12:25</li>
+                                        <li class="name">Franky</li>
+                                    </ul>
+                                    <div class="title">
+                                        <h2 class="sub-title">Tom hiddleston</h2>
+                                        <span class="follow">Follow Up</span>
+                                    </div>
+                                    <div class="desc">
+                                        <p (click)="showFullText1 = true;showFullText2 = false;showFullText3 = false;showFullText4 = false;">{{(text1 | slice:0:190)}}
+                                            <span *ngIf="!showFullText1">...</span>
+                                            <span *ngIf="showFullText1">{{(text1 | slice:190)}}</span>
+                                        </p>
+                                    </div>
+                                    <div class="gallery">
+                                        <a (click)="iconCameraCheck = !iconCameraCheck" >3 <i icon-camera></i></a>
+                                    </div>
+                                    <div class="quick-gallery" *ngIf="iconCameraCheck">
+                                        <carousel  [showIndicators]="false" [(activeSlide)]="activeSlideIndex">
+                                            <slide>
+                                                <figure>
+                                                    <img src="assets/images/quickimg.jpg" alt="">
+                                                </figure>
+                                                
+                                            </slide>
+                                            <slide>
+                                                <figure>
+                                                    <img src="assets/images/chart-img2.jpg" alt="">
+                                                </figure>
+                                            </slide>
+                                            <slide>
+                                                <figure>
+                                                    <img src="assets/images/hero_img.jpg" alt="">
+                                                </figure>
+                                            </slide>
+                                        </carousel>
+                                        <div class="carousel-number">
+                                            <a>{{(activeSlideIndex + 1)+"/"}}</a>
+                                            <a>3</a>
+                                        </div>
+                                    </div>
+                                        
+                                </div>
+                                <div class="detail-list">
+                                    <ul class="quick-info">
+                                        <li class="date">May 6</li>
+                                        <li class="time">20:50</li>
+                                        <li class="name">Franky</li>
+                                    </ul>
+                                    <div class="title">
+                                        <h2 class="sub-title">Tom hiddleston</h2>
+                                        <span class="follow">Follow Up</span>
+                                    </div>
+                                    <div class="desc">
+                                        <p (click)="showFullText1 = false;showFullText2 = true;showFullText3 = false;showFullText4 = false;">{{(text2 | slice:0:190)}}
+                                            <span *ngIf="!showFullText2">...</span>
+                                            <span *ngIf="showFullText2">{{(text2 | slice:190)}}</span>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="detail-list">
+                                    <ul class="quick-info">
+                                        <li class="date">May 6</li>
+                                        <li class="time">23:13</li>
+                                        <li class="name">Franky</li>
+                                    </ul>
+                                    <div class="title">
+                                        <h2 class="sub-title">Tom hiddleston</h2>
+                                        <span class="follow">Follow Up</span>
+                                    </div>
+                                    <div class="desc">
+                                        <p (click)="showFullText1 = false;showFullText2 = false;showFullText3 = true;showFullText4 = false;">{{(text3 | slice:0:190)}}
+                                            <span *ngIf="!showFullText3">...</span>
+                                            <span *ngIf="showFullText3">{{(text3 | slice:190)}}</span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngIf="tabNum == 'Scarlett Johansson'">
+                        <div class="quick-top">
+                            <div class="quick-desc">
+                                <ul class="list">
+                                    <li>Close</li>
+                                    <li>Negotiations</li>
+                                    <li>Negotiations</li>
+                                    <li>Follow Up</li>
+                                    <li>Initial</li>
+                                </ul>
+                                <div class="desc">
+                                    <h2 class="title">Last Activity<span>May 25, 2020</span></h2>
+                                    <h2 class="title">Number of Acitivities<span>8</span></h2>
+                                    <h2 class="title">Days Active<span>37</span></h2>
+                                </div>
+                            </div>
+                            <div id="chart">
+                                <apx-chart #chartObj
+                                [series]="chartOptions.series"
+                                [chart]="chartOptions.chart"
+                                [xaxis]="chartOptions.xaxis"
+                                [yaxis]="chartOptions.yaxis"
+                                [dataLabels]="chartOptions.dataLabels"
+                                [grid]="chartOptions.grid"
+                                [stroke]="chartOptions.stroke"
+                                [title]="chartOptions.title"
+                                [markers]="chartOptions.markers"
+                                [legend]="chartOptions.legend"
+                                >
+                                </apx-chart>
+                            </div>
+                        </div>
+                            
+                        <div class="scrollbar" malihu-scrollbar>
+                            <div  class="quick-detail ">
+                                <div class="detail-list">
+                                    <ul class="quick-info">
+                                        <li class="date">May 8</li>
+                                        <li class="time">12:25</li>
+                                        <li class="name">Franky</li>
+                                    </ul>
+                                    <div class="title">
+                                        <h2 class="sub-title">Tom hiddleston</h2>
+                                        <span class="follow">Follow Up</span>
+                                    </div>
+                                    <div class="desc">
+                                        <p (click)="showFullText1 = true;showFullText2 = false;showFullText3 = false;showFullText4 = false;">{{(text1 | slice:0:190)}}
+                                            <span *ngIf="!showFullText1">...</span>
+                                            <span *ngIf="showFullText1">{{(text1 | slice:190)}}</span>
+                                        </p>
+                                    </div>
+                                    <div class="gallery">
+                                        <a (click)="iconCameraCheck = !iconCameraCheck" >3 <i icon-camera></i></a>
+                                    </div>
+                                    <div class="quick-gallery" *ngIf="iconCameraCheck">
+                                        <carousel  [showIndicators]="false" [(activeSlide)]="activeSlideIndex">
+                                            <slide>
+                                                <figure>
+                                                    <img src="assets/images/quickimg.jpg" alt="">
+                                                </figure>
+                                                
+                                            </slide>
+                                            <slide>
+                                                <figure>
+                                                    <img src="assets/images/chart-img2.jpg" alt="">
+                                                </figure>
+                                            </slide>
+                                            <slide>
+                                                <figure>
+                                                    <img src="assets/images/hero_img.jpg" alt="">
+                                                </figure>
+                                            </slide>
+                                        </carousel>
+                                        <div class="carousel-number">
+                                            <a>{{(activeSlideIndex + 1)+"/"}}</a>
+                                            <a>3</a>
+                                        </div>
+                                    </div>
+                                        
+                                </div>
+                                <div class="detail-list">
+                                    <ul class="quick-info">
+                                        <li class="date">May 6</li>
+                                        <li class="time">20:50</li>
+                                        <li class="name">Franky</li>
+                                    </ul>
+                                    <div class="title">
+                                        <h2 class="sub-title">Tom hiddleston</h2>
+                                        <span class="follow">Follow Up</span>
+                                    </div>
+                                    <div class="desc">
+                                        <p (click)="showFullText1 = false;showFullText2 = true;showFullText3 = false;showFullText4 = false;">{{(text2 | slice:0:190)}}
+                                            <span *ngIf="!showFullText2">...</span>
+                                            <span *ngIf="showFullText2">{{(text2 | slice:190)}}</span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngIf="tabNum == 'Hulk'">
+                        <div class="quick-top">
+                            <div class="quick-desc">
+                                <ul class="list">
+                                    <li>Close</li>
+                                    <li>Negotiations</li>
+                                    <li>Negotiations</li>
+                                    <li class="active">Follow Up</li>
+                                    <li class="active">Initial</li>
+                                </ul>
+                                <div class="desc">
+                                    <h2 class="title">Last Activity<span>May 25, 2020</span></h2>
+                                    <h2 class="title">Number of Acitivities<span>8</span></h2>
+                                    <h2 class="title">Days Active<span>37</span></h2>
+                                </div>
+                            </div>
+                            <div id="chart">
+                                <apx-chart #chartObj
+                                [series]="chartOptions.series"
+                                [chart]="chartOptions.chart"
+                                [xaxis]="chartOptions.xaxis"
+                                [yaxis]="chartOptions.yaxis"
+                                [dataLabels]="chartOptions.dataLabels"
+                                [grid]="chartOptions.grid"
+                                [stroke]="chartOptions.stroke"
+                                [title]="chartOptions.title"
+                                [markers]="chartOptions.markers"
+                                [legend]="chartOptions.legend"
+                                >
+                                </apx-chart>
+                            </div>
+                        </div>
+                            
+                        <div class="scrollbar" malihu-scrollbar>
+                            <div  class="quick-detail ">
+                                <div class="detail-list">
+                                    <ul class="quick-info">
+                                        <li class="date">May 8</li>
+                                        <li class="time">12:25</li>
+                                        <li class="name">Franky</li>
+                                    </ul>
+                                    <div class="title">
+                                        <h2 class="sub-title">Tom hiddleston</h2>
+                                        <span class="follow">Follow Up</span>
+                                    </div>
+                                    <div class="desc">
+                                        <p (click)="showFullText1 = true;showFullText2 = false;showFullText3 = false;showFullText4 = false;">{{(text1 | slice:0:190)}}
+                                            <span *ngIf="!showFullText1">...</span>
+                                            <span *ngIf="showFullText1">{{(text1 | slice:190)}}</span>
+                                        </p>
+                                    </div>
+                                    <div class="gallery">
+                                        <a (click)="iconCameraCheck = !iconCameraCheck" >3 <i icon-camera></i></a>
+                                    </div>
+                                    <div class="quick-gallery" *ngIf="iconCameraCheck">
+                                        <carousel  [showIndicators]="false" [(activeSlide)]="activeSlideIndex">
+                                            <slide>
+                                                <figure>
+                                                    <img src="assets/images/quickimg.jpg" alt="">
+                                                </figure>
+                                                
+                                            </slide>
+                                            <slide>
+                                                <figure>
+                                                    <img src="assets/images/chart-img2.jpg" alt="">
+                                                </figure>
+                                            </slide>
+                                            <slide>
+                                                <figure>
+                                                    <img src="assets/images/hero_img.jpg" alt="">
+                                                </figure>
+                                            </slide>
+                                        </carousel>
+                                        <div class="carousel-number">
+                                            <a>{{(activeSlideIndex + 1)+"/"}}</a>
+                                            <a>3</a>
+                                        </div>
+                                    </div>
+                                        
+                                </div>
+                                <div class="detail-list">
+                                    <ul class="quick-info">
+                                        <li class="date">May 6</li>
+                                        <li class="time">20:50</li>
+                                        <li class="name">Franky</li>
+                                    </ul>
+                                    <div class="title">
+                                        <h2 class="sub-title">Tom hiddleston</h2>
+                                        <span class="follow">Follow Up</span>
+                                    </div>
+                                    <div class="desc">
+                                        <p (click)="showFullText1 = false;showFullText2 = true;showFullText3 = false;showFullText4 = false;">{{(text2 | slice:0:190)}}
+                                            <span *ngIf="!showFullText2">...</span>
+                                            <span *ngIf="showFullText2">{{(text2 | slice:190)}}</span>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="detail-list">
+                                    <ul class="quick-info">
+                                        <li class="date">May 6</li>
+                                        <li class="time">23:13</li>
+                                        <li class="name">Franky</li>
+                                    </ul>
+                                    <div class="title">
+                                        <h2 class="sub-title">Tom hiddleston</h2>
+                                        <span class="follow">Follow Up</span>
+                                    </div>
+                                    <div class="desc">
+                                        <p (click)="showFullText1 = false;showFullText2 = false;showFullText3 = true;showFullText4 = false;">{{(text3 | slice:0:190)}}
+                                            <span *ngIf="!showFullText3">...</span>
+                                            <span *ngIf="showFullText3">{{(text3 | slice:190)}}</span>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="detail-list">
+                                    <ul class="quick-info">
+                                        <li class="date">May 6</li>
+                                        <li class="time">20:50</li>
+                                        <li class="name">Franky</li>
+                                    </ul>
+                                    <div class="title">
+                                        <h2 class="sub-title">Tom hiddleston</h2>
+                                        <span class="follow">Follow Up</span>
+                                    </div>
+                                    <div class="desc">
+                                        <p (click)="showFullText1 = false;showFullText2 = false;showFullText3 = false;showFullText4 = true;">{{(text4 | slice:0:190)}}
+                                            <span *ngIf="!showFullText4">...</span>
+                                            <span *ngIf="showFullText4">{{(text4 | slice:190)}}</span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngIf="tabNum == 'Chris Evans'">
+                        <div class="quick-top">
+                            <div class="quick-desc">
+                                <ul class="list">
+                                    <li>Close</li>
+                                    <li>Negotiations</li>
+                                    <li>Negotiations</li>
+                                    <li>Follow Up</li>
+                                    <li>Initial</li>
+                                </ul>
+                                <div class="desc">
+                                    <h2 class="title">Last Activity<span>May 25, 2020</span></h2>
+                                    <h2 class="title">Number of Acitivities<span>8</span></h2>
+                                    <h2 class="title">Days Active<span>37</span></h2>
+                                </div>
+                            </div>
+                            <div id="chart">
+                                <apx-chart #chartObj
+                                [series]="chartOptions.series"
+                                [chart]="chartOptions.chart"
+                                [xaxis]="chartOptions.xaxis"
+                                [yaxis]="chartOptions.yaxis"
+                                [dataLabels]="chartOptions.dataLabels"
+                                [grid]="chartOptions.grid"
+                                [stroke]="chartOptions.stroke"
+                                [title]="chartOptions.title"
+                                [markers]="chartOptions.markers"
+                                [legend]="chartOptions.legend"
+                                >
+                                </apx-chart>
+                            </div>
+                        </div>
+                            
+                        <div class="scrollbar" malihu-scrollbar>
+                            <div  class="quick-detail ">
+                                <div class="detail-list">
+                                    <ul class="quick-info">
+                                        <li class="date">May 8</li>
+                                        <li class="time">12:25</li>
+                                        <li class="name">Franky</li>
+                                    </ul>
+                                    <div class="title">
+                                        <h2 class="sub-title">Tom hiddleston</h2>
+                                        <span class="follow">Follow Up</span>
+                                    </div>
+                                    <div class="desc">
+                                        <p (click)="showFullText1 = true;showFullText2 = false;showFullText3 = false;showFullText4 = false;">{{(text1 | slice:0:190)}}
+                                            <span *ngIf="!showFullText1">...</span>
+                                            <span *ngIf="showFullText1">{{(text1 | slice:190)}}</span>
+                                        </p>
+                                    </div>
+                                    <div class="gallery">
+                                        <a (click)="iconCameraCheck = !iconCameraCheck" >3 <i icon-camera></i></a>
+                                    </div>
+                                    <div class="quick-gallery" *ngIf="iconCameraCheck">
+                                        <carousel  [showIndicators]="false" [(activeSlide)]="activeSlideIndex">
+                                            <slide>
+                                                <figure>
+                                                    <img src="assets/images/quickimg.jpg" alt="">
+                                                </figure>
+                                                
+                                            </slide>
+                                            <slide>
+                                                <figure>
+                                                    <img src="assets/images/chart-img2.jpg" alt="">
+                                                </figure>
+                                            </slide>
+                                            <slide>
+                                                <figure>
+                                                    <img src="assets/images/hero_img.jpg" alt="">
+                                                </figure>
+                                            </slide>
+                                        </carousel>
+                                        <div class="carousel-number">
+                                            <a>{{(activeSlideIndex + 1)+"/"}}</a>
+                                            <a>3</a>
+                                        </div>
+                                    </div>
+                                        
+                                </div>
+                                <div class="detail-list">
+                                    <ul class="quick-info">
+                                        <li class="date">May 6</li>
+                                        <li class="time">20:50</li>
+                                        <li class="name">Franky</li>
+                                    </ul>
+                                    <div class="title">
+                                        <h2 class="sub-title">Tom hiddleston</h2>
+                                        <span class="follow">Follow Up</span>
+                                    </div>
+                                    <div class="desc">
+                                        <p (click)="showFullText1 = false;showFullText2 = true;showFullText3 = false;showFullText4 = false;">{{(text2 | slice:0:190)}}
+                                            <span *ngIf="!showFullText2">...</span>
+                                            <span *ngIf="showFullText2">{{(text2 | slice:190)}}</span>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="detail-list">
+                                    <ul class="quick-info">
+                                        <li class="date">May 6</li>
+                                        <li class="time">23:13</li>
+                                        <li class="name">Franky</li>
+                                    </ul>
+                                    <div class="title">
+                                        <h2 class="sub-title">Tom hiddleston</h2>
+                                        <span class="follow">Follow Up</span>
+                                    </div>
+                                    <div class="desc">
+                                        <p (click)="showFullText1 = false;showFullText2 = false;showFullText3 = true;showFullText4 = false;">{{(text3 | slice:0:190)}}
+                                            <span *ngIf="!showFullText3">...</span>
+                                            <span *ngIf="showFullText3">{{(text3 | slice:190)}}</span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngIf="tabNum == 'S.H.I.E.L.D.'">
+                        <div class="quick-top">
+                            <div class="quick-desc">
+                                <ul class="list">
+                                    <li>Close</li>
+                                    <li>Negotiations</li>
+                                    <li>Negotiations</li>
+                                    <li class="active">Follow Up</li>
+                                    <li class="active">Initial</li>
+                                </ul>
+                                <div class="desc">
+                                    <h2 class="title">Last Activity<span>May 25, 2020</span></h2>
+                                    <h2 class="title">Number of Acitivities<span>8</span></h2>
+                                    <h2 class="title">Days Active<span>37</span></h2>
+                                </div>
+                            </div>
+                            <div id="chart">
+                                <apx-chart #chartObj
+                                [series]="chartOptions.series"
+                                [chart]="chartOptions.chart"
+                                [xaxis]="chartOptions.xaxis"
+                                [yaxis]="chartOptions.yaxis"
+                                [dataLabels]="chartOptions.dataLabels"
+                                [grid]="chartOptions.grid"
+                                [stroke]="chartOptions.stroke"
+                                [title]="chartOptions.title"
+                                [markers]="chartOptions.markers"
+                                [legend]="chartOptions.legend"
+                                >
+                                </apx-chart>
+                            </div>
+                        </div>
+                            
+                        <div class="scrollbar" malihu-scrollbar>
+                            <div  class="quick-detail ">
+                                <div class="detail-list">
+                                    <ul class="quick-info">
+                                        <li class="date">May 8</li>
+                                        <li class="time">12:25</li>
+                                        <li class="name">Franky</li>
+                                    </ul>
+                                    <div class="title">
+                                        <h2 class="sub-title">Tom hiddleston</h2>
+                                        <span class="follow">Follow Up</span>
+                                    </div>
+                                    <div class="desc">
+                                        <p (click)="showFullText1 = true;showFullText2 = false;showFullText3 = false;showFullText4 = false;">{{(text1 | slice:0:190)}}
+                                            <span *ngIf="!showFullText1">...</span>
+                                            <span *ngIf="showFullText1">{{(text1 | slice:190)}}</span>
+                                        </p>
+                                    </div>
+                                    <div class="gallery">
+                                        <a (click)="iconCameraCheck = !iconCameraCheck" >3 <i icon-camera></i></a>
+                                    </div>
+                                    <div class="quick-gallery" *ngIf="iconCameraCheck">
+                                        <carousel  [showIndicators]="false" [(activeSlide)]="activeSlideIndex">
+                                            <slide>
+                                                <figure>
+                                                    <img src="assets/images/quickimg.jpg" alt="">
+                                                </figure>
+                                                
+                                            </slide>
+                                            <slide>
+                                                <figure>
+                                                    <img src="assets/images/chart-img2.jpg" alt="">
+                                                </figure>
+                                            </slide>
+                                            <slide>
+                                                <figure>
+                                                    <img src="assets/images/hero_img.jpg" alt="">
+                                                </figure>
+                                            </slide>
+                                        </carousel>
+                                        <div class="carousel-number">
+                                            <a>{{(activeSlideIndex + 1)+"/"}}</a>
+                                            <a>3</a>
+                                        </div>
+                                    </div>
+                                        
+                                </div>
+                                <div class="detail-list">
+                                    <ul class="quick-info">
+                                        <li class="date">May 6</li>
+                                        <li class="time">20:50</li>
+                                        <li class="name">Franky</li>
+                                    </ul>
+                                    <div class="title">
+                                        <h2 class="sub-title">Tom hiddleston</h2>
+                                        <span class="follow">Follow Up</span>
+                                    </div>
+                                    <div class="desc">
+                                        <p (click)="showFullText1 = false;showFullText2 = true;showFullText3 = false;showFullText4 = false;">{{(text2 | slice:0:190)}}
+                                            <span *ngIf="!showFullText2">...</span>
+                                            <span *ngIf="showFullText2">{{(text2 | slice:190)}}</span>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="detail-list">
+                                    <ul class="quick-info">
+                                        <li class="date">May 6</li>
+                                        <li class="time">23:13</li>
+                                        <li class="name">Franky</li>
+                                    </ul>
+                                    <div class="title">
+                                        <h2 class="sub-title">Tom hiddleston</h2>
+                                        <span class="follow">Follow Up</span>
+                                    </div>
+                                    <div class="desc">
+                                        <p (click)="showFullText1 = false;showFullText2 = false;showFullText3 = true;showFullText4 = false;">{{(text3 | slice:0:190)}}
+                                            <span *ngIf="!showFullText3">...</span>
+                                            <span *ngIf="showFullText3">{{(text3 | slice:190)}}</span>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="detail-list">
+                                    <ul class="quick-info">
+                                        <li class="date">May 6</li>
+                                        <li class="time">20:50</li>
+                                        <li class="name">Franky</li>
+                                    </ul>
+                                    <div class="title">
+                                        <h2 class="sub-title">Tom hiddleston</h2>
+                                        <span class="follow">Follow Up</span>
+                                    </div>
+                                    <div class="desc">
+                                        <p (click)="showFullText1 = false;showFullText2 = false;showFullText3 = false;showFullText4 = true;">{{(text4 | slice:0:190)}}
+                                            <span *ngIf="!showFullText4">...</span>
+                                            <span *ngIf="showFullText4">{{(text4 | slice:190)}}</span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

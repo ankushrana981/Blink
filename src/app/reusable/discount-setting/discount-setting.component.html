@@ -1,0 +1,325 @@
+<div class="d-flex flex-wrap chart-form create-task-from position-relative product-modal discount-modal">
+    <div class="chart-box d-flex flex-wrap w-100">
+        <div class="chart-header w-100 d-flex flex-wrap">
+            <div class="chart-right flex-1 d-flex flex-wrap align-items-center justify-content-between">
+                <h3 class=text-title>Discount Setting</h3>
+                <!-- <ng-content></ng-content> -->
+                <a href="javascript:void(0)" icon-close (click)="closeTask()"></a>
+            </div>
+        </div>
+        <div class="w-100 create-task-body">
+            <div class="task-body">
+                <!-- <div malihu-scrollbar class="scrollbar"> -->
+                <div class="d-flex flex-wrap ">
+                    <a class="btn-task active" href="javascript:void(0)" (click)="setpOne()">Basic</a>
+                    <a class="btn-task" href="javascript:void(0)" (click)="setpTwo()"
+                        [ngClass]="[setp2 ? 'active' : '', setp3 ? 'active' : '' , setp4 ? 'active' : '']">Triggers</a>
+                    <a class="btn-task" href="javascript:void(0)" (click)="setpThree()"
+                        [ngClass]="[setp3 ? 'active' : '' , setp4 ? 'active' : '']">Attachments</a>
+                    <a class="btn-task" href="javascript:void(0)" (click)="setpFour()"
+                        [ngClass]="{'active': setp4}">Approval</a>
+                </div>
+                <div class="task-content">
+                    <form class="example-form prduct-form">
+                        <div class="body" [hidden]="!setp1">
+                            <div class="product-list">
+                                <div class="desc">
+                                    <label class="title">Discount Name</label>
+                                    <input id="productname" type="text" class="form-control remove-border">
+                                </div>
+                                <div class="desc">
+                                    <label class="title">Discount</label>
+                                    <input id="productname" type="text" class="form-control form-size" prefix="Rp. " mask="separator" thousandSeparator=".">
+                                    <ul class="list-btn">
+                                        <li class="percent"><a class="common-btn">%</a></li>
+                                        <li class="percent"><a class="common-btn">gr</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="product-desc">
+                                <div class="desc-detail">
+                                    <label class="title">Discount Description</label>
+                                    <input id="productname" type="text" class="form-control">
+                                </div>
+                            </div>
+                            <div class="customer-btn">
+                                <a (click)="ledger=!ledger" [ngClass]="{'active' : ledger}">Customer</a>
+                                <div class="detail-desc" *ngIf="ledger">
+                                    <ul class="task-detail mt-2 d-flex flex-row">
+                                        <li>
+                                            <div class="form-group form-task remove-border">
+                                                <ng-select formControlName="task_type" class="w-100" [items]="tasks"
+                                                    placeholder="Assign To" bindLabel="name"
+                                                    (change)="chnageTypeValue()" bindValue="name" [searchable]="false"
+                                                    [hideSelected]="true">
+                                                    <ng-template ng-label-tmp let-item="item" let-clear="clear">
+                                                        <span class="ng-value-label">{{item.name}}</span>
+                                                        <span class="ng-value-icon right" (click)="clear(item);"
+                                                            aria-hidden="true">×</span>
+                                                    </ng-template>
+                                                    <ng-template ng-option-tmp let-item="item" let-index="index">
+                                                        {{item.name}}
+                                                    </ng-template>
+                                                </ng-select>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <!-- <div class="customer-list" *ngIf="ledger">
+                                    <span>Julia Roberts,</span>
+                                    <span>Henry Ford,</span>
+                                    <span>Elon Musk</span>
+                                </div> -->
+                            </div>
+                            <div class="save-btn">
+                                <a>Save</a>
+                            </div>
+                        </div>
+
+                        <div class="body" [hidden]="!setp2">
+                            <div class="triggers-detail">
+                                <div class="triggers-tab">
+                                    <h2 class="main-title">Triggers</h2>
+                                    <div class="triggers-list">
+                                        <ul class="nav nav-tabs">
+                                            <li class="nav-item">
+                                            <a class="nav-link" data-toggle="pill" href="#home">Date</a>
+                                            </li>
+                                            <li class="nav-item">
+                                            <a class="nav-link" data-toggle="pill" href="#time">Time</a>
+                                            </li>
+                                            <li class="nav-item">
+                                            <a class="nav-link" data-toggle="pill" href="#amount">amount</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" data-toggle="pill" href="#quantity">Quantity</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" data-toggle="pill" href="#customer">Customer Level</a>
+                                            </li>
+                                        </ul>
+                                        <div class="tab-content">
+                                            <div class="tab-pane fade" id="home">
+                                                <div class="form-group">
+                                                    <Span class="icon"><i icon-search></i></Span>
+                                                    <input type="text" class="form-control" placeholder="Search the product">
+                                                </div>
+                                                <ul class="list">
+                                                    <li><a>Cheese</a></li>
+                                                    <li><a>hotdog</a></li>
+                                                    <li><a>pancake</a></li>
+                                                    <li><a>Tiramisu</a></li>
+                                                </ul>
+                                                <div class="add-btn">
+                                                    <a>Add Trigger</a>
+                                                </div>
+                                            </div>
+                                            <div class="tab-pane fade" id="time">
+                                                <div class="form-group">
+                                                    <Span class="icon"><i icon-search></i></Span>
+                                                    <input type="text" class="form-control" placeholder="Search the product">
+                                                </div>
+                                                <ul class="list">
+                                                    <li><a>pancake</a></li>
+                                                    <li><a>Tiramisu</a></li>
+                                                </ul>
+                                                <div class="add-btn">
+                                                    <a>Add Trigger</a>
+                                                </div>
+                                            </div>
+                                            <div class="tab-pane fade" id="amount">
+                                                <div class="form-group">
+                                                    <Span class="icon"><i icon-search></i></Span>
+                                                    <input type="text" class="form-control" placeholder="Search the product">
+                                                </div>
+                                                <ul class="list">
+                                                    <li><a>Cheese</a></li>
+                                                    <li><a>hotdog</a></li>
+                                                </ul>
+                                                <div class="add-btn">
+                                                    <a>Add Trigger</a>
+                                                </div>
+                                            </div>
+                                            <div class="tab-pane fade" id="quantity">
+                                                <div class="form-group">
+                                                    <Span class="icon"><i icon-search></i></Span>
+                                                    <input type="text" class="form-control" placeholder="Search the product">
+                                                </div>
+                                                <ul class="list">
+                                                    <li><a>Cheese</a></li>
+                                                    <li><a>hotdog</a></li>
+                                                    <li><a>pancake</a></li>
+                                                    <li><a>Tiramisu</a></li>
+                                                </ul>
+                                                <div class="add-btn">
+                                                    <a>Add Trigger</a>
+                                                </div>
+                                            </div>
+                                            <div class="tab-pane fade" id="customer">
+                                                <div class="form-group">
+                                                    <Span class="icon"><i icon-search></i></Span>
+                                                    <input type="text" class="form-control" placeholder="Search the product">
+                                                </div>
+                                                <ul class="list">
+                                                    <li><a>Cheese</a></li>
+                                                    <li><a>hotdog</a></li>
+                                                </ul>
+                                                <div class="add-btn">
+                                                    <a>Add Trigger</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- <tabset class="triggers-list">
+                                        <tab heading="Date" id="tab1">
+                                            <div class="form-group">
+                                                <Span class="icon"><i icon-search></i></Span>
+                                                <input type="text" class="form-control" placeholder="Search the product">
+                                            </div>
+                                            <ul class="list">
+                                                <li><a>Cheese</a></li>
+                                                <li><a>hotdog</a></li>
+                                            </ul>
+                                            <div class="add-btn">
+                                                <a>Add Trigger</a>
+                                            </div>
+                                        </tab>
+                                        <tab heading="Time">
+                                            <div class="form-group">
+                                                <Span class="icon"><i icon-search></i></Span>
+                                                <input type="text" class="form-control" placeholder="Search the product">
+                                            </div>
+                                            <ul class="list">
+                                                <li><a>pancake</a></li>
+                                                <li><a>Tiramisu</a></li>
+                                            </ul>
+                                            <div class="add-btn">
+                                                <a>Add Trigger</a>
+                                            </div>
+                                        </tab>
+                                        <tab heading="amount">
+                                            <div class="form-group">
+                                                <Span class="icon"><i icon-search></i></Span>
+                                                <input type="text" class="form-control" placeholder="Search the product">
+                                            </div>
+                                            <ul class="list">
+                                                <li><a>Cheese</a></li>
+                                                <li><a>hotdog</a></li>
+                                                <li><a>pancake</a></li>
+                                                <li><a>Tiramisu</a></li>
+                                            </ul>
+                                            <div class="add-btn">
+                                                <a>Add Trigger</a>
+                                            </div>
+                                        </tab>
+                                        <tab heading="Quantity">
+                                            <div class="form-group">
+                                                <Span class="icon"><i icon-search></i></Span>
+                                                <input type="text" class="form-control" placeholder="Search the product">
+                                            </div>
+                                            <ul class="list">
+                                                <li><a>pancake</a></li>
+                                                <li><a>Tiramisu</a></li>
+                                            </ul>
+                                            <div class="add-btn">
+                                                <a>Add Trigger</a>
+                                            </div>
+
+                                        </tab>
+                                        <tab heading="Customer Level">
+                                            <div class="form-group">
+                                                <Span class="icon"><i icon-search></i></Span>
+                                                <input type="text" class="form-control" placeholder="Search the product">
+                                            </div>
+                                            <ul class="list">
+                                                <li><a>Cheese</a></li>
+                                                <li><a>hotdog</a></li>
+                                            </ul>
+                                            <div class="add-btn">
+                                                <a>Add Trigger</a>
+                                            </div>
+                                        </tab>
+                                    </tabset> -->
+                                </div>
+                                <div class="assign-detail">
+                                    <h2 class="title">Assigned Triggers</h2>
+                                    <div class="table-respons">
+                                    <table>
+                                        <tbody>
+                                        <tr>
+                                            <td class="number">1.</td>
+                                            <td class="desc line">When total receipt exceeds Rp. 300.000</td>
+                                            <td class="close"><span class="ico"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M1 1L15 15M15 1L1 15" stroke="#D2DDEC" stroke-width="2"/></svg></span></td>
+                                        </tr>
+                                        <tr class="active">
+                                            <td class="number">2.</td>
+                                            <td class="desc line">At 5pm - 10pm only</td>
+                                            <td class="close"><span class="ico"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M1 1L15 15M15 1L1 15" stroke="#D2DDEC" stroke-width="2"/></svg></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="number">3.</td>
+                                            <td class="desc">Customer Level 3 or above</td>
+                                            <td class="close"><span class="ico"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M1 1L15 15M15 1L1 15" stroke="#D2DDEC" stroke-width="2"/></svg></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="number">4.</td>
+                                            <td class="desc">From Jan 12 2021 - Jan 31 2021</td>
+                                            <td class="close"><span class="ico"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M1 1L15 15M15 1L1 15" stroke="#D2DDEC" stroke-width="2"/></svg></span></td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="body" [hidden]="!setp3">
+                            <div class="product-desc">
+                                <div class="desc-detail attachment-size">
+                                    <div class="form-group task-details remove-dropdown">
+                                        <ng-select class="w-100" [items]="attachments" [multiple]="true"
+                                            [hideSelected]="true" [closeOnSelect]="true"
+                                            placeholder="Attachments" bindLabel="name" bindValue="name">
+                                            <ng-template ng-label-tmp let-item="item" let-clear="clear">
+                                                <span class="ng-value-label">{{item.name}}</span>
+                                                <span class="ng-value-icon right" (click)="clear(item)"
+                                                    aria-hidden="true">×</span>
+                                            </ng-template>
+                                            <ng-template ng-option-tmp let-item="item" let-index="index">
+                                                {{item.name}}
+                                            </ng-template>
+                                        </ng-select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="save-btn">
+                                <a>Save</a>
+                            </div>
+
+                        </div>
+                        <div class="body" [hidden]="!setp4">
+                            <div class="level-detail">
+                                <label class="sub-title">Approval Level</label>
+                                <ul class="level-list">
+                                    <li><a (click)="clickStar(1)">Lv 1</a></li>
+                                    <li><a (click)="clickStar(2)">Lv 2</a></li>
+                                    <li><a (click)="clickStar(3)">Lv 3</a></li>
+                                    <li><a (click)="clickStar(4)">Lv 4</a></li>
+                                </ul>
+                            </div>
+                                
+                            <div class="save-btn">
+                                <a>Save</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <!-- </div> -->
+            </div>
+        </div>
+    </div>
+</div>

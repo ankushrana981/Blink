@@ -1,0 +1,1060 @@
+<div class="crm-Wrap notes-wrap crmnotes-wrap-h" [ngClass]="icon1?'active':''">
+
+  <div class="contentBox task-page">
+    <div class="leftContent overflow-0 task-board notes-dashboard-main notes-dashboard-main-h">
+      <div
+        class="viewdata-title task-title d-flex flex-wrap align-items-center justify-content-between notes-title-main-h">
+        <div class="d-flex flex-wrap align-items-center notes-left-h">
+          <div class="titleWith-filter">
+            <h2>
+              <img src="assets/images/icon-list.svg" height="25" width="25" alt="" class="mr-2">Notes
+            </h2>
+            <div class="filteredOption mcs-horizontal-scrollbar-notes-filter" malihu-scrollbar
+              >
+              <ul>
+                <li *ngFor="let item of tempArr;let index=index;" class="note-filter-record">
+                  <small class="close">
+                    <img src="assets/images/icon-close-dark.svg" alt="" width="10" (click)="resetFilter(item)">
+                  </small>
+                  <p>
+                    <span>{{item.parentFilter}}</span>
+                  </p>
+                  <p *ngIf="item.selectedObj.id == 1">
+                    <span>{{ item.childFilter | date }}</span>
+                    <span *ngIf="item.selectedObj.id == 1 && item.selectedObj.bindedValue.id !== 1">
+                      -{{item.subchildrange | date }}
+                    </span>
+                  </p>
+                  <p
+                    *ngIf="item.selectedObj.id == 1 || item.selectedObj.id == 2 || item.selectedObj.id == 3 || item.selectedObj.id == 4 || item.selectedObj.id == 5">
+                    <span>
+                      {{ item.secondFilter }}
+                    </span>
+                  </p>
+                </li>
+              </ul>
+            </div>
+            <div *ngIf="tempArr.length != 3" class="filter-btnBox" (click)="startingFilter()">
+              <img src="assets/images/icon-filter.svg" height="25" width="25" style="margin-top: -3px;" alt="">
+            </div>
+            <div class="selectBoxList fliter-task" *ngIf="fliterflag">
+              <div class="form-group" (clickOutside)="isOpenFilter = false">
+                <label class="gray-label">Filter</label>
+                <ng-select #filterName [clearable]="false" [items]="filterstart" bindLabel="title"
+                  [(ngModel)]="filterData" [closeOnSelect]="true" name="filterName" id="filterName" autocomplete="off"
+                  (change)="isOpenFilter = false;changedParentFilter($event)" [isOpen]="isOpenFilter"
+                  (focus)="isOpenFilter = true">
+                </ng-select>
+              </div>
+              <div class="form-group" *ngIf="filterData?.option?.length > 0" (clickOutside)="isOpen = false">
+                <label class="gray-label">{{filterData.labelName}}</label>
+                <ng-select [clearable]="false" #secondFilter1 [items]="filterData.option"
+                  [(ngModel)]="filterData.bindedValue" [isOpen]="isOpen" [closeOnSelect]="true" bindLabel="title"
+                  name="secondFilter" id="secondFilter" autocomplete="off"
+                  (change)="isOpen = false;changedChildFilter($event);" (focus)="isOpen = true">
+                </ng-select>
+              </div>
+              <ng-container *ngFor="let data of filterData.suboptions;let index=index;">
+                <div class="form-group"
+                  *ngIf="data?.options?.length && data.type==='select' && !data.async && filterData?.bindedValue?.id > 0">
+                  <label class="gray-label">{{data.labelName}}</label>
+                  <ng-select [clearable]="false" [items]="data?.options" [(ngModel)]="data.bindvalue" bindLabel="title"
+                    name="{{'secondFilter'+index}}" id="{{'secondFilter'+index}}" autocomplete="off"
+                    (change)="changedsubChildFilter($event)">
+                  </ng-select>
+                </div>
+                <div class="form-group" *ngIf="data.type==='select' && data.async && filterData?.bindedValue?.id > 0">
+                  <label class="gray-label">{{data.labelName}}</label>
+                  <ng-select [clearable]="false" [items]="data?.options | async" bindLabel="title"
+                    [(ngModel)]="data.bindvalue" [loading]="'companiesLoading'" [notFoundText]="'notFoundText'"
+                    name="{{'secondFilter'+index}}" id="{{'secondFilter'+index}}" autocomplete="off"
+                    [typeahead]="MainSearchdataSource" (change)="changedsubChildFilter($event)">
+                  </ng-select>
+                </div>
+              </ng-container>
+              <div class="form-group" *ngIf="filterData?.date || filterData?.enddate">
+                <label>Start Date</label>
+                <div class="datepickerInputBox">
+                  <input class="form-control" name="minDatepicker" type="text" id="minDatepicker" [maxDate]="maxDate"
+                    bsDatepicker placeholder="" [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY' }"
+                    (bsValueChange)="modelDatepickerDate($event,'start')" [(ngModel)]="startDateInput">
+                  <i class="fa fa-calendar" aria-hidden="true"></i>
+                </div>
+              </div>
+              <div class="form-group" *ngIf="filterData?.enddate">
+                <label>End date</label>
+                <div class="datepickerInputBox">
+                  <input class="form-control" name="maxDatepicker" type="text" id="maxDatepicker" [maxDate]="maxDate"
+                    bsDatepicker placeholder="" [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY' }"
+                    (bsValueChange)="modelDatepickerDate($event,'end')" [(ngModel)]="endDateInput">
+                  <i class="fa fa-calendar" aria-hidden="true"></i>
+                </div>
+              </div>
+              <div class="form-group" *ngIf="filterData?.month || filterData?.endmonth">
+                <label>Start Month</label>
+                <div class="datepickerInputBox">
+                  <input class="form-control" name="minDatepicker" type="text" id="minMonthDatepicker" bsDatepicker
+                    placeholder="" [bsConfig]="{ dateInputFormat: 'MMM' }" (onShown)="onOpenCalendar($event)"
+                    (bsValueChange)="ModelDatepicker($event)">
+                  <i class="fa fa-calendar" aria-hidden="true"></i>
+                </div>
+              </div>
+              <div class="form-group" *ngIf="filterData?.endmonth">
+                <label>End Month</label>
+                <div class="datepickerInputBox">
+                  <input class="form-control" name="maxDatepicker" type="text" id="maxMonthDatepicker" bsDatepicker
+                    placeholder="" [bsConfig]="{ dateInputFormat: 'MMM' }" (onShown)="onOpenCalendar($event)"
+                    (bsValueChange)="ModelDatepicker($event)">
+                  <i class="fa fa-calendar" aria-hidden="true"></i>
+                </div>
+              </div>
+              <div class="form-group" *ngIf="filterData?.year || filterData?.endyear">
+                <label>Start Year</label>
+                <div class="datepickerInputBox">
+                  <input class="form-control" name="minDatepicker" type="text" id="minYearDatepicker" bsDatepicker
+                    placeholder="" [bsConfig]="{ dateInputFormat: 'YYYY' }" (onShown)="onOpenyearCalendar($event)"
+                    (bsValueChange)="ModelDatepicker($event)">
+                  <i class="fa fa-calendar" aria-hidden="true"></i>
+                </div>
+              </div>
+              <div class="form-group" *ngIf="filterData?.endyear">
+                <label>End Year</label>
+                <div class="datepickerInputBox">
+                  <input class="form-control" name="maxDatepicker" type="text" id="maxYearDatepicker" bsDatepicker
+                    placeholder="" [bsConfig]="{ dateInputFormat: 'YYYY' }" (onShown)="onOpenyearCalendar($event)"
+                    (bsValueChange)="ModelDatepicker($event)">
+                  <i class="fa fa-calendar" aria-hidden="true"></i>
+                </div>
+              </div>
+              <div class="" *ngIf="filterData.id === 4">
+                <mat-form-field class="example-full-width mat-input">
+                  <input [(ngModel)]="filterData.note" #notesInput matInput type="text" placeholder="Notes" value=""
+                    autocomplete="off" id="txtNotes" name="txtNotes" (keydown.enter)="changedChildFilter($event)">
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="d-flex flex-wrap" style="margin-top: -20px;">
+          <a class="icon-task" href="javascript:void(0)" icon-more title="More"></a>
+          <a class="icon-task" href="javascript:void(0);" (click)="changeIc('dots')" icon-pluse
+            title="Add New Task Note"></a>
+          <a class="icon-task" href="javascript:void(0)" icon-filter title="Filter" (click)="startingFilter()"></a>
+          <a class="icon-task" href="javascript:void(0)" icon-upload title="Upload"></a>
+          <a class="icon-task" href="javascript:void(0)" icon-download title="Download"></a>
+        </div>
+      </div>
+      <div class="maintable">
+        <div>
+          <b class="table-title"><span class="ng-tns-c4-1">Customer </span></b>
+          <div class="small help-block line-divider help-desc"><span class="table-text"><span class="ng-tns-c4-1">May 6,
+                2022</span></span></div>
+        </div>
+        <div style="max-width: 75vw;">
+          <span style="text-overflow: ellipsis;white-space: nowrap;max-width: 99%;overflow: hidden;"> Lorem Ipsum is
+            simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard
+            dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a
+            type specimen book. </span>
+          <span style="text-overflow: ellipsis;white-space: nowrap;max-width:99%;overflow: hidden;"> Lorem Ipsum is
+            simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard
+            dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a
+            type specimen book. </span>
+        </div>
+        <div style="white-space: nowrap;">Customer 121</div>
+      </div>
+
+      <div class="card card-box pl-0 card-attention view-details-table wow fadeIn" data-wow-delay=".3s" #tblDivElem>
+        <div class="table-sticky-header">
+          <table style="width:100%" class="table-hover table-dashboard default-to-custom first-padding-0">
+            <thead>
+              <tr class="x-animated fadeIn d-1 in">
+                <th width="57"></th>
+                <th class="table-date">
+                  <b class="table-title">
+                    <span>Type</span>&nbsp;
+                  </b>
+                  <div class="small help-block line-divider before-line type">
+                    <span class="table-text">Date</span>
+                  </div>
+                </th>
+                <th class="table-description" id="th-table-descp">
+                  <b class="table-title">
+                    <span>Note Type - Title</span>&nbsp;
+                  </b>
+                  <div class="small help-block line-divider before-line board">
+                    <span class="table-text">Description </span>
+                  </div>
+                </th>
+                <th class="table-cdate">
+                  <b class="table-title">
+                    <span>Created Date</span>&nbsp;
+                  </b>
+                  <div class="small help-block line-divider before-line board">
+                    <span class="table-text">Created By</span>
+                  </div>
+                </th>
+                <th class="table-action" width="30"></th>
+              </tr>
+            </thead>
+          </table>
+        </div>
+      
+      </div>
+      <div class="notes-btn text-end btn-task-main wow fadeIn" data-wow-delay="500ms">
+        <a *ngIf="showAddNewTaskButton" class="btn btn-main btn-blue" (click)="changeIc('dots')">Add New Task</a>
+      </div>
+    </div>
+  </div>
+  <div class="rightSidebar-wrap rightSide-data-penal" *ngIf="showDummySidebar">
+    <div class="data-penal-header">
+      <a href="jasvscript:void(0);" class="icon-dot" (click)="changeIc('dots');$event.preventDefault()">
+        <i icon-more></i>
+      </a>
+    </div>
+  </div>
+  <div
+    class="rightSidebar-wrap rightSidebar-wrap-right-0 rightSide-data-penal comman-sidebar  notes-sidebar crmnotes-sidebar-h">
+    <div class="data-penal-body">
+      <ng-container *ngIf="showNoteDetailsDiv">
+        <a href="javascript:void(0);" class="icon-dot icon-notes" (click)="changeIc('')">
+          <i icon-more></i>
+        </a>
+        <h3 class="rightSidebar-main_title">
+          Note Details
+        </h3>
+        <div class="top50-space-h">
+          <div class="row">
+            <div class="col-12">
+              <label>Description</label>
+              <p>{{noteDetailsData?.notes}}</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12"></div>
+          </div>
+        </div>
+        <h3 class="rightSidebar-main_title mb-40" *ngIf="clientTasks.length > 0 || clientNotes.length > 0">
+          Relevant Info
+        </h3>
+        <div class="row" *ngIf="clientTasks.length > 0">
+          <div class="col-12">
+            <label>Tasks</label>
+            <ng-container *ngFor="let task of clientTasks">
+              <div style="cursor: pointer;" (click)="showTaskDetails(task, crmTaskPopup)">
+                <h5 class="rightSidebar-main_title">{{task?.presetActivity?.title}}</h5>
+                <p>{{task?.createdOn | date: 'MMM d, y hh:mm aaa'}} {{task?.user?.title}}</p>
+              </div>
+            </ng-container>
+            <a href="javascript:void(0);" *ngIf="showTaskShowMore && tempClientTaskArray.length > 3"
+              (click)="redirectToTask(taskDetailBusinessPartnerID)">Show More</a>
+            <!-- <a href="javascript:void(0);" *ngIf="showTaskShowMore && tempClientTaskArray.length > 3"
+                (click)="showMoreTasks()">Show More</a> -->
+            <a href="javascript:void(0);" *ngIf="!showTaskShowMore" (click)="showLessTasks()">Show Less</a>
+          </div>
+        </div>
+        <div class="row" *ngIf="clientNotes.length > 0">
+          <div class="col-12">
+            <label>Notes</label>
+            <ng-container *ngFor="let notes of clientNotes">
+              <div style="cursor: pointer;" (click)="showNotesDetails(notes, crmNotePopup)">
+                <h5 class="rightSidebar-main_title">{{notes?.presetActivity?.title}}</h5>
+                <p>{{notes?.dateOfEntry | date: 'MMM d, y hh:mm aaa'}} {{notes?.createdBy?.title}}</p>
+              </div>
+            </ng-container>
+            <a href="javascript:void(0);" *ngIf="showNotesShowMore  && tempClientNotesArray.length > 3 "
+              (click)="singleOutClient(noteDetailBusinessPartnerID)">Show More</a>
+            <a href="javascript:void(0);" *ngIf="!showNotesShowMore" (click)="showLessNotes()">Show Less</a>
+          </div>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="!showNoteDetailsDiv">
+        <form class="manageNote-form">
+          <a href="javascript:void(0);" class="icon-dot icon-notes" (click)="changeIc('')">
+            <i icon-more></i>
+          </a>
+          <h3 class="rightSidebar-main_title mb-40">
+            Manage Note
+          </h3>
+          <div class="row">
+            <div class="col-12">
+              <div class="form-group datepicker-formGroup form-group-title mt-13 mb-2">
+                <label>Date of Entry</label>
+                <div class="datepickerInputBox">
+                  <input class="form-control" name="minDatepicker" type="text" id="minDatepicker"
+                    [(ngModel)]="user.dateOfEntry" bsDatepicker (bsValueChange)="ModelDatepicker($event)"
+                    [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY',showWeekNumbers:false }" #dateOfEntryNotes>
+                  <img src="assets/images/calender.svg" class="calender-ic" (click)="dateOfEntryNotes.click()">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12">
+              <div class="form-group datepicker-formGroup form-group-title mb-20 mt-1">
+                <label>Time of Entry</label>
+                <div class="time-of-entry">
+                  <mat-form-field class="example-full-width">
+                    <input matInput value="" name="hours" type="number" [(ngModel)]="user.hourSelection" min="0"
+                      max="23" required (ngModelChange)="validateValue($event)">
+                  </mat-form-field>
+                  <span class="colon">:</span>
+                  <mat-form-field class="example-full-width">
+                    <input matInput value="" name="minutes" type="number" [(ngModel)]="user.minutesSelection" min="0"
+                      max="59" required (ngModelChange)="validateMinutesValue($event)">
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="notes-height">
+            <div class="row notes-form">
+              <div class="col-12">
+                <div class="form-group mb-24">
+                  <ng-select [clearable]="false" placeholder="Title" [(ngModel)]="user.presetActivity"
+                    [items]="titleArr" bindLabel="title" name="presetActivity">
+                  </ng-select>
+                </div>
+
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12">
+                <div class="form-group mb-24">
+                  <ng-select [items]="tasks" bindLabel="name" bindValue="type" [multiple]="false" name="type"
+                    placeholder="Type of Note" [(ngModel)]="user.type" id="notesname" (change)="recordSelected($event)">
+                  </ng-select>
+                </div>
+              </div>
+            </div>
+            <div class="row" *ngIf="user.type =='2'">
+              <div class="col-12">
+                <div class="form-group">
+                  <ng-select [clearable]="false" placeholder="Customer" [items]="clientNameItem | async"
+                    bindLabel="title" [(ngModel)]="user.businessPartner" [loading]="supplierLoading"
+                    name="businessPartner" id="businessPartner" autocomplete="off"
+                    [typeahead]="MainSearchdataSource" (change)="recordSelected($event, addCustomerPopup)">
+                  </ng-select>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row d-none">
+            <div class="col-12">
+              <div class="form-group datepicker-formGroup mt-8">
+                <label>Next followup</label>
+                <div class="datepickerInputBox">
+                  <input class="form-control" name="minDatepicker" type="text" id="minDatepicker"
+                    [(ngModel)]="user.dueDate" bsDatepicker (bsValueChange)="ModelDatepicker($event)"
+                    [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY',showWeekNumbers:false }">
+                  <i class="fa fa-calendar" aria-hidden="true"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row" *ngIf="user.type =='3'">
+            <div class="col-12">
+              <div class="form-group">
+                <ng-select [clearable]="false" placeholder="Task" [items]="taskrecords" bindLabel="title"
+                  [(ngModel)]="user.crmTask" name="crmTask" id="crmTask" autocomplete="off" id="taskname"
+                  (change)="recordSelected($event)"></ng-select>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12">
+              <div class="form-group mb-35 note-fields">
+                <mat-form-field class="example-full-width">
+                  <textarea matInput matTextareaAutosize placeholder="Notes" value="" name="notes"
+                    [(ngModel)]="user.notes"></textarea>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12">
+              <div class="uplaod-img">
+                <div class="file-input file-input-notes">
+                  <input type="file" name="file-input" id="file-input" class="file-input__input"
+                    (change)="addNotesImage($event)" multiple>
+                  <label class="file-input__label" for="file-input">
+                    <ng-container *ngIf="fileList.length === 0">
+                      <span class="no">Select Image</span>
+                    </ng-container>
+                    <ng-container *ngIf="fileList.length > 0">
+                      <span class="no">{{fileList.length}}</span>
+                    </ng-container>
+                    <img src="assets/images/camera.svg" class="camera-ic">
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row d-none">
+            <div class="col-12">
+              <div class="form-group">
+                <div class="custom-control custom-checkbox">
+                  <input type="checkbox" class="custom-control-input" id="defaultChecked2" name="check"
+                    (change)="changedCheck($event)" [(ngModel)]="user.isComplete">
+                  <label class="custom-control-label" for="defaultChecked2">Mark completed ?</label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </ng-container>
+    </div>
+    <div class="data-penal-footer">
+      <ng-container *ngIf="showNoteDetailsDiv">
+        <div class="row">
+          <div class="col-12"></div>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="!showNoteDetailsDiv">
+        <div class="row">
+          <div class="col-12">
+            <button class="btn close-btn" type="submit" (click)="changeIc('arrow')">
+              Cancel</button>
+            <button *ngIf="!user.id" [disabled]="!user.presetActivity && !user.type" class="btn close-btn" type="submit"
+              (click)="Createdisnote(user)">
+              Save</button>
+            <button *ngIf="user.id" class="btn close-btn" type="submit" (click)="updatedNote(user)">
+              Save</button>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</div>
+<ng-template #quickcustomer>
+  <!-- <div class="modal-body p-0" app-quick-customer (closeClick)="modalRef.hide()">
+  </div> -->
+</ng-template>
+
+<ng-template #deleteNotesPopup>
+  <div class="modal-body p-0 delete-modal" (closeClick)="modalRef.hide()">
+    <div class="d-flex flex-wrap position-relative quick-modal">
+      <div class="d-flex flex-wrap w-100">
+        <div class="chart-header w-100 d-flex flex-wrap">
+          <div class="chart-right flex-1 d-flex flex-wrap align-items-center">
+            <h3 class=text-title>Delete Confirmation</h3>
+            <a href="javascript:void(0)" icon-close (click)="modalRef.hide()" class="close-ic"></a>
+          </div>
+        </div>
+        <div class="w-100 ">
+          <div class="task-body">
+            <h3>Are you sure you want to delete this note ?</h3>
+            <div class="footer-btn">
+              <a href="javascript:void(0);" (click)="unsetDeleteId();modalRef.hide()" class="cancel">Cancel</a>
+              <a href="javascript:void(0);" (click)="deleteThisNote();modalRef.hide()" class="yes">Yes</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+
+<ng-template #notesPhots>
+  <div class="modal-body p-0 galley-modal" (closeClick)="modalRef.hide()">
+    <div class="d-flex flex-wrap position-relative">
+      <div class="chart-box d-flex flex-wrap w-100">
+        <div class="chart-header w-100 d-flex flex-wrap">
+          <div class="chart-right flex-1 d-flex flex-wrap align-items-center justify-content-between">
+            <h3 class=text-title>Note Photos</h3>=
+            <a href="javascript:void(0)" icon-close (click)="modalRef.hide()"></a>
+          </div>
+        </div>
+        <div class="w-100">
+          <div class="task-body">
+            <div class="gallery-view">
+              <carousel [showIndicators]="false" [(activeSlide)]="activeSlideIndex" >
+                <slide *ngFor="let image of selectedNotesImagesObject">
+                  <img [src]="image?.src" alt="" style="display: block; width: 100%;">
+                </slide>
+              </carousel>
+              <div class="carousel-number">
+                <a>{{(activeSlideIndex + 1)+"/"}}</a>
+                <a>{{selectedNotesImagesObject.length}}</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #createTask>
+  <div class="modal-body p-0">
+    <div class="d-flex flex-wrap chart-form create-task-from position-relative">
+      <div class="chart-box d-flex flex-wrap w-100" [ngClass]="{'active-task': ''}">
+        <div class="chart-header w-100 d-flex flex-wrap">
+          <div class="chart-right flex-1 d-flex flex-wrap align-items-center justify-content-between">
+            <h3 class=text-title>Quick Task Entry</h3>
+            <a href="javascript:void(0)" icon-close (click)="modalRef.hide()"></a>
+          </div>
+        </div>
+        <div class="w-100 create-task-body">
+          <div class="task-body">
+            <div>
+              <form class="example-form" #formDir="ngForm" novalidate #taskform [formGroup]="addForm"
+                (ngSubmit)="submitAddForm()">
+                <div class="">
+                  <div class="step-block d-flex flex-wrap">
+                    <ul class="task-details d-flex flex-column">
+                      <li (clickOutside)="createdDateClose()">
+                        <div class="form-group form-task remove-border">
+                          <mat-form-field class="example-full-width mat-input" (click)="createdDateClick()">
+                            <input formControlName="dateOfEntry" matInput type="text" placeholder="Created Date"
+                              value="" autocomplete="off" readonly>
+                          </mat-form-field>
+                        </div>
+                      </li>
+                      <li (clickOutside)="dueDateClose()" class="bottom-line">
+                        <div class="form-group form-task remove-border">
+                          <mat-form-field class="example-full-width mat-input" (click)="dueDateClick()">
+                            <input formControlName="dueDate" matInput type="text" placeholder="Due" value=""
+                              autocomplete="off" readonly>
+                          </mat-form-field>
+                        </div>
+                      </li>
+                      <li>
+                        <div class="form-group form-task remove-border divide-two">
+                          <mat-form-field class="example-full-width mat-input">
+                            <input matInput type="text" placeholder="Task Type" value="Customer" autocomplete="off"
+                              readonly>
+                          </mat-form-field>
+                          <mat-form-field class="example-full-width mat-input">
+                            <input matInput type="text" placeholder="Customer" [value]="customerNameCreateTask"
+                              autocomplete="off" readonly>
+                          </mat-form-field>
+                        </div>
+                      </li>
+                      <li>
+                        <div class="form-group form-task remove-border bottom-line-title title-control ">
+                          <ng-select (change)="onChangepresetActivity($event)" formControlName="title" class="w-100"
+                            [items]="titleArr" placeholder="Title" bindLabel="title" bindValue="id" [searchable]="false"
+                            [hideSelected]="true">
+                            <ng-template ng-label-tmp let-item="item" let-clear="clear">
+                              <span class="ng-value-label">{{item.title}}</span>
+                              <span class="ng-value-icon right" (click)="clear(item);"
+                                aria-hidden="true">×</span>
+                            </ng-template>
+                            <ng-template ng-option-tmp let-item="item" let-index="index">
+                              {{item.title}}
+                            </ng-template>
+                          </ng-select>
+                        </div>
+                      </li>
+                      <li>
+                        <div class="form-group form-task form-border focus-div">
+                          <mat-form-field class="example-full-width mat-input">
+                            <input name="subTitle" id="subTitle" formControlName="subTitle" matInput type="text"
+                              placeholder="Focus" value="" autocomplete="off">
+                          </mat-form-field>
+                        </div>
+                      </li>
+                      <li>
+                        <div class="form-group form-task form-border">
+                          <mat-form-field class="example-full-width mat-input">
+                            <input matInput type="text" formControlName="note" placeholder="Notes" value=""
+                              autocomplete="off">
+                          </mat-form-field>
+                        </div>
+                      </li>
+                      <li *ngIf="accessLevel > 2">
+                        <div class="form-group form-task remove-border"
+                          [ngStyle]="{'pointer-events': taskDataObj?.id > 0 ? 'none' : '' }">
+                          <ng-select (change)="changeAssignTo($event)" class="w-100" [items]="users"
+                            placeholder="Assign To" [closeOnSelect]="true" bindLabel="title" bindValue="id"
+                            [searchable]="true" [hideSelected]="true">
+                            <ng-template ng-label-tmp let-item="item" let-clear="clear">
+                              <span class="ng-value-label">{{item.title}}</span>
+                              <span class="ng-value-icon right" (click)="clear(item);"
+                                aria-hidden="true">×</span>
+                            </ng-template>
+                            <ng-template ng-option-tmp let-item="item" let-index="index">
+                              {{item.title}}
+                            </ng-template>
+                          </ng-select>
+                        </div>
+                      </li>
+                    </ul>
+                    <div *ngIf="createedDate" class="custom-picker move theme-white theme-green">
+                      <bs-datepicker-inline (bsValueChange)="createdDateValueChange($event,bsConfigCreated_Date)"
+                        [bsConfig]="bsConfigCreated_Date" [bsValue]="created_Date">
+                        <a icon-close (click)="createdDateClose()"></a>
+                        <a icon-close (click)="createdDateClose()"></a>
+                      </bs-datepicker-inline>
+                    </div>
+                    <div *ngIf="dueDate" class="custom-picker move theme-white theme-green">
+                      <bs-datepicker-inline (bsValueChange)="dueDateValueChange($event,bsConfig)" [bsConfig]="bsConfig"
+                        [bsValue]="due_date">
+                        <a icon-close (click)="dueDateClose()"></a>
+                      </bs-datepicker-inline>
+                    </div>
+                  </div>
+                  <div class="task-btn-grp d-flex flex-wrap align-items-start justify-content-between">
+                    <button type="submit" class="btn-save assign-to-btn"
+                      [ngClass]="(addForm.valid && isSaveButtonDisabled == false) ? '' : 'disabled'">
+                      Assign to
+                    </button>
+                    <button type="submit" class="btn-save"
+                      [ngClass]="(addForm.valid && isSaveButtonDisabled == false) ? '' : 'disabled'">
+                      Save
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+
+<ng-template #addCustomerPopup>
+  <div class="modal-body p-0 delete-modal" (closeClick)="modalRef.hide()">
+    <div class="d-flex flex-wrap chart-form create-task-from position-relative">
+      <div class="chart-box d-flex flex-wrap w-100" [ngClass]="{'active-task': subListTask}">
+        <div class="chart-header w-100 d-flex flex-wrap">
+          <div class="chart-right flex-1 d-flex flex-wrap align-items-center justify-content-between">
+            <h3 class=text-title>Add New Customer</h3>
+            <a href="javascript:void(0)" icon-close (click)="modalRef.hide()"></a>
+          </div>
+        </div>
+        <div class="task-body w-100">
+          <div class="d-flex flex-wrap ">
+            <a class="btn-task active" href="javascript:void(0)" [ngClass]="{'active': displayStepOne}"
+              (click)="showStepOne()">Basic
+              Profile</a>
+            <a class="btn-task" href="javascript:void(0)" [ngClass]="{'active': displayStepTwo}"
+              (click)="showStepTwo()">Notes</a>
+            <a class="btn-task" href="javascript:void(0)" [ngClass]="{'active': displayStepThree}"
+              (click)="showStepThree()">Payment Terms</a>
+            <a class="btn-task" href="javascript:void(0)" [ngClass]="{'active': displayStepFour}"
+              (click)="showStepFour()">Sales Info</a>
+          </div>
+          <form class="example-form" [formGroup]="addCustomerBasicInfo" (ngSubmit)="addBasicInfo()">
+            <div class="task-content" *ngIf="displayStepOne">
+              <div class="">
+                <div class="step-block d-flex justify-content-between">
+                  <div class="left-section">
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="row">
+                          <div class="col-md-6">
+                            <div class="form-group form-task">
+                              <mat-form-field class="example-full-width mat-input">
+                                <input matInput formControlName="title" type="text" placeholder="Customer Name" value=""
+                                  autocomplete="off">
+                              </mat-form-field>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-12">
+                            <div class="form-group form-task">
+                              <mat-form-field class="example-full-width mat-input">
+                                <input matInput formControlName="address1" type="text" placeholder="Address Line 1"
+                                  value="" autocomplete="off">
+                              </mat-form-field>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-12">
+                            <div class="form-group form-task">
+                              <mat-form-field class="example-full-width mat-input">
+                                <input matInput formControlName="address2" type="text" placeholder="Address Line 2"
+                                  value="" autocomplete="off">
+                              </mat-form-field>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-6">
+                            <div class="form-group form-task">
+                              <mat-form-field class="example-full-width mat-input">
+                                <input matInput formControlName="city" type="text" placeholder="City" value=""
+                                  autocomplete="off">
+                              </mat-form-field>
+                            </div>
+                          </div>
+                          <div class="col-md-6">
+                            <div class="form-group form-task">
+                              <mat-form-field class="example-full-width mat-input">
+                                <input matInput formControlName="state" type="text" placeholder="State" value=""
+                                  autocomplete="off">
+                              </mat-form-field>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-6">
+                            <div class="form-group form-task">
+                              <mat-form-field class="example-full-width mat-input">
+                                <input matInput formControlName="country" type="text" placeholder="Country" value=""
+                                  autocomplete="off">
+                              </mat-form-field>
+                            </div>
+                          </div>
+                          <div class="col-md-6">
+                            <div class="form-group form-task">
+                              <mat-form-field class="example-full-width mat-input">
+                                <input matInput formControlName="zip" type="text" placeholder="Zip" value=""
+                                  autocomplete="off">
+                              </mat-form-field>
+                            </div>
+                          </div>
+                        </div>
+                        <div>
+                          <div class="confiorm-location">
+                            <a href="javascript:void(0);">Confirm Location<i class="location-pin"></i></a>
+                          </div>
+                          <button type="button" class="btn-save">Details</button>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-6">
+                            <div class="form-group form-task">
+                              <mat-form-field class="example-full-width mat-input">
+                                <input matInput formControlName="email" type="text" placeholder="Email" value=""
+                                  autocomplete="off">
+                              </mat-form-field>
+                            </div>
+                          </div>
+                          <div class="col-md-6">
+                            <div class="form-group form-task">
+                              <mat-form-field class="example-full-width mat-input">
+                                <input matInput formControlName="faceBook" type="text" placeholder="FaceBook" value=""
+                                  autocomplete="off">
+                              </mat-form-field>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-6">
+                            <div class="form-group form-task">
+                              <mat-form-field class="example-full-width mat-input">
+                                <input matInput formControlName="instaGram" type="text" placeholder="Instagram" value=""
+                                  autocomplete="off">
+                              </mat-form-field>
+                            </div>
+                          </div>
+                          <div class="col-md-6">
+                            <div class="form-group form-task">
+                              <mat-form-field class="example-full-width mat-input">
+                                <input matInput formControlName="google" type="text" placeholder="Google" value=""
+                                  autocomplete="off">
+                              </mat-form-field>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-6">
+                            <div class="form-group form-task">
+                              <mat-form-field class="example-full-width mat-input">
+                                <input matInput formControlName="tiktok" type="text" placeholder="Tiktok" value=""
+                                  autocomplete="off">
+                              </mat-form-field>
+                            </div>
+                          </div>
+                          <div class="col-md-6">
+                            <div class="form-group form-task">
+                              <mat-form-field class="example-full-width mat-input">
+                                <input matInput formControlName="webSite" type="text" placeholder="Website" value=""
+                                  autocomplete="off">
+                              </mat-form-field>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="right-section">
+                    <div>
+                      <h4>Relational Information</h4>
+                      <div class="form-group form-task">
+                        <ng-select [clearable]="false" placeholder="Contact" formControlName="contactPerson"
+                          [items]="contactList" bindLabel="title" name="contact">
+                        </ng-select>
+                      </div>
+                      <div class="form-group form-task">
+                        <ng-select [clearable]="false" placeholder="Company" formControlName="company"
+                          [items]="companyList" bindLabel="title" name="company">
+                        </ng-select>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="task-content small-form " *ngIf="displayStepTwo">
+              <div class="">
+                <div class="step-block d-flex flex-wrap">
+                  <div class="left-section">
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="row">
+                          <div class="col-md-12">
+                            <div class="form-group form-task">
+                              <mat-form-field class="example-full-width mat-input">
+                                <input matInput formControlName="internalNotes" type="text"
+                                  placeholder="Internal Notes (Private)" value="" autocomplete="off">
+                              </mat-form-field>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-12">
+                            <div class="form-group form-task">
+                              <mat-form-field class="example-full-width mat-input">
+                                <input matInput formControlName="externalNotes" type="text"
+                                  placeholder="External Notes (Shows on Invoice)" value="" autocomplete="off">
+                              </mat-form-field>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="task-content small-form " *ngIf="displayStepThree">
+              <div class="">
+                <div class="step-block d-flex flex-wrap">
+                  <div class="left-section">
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="row">
+                          <div class="col-md-12">
+                            <div class="form-group form-task">
+                              <ng-select [clearable]="false" placeholder="Payment Term"
+                                formControlName="paymentTermDuration" [items]="paymentList" bindLabel="displayName"
+                                name="Payment Term">
+                              </ng-select>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-12">
+                            <div class="form-group form-task">
+                              <mat-form-field class="example-full-width mat-input">
+                                <input matInput formControlName="allowedCreditAmount" type="number"
+                                  placeholder="Extendable Credit" value="" autocomplete="off"
+                                  (keypress)="numberOnly($event)">
+                              </mat-form-field>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="task-content small-form " *ngIf="displayStepFour">
+              <div class="">
+                <div class="step-block d-flex flex-wrap">
+                  <div class="left-section">
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="row">
+                          <div class="col-md-12">
+                            <div class="form-group form-task">
+                              <ng-select [clearable]="false" placeholder="Sales Contact"
+                                formControlName="salesRepresentative" [items]="tenantUsers" bindLabel="title"
+                                name="salesRepresentative">
+                              </ng-select>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-12">
+                            <div class="form-group form-task">
+                              <ng-select [clearable]="false" placeholder="Area (ZONE)" formControlName="area"
+                                [items]="areaLookup" bindLabel="title" name="area">
+                              </ng-select>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-12">
+                            <div class="form-group form-task">
+                              <ng-select [clearable]="false" placeholder="Region (Branch)" formControlName="branch"
+                                [items]="regionList" bindLabel="title" name="branch">
+                              </ng-select>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-12">
+                            <div class="form-group form-task">
+                              <ng-select [clearable]="false" placeholder="Establishment Type"
+                                formControlName="establishmentType" [items]="establishmentTypes" bindLabel="title"
+                                name="establishmentType">
+                              </ng-select>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="task-btn-grp d-flex flex-wrap align-items-start justify-content-between">
+              <button type="submit" [ngClass]="addCustomerBasicInfo.valid  ? '' : 'disabled'" class="btn-save"
+                [disabled]="!addCustomerBasicInfo.valid">
+                Save
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #crmNotePopup>
+  <div class="modal-body p-0 delete-modal" (closeClick)="modalRef.hide()">
+    <div class="d-flex flex-wrap position-relative">
+      <div class="chart-box d-flex flex-wrap w-100">
+        <div class="chart-header w-100 d-flex flex-wrap">
+          <div class="chart-right flex-1 d-flex flex-wrap align-items-center justify-content-between">
+            <h3 class=text-title>CRM - NOTE</h3>
+            <a href="javascript:void(0)" icon-close (click)="modalRef.hide(); resetCRMNotesData();"></a>
+          </div>
+        </div>
+        <div class="w-100">
+          <div class="task-body">
+            <div class="parent-notes-div">
+              <div class="left-section">
+                <div>
+                  <label>Note Type</label>
+                  <p class="large-font">{{typeArray[crmNotePopupData?.type]}}</p>
+                </div>
+              </div>
+              <div class="middle-section">
+                <div>
+                  <label>Customer Name</label>
+                  <p class="large-font">{{crmNotePopupData?.businessPartner?.title}}</p>
+                </div>
+                <div class="d-flex two-div">
+                  <div class="title">
+                    <label>Title</label>
+                    <p>{{crmNotePopupData?.presetActivity?.title}}</p>
+                  </div>
+                  <div>
+                    <label>Focus</label>
+                    <p>--</p>
+                  </div>
+                </div>
+                <div>
+                  <label>Entry</label>
+                  <p>{{crmNotePopupData?.dateOfEntry | date: 'MMM d, y - h:mm a'}} </p>
+                </div>
+                <div>
+                  <label>Created</label>
+                  <p>{{crmNotePopupData?.createdBy?.title}} - {{crmNotePopupData?.createdOn | date: 'MMM d,
+                    y h:mm a '}} </p>
+                </div>
+              </div>
+              <div class="right-section">
+                <div class="notes">
+                  <label>NOTE</label>
+                  <p>{{crmNotePopupData?.notes}}</p>
+                </div>
+              </div>
+            </div>
+            <div class="footer-btn">
+              <a href="javascript:void(0);" (click)="modalRef.hide(); resetCRMNotesData();" class="yes">Close</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #crmTaskPopup>
+  <div class="modal-body p-0 delete-modal" (closeClick)="modalRef.hide()">
+    <div class="d-flex flex-wrap position-relative">
+      <div class="chart-box d-flex flex-wrap w-100">
+        <div class="chart-header w-100 d-flex flex-wrap">
+          <div class="chart-right flex-1 d-flex flex-wrap align-items-center justify-content-between">
+            <h3 class=text-title>CRM - TASK</h3>
+            <a href="javascript:void(0)" icon-close (click)="modalRef.hide(); resetCRMTaskData();"></a>
+          </div>
+        </div>
+        <div class="w-100">
+          <div class="task-body">
+            <div class="parent-notes-div">
+              <div class="left-section">
+                <div>
+                  <label>Task Type</label>
+                  <p class="large-font">{{typeArray[crmTaskPopupData?.type]}}</p>
+                </div>
+              </div>
+              <div class="middle-section">
+                <div>
+                  <label>Customer Name</label>
+                  <p class="large-font">{{crmTaskPopupData?.businessPartner?.title}}</p>
+                </div>
+                <div class="d-flex two-div">
+                  <div class="title">
+                    <label>Title</label>
+                    <p>{{crmTaskPopupData?.presetActivity?.title}}</p>
+                  </div>
+                  <div>
+                    <label>Focus</label>
+                    <p>{{crmTaskPopupData?.subTitle}}</p>
+                  </div>
+                </div>
+
+                <div>
+                  <label>Entry</label>
+                  <p>{{crmTaskPopupData?.dateOfEntry | date: 'MMM d, y - h:mm a'}} </p>
+                </div>
+                <div>
+                  <label>Created</label>
+                  <p>{{crmTaskPopupData?.createdBy?.fullname}} - {{crmTaskPopupData?.createdOn | date: 'MMM d,
+                    y h:mm a '}} </p>
+                </div>
+                <div>
+                  <label>Completed?</label>
+                  <p *ngIf="crmTaskPopupData?.isComplete === true" class="pb-0">Yes</p>
+                  <p *ngIf="crmTaskPopupData?.isComplete === false" class="pb-0">No</p>
+                </div>
+              </div>
+              <div class="right-section">
+                <div class="notes">
+                  <label>NOTE</label>
+                  <p>{{crmTaskPopupData?.note}}</p>
+                </div>
+                <div>
+                  <label>Due Date</label>
+                  <p>{{crmTaskPopupData?.dueDate | date: 'MMM d, y' }}</p>
+                </div>
+                <div>
+                  <label>Assigned To</label>
+                  <p>{{crmTaskPopupData?.user?.title }}</p>
+                </div>
+              </div>
+            </div>
+            <div class="footer-btn">
+              <a href="javascript:void(0);" (click)="modalRef.hide(); resetCRMTaskData();" class="yes">Close</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<!-- <app-modal-demo style="position: relative;z-index: 999999999;"></app-modal-demo> -->

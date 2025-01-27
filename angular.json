@@ -62,9 +62,7 @@
             },
             "ssr": {
               "entry": "src/server.ts"
-            },
-            "baseHref": "/angularupdated/",
-            "deployUrl": "/angularupdated/"
+            }
           },
           "configurations": {
             "production": {
@@ -134,8 +132,5 @@
         }
       }
     }
-  },
-  "cli": {
-    "analytics": false
   }
 }

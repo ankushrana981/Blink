@@ -73,6 +73,7 @@ export class SidebarComponent extends BaseComponent implements OnInit {
         this.broadcaster.broadcast('togglesidebar1', $('#nav-icon2')[0].className);
     }
     toggleSideBarNav(id:any) {
+        $('#accordionExample .collapse.show').removeClass('show');
         $('#' + id).click();
         setTimeout(() => {
             $('#main-content').addClass("collapsed");
@@ -186,7 +187,6 @@ export class SidebarComponent extends BaseComponent implements OnInit {
         this.menus.forEach(t => t.isActive = false);
         r.isActive = true;
         this.activeLink = title;
-
     }
 }
 

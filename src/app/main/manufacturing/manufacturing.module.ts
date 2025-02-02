@@ -14,24 +14,28 @@ import {ProductModifierComponent} from './product-modifier/product-modifier.comp
 // import { MalihuScrollbarModule } from 'ngx-malihu-scrollbar';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { NgSelectModule } from '@ng-select/ng-select';
-// import { ModalModule as NgModalDragg } from 'ng-modal-lib';
+import { ModalModule as NgModalDragg } from 'ng-modal-lib';
 import { ManageCompositionsComponent } from './manage-compositions/manage-compositions.component';
 // import { AlphabetFilterModule } from 'alphabet-filter';
+import { InfiniteScrollDirective } from 'ngx-infinite-scroll';
 
 @NgModule({
+  
   declarations: [CompositionEntryComponent,
     CompositionViewComponent, 
     CompositionComponent,
     ManageCompositionsComponent,ProductModifierComponent,
     ProductionViewComponent, ProductionEntryComponent, OutsideClickDirective],
+    
   imports: [
     // MalihuScrollbarModule.forRoot(),
     SharedModule,
     CommonModule,
     ModalModule.forRoot(),
     NgSelectModule,
-    // NgModalDragg,
+    NgModalDragg,
     // AlphabetFilterModule,
+    InfiniteScrollDirective,
     RouterModule.forChild(
       [
         {

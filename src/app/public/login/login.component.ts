@@ -45,7 +45,7 @@ export class LoginComponent extends BaseComponent implements OnInit {
             this.setToken('expires_in', success.expires_in);
             this.setToken('refresh_token', success.refresh_token);
             this.router.navigate(['/main/dashboard']);
-            this.popToast('success', 'Login Successful');
+            // this.popToast('success', 'Login Successful');
           } else {
             this.popToast('error', success.message);
           }

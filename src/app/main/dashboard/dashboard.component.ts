@@ -58,7 +58,7 @@ export class DashboardComponent implements OnInit {
         data: [400, 600, 1125, 1000]
       }],
       chart:{
-        height: 260,
+        height: 280,
         type: 'area',
         zoom: {
           enabled: false
@@ -66,6 +66,9 @@ export class DashboardComponent implements OnInit {
       },
       xaxis:{
         categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep'],
+      },
+      stroke: {
+        curve: 'smooth'
       }
     }
    }

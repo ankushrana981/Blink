@@ -40,3 +40,5 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+/.vs/ERP%20Web%20Updated/FileContentIndex
+/.vs

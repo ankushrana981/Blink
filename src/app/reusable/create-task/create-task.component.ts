@@ -37,9 +37,10 @@ import {
     styles: [],
 })
 export class CreateTaskComponent extends BaseComponent implements OnInit {
-stop($event: MouseEvent) {
-throw new Error('Method not implemented.');
-}
+    @ViewChild('subTitle') subTitle!: ElementRef;
+    stop(event: MouseEvent) {
+        event.stopPropagation();
+      }
     modalRef: BsModalRef;
     @Input() isSubtaskOpen: boolean = false;
     @Input() isSubtask: boolean = false;
@@ -340,6 +341,7 @@ throw new Error('Method not implemented.');
             .callApi("api/tenants/presetactivities/lookup?q=", "", "get")
             .then((success) => {
                 if (success) {
+                    console.log(this.titles, "titles")
                     this.titles = success;
                 } else {
                     this.popToast("error", success.message);
@@ -1200,10 +1202,10 @@ throw new Error('Method not implemented.');
         this.isOpenBoard = false;
     }
 
-    boardEnterClick(e) {
-        $("#subTitle").focus();
+    boardEnterClick(event: Event) {
+        this.subTitle.nativeElement.focus();
         this.isOpenBoard = false;
-    }
+      }
 
     // Floating label
     Floaty = () => {

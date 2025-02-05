@@ -41,6 +41,7 @@
     "ngx-bootstrap": "^19.0.1",
     "ngx-currency": "^19.0.0",
     "ngx-infinite-scroll": "^19.0.0",
+    "ngx-page-scroll": "^13.0.0",
     "ngx-print": "^2.0.0",
     "ngx-spinner": "^17.0.0",
     "ngx-sweetalert2": "^0.2.7",

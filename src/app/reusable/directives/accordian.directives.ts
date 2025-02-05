@@ -1,6 +1,9 @@
 import { Directive, ElementRef, HostListener, Input, Renderer2 } from "@angular/core";
 
-@Directive({ selector: '[accordion]' })
+@Directive({
+    selector: '[accordion]',
+    standalone: false
+})
 export class AccordionDirective {
     @Input() clickCount: number;
 
@@ -8,10 +11,10 @@ export class AccordionDirective {
     }
 
     @HostListener('click', ['$event']) onClick($event) {
-        if(this.clickCount != 1){
+        if (this.clickCount != 1) {
             let elements = document.getElementsByClassName("is-open");
             for (let i = 0; i < elements.length; i++) {
-                if(this.el.nativeElement.id != elements[i].id){
+                if (this.el.nativeElement.id != elements[i].id) {
                     this._ren.removeClass(elements[i], 'is-open');
                 }
             }

@@ -3,7 +3,8 @@ import * as _ from 'lodash';
 
 @Pipe({
     name: 'unique',
-    pure: false
+    pure: false,
+    standalone:false
 })
 
 export class UniquePipe implements PipeTransform {

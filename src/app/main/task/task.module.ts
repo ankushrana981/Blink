@@ -9,9 +9,9 @@ import { TasksComponent } from './tasks/tasks.component';
 import { ViewTasksComponent } from './view-tasks/view-tasks.component';
 // import { ModalModule as NgModalDragg } from 'ng-modal-lib';
 import { AccordionDirective } from '../../reusable/directives/accordian.directives';
-// import {DragDropModule} from '@angular/cdk/drag-drop';
+import {DragDropModule} from '@angular/cdk/drag-drop';
 // import { AngularResizedEventModule } from 'angular-resize-event';
-// import { NgxPageScrollModule } from 'ngx-page-scroll';
+import { NgxPageScrollModule } from 'ngx-page-scroll';
 // import { ScrollToModule } from '@nicky-lenaers/ngx-scroll-to';
 import { UniquePipe } from './unique-pipe';
 // import { DndModule } from 'ngx-drag-drop';
@@ -28,20 +28,21 @@ import { UniquePipe } from './unique-pipe';
     declarations: [
         TasksComponent,
         ViewTasksComponent,
-        // AccordionDirective,
-        // UniquePipe
+        UniquePipe,
+        AccordionDirective
     ],
     imports: [
         CommonModule, SharedModule,
+    
         // MalihuScrollbarModule.forRoot(),
         ModalModule.forRoot(),
         NgSelectModule,
         // NgModalDragg,
         // DndModule,
-        // NgxPageScrollModule,
+        NgxPageScrollModule,
         // ScrollToModule.forRoot(),
         // PerfectScrollbarModule,
-        // DragDropModule,
+        DragDropModule,
         // AngularResizedEventModule,
         RouterModule.forChild(
             [

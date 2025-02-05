@@ -4,7 +4,7 @@ import { HttpClientModule, HttpClientXsrfModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatPaginatorModule } from '@angular/material/paginator';
-import { NgSelectModule } from '@ng-select/ng-select';
+import { NgLabelTemplateDirective, NgOptionTemplateDirective, NgSelectModule } from '@ng-select/ng-select';
 // import { SweetAlert2Module } from 'ngx-sweetalert2';
 import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
@@ -210,6 +210,8 @@ import { IconSquareRightComponent } from '../../common/svg/icon-square-right';
     MatSlideToggleModule,
     MatRadioModule,
     NgSelectModule,
+    NgOptionTemplateDirective,
+    NgLabelTemplateDirective,
     //         SweetAlert2Module,
 //     MalihuScrollbarModule,
     BnDatatableModule,

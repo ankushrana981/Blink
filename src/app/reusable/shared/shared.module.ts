@@ -202,7 +202,6 @@ import { IconSquareRightComponent } from '../../common/svg/icon-square-right';
     BsDatepickerModule,
     DragDropModule,
     TabsModule,
-    //         HttpClientXsrfModule,
     //         NgxSpinnerModule,
     ModalModule,
     FormsModule,
@@ -213,7 +212,7 @@ import { IconSquareRightComponent } from '../../common/svg/icon-square-right';
     NgOptionTemplateDirective,
     NgLabelTemplateDirective,
     //         SweetAlert2Module,
-//     MalihuScrollbarModule,
+    //     MalihuScrollbarModule,
     BnDatatableModule,
     LoadingBarHttpClientModule,
     PaginationModule,
@@ -274,4 +273,4 @@ import { IconSquareRightComponent } from '../../common/svg/icon-square-right';
     IconSquareRightComponent,
   ],
 })
-export class SharedModule {}
+export class SharedModule { }

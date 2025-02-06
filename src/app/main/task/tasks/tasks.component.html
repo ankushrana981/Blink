@@ -363,46 +363,47 @@
         <div class="col-xl-9  wow fadeIn card card-box task-tab">
             <ul class="nav nav-tabs filterDashboardData" role="tablist">
                 <li class="nav-item" *ngIf="isTaskDashboard">
-                    <a class="nav-link active" data-toggle="tab" href="javascript:void(0);" role="tab"
+                    <a class="nav-link" [ngClass]="{ 'active': selectedTab === 0 }" href="javascript:void(0);" role="tab"
                         (click)="filterDashboardData(0)">All</a>
                 </li>
                 <li class="nav-item" *ngIf="isTaskDashboard">
-                    <a class="nav-link" data-toggle="tab" href="javascript:void(0);" role="tab"
+                    <a class="nav-link" [ngClass]="{ 'active': selectedTab === 1 }" href="javascript:void(0);" role="tab"
                         (click)="filterDashboardData(1)">New</a>
                 </li>
                 <li class="nav-item" *ngIf="isTaskDashboard">
-                    <a class="nav-link" data-toggle="tab" href="javascript:void(0);" role="tab"
+                    <a class="nav-link" [ngClass]="{ 'active': selectedTab === 2 }" href="javascript:void(0);" role="tab"
                         (click)="filterDashboardData(2)">Progressed</a>
                 </li>
                 <li class="nav-item" *ngIf="isTaskDashboard">
-                    <a class="nav-link" data-toggle="tab" href="javascript:void(0);" role="tab"
+                    <a class="nav-link" [ngClass]="{ 'active': selectedTab === 3 }" href="javascript:void(0);" role="tab"
                         (click)="filterDashboardData(3)">Overdue</a>
                 </li>
                 <li class="nav-item" *ngIf="isTaskDashboard">
-                    <a class="nav-link" data-toggle="tab" href="javascript:void(0);" role="tab"
+                    <a class="nav-link" [ngClass]="{ 'active': selectedTab === 4 }" href="javascript:void(0);" role="tab"
                         (click)="filterDashboardData(4)">Forgotten</a>
                 </li>
                 <li class="nav-item" *ngIf="!isTaskDashboard">
-                    <a class="nav-link active" data-toggle="tab" href="javascript:void(0);" role="tab"
+                    <a class="nav-link" [ngClass]="{ 'active': selectedTab === 5 }" href="javascript:void(0);" role="tab"
                         (click)="filterDashboardData(5)">Current</a>
                 </li>
                 <li class="nav-item" *ngIf="!isTaskDashboard">
-                    <a class="nav-link" data-toggle="tab" href="javascript:void(0);" role="tab"
+                    <a class="nav-link" [ngClass]="{ 'active': selectedTab === 6 }" href="javascript:void(0);" role="tab"
                         (click)="filterDashboardData(6)">Planned</a>
                 </li>
                 <li class="nav-item" *ngIf="!isTaskDashboard">
-                    <a class="nav-link" data-toggle="tab" href="javascript:void(0);" role="tab"
+                    <a class="nav-link" [ngClass]="{ 'active': selectedTab === 7 }" href="javascript:void(0);" role="tab"
                         (click)="filterDashboardData(7)">Due Soon</a>
                 </li>
                 <li class="nav-item" *ngIf="!isTaskDashboard">
-                    <a class="nav-link" data-toggle="tab" href="javascript:void(0);" role="tab"
+                    <a class="nav-link" [ngClass]="{ 'active': selectedTab === 3 }" href="javascript:void(0);" role="tab"
                         (click)="filterDashboardData(3)">Overdue</a>
                 </li>
                 <li class="nav-item" *ngIf="!isTaskDashboard">
-                    <a class="nav-link" data-toggle="tab" href="javascript:void(0);" role="tab"
+                    <a class="nav-link" [ngClass]="{ 'active': selectedTab === 4 }" href="javascript:void(0);" role="tab"
                         (click)="filterDashboardData(4)">Forgotten</a>
                 </li>
-            </ul><!-- Tab panes -->
+            </ul>
+            <!-- Tab panes -->
             <div class="tab-content">
                 <div class="tab-pane active" role="tabpanel">
                     <div malihu-scrollbar class="scrollbar h-424 filterDashboardDataTable">

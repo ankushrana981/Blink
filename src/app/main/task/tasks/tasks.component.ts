@@ -48,6 +48,7 @@ export class TasksComponent extends BaseComponent implements OnInit {
     @ViewChild(InfiniteScrollDirective) infiniteScroll: InfiniteScrollDirective;
     modalRef: BsModalRef;
     openchatbox: boolean = false;
+    selectedTab: number = 0;
     @ViewChild(ModalDemoComponent) child;
     public scrollbarXOptions = {
         axis: "x",
@@ -2589,6 +2590,7 @@ subTask_due_date: Date;
         }
     }
     filterDashboardData(type) {
+        this.selectedTab = type;
         if(type == 5){
             this.listrecords = this.tempcurrentListRecords;
             return 

@@ -77,7 +77,6 @@ export class CreateTaskComponent extends BaseComponent implements OnInit {
     created_Date: any = new Date();
     due_date: any = new Date();
     subTask_due_date: any = new Date();
-    declare public commonService: CommonService;
     public accessLevel: number;
     public currentBranch: any;
     public boardListNew: Observable<any>;
@@ -1171,6 +1170,7 @@ export class CreateTaskComponent extends BaseComponent implements OnInit {
     }
 
     SearchString(e) {
+        console.log('search string')
         this.boardList = [...this.tempboardListData];
         var searchKeyword = e.term.toLowerCase();
         var checkExist = this.tempboardListData.filter(

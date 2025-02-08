@@ -3,7 +3,7 @@ import { Title, Meta } from '@angular/platform-browser';
 import { isPlatformBrowser, isPlatformServer } from '@angular/common';
 import { Router, ActivatedRoute } from "@angular/router";
 import { CommonService } from './common.service';
-// import { LookupService } from '@common/lookup.service';
+import { LookupService } from '../common/lookup.service';
 import { ErrorMessages } from './errorMessages';
 import { HttpClient } from '@angular/common/http';
 import { BsModalService } from 'ngx-bootstrap/modal';
@@ -12,8 +12,6 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import * as jQuery from 'jquery';
 import moment from 'moment';
 import Swal from 'sweetalert2';
-import { LookupService } from './lookup.service';
-
 import { Broadcaster } from './broadCaster';
 declare var jquery: any;
 declare var $: any;

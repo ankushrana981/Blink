@@ -6,6 +6,11 @@
     border: 0px solid darkgray;
     border-radius: 4px;
   }
+  
+::ng-deep.custom-scrollbars{
+  background-color: #efefef !important;
+  border-radius: 5px !important;
+}
 .title-span-border{
   border-right: solid 1px black;
   padding-right: 9px;
@@ -99,13 +104,7 @@
     overflow-y: scroll;
     padding: 0px;
   }
-  .taskDashboardSelectionPopUp,.workspaceSelectionPopUp ::-webkit-scrollbar {
-    display: none; /* For Chrome */
-  }
-  .taskDashboardSelectionPopUp,.workspaceSelectionPopUp {
-    scrollbar-width: none;  /* Firefox */
-    -ms-overflow-style: none;  /* IE and Edge */
-  }
+
   .workspace-list{
     border-top: 10px solid #394B66;
     border-bottom: 11px solid #394B66;
@@ -320,14 +319,6 @@
     }
     .filterDashboardData li{
       display: inline-block;
-    }
-    /* Hide Scrollbar */
-    .filterDashboardData::-webkit-scrollbar {
-      display: none;
-    }
-    .filterDashboardData {
-      -ms-overflow-style: none;  /* IE and Edge */
-      scrollbar-width: none;  /* Firefox */
     }
     .filterDashboardDataTable .attension-table .table-respons{
       max-height: 850px;

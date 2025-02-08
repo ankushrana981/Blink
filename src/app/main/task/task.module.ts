@@ -14,6 +14,7 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
 import { NgxPageScrollModule } from 'ngx-page-scroll';
 // import { ScrollToModule } from '@nicky-lenaers/ngx-scroll-to';
 import { UniquePipe } from './unique-pipe';
+import { NgScrollbarModule } from 'ngx-scrollbar';
 // import { DndModule } from 'ngx-drag-drop';
 
 // import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
@@ -40,6 +41,7 @@ import { UniquePipe } from './unique-pipe';
         // NgModalDragg,
         // DndModule,
         NgxPageScrollModule,
+        NgScrollbarModule,
         // ScrollToModule.forRoot(),
         // PerfectScrollbarModule,
         DragDropModule,

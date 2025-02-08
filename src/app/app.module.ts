@@ -17,6 +17,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { NgApexchartsModule } from 'ng-apexcharts';
 import { CacheInterceptor } from './common/interceptors/cache.interceptor';
 import { BsModalService } from 'ngx-bootstrap/modal';
+import { NgScrollbarModule } from 'ngx-scrollbar';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { BsModalService } from 'ngx-bootstrap/modal';
       positionClass: 'toast-top-right',
       preventDuplicates: true,
     }),
-    NgApexchartsModule
+    NgApexchartsModule,
+    NgScrollbarModule
   ],
    schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [

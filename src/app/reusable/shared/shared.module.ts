@@ -86,6 +86,7 @@ import { CarouselModule } from 'ngx-bootstrap/carousel';
 import { NgApexchartsModule } from 'ng-apexcharts';
 import { IconSquareQuestionComponent } from '../../common/svg/icon-square-question';
 import { IconSquareRightComponent } from '../../common/svg/icon-square-right';
+import { NgScrollbarModule } from 'ngx-scrollbar';
 // import { NgxSliderModule } from '@angular-slider/ngx-slider';
 
 // const maskConfig: Partial<IConfig> = {validation: false,};
@@ -204,6 +205,7 @@ import { IconSquareRightComponent } from '../../common/svg/icon-square-right';
     TabsModule,
     //         NgxSpinnerModule,
     ModalModule,
+    NgScrollbarModule ,
     FormsModule,
     MatPaginatorModule,
     MatSlideToggleModule,

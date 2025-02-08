@@ -42,7 +42,7 @@ import { ErrorMessages } from '../common/errorMessages';
     HeaderComponent,
     SidebarComponent,
     HighchartsComponent,
-
+    
     //  GhostListComponent,
     CustomerSetupModalComponent,
 

@@ -1,388 +1,403 @@
 <div class="dashboardWrap">
-  <div class="page-title">
-      <h2>CRM Dashboard</h2>
-  </div>
-  <div class="row rowBox">
-    
-    <div class="col-xs-6  wow fadeIn" data-wow-delay="100ms">
-      <div class="card chartCardBox">
-        <div class="setting-view pull-right">
-            <button mat-button [matMenuTriggerFor]="menu"> <span class="fa fa-cog fa-fw"></span></button>
-            <mat-menu #menu="matMenu" xPosition="before">
-               <button [routerLink]="['/main/dashboard/accounting']" mat-menu-item >Accounting: Account Receivable View</button>
-                <button [routerLink]="['/main/dashboard/invoice-approvals']" mat-menu-item>Invoice: Approvals</button>
-                <button [routerLink]="['/main/dashboard/warehouse']" mat-menu-item>Warehouse Logistics: Customer Orders</button>
-                <button [routerLink]="['/main/dashboard/crm-dashboard']" mat-menu-item>CRM</button>
-                <button [routerLink]="['/main/dashboard/general-admin']" mat-menu-item>General Admin: Invoice View</button>
-                <button [routerLink]="['/main/dashboard/finance-expenses']" mat-menu-item>Finnce: Expenses View</button>
-                <button [routerLink]="['/main/dashboard/finance-current']" mat-menu-item>Finnce: Current Sales</button>
-            </mat-menu>
-        </div>
-        
-        <div class="card-body">
-          <router-outlet></router-outlet>
-        </div>
-      </div>
+    <div class="page-title">
+        <h2>CRM Dashboard</h2>
     </div>
-    <div class="col-xs-4 wow fadeIn" data-wow-delay="300ms">
-      <div class="card greenBG-chart" style="background: url(../assets/images/bg-green-chart.png) repeat-x;
+    <div class="row rowBox">
+
+        <div class="col-xs-6  wow fadeIn" data-wow-delay="100ms">
+            <div class="card chartCardBox">
+                <div class="setting-view pull-right">
+                    <button mat-button [matMenuTriggerFor]="menu"> <span class="fa fa-cog fa-fw"></span></button>
+                    <mat-menu #menu="matMenu" xPosition="before">
+                        <button [routerLink]="['/main/dashboard/accounting']" mat-menu-item>Accounting: Account
+                            Receivable View</button>
+                        <button [routerLink]="['/main/dashboard/invoice-approvals']" mat-menu-item>Invoice:
+                            Approvals</button>
+                        <button [routerLink]="['/main/dashboard/warehouse']" mat-menu-item>Warehouse Logistics: Customer
+                            Orders</button>
+                        <button [routerLink]="['/main/dashboard/crm-dashboard']" mat-menu-item>CRM</button>
+                        <button [routerLink]="['/main/dashboard/general-admin']" mat-menu-item>General Admin: Invoice
+                            View</button>
+                        <button [routerLink]="['/main/dashboard/finance-expenses']" mat-menu-item>Finnce: Expenses
+                            View</button>
+                        <button [routerLink]="['/main/dashboard/finance-current']" mat-menu-item>Finnce: Current
+                            Sales</button>
+                    </mat-menu>
+                </div>
+
+                <div class="card-body">
+                    <router-outlet></router-outlet>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-4 wow fadeIn" data-wow-delay="300ms">
+            <div class="card greenBG-chart" style="background: url(../assets/images/bg-green-chart.png) repeat-x;
       background-size: 100% 100%;
       color: #fff;
       position: relative;">
-        <div class="card-header">
-                    <mat-form-field>                       
-                      <mat-select [(value)]="selected">                                        
-                        <mat-option value="option1">Restaurants</mat-option>
-                        <mat-option value="option2">Branchs</mat-option>                                     
-                      </mat-select>                        
+                <div class="card-header">
+                    <mat-form-field>
+                        <mat-select [(value)]="selected">
+                            <mat-option value="option1">Restaurants</mat-option>
+                            <mat-option value="option2">Branchs</mat-option>
+                        </mat-select>
                     </mat-form-field>
                     <div class="setting-view pull-right">
-                        <button mat-button [matMenuTriggerFor]="menu1" class="md-icon-button md-button md-ink-ripple"> <span class="fa fa-cog fa-fw"></span></button>
+                        <button mat-button [matMenuTriggerFor]="menu1" class="md-icon-button md-button md-ink-ripple">
+                            <span class="fa fa-cog fa-fw"></span></button>
                         <mat-menu #menu1="matMenu">
-                           <button mat-menu-item >Option 0</button>
+                            <button mat-menu-item>Option 0</button>
                             <button mat-menu-item>Option 1</button>
-                            <button  mat-menu-item>Option 2</button>                            
+                            <button mat-menu-item>Option 2</button>
                         </mat-menu>
                     </div>
-    
+
+                </div>
+                <div class="card-body">
+                    <ul class="tab-months">
+                        <li ng-click="" role="button" tabindex="0">3 months</li>
+                        <li class="active" ng-click="" role="button" tabindex="0">6 months</li>
+                        <li ng-click="" role="button" tabindex="0">12 months</li>
+                    </ul>
+                    <apx-chart #chartObj [series]="chartOptions.series" [chart]="chartOptions.chart"
+                        [xaxis]="chartOptions.xaxis" [stroke]="chartOptions.stroke"></apx-chart>
+                    <!-- <apx-chart [series]="series1"  [xaxis]="xaxis1"  [stroke]="stroke1" ></apx-chart> -->
+                </div>
+            </div>
         </div>
-        <div class="card-body">
-                <ul class="tab-months">
-                    <li ng-click="" role="button" tabindex="0">3 months</li>
-                    <li class="active" ng-click="" role="button" tabindex="0">6 months</li>
-                    <li ng-click="" role="button" tabindex="0">12 months</li>
-                </ul>
-                <apx-chart #chartObj
-                [series]="chartOptions.series"
-                [chart]="chartOptions.chart"
-                [xaxis]="chartOptions.xaxis"
-                [stroke]="chartOptions.stroke"></apx-chart>
-            <!-- <apx-chart [series]="series1"  [xaxis]="xaxis1"  [stroke]="stroke1" ></apx-chart> -->
-        </div>
-      </div>
-    </div>
-    <div class="col-xs-2 wow fadeIn" data-wow-delay="500ms">
-      <div class="card calenderWrap">
-        <div class="calender">
-            <div class="form-group">
-              <!-- <bs-datepicker-inline [bsValue]="bsInlineValue"></bs-datepicker-inline> -->
-              <!-- <input type="text"
+        <div class="col-xs-2 wow fadeIn" data-wow-delay="500ms">
+            <div class="card calenderWrap">
+                <div class="calender">
+                    <div class="form-group">
+                        <!-- <bs-datepicker-inline [bsValue]="bsInlineValue"></bs-datepicker-inline> -->
+                        <!-- <input type="text"
              placeholder="Datepicker"
              class="form-control"
              bsDatepicker> -->
-             <bs-datepicker-inline [bsValue]="bsInlineValue" [bsConfig]="{ showWeekNumbers:false }"></bs-datepicker-inline>
-            </div>
-          </div>         
-          <div class="task-wrapper">
-                        <h3>TASKS</h3>
-
-                        <div class="task-options md-menu ng-scope _md">
-                            <button mat-button [matMenuTriggerFor]="menu1" class="md-icon-button md-button md-ink-ripple"> <i class="fa fa-ellipsis-h" aria-hidden="true"></i></button>
-                            <mat-menu #menu1="matMenu">
-                                <button mat-menu-item >Option 0</button>
-                                <button mat-menu-item>Option 1</button>
-                                <button  mat-menu-item>Option 2</button>
-                                
-                            </mat-menu>
-                        </div>
-                        <!-- malihu-scrollbar [scrollbarOptions]="scrollbarOptions" -->
-                <ul class="task-list">
-                    <li ng-click="" class="ongoing" role="button" tabindex="0">
-                        <h6>Excepteur Sint Occaecat</h6>
-                        <p>
-                            <span class="status">Ongoing</span>
-                            <span class="time">Due Date</span>
-                            <span class="">64%</span>
-                        </p>
-                    </li>
-                    <li ng-click="" class="completed" role="button" tabindex="0">
-                        <h6>nemo Enim Resam Voluptatem</h6>
-                        <p>
-                            <span class="status">Completed</span>
-                            <span class="time">Due Date</span>
-                            <span class="">100%</span>
-                        </p>
-                    </li>
-                    <li ng-click="" class="ongoing" role="button" tabindex="0">
-                        <h6>Sed Quia Non Numquam</h6>
-                        <p>
-                            <span class="status">Ongoing</span>
-                            <span class="time">Due Date</span>
-                            <span class="">34%</span>
-                        </p>
-                    </li>
-                    <li ng-click="" class="uncomplete" role="button" tabindex="0">
-                        <h6>Leque Perro Quisquam Estacosta</h6>
-                        <p>
-                            <span class="status">Uncomplete</span>
-                            <span class="time">Due Date</span>
-                            <span class="">0%</span>
-                        </p>
-                    </li>
-                </ul>
-           </div>
-      </div>
-    </div>    
-  </div>
-  <div class="row overview overview-bottom wow fadeIn" data-wow-delay="500ms">
-    <div class="col-xs-10 wow fadeIn" data-wow-delay="700ms">
-      <div class="card notif-box">
-        <div class="card-body">
-            <ul class="notif-tab">
-                <li class="active">Emails</li>
-                <li>Direct Messages</li>
-                <li>notifications<i class="fa fa-circle"></i></li>
-            </ul>
-            <!-- malihu-scrollbar [scrollbarOptions]="scrollbarOptions" -->
-          <div class="notif-list ng-isolate-scope mCustomScrollbar _mCS_36 mCS-autoHide"  >
-              <table class="table table-notif">
-                <tbody>
-                    <tr>
-                      <td>
-                          <div class="ava-name">TA</div>
-                      </td>
-                      <td class="darkest">The single most important thing!</td>
-                      <td>Hola! My name is Tomas Alvarez, speaking Spanish</td>
-                      <td>May 20</td>
-                      <td class="darker">Tomas Alvarez</td>
-                      <td class="darker">Consulting Twice LLC</td>
-                      <td>
-                          <button class="action-btn">
-                              <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
-                          </button>
-                          <div class="action-icons">
-                              <a ng-click="">
-                                  <i class="fa fa-pencil"></i>
-                              </a>
-                              <a ng-click="">
-                                  <i class="fa fa-trash-o"></i>
-                              </a>
-                              <a ng-click="">
-                                  <i class="fa fa-bookmark-o"></i>
-                              </a>
-                          </div>
-                      </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div class="ava-name">FR</div>
-                        </td>
-                        <td class="darkest">Payment Reminders and Fees</td>
-                        <td>Separated they live in Bookmarksgroove</td>
-                        <td>June 7</td>
-                        <td class="darker">Frederick Rothbauer</td>
-                        <td class="darker">Techology Kelner</td>
-                        <td>
-                            <button class="action-btn">
-                                <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
-                            </button>
-                            <div class="action-icons">
-                                <a ng-click="">
-                                    <i class="fa fa-pencil"></i>
-                                </a>
-                                <a ng-click="">
-                                    <i class="fa fa-trash-o"></i>
-                                </a>
-                                <a ng-click="">
-                                    <i class="fa fa-bookmark-o"></i>
-                                </a>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div class="ava-name">WK</div>
-                        </td>
-                        <td class="darkest">Sending some invoicing documents ASAP</td>
-                        <td>Omnicos directe al desirabilite de un nom</td>
-                        <td>June 14</td>
-                        <td class="darker">Walter Kowalsky</td>
-                        <td class="darker">CoachLab</td>
-                        <td>
-                            <button class="action-btn">
-                                <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
-                            </button>
-                            <div class="action-icons">
-                                <a ng-click="">
-                                    <i class="fa fa-pencil"></i>
-                                </a>
-                                <a ng-click="">
-                                    <i class="fa fa-trash-o"></i>
-                                </a>
-                                <a ng-click="">
-                                    <i class="fa fa-bookmark-o"></i>
-                                </a>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div class="ava-name">TA</div>
-                        </td>
-                        <td class="darkest">The single most important thing!</td>
-                        <td>Hola! My name is Tomas Alvarez, speaking Spanish</td>
-                        <td>May 20</td>
-                        <td class="darker">Tomas Alvarez</td>
-                        <td class="darker">Consulting Twice LLC</td>
-                        <td>
-                            <button class="action-btn">
-                                <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
-                            </button>
-                            <div class="action-icons">
-                                <a ng-click="">
-                                    <i class="fa fa-pencil"></i>
-                                </a>
-                                <a ng-click="">
-                                    <i class="fa fa-trash-o"></i>
-                                </a>
-                                <a ng-click="">
-                                    <i class="fa fa-bookmark-o"></i>
-                                </a>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div class="ava-name">FR</div>
-                        </td>
-                        <td class="darkest">Payment Reminders and Fees</td>
-                        <td>Separated they live in Bookmarksgroove</td>
-                        <td>June 7</td>
-                        <td class="darker">Frederick Rothbauer</td>
-                        <td class="darker">Techology Kelner</td>
-                        <td>
-                            <button class="action-btn">
-                                <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
-                            </button>
-                            <div class="action-icons">
-                                <a ng-click="">
-                                    <i class="fa fa-pencil"></i>
-                                </a>
-                                <a ng-click="">
-                                    <i class="fa fa-trash-o"></i>
-                                </a>
-                                <a ng-click="">
-                                    <i class="fa fa-bookmark-o"></i>
-                                </a>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div class="ava-name">WK</div>
-                        </td>
-                        <td class="darkest">Sending some invoicing documents ASAP</td>
-                        <td>Omnicos directe al desirabilite de un nom</td>
-                        <td>June 14</td>
-                        <td class="darker">Walter Kowalsky</td>
-                        <td class="darker">CoachLab</td>
-                        <td>
-                            <button class="action-btn">
-                                <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
-                            </button>
-                            <div class="action-icons">
-                                <a ng-click="">
-                                    <i class="fa fa-pencil"></i>
-                                </a>
-                                <a ng-click="">
-                                    <i class="fa fa-trash-o"></i>
-                                </a>
-                                <a ng-click="">
-                                    <i class="fa fa-bookmark-o"></i>
-                                </a>
-                            </div>
-                        </td>
-                    </tr>
-                </tbody>
-              </table>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="col-xs-2  wow fadeIn" data-wow-delay="900ms">
-      <div class="card" style=" background: #FFFFFF url(../assets/images/corner-memos.png) no-repeat top left">
-        <div class="card-body viewdata-panel memos">
-            <h3>MEMOS</h3>
-            <div class="memo-options" (click)="iconsshow()">
-                    <!-- <button class="md-icon-button md-button md-ink-ripple" type="button">
-                            <i class="fa fa-ellipsis-h" aria-hidden="true"></i> -->
-                            <button mat-button  class="md-icon-button md-button md-ink-ripple"> <i class="fa fa-ellipsis-h" aria-hidden="true"></i></button>
-                    <!-- </button> -->
-                    <div class="action-memo" [ngClass]="toggle?'show':''" >
-                        <a href="javascript:;">
-                            <i class="fa fa-plus" (click)="openModal1(template1)"></i>
-                        </a>
-                        <a href="javascript:;">
-                            <i class="fa fa-search"></i>
-                        </a>
-                        <a href="javascript:;">
-                            <i class="fa fa-gear"></i>
-                        </a>
+                        <bs-datepicker-inline [bsValue]="bsInlineValue"
+                            [bsConfig]="{ showWeekNumbers:false }"></bs-datepicker-inline>
                     </div>
                 </div>
-                <!-- malihu-scrollbar [scrollbarOptions]="scrollbarOptions" -->
-            <ul class="memo-list" >
-                <li (click)="openModal(template)">Solutions therefore always</li>
-                <li (click)="openModal(template)">Nam libero tempore, cum soluta lorem ipsum dolor sit amet</li>
-                <li (click)="openModal(template)">Account of the system and expense lorem ipsum</li>
-                <li (click)="openModal(template)">Solutions therefore always</li>
-                <li (click)="openModal(template)">Nam libero tempore, cum soluta lorem ipsum dolor sit amet</li>                
-            </ul>
+                <div class="task-wrapper">
+                    <h3>TASKS</h3>
+
+                    <div class="task-options md-menu ng-scope _md">
+                        <button mat-button [matMenuTriggerFor]="menu1" class="md-icon-button md-button md-ink-ripple">
+                            <i class="fa fa-ellipsis-h" aria-hidden="true"></i></button>
+                        <mat-menu #menu1="matMenu">
+                            <button mat-menu-item>Option 0</button>
+                            <button mat-menu-item>Option 1</button>
+                            <button mat-menu-item>Option 2</button>
+
+                        </mat-menu>
+                    </div>
+                    <!-- malihu-scrollbar [scrollbarOptions]="scrollbarOptions" -->
+                    <ul class="task-list">
+                            <ng-scrollbar visibility="hover" #scrollEl thumbClass="custom-scrollbars">
+                            <li ng-click="" class="ongoing" role="button" tabindex="0">
+                                <h6>Excepteur Sint Occaecat</h6>
+                                <p>
+                                    <span class="status">Ongoing</span>
+                                    <span class="time">Due Date</span>
+                                    <span class="">64%</span>
+                                </p>
+                            </li>
+                            <li ng-click="" class="completed" role="button" tabindex="0">
+                                <h6>nemo Enim Resam Voluptatem</h6>
+                                <p>
+                                    <span class="status">Completed</span>
+                                    <span class="time">Due Date</span>
+                                    <span class="">100%</span>
+                                </p>
+                            </li>
+                            <li ng-click="" class="ongoing" role="button" tabindex="0">
+                                <h6>Sed Quia Non Numquam</h6>
+                                <p>
+                                    <span class="status">Ongoing</span>
+                                    <span class="time">Due Date</span>
+                                    <span class="">34%</span>
+                                </p>
+                            </li>
+                            <li ng-click="" class="uncomplete" role="button" tabindex="0">
+                                <h6>Leque Perro Quisquam Estacosta</h6>
+                                <p>
+                                    <span class="status">Uncomplete</span>
+                                    <span class="time">Due Date</span>
+                                    <span class="">0%</span>
+                                </p>
+                            </li>
+                        </ng-scrollbar>
+                        </ul>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
+    <div class="row overview overview-bottom wow fadeIn" data-wow-delay="500ms">
+        <div class="col-xs-10 wow fadeIn" data-wow-delay="700ms">
+            <div class="card notif-box">
+                <div class="card-body">
+                    <ul class="notif-tab">
+                        <li class="active">Emails</li>
+                        <li>Direct Messages</li>
+                        <li>notifications<i class="fa fa-circle"></i></li>
+                    </ul>
+                    <div class="notif-list ng-isolate-scope mCustomScrollbar _mCS_36 mCS-autoHide">
+                        <ng-scrollbar visibility="hover" #scrollEl thumbClass="custom-scrollbars">
+                            <table class="table table-notif">
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <div class="ava-name">TA</div>
+                                        </td>
+                                        <td class="darkest">The single most important thing!</td>
+                                        <td>Hola! My name is Tomas Alvarez, speaking Spanish</td>
+                                        <td>May 20</td>
+                                        <td class="darker">Tomas Alvarez</td>
+                                        <td class="darker">Consulting Twice LLC</td>
+                                        <td>
+                                            <button class="action-btn">
+                                                <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
+                                            </button>
+                                            <div class="action-icons">
+                                                <a ng-click="">
+                                                    <i class="fa fa-pencil"></i>
+                                                </a>
+                                                <a ng-click="">
+                                                    <i class="fa fa-trash-o"></i>
+                                                </a>
+                                                <a ng-click="">
+                                                    <i class="fa fa-bookmark-o"></i>
+                                                </a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="ava-name">FR</div>
+                                        </td>
+                                        <td class="darkest">Payment Reminders and Fees</td>
+                                        <td>Separated they live in Bookmarksgroove</td>
+                                        <td>June 7</td>
+                                        <td class="darker">Frederick Rothbauer</td>
+                                        <td class="darker">Techology Kelner</td>
+                                        <td>
+                                            <button class="action-btn">
+                                                <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
+                                            </button>
+                                            <div class="action-icons">
+                                                <a ng-click="">
+                                                    <i class="fa fa-pencil"></i>
+                                                </a>
+                                                <a ng-click="">
+                                                    <i class="fa fa-trash-o"></i>
+                                                </a>
+                                                <a ng-click="">
+                                                    <i class="fa fa-bookmark-o"></i>
+                                                </a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="ava-name">WK</div>
+                                        </td>
+                                        <td class="darkest">Sending some invoicing documents ASAP</td>
+                                        <td>Omnicos directe al desirabilite de un nom</td>
+                                        <td>June 14</td>
+                                        <td class="darker">Walter Kowalsky</td>
+                                        <td class="darker">CoachLab</td>
+                                        <td>
+                                            <button class="action-btn">
+                                                <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
+                                            </button>
+                                            <div class="action-icons">
+                                                <a ng-click="">
+                                                    <i class="fa fa-pencil"></i>
+                                                </a>
+                                                <a ng-click="">
+                                                    <i class="fa fa-trash-o"></i>
+                                                </a>
+                                                <a ng-click="">
+                                                    <i class="fa fa-bookmark-o"></i>
+                                                </a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="ava-name">TA</div>
+                                        </td>
+                                        <td class="darkest">The single most important thing!</td>
+                                        <td>Hola! My name is Tomas Alvarez, speaking Spanish</td>
+                                        <td>May 20</td>
+                                        <td class="darker">Tomas Alvarez</td>
+                                        <td class="darker">Consulting Twice LLC</td>
+                                        <td>
+                                            <button class="action-btn">
+                                                <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
+                                            </button>
+                                            <div class="action-icons">
+                                                <a ng-click="">
+                                                    <i class="fa fa-pencil"></i>
+                                                </a>
+                                                <a ng-click="">
+                                                    <i class="fa fa-trash-o"></i>
+                                                </a>
+                                                <a ng-click="">
+                                                    <i class="fa fa-bookmark-o"></i>
+                                                </a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="ava-name">FR</div>
+                                        </td>
+                                        <td class="darkest">Payment Reminders and Fees</td>
+                                        <td>Separated they live in Bookmarksgroove</td>
+                                        <td>June 7</td>
+                                        <td class="darker">Frederick Rothbauer</td>
+                                        <td class="darker">Techology Kelner</td>
+                                        <td>
+                                            <button class="action-btn">
+                                                <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
+                                            </button>
+                                            <div class="action-icons">
+                                                <a ng-click="">
+                                                    <i class="fa fa-pencil"></i>
+                                                </a>
+                                                <a ng-click="">
+                                                    <i class="fa fa-trash-o"></i>
+                                                </a>
+                                                <a ng-click="">
+                                                    <i class="fa fa-bookmark-o"></i>
+                                                </a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="ava-name">WK</div>
+                                        </td>
+                                        <td class="darkest">Sending some invoicing documents ASAP</td>
+                                        <td>Omnicos directe al desirabilite de un nom</td>
+                                        <td>June 14</td>
+                                        <td class="darker">Walter Kowalsky</td>
+                                        <td class="darker">CoachLab</td>
+                                        <td>
+                                            <button class="action-btn">
+                                                <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
+                                            </button>
+                                            <div class="action-icons">
+                                                <a ng-click="">
+                                                    <i class="fa fa-pencil"></i>
+                                                </a>
+                                                <a ng-click="">
+                                                    <i class="fa fa-trash-o"></i>
+                                                </a>
+                                                <a ng-click="">
+                                                    <i class="fa fa-bookmark-o"></i>
+                                                </a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </ng-scrollbar>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-2  wow fadeIn" data-wow-delay="900ms">
+            <div class="card" style=" background: #FFFFFF url(../assets/images/corner-memos.png) no-repeat top left">
+                <div class="card-body viewdata-panel memos">
+                    <h3>MEMOS</h3>
+                    <div class="memo-options" (click)="iconsshow()">
+                        <!-- <button class="md-icon-button md-button md-ink-ripple" type="button">
+                            <i class="fa fa-ellipsis-h" aria-hidden="true"></i> -->
+                        <button mat-button class="md-icon-button md-button md-ink-ripple"> <i class="fa fa-ellipsis-h"
+                                aria-hidden="true"></i></button>
+                        <!-- </button> -->
+                        <div class="action-memo" [ngClass]="toggle?'show':''">
+                            <a href="javascript:;">
+                                <i class="fa fa-plus" (click)="openModal1(template1)"></i>
+                            </a>
+                            <a href="javascript:;">
+                                <i class="fa fa-search"></i>
+                            </a>
+                            <a href="javascript:;">
+                                <i class="fa fa-gear"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <ul class="memo-list">
+                            <ng-scrollbar visibility="hover" #scrollEl thumbClass="custom-scrollbars" orientation="vertical">
+                            <li (click)="openModal(template)">Solutions therefore always</li>
+                            <li (click)="openModal(template)">Nam libero tempore, cum soluta lorem ipsum dolor sit amet
+                            </li>
+                            <li (click)="openModal(template)">Account of the system and expense lorem ipsum</li>
+                            <li (click)="openModal(template)">Solutions therefore always</li>
+                            <li (click)="openModal(template)">Nam libero tempore, cum soluta lorem ipsum dolor sit amet
+                            </li>
+                        </ng-scrollbar>
+                        </ul>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 <ng-template #template>
-        <div class="modal-header">
-          <h4 class="modal-title">Solutions there for always</h4>
-          <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+    <div class="modal-header">
+        <h4 class="modal-title">Solutions there for always</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
             <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <p>
-            A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart. I am alone, and feel the charm of existence in this spot, which was created for the bliss of souls like mine. I am so happy, my dear
-          </p>
-        </div>
-        <div class="modal-footer">
-          <span>
-              <button class="btn"><i class="fa fa-pencil"></i></button>
-              <button class="btn"><i class="fa fa-bookmark-o"></i></button>
-              <button class="btn" (click)="openModalDelete(template2)"><i class="fa fa-trash-o"></i></button>
-          </span>
-        </div>
+        </button>
+    </div>
+    <div class="modal-body">
+        <p>
+            A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I
+            enjoy with my whole heart. I am alone, and feel the charm of existence in this spot, which was created for
+            the bliss of souls like mine. I am so happy, my dear
+        </p>
+    </div>
+    <div class="modal-footer">
+        <span>
+            <button class="btn"><i class="fa fa-pencil"></i></button>
+            <button class="btn"><i class="fa fa-bookmark-o"></i></button>
+            <button class="btn" (click)="openModalDelete(template2)"><i class="fa fa-trash-o"></i></button>
+        </span>
+    </div>
 
 </ng-template>
 <ng-template #template1>
 
-        <div class="modal-header">
-          <h4 class="modal-title">NEW MEMO</h4>
-          <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef1.hide()">
+    <div class="modal-header">
+        <h4 class="modal-title">NEW MEMO</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef1.hide()">
             <span aria-hidden="true">&times;</span>
-          </button>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="form-group">
+            <mat-form-field class="example-full-width">
+                <mat-label>TITLE</mat-label>
+                <input matInput name="title" type="text">
+            </mat-form-field>
         </div>
-         <div class="modal-body">
-            <div class="form-group">
-                <mat-form-field class="example-full-width">
-                    <mat-label>TITLE</mat-label>
-                    <input matInput name="title" type="text">
-                </mat-form-field>
-            </div>
-            <div class="form-group">
-                <mat-form-field class="example-full-width">
-                    <mat-label>ENTER YOUR MEMO TEXT</mat-label>
-                    <input matInput name="memotext" type="text">
-                </mat-form-field>
-            </div>
-         </div>
-         <div class="modal-footer">
-            <button class="btn btn-primary" type="button">ADD</button>
-         </div>
-         
+        <div class="form-group">
+            <mat-form-field class="example-full-width">
+                <mat-label>ENTER YOUR MEMO TEXT</mat-label>
+                <input matInput name="memotext" type="text">
+            </mat-form-field>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" type="button">ADD</button>
+    </div>
+
 
 </ng-template>
-<ng-template #template2 >
+<ng-template #template2>
     <div class="delete-modal-content">
         <!-- <div class="modal-header">
           <h4 class="modal-title">DELETE</h4>
@@ -390,16 +405,16 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div> -->
-         <div class="modal-body text-center">
+        <div class="modal-body text-center">
             <div class="img-box">
                 <img src="assets/images/trash-bin1.png" alt="Delete">
-            </div> 
-            <h4>Are you sure you want to delete it?</h4>   
-         </div>
+            </div>
+            <h4>Are you sure you want to delete it?</h4>
+        </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-no">Cancel</button>
             <button type="button" class="btn btn-yes" data-dismiss="modal">Yes</button>
-        </div>   
+        </div>
     </div>
 
 </ng-template>

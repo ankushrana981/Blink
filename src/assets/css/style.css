@@ -3495,6 +3495,11 @@ div.mat-mdc-select-panel .mat-mdc-option {
 /* WAREHOUSE LOGISTICS */
 /*.minitable-detailview{margin-top:30px;}
 */
+::ng-deep.custom-scrollbars{
+  background-color: #efefef !important;
+  border-radius: 5px !important;
+}
+
 .warehouseGraph .graphTable-box {
   margin-top: 30px;
 }
@@ -3690,12 +3695,9 @@ div.mat-mdc-select-panel .mat-mdc-option {
   margin-top: 15px;
   overflow-y: auto;
   overflow-x: hidden;
-  scrollbar-width: none;
 }
 
-.dashboardWrap .graphTable-box:hover {
-  scrollbar-width: auto;
-}
+
 
 .dashboardWrap .greenBG-chart ul.tab-months {
   list-style: none;
@@ -4318,11 +4320,6 @@ div.mat-mdc-select-panel .mat-mdc-option {
   margin-bottom: 15px;
   overflow-y: none;
   overflow-x: auto;
-  scrollbar-width: none;
-}
-
-.task-wrapper ul.task-list:hover {
-  scrollbar-width: auto;
 }
 
 .task-wrapper ul.task-list li {
@@ -4417,12 +4414,6 @@ div.mat-mdc-select-panel .mat-mdc-option {
   padding-top: 0px;
   height: 135px;
   overflow-y: auto;
-  overflow-x: hidden;
-  scrollbar-width: none;
-}
-
-.dashboardWrap .overview-bottom .memos .memo-list:hover {
-  scrollbar-width: auto;
 }
 
 .dashboardWrap .overview-bottom .memos .memo-list li {
@@ -4431,7 +4422,6 @@ div.mat-mdc-select-panel .mat-mdc-option {
   color: #c2c4cc;
   font-size: 14px;
   max-width: 100%;
-  overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
   cursor: pointer;
@@ -4449,7 +4439,6 @@ div.mat-mdc-select-panel .mat-mdc-option {
   overflow-y: auto;
   overflow-x: hidden;
   margin-right: 5px;
-  scrollbar-width: none;
 }
 
 .notif-box .notif-list:hover {

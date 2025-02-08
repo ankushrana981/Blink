@@ -28,7 +28,8 @@
                                     fill="white" />
                             </svg>
                         </span>
-                        <div class="scrollbar" malihu-scrollbar>
+                        <div class="scrollbar">
+                            <ng-scrollbar visibility="hover" #scrollEl thumbClass="custom-scrollbars">
                             <ul class="selected-tags flex-1 filter-main-selected-tag">
                                 <li *ngFor="let i of filterData;index as index" id="{{i?.id}}" class={{i?.class}}
                                     [@fadeIn]>
@@ -73,6 +74,7 @@
                                     </span>
                                 </li>
                             </ul>
+                        </ng-scrollbar>
                         </div>
                     </div>
                     <button type="btn" class="dropdown-btn" (click)="filterReport()"
@@ -407,6 +409,7 @@
             <div class="tab-content">
                 <div class="tab-pane active" role="tabpanel">
                     <div malihu-scrollbar class="scrollbar h-424 filterDashboardDataTable">
+                        <ng-scrollbar visibility="hover"  #scrollEl thumbClass="custom-scrollbars">
                         <div class="table-box mb-20 attension-table">
                             <div class="table-respons">
                                 <table style="width:100%"
@@ -930,6 +933,7 @@
                                 </table>
                             </div>
                         </div>
+                        </ng-scrollbar>
                     </div>
                 </div>
             </div>

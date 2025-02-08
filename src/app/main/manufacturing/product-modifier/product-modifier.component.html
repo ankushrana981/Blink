@@ -75,11 +75,11 @@
                             <div class="tab-content">
                                 <div class="tab-pane fade" id="price">
                                   <div class="form-group">
-                                    <!-- <ng-select  class="w-100" [items]="tasks"
+                                    <ng-select  class="w-100" [items]="tasks"
                                         placeholder="Raw Material" bindLabel="name"
                                         (change)="chnageTypeValue($event)" bindValue="id" [searchable]="false"
-                                        [hideSelected]="true" [(ngModel)]="open1" [ngModelOptions]="{standalone: true}"> -->
-                                        <!-- <ng-template ng-label-tmp let-item="item" let-clear="clear">
+                                        [hideSelected]="true" [(ngModel)]="open1" [ngModelOptions]="{standalone: true}">
+                                        <ng-template ng-label-tmp let-item="item" let-clear="clear">
                                             <span class="ng-value-label">{{item.name}}</span>
                                             <span class="ng-value-icon right" (click)="clear(item);"
                                                 aria-hidden="true">×</span>
@@ -87,10 +87,10 @@
                                         <ng-template ng-option-tmp let-item="item" let-index="index">
                                             {{item.name}}
                                         </ng-template>
-                                    </ng-select> -->
+                                    </ng-select>
                                   </div>
                                   <div class="form-group">
-                                    <!-- <ng-select  class="w-100" [items]="effect"
+                                    <ng-select  class="w-100" [items]="effect"
                                         placeholder="Effect" bindLabel="name"
                                         (change)="chnageToValue($event)" bindValue="id" [searchable]="false"
                                         [hideSelected]="true" [(ngModel)]="open2" [ngModelOptions]="{standalone: true}">
@@ -102,10 +102,10 @@
                                         <ng-template ng-option-tmp let-item="item" let-index="index">
                                             {{item.name}}
                                         </ng-template>
-                                    </ng-select> -->
+                                    </ng-select>
                                   </div>
                                   <div class="form-group" *ngIf="openDiv == 'Replace'">
-                                    <!-- <ng-select  class="w-100" [items]="material"
+                                    <ng-select  class="w-100" [items]="material"
                                         placeholder="Raw Material" bindLabel="name"
                                         (change)="chnageTypeValue($event)" bindValue="id" [searchable]="false"
                                         [hideSelected]="true" [(ngModel)]="open3" [ngModelOptions]="{standalone: true}">
@@ -117,7 +117,7 @@
                                         <ng-template ng-option-tmp let-item="item" let-index="index">
                                             {{item.name}}
                                         </ng-template>
-                                    </ng-select> -->
+                                    </ng-select>
                                   </div>
                                   <div class="from-group add-list">
                                     <h2 class="sub-title">Amount</h2>
@@ -135,7 +135,7 @@
                                 </div>
                                 <div class="tab-pane fade" id="size">
                                   <div class="form-group">
-                                    <!-- <ng-select  class="w-100" [items]="tasks"
+                                    <ng-select  class="w-100" [items]="tasks"
                                         placeholder="Raw Material" bindLabel="name"
                                         (change)="chnageTypeValue($event)" bindValue="id" [searchable]="false"
                                         [hideSelected]="true" [(ngModel)]="open1" [ngModelOptions]="{standalone: true}">
@@ -147,10 +147,10 @@
                                         <ng-template ng-option-tmp let-item="item" let-index="index">
                                             {{item.name}}
                                         </ng-template>
-                                    </ng-select> -->
+                                    </ng-select>
                                   </div>
                                   <div class="form-group">
-                                    <!-- <ng-select  class="w-100" [items]="effect"
+                                    <ng-select  class="w-100" [items]="effect"
                                         placeholder="Effect" bindLabel="name"
                                         (change)="chnageTypeValue($event)" bindValue="id" [searchable]="false"
                                         [hideSelected]="true" [(ngModel)]="open2" [ngModelOptions]="{standalone: true}">
@@ -162,7 +162,7 @@
                                         <ng-template ng-option-tmp let-item="item" let-index="index">
                                             {{item.name}}
                                         </ng-template>
-                                    </ng-select> -->
+                                    </ng-select>
                                   </div>
                                     <div class="add-btn btn-green">
                                       <a (click)="variableShow=false;this.selectedthird = true">Add Effect</a>
@@ -170,7 +170,7 @@
                                 </div>
                                 <div class="tab-pane fade" id="recipe">
                                   <div class="form-group">
-                                    <!-- <ng-select  class="w-100" [items]="tasks"
+                                    <ng-select  class="w-100" [items]="tasks"
                                         placeholder="Raw Material" bindLabel="name"
                                         (change)="chnageTypeValue($event)" bindValue="id" [searchable]="false"
                                         [hideSelected]="true" [(ngModel)]="open1" [ngModelOptions]="{standalone: true}">
@@ -182,10 +182,10 @@
                                         <ng-template ng-option-tmp let-item="item" let-index="index">
                                             {{item.name}}
                                         </ng-template>
-                                    </ng-select> -->
+                                    </ng-select>
                                   </div>
                                   <div class="form-group">
-                                    <!-- <ng-select  class="w-100" [items]="effect"
+                                    <ng-select  class="w-100" [items]="effect"
                                         placeholder="Effect" bindLabel="name"
                                         (change)="chnageTypeValue($event)" bindValue="id" [searchable]="false"
                                         [hideSelected]="true" [(ngModel)]="open2" [ngModelOptions]="{standalone: true}">
@@ -197,7 +197,7 @@
                                         <ng-template ng-option-tmp let-item="item" let-index="index">
                                             {{item.name}}
                                         </ng-template>
-                                    </ng-select> -->
+                                    </ng-select>
                                   </div>
                                     <div class="add-btn btn-green">
                                       <a (click)="variableShow=false;this.selectedthird = true">Add Effect</a>
@@ -205,7 +205,7 @@
                                 </div>
                                 <div class="tab-pane fade" id="alter">
                                   <div class="form-group">
-                                    <!-- <ng-select  class="w-100" [items]="tasks"
+                                    <ng-select  class="w-100" [items]="tasks"
                                         placeholder="Raw Material" bindLabel="name"
                                         (change)="chnageTypeValue($event)" bindValue="id" [searchable]="false"
                                         [hideSelected]="true" [(ngModel)]="open1" [ngModelOptions]="{standalone: true}">
@@ -217,10 +217,10 @@
                                         <ng-template ng-option-tmp let-item="item" let-index="index">
                                             {{item.name}}
                                         </ng-template>
-                                    </ng-select> -->
+                                    </ng-select>
                                   </div>
                                   <div class="form-group">
-                                    <!-- <ng-select  class="w-100" [items]="effect"
+                                    <ng-select  class="w-100" [items]="effect"
                                         placeholder="Effect" bindLabel="name"
                                         (change)="chnageToValue($event)" bindValue="id" [searchable]="false"
                                         [hideSelected]="true" [(ngModel)]="open2" [ngModelOptions]="{standalone: true}">
@@ -232,10 +232,10 @@
                                         <ng-template ng-option-tmp let-item="item" let-index="index">
                                             {{item.name}}
                                         </ng-template>
-                                    </ng-select> -->
+                                    </ng-select>
                                   </div>
                                   <div class="form-group" *ngIf="openDiv == 'Replace'">
-                                    <!-- <ng-select  class="w-100" [items]="material"
+                                    <ng-select  class="w-100" [items]="material"
                                         placeholder="Raw Material" bindLabel="name"
                                         (change)="chnageTypeValue($event)" bindValue="id" [searchable]="false"
                                         [hideSelected]="true" [(ngModel)]="open3" [ngModelOptions]="{standalone: true}">
@@ -247,7 +247,7 @@
                                         <ng-template ng-option-tmp let-item="item" let-index="index">
                                             {{item.name}}
                                         </ng-template>
-                                    </ng-select> -->
+                                    </ng-select>
                                   </div>
                                   <div class="from-group add-list">
                                     <h2 class="sub-title">Amount</h2>
@@ -497,4 +497,4 @@
   </div>
 </ng-template>
 
-<!-- <!-- <app-modal-demo style="position: relative;z-index: 999999999;"></app-modal-demo> --> -->
+ <app-modal-demo style="position: relative;z-index: 999999999;"></app-modal-demo>

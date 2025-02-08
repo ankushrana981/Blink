@@ -4,6 +4,7 @@ import { ChatsComponent } from '../../reusable/chats/chats.component';
 import { CdkDragStart } from '@angular/cdk/drag-drop';
 @Component({
     selector: 'app-modal-demo',
+    standalone:false,
     templateUrl: './draggable-popup.component.html',
 })
 export class ModalDemoComponent {

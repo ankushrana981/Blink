@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { InvoiceEntryComponent } from './invoice-entry/invoice-entry.component';
 import { InvoiceViewComponent } from './invoice-view/invoice-view.component';
 import { InvoiceApprovalComponent } from './invoice-approval/invoice-approval.component';
-// import { SharedModule } from './../../reusable/shared/shared.module'
 import { SharedModule } from '../../reusable/shared/shared.module'
 import { RouterModule } from '@angular/router';
 import { GhostListComponent } from '../../reusable/ghost/ghost-list.component';

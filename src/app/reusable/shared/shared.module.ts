@@ -10,7 +10,6 @@ import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 // import { ImageCropperModule } from 'ngx-image-cropper';
 import { MatTooltipModule } from '@angular/material/tooltip';
-// import { MalihuScrollbarModule } from 'ngx-malihu-scrollbar';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { BsDropdownDirective } from 'ngx-bootstrap/dropdown';
@@ -141,7 +140,7 @@ import { NgScrollbarModule } from 'ngx-scrollbar';
   ],
   declarations: [
     BaseComponent,
-    // ModalDemoComponent,
+    ModalDemoComponent,
     IconDownloadComponent,
     IconFilterComponent,
     IconMoreComponent,
@@ -225,7 +224,7 @@ import { NgScrollbarModule } from 'ngx-scrollbar';
     ReactiveFormsModule,
     NgxCurrencyDirective,
     NgxPrintModule,
-    // ModalDemoComponent,
+    ModalDemoComponent,
     IconDownloadComponent,
     IconFilterComponent,
     IconMoreComponent,

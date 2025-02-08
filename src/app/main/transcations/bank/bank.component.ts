@@ -1,5 +1,4 @@
 import { Component, OnInit,TemplateRef,ElementRef } from '@angular/core';
-// import { MalihuScrollbarService } from 'ngx-malihu-scrollbar';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 @Component({
   selector: 'app-bank',
@@ -83,7 +82,7 @@ export class BankComponent implements OnInit {
         name: 'General Task',
     }
 ];
-  chnageTypeValue(){
+  chnageTypeValue(event:any){
 
   }
   changeIc2(type,icon) {

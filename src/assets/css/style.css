@@ -1813,15 +1813,15 @@ input:-internal-autofill-selected {
   bottom: 0;
 }
 
-.rightSidebar-wrap input.mat-input-element {
+.rightSidebar-wrap input.mat-mdc-input-element {
   font-size: 20px;
-  color: #08d9d6;
+  color: #08d9d6 !important;
   text-align: right;
-  height: 30px;
+  height: 30px !important;
 }
 
-.rightSidebar-wrap .mat-input-element {
-  caret-color: #08d9d6;
+.rightSidebar-wrap .mat-mdc-input-element {
+  caret-color: #08d9d6 !important;
 }
 
 .mat-form-field-label-wrapper {
@@ -1839,13 +1839,13 @@ input:-internal-autofill-selected {
   /*right:0;*/
 }
 
-.rightSidebar-wrap textarea.mat-input-element {
+.rightSidebar-wrap textarea.mat-mdc-input-element {
   margin: 10px 0 0px !important;
   line-height: 24px;
-  font-size: 20px;
-  color: #08d9d6;
+  font-size: 20px !important;
+  color: #08d9d6 !important;
   text-align: right;
-  height: 30px;
+  height: 30px !important;
 }
 
 .mat-form-field-label {
@@ -1855,7 +1855,7 @@ input:-internal-autofill-selected {
   transition: 200ms ease-in-out !important;
 }
 
-.rightSidebar-wrap input.mat-input-element {
+.rightSidebar-wrap input.mat-mdc-input-element {
   margin: 12px 0 0px !important;
 }
 
@@ -1883,8 +1883,8 @@ input:-internal-autofill-selected {
   left: inherit;
 }
 
-.rightSidebar-wrap .mat-input-element.mat-focused .mat-form-field-underline {
-  background-color: #08d9d6;
+.rightSidebar-wrap .mat-mdc-input-element.mat-focused .mat-form-field-underline {
+  background-color: #08d9d6 !important;
 }
 
 .rightSidebar-wrap .mat-form-field-appearance-legacy .mat-form-field-label {
@@ -5190,8 +5190,8 @@ table.default-to-custom>tbody>tr>td .rowactions .btn span {
   width: 100%;
 }
 
-input.mat-input-element {
-  font-size: 16px;
+input.mat-mdc-input-element {
+  font-size: 16px !important;
 }
 
 /* ==================================================== Right Sidebar Info*/
@@ -5548,13 +5548,6 @@ app-view-tasks .active .rightSidebar-wrap {
   color: #08d9d6 !important;
 }
 
-/*.rightSidebar-wrap .data-penal-body .example-form{margin:15px 0 0;}
-*/
-/*.rightSidebar-wrap .mat-form-field-appearance-legacy.mat-form-field-invalid:not(.mat-focused) .mat-form-field-ripple{height:2px !important;}
-.rightSidebar-wrap textarea.mat-input-element{font-size:20px;color:#08d9d6;line-height:10px;}
-.rightSidebar-wrap input.mat-input-element{font-size:20px;color:#08d9d6;position:relative;top:0px;}
-.rightSidebar-wrap input.mat-input-element{margin-top:-1.0625em;}
-*/
 .rightSidebar-wrap bs-datepicker-container .bs-datepicker .bs-datepicker-body table td,
 .rightSidebar-wrap .bs-datepicker-body table td:not(.disabled):not(.week) span:not(.disabled):not(.is-other-month) {
   color: #08d9d6 !important;
@@ -6858,9 +6851,9 @@ app-header {
   top: 4px;
 }
 
-.rightSidebar-wrap .manageNote-form input.mat-input-element {
-  top: -3px;
-  margin: 0px 0 0;
+.rightSidebar-wrap .manageNote-form input.mat-mdc-input-element {
+  top: -3px !important;
+  margin: 0px 0 0 !important;
 }
 
 .rightSidebar-wrap .manageNote-form .datepicker-formGroup label {
@@ -7183,9 +7176,9 @@ app-header {
   cursor: pointer;
 }
 
-.manufacturing-Wrap .manageBox .table .form-group input.mat-input-element {
-  color: #2a394d;
-  font-weight: 600;
+.manufacturing-Wrap .manageBox .table .form-group input.mat-mdc-input-element {
+  color: #2a394d !important;
+  font-weight: 600 !important;
 }
 
 .manufacturing-Wrap .manageBox .btn,
@@ -7333,10 +7326,10 @@ app-header {
   padding: 3px 5px;
 }
 
-.manufacturing-Wrap input.mat-input-element {
-  height: 33px;
-  margin: 5px 0 0;
-  font-size: 14px;
+.manufacturing-Wrap input.mat-mdc-input-element {
+  height: 33px !important;
+  margin: 5px 0 0 !important;
+  font-size: 14px !important;
 }
 
 .productSetupBox table.default-to-custom>tbody>tr>td .btn {
@@ -7616,12 +7609,12 @@ app-header {
   border-top: 0;
 }
 
-.manufacturing-Wrap .ui-manageBox .form-group input.mat-input-element {
+.manufacturing-Wrap .ui-manageBox .form-group input.mat-mdc-input-element {
   margin: 18px 0 0;
   border: none;
   height: auto;
-  color: #f5b912;
-  font-size: 12px;
+  color: #f5b912 !important;
+  font-size: 12px !important;
 }
 
 .manufacturing-Wrap .ui-manageBox .mat-form-field-appearance-legacy .mat-form-field-infix {
@@ -10878,17 +10871,17 @@ app-prodcut-view .crm-Wrap.active {
   background-color: #2A394D;
 }
 
-.mat-input input.mat-input-element {
+.mat-input input.mat-mdc-input-element {
   font-family: 'Mulish';
-  font-size: 16px;
+  font-size: 16px !important;
   line-height: 19px;
   letter-spacing: 0.05em;
-  color: #2A394D;
+  color: #2A394D !important;
 }
 
-.form-task .mat-input input.mat-input-element {
-  font-family: 'SF UI Display Semibold';
-  font-size: 12px;
+.form-task .mat-input input.mat-mdc-input-element {
+  font-family: 'SF UI Display Semibold' !important;
+  font-size: 12px !important;
   line-height: 14px;
 }
 
@@ -16771,12 +16764,12 @@ table.default-to-custom>thead>tr>th:nth-child(2) .line-divider.help-block:before
 }
 
 .add-new-customer-popup .form-task .mat-input.mat-form-field-appearance-legacy .mat-form-field-label,
-.add-new-customer-popup .form-task .mat-input input.mat-input-element {
-  font-weight: 600;
-  font-size: 10px;
+.add-new-customer-popup .form-task .mat-input input.mat-mdc-input-element {
+  font-weight: 600 !important;
+  font-size: 10px !important;
   line-height: 12px;
   letter-spacing: 0.05em;
-  color: #2A394D;
+  color: #2A394D !important;
 }
 
 .add-new-customer-popup .form-task .mat-form-field-label {
@@ -17681,8 +17674,8 @@ body .task-title-main .filternav-dropdown ul.navlist-full {
   justify-content: flex-end;
 }
 
-.time-of-entry input.mat-input-element {
-  font-size: 18px;
+.time-of-entry input.mat-mdc-input-element {
+  font-size: 18px !important;
   top: 0 !important;
   margin: 0 !important;
 }
@@ -17697,7 +17690,7 @@ body .task-title-main .filternav-dropdown ul.navlist-full {
   padding: 0;
 }
 
-.time-of-entry .manageNote-form input.mat-input-element {
+.time-of-entry .manageNote-form input.mat-mdc-input-element {
   text-align: center;
 }
 
@@ -17821,16 +17814,10 @@ input[type=number] {
   max-height: 27px;
 }
 
-.rightSidebar-wrap textarea.mat-input-element {
-  font-size: 18px;
+.rightSidebar-wrap textarea.mat-mdc-input-element {
+  font-size: 18px !important;
 }
 
-/* .note-fields textarea.mat-input-element.cdk-textarea-autosize{height: auto !important;} */
-/* .note-fields textarea.mat-input-element.cdk-textarea-autosize::-webkit-input-placeholder{color: #F2F2F2!important;-webkit-text-fill-color: #F2F2F2;opacity: 0.5;font-size: 14px;}
-.note-fields textarea.mat-input-element.cdk-textarea-autosize:-ms-input-placeholder{color: #F2F2F2!important;-webkit-text-fill-color: #F2F2F2;opacity: 0.5;font-size: 14px;}
-.note-fields textarea.mat-input-element.cdk-textarea-autosize::placeholder{color: #F2F2F2!important;-webkit-text-fill-color: #F2F2F2;opacity: 0.5;font-size: 14px;} */
-
-/* .note-fields{margin-top: 80px;} */
 .rightSidebar-wrap .manageNote-form .form-group.note-fields label {
   top: -2px;
   font-size: 12px;
@@ -18191,8 +18178,8 @@ body .task-note-table .td-des .table-text {
   top: 2px;
 }
 
-.note-fields textarea.mat-input-element.cdk-textarea-autosize {
-  box-sizing: content-box;
+.note-fields textarea.mat-mdc-input-element.cdk-textarea-autosize {
+  box-sizing: content-box !important;
 }
 
 .rightSidebar-wrap.notes-sidebar .data-penal-footer .btn {
@@ -18541,13 +18528,13 @@ table.default-to-custom tr td>.table-title.task-main-des {
   margin-top: -8px;
 }
 
-.task-title-main-h .mat-input input.mat-input-element,
-.notes-title-main-h .mat-input input.mat-input-element {
+.task-title-main-h .mat-input input.mat-mdc-input-element,
+.notes-title-main-h .mat-input input.mat-mdc-input-element {
   font-family: 'SF UI Display Semibold';
-  font-size: 12px;
+  font-size: 12px !important;
   line-height: 14px;
   letter-spacing: 0.05em;
-  color: #2A394D;
+  color: #2A394D !important;
 }
 
 .task-title-main-h .mat-input.mat-form-field-appearance-legacy.mat-form-field-can-float .mat-input-server:focus+.mat-form-field-label-wrapper .mat-form-field-label,
@@ -18977,15 +18964,15 @@ table.default-to-custom tr td>.table-title.task-main-des {
   margin-top: 22px;
 }
 
-.Query-popup textarea.mat-input-element {
+.Query-popup textarea.mat-mdc-input-element {
   padding: 0;
   margin: 0;
-  font-family: 'SF UI Display Semibold';
-  font-weight: 600;
-  font-size: 12px;
-  line-height: 14px;
+  font-family: 'SF UI Display Semibold' !important;
+  font-weight: 600 !important;
+  font-size: 12px !important;
+  line-height: 14px !important;
   letter-spacing: 0.05em;
-  color: #2A394D;
+  color: #2A394D !important;
 }
 
 .Query-popup .task-body .upload-sec.file-input .after-fill img {
@@ -19392,12 +19379,12 @@ body .reladex-table tr td .rownumber {
   padding: 0.25em 0;
 }
 
-.reladex-title-main-h .mat-input input.mat-input-element {
+.reladex-title-main-h .mat-input input.mat-mdc-input-element {
   font-family: 'SF UI Display Semibold';
-  font-size: 12px;
+  font-size: 12px !important;
   line-height: 14px;
   letter-spacing: 0.05em;
-  color: #2A394D;
+  color: #2A394D !important;
 }
 
 .reladex-left-h {
@@ -19809,10 +19796,10 @@ table.default-to-custom tr td>.table-title.taskcrm-desmain-h {
   margin-top: 15px;
 }
 
-.taskcrm-sidebar textarea.mat-input-element {
-  font-size: 16px;
+.taskcrm-sidebar textarea.mat-mdc-input-element {
+  font-size: 16px !important;
   line-height: 19px;
-  font-family: 'Myriad Pro';
+  font-family: 'Myriad Pro' !important;
 }
 
 .taskcrm-sidebar .manageNote-form .datepicker-formGroup label {

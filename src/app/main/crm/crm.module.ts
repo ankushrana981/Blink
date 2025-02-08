@@ -11,20 +11,12 @@ import { RouterModule } from "@angular/router";
 import { AddCustomerSetupComponent } from "./customer-setup/add-customer-setup/add-customer-setup.component";
 import { CustomerSetupListingComponent } from "./customer-setup/customer-setup-listing/customer-setup-listing.component";
 import { SharedModule } from "./../../reusable/shared/shared.module";
-// import { MalihuScrollbarModule } from "ngx-malihu-scrollbar";
 import { ModalModule } from "ngx-bootstrap/modal";
-// import { ChatsComponent } from './chats/chats.component';
 import { NgSelectModule } from "@ng-select/ng-select";
 import { NotesViewComponent } from "./notes-view/notes-view.component";
-// import { PerfectScrollbarModule } from "ngx-perfect-scrollbar";
-// import { PERFECT_SCROLLBAR_CONFIG } from "ngx-perfect-scrollbar";
-// import { PerfectScrollbarConfigInterface } from "ngx-perfect-scrollbar";
 import { CarouselModule } from "ngx-bootstrap/carousel";
 import { TasksComponent } from "./tasks/tasks.component";
 import { ReladexComponent } from './reladex/reladex.component';
-// const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
-//   suppressScrollX: true,
-// };
 @NgModule({
   declarations: [
     AddCustomerSetupComponent,
@@ -43,10 +35,8 @@ import { ReladexComponent } from './reladex/reladex.component';
   imports: [
     CommonModule,
     SharedModule,
-    // MalihuScrollbarModule.forRoot(),
     ModalModule.forRoot(),
     NgSelectModule,
-    // PerfectScrollbarModule,
     CarouselModule,
     RouterModule.forChild([
       {
@@ -121,12 +111,6 @@ import { ReladexComponent } from './reladex/reladex.component';
         pathMatch: "full",
       },
     ]),
-  ],
-  providers: [
-    // {
-    //   provide: PERFECT_SCROLLBAR_CONFIG,
-    //   useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG,
-    // },
-  ],
+  ]
 })
 export class CrmModule {}

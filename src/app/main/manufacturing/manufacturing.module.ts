@@ -9,9 +9,6 @@ import { SharedModule } from './../../reusable/shared/shared.module'
 import { CompositionComponent } from './composition/composition.component';
 import { OutsideClickDirective } from './outside-click.directive';
 import {ProductModifierComponent} from './product-modifier/product-modifier.component';
-
-
-// import { MalihuScrollbarModule } from 'ngx-malihu-scrollbar';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { ModalModule as NgModalDragg } from 'ng-modal-lib';
@@ -28,7 +25,6 @@ import { InfiniteScrollDirective } from 'ngx-infinite-scroll';
     ProductionViewComponent, ProductionEntryComponent, OutsideClickDirective],
     
   imports: [
-    // MalihuScrollbarModule.forRoot(),
     SharedModule,
     CommonModule,
     ModalModule.forRoot(),

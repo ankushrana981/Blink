@@ -13,18 +13,15 @@ import { MainComponent } from './main/main.component';
 import { HeaderComponent } from './../reusable/header/header.component';
 import { SidebarComponent } from './../reusable/sidebar/sidebar.component';
 import { HighchartsComponent } from '../reusable/highcharts/highcharts.component';
-// import { ChartModule } from  'angular-highcharts';
 import { NgApexchartsModule } from 'ng-apexcharts';
 import { SharedModule } from './../reusable/shared/shared.module';
-import { AddCustomerSetupComponent } from './crm/customer-setup/add-customer-setup/add-customer-setup.component';
 import { CustomerSetupModalComponent } from '../reusable/customer-setup-modal/customer-setup-modal.component';
-import { GhostListComponent } from '../reusable/ghost/ghost-list.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { SettingsComponent } from './settings/settings.component';
 import { CompanySettingsComponent } from './settings/company-settings/company-settings.component';
 import { ChartofaccountComponent } from './settings/chartofaccount/chartofaccount.component';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
-// import { ModalModule as NgModalDragg } from 'ng-modal-lib';
+import { ModalModule as NgModalDragg } from 'ng-modal-lib';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { ErrorMessages } from '../common/errorMessages';
 
@@ -42,24 +39,17 @@ import { ErrorMessages } from '../common/errorMessages';
     HeaderComponent,
     SidebarComponent,
     HighchartsComponent,
-    
-    //  GhostListComponent,
     CustomerSetupModalComponent,
-
     SettingsComponent,
-
     CompanySettingsComponent,
-
     ChartofaccountComponent,
   ],
   imports: [
     ModalModule.forRoot(),
-    // BsDatepickerModule.forRoot(),
     SharedModule,
     CommonModule,
-    // ChartModule,
     NgApexchartsModule,
-    // NgModalDragg,
+    NgModalDragg,
     DragDropModule,
     BsDropdownModule.forRoot(),
     RouterModule.forChild([
@@ -174,6 +164,5 @@ import { ErrorMessages } from '../common/errorMessages';
     ]),
   ],
   providers: [ErrorMessages],
-  // entryComponents: [CustomerSetupModalComponent],
 })
 export class MainModule {}

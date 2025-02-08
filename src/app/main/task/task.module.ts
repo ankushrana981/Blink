@@ -2,29 +2,18 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from './../../reusable/shared/shared.module'
-// import { MalihuScrollbarModule } from 'ngx-malihu-scrollbar';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { TasksComponent } from './tasks/tasks.component';
 import { ViewTasksComponent } from './view-tasks/view-tasks.component';
-// import { ModalModule as NgModalDragg } from 'ng-modal-lib';
+import { ModalModule as NgModalDragg } from 'ng-modal-lib';
 import { AccordionDirective } from '../../reusable/directives/accordian.directives';
 import {DragDropModule} from '@angular/cdk/drag-drop';
-// import { AngularResizedEventModule } from 'angular-resize-event';
+import { AngularResizeEventModule } from 'angular-resize-event';
 import { NgxPageScrollModule } from 'ngx-page-scroll';
-// import { ScrollToModule } from '@nicky-lenaers/ngx-scroll-to';
 import { UniquePipe } from './unique-pipe';
 import { NgScrollbarModule } from 'ngx-scrollbar';
-// import { DndModule } from 'ngx-drag-drop';
-
-// import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
-// import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
-// import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
-
-// const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
-//   suppressScrollX: true
-// };
-
+import { DndModule } from 'ngx-drag-drop';
 @NgModule({
     declarations: [
         TasksComponent,
@@ -34,18 +23,14 @@ import { NgScrollbarModule } from 'ngx-scrollbar';
     ],
     imports: [
         CommonModule, SharedModule,
-    
-        // MalihuScrollbarModule.forRoot(),
         ModalModule.forRoot(),
         NgSelectModule,
-        // NgModalDragg,
-        // DndModule,
+        NgModalDragg,
+        DndModule,
         NgxPageScrollModule,
         NgScrollbarModule,
-        // ScrollToModule.forRoot(),
-        // PerfectScrollbarModule,
         DragDropModule,
-        // AngularResizedEventModule,
+        AngularResizeEventModule,
         RouterModule.forChild(
             [
                 {
@@ -65,10 +50,6 @@ import { NgScrollbarModule } from 'ngx-scrollbar';
                 }
             ]
         )
-    ],
-    // providers:[{
-    //     provide: PERFECT_SCROLLBAR_CONFIG,
-    //     useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
-    // }]
+    ]
 })
 export class TaskModule { }

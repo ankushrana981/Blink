@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgIf } from '@angular/common';
 import { BankComponent } from './bank/bank.component';
 import { DiscountComponent } from './discount/discount.component';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from './../../reusable/shared/shared.module';
 @NgModule({
+  declarations: [BankComponent,DiscountComponent],
   imports: [
     CommonModule,SharedModule,
     RouterModule.forChild(

@@ -354,7 +354,8 @@
 									</div>
 									<div class="d-block x-animated fadeIn d-4">
 										<mat-form-field class="example-full-width">
-											<input matInput placeholder="Discount" value="0"
+											<mat-label> Discount </mat-label>
+											<input matInput placeholder="" value="0"
 												(keydown)="AllowNumbers($event)" name="productdiscount"
 												[(ngModel)]="user.productdiscount">
 										</mat-form-field>
@@ -816,4 +817,4 @@
 		</div>
 	</ng-template>
 
-	<!-- <app-modal-demo style="position: relative;z-index: 999999999;"></app-modal-demo> -->
+	<app-modal-demo style="position: relative;z-index: 999999999;"></app-modal-demo>

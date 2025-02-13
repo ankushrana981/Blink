@@ -74,10 +74,6 @@ div.mat-mdc-select-panel .mat-mdc-option{
   line-height: inherit !important;
   min-height: 34px;
 }
-.mdc-text-field--filled:not(.mdc-text-field--disabled) .mdc-line-ripple::before,
-.mdc-text-field--filled:not(.mdc-text-field--disabled) .mdc-line-ripple::after {
-  border-color: rgb(8, 217, 214) !important;
-}
 .dashboardWrap .card.greenBG-chart {
   .mdc-text-field--filled:not(.mdc-text-field--disabled) .mdc-line-ripple::before,
   .mdc-text-field--filled:not(.mdc-text-field--disabled) .mdc-line-ripple::after {

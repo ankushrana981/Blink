@@ -1,22 +1,18 @@
 <div *ngIf="type == 'accounting'">
-  asdfhoasfhaoish
   <!-- <div class="chat">
       <div [chart]="chart"> 
       </div> -->
 </div>
 <div *ngIf="type != 'accounting'">
-
-  <apx-chart [series]="[70, 35, 45, 30, 45]"  [labels]="['Web Services', 'Dealerships', 'Commercials', 'Hotel','Restaurants']"
+  <!-- <apx-chart  [labels]="['Web Services', 'Dealerships', 'Commercials', 'Hotel','Restaurants']"
     [colors]="['#1ab7ea', '#0084ff', '#39539E', '#0077B5']" [plotOptions]="plotOptions1" 
-  >
+  > -->
+  <apx-chart #chartObj 
+  [colors]="chartOptions.colors"
+  [series]="chartOptions.series"
+  [legend]="chartOptions.legend"
+  [plotOptions]="chartOptions.plotOptions"
+  [labels]="chartOptions.labels"
+  [chart]="chartOptions.chart">
 </apx-chart>
 </div>
-
-<!-- [responsive]="[{
-  breakpoint: 480,
-  options: {
-      legend: {
-          show: false
-      }
-  }
-}]" -->

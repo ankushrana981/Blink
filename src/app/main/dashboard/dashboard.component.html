@@ -61,7 +61,6 @@
                     </ul>
                     <apx-chart #chartObj [series]="chartOptions.series" [chart]="chartOptions.chart"
                         [xaxis]="chartOptions.xaxis" [stroke]="chartOptions.stroke"></apx-chart>
-                    <!-- <apx-chart [series]="series1"  [xaxis]="xaxis1"  [stroke]="stroke1" ></apx-chart> -->
                 </div>
             </div>
         </div>
@@ -69,11 +68,6 @@
             <div class="card calenderWrap">
                 <div class="calender">
                     <div class="form-group">
-                        <!-- <bs-datepicker-inline [bsValue]="bsInlineValue"></bs-datepicker-inline> -->
-                        <!-- <input type="text"
-             placeholder="Datepicker"
-             class="form-control"
-             bsDatepicker> -->
                         <bs-datepicker-inline [bsValue]="bsInlineValue"
                             [bsConfig]="{ showWeekNumbers:false }"></bs-datepicker-inline>
                     </div>
@@ -91,7 +85,6 @@
 
                         </mat-menu>
                     </div>
-                    <!-- malihu-scrollbar [scrollbarOptions]="scrollbarOptions" -->
                     <ul class="task-list">
                             <ng-scrollbar visibility="hover" #scrollEl thumbClass="custom-scrollbars">
                             <li ng-click="" class="ongoing" role="button" tabindex="0">

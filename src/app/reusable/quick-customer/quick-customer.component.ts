@@ -16,7 +16,8 @@ import {
   ApexGrid,
   ApexLegend,
   ApexOptions,
-  ApexMarkers
+  ApexMarkers,
+  ApexPlotOptions
 } from "ng-apexcharts";
 export type ChartOptions = {
   series: ApexAxisChartSeries;
@@ -28,8 +29,11 @@ export type ChartOptions = {
   stroke: ApexStroke;
   title: ApexTitleSubtitle;
   legend:ApexLegend;
-  options:ApexOptions
-  markers:ApexMarkers
+  options:ApexOptions;
+  markers:ApexMarkers;
+  labels:string[];
+  colors: string[];
+  plotOptions: ApexPlotOptions;
 };
 @Component({
   selector: '[app-quick-customer]',

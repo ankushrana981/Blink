@@ -1,5 +1,5 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
-// import { ResizedEvent } from 'angular-resize-event';
+import { ResizedEvent } from 'angular-resize-event';
 import { ChatsComponent } from '../../reusable/chats/chats.component';
 import { CdkDragStart } from '@angular/cdk/drag-drop';
 @Component({
@@ -39,10 +39,10 @@ export class ModalDemoComponent {
             }, 10)
         }
     }
-    // onResize(event: ResizedEvent) {
-    //     this.isCusClsAdd = event.newWidth <= 750 ? true : false;
-    //     console.log(this.isCusClsAdd = event.newWidth <= 750 ? true : false)
-    // }
+    onResize(event: ResizedEvent) {
+        this.isCusClsAdd = event.newRect.width <= 750 ? true : false;
+        console.log(this.isCusClsAdd = event.newRect.width <= 750 ? true : false)
+    }
 
     openMdlFrmOthrCom() {
         document.getElementById("openBtn").click();

@@ -2302,7 +2302,15 @@ h4.infosubmitted span {
 .navbar {
   padding: 12px 40px 9px 20px;
 }
-
+.navbar-brand {
+  display: inline-block !important;
+  padding-top: .3125rem !important;
+  padding-bottom: .3125rem !important;
+  margin-right: 1rem !important;
+  font-size: 1.25rem !important;
+  line-height: inherit !important;
+  white-space: nowrap !important;
+}
 .navbar-brand img {
   max-width: 35px;
 }
@@ -2347,7 +2355,9 @@ h4.infosubmitted span {
   background: #f5f5f5;
   text-decoration: none;
 }
-
+.navbar-nav li .btn-link{
+text-decoration: none !important;
+}
 .navbar-nav li .btn-link i.fa {
   color: #c0c6d1;
   margin-right: 14px;
@@ -3282,7 +3292,7 @@ div.mat-mdc-select-panel .mat-mdc-option {
   max-width: 295px !important;
 }
 
-.dashboardWrap .accountingGraph .mat-form-field {
+.dashboardWrap .accountingGraph .mat-mdc-form-field {
   margin-bottom: 25px;
 }
 
@@ -3632,7 +3642,7 @@ div.mat-mdc-select-panel .mat-mdc-option {
   height: 1px;
 }
 
-.dashboardWrap .mat-form-field,
+.dashboardWrap .mat-mdc-form-field,
 .dashboardWrap .mat-mdc-form-field {
   width: 125px;
 }
@@ -4790,8 +4800,11 @@ div.mat-mdc-select-panel .mat-mdc-option {
 .newMemo-Modal .modal-content .modal-body input {
   text-align: left;
   color: #08d9d4;
+  caret-color: #08d9d4 !important;
 }
-
+.newMemo-Modal .mdc-text-field--filled:not(.mdc-text-field--disabled) .mdc-line-ripple::after {
+  border-bottom-color: #08d9d4 !important;
+}
 .newMemo-Modal .mat-mdc-text-field-wrapper .mat-mdc-form-field-infix .mat-mdc-floating-label {
   font-size: 14px;
   right: 0;
@@ -8014,7 +8027,7 @@ app-header {
   align-items: flex-end;
 }
 
-.inventoryreports-content .card-header .mat-form-field {
+.inventoryreports-content .card-header .mat-mdc-form-field {
   height: 20px;
 }
 
@@ -17664,7 +17677,7 @@ body .task-title-main .filternav-dropdown ul.navlist-full {
   border: none;
 }
 
-.time-of-entry .mat-form-field {
+.time-of-entry .mat-mdc-form-field {
   max-width: 23px;
   font-family: 'Myriad Pro';
 }

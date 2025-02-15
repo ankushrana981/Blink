@@ -5,86 +5,84 @@
     <div class="row">
         <div class="col-md-4">
             <mat-form-field>
-
                 <mat-select [(value)]="selected">
                     <mat-option value="option1">Customer name</mat-option>
                     <mat-option value="option2">By division</mat-option>
                     <mat-option value="option3">By customer</mat-option>
                 </mat-select>
-
             </mat-form-field>
         </div>
     </div>
     <div class="row">
         <div class="col-md-7">
             <div class="graphTable-box" malihu-scrollbar>
-                <ng-scrollbar visibility="hover" #scrollEl thumbClass="custom-scrollbars">
-                <table class="table table-striped">
-                    <thead>
+                <ng-scrollbar visibility="hover" #scrollEl thumbClass="custom-scrollbars" orientation="vertical">
+                    <table class="table table-striped">
+                        <thead>
 
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Customer Name</td>
-                            <td>$350</td>
-                            <td>5</td>
-                        </tr>
-                        <tr>
-                            <td>Customer Name</td>
-                            <td>$1984</td>
-                            <td>14</td>
-                        </tr>
-                        <tr>
-                            <td>Customer Name</td>
-                            <td>$240</td>
-                            <td>5</td>
-                        </tr>
-                        <tr>
-                            <td>Customer Name</td>
-                            <td>$20</td>
-                            <td>5</td>
-                        </tr>
-                        <tr>
-                            <td>Customer Name</td>
-                            <td>$350</td>
-                            <td>5</td>
-                        </tr>
-                        <tr>
-                            <td>Customer Name</td>
-                            <td>$1984</td>
-                            <td>14</td>
-                        </tr>
-                        <tr>
-                            <td>Customer Name</td>
-                            <td>$240</td>
-                            <td>5</td>
-                        </tr>
-                        <tr>
-                            <td>Customer Name</td>
-                            <td>$20</td>
-                            <td>5</td>
-                        </tr>
-                        <tr>
-                            <td>Customer Name</td>
-                            <td>$350</td>
-                            <td>5</td>
-                        </tr>
-                        <tr>
-                            <td>Customer Name</td>
-                            <td>$1984</td>
-                            <td>14</td>
-                        </tr>
-                        <tr>
-                            <td>Customer Name</td>
-                            <td>$240</td>
-                            <td>5</td>
-                        </tr>
-                        <tr>
-                            <td>Customer Name</td>
-                            <td>$20</td>
-                            <td>5</td>
-                        </tr>
-                        <!-- <tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Customer Name</td>
+                                <td>$350</td>
+                                <td>5</td>
+                            </tr>
+                            <tr>
+                                <td>Customer Name</td>
+                                <td>$1984</td>
+                                <td>14</td>
+                            </tr>
+                            <tr>
+                                <td>Customer Name</td>
+                                <td>$240</td>
+                                <td>5</td>
+                            </tr>
+                            <tr>
+                                <td>Customer Name</td>
+                                <td>$20</td>
+                                <td>5</td>
+                            </tr>
+                            <tr>
+                                <td>Customer Name</td>
+                                <td>$350</td>
+                                <td>5</td>
+                            </tr>
+                            <tr>
+                                <td>Customer Name</td>
+                                <td>$1984</td>
+                                <td>14</td>
+                            </tr>
+                            <tr>
+                                <td>Customer Name</td>
+                                <td>$240</td>
+                                <td>5</td>
+                            </tr>
+                            <tr>
+                                <td>Customer Name</td>
+                                <td>$20</td>
+                                <td>5</td>
+                            </tr>
+                            <tr>
+                                <td>Customer Name</td>
+                                <td>$350</td>
+                                <td>5</td>
+                            </tr>
+                            <tr>
+                                <td>Customer Name</td>
+                                <td>$1984</td>
+                                <td>14</td>
+                            </tr>
+                            <tr>
+                                <td>Customer Name</td>
+                                <td>$240</td>
+                                <td>5</td>
+                            </tr>
+                            <tr>
+                                <td>Customer Name</td>
+                                <td>$20</td>
+                                <td>5</td>
+                            </tr>
+                            <!-- <tr>
                             <td>Customer Name</td>
                             <td>$350</td>
                             <td>5</td>
@@ -104,9 +102,9 @@
                             <td>$350</td>
                             <td>5</td>
                         </tr> -->
-                    </tbody>
-                </table>
-            </ng-scrollbar>
+                        </tbody>
+                    </table>
+                </ng-scrollbar>
             </div>
 
         </div>
@@ -119,23 +117,13 @@
                         <h6 class="chart-title">6 month AR snapshot</h6>
                     </div>
                 </div>
-                <apx-chart #chartObj
-    [series]="chartOptions.series"
-    [chart]="chartOptions.chart"
-    [xaxis]="chartOptions.xaxis"
-    [yaxis]="chartOptions.yaxis"
-    [dataLabels]="chartOptions.dataLabels"
-    [grid]="chartOptions.grid"
-    [stroke]="chartOptions.stroke"
-    [title]="chartOptions.title"
-    [markers]="chartOptions.markers"
-    [legend]="chartOptions.legend"
-    >
-    </apx-chart>
+                <apx-chart #chartObj [series]="chartOptions.series" [chart]="chartOptions.chart" [xaxis]="chartOptions.xaxis"
+                     [legend]="chartOptions.legend" [responsive]="chartOptions.responsive">
+                </apx-chart>
                 <!-- <apx-chart [series]="series1"  [xaxis]="xaxis1" [responsive]="res" [legend]="legend1">
                 </apx-chart> -->
             </div>
-        </div>
+        </div>  
     </div>
 </div>
 

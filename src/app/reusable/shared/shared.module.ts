@@ -66,7 +66,7 @@ import { IconMinimizeComponent } from '../../common/svg/icon-minimize.component'
 import { ModalDemoComponent } from '../../reusable/draggable-popup/draggable-popup.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { RouterModule } from '@angular/router';
-// import { AngularResizedEventModule } from 'angular-resize-event';
+import { AngularResizeEventModule } from 'angular-resize-event';
 import { AddProductComponent } from '../../reusable/add-product/add-product.component';
 import { IconCameraComponent } from '../../common/svg/icon-camera.component';
 import { IconProductFileComponent } from '../../common/svg/icon-product-file.component';
@@ -103,7 +103,7 @@ import { NgScrollbarModule } from 'ngx-scrollbar';
     BsDropdownModule,
     InfiniteScrollDirective,
     RouterModule,
-    //         AngularResizedEventModule,
+    AngularResizeEventModule,
     DragDropModule,
     BsDatepickerModule.forRoot(),
     ModalModule.forRoot(),
@@ -198,7 +198,7 @@ import { NgScrollbarModule } from 'ngx-scrollbar';
     MatInputModule,
     BsDropdownModule,
     InfiniteScrollDirective,
-    //         AngularResizedEventModule,
+    AngularResizeEventModule,
     BsDatepickerModule,
     DragDropModule,
     TabsModule,

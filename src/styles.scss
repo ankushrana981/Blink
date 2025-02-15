@@ -64,6 +64,7 @@ html {
 .mat-mdc-menu-panel,
 div.mat-mdc-select-panel{
   background: #fff !important;
+  max-width: fit-content !important;
 }
 .mat-mdc-select-arrow svg,
 div.mat-mdc-select-panel mat-pseudo-checkbox,
@@ -73,6 +74,9 @@ div.mat-mdc-select-panel mat-pseudo-checkbox,
 div.mat-mdc-select-panel .mat-mdc-option{
   line-height: inherit !important;
   min-height: 34px;
+}
+.mat-mdc-option .mdc-list-item__primary-text{
+  white-space: nowrap !important;
 }
 .dashboardWrap .card.greenBG-chart {
   .mdc-text-field--filled:not(.mdc-text-field--disabled) .mdc-line-ripple::before,

@@ -174,7 +174,7 @@
 												<table class="table text-end table-totals">
 													<tbody>
 														<tr>
-															<td class="totalText">Subtotal: 
+															<td class="totalText">Subtotal:
 																<!-- <b>$ 0.00 </b> -->
 															</td>
 															<td width="100px" class="text-end ng-binding">
@@ -355,23 +355,21 @@
 									<div class="d-block x-animated fadeIn d-4">
 										<mat-form-field class="example-full-width">
 											<mat-label> Discount </mat-label>
-											<input matInput placeholder="" value="0"
-												(keydown)="AllowNumbers($event)" name="productdiscount"
-												[(ngModel)]="user.productdiscount">
+											<input matInput placeholder="" value="0" (keydown)="AllowNumbers($event)"
+												name="productdiscount" [(ngModel)]="user.productdiscount">
 										</mat-form-field>
 									</div>
 									<div class="d-block x-animated fadeIn d-5">
 										<mat-form-field class="example-full-width">
 											<input matInput placeholder="Tax value($)" name="taxvalue"
 												(keydown)="AllowNumbers($event)" [(ngModel)]="user.taxValue"
-												currencyMask >
+												currencyMask>
 										</mat-form-field>
 									</div>
 									<div class="d-block x-animated fadeIn d-6">
 										<mat-form-field class="example-full-width">
 											<input matInput placeholder="Unit price" value="0.00" name="unitprice"
-												(keydown)="AllowNumbers($event)" [(ngModel)]="user.price" currencyMask
-												>
+												(keydown)="AllowNumbers($event)" [(ngModel)]="user.price" currencyMask>
 										</mat-form-field>
 									</div>
 								</form>
@@ -393,12 +391,14 @@
 							<form class="example-form field-form mt-20">
 								<div class="form-group textareaBox mb-20 x-animated fadeIn d-5">
 									<mat-form-field class="example-full-width">
-										<textarea matInput placeholder="Notes" name="comment" id="comment"
+										<mat-label>Notes</mat-label>
+										<textarea matInput name="comment" id="comment"
 											[(ngModel)]="user.notes"></textarea>
 									</mat-form-field>
 								</div>
 								<div class="form-group inputBox mb-20 x-animated fadeIn d-6">
 									<mat-form-field class="example-full-width">
+										<mat-label>Discount</mat-label>
 										<input matInput placeholder="Discount" value="0" name="discount"
 											(keydown)="AllowNumbers($event)" [(ngModel)]="user.discount">
 									</mat-form-field>

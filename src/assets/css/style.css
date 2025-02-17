@@ -3707,7 +3707,9 @@ div.mat-mdc-select-panel .mat-mdc-option {
   overflow-x: hidden;
 }
 
-
+.dashboardWrap .graphTable-box .table{
+  --bs-table-striped-bg: #f9f9f9 !important;
+}
 
 .dashboardWrap .greenBG-chart ul.tab-months {
   list-style: none;

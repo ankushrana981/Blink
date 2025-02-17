@@ -1904,6 +1904,233 @@ input:-internal-autofill-selected {
   min-height: 0;
 }
 
+/* gcss */
+.rightSidebar-wrap .qtyFormGroup .mat-mdc-form-field-infix {
+  padding: 0;
+  min-height: 0;
+}
+
+.rightSidebar-wrap .qtyFormGroup .mdc-floating-label.mat-mdc-floating-label {
+  right: 0 !important;
+  color: rgba(255, 255, 255, 0.5) !important;
+  font-size: 14px;
+}
+
+.rightSidebar-wrap
+  .qtyFormGroup
+  .mdc-floating-label.mat-mdc-floating-label.mdc-floating-label--float-above {
+  right: -20px !important;
+  color: #fff !important;
+  font-size: 14px;
+}
+
+.rightSidebar-wrap
+  .qtyFormGroup
+  .mdc-text-field--filled:not(.mdc-text-field--disabled).mdc-text-field--invalid
+  .mdc-floating-label {
+  color: #08d9d6 !important;
+}
+
+.qtyFormGroup
+  .mdc-text-field--filled.mdc-text-field--invalid:not(.mdc-text-field--disabled)
+  .mdc-line-ripple::after {
+  border-bottom-color: #08d9d6;
+}
+
+.rightSidebar-wrap .qtyFormGroup input.mat-mdc-input-element {
+  margin: 20px 0 0px !important;
+}
+
+.qtyFormGroup
+  .mat-mdc-text-field-wrapper
+  .mat-mdc-form-field-flex
+  .mat-mdc-floating-label {
+  top: 38px !important;
+}
+/* gcss end */
+
+/* notes */
+.rightSidebar-wrap .notes2 .mat-mdc-form-field-infix {
+  padding: 0;
+  min-height: 0;
+}
+
+.rightSidebar-wrap .notes2 .mdc-floating-label.mat-mdc-floating-label {
+  right: 0 !important;
+  color: rgba(255, 255, 255, 0.5) !important;
+  font-size: 14px;
+}
+
+.rightSidebar-wrap
+  .notes2
+  .mdc-floating-label.mat-mdc-floating-label.mdc-floating-label--float-above {
+  right: -12px !important;
+  color: #fff !important;
+  font-size: 14px;
+}
+
+.rightSidebar-wrap
+  .notes2
+  .mdc-text-field--filled:not(.mdc-text-field--disabled).mdc-text-field--invalid
+  .mdc-floating-label {
+  color: #08d9d6 !important;
+}
+
+.notes2
+  .mdc-text-field--filled.mdc-text-field--invalid:not(.mdc-text-field--disabled)
+  .mdc-line-ripple::after {
+  border-bottom-color: #08d9d6;
+}
+
+.rightSidebar-wrap .notes2 input.mat-mdc-input-element {
+  margin: 20px 0 0px !important;
+}
+
+.rightSidebar-wrap .notes2 textarea.mat-mdc-input-element {
+  height: 30px !important;
+}
+
+.notes2 .mat-mdc-text-field-wrapper.mdc-text-field.mdc-text-field--filled {
+  height: unset !important;
+}
+
+/* notes end */
+
+/* disct2 */
+.rightSidebar-wrap .disct2 .mat-mdc-form-field-infix {
+  padding: 0;
+  min-height: 0;
+}
+
+.rightSidebar-wrap .disct2 .mdc-floating-label.mat-mdc-floating-label {
+  right: 0 !important;
+  color: rgba(255, 255, 255, 0.5) !important;
+  font-size: 14px;
+}
+
+.rightSidebar-wrap
+  .disct2
+  .mdc-floating-label.mat-mdc-floating-label.mdc-floating-label--float-above {
+  right: -18px !important;
+  color: #fff !important;
+  font-size: 14px;
+}
+
+.rightSidebar-wrap
+  .disct2
+  .mdc-text-field--filled:not(.mdc-text-field--disabled).mdc-text-field--invalid
+  .mdc-floating-label {
+  color: #08d9d6 !important;
+}
+
+.disct2
+  .mdc-text-field--filled.mdc-text-field--invalid:not(.mdc-text-field--disabled)
+  .mdc-line-ripple::after {
+  border-bottom-color: #08d9d6;
+}
+
+.rightSidebar-wrap .disct2 input.mat-mdc-input-element {
+  margin: 20px 0 0px !important;
+}
+
+.disct2
+  .mat-mdc-text-field-wrapper
+  .mat-mdc-form-field-flex
+  .mat-mdc-floating-label {
+  top: 38px !important;
+}
+/* disct2 end */
+
+/* taxv1 */
+.rightSidebar-wrap .taxv1 .mat-mdc-form-field-infix {
+  padding: 0;
+  min-height: 0;
+}
+
+.rightSidebar-wrap .taxv1 .mdc-floating-label.mat-mdc-floating-label {
+  right: 0 !important;
+  color: rgba(255, 255, 255, 0.5) !important;
+  font-size: 14px;
+}
+
+.rightSidebar-wrap
+  .taxv1
+  .mdc-floating-label.mat-mdc-floating-label.mdc-floating-label--float-above {
+  right: -18px !important;
+  color: #fff !important;
+  font-size: 14px;
+}
+
+.rightSidebar-wrap
+  .taxv1
+  .mdc-text-field--filled:not(.mdc-text-field--disabled).mdc-text-field--invalid
+  .mdc-floating-label {
+  color: #08d9d6 !important;
+}
+
+.taxv1
+  .mdc-text-field--filled.mdc-text-field--invalid:not(.mdc-text-field--disabled)
+  .mdc-line-ripple::after {
+  border-bottom-color: #08d9d6;
+}
+
+.rightSidebar-wrap .taxv1 input.mat-mdc-input-element {
+  margin: 20px 0 0px !important;
+}
+
+.taxv1
+  .mat-mdc-text-field-wrapper
+  .mat-mdc-form-field-flex
+  .mat-mdc-floating-label {
+  top: 38px !important;
+}
+/* taxv1 end */
+
+/* unitprc */
+.rightSidebar-wrap .unitprc .mat-mdc-form-field-infix {
+  padding: 0;
+  min-height: 0;
+}
+
+.rightSidebar-wrap .unitprc .mdc-floating-label.mat-mdc-floating-label {
+  right: 0 !important;
+  color: rgba(255, 255, 255, 0.5) !important;
+  font-size: 14px;
+}
+
+.rightSidebar-wrap
+  .unitprc
+  .mdc-floating-label.mat-mdc-floating-label.mdc-floating-label--float-above {
+  right: -18px !important;
+  color: #fff !important;
+  font-size: 14px;
+}
+
+.rightSidebar-wrap
+  .unitprc
+  .mdc-text-field--filled:not(.mdc-text-field--disabled).mdc-text-field--invalid
+  .mdc-floating-label {
+  color: #08d9d6 !important;
+}
+
+.unitprc
+  .mdc-text-field--filled.mdc-text-field--invalid:not(.mdc-text-field--disabled)
+  .mdc-line-ripple::after {
+  border-bottom-color: #08d9d6;
+}
+
+.rightSidebar-wrap .unitprc input.mat-mdc-input-element {
+  margin: 20px 0 0px !important;
+}
+
+.unitprc
+  .mat-mdc-text-field-wrapper
+  .mat-mdc-form-field-flex
+  .mat-mdc-floating-label {
+  top: 38px !important;
+}
+/* unitprc end */
+
 .rightSidebar-wrap .textareaBox .mat-mdc-form-field-infix textarea {
   padding: 2px 0;
 }

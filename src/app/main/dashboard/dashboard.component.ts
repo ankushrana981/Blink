@@ -14,7 +14,6 @@ export interface Food {
   styles: []
 })
 export class DashboardComponent implements OnInit {
-  public scrollbarOptions = { axis: 'y', theme: 'minimal-dark', autoHideScrollbar: true };
 
   public toggle: boolean = false;
   selected = 'option1';

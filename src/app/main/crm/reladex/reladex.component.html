@@ -11,8 +11,7 @@
             <ng-select [searchable]="false" (change)="changedselectedType($event)" class="reladex-select"
               [items]="typesArray" bindLabel="name" autofocus bindValue="id" [(ngModel)]="selectedTypeID">
             </ng-select>
-            <div class="filteredOption mcs-horizontal-scrollbar-notes-filter" malihu-scrollbar
-             >
+            <div class="filteredOption mcs-horizontal-scrollbar-notes-filter" malihu-scrollbar>
               <ul>
                 <li *ngFor="let item of tempArr;let index=index;" class="note-filter-record">
                   <small class="close">
@@ -61,9 +60,8 @@
                 <div class="form-group" *ngIf="data.type==='select' && data.async && filterData?.bindedValue?.id > 0">
                   <label class="gray-label">{{data.labelName}}</label>
                   <ng-select [clearable]="false" [items]="data?.options | async" bindLabel="title"
-                    [(ngModel)]="data.bindvalue"
-                    name="{{'secondFilter'+index}}" id="{{'secondFilter'+index}}" autocomplete="off"
-                    [typeahead]="MainSearchdataSource" (change)="changedsubChildFilter($event)">
+                    [(ngModel)]="data.bindvalue" name="{{'secondFilter'+index}}" id="{{'secondFilter'+index}}"
+                    autocomplete="off" [typeahead]="MainSearchdataSource" (change)="changedsubChildFilter($event)">
                   </ng-select>
                 </div>
               </ng-container>
@@ -350,8 +348,8 @@
           </div>
         </perfect-scrollbar> -->
       </div>
-      <div class="notes-btn text-end btn-task-main wow fadeIn" data-wow-delay="500ms">
-        <a *ngIf="showAddNewTaskButton" class="btn btn-main btn-blue" (click)="changeIc('dots')">Add New Task</a>
+      <div class="notes-btn text-end btn-task-main wow fadeIn " data-wow-delay="500ms">
+        <a *ngIf="showAddNewTaskButton" class="btn btn-main btn-blue wh-btn" (click)="changeIc('dots')">Add New Task</a>
       </div>
     </div>
   </div>
@@ -1758,8 +1756,7 @@
                             [hideSelected]="true">
                             <ng-template ng-label-tmp let-item="item" let-clear="clear">
                               <span class="ng-value-label">{{item.title}}</span>
-                              <span class="ng-value-icon right" (click)="clear(item)"
-                                aria-hidden="true">×</span>
+                              <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
                             </ng-template>
                             <ng-template ng-option-tmp let-item="item" let-index="index">
                               {{item.title}}
@@ -1768,7 +1765,7 @@
                         </div>
                       </li>
                       <li>
-                        <div class="form-group form-task form-border focus-div">
+                        <div class="form-group form-task form-border focus-div ">
                           <mat-form-field class="example-full-width mat-input">
                             <input name="subTitle" id="subTitle" formControlName="subTitle" matInput type="text"
                               placeholder="Focus" value="" autocomplete="off">
@@ -1791,8 +1788,7 @@
                             [searchable]="true" [hideSelected]="true">
                             <ng-template ng-label-tmp let-item="item" let-clear="clear">
                               <span class="ng-value-label">{{item.title}}</span>
-                              <span class="ng-value-icon right" (click)="clear(item)"
-                                aria-hidden="true">×</span>
+                              <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
                             </ng-template>
                             <ng-template ng-option-tmp let-item="item" let-index="index">
                               {{item.title}}

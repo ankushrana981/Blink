@@ -9,8 +9,7 @@
             <h2>
               <img src="assets/images/icon-list.svg" height="25" width="25" alt="" class="mr-2">Tasks
             </h2>
-            <div class="filteredOption mcs-horizontal-scrollbar-notes-filter " malihu-scrollbar
-              >
+            <div class="filteredOption mcs-horizontal-scrollbar-notes-filter " malihu-scrollbar>
               <ul>
                 <li *ngFor="let item of tempArr;let index=index;" class="note-filter-record">
                   <small class="close">
@@ -66,9 +65,8 @@
                 <div class="form-group" *ngIf="data.type==='select' && data.async && filterData?.bindedValue?.id > 0">
                   <label class="gray-label">{{data.labelName}}</label>
                   <ng-select [clearable]="false" [items]="data?.options | async" bindLabel="title"
-                    [(ngModel)]="data.bindvalue"
-                    name="{{'secondFilter'+index}}" id="{{'secondFilter'+index}}" autocomplete="off"
-                    [typeahead]="MainSearchdataSource" (change)="changedsubChildFilter($event)">
+                    [(ngModel)]="data.bindvalue" name="{{'secondFilter'+index}}" id="{{'secondFilter'+index}}"
+                    autocomplete="off" [typeahead]="MainSearchdataSource" (change)="changedsubChildFilter($event)">
                   </ng-select>
                 </div>
               </ng-container>
@@ -386,21 +384,21 @@
             Task Details
           </h3>
           <div class="top50-space-h">
-          <div class="row">
-            <div class="col-12">
-              <label>Description</label>
-              <p>{{taskDetailsData?.note}}</p>
+            <div class="row">
+              <div class="col-12">
+                <label>Description</label>
+                <p>{{taskDetailsData?.note}}</p>
+              </div>
             </div>
-          </div>
-          <div class="row">
-            <div class="col-12">
-              <label>Assigned By</label>
-              <p>{{taskDetailsData?.user?.title}}</p>
+            <div class="row">
+              <div class="col-12">
+                <label>Assigned By</label>
+                <p>{{taskDetailsData?.user?.title}}</p>
+              </div>
             </div>
-          </div>
-          <div class="row">
-            <div class="col-12"></div>
-          </div>
+            <div class="row">
+              <div class="col-12"></div>
+            </div>
           </div>
           <h3 class="rightSidebar-main_title mb-40" *ngIf="clientTasks.length > 0 || clientNotes.length > 0">
             Relevant Info
@@ -449,7 +447,7 @@
                     <input class="form-control" name="minDatepicker" type="text" id="minDatepicker"
                       [(ngModel)]="task.dateOfEntry" bsDatepicker (bsValueChange)="ModelDatepicker($event)"
                       [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY',showWeekNumbers:false }" #dateOfEntry>
-                    <img src="assets/images/calender.svg" class="calender-ic" (click)="dateOfEntry.click()" >
+                    <img src="assets/images/calender.svg" class="calender-ic" (click)="dateOfEntry.click()">
                   </div>
                 </div>
               </div>
@@ -489,7 +487,7 @@
             </div>
             <div class="row">
               <div class="col-12">
-                <div class="form-group mb-28">
+                <div class="form-group mb-28 focus-box-field">
                   <input class="form-control" matInput name="subTitle" placeholder="Focus" type="text" id="subTitle"
                     [(ngModel)]="task.subTitle">
                 </div>
@@ -509,9 +507,9 @@
             <div class="row">
               <div class="col-12">
                 <div class="form-group mb-35 note-fields">
-                  <mat-form-field class="example-full-width">
-                    <textarea matInput matTextareaAutosize placeholder="Notes" value="" name="note"
-                      [(ngModel)]="task.note"></textarea>
+                  <mat-form-field class="example-full-width notes2 task-crm-notes-field">
+                    <mat-label>Notes</mat-label>
+                    <textarea matInput matTextareaAutosize value="" name="note" [(ngModel)]="task.note"></textarea>
                   </mat-form-field>
                 </div>
               </div>
@@ -567,7 +565,7 @@
 <ng-template #addCustomerPopup>
   <div class="modal-body p-0 delete-modal" (closeClick)="modalRef.hide()">
     <div class="d-flex flex-wrap chart-form create-task-from position-relative">
-      <div class="chart-box d-flex flex-wrap w-100" >
+      <div class="chart-box d-flex flex-wrap w-100">
         <div class="chart-header w-100 d-flex flex-wrap">
           <div class="chart-right flex-1 d-flex flex-wrap align-items-center justify-content-between">
             <h3 class=text-title>Add New Customer</h3>
@@ -1031,7 +1029,7 @@
 <ng-template #createTask>
   <div class="modal-body p-0">
     <div class="d-flex flex-wrap chart-form create-task-from position-relative">
-      <div class="chart-box d-flex flex-wrap w-100" >
+      <div class="chart-box d-flex flex-wrap w-100">
         <div class="chart-header w-100 d-flex flex-wrap">
           <div class="chart-right flex-1 d-flex flex-wrap align-items-center justify-content-between">
             <h3 class=text-title>Quick Task Entry</h3>
@@ -1081,8 +1079,7 @@
                             [hideSelected]="true">
                             <ng-template ng-label-tmp let-item="item" let-clear="clear">
                               <span class="ng-value-label">{{item.title}}</span>
-                              <span class="ng-value-icon right" (click)="clear(item)"
-                                aria-hidden="true">×</span>
+                              <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
                             </ng-template>
                             <ng-template ng-option-tmp let-item="item" let-index="index">
                               {{item.title}}
@@ -1114,8 +1111,7 @@
                             [searchable]="true" [hideSelected]="true">
                             <ng-template ng-label-tmp let-item="item" let-clear="clear">
                               <span class="ng-value-label">{{item.title}}</span>
-                              <span class="ng-value-icon right" (click)="clear(item);"
-                                aria-hidden="true">×</span>
+                              <span class="ng-value-icon right" (click)="clear(item);" aria-hidden="true">×</span>
                             </ng-template>
                             <ng-template ng-option-tmp let-item="item" let-index="index">
                               {{item.title}}

@@ -9,9 +9,9 @@
             <h2>
               <img src="assets/images/icon-list.svg" height="25" width="25" alt="" class="mr-2">Notes
             </h2>
-            <div class="filteredOption mcs-horizontal-scrollbar-notes-filter" malihu-scrollbar
-              >
+            <div class="filteredOption mcs-horizontal-scrollbar-notes-filter">
               <ul>
+                <ng-scrollbar visibility="hover" #scrollEl thumbClass="custom-scrollbars" orientation="vertical">
                 <li *ngFor="let item of tempArr;let index=index;" class="note-filter-record">
                   <small class="close">
                     <img src="assets/images/icon-close-dark.svg" alt="" width="10" (click)="resetFilter(item)">
@@ -32,6 +32,7 @@
                     </span>
                   </p>
                 </li>
+                </ng-scrollbar>
               </ul>
             </div>
             <div *ngIf="tempArr.length != 3" class="filter-btnBox" (click)="startingFilter()">

@@ -1,126 +1,147 @@
 <div class="crm-Wrap" [ngClass]="icon1?'active':''">
-  <div class="viewdata-title">
-    <h2>
-      <img src="assets/images/icon-list.svg"  height="25" width="25" alt=""> Expenses</h2>
-    <div class="pull-right right-top-btns">
-      <a class="btn btn-link" >
-        <img src="assets/images/icon-plus.svg"  height="25" width="25" alt="" (click)="changeIc('dots')">
-      </a>	
-    </div>
-  </div>
-  <div class="contentBox">
-    <div class="leftContent">
-      <div class="card">
-        <div class="table-box viewTable" data-infinite-scroll debounce  (scrolled)="onScrollDown($event)">
-		   <table style="width:100%" class="table-hover default-to-custom ng-isolate-scope">
-			   <tbody [@fadeIn]="listrecords?.length" fxLayout="row wrap" class="list">
-				   <tr style="vertical-align:top;" class="x-animated fadeIn d-1 in" *ngFor="let i of listrecords; index as j" fxFlex="100" fxFlex.lt-sm="200">
-		                <td width="64px" class="text-center"><h4 class="rownumber ng-binding">{{j+1}}</h4></td>
-		                <td class="text-left">
-		                    <b><span class="ng-binding">{{i?.createdOn | date:'d-MMM-y'}}</span> &nbsp;</b>
-		                    <div class="small help-block line-divider">&nbsp;</div>
-		                </td>
-		                <td class="text-left">
-		                        <b><span class="ng-binding">{{i?.description}}</span>&nbsp;</b>
-		                        <div class="small help-block line-divider ng-binding">&nbsp;</div>
-		                </td>
-		                <td class="text-end">
-		                    <b><span class="ng-binding">{{i?.currency?.title}}</span>&nbsp;</b> 
-		                    <div *ngIf ="i?.isDebit == false" class="small help-block line-divider green paymentstatus" aria-hidden="false"> Credit</div> 
-		                    <div *ngIf ="i?.isDebit == true" class="small help-block line-divider red paymentstatus ng-hide" aria-hidden="true">Debit</div>
-		                </td>
-		                <td class="text-end">
-		                    <div><span class="ng-binding">{{i?.department?.title}}</span>&nbsp;</div>
-		                    <div class="small help-block line-divider">&nbsp;</div>
-		                </td>
-		                <td class="text-end">
-		                    <div><span class="ng-binding">{{i?.division?.title}}</span>&nbsp;</div>
-		                    <div class="small help-block line-divider">&nbsp;</div>
-		                </td>
-		                <td class="text-end">
-		                    <div><span class="ng-binding">{{i?.amount}}</span>&nbsp;</div>
-		                    <div class="small help-block line-divider ng-binding" ng-bind="r.expenseCategory.title">{{i?.expenseCategory?.title}}</div>
-		                </td>
-		                <td width="100px" class="text-left">
-		                    <div class="rowactions">
-		                        <a class="btn btn-link" hov-title="View/Edit" (click)="editAdjustment(i)"><i class="fa fa-pencil"></i></a>
-		                        <a class="btn btn-link" hov-title="Delete" (click)="deleteAdjustment(i)"><i class="fa fa-remove text-danger"></i></a>		                        
-		                    </div>
-		                </td>
-		            </tr>
+	<div class="viewdata-title">
+		<h2>
+			<img src="assets/images/icon-list.svg" height="25" width="25" alt=""> Expenses
+		</h2>
+		<div class="pull-right right-top-btns">
+			<a class="btn btn-link">
+				<img src="assets/images/icon-plus.svg" height="25" width="25" alt="" (click)="changeIc('dots')">
+			</a>
+		</div>
+	</div>
+	<div class="contentBox">
+		<div class="leftContent">
+			<div class="card">
+				<div class="table-box viewTable" data-infinite-scroll debounce (scrolled)="onScrollDown($event)">
+					<table style="width:100%" class="table-hover default-to-custom ng-isolate-scope">
+						<tbody [@fadeIn]="listrecords?.length" fxLayout="row wrap" class="list">
+							<tr style="vertical-align:top;" class="x-animated fadeIn d-1 in"
+								*ngFor="let i of listrecords; index as j" fxFlex="100" fxFlex.lt-sm="200">
+								<td width="64px" class="text-center">
+									<h4 class="rownumber ng-binding">{{j+1}}</h4>
+								</td>
+								<td class="text-left">
+									<b><span class="ng-binding">{{i?.createdOn | date:'d-MMM-y'}}</span> &nbsp;</b>
+									<div class="small help-block line-divider">&nbsp;</div>
+								</td>
+								<td class="text-left">
+									<b><span class="ng-binding">{{i?.description}}</span>&nbsp;</b>
+									<div class="small help-block line-divider ng-binding">&nbsp;</div>
+								</td>
+								<td class="text-end">
+									<b><span class="ng-binding">{{i?.currency?.title}}</span>&nbsp;</b>
+									<div *ngIf="i?.isDebit == false"
+										class="small help-block line-divider green paymentstatus" aria-hidden="false">
+										Credit</div>
+									<div *ngIf="i?.isDebit == true"
+										class="small help-block line-divider red paymentstatus ng-hide"
+										aria-hidden="true">Debit</div>
+								</td>
+								<td class="text-end">
+									<div><span class="ng-binding">{{i?.department?.title}}</span>&nbsp;</div>
+									<div class="small help-block line-divider">&nbsp;</div>
+								</td>
+								<td class="text-end">
+									<div><span class="ng-binding">{{i?.division?.title}}</span>&nbsp;</div>
+									<div class="small help-block line-divider">&nbsp;</div>
+								</td>
+								<td class="text-end">
+									<div><span class="ng-binding">{{i?.amount}}</span>&nbsp;</div>
+									<div class="small help-block line-divider ng-binding"
+										ng-bind="r.expenseCategory.title">{{i?.expenseCategory?.title}}</div>
+								</td>
+								<td width="100px" class="text-left">
+									<div class="rowactions">
+										<a class="btn btn-link" hov-title="View/Edit" (click)="editAdjustment(i)"><i
+												class="fa fa-pencil"></i></a>
+										<a class="btn btn-link" hov-title="Delete" (click)="deleteAdjustment(i)"><i
+												class="fa fa-remove text-danger"></i></a>
+									</div>
+								</td>
+							</tr>
 
-		        </tbody>
-		    </table>
-        </div>
-      </div>
-    </div>  
-	<div  class="rightSidebar-wrap rightSidebar-wrap-right-0 rightSide-data-penal comman-sidebar">
-		<!-- <div class="data-penal-header">
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		<div class="rightSidebar-wrap rightSidebar-wrap-right-0 rightSide-data-penal comman-sidebar">
+			<!-- <div class="data-penal-header">
 			<h3>Manage Entry</h3>
 		</div> -->
-		<div class="data-penal-body">
-			<form class="manageNote-form">
-				<h3 class="rightSidebar-main_title mb-40">Manage Entry</h3>
-				<div class="row">
-					<div class="col-12">
-						<div class="form-group datepicker-formGroup mb-20">
-							<label>Date</label>
-							<div class="datepickerInputBox">
-								<input class="form-control" name="minDatepicker" type="text" id="minDatepicker" [(ngModel)]="user.entryDate" bsDatepicker placeholder=""
-								 [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY' }">
-								<i class="fa fa-calendar" aria-hidden="true"></i>
+			<div class="data-penal-body">
+				<form class="manageNote-form">
+					<h3 class="rightSidebar-main_title mb-40">Manage Entry</h3>
+					<div class="row">
+						<div class="col-12">
+							<div class="form-group datepicker-formGroup mb-20">
+								<label>Date</label>
+								<div class="datepickerInputBox">
+									<input class="form-control" name="minDatepicker" type="text" id="minDatepicker"
+										[(ngModel)]="user.entryDate" bsDatepicker placeholder=""
+										[bsConfig]="{ dateInputFormat: 'DD-MM-YYYY' }">
+									<i class="fa fa-calendar" aria-hidden="true"></i>
+								</div>
 							</div>
 						</div>
 					</div>
-				</div>
-				<div class="row">
-					<div class="col-12">
-						<div class="mb-20">
-							<mat-form-field class="example-full-width">
-								<textarea matInput placeholder="Description" name="description" id="description" [(ngModel)]="user.description" required></textarea>
-							</mat-form-field>
+					<div class="row">
+						<div class="col-12">
+							<div class="mb-20">
+								<mat-form-field class="example-full-width notes2 desc1 ">
+									<mat-label>Description</mat-label>
+									<textarea matInput name="description" id="description"
+										[(ngModel)]="user.description" required></textarea>
+								</mat-form-field>
+							</div>
 						</div>
 					</div>
-				</div>
-				<div class="row">
-					<div class="col-12">
-						<div class="form-group custom-selectBox mb-20">
-							<mat-form-field class="example-full-width">
-								<input matInput placeholder="Amount" name="amount" id="amount" [(ngModel)]="user.amount" (keydown)="AllowNumbers($event)" required>
-							</mat-form-field>
+					<div class="row">
+						<div class="col-12">
+							<div class="form-group custom-selectBox mb-20">
+								<mat-form-field class="example-full-width amot desc2">
+									<mat-label>Amount</mat-label>
+									<input matInput name="amount" id="amount" [(ngModel)]="user.amount"
+										(keydown)="AllowNumbers($event)" required>
+								</mat-form-field>
+							</div>
 						</div>
 					</div>
-				</div>
-				<div class="row">
-					<div class="col-12">
-						<div class="form-group custom-selectBox">
-							<!-- <label class="gray-label">PB-20</label> -->
-							<ng-select [clearable]="false" [(ngModel)]="user.expenseCategory" placeholder="PB-20" [items]="expencecatrecords" bindLabel="title" name="expencecatrecords"
-							 id="expencecatrecords" autocomplete="off" (change)="expenceItemselected($event)">
-							</ng-select>
-						</div>
-					</div>
-				</div>
-			
-			
-				<div class="row">
-					<div class="col-12">
-					  <form class="example-form">
-						<div class="fieldsBox" [ngClass]="accclose?'more-fields':''">
-						  <a href="javascript:;" class="more-fields-btn a-btn mb-15" (click)="accordianview('more')">More Details
-							<i class="fa fa-angle-down" aria-hidden="true"></i>
-						  </a>
-						  <a href="javascript:;" class="less-fields-btn a-btn mb-15" (click)="accordianview('less')">Less Details
-							<i class="fa fa-angle-up" aria-hidden="true"></i>
-						  </a>
-						  <form class="example-form field-form">
-							<div class="form-group custom-selectBox mb-45">
-								<!-- <label class="gray-label">Currency</label> -->
-								<ng-select [clearable]="false" [(ngModel)]="user.currency" placeholder="Currency" [items]="currencies" bindLabel="title" name="currencies"
-								 id="currencies" autocomplete="off" (change)="expenceItemselected($event)">
+					<div class="row">
+						<div class="col-12">
+							<div class="form-group custom-selectBox">
+								<!-- <label class="gray-label">PB-20</label> -->
+								<ng-select [clearable]="false" [(ngModel)]="user.expenseCategory" placeholder="PB-20"
+									[items]="expencecatrecords" bindLabel="title" name="expencecatrecords"
+									id="expencecatrecords" autocomplete="off" (change)="expenceItemselected($event)">
 								</ng-select>
 							</div>
-							<!-- <div class="row">
+						</div>
+					</div>
+
+
+					<div class="row">
+						<div class="col-12">
+							<form class="example-form">
+								<div class="fieldsBox" [ngClass]="accclose?'more-fields':''">
+									<a href="javascript:;" class="more-fields-btn a-btn mb-15"
+										(click)="accordianview('more')">More Details
+										<i class="fa fa-angle-down" aria-hidden="true"></i>
+									</a>
+									<a href="javascript:;" class="less-fields-btn a-btn mb-15"
+										(click)="accordianview('less')">Less Details
+										<i class="fa fa-angle-up" aria-hidden="true"></i>
+									</a>
+									<form class="example-form field-form">
+										<div class="form-group custom-selectBox mb-45">
+											<!-- <label class="gray-label">Currency</label> -->
+											<ng-select [clearable]="false" [(ngModel)]="user.currency"
+												placeholder="Currency" [items]="currencies" bindLabel="title"
+												name="currencies" id="currencies" autocomplete="off"
+												(change)="expenceItemselected($event)">
+											</ng-select>
+										</div>
+										<!-- <div class="row">
 								<div class="col-12">
 									<mat-radio-group aria-label="Select an option">
 										<mat-radio-button value="1">Is Debit</mat-radio-button>
@@ -128,60 +149,69 @@
 									  </mat-radio-group>
 								</div>
 							</div> -->
-								<div class="radioBtngroup mb-20">
-									<div class="form-group"> 	
-										<label class="radio-inline">
-											<input type="radio" name="optradio" (change)="debitselected($event)"  [checked]='user.isDebit == true'>Is Debit 
-										</label>
-									</div>
-									<div class="form-group mb-0"> 
-										<label class="radio-inline">
-											<input type="radio" name="optradio" (change)="creditselected($event)" [checked]='user.isDebit == false'>Is Credit
-										</label>
-									</div>
+										<div class="radioBtngroup mb-20">
+											<div class="form-group">
+												<label class="radio-inline">
+													<input type="radio" name="optradio" (change)="debitselected($event)"
+														[checked]='user.isDebit == true'>Is Debit
+												</label>
+											</div>
+											<div class="form-group mb-0">
+												<label class="radio-inline">
+													<input type="radio" name="optradio"
+														(change)="creditselected($event)"
+														[checked]='user.isDebit == false'>Is Credit
+												</label>
+											</div>
+										</div>
+										<div class="form-group custom-selectBox mb-30">
+
+											<ng-select [clearable]="false" [(ngModel)]="user.division"
+												placeholder="Division" [items]="divisionNameItem | async"
+												bindLabel="title" [notFoundText]="notFoundText" name="division"
+												id="division" autocomplete="off" (change)="expenceItemselected($event)"
+												[typeahead]="MainSearchdataSource">
+											</ng-select>
+										</div>
+										<div class="ngSelectBox form-group mb-30">
+											<!-- <label class="gray-label select-label">Department</label> -->
+											<ng-select [clearable]="false" [(ngModel)]="user.department"
+												placeholder="Department" id="department" [items]="departmentArr"
+												bindLabel="title" name="department"
+												(change)="expenceItemselected($event)">
+											</ng-select>
+										</div>
+
+
+									</form>
 								</div>
-								<div class="form-group custom-selectBox mb-30">
-								
-									<ng-select [clearable]="false" [(ngModel)]="user.division" placeholder="Division" [items]="divisionNameItem | async" bindLabel="title" [notFoundText]="notFoundText"
-									 name="division" id="division" autocomplete="off" (change)="expenceItemselected($event)" [typeahead]="MainSearchdataSource">
-									</ng-select>
-								</div>
-								<div class="ngSelectBox form-group mb-30">
-								  <!-- <label class="gray-label select-label">Department</label> -->
-								  <ng-select [clearable]="false" [(ngModel)]="user.department" placeholder="Department" id="department" [items]="departmentArr" bindLabel="title" name="department"
-									(change)="expenceItemselected($event)">
-								  </ng-select>
-								</div>
-		  
-							
-						  </form>
+							</form>
 						</div>
-					  </form>
 					</div>
-				  </div>
-				
-			</form>
-		</div>
-		<div class="data-penal-footer">
-			<div class="row">
-				<div class="col-12">
-					<button class="btn close-btn" type="submit" (click)="changeIc('arrow')">
-						<i class="fa fa-remove mr-1" aria-hidden="true"></i> Cancel</button>
 
-					<button [disabled]="!user.description || !user.amount " class="btn close-btn" type="submit"  (click)="createExpence(user)">
-						<i class="fa fa-floppy-o mr-1" aria-hidden="true"></i> save</button>
+				</form>
+			</div>
+			<div class="data-penal-footer">
+				<div class="row">
+					<div class="col-12">
+						<button class="btn close-btn" type="submit" (click)="changeIc('arrow')">
+							<i class="fa fa-remove mr-1" aria-hidden="true"></i> Cancel</button>
+
+						<button [disabled]="!user.description || !user.amount " class="btn close-btn" type="submit"
+							(click)="createExpence(user)">
+							<i class="fa fa-floppy-o mr-1" aria-hidden="true"></i> save</button>
+
+					</div>
+					<div class="col-6">
+
+					</div>
+
 
 				</div>
-				<div class="col-6">
-
-				</div>
-
-
 			</div>
 		</div>
 	</div>
-  </div>
-  	
+
 </div>
 
 

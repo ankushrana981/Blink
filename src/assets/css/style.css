@@ -1880,20 +1880,18 @@ input:-internal-autofill-selected {
 
 .rightSidebar-wrap
   .textareaBox
-  #mat-mdc-form-field-label-4.mdc-floating-label.mat-mdc-floating-label.mdc-floating-label--float-above {
+  .mdc-floating-label.mat-mdc-floating-label.mdc-floating-label--float-above {
   right: -12px !important;
   color: #fff !important;
   font-size: 14px;
 }
 
-.rightSidebar-wrap label#mat-mdc-form-field-label-5 {
+/* .rightSidebar-wrap .inputBox label {
   right: -17px !important;
   font-size: 14px;
   color: #fff !important;
-}
-.rightSidebar-wrap
-  .textareaBox
-  #mat-mdc-form-field-label-4.mdc-floating-label.mat-mdc-floating-label {
+} */
+.rightSidebar-wrap .textareaBox .mdc-floating-label.mat-mdc-floating-label {
   right: 0 !important;
   color: rgba(255, 255, 255, 0.5) !important;
   font-size: 14px;
@@ -1996,6 +1994,15 @@ input:-internal-autofill-selected {
 
 /* notes end */
 
+/* desc1 */
+.rightSidebar-wrap
+  .desc1
+  .mdc-floating-label.mat-mdc-floating-label.mdc-floating-label--float-above {
+  right: -25px !important;
+  top: 23px;
+}
+/* end  desc1 */
+
 /* disct2 */
 .rightSidebar-wrap .disct2 .mat-mdc-form-field-infix {
   padding: 0;
@@ -2040,6 +2047,38 @@ input:-internal-autofill-selected {
   top: 38px !important;
 }
 /* disct2 end */
+/* amot */
+.amot label {
+  position: absolute !important;
+  top: 37px !important;
+  right: 0 !important;
+}
+
+.amot .mdc-text-field--filled .mdc-floating-label--float-above {
+  right: -16px !important;
+}
+.amot
+  .mdc-text-field--filled:not(
+    .mdc-text-field--disabled
+  ).mdc-text-field--invalid.mdc-text-field--focused
+  .mdc-floating-label,
+.amot
+  .mdc-text-field--filled:not(.mdc-text-field--disabled).mdc-text-field--invalid
+  .mdc-floating-label {
+  color: #08d9d6 !important;
+}
+
+.amot
+  .mdc-text-field--filled.mdc-text-field--invalid:not(.mdc-text-field--disabled)
+  .mdc-line-ripple::after {
+  border-bottom-color: #08d9d6 !important;
+}
+/* end amot */
+
+/* required star maker */
+span.mat-mdc-form-field-required-marker.mdc-floating-label--required {
+  color: #f00;
+}
 
 /* taxv1 */
 .rightSidebar-wrap .taxv1 .mat-mdc-form-field-infix {
@@ -2199,9 +2238,9 @@ input:-internal-autofill-selected {
   height: 30px !important;
 }
 
-.rightSidebar-wrap textarea + .inputBox .mat-mdc-form-field-infix {
+/* .rightSidebar-wrap textarea + .inputBox .mat-mdc-form-field-infix {
   padding-top: 0;
-}
+} */
 
 .mat-form-field-label {
   -webkit-transition: 200ms ease-in-out !important;
@@ -2213,12 +2252,12 @@ input:-internal-autofill-selected {
 .rightSidebar-wrap input.mat-mdc-input-element {
   margin: 12px 0 0px !important;
 }
-.rightSidebar-wrap #mat-input-5.mat-mdc-input-element {
+/* .rightSidebar-wrap #mat-input-5.mat-mdc-input-element {
   margin: -5px 0 0px !important;
-}
-.rightSidebar-wrap .inputBox .mdc-text-field {
+} */
+/* .rightSidebar-wrap .inputBox .mdc-text-field {
   height: 54px;
-}
+} */
 .rightSidebar-wrap
   .mat-form-field-appearance-legacy.mat-form-field-can-float
   .mat-input-server:focus
@@ -7531,7 +7570,7 @@ app-header {
 
 .rightSidebar-wrap .manageNote-form input.mat-mdc-input-element {
   top: -3px !important;
-  margin: 0px 0 0 !important;
+  /* margin: 0px 0 0 !important; */
 }
 
 .rightSidebar-wrap .manageNote-form .datepicker-formGroup label {
@@ -23234,4 +23273,27 @@ app-view-tasks .taskview-only-wrap-h.active {
   .task-height .min-h-50 {
     height: auto;
   }
+}
+
+/* filter icon */
+.reladex-title-main-h .titleWith-filter .filter-btnBox {
+  margin: 0 0 0 1px;
+}
+
+.wh-btn:hover {
+  background-color: #246caf;
+  color: #000000;
+}
+
+.rightSidebar-wrap .focus-box-field input.mat-mdc-input-element {
+  font-size: 14px !important;
+  padding-right: 0 !important;
+}
+
+.rightSidebar-wrap .manageNote-form .form-group .task-crm-notes-field label {
+  position: absolute !important;
+}
+
+.task-crm-notes-field textarea.mat-mdc-input-element {
+  margin-top: 40px !important;
 }

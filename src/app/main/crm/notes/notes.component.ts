@@ -219,16 +219,7 @@ export class NotesComponent extends BaseComponent implements OnInit {
   crmTaskPopupData: any = {};
   businessPartnerId: any = "";
   listApiFilterType: any = "";
-  public scrollbarOptionsFilterMenu = {
-    axis: "x",
-    theme: "light",
-    scrollbarPosition: "inside",
-    advanced: { autoExpandHorizontalScroll: true },
-    autoHideScrollbar: false,
-    callbacks: {
-      onTotalScrollOffset: 500,
-    },
-  };
+
 taskDataObj: any;
 subListTask: any;
   constructor(

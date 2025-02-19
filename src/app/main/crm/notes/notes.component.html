@@ -12,26 +12,26 @@
             <div class="filteredOption mcs-horizontal-scrollbar-notes-filter">
               <ul>
                 <ng-scrollbar visibility="hover" #scrollEl thumbClass="custom-scrollbars" orientation="vertical">
-                <li *ngFor="let item of tempArr;let index=index;" class="note-filter-record">
-                  <small class="close">
-                    <img src="assets/images/icon-close-dark.svg" alt="" width="10" (click)="resetFilter(item)">
-                  </small>
-                  <p>
-                    <span>{{item.parentFilter}}</span>
-                  </p>
-                  <p *ngIf="item.selectedObj.id == 1">
-                    <span>{{ item.childFilter | date }}</span>
-                    <span *ngIf="item.selectedObj.id == 1 && item.selectedObj.bindedValue.id !== 1">
-                      -{{item.subchildrange | date }}
-                    </span>
-                  </p>
-                  <p
-                    *ngIf="item.selectedObj.id == 1 || item.selectedObj.id == 2 || item.selectedObj.id == 3 || item.selectedObj.id == 4 || item.selectedObj.id == 5">
-                    <span>
-                      {{ item.secondFilter }}
-                    </span>
-                  </p>
-                </li>
+                  <li *ngFor="let item of tempArr;let index=index;" class="note-filter-record">
+                    <small class="close">
+                      <img src="assets/images/icon-close-dark.svg" alt="" width="10" (click)="resetFilter(item)">
+                    </small>
+                    <p>
+                      <span>{{item.parentFilter}}</span>
+                    </p>
+                    <p *ngIf="item.selectedObj.id == 1">
+                      <span>{{ item.childFilter | date }}</span>
+                      <span *ngIf="item.selectedObj.id == 1 && item.selectedObj.bindedValue.id !== 1">
+                        -{{item.subchildrange | date }}
+                      </span>
+                    </p>
+                    <p
+                      *ngIf="item.selectedObj.id == 1 || item.selectedObj.id == 2 || item.selectedObj.id == 3 || item.selectedObj.id == 4 || item.selectedObj.id == 5">
+                      <span>
+                        {{ item.secondFilter }}
+                      </span>
+                    </p>
+                  </li>
                 </ng-scrollbar>
               </ul>
             </div>
@@ -199,7 +199,7 @@
             </thead>
           </table>
         </div>
-      
+
       </div>
       <div class="notes-btn text-end btn-task-main wow fadeIn" data-wow-delay="500ms">
         <a *ngIf="showAddNewTaskButton" class="btn btn-main btn-blue" (click)="changeIc('dots')">Add New Task</a>
@@ -294,12 +294,12 @@
               <div class="form-group datepicker-formGroup form-group-title mb-20 mt-1">
                 <label>Time of Entry</label>
                 <div class="time-of-entry">
-                  <mat-form-field class="example-full-width">
+                  <mat-form-field class="example-full-width notes-hours">
                     <input matInput value="" name="hours" type="number" [(ngModel)]="user.hourSelection" min="0"
                       max="23" required (ngModelChange)="validateValue($event)">
                   </mat-form-field>
                   <span class="colon">:</span>
-                  <mat-form-field class="example-full-width">
+                  <mat-form-field class="example-full-width notes-minutes">
                     <input matInput value="" name="minutes" type="number" [(ngModel)]="user.minutesSelection" min="0"
                       max="59" required (ngModelChange)="validateMinutesValue($event)">
                   </mat-form-field>
@@ -332,8 +332,8 @@
                 <div class="form-group">
                   <ng-select [clearable]="false" placeholder="Customer" [items]="clientNameItem | async"
                     bindLabel="title" [(ngModel)]="user.businessPartner" [loading]="supplierLoading"
-                    name="businessPartner" id="businessPartner" autocomplete="off"
-                    [typeahead]="MainSearchdataSource" (change)="recordSelected($event, addCustomerPopup)">
+                    name="businessPartner" id="businessPartner" autocomplete="off" [typeahead]="MainSearchdataSource"
+                    (change)="recordSelected($event, addCustomerPopup)">
                   </ng-select>
                 </div>
               </div>
@@ -365,9 +365,9 @@
           <div class="row">
             <div class="col-12">
               <div class="form-group mb-35 note-fields">
-                <mat-form-field class="example-full-width">
-                  <textarea matInput matTextareaAutosize placeholder="Notes" value="" name="notes"
-                    [(ngModel)]="user.notes"></textarea>
+                <mat-form-field class="example-full-width notes2 notescom-notes">
+                  <mat-label>Notes</mat-label>
+                  <textarea matInput matTextareaAutosize value="" name="notes" [(ngModel)]="user.notes"></textarea>
                 </mat-form-field>
               </div>
             </div>
@@ -470,7 +470,7 @@
         <div class="w-100">
           <div class="task-body">
             <div class="gallery-view">
-              <carousel [showIndicators]="false" [(activeSlide)]="activeSlideIndex" >
+              <carousel [showIndicators]="false" [(activeSlide)]="activeSlideIndex">
                 <slide *ngFor="let image of selectedNotesImagesObject">
                   <img [src]="image?.src" alt="" style="display: block; width: 100%;">
                 </slide>
@@ -540,8 +540,7 @@
                             [hideSelected]="true">
                             <ng-template ng-label-tmp let-item="item" let-clear="clear">
                               <span class="ng-value-label">{{item.title}}</span>
-                              <span class="ng-value-icon right" (click)="clear(item);"
-                                aria-hidden="true">×</span>
+                              <span class="ng-value-icon right" (click)="clear(item);" aria-hidden="true">×</span>
                             </ng-template>
                             <ng-template ng-option-tmp let-item="item" let-index="index">
                               {{item.title}}
@@ -573,8 +572,7 @@
                             [searchable]="true" [hideSelected]="true">
                             <ng-template ng-label-tmp let-item="item" let-clear="clear">
                               <span class="ng-value-label">{{item.title}}</span>
-                              <span class="ng-value-icon right" (click)="clear(item);"
-                                aria-hidden="true">×</span>
+                              <span class="ng-value-icon right" (click)="clear(item);" aria-hidden="true">×</span>
                             </ng-template>
                             <ng-template ng-option-tmp let-item="item" let-index="index">
                               {{item.title}}
@@ -1058,4 +1056,4 @@
   </div>
 </ng-template>
 
-<app-modal-demo style="position: relative;z-index: 999999999;"></app-modal-demo> 
+<app-modal-demo style="position: relative;z-index: 999999999;"></app-modal-demo>

@@ -19979,7 +19979,8 @@ input[type="number"] {
 }
 
 .notes-form {
-  margin-top: 37px;
+  /* margin-top: 37px; */
+  margin-top: 17px;
 }
 
 .notes-sidebar .mb-28 {
@@ -23296,4 +23297,28 @@ app-view-tasks .taskview-only-wrap-h.active {
 
 .task-crm-notes-field textarea.mat-mdc-input-element {
   margin-top: 40px !important;
+}
+
+.notes-hours .mat-mdc-form-field-infix,
+.notes-minutes .mat-mdc-form-field-infix {
+  padding: 0 !important;
+}
+.notes-hours + span.colon {
+  margin-top: -20px;
+}
+.notes-hours .mdc-line-ripple,
+.notes-minutes .mdc-line-ripple {
+  display: none;
+}
+
+.notescom-notes label {
+  position: absolute !important;
+}
+.notescom-notes textarea.mat-mdc-input-element {
+  margin-top: 46px !important;
+}
+.rightSidebar-wrap .notescom-notes label {
+  top: -6px !important;
+  font-size: 12px;
+  letter-spacing: -0.1px;
 }

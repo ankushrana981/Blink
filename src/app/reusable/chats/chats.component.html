@@ -28,10 +28,10 @@
                     </ng-container>
                 </a>
             </div>
-            alihu-scrollbar 
-            <!-- [scrollbarOptions]="scrollbarOptions" -->
-            <div mclass="scrollbar" >
+        
+            <div mclass="scrollbar" style="height: calc(100% - 10px);">
                 <ul class="chat-ul" [ngClass]="chatview ? 'chat-stream' : 'user-view'">
+                    <ng-scrollbar visibility="hover" #scroll thumbClass="custom-scrollbars" orientation="vertical">
                     <li class="chat-li d-flex flex-wrap" (click)="chatOpen()">
                         <div>
                             <span class="user-img user-activation active"
@@ -178,6 +178,7 @@
                             </div>
                         </div>
                     </li>
+                </ng-scrollbar>
                 </ul>
             </div>
             <div class="chat-more d-flex flex-wrap justify-content-between"
@@ -353,11 +354,12 @@
                 </div>
             </div>
         </div>
-        <!-- [scrollbarOptions]="scrollbarOptions" -->
-        <div malihu-scrollbar class="scrollbar scrollbar2" >
+
+        <div class="scrollbar scrollbar2" >
             <ul class="chat-ul d-flex flex-column w-100">
-                <li *ngFor="let chatMessage of chatMessages; let i = index" [ngClass]="(i%2 == 0) ? 'chat-li d-flex flex-wrap' : 'chat-li d-flex flex-wrap ml-auto'">
-                    <time *ngIf="(i == 0)" class="chat-date w-100 mb-8">May 12, 2018</time>
+                <ng-scrollbar visibility="hover" #scrollEl thumbClass="custom-scrollbars" orientation="vertical">
+                <li *ngFor="let chatMessage of chatMessages; let i = index" [ngClass]="(i%2 == 0) ? 'chat-li d-flex flex-wrap' : 'chat-li d-flex ml-auto flex-wrap '">
+                    <time *ngIf="(i == 0)" class="chat-date w-100 mb-8">May 12, 2018</time> 
                     <span *ngIf="(i%2 == 0)" class="user-img user-activation active"
                         style="background-image: url(assets/images/user-1.png);"></span>
                     <div [ngClass]="(i%2 == 0) ? 'chat-message flex-1' : 'chat-message chat-self flex-1'">
@@ -365,112 +367,7 @@
                         <time class="chat-time">13:10</time>
                     </div>
                 </li>
-
-                <!-- <li class="chat-li d-flex flex-wrap">
-                    <time class="chat-date w-100 mb-8">May 12, 2018</time>
-                    <span class="user-img user-activation active"
-                        style="background-image: url(assets/images/user-1.png);"></span>
-                    <div class="chat-message flex-1">
-                        <p>When our power of choice is untrammelled and when nothing
-                            prevents our being able to do what we like best, every pleasure
-                            is to be welcomed</p>
-                        <time class="chat-time">13:10</time>
-                    </div>
-                </li>
-                <li class="chat-li d-flex flex-wrap ml-auto">
-                    <div class="chat-message chat-self flex-1">
-                        <p>Nor again is there anyone who loves or pursues or desires to
-                            obtain pain of itself</p>
-                        <time class="chat-time">15:30</time>
-                    </div>
-                </li> -->
-
-                <!-- <li class="chat-li d-flex flex-wrap">
-                    <time class="chat-date w-100 mb-8">May 12, 2018</time>
-                    <span class="user-img user-activation active"
-                        style="background-image: url(assets/images/user-1.png);"></span>
-                    <div class="chat-message flex-1">
-                        <p>When our power of choice is untrammelled and when nothing
-                            prevents our being able to do what we like best, every pleasure
-                            is to be welcomed</p>
-                        <time class="chat-time">13:10</time>
-                    </div>
-                </li>
-                <li class="chat-li d-flex flex-wrap ml-auto">
-                    <div class="chat-message chat-self flex-1">
-                        <p>Nor again is there anyone who loves or pursues or desires to
-                            obtain pain of itself</p>
-                        <time class="chat-time">15:30</time>
-                    </div>
-                </li>
-                <li class="chat-li d-flex flex-wrap">
-                    <span class="user-img user-activation active"
-                        style="background-image: url(assets/images/user-1.png);"></span>
-                    <div class="chat-message flex-1">
-                        <p>Nor again is there anyone who loves or pursues or desires to
-                            obtain pain of itself</p>
-                        <time class="chat-time">15:30</time>
-                    </div>
-                </li>
-                <li class="chat-li d-flex flex-wrap ml-auto">
-                    <div class="chat-message chat-self chart-img flex-1">
-                        <a href="assets/images/chart-img.jpg" data-fancybox="gallery">
-                            <img src="assets/images/chart-img.jpg" alt="Chart Image">
-                        </a>
-                        <p>Suprele ehenderit qui in ea voluptate velit esse</p>
-                        <time class="chat-time">15:30</time>
-                    </div>
-                </li>
-                <li class="chat-li d-flex flex-wrap ml-auto">
-                    <div class="chat-message chat-self chart-document flex-1">
-                        <p class="d-flex flex-wrap">
-                            <span class="file-img rounded-circle" icon-file></span>
-                            <span class="flex-1 d-flex flex-column">
-                                <span class="file-name">File-R2-2018.pdf</span>
-                                <span class="file-size">1,3 MB</span>
-                            </span>
-                        </p>
-                        <time class="chat-time">15:30</time>
-                    </div>
-                </li>
-                <li class="chat-li d-flex flex-wrap">
-                    <span class="user-img user-activation active"
-                        style="background-image: url(assets/images/user-1.png);"></span>
-                    <div class="chat-message chart-img flex-1">
-                        <a href="assets/images/chart-img2.jpg" data-fancybox="gallery">
-                            <img src="assets/images/chart-img2.jpg" alt="Chart Image">
-                        </a>
-                        <p>Suprele ehenderit qui in ea voluptate velit esse</p>
-                        <time class="chat-time">15:30</time>
-                    </div>
-                </li>
-                <li class="chat-li d-flex flex-wrap">
-                    <time class="chat-date w-100 mb-8">May 12, 2018</time>
-                    <span class="user-img user-activation active"
-                        style="background-image: url(assets/images/user-1.png);"></span>
-                    <div class="chat-message flex-1">
-                        <p>When our power of choice is untrammelled and when nothing
-                            prevents our being able to do what we like best, every pleasure
-                            is to be welcomed</p>
-                        <time class="chat-time">13:10</time>
-                    </div>
-                </li>
-                <li class="chat-li d-flex flex-wrap ml-auto">
-                    <div class="chat-message chat-self flex-1">
-                        <p>Nor again is there anyone who loves or pursues or desires to
-                            obtain pain of itself</p>
-                        <time class="chat-time">15:30</time>
-                    </div>
-                </li>
-                <li class="chat-li d-flex flex-wrap">
-                    <span class="user-img user-activation active"
-                        style="background-image: url(assets/images/user-1.png);"></span>
-                    <div class="chat-message flex-1">
-                        <p>Nor again is there anyone who loves or pursues or desires to
-                            obtain pain of itself</p>
-                        <time class="chat-time">15:30</time>
-                    </div>
-                </li> -->
+            </ng-scrollbar>
             </ul>
         </div>
         <div class="message-box d-flex flex-wrap w-100">

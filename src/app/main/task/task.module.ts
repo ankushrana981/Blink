@@ -14,6 +14,7 @@ import { NgxPageScrollModule } from 'ngx-page-scroll';
 import { UniquePipe } from './unique-pipe';
 import { NgScrollbarModule } from 'ngx-scrollbar';
 import { DndModule } from 'ngx-drag-drop';
+
 @NgModule({
     declarations: [
         TasksComponent,
@@ -23,6 +24,7 @@ import { DndModule } from 'ngx-drag-drop';
     ],
     imports: [
         CommonModule, SharedModule,
+
         ModalModule.forRoot(),
         NgSelectModule,
         NgModalDragg,

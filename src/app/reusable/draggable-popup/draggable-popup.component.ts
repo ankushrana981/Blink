@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { ResizedEvent } from 'angular-resize-event';
 import { ChatsComponent } from '../../reusable/chats/chats.component';
 import { CdkDragStart } from '@angular/cdk/drag-drop';

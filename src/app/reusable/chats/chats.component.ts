@@ -1,10 +1,8 @@
 import { Component, OnInit, Injector, HostListener, Output, ViewChild, ElementRef, AfterViewInit, Input } from '@angular/core';
 import { EventEmitter } from '@angular/core';
-// import { BaseComponent } from '../../../common/commonComponent';
-// import { MalihuScrollbarService } from 'ngx-malihu-scrollbar';
-// import { trigger } from '@angular/animations';
-// import { fadeIn, fadeOut } from '../../../reusable/fade-animations';
-// import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { NgScrollbar } from 'ngx-scrollbar';
+
 
 @Component({
     selector: '[app-chats]',
@@ -13,7 +11,7 @@ import { EventEmitter } from '@angular/core';
 })
 export class ChatsComponent implements OnInit {
     public scrollbarOptions = { axis: 'y', theme: 'minimal-dark', autoHideScrollbar: true };
-
+    @ViewChild('scrollEl', { static: false }) scrollRef!: NgScrollbar;
     dropdownActive1: boolean = false;
     dropdownActive2: boolean = false;
     dropdownActive3: boolean = false;
@@ -70,17 +68,17 @@ export class ChatsComponent implements OnInit {
         this.minimizeClick.emit("minimize"); // Pass any payload as argument
     }
 
-    // drg2Btn(){
-    //     setTimeout(() => {
-    //         $(".scrollbar2").mCustomScrollbar("scrollTo", "bottom");
-    //         $(".scrollbar2").mCustomScrollbar("update");
-    //     }, 100);
-    // }
+    drg2Btn() {
+        setTimeout(() => {
+          if (this.scrollRef) {
+            this.scrollRef.update(); 
+            this.scrollRef.scrollTo({ bottom: 0, duration: 500 });
+          }
+        }, 100);
+      }
 
-    // private mScrollbarService: MalihuScrollbarService;
-    // private modalService: BsModalService;
 
-    // heroForm: FormGroup;
+    heroForm: FormGroup;
 
     people: any[] = [
         {

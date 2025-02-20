@@ -41,7 +41,7 @@ import { IconSendComponent } from '../../common/svg/icon-send.component';
 import { IconPluseRoundComponent } from '../../common/svg/icon-pluse-round.component';
 import { IconSearchComponent } from '../../common/svg/icon-search.component';
 import { IconLocationLineComponent } from '../../common/svg/icon-location-line.component';
-// import { IconFileComponent } from '@common/svg/icon-product-file.component';
+// import { IconFileComponent } from '../../common/svg/icon-product-file.component';
 import { IconFileLineComponent } from '../../common/svg/icon-file-line.component';
 import { IconDocumentLineComponent } from '../../common/svg/icon-document-line.component';
 import { IconContactLineComponent } from '../../common/svg/icon-contact-line.component';
@@ -105,6 +105,7 @@ import { NgScrollbarModule } from 'ngx-scrollbar';
     RouterModule,
     AngularResizeEventModule,
     DragDropModule,
+    NgScrollbarModule,
     BsDatepickerModule.forRoot(),
     ModalModule.forRoot(),
     HttpClientModule,

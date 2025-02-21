@@ -1,19 +1,21 @@
 <div class="adjustments-Wrap crm-Wrap" [ngClass]="icon1?'active':''">
 	<div class="viewdata-title">
-		<h2> <img src="assets/images/icon-list.svg"  height="25" width="25" alt="" class="mr-2">  Adjustments</h2>
+		<h2> <img src="assets/images/icon-list.svg" height="25" width="25" alt="" class="mr-2"> Adjustments</h2>
 		<div class="pull-right right-top-btns">
 			<a class="btn-link">
-				<img class="ng-tns-c7-2" alt="" height="25" src="assets/images/icon-plus.svg" width="25" (click)="changeIc('dots')">
+				<img class="ng-tns-c7-2" alt="" height="25" src="assets/images/icon-plus.svg" width="25"
+					(click)="changeIc('dots')">
 			</a>
 		</div>
 	</div>
 	<div class="contentBox">
 		<div class="leftContent">
 			<div class="card">
-				<div class="table-box viewTable" data-infinite-scroll debounce  (scrolled)="onScrollDown($event)" >
+				<div class="table-box viewTable" data-infinite-scroll debounce (scrolled)="onScrollDown($event)">
 					<table style="width:100%" class="table-hover default-to-custom ng-isolate-scope">
 						<tbody [@fadeIn]="listrecords?.length" fxLayout="row wrap" class="list">
-							<tr style="vertical-align:top;" class="x-animated fadeIn d-1 in" *ngFor="let i of listrecords; index as j" fxFlex="100" fxFlex.lt-sm="200">
+							<tr style="vertical-align:top;" class="x-animated fadeIn d-1 in"
+								*ngFor="let i of listrecords; index as j" fxFlex="100" fxFlex.lt-sm="200">
 								<td width="64px" class="text-center">
 									<h4 class="rownumber ng-binding">{{j+1}}</h4>
 								</td>
@@ -34,12 +36,14 @@
 								</td>
 								<td class="text-end">
 									<div>
-										<span class="ng-binding">{{i?.adjustmentCategory?.title}}</span>&nbsp;</div>
+										<span class="ng-binding">{{i?.adjustmentCategory?.title}}</span>&nbsp;
+									</div>
 									<div class="small help-block line-divider">&nbsp;</div>
 								</td>
 								<td class="text-end">
 									<div>
-										<span class="ng-binding">{{i?.notes}}</span>&nbsp;</div>
+										<span class="ng-binding">{{i?.notes}}</span>&nbsp;
+									</div>
 									<div class="small help-block line-divider">&nbsp;</div>
 								</td>
 								<td width="100px" class="text-left">
@@ -67,15 +71,17 @@
 		</div> -->
 
 		<div class="data-penal-body">
-			 <h3 class="rightSidebar-main_title mb-40">Manage Entry</h3>
+			<h3 class="rightSidebar-main_title mb-40">Manage Entry</h3>
 			<form class="manageNote-form">
 				<div class="row">
 					<div class="col-12">
 						<div class="form-group datepicker-formGroup mb-20">
 							<label>Date</label>
 							<div class="datepickerInputBox">
-								<input class="form-control" name="minDatepicker" type="text" id="minDatepicker" [(ngModel)]="user.entryDate" bsDatepicker placeholder=""
-								 (bsValueChange)="ModelDatepicker($event)" [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY',showWeekNumbers:false}">
+								<input class="form-control" name="minDatepicker" type="text" id="minDatepicker"
+									[(ngModel)]="user.entryDate" bsDatepicker placeholder=""
+									(bsValueChange)="ModelDatepicker($event)"
+									[bsConfig]="{ dateInputFormat: 'DD-MM-YYYY',showWeekNumbers:false}">
 								<i class="fa fa-calendar" aria-hidden="true"></i>
 							</div>
 						</div>
@@ -85,8 +91,10 @@
 					<div class="col-12 ">
 						<div class="form-group custom-selectBox mb-20">
 							<!-- <label class="gray-label">Product</label> -->
-							<ng-select [clearable]="false" [(ngModel)]="user.product" placeholder ="Product" [items]="productNameItem | async" bindLabel="title" [notFoundText]="notFoundText"
-							 name="productName" id="productName" autocomplete="off" (change)="productSelected($event)" [typeahead]="MainSearchdataSource">
+							<ng-select [clearable]="false" [(ngModel)]="user.product" placeholder="Product"
+								[items]="productNameItem | async" bindLabel="title" [notFoundText]="notFoundText"
+								name="productName" id="productName" autocomplete="off"
+								(change)="productSelected($event)" [typeahead]="MainSearchdataSource">
 							</ng-select>
 						</div>
 					</div>
@@ -94,8 +102,11 @@
 				<div class="row">
 					<div class="col-12">
 						<div class="custom-selectBox mb-20">
-							<mat-form-field class="example-full-width">
-								<input matInput placeholder="Quantity" name="quantity" id="quantity" [(ngModel)]="user.quantity" (keydown)="AllowNumbers($event)" required>
+							<mat-form-field class="example-full-width disct2 adj-qty">
+								<mat-label>Quantity</mat-label>
+
+								<input matInput name="quantity" id="quantity" [(ngModel)]="user.quantity"
+									(keydown)="AllowNumbers($event)" required>
 							</mat-form-field>
 						</div>
 					</div>
@@ -104,8 +115,10 @@
 					<div class="col-12">
 						<div class="form-group custom-selectBox mb-20">
 							<!-- <label class="gray-label">Adjustment Category</label> -->
-							<ng-select [clearable]="false" [(ngModel)]="user.adjustmentCategory" placeholder ="Adjustment Category" [items]="adjustmentcatrecords" bindLabel="title" name="adjustmentCategory"
-							 id="adjustmentCategory" autocomplete="off" (change)="productSelected($event)">
+							<ng-select [clearable]="false" [(ngModel)]="user.adjustmentCategory"
+								placeholder="Adjustment Category" [items]="adjustmentcatrecords" bindLabel="title"
+								name="adjustmentCategory" id="adjustmentCategory" autocomplete="off"
+								(change)="productSelected($event)">
 							</ng-select>
 						</div>
 					</div>
@@ -113,7 +126,8 @@
 				<div class="row">
 					<div class="col-12 mb-20">
 						<mat-form-field class="example-full-width">
-							<textarea matInput placeholder="Leave a comment" name="comment" id="comment" [(ngModel)]="user.notes" required></textarea>
+							<textarea matInput placeholder="Leave a comment" name="comment" id="comment"
+								[(ngModel)]="user.notes" required></textarea>
 						</mat-form-field>
 
 					</div>
@@ -129,7 +143,8 @@
 					<button class="btn close-btn" type="submit" (click)="changeIc('arrow')">
 						<i class="fa fa-remove" aria-hidden="true"></i> Cancel</button>
 
-					<button [disabled] ="!user.product || !user.quantity || !user.adjustmentCategory || !user.notes" class="btn close-btn"  type="submit"  (click)="createAdjustment(user)">
+					<button [disabled]="!user.product || !user.quantity || !user.adjustmentCategory || !user.notes"
+						class="btn close-btn" type="submit" (click)="createAdjustment(user)">
 						<i class="fa fa-floppy-o" aria-hidden="true"></i> save</button>
 
 				</div>

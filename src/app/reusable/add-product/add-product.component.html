@@ -24,11 +24,12 @@
                                 <div class="desc">
                                     <label class="title">product Name</label>
                                     <input id="productname" type="text" class="form-control remove-border">
-                                        
+
                                 </div>
                                 <div class="desc">
                                     <label class="title">Price</label>
-                                    <input id="productname" type="text" class="form-control" prefix="Rp. " mask="separator" thousandSeparator=".">
+                                    <input id="productname" type="text" class="form-control" prefix="Rp. "
+                                        mask="separator" thousandSeparator=".">
                                 </div>
                             </div>
                             <div class="product-desc">
@@ -44,29 +45,30 @@
                                     </li> -->
                                     <li class="file-input file-extra">
                                         <input type="file" name="file-input" id="file-input" class="file-input__input">
-                                        <label class="file-input__label" for="file-input">or choose from files<i icon-product-file></i></label>
-                                    </li> 
+                                        <label class="file-input__label" for="file-input">or choose from files<i
+                                                icon-product-file></i></label>
+                                    </li>
                                 </ul>
                             </div>
                             <div class="uplaod-img">
                                 <div class="file-input">
                                     <input type="file" name="file-input" id="file-input" class="file-input__input">
-                                    <label class="file-input__label" for="file-input"><i icon-camera></i>OPEN CAMERA</label>
+                                    <label class="file-input__label" for="file-input"><i icon-camera></i>OPEN
+                                        CAMERA</label>
                                 </div>
                             </div>
 
                             <div class="details-btn">
-                                <button type="button" (click)="assigntoClick()"
-                                    [ngClass]="assignto ? '' : 'unclick'" class="btn-assign">Details</button>
+                                <button type="button" (click)="assigntoClick()" [ngClass]="assignto ? '' : 'unclick'"
+                                    class="btn-assign">Details</button>
                             </div>
                             <div class="detail-desc" *ngIf="assignto">
                                 <ul class="task-detail mt-2 d-flex flex-row">
                                     <li>
                                         <div class="form-group form-task remove-border">
                                             <ng-select formControlName="task_type" class="w-100" [items]="tasks"
-                                                placeholder="Category" bindLabel="name"
-                                                (change)="chnageTypeValue()" bindValue="name" [searchable]="false"
-                                                [hideSelected]="true">
+                                                placeholder="Category" bindLabel="name" (change)="chnageTypeValue()"
+                                                bindValue="name" [searchable]="false" [hideSelected]="true">
                                                 <ng-template ng-label-tmp let-item="item" let-clear="clear">
                                                     <span class="ng-value-label">{{item.name}}</span>
                                                     <span class="ng-value-icon right" (click)="clear(item);"
@@ -97,9 +99,8 @@
                                     <li>
                                         <div class="form-group form-task remove-border">
                                             <ng-select formControlName="task_type" class="w-100" [items]="tasks"
-                                                placeholder="Packaging" bindLabel="name"
-                                                (change)="chnageTypeValue()" bindValue="name" [searchable]="false"
-                                                [hideSelected]="true">
+                                                placeholder="Packaging" bindLabel="name" (change)="chnageTypeValue()"
+                                                bindValue="name" [searchable]="false" [hideSelected]="true">
                                                 <ng-template ng-label-tmp let-item="item" let-clear="clear">
                                                     <span class="ng-value-label">{{item.name}}</span>
                                                     <span class="ng-value-icon right" (click)="clear(item);"
@@ -113,9 +114,11 @@
                                     </li>
                                     <li>
                                         <div class="form-group form-task form-border">
-                                            <mat-form-field class="example-full-width mat-input">
-                                                <input formControlName="focus" matInput type="text" placeholder="Packaging Note"
-                                                    value="" autocomplete="off">
+                                            <mat-form-field class="example-full-width mat-input mdp-packnotes">
+                                                <mat-label>Packaging Note</mat-label>
+
+                                                <input formControlName="focus" matInput type="text" value=""
+                                                    autocomplete="off">
                                             </mat-form-field>
                                         </div>
                                     </li>
@@ -123,18 +126,18 @@
                                 <div class="config-desc">
                                     <h3 class="sub-title">Cofiguration</h3>
                                     <ul class="check-list">
-                                        <li class="check-grp"> 
+                                        <li class="check-grp">
                                             <input type="checkbox" name="check-examle" id="option5">
                                             <label for="option5">raw material</label>
                                         </li>
                                         <div class="form-group form-task form-border">
                                             <input id="productname" type="text" class="form-control" placeholder="SLD">
                                         </div>
-                                        <li class="check-grp"> 
+                                        <li class="check-grp">
                                             <input type="checkbox" name="check-examle" id="option6">
                                             <label for="option6">pos product</label>
                                         </li>
-                                        <li class="check-grp"> 
+                                        <li class="check-grp">
                                             <input type="checkbox" name="check-examle" id="option7">
                                             <label for="option7">Recipe reduction</label>
                                         </li>
@@ -144,8 +147,8 @@
                                             <div class="form-group form-task remove-border">
                                                 <ng-select formControlName="task_type" class="w-100" [items]="tasks"
                                                     placeholder="Branch Availability" bindLabel="name"
-                                                    (change)="chnageTypeValue()" bindValue="name"
-                                                    [searchable]="false" [hideSelected]="true">
+                                                    (change)="chnageTypeValue()" bindValue="name" [searchable]="false"
+                                                    [hideSelected]="true">
                                                     <ng-template ng-label-tmp let-item="item" let-clear="clear">
                                                         <span class="ng-value-label">{{item.name}}</span>
                                                         <span class="ng-value-icon right" (click)="clear(item);"
@@ -160,9 +163,8 @@
                                         <li>
                                             <div class="form-group form-task remove-border">
                                                 <ng-select formControlName="task_type" class="w-100" [items]="tasks"
-                                                    placeholder="Print to" bindLabel="name"
-                                                    (change)="chnageTypeValue()" bindValue="name"
-                                                    [searchable]="false" [hideSelected]="true">
+                                                    placeholder="Print to" bindLabel="name" (change)="chnageTypeValue()"
+                                                    bindValue="name" [searchable]="false" [hideSelected]="true">
                                                     <ng-template ng-label-tmp let-item="item" let-clear="clear">
                                                         <span class="ng-value-label">{{item.name}}</span>
                                                         <span class="ng-value-icon right" (click)="clear(item);"
@@ -189,8 +191,8 @@
                                     <!-- <label class="title">Preferred Vendor</label> -->
                                     <div class="form-group task-details remove-dropdown">
                                         <ng-select class="w-100" [items]="people" [multiple]="false"
-                                            [hideSelected]="true" [closeOnSelect]="true"
-                                            placeholder="Preferred Vendor" bindLabel="name" bindValue="name">
+                                            [hideSelected]="true" [closeOnSelect]="true" placeholder="Preferred Vendor"
+                                            bindLabel="name" bindValue="name">
                                             <ng-template ng-label-tmp let-item="item" let-clear="clear">
                                                 <span class="ng-value-label">{{item.name}}</span>
                                                 <span class="ng-value-icon right" (click)="clear(item)"
@@ -207,7 +209,8 @@
                                     <input id="productname" type="text" class="form-control"> -->
                                     <mat-form-field class="example-full-width mat-input">
                                         <input formControlName="focus" matInput type="text" placeholder="Source Price"
-                                            value="" autocomplete="off" prefix="Rp. " mask="separator" thousandSeparator=".">
+                                            value="" autocomplete="off" prefix="Rp. " mask="separator"
+                                            thousandSeparator=".">
                                     </mat-form-field>
                                 </div>
                             </div>
@@ -216,8 +219,8 @@
                                     <!-- <label class="title">Vendor List</label> -->
                                     <div class="form-group task-details remove-dropdown">
                                         <ng-select class="w-100" [items]="Vendor" [multiple]="true"
-                                            [hideSelected]="true" [closeOnSelect]="true"
-                                            placeholder="Vendor List" bindLabel="name" bindValue="name">
+                                            [hideSelected]="true" [closeOnSelect]="true" placeholder="Vendor List"
+                                            bindLabel="name" bindValue="name">
                                             <ng-template ng-label-tmp let-item="item" let-clear="clear">
                                                 <span class="ng-value-label">{{item.name}}</span>
                                                 <span class="ng-value-icon right" (click)="clear(item)"

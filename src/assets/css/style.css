@@ -316,10 +316,11 @@ button:focus {
   background: #b82f2d;
 }
 
-.ml-auto, .mx-auto {
+.ml-auto,
+.mx-auto {
   margin-left: auto !important;
 }
-.chat-ul.user-view{
+.chat-ul.user-view {
   height: calc(100% - 40px);
   overflow: auto;
 }
@@ -7273,8 +7274,8 @@ app-tasks .viewdata-title h2 {
 
 .tier-content input[type="checkbox"],
 .tier-content input[type="radio"] {
-  width: 18px;
-  height: 18px;
+  width: 16px;
+  height: 16px;
 }
 
 .tier-content label input[type="checkbox"],
@@ -23364,6 +23365,42 @@ app-view-tasks .taskview-only-wrap-h.active {
   letter-spacing: -0.1px;
 }
 
-app-vendor-setup .mdc-text-field--filled:not(.mdc-text-field--disabled) .mdc-line-ripple::after {
+app-vendor-setup
+  .mdc-text-field--filled:not(.mdc-text-field--disabled)
+  .mdc-line-ripple::after {
   border-bottom-color: #2a394d !important;
+}
+
+app-vendor-setup
+  .mat-mdc-text-field-wrapper
+  .mat-mdc-form-field-flex
+  .mat-mdc-floating-label {
+  top: 38px;
+  letter-spacing: 0.1px;
+}
+.mt--21 {
+  margin-top: -21px;
+}
+
+.mt-21 {
+  margin-top: 21px;
+}
+
+.adj-qty {
+  margin-top: -11px;
+}
+.adj-qty > .mat-mdc-text-field-wrapper {
+  height: 58px !important;
+}
+.rightSidebar-wrap .adj-qty input.mat-mdc-input-element {
+  margin: 23px 0px 0px !important;
+}
+
+.mdp-packnotes .mdc-text-field--filled .mdc-floating-label {
+  font-size: 10px;
+  color: #a0a3b9 !important;
+  font-weight: 500;
+}
+.product-modal .prduct-form .form-control {
+  height: 24px;
 }

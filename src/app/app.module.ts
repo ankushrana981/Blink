@@ -18,12 +18,15 @@ import { NgApexchartsModule } from 'ng-apexcharts';
 import { CacheInterceptor } from './common/interceptors/cache.interceptor';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { NgScrollbarModule } from 'ngx-scrollbar';
+import { SharedModule } from './reusable/shared/shared.module';
+
 
 @NgModule({
   declarations: [
     AppComponent,
   ],
   imports: [
+    SharedModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
@@ -34,7 +37,7 @@ import { NgScrollbarModule } from 'ngx-scrollbar';
       preventDuplicates: true,
     }),
     NgApexchartsModule,
-    NgScrollbarModule
+    
   ],
    schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [

@@ -17,6 +17,7 @@ import { NotesViewComponent } from "./notes-view/notes-view.component";
 import { CarouselModule } from "ngx-bootstrap/carousel";
 import { TasksComponent } from "./tasks/tasks.component";
 import { ReladexComponent } from './reladex/reladex.component';
+import { ChatsComponent } from "../../reusable/chats/chats.component";
 @NgModule({
   declarations: [
     AddCustomerSetupComponent,
@@ -95,11 +96,11 @@ import { ReladexComponent } from './reladex/reladex.component';
         component: TasksComponent,
         pathMatch: "full",
       },
-      // {
-      //     path: 'chats',
-      //     component: ChatsComponent,
-      //     pathMatch: 'full'
-      // },
+      {
+          path: 'chats',
+          component: ChatsComponent,
+          pathMatch: 'full'
+      },
       {
         path: "notes-view",
         component: NotesViewComponent,

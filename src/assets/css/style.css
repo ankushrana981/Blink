@@ -5473,6 +5473,39 @@ div.mat-mdc-select-panel .mat-mdc-option {
   border-color: #adadad;
 }
 
+.custom-file-input {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: calc(1.5em + 0.75rem + 2px);
+  margin: 0;
+  overflow: hidden;
+  opacity: 0;
+}
+label.custom-file-label {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 1;
+  height: calc(1.5em + 0.75rem + 2px);
+  padding: 0.375rem 0.75rem;
+  overflow: hidden;
+  font-weight: 400;
+  color: #495057;
+  background-color: #fff;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+}
+
+.custom-file {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  height: calc(1.5em + 0.75rem + 2px);
+  margin-bottom: 0;
+}
+
 .alert-danger {
   padding: 15px;
 }
@@ -23321,4 +23354,8 @@ app-view-tasks .taskview-only-wrap-h.active {
   top: -6px !important;
   font-size: 12px;
   letter-spacing: -0.1px;
+}
+
+app-vendor-setup .mdc-text-field--filled:not(.mdc-text-field--disabled) .mdc-line-ripple::after {
+  border-bottom-color: #2a394d !important;
 }

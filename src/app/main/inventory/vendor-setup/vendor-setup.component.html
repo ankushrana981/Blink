@@ -2,7 +2,8 @@
 	<div class="manufacturing-Wrap" *ngIf="SwitchUi">
 		<div class="viewdata-title">
 			<h2>
-				<img src="assets/images/icon-list.svg" height="25" width="25" alt="" class="mr-2"> Vendors</h2>
+				<img src="assets/images/icon-list.svg" height="25" width="25" alt="" class="mr-2"> Vendors
+			</h2>
 			<div class="pull-right right-top-btns">
 				<a class="btn btn-link" (click)="openFileUpload('open')">
 					<img src="assets/images/upload.svg" height="25" width="25" alt="">
@@ -17,9 +18,9 @@
 				<div class="card">
 					<div class="table-box viewTable mb-20" (scrolled)="onScrollDown($event)">
 						<table style="width:100%" class="table-hover default-to-custom">
-							<tbody  fxLayout="row wrap" class="list">
-								<tr style="vertical-align:top;" *ngFor="let r of usersList; let i = index" class="x-animated fadeIn d-1 in" fxFlex="100"
-								 fxFlex.lt-sm="200">
+							<tbody fxLayout="row wrap" class="list">
+								<tr style="vertical-align:top;" *ngFor="let r of usersList; let i = index"
+									class="x-animated fadeIn d-1 in" fxFlex="100" fxFlex.lt-sm="200">
 									<td width="64px" class="text-center">
 										<h4 class="rownumber ng-binding">{{i+1}}</h4>
 									</td>
@@ -35,27 +36,38 @@
 									</td>
 									<td class="text-left">
 										<b>
-											<span class="ng-binding ng-hide" aria-hidden="true">{{r.area?.title}}</span>&nbsp;</b>
+											<span class="ng-binding ng-hide"
+												aria-hidden="true">{{r.area?.title}}</span>&nbsp;</b>
 										<div class="small help-block line-divider">&nbsp;</div>
 									</td>
 									<td class="text-end">
 										<div>
-											<span ng-show="vm.isClient" ng-bind="r.region.title || '&nbsp;'" class="ng-binding ng-hide" aria-hidden="true">{{r.region?.title}}</span>&nbsp;</div>
+											<span ng-show="vm.isClient" ng-bind="r.region.title || '&nbsp;'"
+												class="ng-binding ng-hide"
+												aria-hidden="true">{{r.region?.title}}</span>&nbsp;
+										</div>
 										<div class="small help-block line-divider">&nbsp;</div>
 									</td>
 									<td class="text-end">
 										<div>
-											<span ng-show="vm.isClient" ng-bind="r.establishmentType.title || '&nbsp;'" class="ng-binding ng-hide" aria-hidden="true">&nbsp;</span>&nbsp;</div>
+											<span ng-show="vm.isClient" ng-bind="r.establishmentType.title || '&nbsp;'"
+												class="ng-binding ng-hide" aria-hidden="true">&nbsp;</span>&nbsp;
+										</div>
 										<div class="small help-block line-divider">&nbsp;</div>
 									</td>
 									<td class="text-end">
 										<div>
-											<span ng-show="vm.isClient" ng-bind="r.discount || '&nbsp;'" class="ng-binding ng-hide" aria-hidden="true">&nbsp;</span>&nbsp;</div>
+											<span ng-show="vm.isClient" ng-bind="r.discount || '&nbsp;'"
+												class="ng-binding ng-hide" aria-hidden="true">&nbsp;</span>&nbsp;
+										</div>
 										<div class="small help-block line-divider">&nbsp;</div>
 									</td>
 									<td class="text-end">
 										<div>
-											<span ng-show="vm.isClient" ng-bind="r.paymentTermDuration + ' days' || '&nbsp;'" class="ng-binding ng-hide" aria-hidden="true"></span>&nbsp;</div>
+											<span ng-show="vm.isClient"
+												ng-bind="r.paymentTermDuration + ' days' || '&nbsp;'"
+												class="ng-binding ng-hide" aria-hidden="true"></span>&nbsp;
+										</div>
 										<div class="small help-block line-divider">&nbsp;</div>
 									</td>
 									<td width="100px" class="text-left">
@@ -85,7 +97,8 @@
 <div class="add-customer-setup-wrap" *ngIf="!SwitchUi">
 	<div class="viewdata-title">
 		<div class="right-top-btns">
-			<a ng-click="vm.isEditorVisible = false" class="btn btn-link pull-right" (click)="closeAddEditView()">
+			<a ng-click="vm.isEditorVisible = false" class="btn btn-link pull-right text-decoration-none"
+				(click)="closeAddEditView()">
 				<!-- <i class="fa fa-remove fa-2w mr-1"></i> -->
 				<img src="assets/images/icon-close-dark.svg" height="13" width="13" alt="" style="margin-right: 8px">
 
@@ -101,26 +114,30 @@
 	</div>
 	<div class="contentBox">
 		<div class="card">
-			<div class="row viewdata-wrapper"> 
+			<div class="row viewdata-wrapper">
 				<div class="col-md-1 tier-menu">
 					<ol class="nav">
-						<li [ngClass]="config.stepOne ? 'active' : ''" id="stepOne" class="customanimate order-animate1">
+						<li [ngClass]="config.stepOne ? 'active' : ''" id="stepOne"
+							class="customanimate order-animate1">
 							<a>
 								<span>Basic profile</span>
 							</a>
 						</li>
-						<li [ngClass]="config.stepTwo ? 'active' : ''" id="stepTwo" class="customanimate order-animate2">
+						<li [ngClass]="config.stepTwo ? 'active' : ''" id="stepTwo"
+							class="customanimate order-animate2">
 							<a>
 								<span>Notes</span>
 							</a>
 						</li>
-						<li [ngClass]="config.stepThree ? 'active' : ''" id="stepThree" class="customanimate order-animate3">
+						<li [ngClass]="config.stepThree ? 'active' : ''" id="stepThree"
+							class="customanimate order-animate3">
 							<a>
 								<span>Alias Inforamtion</span>
 							</a>
 						</li>
 						<!-- <li [ngClass]="blinktitle3 == 'basicprofile'?'active':''"><a><span>Bank information</span></a></li> -->
-						<li [ngClass]="config.stepFour ? 'active' : ''" id="stepFour" class="customanimate order-animate4">
+						<li [ngClass]="config.stepFour ? 'active' : ''" id="stepFour"
+							class="customanimate order-animate4">
 							<a>
 								<span>Bank information</span>
 							</a>
@@ -135,60 +152,73 @@
 							<div class="row">
 								<div class="col-md-8 mb-20">
 									<mat-form-field class="example-full-width customanimate order-animate2">
-										<input matInput placeholder="Vendor" name="title" [(ngModel)]="user.title" required>
+										<mat-label>Vendor</mat-label>
+										<input matInput name="title" [(ngModel)]="user.title" required>
 									</mat-form-field>
 								</div>
 								<div class="col-md-4 mb-20">
-									<ng-select class="customanimate order-animate3" [clearable]="false" [(ngModel)]="user.contactPerson" placeholder="Contact Person" id="contactPersn" [items]="contactPersn"
-									 bindLabel="title" name="contactperson" (change)="Cpersonselected($event)"></ng-select>
+									<ng-select class="customanimate order-animate3" [clearable]="false"
+										[(ngModel)]="user.contactPerson" placeholder="Contact Person" id="contactPersn"
+										[items]="contactPersn" bindLabel="title" name="contactperson"
+										(change)="Cpersonselected($event)"></ng-select>
 								</div>
 							</div>
 							<div class="row">
 								<div class="col-md-3 mb-20">
 									<mat-form-field class="example-full-width customanimate order-animate4">
-										<input matInput placeholder="Address line 1" name="addressline1" [(ngModel)]="user.address1">
+										<mat-label>Address line 1</mat-label>
+										<input matInput name="addressline1" [(ngModel)]="user.address1">
 									</mat-form-field>
 								</div>
 								<div class="col-md-3 mb-20">
 									<mat-form-field class="example-full-width customanimate order-animate5">
-										<input matInput placeholder="Address line 2" name="addressline2" [(ngModel)]="user.address2">
+										<mat-label>Address line 2</mat-label>
+										<input matInput name="addressline2" [(ngModel)]="user.address2">
 									</mat-form-field>
 
 								</div>
 								<div class="col-md-3 mb-20">
 									<mat-form-field class="example-full-width customanimate order-animate6">
-										<input matInput placeholder="city" name="city" [(ngModel)]="user.city">
+										<mat-label>city</mat-label>
+										<input matInput name="city" [(ngModel)]="user.city">
 									</mat-form-field>
 
 								</div>
 								<div class="col-md-3 mb-20">
 									<mat-form-field class="example-full-width customanimate order-animate7">
-										<input matInput placeholder="state" name="state" [(ngModel)]="user.state">
+										<mat-label>state</mat-label>
+										<input matInput name="state" [(ngModel)]="user.state">
 									</mat-form-field>
 
 								</div>
 							</div>
 
 							<div class="row">
-								<div class="col-md-3 mb-20">								
-									<ng-select class="customanimate order-animate8" [clearable]="false" [(ngModel)]="user.country" placeholder="Country" id="countryName" [items]="countryrecords" bindLabel="title" name="country"
-									 (change)="countrySelected($event)">
+								<div class="col-md-3 mb-20">
+									<ng-select class="customanimate order-animate8" [clearable]="false"
+										[(ngModel)]="user.country" placeholder="Country" id="countryName"
+										[items]="countryrecords" bindLabel="title" name="country"
+										(change)="countrySelected($event)">
 									</ng-select>
 								</div>
 								<div class="col-md-3 mb-20">
 									<mat-form-field class="example-full-width customanimate order-animate9">
-										<input matInput placeholder="Zipcode" name="zipcode" [(ngModel)]="user.zip">
+										<mat-label>Zipcode</mat-label>
+										<input matInput name="zipcode" [(ngModel)]="user.zip">
 									</mat-form-field>
 
 								</div>
 								<div class="col-md-3 mb-20">
 									<mat-form-field class="example-full-width customanimate order-animate10">
-										<input matInput placeholder="Email" name="email" [(ngModel)]="user.email">
+										<mat-label>Email</mat-label>
+										<input matInput name="email" [(ngModel)]="user.email">
 									</mat-form-field>
 								</div>
 								<div class="col-md-3 mb-20">
 									<mat-form-field class="example-full-width customanimate order-animate11">
-										<input matInput placeholder="Website" name="website" [(ngModel)]="user.website">
+										<mat-label>Website</mat-label>
+
+										<input matInput name="website" [(ngModel)]="user.website">
 									</mat-form-field>
 								</div>
 							</div>
@@ -198,12 +228,14 @@
 							<div class="row">
 								<div class="col-md-6">
 									<mat-form-field class="example-full-width customanimate order-animate2">
-										<input matInput placeholder="Internal Notes" name="internalnotes" [(ngModel)]="user.internalNotes">
+										<input matInput placeholder="Internal Notes" name="internalnotes"
+											[(ngModel)]="user.internalNotes">
 									</mat-form-field>
 								</div>
 								<div class="col-md-6">
 									<mat-form-field class="example-full-width customanimate order-animate3">
-										<input matInput placeholder="External Notes" name="externalnotes" [(ngModel)]="user.externalNotes">
+										<input matInput placeholder="External Notes" name="externalnotes"
+											[(ngModel)]="user.externalNotes">
 									</mat-form-field>
 
 								</div>
@@ -215,13 +247,15 @@
 								<div class="col-md-4 customanimate order-animate2">
 									<label>Has Akias?</label>
 									<div class="custom-control custom-checkbox">
-										<input type="checkbox" class="custom-control-input" id="defaultChecked2" name="check" (change)="changedCheck($event)" [(ngModel)]="user.hasAlias">
+										<input type="checkbox" class="custom-control-input" id="defaultChecked2"
+											name="check" (change)="changedCheck($event)" [(ngModel)]="user.hasAlias">
 										<label class="custom-control-label" for="defaultChecked2"></label>
 									</div>
 								</div>
 								<div class="col-md-4 customanimate order-animate3">
 									<mat-form-field class="example-full-width">
-										<input matInput placeholder="Alias Name" name="aliasname" [(ngModel)]="user.aliasName">
+										<input matInput placeholder="Alias Name" name="aliasname"
+											[(ngModel)]="user.aliasName">
 									</mat-form-field>
 								</div>
 							</div>
@@ -232,12 +266,14 @@
 								<div class="row">
 									<div class="col-md-4 mb-20">
 										<mat-form-field class="example-full-width customanimate order-animate2">
-											<input matInput placeholder="Bank Account Name" name="bankaccountname" [(ngModel)]="user.bankAccountName">
+											<input matInput placeholder="Bank Account Name" name="bankaccountname"
+												[(ngModel)]="user.bankAccountName">
 										</mat-form-field>
 									</div>
 									<div class="col-md-4 mb-20">
 										<mat-form-field class="example-full-width customanimate order-animate2">
-											<input matInput placeholder="Bank Account Number" name="bankaccountnumber" [(ngModel)]="user.bankAccountNumber">
+											<input matInput placeholder="Bank Account Number" name="bankaccountnumber"
+												[(ngModel)]="user.bankAccountNumber">
 										</mat-form-field>
 									</div>
 								</div>
@@ -245,30 +281,36 @@
 									<div class="row">
 										<div class="col-md-3 mb-20">
 											<mat-form-field class="example-full-width customanimate order-animate3">
-												<input matInput placeholder="Bank Name" name="bankname" [(ngModel)]="user.bankName">
+												<input matInput placeholder="Bank Name" name="bankname"
+													[(ngModel)]="user.bankName">
 											</mat-form-field>
 										</div>
 										<div class="col-md-3 mb-20">
 											<mat-form-field class="example-full-width customanimate order-animate4">
-												<input matInput placeholder="Bank Address" name="bankaddress" [(ngModel)]="user.bankAddress">
+												<input matInput placeholder="Bank Address" name="bankaddress"
+													[(ngModel)]="user.bankAddress">
 											</mat-form-field>
 										</div>
 										<div class="col-md-3 mb-20">
 											<mat-form-field class="example-full-width customanimate order-animate5">
-												<input matInput placeholder="Transfer Protocol" name="transferprotocaol" [(ngModel)]="user.bankTransferProtocol">
+												<input matInput placeholder="Transfer Protocol" name="transferprotocaol"
+													[(ngModel)]="user.bankTransferProtocol">
 											</mat-form-field>
 										</div>
 										<div class="col-md-3 mb-20">
 											<mat-form-field class="example-full-width customanimate order-animate6">
-												<input matInput placeholder="Transfer Code" name="transfercode" [(ngModel)]="user.bankTransferCode">
+												<input matInput placeholder="Transfer Code" name="transfercode"
+													[(ngModel)]="user.bankTransferCode">
 											</mat-form-field>
 										</div>
 									</div>
 									<div class="row">
 										<div class="col-md-4 mb-20">
-											<div class="form-group customanimate order-animate7">												
-												<ng-select [clearable]="false" [(ngModel)]="user.sourceCurrency" placeholder="Currenices" [items]="currencies" bindLabel="title" name="currencies"
-												 id="currencies" (change)="currencySelected($event)">
+											<div class="form-group customanimate order-animate7">
+												<ng-select [clearable]="false" [(ngModel)]="user.sourceCurrency"
+													placeholder="Currenices" [items]="currencies" bindLabel="title"
+													name="currencies" id="currencies"
+													(change)="currencySelected($event)">
 												</ng-select>
 											</div>
 										</div>
@@ -283,16 +325,16 @@
 		</div>
 
 	</div>
-	<div class="button-container float-right">
+	<div class="button-container text-end">
 		<button [disabled]="!user.title" class="btn btn-defult bg-none" (click)="createVendor()">
-			<i class="fa fa-floppy-o mr-1"></i>Save changes </button>
+			<i class="fa fa-floppy-o me-1"></i>Save changes </button>
 	</div>
 
 </div>
 
 <div class="uploadfile" *ngIf="fileUploadflag">
 	<a href="javaScript:;" (click)="openFileUpload('close')" class="back-btn mb-10">
-		<i class="fa fa-angle-left mr-1"></i>Back</a>
+		<i class="fa fa-angle-left me-1"></i>Back</a>
 	<div class="page-title">
 		<h2>Client Import</h2>
 	</div>
@@ -305,19 +347,22 @@
 						<div class="row">
 							<div class="col-md-12 mb-20">
 								<div class="custom-file">
-									<input type="file" name="file" class="custom-file-input" id="fileInput" (change)="onFileChange($event)">
+									<input type="file" name="file" class="custom-file-input" id="fileInput"
+										(change)="onFileChange($event)">
 									<label class="custom-file-label" for="fileInput">Select file to upload</label>
 								</div>
 								<button class="btn btn-white" (click)="UploadFile()">
-									<i class="fa fa-cloud-upload mr-1"></i> Upload file</button>
+									<i class="fa fa-cloud-upload me-1"></i> Upload file</button>
 							</div>
 
 						</div>
 						<div class="ng-binding">
 							{{fileName}}
 						</div>
-						<div class="float-right">
-							<a href="javaScript:;" (click)="downloadReport()" class="mr-1">Download</a>Template to import records.</div>
+						<div class=" text-end">
+							<a href="javaScript:;" (click)="downloadReport()" class="me-1">Download</a>Template to
+							import records.
+						</div>
 					</div>
 				</div>
 			</div>

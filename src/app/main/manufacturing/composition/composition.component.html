@@ -1,8 +1,8 @@
-<div class="crm-Wrap inventoryreports-Wrap composition-view product-view" >
+<div class="crm-Wrap inventoryreports-Wrap composition-view product-view">
   <!-- [ngClass]="(icon1 || icon2 || icon3)?'active':''" -->
   <div class="">
     <div class="">
-      <div class="contentBox task-page " >
+      <div class="contentBox task-page ">
         <!-- [ngClass]="(icon1 || icon2 || icon3)?'active':''" -->
 
         <div class="leftContent overflow-0 task-board">
@@ -103,7 +103,9 @@
                       </tr>
                     </thead>
                     <tbody fxLayout="row wrap" class="list">
-                      <tr class="x-animated fadeIn d-1 in" [ngClass]="{'active':dropdown ? 'active' : '','trActive1':icon1 ? 'trActive1' : ''}" (click)="changeIc2('dots','icon1');$event.preventDefault()">
+                      <tr class="x-animated fadeIn d-1 in"
+                        [ngClass]="{'active':dropdown ? 'active' : '','trActive1':icon1 ? 'trActive1' : ''}"
+                        (click)="changeIc2('dots','icon1');$event.preventDefault()">
                         <td class="text-center">
                           <h4 class="rownumber ng-binding">1</h4>
                         </td>
@@ -217,7 +219,8 @@
                       </tr>
                     </tbody>
                     <tbody fxLayout="row wrap" class="list">
-                      <tr class="x-animated fadeIn d-1 in" (click)="changeIc2('dots','icon2');$event.preventDefault()" [ngClass]="icon2 ? 'trActive2' :''">
+                      <tr class="x-animated fadeIn d-1 in" (click)="changeIc2('dots','icon2');$event.preventDefault()"
+                        [ngClass]="icon2 ? 'trActive2' :''">
                         <td class="text-center">
                           <h4 class="rownumber ng-binding">2</h4>
                         </td>
@@ -266,7 +269,8 @@
                       </tr>
                     </tbody>
                     <tbody fxLayout="row wrap" class="list">
-                      <tr class="x-animated fadeIn d-1 in" (click)="changeIc2('dots','icon3');$event.preventDefault()" [ngClass]="icon3 ? 'trActive3' :''">
+                      <tr class="x-animated fadeIn d-1 in" (click)="changeIc2('dots','icon3');$event.preventDefault()"
+                        [ngClass]="icon3 ? 'trActive3' :''">
                         <td class="text-center">
                           <h4 class="rownumber ng-binding">3</h4>
                         </td>
@@ -324,7 +328,8 @@
             data-wow-delay="500ms" #addNewTskBtn>
             <h5 class="p-title">Inventory Cost <span>Rp. 23.353.256,45</span></h5>
             <h5 class="p-title">Inventory Value <span>Rp. 23.353..252.256,45</span></h5>
-            <button type="button" class="btn btn-main btn-green" [routerLink]="[ '/main/manufacturing/manage-compositions']">Add New Composition</button>
+            <button type="button" class="btn btn-main btn-green active-unset"
+              [routerLink]="[ '/main/manufacturing/manage-compositions']">Add New Composition</button>
           </div>
         </div>
 
@@ -358,9 +363,11 @@
       <h3 class="rightSidebar-main_title mb-40">Composition Details</h3>
       <div class="data-block">
         <h5 class="data-title">Composition 1</h5>
-        <p class="data-discription"><span class="left">Vanilla Granules</span><span class="right">20 grams 12.50%</span></p>
+        <p class="data-discription"><span class="left">Vanilla Granules</span><span class="right">20 grams 12.50%</span>
+        </p>
         <p class="data-discription"><span class="left">Component T3</span><span class="right">20 grams 12.50%</span></p>
-        <p class="data-discription"><span class="left">Extra Virgin Olive Oil</span><span class="right">120 ml 75%</span></p>
+        <p class="data-discription"><span class="left">Extra Virgin Olive Oil</span><span class="right">120 ml
+            75%</span></p>
         <p class="data-discription last-desc"><span class="total">Total Expected Weight</span><span>160 grams</span></p>
         <ul class="edit-list">
           <li><a class="edit-btn">Delete</a></li>
@@ -369,9 +376,11 @@
       </div>
       <div class="data-block">
         <h5 class="data-title">Named Composition</h5>
-        <p class="data-discription"><span class="left">Vanilla Granules</span><span class="right">20 grams 12.50%</span></p>
+        <p class="data-discription"><span class="left">Vanilla Granules</span><span class="right">20 grams 12.50%</span>
+        </p>
         <p class="data-discription"><span class="left">Component T3</span><span class="right">20 grams 12.50%</span></p>
-        <p class="data-discription"><span class="left">Extra Virgin Olive Oil</span><span class="right">120 ml 75%</span></p>
+        <p class="data-discription"><span class="left">Extra Virgin Olive Oil</span><span class="right">120 ml
+            75%</span></p>
         <p class="data-discription last-desc"><span class="total">Total Expected Weight</span><span>160 grams</span></p>
         <ul class="edit-list">
           <li><a class="edit-btn">Delete</a></li>
@@ -380,9 +389,11 @@
       </div>
       <div class="data-block">
         <h5 class="data-title">Composition 2</h5>
-        <p class="data-discription"><span class="left">Vanilla Granules</span><span class="right">20 grams 12.50%</span></p>
+        <p class="data-discription"><span class="left">Vanilla Granules</span><span class="right">20 grams 12.50%</span>
+        </p>
         <p class="data-discription"><span class="left">Component T3</span><span class="right">20 grams 12.50%</span></p>
-        <p class="data-discription"><span class="left">Extra Virgin Olive Oil</span><span class="right">120 ml 75%</span></p>
+        <p class="data-discription"><span class="left">Extra Virgin Olive Oil</span><span class="right">120 ml
+            75%</span></p>
         <p class="data-discription last-desc"><span class="total">Total Expected Weight</span><span>160 grams</span></p>
         <ul class="edit-list">
           <li><a class="edit-btn">Delete</a></li>
@@ -419,10 +430,11 @@
     </div>
     <div class="data-penal-footer min-h77">
       <div class="row">
-              <div class="col-12">
-                    <button class="btn add-btn" type="submit" [routerLink]="[ '/main/manufacturing/manage-compositions']">Add Composition</button>
-              </div>
-          </div>
+        <div class="col-12">
+          <button class="btn add-btn" type="submit" [routerLink]="[ '/main/manufacturing/manage-compositions']">Add
+            Composition</button>
+        </div>
+      </div>
     </div>
   </div>
 </div>

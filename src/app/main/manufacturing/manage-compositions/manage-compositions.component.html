@@ -27,9 +27,9 @@
                     <ul class="all-list customanimate order-animate1">
                       <li>
                         <div class="form-group form-task remove-border">
-                          <ng-select formControlName="task_type" class="w-100" [items]="tasks" placeholder="PRODUCT"
-                            bindLabel="name" (change)="chnageTypeValue()" bindValue="name" [searchable]="false"
-                            [hideSelected]="true">
+                          <ng-select formControlName="task_type" class="w-100 form-task-mc" [items]="tasks"
+                            placeholder="PRODUCT" bindLabel="name" (change)="chnageTypeValue()" bindValue="name"
+                            [searchable]="false" [hideSelected]="true">
                             <ng-template ng-label-tmp let-item="item" let-clear="clear">
                               <span class="ng-value-label">{{item.name}}</span>
                               <span class="ng-value-icon right" (click)="clear(item);" aria-hidden="true">×</span>
@@ -42,18 +42,18 @@
                       </li>
                       <li class="customanimate order-animate3" [ngClass]="selectedFirst ? 'active':''">
                         <!-- <li class="customanimate order-animate3" [ngClass]="selectedFirst ? 'active':''" (click)="isSelected('first')"> -->
-                        <div class="form-group form-task form-border">
-                          <mat-form-field class="example-full-width mat-input">
-                            <input formControlName="focus" matInput type="text" placeholder="COMPOSITION nAME" value=""
-                              autocomplete="off">
+                        <div class="form-group form-task form-border ">
+                          <mat-form-field class="example-full-width mat-input mc-cn form-task-mc">
+                            <mat-label>COMPOSITION NAME</mat-label>
+                            <input formControlName="focus" matInput type="text" value="" autocomplete="off">
                           </mat-form-field>
                         </div>
                       </li>
                       <li class="customanimate order-animate4">
                         <div class="form-group form-task form-border">
-                          <mat-form-field class="example-full-width mat-input">
-                            <input formControlName="focus" matInput type="text" placeholder="Error Threshold (%)"
-                              value="" autocomplete="off">
+                          <mat-form-field class="example-full-width mat-input mc-cn">
+                            <mat-label>Error Threshold (%)</mat-label>
+                            <input formControlName="focus" matInput type="text" value="" autocomplete="off">
                           </mat-form-field>
                         </div>
                       </li>
@@ -132,13 +132,13 @@
                                 <li class="percent"><a class="common-btn">%</a></li>
                                 <li class="percent">
                                   <a class="common-btn" (click)="this.weightShow = !this.weightShow"
-                                  (clickOutside)="this.weightShow = false"><span>gr</span></a>
+                                    (clickOutside)="this.weightShow = false"><span>gr</span></a>
                                   <ul class="sub-weight" [ngClass]="{active: weightShow, inactive: !weightShow}">
-                                      <li><a class="common-btn">ton</a></li>
-                                      <li><a class="common-btn">kg</a>
-                                      <li><a class="common-btn">gr</a></li>
-                                      <li><a class="common-btn">mg</a>
-                                      <li><a class="common-btn">pcs</a></li>
+                                    <li><a class="common-btn">ton</a></li>
+                                    <li><a class="common-btn">kg</a>
+                                    <li><a class="common-btn">gr</a></li>
+                                    <li><a class="common-btn">mg</a>
+                                    <li><a class="common-btn">pcs</a></li>
                                   </ul>
                                 </li>
                               </ul>
@@ -162,9 +162,10 @@
                           <td class="desc">ON</td>
                           <td class="price"><span class="price-title">30</span><span class="p-desc"> gr</span></td>
                           <td class="percent">11.11%</td>
-                          <td class="close"><span class="ico"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M1 1L15 15M15 1L1 15" stroke="#D2DDEC" stroke-width="2"/>
-                            </svg></span></td>
+                          <td class="close"><span class="ico"><svg width="16" height="16" viewBox="0 0 16 16"
+                                fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M1 1L15 15M15 1L1 15" stroke="#D2DDEC" stroke-width="2" />
+                              </svg></span></td>
                         </tr>
                         <tr class="active">
                           <td class="number">2</td>
@@ -172,9 +173,10 @@
                           <td class="desc">CS1</td>
                           <td class="price"><span class="price-title">1</span> <span class="p-desc"> Piece</span></td>
                           <td class="percent">-</td>
-                          <td class="close"><span class="ico"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M1 1L15 15M15 1L1 15" stroke="#D2DDEC" stroke-width="2"/>
-                            </svg></span></td>
+                          <td class="close"><span class="ico"><svg width="16" height="16" viewBox="0 0 16 16"
+                                fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M1 1L15 15M15 1L1 15" stroke="#D2DDEC" stroke-width="2" />
+                              </svg></span></td>
                         </tr>
                         <tr>
                           <td class="number">3.</td>
@@ -182,9 +184,10 @@
                           <td class="desc">BUN</td>
                           <td class="price"><span class="price-title">1</span> <span class="p-desc"> Piece</span></td>
                           <td class="percent">-</td>
-                          <td class="close"><span class="ico"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M1 1L15 15M15 1L1 15" stroke="#D2DDEC" stroke-width="2"/>
-                            </svg></span></td>
+                          <td class="close"><span class="ico"><svg width="16" height="16" viewBox="0 0 16 16"
+                                fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M1 1L15 15M15 1L1 15" stroke="#D2DDEC" stroke-width="2" />
+                              </svg></span></td>
                         </tr>
                         <tr>
                           <td class="number">4.</td>
@@ -192,9 +195,10 @@
                           <td class="desc">GBE</td>
                           <td class="price"><span class="price-title">240</span> <span class="p-desc"> gr</span></td>
                           <td class="percent">88.89%</td>
-                          <td class="close"><span class="ico"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M1 1L15 15M15 1L1 15" stroke="#D2DDEC" stroke-width="2"/>
-                            </svg></span></td>
+                          <td class="close"><span class="ico"><svg width="16" height="16" viewBox="0 0 16 16"
+                                fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M1 1L15 15M15 1L1 15" stroke="#D2DDEC" stroke-width="2" />
+                              </svg></span></td>
                         </tr>
 
                       </tbody>

@@ -35,8 +35,8 @@
                         <span class="sales-totals">$56</span>
                          [ngClass]="{'inactive' : item.active === false }"[ngClass]="icon1?'active':''"
                     </li> -->
-                    <li *ngFor="let item of salesConfigs;let index = index" role="button" tabindex="0" id="saletab5" [ngClass]="(item.active === true)? 'active' : 'inactive'"
-                        (click)="toggleClass(index)">
+                    <li *ngFor="let item of salesConfigs;let index = index" role="button" tabindex="0" id="saletab5"
+                        [ngClass]="(item.active === true)? 'active' : 'inactive'" (click)="toggleClass(index)">
                         <!-- <li *ngFor="let item of salesConfigs;let index = index" role="button" tabindex="0" id="saletab5" > -->
                         <span [class]="item.className"></span>
                         <span class="division-name">{{item.name}}</span>
@@ -47,7 +47,7 @@
         </div>
         <div class="col-sm-6">
             <div class="chart-wrap">
-                <mat-form-field>
+                <mat-form-field class="finance-sale-drop">
 
                     <mat-select [(value)]="selected">
                         <mat-option value="option1">This month</mat-option>
@@ -65,7 +65,8 @@
                         <span class="progress-average">Average $2200</span>
                     </div>
                     <div class="progress">
-                        <div class="progress-bar green" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
+                        <div class="progress-bar green" role="progressbar" aria-valuenow="40" aria-valuemin="0"
+                            aria-valuemax="100" style="width: 40%">
                             <span class="sr-only">40%</span>
                         </div>
                     </div>
@@ -76,7 +77,8 @@
                         <span class="progress-average">Average $650</span>
                     </div>
                     <div class="progress">
-                        <div class="progress-bar purple" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 70%">
+                        <div class="progress-bar purple" role="progressbar" aria-valuenow="40" aria-valuemin="0"
+                            aria-valuemax="100" style="width: 70%">
                             <span class="sr-only">70%</span>
                         </div>
                     </div>
@@ -87,7 +89,8 @@
                         <span class="progress-average">Average $1260</span>
                     </div>
                     <div class="progress">
-                        <div class="progress-bar blue" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 23%">
+                        <div class="progress-bar blue" role="progressbar" aria-valuenow="40" aria-valuemin="0"
+                            aria-valuemax="100" style="width: 23%">
                             <span class="sr-only">23%</span>
                         </div>
                     </div>
@@ -98,7 +101,8 @@
                         <span class="progress-average">Average $90</span>
                     </div>
                     <div class="progress">
-                        <div class="progress-bar yellow" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                        <div class="progress-bar yellow" role="progressbar" aria-valuenow="40" aria-valuemin="0"
+                            aria-valuemax="100" style="width: 100%">
                             <span class="sr-only">114%</span>
                         </div>
                     </div>
@@ -109,7 +113,8 @@
                         <span class="progress-average">Average $118</span>
                     </div>
                     <div class="progress">
-                        <div class="progress-bar red" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
+                        <div class="progress-bar red" role="progressbar" aria-valuenow="40" aria-valuemin="0"
+                            aria-valuemax="100" style="width: 60%">
                             <span class="sr-only">60%</span>
                         </div>
                     </div>
@@ -129,9 +134,10 @@
                         <h2>70%</h2>
                     </div>
                 </div>
-                <apx-chart [series]="series1"  [responsive]="res" [legend]="legend1" [yaxis]="yaxis" [xaxis]="xaxis1" [grid]="grid" [colors]="colors1">
-                    </apx-chart>
-               <!--  <span class="for-month">August</span> -->
+                <apx-chart [series]="series1" [responsive]="res" [legend]="legend1" [yaxis]="yaxis" [xaxis]="xaxis1"
+                    [grid]="grid" [colors]="colors1">
+                </apx-chart>
+                <!--  <span class="for-month">August</span> -->
                 <!-- <img src="./Content/Images/salesChart.png" class="img-responsive"> -->
             </div>
         </div>

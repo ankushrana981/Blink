@@ -125,9 +125,9 @@
 				</div>
 				<div class="row">
 					<div class="col-12 mb-20">
-						<mat-form-field class="example-full-width">
-							<textarea matInput placeholder="Leave a comment" name="comment" id="comment"
-								[(ngModel)]="user.notes" required></textarea>
+						<mat-form-field class="example-full-width notes2 adjcomm">
+							<mat-label>Leave a comment</mat-label>
+							<textarea matInput name="comment" id="comment" [(ngModel)]="user.notes" required></textarea>
 						</mat-form-field>
 
 					</div>

@@ -41,16 +41,16 @@
                                 </ul>
                                 <div class="trailer">
                                     <span class="sub-title">Trailer</span>
-                                    <span class="desc">1304/ATLG/WS9505118285621 Refund: ULPRWHHPO PPU(JBQDBA00000000Trinawati Eka Putr</span>
+                                    <span class="desc">1304/ATLG/WS9505118285621 Refund: ULPRWHHPO
+                                        PPU(JBQDBA00000000Trinawati Eka Putr</span>
                                 </div>
                             </div>
-                            <div class="transcations-desc"  *ngIf="!ledger">
+                            <div class="transcations-desc" *ngIf="!ledger">
                                 <h2 class="title">Associated Ledger</h2>
                                 <div class="table-box">
                                     <div class="table-respons">
-                                        <table style="width:100%"
-                                            class="table-hover task-table-main first-padding-0">
-                                        
+                                        <table style="width:100%" class="table-hover task-table-main first-padding-0">
+
                                             <thead class="thead-none">
                                                 <tr class="x-animated fadeIn d-1 in">
                                                     <th class="table-date">
@@ -105,7 +105,8 @@
                                                     </td>
                                                     <td class="text-left">
                                                         <b class="table-title">
-                                                            <span>Local Charges and Destination Logistics MX-PO-19-000365
+                                                            <span>Local Charges and Destination Logistics
+                                                                MX-PO-19-000365
                                                             </span>
                                                         </b>
                                                     </td>
@@ -136,7 +137,8 @@
                                                     </td>
                                                     <td class="text-left">
                                                         <b class="table-title">
-                                                            <span>Local Charges and Destination Logistics MX-PO-19-000365
+                                                            <span>Local Charges and Destination Logistics
+                                                                MX-PO-19-000365
                                                             </span>
                                                         </b>
                                                     </td>
@@ -281,40 +283,48 @@
                                 <form>
                                     <div class="ledger-detail">
                                         <div class="ledger-left">
-                                            <div class="form-group date customanimate order-animate1">
+                                            <div class="form-group mb-10 date customanimate order-animate1">
                                                 <label class="sub-title">Date</label>
-                                                <input class="form-control"  #datepickerYMD="bsDatepicker" bsDatepicker formControlName="dateYMD" [bsConfig]="{ dateInputFormat: 'MM-DD-YYYY' }">
-                                                <button class="dateicon" (click)="datepickerYMD.toggle()" [attr.aria-expanded]="datepickerYMD.isOpen" type="button">
+                                                <input class="form-control" #datepickerYMD="bsDatepicker" bsDatepicker
+                                                    formControlName="dateYMD"
+                                                    [bsConfig]="{ dateInputFormat: 'MM-DD-YYYY' }">
+                                                <button class="dateicon" (click)="datepickerYMD.toggle()"
+                                                    [attr.aria-expanded]="datepickerYMD.isOpen" type="button">
                                                     <img src="assets/images/icon-date.svg">
                                                 </button>
                                             </div>
-                                            <div class="form-group customanimate order-animate3">
-                                                <mat-form-field class="example-full-width mat-input">
-                                                    <input formControlName="focus" matInput type="text" placeholder="Amount"
-                                                        value="" autocomplete="off">
+                                            <div class="form-group mb-10 customanimate order-animate3">
+                                                <mat-form-field class="example-full-width mat-input trans-pop">
+                                                    <mat-label>Amount</mat-label>
+                                                    <input formControlName="focus" matInput type="text" value=""
+                                                        autocomplete="off">
                                                 </mat-form-field>
                                                 <ul class="amount-type">
-                                                    <li><a (click)="debit = !debit;deposite=false" 
-                                                        [ngClass]="{active: debit, inactive: !debit}">Debit</a></li>
-                                                    <li><a (click)="deposite = !deposite;debit=false" 
-                                                        [ngClass]="{active: deposite, inactive: !deposite}">Credit</a></li>
+                                                    <li><a (click)="debit = !debit;deposite=false"
+                                                            [ngClass]="{active: debit, inactive: !debit}">Debit</a></li>
+                                                    <li><a (click)="deposite = !deposite;debit=false"
+                                                            [ngClass]="{active: deposite, inactive: !deposite}">Credit</a>
+                                                    </li>
                                                 </ul>
                                             </div>
                                             <div class="form-group customanimate order-animate5">
-                                                <mat-form-field class="example-full-width mat-input">
-                                                    <input formControlName="focus" matInput type="text" placeholder="Description"
-                                                        value="" autocomplete="off">
+                                                <mat-form-field class="example-full-width mat-input trans-pop">
+                                                    <mat-label>Description</mat-label>
+                                                    <input formControlName="focus" matInput type="text" value=""
+                                                        autocomplete="off">
                                                 </mat-form-field>
                                             </div>
                                         </div>
                                         <div class="ledger-center">
-                                            <a class="more-btn customanimate order-animate7"  [ngClass]="{'active' : more}">More <img src="assets/images/right-icon.svg"></a>
+                                            <a class="more-btn customanimate order-animate7"
+                                                [ngClass]="{'active' : more}">More <img
+                                                    src="assets/images/right-icon.svg"></a>
                                             <div class="customanimate order-animate9">
                                                 <div class="form-group">
-                                                    <ng-select  class="w-100" [items]="tasks"
-                                                        placeholder="Expensed From" bindLabel="name"
-                                                        (change)="chnageTypeValue($event)" bindValue="id" [searchable]="false"
-                                                        [hideSelected]="true" [(ngModel)]="open1" [ngModelOptions]="{standalone: true}">
+                                                    <ng-select class="w-100" [items]="tasks" placeholder="Expensed From"
+                                                        bindLabel="name" (change)="chnageTypeValue($event)"
+                                                        bindValue="id" [searchable]="false" [hideSelected]="true"
+                                                        [(ngModel)]="open1" [ngModelOptions]="{standalone: true}">
                                                         <ng-template ng-label-tmp let-item="item" let-clear="clear">
                                                             <span class="ng-value-label">{{item.name}}</span>
                                                             <span class="ng-value-icon right" (click)="clear(item);"
@@ -328,10 +338,10 @@
                                             </div>
                                             <div class="customanimate order-animate11">
                                                 <div class="form-group">
-                                                    <ng-select  class="w-100" [items]="tasks"
-                                                        placeholder="ENTRY tYPE" bindLabel="name"
-                                                        (change)="chnageTypeValue($event)" bindValue="id" [searchable]="false"
-                                                        [hideSelected]="true" [(ngModel)]="open2" [ngModelOptions]="{standalone: true}">
+                                                    <ng-select class="w-100" [items]="tasks" placeholder="ENTRY tYPE"
+                                                        bindLabel="name" (change)="chnageTypeValue($event)"
+                                                        bindValue="id" [searchable]="false" [hideSelected]="true"
+                                                        [(ngModel)]="open2" [ngModelOptions]="{standalone: true}">
                                                         <ng-template ng-label-tmp let-item="item" let-clear="clear">
                                                             <span class="ng-value-label">{{item.name}}</span>
                                                             <span class="ng-value-icon right" (click)="clear(item);"
@@ -345,10 +355,11 @@
                                             </div>
                                             <div class="customanimate order-animate13">
                                                 <div class="form-group">
-                                                    <ng-select  class="w-100" [items]="tasks"
+                                                    <ng-select class="w-100" [items]="tasks"
                                                         placeholder="lINKED dOCUMENT" bindLabel="name"
-                                                        (change)="chnageTypeValue($event)" bindValue="id" [searchable]="false"
-                                                        [hideSelected]="true" [(ngModel)]="open3" [ngModelOptions]="{standalone: true}">
+                                                        (change)="chnageTypeValue($event)" bindValue="id"
+                                                        [searchable]="false" [hideSelected]="true" [(ngModel)]="open3"
+                                                        [ngModelOptions]="{standalone: true}">
                                                         <ng-template ng-label-tmp let-item="item" let-clear="clear">
                                                             <span class="ng-value-label">{{item.name}}</span>
                                                             <span class="ng-value-icon right" (click)="clear(item);"
@@ -361,13 +372,13 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="ledger-right" *ngIf="more" >
+                                        <div class="ledger-right" *ngIf="more">
                                             <div class="customanimate order-animate1">
                                                 <div class="form-group">
-                                                    <ng-select class="w-100" [items]="tasks"
-                                                        placeholder="cURRENCY" bindLabel="name"
-                                                        (change)="chnageTypeValue($event)" bindValue="id" [searchable]="false"
-                                                        [hideSelected]="true" [(ngModel)]="open4" [ngModelOptions]="{standalone: true}">
+                                                    <ng-select class="w-100" [items]="tasks" placeholder="cURRENCY"
+                                                        bindLabel="name" (change)="chnageTypeValue($event)"
+                                                        bindValue="id" [searchable]="false" [hideSelected]="true"
+                                                        [(ngModel)]="open4" [ngModelOptions]="{standalone: true}">
                                                         <ng-template ng-label-tmp let-item="item" let-clear="clear">
                                                             <span class="ng-value-label">{{item.name}}</span>
                                                             <span class="ng-value-icon right" (click)="clear(item);"
@@ -381,10 +392,10 @@
                                             </div>
                                             <div class="customanimate order-animate3">
                                                 <div class="form-group">
-                                                    <ng-select  class="w-100" [items]="tasks"
-                                                        placeholder="bRANCH" bindLabel="name"
-                                                        (change)="chnageTypeValue($event)" bindValue="id" [searchable]="false"
-                                                        [hideSelected]="true" [(ngModel)]="open5" [ngModelOptions]="{standalone: true}">
+                                                    <ng-select class="w-100" [items]="tasks" placeholder="bRANCH"
+                                                        bindLabel="name" (change)="chnageTypeValue($event)"
+                                                        bindValue="id" [searchable]="false" [hideSelected]="true"
+                                                        [(ngModel)]="open5" [ngModelOptions]="{standalone: true}">
                                                         <ng-template ng-label-tmp let-item="item" let-clear="clear">
                                                             <span class="ng-value-label">{{item.name}}</span>
                                                             <span class="ng-value-icon right" (click)="clear(item);"
@@ -398,10 +409,10 @@
                                             </div>
                                             <div class="customanimate order-animate5">
                                                 <div class="form-group">
-                                                    <ng-select  class="w-100" [items]="tasks"
-                                                        placeholder="dEPARTMENT" bindLabel="name"
-                                                        (change)="chnageTypeValue($event)" bindValue="id" [searchable]="false"
-                                                        [hideSelected]="true" [(ngModel)]="open6" [ngModelOptions]="{standalone: true}">
+                                                    <ng-select class="w-100" [items]="tasks" placeholder="dEPARTMENT"
+                                                        bindLabel="name" (change)="chnageTypeValue($event)"
+                                                        bindValue="id" [searchable]="false" [hideSelected]="true"
+                                                        [(ngModel)]="open6" [ngModelOptions]="{standalone: true}">
                                                         <ng-template ng-label-tmp let-item="item" let-clear="clear">
                                                             <span class="ng-value-label">{{item.name}}</span>
                                                             <span class="ng-value-icon right" (click)="clear(item);"
@@ -415,10 +426,10 @@
                                             </div>
                                             <div class="customanimate order-animate7">
                                                 <div class="form-group">
-                                                    <ng-select  class="w-100" [items]="tasks"
-                                                        placeholder="dIVISION" bindLabel="name"
-                                                        (change)="chnageTypeValue($event)" bindValue="id" [searchable]="false"
-                                                        [hideSelected]="true" [(ngModel)]="open7" [ngModelOptions]="{standalone: true}">
+                                                    <ng-select class="w-100" [items]="tasks" placeholder="dIVISION"
+                                                        bindLabel="name" (change)="chnageTypeValue($event)"
+                                                        bindValue="id" [searchable]="false" [hideSelected]="true"
+                                                        [(ngModel)]="open7" [ngModelOptions]="{standalone: true}">
                                                         <ng-template ng-label-tmp let-item="item" let-clear="clear">
                                                             <span class="ng-value-label">{{item.name}}</span>
                                                             <span class="ng-value-icon right" (click)="clear(item);"
@@ -437,12 +448,12 @@
                                     </div>
                                 </form>
                             </div>
-                                
+
                             <div class="transcations-btn">
                                 <ul class="list">
                                     <li><a>Expand Time</a></li>
                                     <li><a>Expand Amount</a></li>
-                                    <li><a (click)="ledger=true" [ngClass]="{'active' : ledger}">Create Ledger</a></li>   
+                                    <li><a (click)="ledger=true" [ngClass]="{'active' : ledger}">Create Ledger</a></li>
                                 </ul>
                                 <ul class="list next">
                                     <li><a href="#">Next</a></li>
@@ -472,16 +483,16 @@
                                 </ul>
                                 <div class="trailer">
                                     <span class="sub-title">Trailer</span>
-                                    <span class="desc">1304/ATLG/WS9505118285621 Refund: ULPRWHHPO PPU(JBQDBA00000000Trinawati Eka Putr</span>
+                                    <span class="desc">1304/ATLG/WS9505118285621 Refund: ULPRWHHPO
+                                        PPU(JBQDBA00000000Trinawati Eka Putr</span>
                                 </div>
                             </div>
                             <div class="transcations-desc">
                                 <h2 class="title">Selected Ledgers</h2>
                                 <div class="table-box">
                                     <div class="table-respons reconciliation-table">
-                                        <table style="width:100%"
-                                            class="table-hover task-table-main first-padding-0">
-                                        
+                                        <table style="width:100%" class="table-hover task-table-main first-padding-0">
+
                                             <thead class="thead-none">
                                                 <tr class="x-animated fadeIn d-1 in">
                                                     <th class="table-date">
@@ -536,7 +547,8 @@
                                                     </td>
                                                     <td class="text-left">
                                                         <b class="table-title">
-                                                            <span>Local Charges and Destination Logistics MX-PO-19-000365
+                                                            <span>Local Charges and Destination Logistics
+                                                                MX-PO-19-000365
                                                             </span>
                                                         </b>
                                                     </td>
@@ -589,9 +601,15 @@
                                     <li><a href="#">Back</a></li>
                                 </ul>
                                 <ul class="list next">
-                                    <li><a (click)="addCreditModal(credit);$event.preventDefault();creditactive=true" [ngClass]="creditactive ? 'active' : ''" (clickOutside)="creditactive=false" >Apply to Credit</a></li>
-                                    <li><a (click)="addBalanceModal(balance);$event.preventDefault();adjustactive=true" [ngClass]="adjustactive ? 'active' : ''" (clickOutside)="adjustactive=false">Return to Balance</a></li>
-                                    <li><a (click)="addAdjustModal(adjust);$event.preventDefault();balanceactive=true" [ngClass]="balanceactive ? 'active' : ''" (clickOutside)="balanceactive=false">Adjust</a></li>
+                                    <li><a (click)="addCreditModal(credit);$event.preventDefault();creditactive=true"
+                                            [ngClass]="creditactive ? 'active' : ''"
+                                            (clickOutside)="creditactive=false">Apply to Credit</a></li>
+                                    <li><a (click)="addBalanceModal(balance);$event.preventDefault();adjustactive=true"
+                                            [ngClass]="adjustactive ? 'active' : ''"
+                                            (clickOutside)="adjustactive=false">Return to Balance</a></li>
+                                    <li><a (click)="addAdjustModal(adjust);$event.preventDefault();balanceactive=true"
+                                            [ngClass]="balanceactive ? 'active' : ''"
+                                            (clickOutside)="balanceactive=false">Adjust</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -618,16 +636,16 @@
                                 </ul>
                                 <div class="trailer">
                                     <span class="sub-title">Trailer</span>
-                                    <span class="desc">1304/ATLG/WS9505118285621 Refund: ULPRWHHPO PPU(JBQDBA00000000Trinawati Eka Putr</span>
+                                    <span class="desc">1304/ATLG/WS9505118285621 Refund: ULPRWHHPO
+                                        PPU(JBQDBA00000000Trinawati Eka Putr</span>
                                 </div>
                             </div>
                             <div class="transcations-desc">
                                 <h2 class="title">Reconciliation Confirmation</h2>
                                 <div class="table-box">
                                     <div class="table-respons">
-                                        <table style="width:100%"
-                                            class="table-hover task-table-main first-padding-0">
-                                        
+                                        <table style="width:100%" class="table-hover task-table-main first-padding-0">
+
                                             <thead class="thead-none">
                                                 <tr class="x-animated fadeIn d-1 in">
                                                     <th class="table-date">
@@ -682,7 +700,8 @@
                                                     </td>
                                                     <td class="text-left">
                                                         <b class="table-title">
-                                                            <span>Local Charges and Destination Logistics MX-PO-19-000365
+                                                            <span>Local Charges and Destination Logistics
+                                                                MX-PO-19-000365
                                                             </span>
                                                         </b>
                                                     </td>
@@ -737,7 +756,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                
+
                             </div>
                             <div class="transcations-btn">
                                 <ul class="list">

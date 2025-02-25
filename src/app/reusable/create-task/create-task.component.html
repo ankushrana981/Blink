@@ -29,24 +29,26 @@
                                 <div class="step-block d-flex flex-wrap">
                                     <ul class="task-details d-flex flex-column">
                                         <li (clickOutside)="createdDateClose()">
-                                            <div class="form-group form-task">
-                                                <input id="createdDate" type="text" class="form-control" bsDatepicker
-                                                [bsConfig]="bsConfig" floating-label="Created Date" />
-                                                <mat-form-field class="example-full-width mat-input"
+                                            <div class="form-group form-task mb-1">
+                                                <!-- <input id="createdDate" type="text" class="form-control" bsDatepicker
+                                                    [bsConfig]="bsConfig" floating-label="Created Date" /> -->
+                                                <mat-form-field class="example-full-width mat-input ct-create-date"
                                                     (click)="createdDateClick()">
-                                                    <input formControlName="dateOfEntry" matInput type="text"
-                                                        placeholder="Created Date" value="" autocomplete="off" readonly>
+                                                    <mat-label>Created Date</mat-label>
+                                                    <input formControlName="dateOfEntry" matInput type="text" value=""
+                                                        autocomplete="off" readonly>
                                                 </mat-form-field>
                                             </div>
                                         </li>
                                         <li (clickOutside)="dueDateClose()">
                                             <div class="form-group form-task">
-                                                <input id="due" type="text" class="form-control" bsDatepicker bsDatepicker
-                                                [bsConfig]="bsConfig" floating-label="Due" />
-                                                <mat-form-field class="example-full-width mat-input"
+                                                <!-- <input id="due" type="text" class="form-control" bsDatepicker
+                                                    bsDatepicker [bsConfig]="bsConfig" floating-label="Due" /> -->
+                                                <mat-form-field class="example-full-width mat-input ct-due-date"
                                                     (click)="dueDateClick()">
-                                                    <input formControlName="dueDate" matInput type="text"
-                                                        placeholder="Due" value="" autocomplete="off" readonly>
+                                                    <mat-label>Due</mat-label>
+                                                    <input formControlName="dueDate" matInput type="text" value=""
+                                                        autocomplete="off" readonly>
                                                 </mat-form-field>
                                             </div>
                                         </li>
@@ -77,6 +79,7 @@
                                             <div class="form-group form-task form-border">
 
                                                 <mat-form-field class="example-full-width mat-input">
+
                                                     <input formControlName="board" matInput placeholder="Board" value=""
                                                         autocomplete="off">
                                                 </mat-form-field>
@@ -193,10 +196,10 @@
                                             <div class="form-group form-task form-border">
                                                 <!-- <input formControlName="focus" id="focus" type="text" floating-label="Focus"
                                                 class="form-control" autocomplete="off" /> -->
-                                                <mat-form-field class="example-full-width mat-input">
-                                                    <input formControlName="subTitle" name="subTitle" #subTitle id="subTitle"
-                                                        matInput type="text" placeholder="Focus" value=""
-                                                        autocomplete="off">
+                                                <mat-form-field class="example-full-width mat-input ct-due-date">
+                                                    <mat-label>Focus</mat-label>
+                                                    <input formControlName="subTitle" name="subTitle" #subTitle
+                                                        id="subTitle" matInput type="text" value="" autocomplete="off">
                                                 </mat-form-field>
                                             </div>
                                         </li>
@@ -204,9 +207,10 @@
                                             <div class="form-group form-task form-border">
                                                 <!-- <input formControlName="notes" id="notes" type="text" floating-label="Notes"
                                                 class="form-control" autocomplete="off" /> -->
-                                                <mat-form-field class="example-full-width mat-input">
-                                                    <input formControlName="note" matInput type="text"
-                                                        placeholder="Notes" value="" autocomplete="off">
+                                                <mat-form-field class="example-full-width mat-input ct-due-date">
+                                                    <mat-label>Notes</mat-label>
+                                                    <input formControlName="note" matInput type="text" value=""
+                                                        autocomplete="off">
                                                 </mat-form-field>
                                             </div>
                                         </li>
@@ -468,10 +472,10 @@
                                         </ul>
                                         <li>
                                             <div class="form-group form-task form-border">
-                                                <mat-form-field class="example-full-width mat-input">
+                                                <mat-form-field class="example-full-width mat-input ct-due-date mt--9">
+                                                    <mat-label>Task Description</mat-label>
                                                     <input formControlName="description" name="txtDescription"
-                                                        id="txtDescription" matInput placeholder="Task Description"
-                                                        autocomplete="off">
+                                                        id="txtDescription" matInput autocomplete="off">
                                                 </mat-form-field>
                                                 <!-- <input formControlName="description" id="taskDescription" type="text"
                                                 floating-label="Task Description" class="form-control"
@@ -480,9 +484,10 @@
                                         </li>
                                         <li (clickOutside)="taskdueDateClose()">
                                             <div class="form-group form-task form-border">
-                                                <mat-form-field class="example-full-width mat-input">
-                                                    <input formControlName="dueDate" matInput placeholder="Due Date"
-                                                        value="" autocomplete="off" readonly>
+                                                <mat-form-field class="example-full-width mat-input ct-due-date">
+                                                    <mat-label>Due Date</mat-label>
+                                                    <input formControlName="dueDate" matInput value=""
+                                                        autocomplete="off" readonly>
                                                 </mat-form-field>
                                                 <!-- <input id="dueDate" type="text" floating-label="Due Date"
                                                 class="form-control" bsDatepicker [bsConfig]="bsConfig"
@@ -580,8 +585,7 @@
                                         <div class="task-tabing" style="margin-left: 0px; margin-bottom: 30px;">
                                             <div class="list-div-main subtask-query-process-history">
                                                 <!-- malihu-scrollbar  [scrollbarOptions]="scrollbarOptionsTaskNewUI" -->
-                                                <ul  class="scrollbar"
-                                                   >
+                                                <ul class="scrollbar">
                                                     <li
                                                         *ngFor="let innerRecords of taskDataObj.relatedTaskList; let index = index">
                                                         <span class="circle"
@@ -811,11 +815,12 @@
                                                     </div>
                                                 </div>
                                                 <div class="form-group form-task w-100">
-                                                    <mat-form-field class="example-full-width mat-input">
+                                                    <mat-form-field
+                                                        class="example-full-width mat-input ct-due-date ct-texta">
+                                                        <mat-label>Note</mat-label>
                                                         <textarea formControlName="taskDetailText"
                                                             id="taskDetailImageText" matInput matTextareaAutosize
-                                                            type="text" placeholder="Note" value=""
-                                                            autocomplete="off"></textarea>
+                                                            type="text" value="" autocomplete="off"></textarea>
                                                     </mat-form-field>
                                                 </div>
                                                 <div

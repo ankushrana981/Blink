@@ -81,8 +81,7 @@
                                     <label class="gray-label">{{data.labelName}}</label>
                                     <ng-select [clearable]="false" [items]="data?.options | async" bindLabel="title"
                                         [(ngModel)]="data.bindvalue" [loading]="companiesLoading"
-                                    name="{{'secondFilter'+index}}"
-                                        id="{{'secondFilter'+index}}" autocomplete="off"
+                                        name="{{'secondFilter'+index}}" id="{{'secondFilter'+index}}" autocomplete="off"
                                         [typeahead]="MainSearchdataSource" (change)="changedsubChildFilter($event)">
                                     </ng-select>
                                 </div>
@@ -187,15 +186,16 @@
                                            (keydown.enter)="changedChildFilter($event)">
                                 </mat-form-field>-->
                                 <label class="gray-label">Board</label>
-                                <ng-select [(ngModel)]="filterData.board"
-                                           [hideSelected]="true" [searchable]="true" id="txtBoard" name="txtBoard"
-                                           class="w-100" [items]="boardList" placeholder="" [isOpen]="isOpenBoard"
-                                           bindLabel="board" bindValue="board" (change)="changedChildFilter($event)"
-                                           (search)="isOpenBoard = true;SearchString($event)" (blur)="isOpenBoard = false" [selectOnTab]="true">
+                                <ng-select [(ngModel)]="filterData.board" [hideSelected]="true" [searchable]="true"
+                                    id="txtBoard" name="txtBoard" class="w-100" [items]="boardList" placeholder=""
+                                    [isOpen]="isOpenBoard" bindLabel="board" bindValue="board"
+                                    (change)="changedChildFilter($event)"
+                                    (search)="isOpenBoard = true;SearchString($event)" (blur)="isOpenBoard = false"
+                                    [selectOnTab]="true">
                                     <ng-template ng-label-tmp let-item="item" let-clear="clear">
                                         <span class="ng-value-label">{{item.board}}</span>
                                         <span class="ng-value-icon right" (click)="clear(item);stop($event)"
-                                              aria-hidden="true">�</span>
+                                            aria-hidden="true">�</span>
                                     </ng-template>
                                     <ng-template ng-option-tmp let-item="item" let-index="index">
                                         {{item.board}}
@@ -333,21 +333,121 @@
                                 <th class="table-action"></th>
                             </tr>
                         </thead>
+                        <tbody>
+                            <tr class="x- fadeIn d-1 in accordion-table cursor-pointer active" accordion="" fxflex="100"
+                                fxflex.lt-sm="200" style="vertical-align:top;" id="tr0">
+                                <td class="text-center">
+                                    <h4 class="rownumber ng-binding" ng-bind="($index + 1)">1 </h4>
+                                </td>
+                                <td class="text-left"><b class="table-title top-viewtask-td-h"><!----><span
+                                            class="ng-tns-c8-5 ng-star-inserted" style="color: rgb(255, 0, 0);">Feb 2,
+                                            2024</span><!----> &nbsp; </b>
+                                    <div class="small help-block line-divider bottom-viewtask-td-h"></div>
+                                </td>
+                                <td class="text-left"><b class="table-title top-viewtask-td-h"><span
+                                            class="ng-tns-c8-5"> Note <!----><!----><br
+                                                class="ng-tns-c8-5 ng-star-inserted"></span></b>
+                                    <div class="small help-desc help-block line-divider bottom-viewtask-td-h">
+                                        <!----><!----><!----><span
+                                            class="table-text task-desc-hover-text ng-tns-c8-5 ng-star-inserted"
+                                            style="padding-right:5px;"></span><!----></div>
+                                </td>
+                                <td class="text-left"><b class="table-title top-viewtask-td-h"><span
+                                            class="ng-tns-c8-5"> Not Started <!----><br class="ng-tns-c8-5"></span></b>
+                                    <div class="small help-block line-divider"><!----><span
+                                            class="table-text ng-tns-c8-5 ng-star-inserted"> 0%
+                                        </span><!----></div>
+                                </td>
+                                <td class="text-left"><b class="table-title top-viewtask-td-h"
+                                        style="padding-bottom: 0px ;"><span class="ng-tns-c8-5"> Jan 22, 2024
+                                        </span></b>
+                                    <div class="small help-block line-divider taskview-des-main-h bottom-viewtask-td-h">
+                                        <!----><!----><span
+                                            class="table-text help-desc help-block taskview-des-h ng-tns-c8-5 ng-star-inserted"><!----></span>
+                                        <div class="table-fulldesc taskview-fulldes-h ng-tns-c8-5 ng-star-inserted">
+                                            <!----></div><!---->
+                                    </div>
+                                </td>
+                                <td class="ng-tns-c8-5">
+                                    <div class="d-flex">
+                                        <div class="btn-group"><!----><a class="icon-more ng-tns-c8-5 ng-star-inserted"
+                                                href="javascript:void(0)" icon-more=""><svg xml:space="preserve"
+                                                    xmlns:xlink="http://www.w3.org/1999/xlink" class="icon-more"
+                                                    id="IconMore" style="enable-background:new 0 0 24 6;" version="1.1"
+                                                    viewBox="0 0 24 6" x="0px" xmlns="http://www.w3.org/2000/svg"
+                                                    y="0px">
+                                                    <path class="st0" d="M0,3c0-1.7,1.3-3,3-3s3,1.3,3,3S4.7,6,3,6S0,4.7,0,3z M9,3c0-1.7,1.3-3,3-3s3,1.3,3,3s-1.3,3-3,3S9,4.7,9,3z
+                            	 M18,3c0-1.7,1.3-3,3-3s3,1.3,3,3s-1.3,3-3,3S18,4.7,18,3z"></path>
+                                                </svg></a><!---->
+                                            <ul
+                                                class="dropdown-table dark right dropdown-progress d-flex flex-column align-items-center justify-content-center">
+                                                <!---->
+                                                <li class="ng-tns-c8-5 show ng-star-inserted">
+                                                    <ul class="ng-tns-c8-5">
+                                                        <li class="new-option" role="menuitem"><a class="dropdown-item"
+                                                                href="/">Add Subtask</a></li>
+                                                        <li class="new-option" role="menuitem"><a class="dropdown-item"
+                                                                href="/"> Move Due Date </a></li>
+                                                        <li class="new-option" role="menuitem"><a class="dropdown-item"
+                                                                href="/">Edit</a></li><!---->
+                                                        <li class="new-option ng-tns-c8-5 ng-star-inserted"
+                                                            role="menuitem"><a class="dropdown-item"
+                                                                href="javascript:void(0)">Delete</a></li>
+                                                        <li class="new-option" role="menuitem"><a class="dropdown-item"
+                                                                href="/">Query</a></li><!---->
+                                                    </ul>
+                                                </li>
+                                                <li class="modal-body text-center w-100">
+                                                    <p class="modal-name">Progress</p>
+                                                    <div class="d-flex flex-wrap justify-content-between"><button
+                                                            class="btn btn-default btn-sm" type="button"> Cancel
+                                                        </button><button class="btn btn-primary btn-sm" type="button">
+                                                            Yes </button></div>
+                                                </li>
+                                                <li class="modal-body text-center w-100">
+                                                    <p class="modal-name">Revert</p>
+                                                    <div class="d-flex flex-wrap justify-content-between"><button
+                                                            class="btn btn-default btn-sm" type="button"> Cancel
+                                                        </button><button class="btn btn-primary btn-sm" type="button">
+                                                            Yes </button></div>
+                                                </li>
+                                                <li class="modal-body text-center w-100">
+                                                    <p class="modal-name">Delete?</p>
+                                                    <div class="d-flex flex-wrap justify-content-between"><button
+                                                            class="btn btn-default btn-sm" type="button"> No
+                                                        </button><button class="btn btn-primary btn-sm" type="button">
+                                                            Yes </button></div>
+                                                </li>
+                                                <li class="modal-body text-center w-100 complete-info">
+                                                    <p class="modal-name">Complete?</p>
+                                                    <div class="d-flex flex-wrap justify-content-between"><button
+                                                            class="btn btn-default btn-sm" type="button"> No
+                                                        </button><button class="btn btn-primary btn-sm" type="button">
+                                                            Yes </button></div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
                     </table>
                 </div>
-          
+
             </div>
             <div class="addNewTask">
                 <ul id="dropdown-basic"
-                class="dropdown-table dark left sub-task-progress-revert progressWidth dropdown-progress d-flex flex-column align-items-center justify-content-center"
-                [ngClass]="{'show':addClicked}">
+                    class="dropdown-table dark left sub-task-progress-revert progressWidth dropdown-progress d-flex flex-column align-items-center justify-content-center"
+                    [ngClass]="{'show':addClicked}">
                     <li [ngClass]="{'show':addClicked}">
                         <ul>
                             <li role="menuitem" class="new-option">
-                                <a (click)="createTaskModal(createTask,{});$event.preventDefault()" class="dropdown-item changeStatus">Add New Task</a>
+                                <a (click)="createTaskModal(createTask,{});$event.preventDefault()"
+                                    class="dropdown-item changeStatus">Add New Task</a>
                             </li>
                             <li role="menuitem" class="new-option">
-                                <a (click)="createTaskModal(openSubTask,{});$event.preventDefault()" class="dropdown-item changeStatus">Add New Sub Task</a>
+                                <a (click)="createTaskModal(openSubTask,{});$event.preventDefault()"
+                                    class="dropdown-item changeStatus">Add New Sub Task</a>
                             </li>
                         </ul>
                     </li>
@@ -369,7 +469,8 @@
             </a>
         </div>
     </div>
-    <div class="rightSidebar-wrap rightSidebar-wrap-right-0 rightSide-data-penal comman-sidebar right-aside taskview-right-aside">
+    <div
+        class="rightSidebar-wrap rightSidebar-wrap-right-0 rightSide-data-penal comman-sidebar right-aside taskview-right-aside">
         <div class="data-penal-body d-flex flex-column">
             <div class="">
                 <a href="jasvscript:void(0);" class="icon-dot" (click)="changeIc('arrow');$event.preventDefault()">
@@ -609,8 +710,8 @@
                                     </div>
                                     <div class="form-group form-task small-note">
                                         <mat-form-field class="example-full-width mat-input">
-                                            <input formControlName="taskDetailText" id="queryTaskDetailText" matInput type="text"
-                                                placeholder="Query" value="" autocomplete="off">
+                                            <input formControlName="taskDetailText" id="queryTaskDetailText" matInput
+                                                type="text" placeholder="Query" value="" autocomplete="off">
                                         </mat-form-field>
                                     </div>
                                     <div class="task-btn-grp d-flex flex-wrap align-items-start justify-content-end">
@@ -636,8 +737,7 @@
                                     </div>
                                     <div class="task-tabing popup-task-tabbing">
                                         <div class="list-div-main">
-                                            <ul malihu-scrollbar class="h-211 scrollbar"
-                                                >
+                                            <ul malihu-scrollbar class="h-211 scrollbar">
                                                 <li *ngFor="let record of openPopupTaskChatData; let index = index">
                                                     <span class="circle"
                                                         [ngClass]="{'yellow': 0 === (index+1) % 2}"></span>
@@ -647,28 +747,34 @@
                                                         <span class="remove-bullet">{{record?.createdBy}}</span>
                                                         <div class="chat-action">
                                                             <a class="icon-task" href="javascript:void(0)"
-                                                               (click)="setEditSubTaskChat(record)" icon-pencil ></a>
+                                                                (click)="setEditSubTaskChat(record)" icon-pencil></a>
                                                             <!--<div (clickOutside)="subTaskChatDeleteDropdownClose()"
                                                                  class="chat-delete-div mr-0">-->
-                                                                <!--[ngClass]="(delSubShowId == k.id) ? 'active' : ''"-->
+                                                            <!--[ngClass]="(delSubShowId == k.id) ? 'active' : ''"-->
                                                             <a class="icon-delete" href="javascript:void(0)"
-                                                                (click)="subTaskChatDeleteDropdownClick(record.mqcId)" icon-cross></a>
-                                                           
+                                                                (click)="subTaskChatDeleteDropdownClick(record.mqcId)"
+                                                                icon-cross></a>
+
                                                             <ul class="dropdown-table dark left sub-task-progress-delete"
-                                                                [ngClass]="(delSubTaskChatShowId == record.mqcId) ? 'show' : ''" > <!--style="margin-left:353px;"-->
-                                                                <li class="modal-body static text-center modal-revert w-100 new-option" ><!--style="padding: 15px 10px;"-->
-                                                                    <p class="modal-name animated-item" style="color:white;">
+                                                                [ngClass]="(delSubTaskChatShowId == record.mqcId) ? 'show' : ''">
+                                                                <!--style="margin-left:353px;"-->
+                                                                <li
+                                                                    class="modal-body static text-center modal-revert w-100 new-option">
+                                                                    <!--style="padding: 15px 10px;"-->
+                                                                    <p class="modal-name animated-item"
+                                                                        style="color:white;">
                                                                         Delete ?
                                                                     </p>
-                                                                    <div class="d-flex flex-wrap justify-content-between animated-item">
+                                                                    <div
+                                                                        class="d-flex flex-wrap justify-content-between animated-item">
                                                                         <button type="button"
-                                                                                class="btn btn-default btn-sm"
-                                                                                (click)="subTaskChatDeleteDropdownClose();$event.stopPropagation()">
+                                                                            class="btn btn-default btn-sm"
+                                                                            (click)="subTaskChatDeleteDropdownClose();$event.stopPropagation()">
                                                                             No
                                                                         </button>
                                                                         <button type="button"
-                                                                                class="btn btn-primary btn-sm"
-                                                                                (click)="subTaskChatDelete(record);$event.stopPropagation()">
+                                                                            class="btn btn-primary btn-sm"
+                                                                            (click)="subTaskChatDelete(record);$event.stopPropagation()">
                                                                             Yes
                                                                         </button>
                                                                     </div>
@@ -686,8 +792,8 @@
                                     </div>
                                     <div class="form-group form-task form-task-new">
                                         <mat-form-field class="example-full-width mat-input">
-                                            <input formControlName="taskDetailText" id="taskChatDetailText" matInput type="text"
-                                                placeholder="Message" value="" autocomplete="off">
+                                            <input formControlName="taskDetailText" id="taskChatDetailText" matInput
+                                                type="text" placeholder="Message" value="" autocomplete="off">
                                         </mat-form-field>
                                         <div class="task-btn-grp d-flex align-items-start img-btn">
                                             <button type="submit" class="btn-save"
@@ -704,13 +810,13 @@
                             <div class="task-img-h" *ngIf="!showAddTaskDetailsForm">
                                 <ng-container *ngIf="showAddedTaskDetailsList"> <!--&& imageDataLoaded-->
                                     <div class="list-div-main folder-div-main">
-                                        <ul malihu-scrollbar class="h-211 scrollbar"
-                                            >
+                                        <ul malihu-scrollbar class="h-211 scrollbar">
                                             <li *ngFor="let details of addedTaskDetailsList">
                                                 <div class="folder-img">
-                                                    <img *ngIf="details?.src" [src]="details?.src" style="height: 190px;width:150px;"
-                                                         (click)="openTaskDetailsView(details, addTaskDetailsViewsPopup)">
-                                                    
+                                                    <img *ngIf="details?.src" [src]="details?.src"
+                                                        style="height: 190px;width:150px;"
+                                                        (click)="openTaskDetailsView(details, addTaskDetailsViewsPopup)">
+
                                                 </div>
                                                 <div class="folder-text">
                                                     <div class="date-name">
@@ -769,8 +875,9 @@
                                     </div>
                                     <div class="form-group form-task w-100">
                                         <mat-form-field class="example-full-width mat-input">
-                                            <textarea formControlName="taskDetailText" id="taskDetailImageText" matInput matTextareaAutosize
-                                                type="text" placeholder="Note" value="" autocomplete="off"></textarea>
+                                            <textarea formControlName="taskDetailText" id="taskDetailImageText" matInput
+                                                matTextareaAutosize type="text" placeholder="Note" value=""
+                                                autocomplete="off"></textarea>
                                         </mat-form-field>
                                     </div>
                                     <div
@@ -805,7 +912,8 @@
                         <div class="upload-sec file-input">
                             <div class="after-fill">
                                 <img *ngIf="taskDetailsViewData?.src" [src]="taskDetailsViewData?.src">
-                                <img *ngIf="!taskDetailsViewData?.src" src="assets/images/no_image.png" style="height: 190px;width:290px;">
+                                <img *ngIf="!taskDetailsViewData?.src" src="assets/images/no_image.png"
+                                    style="height: 190px;width:290px;">
                             </div>
                         </div>
                         <div class="task-detail-inner">

@@ -3360,7 +3360,7 @@ button.btn:focus:active {
 }
 
 .mb-10 {
-  margin-bottom: 10px;
+  margin-bottom: 10px !important;
 }
 
 .mb-5 {
@@ -23384,6 +23384,9 @@ app-vendor-setup
 .mt--21 {
   margin-top: -21px;
 }
+.mt--9 {
+  margin-top: -9px !important;
+}
 
 .mt-21 {
   margin-top: 21px;
@@ -23548,4 +23551,80 @@ app-vendor-setup
   .mdc-text-field--filled:not(.mdc-text-field--disabled)
   .mdc-line-ripple::after {
   border-bottom-color: #08d9d6 !important;
+}
+.trans-pop label.mdc-floating-label.mat-mdc-floating-label {
+  font-family: Myriad Pro;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 17px;
+  color: #828282 !important;
+  text-transform: capitalize;
+  letter-spacing: 0.08em;
+  top: 38px;
+}
+.trans-pop
+  .mdc-text-field--filled:not(.mdc-text-field--disabled)
+  .mdc-line-ripple::after {
+  border-bottom-color: #2a394d;
+}
+.trans-pop
+  .mat-mdc-form-field-subscript-wrapper.mat-mdc-form-field-bottom-align {
+  height: 1px;
+}
+.transcations-popup
+  .transcations-desc.ledger
+  .ledger-detail
+  .ledger-left
+  .form-group.date
+  .form-control {
+  padding: 10px 40px 8px 10px;
+}
+.ct-due-date label.mdc-floating-label.mat-mdc-floating-label {
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #a0a3b9 !important;
+  font-family: "SF UI Display Semibold";
+  font-size: 12px;
+  line-height: 14px;
+  top: 35px;
+}
+
+.ct-create-date label.mdc-floating-label.mat-mdc-floating-label {
+  font-size: 12px;
+  font-weight: 500;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #a0a3b9 !important;
+  font-family: "SF UI Display Semibold";
+  top: 35px !important;
+}
+.ct-create-date .mat-mdc-form-field-infix {
+  margin: -7px 0 0 0;
+}
+.ct-create-date .mdc-text-field {
+  height: 43px !important;
+}
+.ct-due-date
+  .mdc-text-field--filled:not(.mdc-text-field--disabled).mdc-text-field--invalid
+  .mdc-floating-label {
+  color: #a0a3b9 !important;
+}
+
+.ct-create-date
+  .mdc-text-field--filled:not(.mdc-text-field--disabled)
+  .mdc-line-ripple::before,
+.ct-create-date
+  .mdc-text-field--filled:not(.mdc-text-field--disabled)
+  .mdc-line-ripple::after,
+.ct-due-date
+  .mdc-text-field--filled:not(.mdc-text-field--disabled)
+  .mdc-line-ripple::before,
+.ct-due-date
+  .mdc-text-field--filled:not(.mdc-text-field--disabled)
+  .mdc-line-ripple::after {
+  border-bottom-color: #e3e3e9 !important;
+}
+
+.ct-texta textarea {
+  height: 18px;
 }

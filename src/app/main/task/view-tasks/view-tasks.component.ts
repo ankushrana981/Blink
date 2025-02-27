@@ -365,6 +365,8 @@ throw new Error('Method not implemented.');
     addTaskChatForm: FormGroup;
     addTaskDetailsForm: FormGroup;
     fileList: any = [];
+    notFoundText:any;
+    note:any;
     uploadedFileSource: any;
     showAddTaskDetailsForm: boolean = false;
     showAddedTaskDetailsList: boolean = true;
@@ -639,6 +641,7 @@ throw new Error('Method not implemented.');
                         }
                     });
                     this.listrecords = success.records;
+                    console.log(this.listrecords, "record list")
                     this.listrecordsTotal = success.total;
                     this.listrecords.forEach((element) => {
                         element.active = false;
@@ -1073,7 +1076,7 @@ throw new Error('Method not implemented.');
         this.subShowId = 0;
         this.delSubShowId = this.delSubShowId == 0 ? id : 0;
     }
-    subDeleteDropdownClose() {
+    subDeleteDropdownClose(id) {
         this.delSubShowId = 0;
     }
 

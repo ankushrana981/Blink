@@ -1,336 +1,341 @@
 .pagination {
-    margin: 2px 0px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: 0px solid darkgray;
-    border-radius: 4px;
-  }
-  
-::ng-deep.custom-scrollbars{
+  margin: 2px 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 0px solid darkgray;
+  border-radius: 4px;
+}
+
+::ng-deep.custom-scrollbars {
   background-color: #efefef !important;
   border-radius: 5px !important;
 }
-.title-span-border{
+.title-span-border {
   border-right: solid 1px black;
   padding-right: 9px;
   margin-right: 5px;
 }
-.title-span{
+.title-span {
   margin-left: 4px;
   font-size: 19px;
 }
-.clickable:hover{
-  cursor: pointer; 
+.clickable:hover {
+  cursor: pointer;
 }
-  .pagination a {
-    color: white;
-    padding: 4px 9px;
-    margin:0px 3px;
-    border-radius: inherit;
-    text-decoration: none;
-    background-color: darkgray;
-  }
-  .orangeOnHover{
-    background-color: orange !important;
-  }
-  .blueOnHover:hover{
-    background-color: blue !important;
+.pagination a {
+  color: white;
+  padding: 4px 9px;
+  margin: 0px 3px;
+  border-radius: inherit;
+  text-decoration: none;
+  background-color: darkgray;
+}
+.orangeOnHover {
+  background-color: orange !important;
+}
+.blueOnHover:hover {
+  background-color: blue !important;
+}
+.redOnHover:hover {
+  background-color: red !important;
+}
+.redOnHover,
+.blueOnHover {
+  background-color: darkgray;
+}
+.green {
+  background-color: green !important;
+}
+.l2 {
+  display: none;
+  color: white;
+}
+.l1 {
+  display: inline-block;
+  color: white;
+}
+.progressLabel:hover .l2 {
+  display: inline-block;
+}
+.progressLabel:hover .l1 {
+  display: none;
+}
+.progressLabel .l2 {
+  display: none;
+}
+.mtop-5 {
+  margin-top: 5px;
+}
+.mtop-5:hover {
+  color: white;
+}
+.workspaceWidth {
+  width: 210px !important;
+  min-height: fit-content !important;
+}
+.undoButtonWidth {
+  /* width: 210px !important; */
+  min-height: 36px !important;
+  transition-delay: 300ms;
+  transition: cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+.progressWidthExtend {
+  width: 210px !important;
+  min-height: 36px !important;
+  transition-delay: 300ms;
+  transition: cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+.workspaceSelectionPopUp {
+  z-index: 2;
+  color: white;
+  right: -120px !important;
+  top: 37px !important;
+  max-height: 300px;
+  overflow-y: scroll;
+  padding: 0px;
+}
+.taskDashboardSelectionPopUp {
+  z-index: 2;
+  color: white;
+  right: -106px !important;
+  top: 37px !important;
+  max-height: 300px;
+  overflow-y: scroll;
+  padding: 0px;
+}
 
-  }
-  .redOnHover:hover{
-    background-color: red !important;
-  }
-  .redOnHover, .blueOnHover{
-    background-color: darkgray;
-  }
-  .green{
-    background-color: green !important;
-  }
-  .l2{
-      display: none;
-      color: white;
-  }
-  .l1{
-      display: inline-block;
-      color: white;
-  }
-  .progressLabel:hover .l2 {
-    display: inline-block;
-  }
-  .progressLabel:hover .l1 {
-    display: none;
-  }
-  .progressLabel .l2{
-      display: none;
-  }
-  .mtop-5{
-      margin-top:5px;
-  }
-  .mtop-5:hover{
-    color: white;
-  }
-  .workspaceWidth{
-    width: 210px !important; 
-    min-height: fit-content !important;
-  }
-  .undoButtonWidth{
-    /* width: 210px !important; */
-    min-height: 36px !important;
-    transition-delay: 300ms;
-    transition: cubic-bezier(0.165, 0.84, 0.44, 1);
-  }
-  .progressWidthExtend{
-    width: 210px !important;
-    min-height: 36px !important;
-    transition-delay: 300ms;
-    transition: cubic-bezier(0.165, 0.84, 0.44, 1);
-  }
-  .workspaceSelectionPopUp{
-    z-index: 2;
-    color: white;
-    right: -120px !important;
-    top: 37px !important;
-    max-height: 300px;
-    overflow-y: scroll;
-    padding: 0px;
-  }
-  .taskDashboardSelectionPopUp{
-    z-index: 2;
-    color: white;
-    right: -106px !important;
-    top: 37px !important;
-    max-height: 300px;
-    overflow-y: scroll;
-    padding: 0px;
-  }
-
-  .workspace-list{
-    border-top: 10px solid #394B66;
-    border-bottom: 11px solid #394B66;
-  }
-  .changeStatusList{
-    text-align: center;
-  }
-  .changeStatus{
-    color: white;
-    font-size: 13px;
-    line-height: 14.32px;
-    cursor: default;
-  }
-  .changeStatus:hover{
-    color: white !important;
-  }
-  .confirmationBox {
-    margin-top: 3px;
-    min-height: 67px;
-  }
-  .undoConfirmationBox{
-    margin-top: 3px;
-    min-height: 27px;
-    border-radius: 5px;
-    left:30px;
-  }
-  /*.progressWidth:has(.progressLabel:hover){
+.workspace-list {
+  border-top: 10px solid #394b66;
+  border-bottom: 11px solid #394b66;
+}
+.changeStatusList {
+  text-align: center;
+}
+.changeStatus {
+  color: white;
+  font-size: 13px;
+  line-height: 14.32px;
+  cursor: default;
+}
+.changeStatus:hover {
+  color: white !important;
+}
+.confirmationBox {
+  margin-top: 3px;
+  min-height: 67px;
+}
+.undoConfirmationBox {
+  margin-top: 3px;
+  min-height: 27px;
+  border-radius: 5px;
+  left: 30px;
+}
+/*.progressWidth:has(.progressLabel:hover){
     width:190px !important
   }*/
-  .with-breaks{
-    white-space: pre-wrap;
-  }
-  .undoToOldStatus-button{
-    width: 100%;
-  }
-  .undo-text{
-    color: rgba(255, 255, 255, 0.46) !important;
-  }
-  .calendarDeactive{
-    color: black !important;
-    font-weight: 400;
-    font-size: 14px;
-  }
-  .calendarActive{
-    color: #00ADB5 !important;
-    font-weight: 600;
-    font-size: 16px;
-  }
-  .calendarDeactive:hover{
-    text-decoration: none;
-    color: black !important;
-    font-weight: 400;
-    font-size: 16px;
-  }
-  .calendarActive:hover{
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 16px;
-    color: #00ADB5 !important;
-  }
-  .margin-auto{
-    margin-left: auto;
-  }
-  .margin-calendar{
-    margin-left: 10px;
-    margin-top: 0px;
-    cursor: pointer;
-    font-size: 18px;
-    line-height: 22px;
-    font-weight: 400;
-  }
-  .unSelectedNotifications{
-    color: black !important;
-    font-weight: 400;
-    display:none;
-  }
-  .notification-title{
-    cursor: pointer;
-    font-size: 18px;
-    line-height: 22px;
-    color: #2a394d;
-    font-weight: 400;
-  }
-  .card-calendar:first-child {
-    height: calc(100%);
-    padding: 0px 15px;
-  }
-  .calendars-task{
-    margin-top: 20px;
-  }
-  .calendar-time-select{
-    height: calc(100vh - 560px) !important;
-    width: auto;
-  }
-  .calendar-time-list{
-    height: calc(100vh - 560px) !important;
-    width: 288px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  .calendar-time-select{
-    width: 288px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  .calendar-time{
-    border-bottom:1px solid black;
-    display: flex;
-  }
-  .calendar-time:hover{
-    background-color: lightgray;
-    cursor: pointer;
-  }
-  .time-span{
-    margin-right: 20px;
-    justify-content: center;
-    align-items: center;
-    display: flex;
-  }
-  .flex-child{
-    flex: 1 1 1;
-    height: 42px;
-  }
-  .time-description{
-    overflow: hidden;
-    text-overflow: ellipsis; 
-  }
-  .background-color-blue{
-    background-color: aqua;
-  }
-  .time-entry-change{
-    justify-content:flex-start;
-    max-width: 20px;
-    max-height: 50px;
-  }
-  .time-label{
-    color : #A0A3B9;
-    text-transform:uppercase;
-    margin-bottom: 1px;
-    font-size: 9px;
-    font-weight: 700;
-    line-height: 10.74px;
-    letter-spacing: 0.08em;
-    text-align: left;
-  }
-  .calendar-event-section-1{
-    margin-top: 8px;
-    margin-bottom: 15px;
-  }
-  .btn-event-div{
-    margin-top:7px;
-    float: right;
-  }
-  .calendar-width{
-    border-radius: 3px;
-  }
-  .btn-event{
-    width: 105px;
-    height: 26px;
-    gap: 0px;
-    border-radius: 2px 0px 0px 0px;
+.with-breaks {
+  white-space: pre-wrap;
+}
+.undoToOldStatus-button {
+  width: 100%;
+}
+.undo-text {
+  color: rgba(255, 255, 255, 0.46) !important;
+}
+.calendarDeactive {
+  color: black !important;
+  font-weight: 400;
+  font-size: 14px;
+}
+.calendarActive {
+  color: #00adb5 !important;
+  font-weight: 600;
+  font-size: 16px;
+}
+.calendarDeactive:hover {
+  text-decoration: none;
+  color: black !important;
+  font-weight: 400;
+  font-size: 16px;
+}
+.calendarActive:hover {
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 16px;
+  color: #00adb5 !important;
+}
+.margin-auto {
+  margin-left: auto;
+}
+.margin-calendar {
+  margin-left: 10px;
+  margin-top: 0px;
+  cursor: pointer;
+  font-size: 18px;
+  line-height: 22px;
+  font-weight: 400;
+}
+.unSelectedNotifications {
+  color: black !important;
+  font-weight: 400;
+  display: none;
+}
+.notification-title {
+  cursor: pointer;
+  font-size: 18px;
+  line-height: 22px;
+  color: #2a394d;
+  font-weight: 400;
+}
+.card-calendar:first-child {
+  height: calc(100%);
+  padding: 0px 15px;
+}
+.calendars-task {
+  margin-top: 20px;
+}
+.calendar-time-select {
+  height: calc(100vh - 560px) !important;
+  width: auto;
+}
+.calendar-time-list {
+  height: calc(100vh - 560px) !important;
+  width: 288px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.calendar-time-select {
+  width: 288px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.calendar-time {
+  border-bottom: 1px solid black;
+  display: flex;
+}
+.calendar-time:hover {
+  background-color: lightgray;
+  cursor: pointer;
+}
+.time-span {
+  margin-right: 20px;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+.flex-child {
+  flex: 1 1 1;
+  height: 42px;
+}
+.time-description {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.background-color-blue {
+  background-color: aqua;
+}
+.time-entry-change {
+  justify-content: flex-start;
+  max-width: 20px;
+  max-height: 50px;
+}
+.time-label {
+  color: #a0a3b9;
+  text-transform: uppercase;
+  margin-bottom: 1px;
+  font-size: 9px;
+  font-weight: 700;
+  line-height: 10.74px;
+  letter-spacing: 0.08em;
+  text-align: left;
+}
+.calendar-event-section-1 {
+  margin-top: 8px;
+  margin-bottom: 15px;
+}
+.btn-event-div {
+  margin-top: 7px;
+  float: right;
+}
+.calendar-width {
+  border-radius: 3px;
+}
+.btn-event {
+  width: 105px;
+  height: 26px;
+  gap: 0px;
+  border-radius: 2px 0px 0px 0px;
 
-    color: #FFFFFF;
-    background-color: #E3E3E9;
-    border: none;
-    font-size: 10px;
-    font-weight: 600;
-    line-height: 11.93px;
-    text-align: center;
-    
-    /* font-size: 14px;
+  color: #ffffff;
+  background-color: #e3e3e9;
+  border: none;
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 11.93px;
+  text-align: center;
+
+  /* font-size: 14px;
     line-height: 16px;
     border-radius: 5px;
     margin-right: 15px; */
+}
+.margins-fix {
+  margin-bottom: 5px;
+}
+.event-dropdowns {
+  max-width: 105px;
+}
+.event-select {
+  height: max-content !important;
+  padding: 0px !important;
+  margin: 0px !important;
+  border: none !important;
+}
+.calendar-event-section-2 {
+  margin-bottom: 15px;
+}
+.calendar-datepiker {
+  text-align: center;
+}
+.filterDashboardDataTable {
+  min-height: 300px;
+}
+.deactive {
+  display: none;
+}
+.width-100 {
+  width: 100% !important;
+}
+@media only screen and (max-width: 1199px) {
+  .filterDashboardData {
+    display: block;
+    overflow-x: scroll;
+    white-space: nowrap;
+    height: 55px;
+    position: relative;
+    top: -30px;
+    padding: 7px 0px 3px 0px;
   }
-  .margins-fix{
-    margin-bottom: 5px;
+  .filterDashboardData li {
+    display: inline-block;
   }
-  .event-dropdowns{
-    max-width: 105px;
+  .filterDashboardDataTable .attension-table .table-respons {
+    max-height: 850px;
   }
-  .event-select{
-    height: max-content !important;
-    padding: 0px !important;
-    margin: 0px !important;
-    border: none !important;
+  .task-tab-main .task-tab .tab-content {
+    padding-top: 0px;
+    margin-top: -14px;
   }
-  .calendar-event-section-2{
-    margin-bottom: 15px;
+  .task-page-margin,
+  .task-title-main {
+    margin-left: -8px;
+    margin-right: -8px;
   }
-  .calendar-datepiker{
-    text-align: center;
+  .task-tab-main .task-tab .tab-content,
+  .task-tab-main .task-tab .tab-pane,
+  .task-tab-main .task-tab .scrollbar {
+    max-height: 650px;
   }
-  .filterDashboardDataTable{
-    min-height: 300px;
-  }
-  .deactive{
-    display: none;
-  }
-  .width-100{
-    width: 100% !important;
-  }
-  @media only screen and (max-width:1199px){
-    .filterDashboardData{
-      display: block;
-      overflow-x: scroll;
-      white-space: nowrap;
-      height: 55px;
-      position: relative;
-      top: -30px;
-      padding: 7px 0px 3px 0px;
-    }
-    .filterDashboardData li{
-      display: inline-block;
-    }
-    .filterDashboardDataTable .attension-table .table-respons{
-      max-height: 850px;
-    }
-    .task-tab-main .task-tab .tab-content{
-      padding-top: 0px; 
-      margin-top: -14px;
-    }
-    .task-page-margin, .task-title-main{
-      margin-left: -8px;
-      margin-right: -8px;
-    }
-    .task-tab-main .task-tab .tab-content, .task-tab-main .task-tab .tab-pane, .task-tab-main .task-tab .scrollbar{max-height: 650px;}
-  }
-  /* Scrollable in a Task Tab is added for less than 1199px devices */
+}
+/* Scrollable in a Task Tab is added for less than 1199px devices */

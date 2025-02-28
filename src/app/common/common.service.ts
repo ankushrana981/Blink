@@ -50,12 +50,6 @@ export class CommonService {
     formData?: boolean
   ): Promise<any> {
     let headersConfig: Record<string, string> = {};
-    console.log('url-' + url);
-    console.log('isPublic-' + isPublic);
-    console.log('html-' + html);
-    console.log('formData-' + formData);
-    console.log('isForm-' + isForm);
-    console.log('-------------');
 
     if (isPublic) {
       const token = this.getToken('accessToken');
@@ -70,7 +64,6 @@ export class CommonService {
     } else {
       headersConfig['content-Type'] = 'application/json';
     }
-    console.log('headersConfig', headersConfig);
 
     if (!isPublic) {
       const token = this.getToken('accessToken');

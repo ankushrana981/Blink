@@ -27,7 +27,7 @@ export class CommonService {
   public _apiUrl = '';
   public platformId: any;
 
-  public getToken(key:any) {
+  public getToken(key: any) {
     if (isPlatformBrowser(this.platformId)) {
       return window.localStorage.getItem(key);
     }
@@ -50,9 +50,19 @@ export class CommonService {
     formData?: boolean
   ): Promise<any> {
     let headersConfig: Record<string, string> = {};
+    console.log('url-' + url);
+    console.log('isPublic-' + isPublic);
+    console.log('html-' + html);
+    console.log('formData-' + formData);
+    console.log('isForm-' + isForm);
+    console.log('-------------');
 
     if (isPublic) {
-      headersConfig['content-Type'] = 'application/json';
+      const token = this.getToken('accessToken');
+      if (token) {
+        headersConfig['Authorization'] = token;
+      }
+      // headersConfig['content-Type'] = 'application/json';
     } else if (html) {
       headersConfig['content-Type'] = 'text/html';
     } else if (formData) {
@@ -60,6 +70,7 @@ export class CommonService {
     } else {
       headersConfig['content-Type'] = 'application/json';
     }
+    console.log('headersConfig', headersConfig);
 
     if (!isPublic) {
       const token = this.getToken('accessToken');
@@ -115,7 +126,7 @@ export class CommonService {
   // popToast(type, title, body) {
   //   this.toasterService.pop(type, title, body);
   // }
-  callApiObservable(url:any, data:any) {
+  callApiObservable(url: any, data: any) {
     let headers = new HttpHeaders({
       'content-Type': 'application/json',
       Authorization: this.getToken('accessToken')!,
@@ -141,7 +152,7 @@ export class CommonService {
       temp.remember = true;
     }
     this.clearToken();
-    //console.log("temp", temp)
+    console.log('temp', temp);
     if (temp.remember) {
       this.setToken('ss_id', temp.ss_id);
       this.setToken('ss_pass', temp.ss_pass);
@@ -151,6 +162,7 @@ export class CommonService {
   clearToken() {
     if (isPlatformBrowser(this.platformId)) {
       window.localStorage.clear();
+      console.log('token clear');
     }
   }
   getCurrentUser = (force: boolean = false): any => {
@@ -170,14 +182,12 @@ export class CommonService {
   }
   showServerError(e: any) {
     if (e.status == 400) {
-      this.popToast('error', 'The username or password is incorrect.', '')
+      this.popToast('error', 'The username or password is incorrect.', '');
       this.logout();
-
     } else if (e.status == 403) {
-      this.popToast('error', e.error, '')
-
+      this.popToast('error', e.error, '');
     } else if (e.status == 401) {
-      this.popToast('error', e.error.message, '')
+      this.popToast('error', e.error.message, '');
       this.logout();
     }
   }

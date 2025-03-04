@@ -736,7 +736,7 @@
                                                                             icon-pencil
                                                                             (click)="createTaskModal(openEditSubTask, i, k);$event.preventDefault()"></a>
                                                                         <div (clickOutside)="subDeleteDropdownClose(0)"
-                                                                            class="btn-group mr-0"
+                                                                            class="btn-group me-0"
                                                                             [ngClass]="(delSubShowId == k.id) ? 'active' : ''">
                                                                             <a *ngIf="delSubShowId != k.id"
                                                                                 class="icon-task"
@@ -776,7 +776,7 @@
                                                                                 href="javascript:void(0)" icon-more
                                                                                 (click)="dropdownClick(2)"></a> -->
                                                                         <div (clickOutside)="subDropdownClose()"
-                                                                            class="btn-group mr-0"
+                                                                            class="btn-group me-0"
                                                                             [ngClass]="(subShowId == k.id) ? 'active' : ''">
                                                                             <a *ngIf="subShowId != k.id"
                                                                                 class="icon-task"

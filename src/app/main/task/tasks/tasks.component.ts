@@ -748,6 +748,7 @@ export class TasksComponent extends BaseComponent implements OnInit {
       @return :
       *****************************************************/
   listApi(alreadyCalled?, isScrolled?) {
+    console.log(isScrolled, "isScrolled")
     let queryParams: any;
     if (!alreadyCalled) {
       //const today = moment();
@@ -764,6 +765,7 @@ export class TasksComponent extends BaseComponent implements OnInit {
       queryParams['offset'] = this.offset;
     } else {
       if (alreadyCalled && isScrolled) {
+        console.log(isScrolled, "isScrolling 1")
         queryParams = {};
         if (this.filterData.length > 0) {
           for (let i = 0; i < this.filterData.length; i++) {
@@ -949,6 +951,7 @@ export class TasksComponent extends BaseComponent implements OnInit {
       .callApi('api/clients/taskDashboard?', queryParams, 'get')
       .then((success) => {
         if (success) {
+          console.log(isScrolled, "isscrolled 2")
           if (isScrolled) {
             var listrecords1 = success.records;
             for (var i = 0; i < listrecords1.length; i++) {

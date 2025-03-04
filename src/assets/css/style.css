@@ -3466,6 +3466,10 @@ button.btn:focus:active {
   z-index: 1;
 }
 
+::ng-deep.dashboardWrap .setting-view .mat-mdc-form-field-subscript-wrapper{
+  display: none;
+}
+
 .dashboard-panels .setting-view .md-button.md-icon-button {
   width: 34px;
   height: 34px;

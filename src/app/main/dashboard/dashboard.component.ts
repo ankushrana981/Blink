@@ -24,32 +24,10 @@ export class DashboardComponent implements OnInit {
   ];
   modalRef!: BsModalRef;
   modalRef1!: BsModalRef;
-  public chart1 = {
-    height: 280,
-    type: 'area',
-    zoom: {
-      enabled: false
-    }
-  }
-  public stroke1!: {
-    curve: 'smooth'
-  }
-  public series1 = [{
-    name: 'Dataset',
-    data: [400, 600, 1125, 1000]
-  }]
-  public xaxis1!: {
-    categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep'],
-  }
-  public tooltip1 = {
-    x: {
-      format: 'dd/MM/yy HH:mm'
-    }
-  }
 
 @ViewChild("chartObj") chart!: ChartComponent;
   public chartOptions: Partial<ChartOptions>;
-  
+
   constructor(private modalService: BsModalService) {
     this.chartOptions = {
       series: [{

@@ -339,11 +339,8 @@
                         </thead>
                     </table>
                 </div>
-
-                <!-- <div malihu-scrollbar class="scrollbar"> -->
-                <ng-scrollbar *ngIf="type === 'component'" class="scroll-container" fxFlex="auto" [visibility]="'hover'"
-                    (scrolled)="onScrollDown($event)">
-                    <div class="scrollbar">
+                <!-- <div malihu-scrollbar class="scrollbar"> --> 
+                    <div class="scrollbar scrollbar-table">
                         <div class="table-box mb-20">
                             <div class="table-respons">
                                 <table style="width:100%" cdkDropList #doneList="cdkDropList"
@@ -2339,9 +2336,6 @@
                             </div>
                         </div>
                     </div>
-                </ng-scrollbar>
-
-
             </div>
             <div class="addNewTask">
                 <ul id="dropdown-basic"

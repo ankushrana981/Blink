@@ -3331,8 +3331,8 @@ button.btn:focus:active {
   z-index: 1;
 }
 
-::ng-deep.dashboardWrap .setting-view .mat-mdc-form-field-subscript-wrapper {
-  display: none;
+::ng-deep .mat-mdc-form-field .mat-mdc-form-field-subscript-wrapper {
+  display: none !important;
 }
 
 .dashboard-panels .setting-view .md-button.md-icon-button {
@@ -3963,6 +3963,10 @@ div.mat-mdc-select-panel .mat-mdc-option {
 .dashboardWrap .mat-mdc-form-field,
 .dashboardWrap .mat-mdc-form-field {
   width: 125px;
+}
+
+.dashboardWrap .mat-mdc-form-field .mat-mdc-form-field-bottom-align::before {
+  display: none !important;
 }
 
 .dashboardWrap .chartCardBox .mat-form-field-appearance-legacy .mat-form-field-infix {

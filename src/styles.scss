@@ -87,6 +87,11 @@ div.mat-mdc-select-panel .mat-mdc-option {
   line-height: inherit !important;
   min-height: 34px;
 }
+
+.mat-mdc-form-field-subscript-wrapper {
+  display: none !important;
+}
+
 .mat-mdc-option .mdc-list-item__primary-text {
   white-space: nowrap !important;
 }

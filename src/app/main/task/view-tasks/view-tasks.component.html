@@ -340,10 +340,10 @@
                     </table>
                 </div>
                 <!-- <div malihu-scrollbar class="scrollbar"> --> 
-                    <div class="scrollbar scrollbar-table">
+                    <div class="scrollbar scrollbar-table" (scroll)="onScroll($event)">
                         <div class="table-box mb-20">
-                            <div class="table-respons">
-                                <table style="width:100%" cdkDropList #doneList="cdkDropList"
+                            <div class="table-respons" >
+                                <table style="width:100%" cdkDropList #doneList="cdkDropList" 
                                     [cdkDropListData]="listrecords" (cdkDropListDropped)="drop($event)"
                                     class="table-hover task-table-main default-to-custom first-padding-0"
                                     [@fadeIn]="listrecords?.length">

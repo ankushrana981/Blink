@@ -461,9 +461,10 @@
             <!-- Tab panes -->
             <div class="tab-content">
                 <div class="tab-pane active" role="tabpanel">
-                    <div malihu-scrollbar class="scrollbar h-424 filterDashboardDataTable">
-                        <ng-scrollbar visibility="hover" #scrollEl thumbClass="custom-scrollbars"
-                            orientation="vertical">
+                    <div class="scrollbar h-424 filterDashboardDataTable scrollbar-table" (scroll)="onScroll($event)">
+                        <!-- <ng-scrollbar visibility="hover" #scrollbar thumbClass="custom-scrollbars"
+                            orientation="vertical"> -->
+
                             <div class="table-box mb-20 attension-table">
                                 <div class="table-respons">
                                     <table style="width:100%"
@@ -850,7 +851,7 @@
                                                                         </div>
                                                                     </div>
                                                                     <div class="list-div-main">
-                                                                        <ul malihu-scrollbar class="scrollbar">
+                                                                        <ul class="scrollbar">
                                                                             <li
                                                                                 *ngFor="let innerRecords of record?.relatedTaskList; let index = index">
                                                                                 <span class="circle"
@@ -968,7 +969,7 @@
                                                                         </div>
                                                                     </div>
                                                                     <div class="list-div-main chat-div-main">
-                                                                        <ul malihu-scrollbar
+                                                                        <ul
                                                                             class="scrollbar chat-div-main-h">
                                                                             <li
                                                                                 *ngFor="let chat of record?.chatData?.listOfDetails; let index = index">
@@ -1004,7 +1005,7 @@
                                                                     </div>
                                                                     <div class="list-div-main folder-div-main">
                                                                         <div class="mcs-horizontal-scrollbar-newui"
-                                                                            malihu-scrollbar>
+                                                                        >
                                                                             <ul>
                                                                                 <li *ngFor="let details of record?.detailsData?.listOfDetails"
                                                                                     class="task-details-image">
@@ -1017,9 +1018,7 @@
                                                                                     <div class="folder-text"
                                                                                         [ngClass]="{'width-100': !details?.src}">
                                                                                         <div class="date-name">
-                                                                                            <span>{{details?.createdOn |
-                                                                                                date: 'MMM d,
-                                                                                                y'}}</span>
+                                                                                            <span>{{details?.createdOn | date: 'MMM d, y'}}</span>
                                                                                             <span>{{details?.createdOn |
                                                                                                 date: 'H:mm'}}</span>
                                                                                             <span>{{details?.createdBy}}</span>
@@ -1042,8 +1041,9 @@
                                     </table>
                                 </div>
                             </div>
-                        </ng-scrollbar>
-                    </div>
+
+                    
+                        </div>
                 </div>
             </div>
         </div>
@@ -1054,7 +1054,7 @@
                         <div class="card-header">
                             <h5>Needs Attention</h5>
                         </div>
-                        <div malihu-scrollbar class="h-211 scrollbar">
+                        <div class="h-211 scrollbar">
                             <div class="table-box mb-20 attension-table">
                                 <div class="table-respons table-sticky-header">
                                     <table style="width:100%"
@@ -1159,7 +1159,7 @@
                                     <h5>Chat Stream</h5>
                                 </div>
                                 <div class="card-body pb-0">
-                                    <div malihu-scrollbar class="h-100 scrollbar chart-scroll">
+                                    <div class="h-100 scrollbar chart-scroll">
                                         <ul class="chat-ul">
                                             <li class="chat-li d-flex flex-wrap">
                                                 <div>
@@ -1375,7 +1375,7 @@
                                     </h5>
                                 </div>
                                 <div class="card-body pb-0">
-                                    <div malihu-scrollbar class="h-100 scrollbar">
+                                    <div class="h-100 scrollbar">
                                         <ul class="memos-list">
                                             <li *ngFor="let i of memoListRecords; index as index">
                                                 <div class="memos-header d-flex flex-wrap justify-content-between">
@@ -1439,7 +1439,7 @@
                             </div>
                         </div>
                         <div *ngIf="showNotifications" class="card-body pb-0">
-                            <div malihu-scrollbar class="h-475 scrollbar">
+                            <div class="h-475 scrollbar">
                                 <ul class="notification-list" [@fadeIn]="notificationList?.length">
                                     <li *ngFor="let item of notificationList">
                                         {{item?.recordTitle}} <span
@@ -1457,14 +1457,14 @@
                                     [bsValue]="todays_date">
                                 </bs-datepicker-inline>
                             </div>
-                            <div *ngIf="!timeSelected" class="calendars-task calendar-time-list" malihu-scrollbar>
+                            <div *ngIf="!timeSelected" class="calendars-task calendar-time-list">
                                 <div *ngFor="let time of calendarTimeList" class="calendar-time"
                                     (click)="timeClicked(time)">
                                     <div class="flex-child time-span">{{time.time}}</div>
                                     <div class="flex-child time-description">{{time.description}}</div>
                                 </div>
                             </div>
-                            <div *ngIf="timeSelected" class="calendars-task calendar-time-select" malihu-scrollbar>
+                            <div *ngIf="timeSelected" class="calendars-task calendar-time-select">
                                 <div class="row calendar-event-section-1">
                                     <div class="col-md-6">
                                         <label class="time-label">Time</label>

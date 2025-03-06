@@ -887,6 +887,14 @@ export class ViewTasksComponent extends BaseComponent implements OnInit {
       value.progressStatusText = 'Not Started';
     }
   }
+  onScroll(event: any) {
+    const target = event.target;
+    const atBottom = target.scrollTop + target.clientHeight >= target.scrollHeight - 5;
+    console.log("bottom")
+    if (atBottom) {
+      this.onScrollDown(event);
+    }
+  }
 
   onScrollDown(ev) {
     if (this.folderView) {
@@ -1189,6 +1197,7 @@ export class ViewTasksComponent extends BaseComponent implements OnInit {
           //            console.log("there is an error:", e);
           //        });
           //}
+          
         }
       })
       .catch((e) => {

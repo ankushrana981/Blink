@@ -6,10 +6,11 @@ import {
   ViewChild,
   Renderer2,
   ElementRef,
+  AfterViewInit,
 } from '@angular/core';
 import { BaseComponent } from '../../../common/commonComponent';
 import { InfiniteScrollDirective } from 'ngx-infinite-scroll';
-import { Subject, Observable, of, concat } from 'rxjs';
+import { Subject, Observable, of, concat, Subscription } from 'rxjs';
 import {
   distinctUntilChanged,
   debounceTime,
@@ -31,6 +32,9 @@ import { ModalDemoComponent } from '../../../reusable/draggable-popup/draggable-
 import moment from 'moment';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { DatePipe } from '@angular/common';
+import { NgScrollbar } from 'ngx-scrollbar';
+import { fromEvent } from 'rxjs';
+
 
 declare var jquery: any;
 declare var $: any;
@@ -581,6 +585,8 @@ export class TasksComponent extends BaseComponent implements OnInit {
     this.refreshTaskList();
     this.calendarConfig();
   }
+
+
   /*****************************************************
       @purpose :For getting the producrts for dropdown
       @parameters :
@@ -1115,6 +1121,7 @@ export class TasksComponent extends BaseComponent implements OnInit {
 
           let data = success.records;
           this.maxPage = Math.floor(success.total / this.limit);
+          console.log(this.limit, "limit", this.maxPage)
           for (let i = 0; i < data.length; i++) {
             this.listrecords.push(data[i]);
           }
@@ -1240,12 +1247,22 @@ export class TasksComponent extends BaseComponent implements OnInit {
     }
   }
   plannedTask(record) {}
-  onScrollDown(ev) {
-    if (this.page < this.maxPage) {
-      this.page++;
-      this.offset = this.page * this.limit;
-      this.getScrollData();
+
+  onScroll(event: any) {
+    const target = event.target;
+    if (!target) return;
+  
+    const atBottom = target.scrollTop + target.clientHeight >= target.scrollHeight - 10;
+    
+    console.log("Scrolled to bottom:",target.scrollTop,target.clientHeight,target.scrollHeight, atBottom); 
+    
+    if (atBottom) {
+      this.onScrollDown(event);
     }
+  }
+
+  onScrollDown(ev) {
+    this.onScrollDownTaskDashboard(this)
   }
 
   onScrollDownTaskDashboard(ev) {

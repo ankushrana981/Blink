@@ -465,585 +465,568 @@
                         <!-- <ng-scrollbar visibility="hover" #scrollbar thumbClass="custom-scrollbars"
                             orientation="vertical"> -->
 
-                            <div class="table-box mb-20 attension-table">
-                                <div class="table-respons">
-                                    <table style="width:100%"
-                                        class="table-hover table-dashboard default-to-custom first-padding-0 task-list-table">
-                                        <thead class="task-list-head">
-                                            <tr class="x-animated fadeIn d-1 in">
-                                                <th width="30"></th>
-                                                <th class="table-date">
-                                                    <b class="table-title">
-                                                        <span class="table-text">Board</span>
-                                                    </b>
-                                                    <div class="small help-block line-divider before-line type">
-                                                        <span>Interaction</span>&nbsp;
+                        <div class="table-box mb-20 attension-table">
+                            <div class="table-respons">
+                                <table style="width:100%"
+                                    class="table-hover table-dashboard default-to-custom first-padding-0 task-list-table">
+                                    <thead class="task-list-head">
+                                        <tr class="x-animated fadeIn d-1 in">
+                                            <th width="30"></th>
+                                            <th class="table-date">
+                                                <b class="table-title">
+                                                    <span class="table-text">Board</span>
+                                                </b>
+                                                <div class="small help-block line-divider before-line type">
+                                                    <span>Interaction</span>&nbsp;
+                                                </div>
+                                            </th>
+                                            <th class="table-description" id="th-table-descp">
+                                                <b class="table-title">
+                                                    <span>Description</span>&nbsp;
+                                                </b>
+                                                <div class="small help-block line-divider before-line board">
+                                                    <span class="table-text">Activity</span>
+                                                    <div class="line-divider before-line board interaction-divider">
+                                                        <span class="table-text" style="padding-top: 5px;">Interaction
+                                                            By</span>
                                                     </div>
-                                                </th>
-                                                <th class="table-description" id="th-table-descp">
-                                                    <b class="table-title">
-                                                        <span>Description</span>&nbsp;
-                                                    </b>
-                                                    <div class="small help-block line-divider before-line board">
-                                                        <span class="table-text">Activity</span>
-                                                        <div class="line-divider before-line board interaction-divider">
-                                                            <span class="table-text"
-                                                                style="padding-top: 5px;">Interaction
-                                                                By</span>
+                                                </div>
+                                            </th>
+                                            <th class="table-action"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody [@fadeIn]="listrecords?.length"
+                                        *ngFor="let record of listrecords; index as j" fxLayout="row wrap"
+                                        class="list task-list-body">
+                                        <tr style="vertical-align:top;" id="tr{{j}}"
+                                            class=" x-animated fadeIn d-1 in accordion-table cursor-pointer"
+                                            fxFlex="100" fxFlex.lt-sm="200" accordion>
+                                            <td width="58px" class="text-center">
+                                                <h4 ng-bind="($index + 1)" class="rownumber ng-binding">{{j+1}}</h4>
+                                            </td>
+                                            <td class="text-left task-board">
+                                                <b class="table-title help-desc help-block">
+                                                    <ng-container *ngIf="record.board !== null">
+                                                        <span class="table-text">
+                                                            <span class="baord-name">{{record.board}}</span>
+                                                            <span class="color-tab-span"
+                                                                *ngIf="record.subTaskId !== null">SUB</span>
+                                                        </span>
+                                                        <div class="table-fulldesc" id="boardNameHover-{{record?.id}}">
+                                                            <span class="text">{{record.board}} >
+                                                                {{record.taskNote}}</span>
                                                         </div>
-                                                    </div>
-                                                </th>
-                                                <th class="table-action"></th>
-                                            </tr>
-                                        </thead>
-                                        <tbody [@fadeIn]="listrecords?.length"
-                                            *ngFor="let record of listrecords; index as j" fxLayout="row wrap"
-                                            class="list task-list-body">
-                                            <tr style="vertical-align:top;" id="tr{{j}}"
-                                                class=" x-animated fadeIn d-1 in accordion-table cursor-pointer"
-                                                fxFlex="100" fxFlex.lt-sm="200" accordion>
-                                                <td width="58px" class="text-center">
-                                                    <h4 ng-bind="($index + 1)" class="rownumber ng-binding">{{j+1}}</h4>
-                                                </td>
-                                                <td class="text-left task-board">
-                                                    <b class="table-title help-desc help-block">
-                                                        <ng-container *ngIf="record.board !== null">
-                                                            <span class="table-text">
-                                                                <span class="baord-name">{{record.board}}</span>
-                                                                <span class="color-tab-span"
-                                                                    *ngIf="record.subTaskId !== null">SUB</span>
-                                                            </span>
-                                                            <div class="table-fulldesc"
-                                                                id="boardNameHover-{{record?.id}}">
-                                                                <span class="text">{{record.board}} >
-                                                                    {{record.taskNote}}</span>
-                                                            </div>
-                                                        </ng-container>
-                                                        <ng-container *ngIf="record.board == null">-</ng-container>
-                                                    </b>
-                                                    <div class="small help-block line-divider help-desc">
-                                                        <span>{{record.interactionOn | date: 'MMM d, y'}}</span>
-                                                    </div>
-                                                </td>
-                                                <td class="text-left task-description" style="position: relative;">
-                                                    <b class="table-title help-desc help-block task-main-des"
-                                                        style="position: static;">
-                                                        <ng-container *ngIf="record.description !== null">
-                                                            <span id="table-text-{{record?.id}}"
-                                                                class="task-desc-hover-text">
-                                                                {{record.description}}
-                                                            </span>
-                                                            <div class="table-fulldesc"
-                                                                id="taskDescriptionHover-{{record?.id}}"
-                                                                *ngIf="record.description.length > 50 && loadTooltipData">
-                                                                <span class="text">{{record.description}}</span>
-                                                            </div>
-                                                        </ng-container>
-                                                        <ng-container
-                                                            *ngIf="record.description == null">-</ng-container>
-                                                    </b>
-                                                    <div class="small help-block line-divider">
-                                                        <div class="button-main-div">
-                                                            <ng-container *ngIf="record.newStatus !== 7">
-                                                                <span class="color-tab-span plus"
-                                                                    *ngIf="record.previousStatus != null && record.previousStatus !== 0 && record.newStatus !== 4 && record?.subTaskId == null">
-                                                                    <i class="fa fa-plus"></i>
-                                                                </span>
-                                                                <span class="color-tab-span plus"
-                                                                    *ngIf="record.previousStatus != null && record.previousStatus === 0 && record?.subTaskId != null">
-                                                                    <i class="fa fa-plus"></i>
-                                                                </span>
-                                                                <span class="color-tab-span grey"
-                                                                    *ngIf="record.previousStatus === 1">Added</span>
-                                                                <span class="color-tab-span"
-                                                                    *ngIf="record.previousStatus === 2">In
-                                                                    Progress</span>
-                                                                <span class="color-tab-span yellow"
-                                                                    *ngIf="record.previousStatus === 3">In Querry</span>
-                                                                <span class="color-tab-span green"
-                                                                    *ngIf="record.previousStatus === 4">Completed</span>
-                                                            </ng-container>
-                                                            <ng-container *ngIf="record.newStatus === 7">
-                                                                <span class="color-tab-span plus question">
-                                                                    <i class="fa fa-question"></i>
-                                                                </span>
-                                                            </ng-container>
-
-                                                            <i class="fa fa-angle-right"
-                                                                *ngIf="record.newStatus !== 5 && record.newStatus !== 6 && (record.previousStatus <= record.newStatus) && (record?.subTaskId != null || (record?.newStatus !== 4 && record?.subTaskId == null && record?.newStatus !== 1 && record?.previousStatus !== 0))"></i>
-                                                            <i class="fa fa-angle-right red"
-                                                                *ngIf="(record.previousStatus > record.newStatus) && record.newStatus !== 4 && record.newStatus !== 5 && record.newStatus !== 6"></i>
+                                                    </ng-container>
+                                                    <ng-container *ngIf="record.board == null">-</ng-container>
+                                                </b>
+                                                <div class="small help-block line-divider help-desc">
+                                                    <span>{{record.interactionOn | date: 'MMM d, y'}}</span>
+                                                </div>
+                                            </td>
+                                            <td class="text-left task-description" style="position: relative;">
+                                                <b class="table-title help-desc help-block task-main-des"
+                                                    style="position: static;">
+                                                    <ng-container *ngIf="record.description !== null">
+                                                        <span id="table-text-{{record?.id}}"
+                                                            class="task-desc-hover-text">
+                                                            {{record.description}}
+                                                        </span>
+                                                        <div class="table-fulldesc"
+                                                            id="taskDescriptionHover-{{record?.id}}"
+                                                            *ngIf="record.description.length > 50 && loadTooltipData">
+                                                            <span class="text">{{record.description}}</span>
+                                                        </div>
+                                                    </ng-container>
+                                                    <ng-container *ngIf="record.description == null">-</ng-container>
+                                                </b>
+                                                <div class="small help-block line-divider">
+                                                    <div class="button-main-div">
+                                                        <ng-container *ngIf="record.newStatus !== 7">
                                                             <span class="color-tab-span plus"
-                                                                *ngIf="record.newStatus === 0">
+                                                                *ngIf="record.previousStatus != null && record.previousStatus !== 0 && record.newStatus !== 4 && record?.subTaskId == null">
+                                                                <i class="fa fa-plus"></i>
+                                                            </span>
+                                                            <span class="color-tab-span plus"
+                                                                *ngIf="record.previousStatus != null && record.previousStatus === 0 && record?.subTaskId != null">
                                                                 <i class="fa fa-plus"></i>
                                                             </span>
                                                             <span class="color-tab-span grey"
-                                                                *ngIf="record.newStatus === 1">Added</span>
-                                                            <span class="color-tab-span" *ngIf="record.newStatus === 2">
-                                                                In
-                                                                Progress
-                                                            </span>
+                                                                *ngIf="record.previousStatus === 1">Added</span>
+                                                            <span class="color-tab-span"
+                                                                *ngIf="record.previousStatus === 2">In
+                                                                Progress</span>
                                                             <span class="color-tab-span yellow"
-                                                                *ngIf="record.newStatus === 3">In Querry</span>
+                                                                *ngIf="record.previousStatus === 3">In Querry</span>
                                                             <span class="color-tab-span green"
-                                                                *ngIf="record.newStatus === 4">Completed</span>
-                                                            <!--<span class="color-tab-span" style="background: indianred;"
+                                                                *ngIf="record.previousStatus === 4">Completed</span>
+                                                        </ng-container>
+                                                        <ng-container *ngIf="record.newStatus === 7">
+                                                            <span class="color-tab-span plus question">
+                                                                <i class="fa fa-question"></i>
+                                                            </span>
+                                                        </ng-container>
+
+                                                        <i class="fa fa-angle-right"
+                                                            *ngIf="record.newStatus !== 5 && record.newStatus !== 6 && (record.previousStatus <= record.newStatus) && (record?.subTaskId != null || (record?.newStatus !== 4 && record?.subTaskId == null && record?.newStatus !== 1 && record?.previousStatus !== 0))"></i>
+                                                        <i class="fa fa-angle-right red"
+                                                            *ngIf="(record.previousStatus > record.newStatus) && record.newStatus !== 4 && record.newStatus !== 5 && record.newStatus !== 6"></i>
+                                                        <span class="color-tab-span plus"
+                                                            *ngIf="record.newStatus === 0">
+                                                            <i class="fa fa-plus"></i>
+                                                        </span>
+                                                        <span class="color-tab-span grey"
+                                                            *ngIf="record.newStatus === 1">Added</span>
+                                                        <span class="color-tab-span" *ngIf="record.newStatus === 2">
+                                                            In
+                                                            Progress
+                                                        </span>
+                                                        <span class="color-tab-span yellow"
+                                                            *ngIf="record.newStatus === 3">In Querry</span>
+                                                        <span class="color-tab-span green"
+                                                            *ngIf="record.newStatus === 4">Completed</span>
+                                                        <!--<span class="color-tab-span" style="background: indianred;"
                                                               *ngIf="record.newStatus === 5">Overdue</span>
                                                         <span class="color-tab-span" style="background: red;"
                                                               *ngIf="record.newStatus === 6">Forgotten</span>-->
-                                                            <div class="hover-icon-h task-hover-h">
-                                                                <span class="text task-record-h "
-                                                                    *ngIf="record.newStatus === 7">{{record?.queryDetailString}}</span>
-                                                                <div *ngIf="record.newStatus === 7 && record?.queryDetailString?.length > 90 && loadTooltipData "
-                                                                    class="table-fulldesc">
-                                                                    {{record?.queryDetailString}}
-                                                                </div>
+                                                        <div class="hover-icon-h task-hover-h">
+                                                            <span class="text task-record-h "
+                                                                *ngIf="record.newStatus === 7">{{record?.queryDetailString}}</span>
+                                                            <div *ngIf="record.newStatus === 7 && record?.queryDetailString?.length > 90 && loadTooltipData "
+                                                                class="table-fulldesc">
+                                                                {{record?.queryDetailString}}
                                                             </div>
                                                         </div>
-                                                        <span class="table-text"
-                                                            *ngIf="record.interactionBy">{{record.interactionBy}}</span>
-                                                        <span class="table-text" *ngIf="!record.interactionBy">-</span>
                                                     </div>
-                                                </td>
-                                                <td>
-                                                    <div class="d-flex">
-                                                        <div class="btn-group" (clickOutside)="dropdownClose()">
-                                                            <a *ngIf="showId != record.id" class="icon-more"
-                                                                href="javascript:void(0)" icon-more
-                                                                (click)="subDropdownClose();$event.stopPropagation();dropdownClick(record.id);$event.stopPropagation()"></a>
-                                                            <a *ngIf="showId == record.id" class="icon-more"
-                                                                href="javascript:void(0)" icon-more
-                                                                (click)="subDropdownClose();$event.stopPropagation();dropdownClose();$event.stopPropagation()"></a>
-                                                            <ul class="dropdown-table dark right dropdown-progress d-flex flex-column align-items-center justify-content-center progressWidthExtend"
-                                                                [ngClass]="{'show' : (showId == record.id) && !undoButtonVisible && flagIsProgressRevert == 0}">
-                                                                <li [ngClass]="{'show': !progressinfo}">
-                                                                    <ul>
-                                                                        <li role="menuitem" class="new-option">
-                                                                            <a class="dropdown-item" href="/"
-                                                                                (click)="createTaskModal(openSubTask,record);$event.stopPropagation();$event.preventDefault()">Add
-                                                                                Subtask</a>
-                                                                        </li>
-                                                                        <!-- Progress/Revert Design -->
-                                                                        <li role="menuitem" class="new-option"
-                                                                            *ngIf="flagIsProgressRevert == 0 && record?.subTaskId !== null && !undoButtonVisible">
-                                                                            <a class="dropdown-item"
-                                                                                href="javascript:void(0)"
-                                                                                (click)="$event.stopPropagation()">
-                                                                                <ng-container
-                                                                                    *ngIf="record.newStatus !== 4">
-                                                                                    <span
-                                                                                        (click)="flagIsProgressRevert = 1;$event.stopPropagation()">Progress</span>
-                                                                                </ng-container>
+                                                    <span class="table-text"
+                                                        *ngIf="record.interactionBy">{{record.interactionBy}}</span>
+                                                    <span class="table-text" *ngIf="!record.interactionBy">-</span>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="d-flex">
+                                                    <div class="btn-group" (clickOutside)="dropdownClose()">
+                                                        <a *ngIf="showId != record.id" class="icon-more"
+                                                            href="javascript:void(0)" icon-more
+                                                            (click)="subDropdownClose();$event.stopPropagation();dropdownClick(record.id);$event.stopPropagation()"></a>
+                                                        <a *ngIf="showId == record.id" class="icon-more"
+                                                            href="javascript:void(0)" icon-more
+                                                            (click)="subDropdownClose();$event.stopPropagation();dropdownClose();$event.stopPropagation()"></a>
+                                                        <ul class="dropdown-table dark right dropdown-progress d-flex flex-column align-items-center justify-content-center progressWidthExtend"
+                                                            [ngClass]="{'show' : (showId == record.id) && !undoButtonVisible && flagIsProgressRevert == 0}">
+                                                            <li [ngClass]="{'show': !progressinfo}">
+                                                                <ul>
+                                                                    <li role="menuitem" class="new-option">
+                                                                        <a class="dropdown-item" href="/"
+                                                                            (click)="createTaskModal(openSubTask,record);$event.stopPropagation();$event.preventDefault()">Add
+                                                                            Subtask</a>
+                                                                    </li>
+                                                                    <!-- Progress/Revert Design -->
+                                                                    <li role="menuitem" class="new-option"
+                                                                        *ngIf="flagIsProgressRevert == 0 && record?.subTaskId !== null && !undoButtonVisible">
+                                                                        <a class="dropdown-item"
+                                                                            href="javascript:void(0)"
+                                                                            (click)="$event.stopPropagation()">
+                                                                            <ng-container
+                                                                                *ngIf="record.newStatus !== 4">
                                                                                 <span
-                                                                                    (click)="flagIsProgressRevert = 1;$event.stopPropagation()"
-                                                                                    *ngIf="record.newStatus !== 4 && record.newStatus !== 1">/</span>
-                                                                                <span *ngIf="record.newStatus !== 1"
-                                                                                    (click)="flagIsProgressRevert = 2;$event.stopPropagation()">Revert</span>
-                                                                            </a>
-                                                                        </li>
-                                                                        <li role="menuitem"
-                                                                            *ngIf="flagIsProgressRevert == 0 && !undoButtonVisible"
-                                                                            class="new-option">
-                                                                            <a class="dropdown-item "
-                                                                                (click)="plannedTask(record);$event.stopPropagation()"
-                                                                                href="javascript:void(0)">Planned
-                                                                                Task</a>
-                                                                        </li>
-                                                                        <li role="menuitem" class="new-option"
-                                                                            *ngIf="!undoButtonVisible">
-                                                                            <a class="dropdown-item"
-                                                                                href="javascript:void(0);"
-                                                                                (click)="onTaskClick(record.taskId)">Go
-                                                                                To
-                                                                                Task</a>
-                                                                        </li>
-                                                                        <li class="modal-body text-center modal-revert w-100 confirmationBox"
-                                                                            [ngClass]="{'show': progressinfo}">
-                                                                            <p class="modal-name">
-                                                                                Progress
-                                                                            </p>
-                                                                            <div
-                                                                                class="d-flex flex-wrap justify-content-between progress-revert-button">
-                                                                                <button type="button"
-                                                                                    class="btn btn-default btn-sm"
-                                                                                    (click)="progressClose();$event.stopPropagation()">
-                                                                                    Cancel
-                                                                                </button>
-                                                                                <button type="button"
-                                                                                    class="btn btn-primary btn-sm"
-                                                                                    (click)="ChangeSubTaskStatusClose(record?.taskId, record?.subTaskId, j);$event.stopPropagation()">
-                                                                                    Yes
-                                                                                </button>
-                                                                            </div>
-                                                                        </li>
+                                                                                    (click)="flagIsProgressRevert = 1;$event.stopPropagation()">Progress</span>
+                                                                            </ng-container>
+                                                                            <span
+                                                                                (click)="flagIsProgressRevert = 1;$event.stopPropagation()"
+                                                                                *ngIf="record.newStatus !== 4 && record.newStatus !== 1">/</span>
+                                                                            <span *ngIf="record.newStatus !== 1"
+                                                                                (click)="flagIsProgressRevert = 2;$event.stopPropagation()">Revert</span>
+                                                                        </a>
+                                                                    </li>
+                                                                    <li role="menuitem"
+                                                                        *ngIf="flagIsProgressRevert == 0 && !undoButtonVisible"
+                                                                        class="new-option">
+                                                                        <a class="dropdown-item "
+                                                                            (click)="plannedTask(record);$event.stopPropagation()"
+                                                                            href="javascript:void(0)">Planned
+                                                                            Task</a>
+                                                                    </li>
+                                                                    <li role="menuitem" class="new-option"
+                                                                        *ngIf="!undoButtonVisible">
+                                                                        <a class="dropdown-item"
+                                                                            href="javascript:void(0);"
+                                                                            (click)="onTaskClick(record.taskId)">Go
+                                                                            To
+                                                                            Task</a>
+                                                                    </li>
+                                                                    <li class="modal-body text-center modal-revert w-100 confirmationBox"
+                                                                        [ngClass]="{'show': progressinfo}">
+                                                                        <p class="modal-name">
+                                                                            Progress
+                                                                        </p>
+                                                                        <div
+                                                                            class="d-flex flex-wrap justify-content-between progress-revert-button">
+                                                                            <button type="button"
+                                                                                class="btn btn-default btn-sm"
+                                                                                (click)="progressClose();$event.stopPropagation()">
+                                                                                Cancel
+                                                                            </button>
+                                                                            <button type="button"
+                                                                                class="btn btn-primary btn-sm"
+                                                                                (click)="ChangeSubTaskStatusClose(record?.taskId, record?.subTaskId, j);$event.stopPropagation()">
+                                                                                Yes
+                                                                            </button>
+                                                                        </div>
+                                                                    </li>
 
-                                                                        <li class="modal-body text-center modal-revert w-100 confirmationBox"
-                                                                            [ngClass]="{'show': revertinfo}">
-                                                                            <p class="modal-name">
-                                                                                Revert
-                                                                            </p>
-                                                                            <div
-                                                                                class="d-flex flex-wrap justify-content-between progress-revert-button">
-                                                                                <button type="button"
-                                                                                    class="btn btn-default btn-sm"
-                                                                                    (click)="revertClose();$event.stopPropagation()">
-                                                                                    Cancel
-                                                                                </button>
-                                                                                <button type="button"
-                                                                                    class="btn btn-primary btn-sm"
-                                                                                    (click)="ChangeSubTaskStatusRevertClose(record?.taskId, record?.subTaskId, j);$event.stopPropagation()">
-                                                                                    Yes
-                                                                                </button>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li class="modal-body text-center modal-revert w-100 confirmationBox"
-                                                                            [ngClass]="{'show': updateProgressionStatus}">
-                                                                            <p class="modal-name">
-                                                                                Update
-                                                                            </p>
-                                                                            <div
-                                                                                class="d-flex flex-wrap justify-content-between progress-revert-button">
-                                                                                <button type="button"
-                                                                                    class="btn btn-default btn-sm"
-                                                                                    (click)="updateStatusClose();$event.stopPropagation()">
-                                                                                    Cancel
-                                                                                </button>
-                                                                                <button type="button"
-                                                                                    class="btn btn-primary btn-sm"
-                                                                                    (click)="changeSubTaskStatusUpdateClose(record?.taskId, record?.subTaskId, statusClickedForUpdate, j);$event.stopPropagation()">
-                                                                                    Yes
-                                                                                </button>
-                                                                            </div>
-                                                                        </li>
-                                                                    </ul>
-                                                                </li>
-                                                            </ul>
-                                                            <ul class="dropdown-table dark right dropdown-progress d-flex flex-column align-items-center justify-content-center progressWidthExtend"
-                                                                [ngClass]="{'show' : (showId == record.id) && flagIsProgressRevert !=0 && record?.subTaskId !== null && !undoButtonVisible}">
-                                                                <li
-                                                                    [ngClass]="{'show':flagIsProgressRevert !=0 && record?.subTaskId !== null && !undoButtonVisible}">
-                                                                    <ul class="progressbar">
-                                                                        <li role="menuitem"
-                                                                            class="new-option changeStatusList">
-                                                                            <a class="mtop-5 changeStatus">Change Status
-                                                                            </a>
-                                                                        </li>
-                                                                        <li role="menuitem"
-                                                                            class="new-option pagination">
-                                                                            <a class="dropdown-item label1 progressLabel"
-                                                                                (click)="progressRevertClick(record,record.newStatus,1,j);$event.stopPropagation()"
-                                                                                [ngClass]="{'orangeOnHover': record.newStatus == 1,'redOnHover':record.newStatus >=2}">
-                                                                                <span class="l1">1</span><span
-                                                                                    class="l2 ">Added</span>
-                                                                            </a>
-                                                                            <a class="dropdown-item label2 orange progressLabel"
-                                                                                (click)="progressRevertClick(record,record.newStatus,2,j);$event.stopPropagation()"
-                                                                                [ngClass]="{'blueOnHover': record.newStatus <2,'orangeOnHover': record.newStatus == 2,'redOnHover':record.newStatus>=3}">
-                                                                                <span class="l1">2</span><span
-                                                                                    class="l2">In Progress</span>
-                                                                            </a>
-                                                                            <a class="dropdown-item label3 progressLabel"
-                                                                                (click)="progressRevertClick(record,record.newStatus,3,j);$event.stopPropagation()"
-                                                                                [ngClass]="{'blueOnHover': record.newStatus <=2,'orangeOnHover': record.newStatus == 3,'redOnHover':record.newStatus>3}">
-                                                                                <span class="l1">3</span><span
-                                                                                    class="l2">In Query</span>
-                                                                            </a>
-                                                                            <a class="dropdown-item label4 progressLabel"
-                                                                                (click)="progressRevertClick(record,record.newStatus,4,j);$event.stopPropagation()"
-                                                                                [ngClass]="{'blueOnHover': record.newStatus <=3,'green': record.newStatus == 4}">
-                                                                                <span class="l1">4</span><span
-                                                                                    class="l2">Complete</span>
-                                                                            </a>
-                                                                        </li>
-                                                                        <li role="menuitem" class="new-option"
-                                                                            *ngIf="!undoButtonVisible">
-                                                                            <a class="dropdown-item"
-                                                                                href="javascript:void(0);"
-                                                                                (click)="onTaskClick(record.taskId)">Go
-                                                                                To
-                                                                                Task</a>
-                                                                        </li>
-                                                                    </ul>
-                                                                </li>
-                                                            </ul>
-                                                            <ul class="undoButtonsUL dropdown-table dark right dropdown-progress d-flex flex-column align-items-center justify-content-center progressWidthExtend"
-                                                                [ngClass]="{'show' : (showId == record.id) && undoButtonVisible}">
-                                                                <li [ngClass]="{'show' : undoButtonVisible}">
-                                                                    <ul>
-                                                                        <li role="menuitem"
-                                                                            class="new-option changeStatusList">
-                                                                            <a class="mtop-5 changeStatus">Change Status
-                                                                            </a>
-                                                                        </li>
-                                                                        <li role="menuitem" class="new-option">
-                                                                            <a class="dropdown-item undo-text"
-                                                                                href="javascript:void(0);"
-                                                                                (click)="undoToOldStatus(record,undoOldStatus,undoNewStatus,j);$event.stopPropagation()">
-                                                                                Undo
-                                                                            </a>
-                                                                        </li>
-                                                                    </ul>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr class="inner-table-tr accordion-table-content x-animated fadeIn d-1 in"
-                                                fxFlex="100" *ngIf="record?.subTaskId !== null">
-                                                <!-- <tr class="inner-table-tr accordion-table-content x-animated fadeIn d-1 in"
-                                            fxFlex="100"
-                                            *ngIf="record?.relatedTaskList.length > 0 && record?.subTaskId !== null"> -->
-                                                <td colspan="4" class="inner-table">
-                                                    <div class="task-tabing">
-                                                        <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-                                                            <li class="nav-item">
-                                                                <a class="nav-link active" id="pills-list-tab"
-                                                                    data-toggle="pill"
-                                                                    href="#pills-list{{record?.taskId}}" role="tab"
-                                                                    aria-controls="pills-list" aria-selected="true"
-                                                                    #pillsListAnchor
-                                                                    id="pillsListAnchor{{record?.taskId}}"
-                                                                    (click)="checkActivenesList(record)"><img
-                                                                        src="assets/images/list-icon-g.svg"
-                                                                        *ngIf="!record?.showBlackListIcon" />
-                                                                    <img src="assets/images/list-icon.svg"
-                                                                        *ngIf="record?.showBlackListIcon" /></a>
-                                                            </li>
-                                                            <li class="nav-item">
-                                                                <a class="nav-link" id="pills-chat-tab"
-                                                                    data-toggle="pill"
-                                                                    href="#pills-chat{{record?.taskId}}" role="tab"
-                                                                    aria-controls="pills-chat" aria-selected="false"
-                                                                    (click)="checkActivenesChat(record); getChatDetails(record?.taskId, record?.subTaskId, record)"
-                                                                    id="pillsChatAnchor{{record?.taskId}}"
-                                                                    #pillsChatAnchor><img
-                                                                        src="assets/images/chat-icon.svg"
-                                                                        *ngIf="!record?.showBlackChatIcon" />
-                                                                    <img src="assets/images/chat-icon-b.svg"
-                                                                        *ngIf="record?.showBlackChatIcon" /></a>
-                                                            </li>
-                                                            <li class="nav-item">
-                                                                <a class="nav-link" id="pills-folder-tab"
-                                                                    data-toggle="pill"
-                                                                    href="#pills-folder{{record?.taskId}}" role="tab"
-                                                                    aria-controls="pills-folder" aria-selected="false"
-                                                                    id="pillsFolderAnchor{{record?.taskId}}"
-                                                                    (click)="checkActivenesDetails(record); getTaskDetails(record?.taskId, record?.subTaskId, record)"
-                                                                    #pillsFolderAnchor><img
-                                                                        src="assets/images/folder-icon.svg"
-                                                                        *ngIf="!record?.showBlackFolderIcon" />
-                                                                    <img src="assets/images/folder-icon-b.svg"
-                                                                        *ngIf="record?.showBlackFolderIcon" /></a>
+                                                                    <li class="modal-body text-center modal-revert w-100 confirmationBox"
+                                                                        [ngClass]="{'show': revertinfo}">
+                                                                        <p class="modal-name">
+                                                                            Revert
+                                                                        </p>
+                                                                        <div
+                                                                            class="d-flex flex-wrap justify-content-between progress-revert-button">
+                                                                            <button type="button"
+                                                                                class="btn btn-default btn-sm"
+                                                                                (click)="revertClose();$event.stopPropagation()">
+                                                                                Cancel
+                                                                            </button>
+                                                                            <button type="button"
+                                                                                class="btn btn-primary btn-sm"
+                                                                                (click)="ChangeSubTaskStatusRevertClose(record?.taskId, record?.subTaskId, j);$event.stopPropagation()">
+                                                                                Yes
+                                                                            </button>
+                                                                        </div>
+                                                                    </li>
+                                                                    <li class="modal-body text-center modal-revert w-100 confirmationBox"
+                                                                        [ngClass]="{'show': updateProgressionStatus}">
+                                                                        <p class="modal-name">
+                                                                            Update
+                                                                        </p>
+                                                                        <div
+                                                                            class="d-flex flex-wrap justify-content-between progress-revert-button">
+                                                                            <button type="button"
+                                                                                class="btn btn-default btn-sm"
+                                                                                (click)="updateStatusClose();$event.stopPropagation()">
+                                                                                Cancel
+                                                                            </button>
+                                                                            <button type="button"
+                                                                                class="btn btn-primary btn-sm"
+                                                                                (click)="changeSubTaskStatusUpdateClose(record?.taskId, record?.subTaskId, statusClickedForUpdate, j);$event.stopPropagation()">
+                                                                                Yes
+                                                                            </button>
+                                                                        </div>
+                                                                    </li>
+                                                                </ul>
                                                             </li>
                                                         </ul>
-                                                        <div class="tab-content" id="pills-tabContent">
-                                                            <div class="tab-pane fade" id="pills-list{{record?.taskId}}"
-                                                                role="tabpanel" aria-labelledby="pills-list-tab"
-                                                                *ngIf="record?.showBlackListIcon"
-                                                                [ngClass]="{'show active': record?.showBlackListIcon}">
-                                                                <div class="list-div-tab-main">
-                                                                    <div class="lst-icon">
-                                                                        <img src="assets/images/list-icon-g.svg">
-                                                                        <div class="hov-ico"
-                                                                            (click)="openQueryTaskPopup(record, queryTaskPopup)">
-                                                                            <img src="assets/images/add-ic.svg">
-                                                                        </div>
+                                                        <ul class="dropdown-table dark right dropdown-progress d-flex flex-column align-items-center justify-content-center progressWidthExtend"
+                                                            [ngClass]="{'show' : (showId == record.id) && flagIsProgressRevert !=0 && record?.subTaskId !== null && !undoButtonVisible}">
+                                                            <li
+                                                                [ngClass]="{'show':flagIsProgressRevert !=0 && record?.subTaskId !== null && !undoButtonVisible}">
+                                                                <ul class="progressbar">
+                                                                    <li role="menuitem"
+                                                                        class="new-option changeStatusList">
+                                                                        <a class="mtop-5 changeStatus">Change Status
+                                                                        </a>
+                                                                    </li>
+                                                                    <li role="menuitem" class="new-option pagination">
+                                                                        <a class="dropdown-item label1 progressLabel"
+                                                                            (click)="progressRevertClick(record,record.newStatus,1,j);$event.stopPropagation()"
+                                                                            [ngClass]="{'orangeOnHover': record.newStatus == 1,'redOnHover':record.newStatus >=2}">
+                                                                            <span class="l1">1</span><span
+                                                                                class="l2 ">Added</span>
+                                                                        </a>
+                                                                        <a class="dropdown-item label2 orange progressLabel"
+                                                                            (click)="progressRevertClick(record,record.newStatus,2,j);$event.stopPropagation()"
+                                                                            [ngClass]="{'blueOnHover': record.newStatus <2,'orangeOnHover': record.newStatus == 2,'redOnHover':record.newStatus>=3}">
+                                                                            <span class="l1">2</span><span class="l2">In
+                                                                                Progress</span>
+                                                                        </a>
+                                                                        <a class="dropdown-item label3 progressLabel"
+                                                                            (click)="progressRevertClick(record,record.newStatus,3,j);$event.stopPropagation()"
+                                                                            [ngClass]="{'blueOnHover': record.newStatus <=2,'orangeOnHover': record.newStatus == 3,'redOnHover':record.newStatus>3}">
+                                                                            <span class="l1">3</span><span class="l2">In
+                                                                                Query</span>
+                                                                        </a>
+                                                                        <a class="dropdown-item label4 progressLabel"
+                                                                            (click)="progressRevertClick(record,record.newStatus,4,j);$event.stopPropagation()"
+                                                                            [ngClass]="{'blueOnHover': record.newStatus <=3,'green': record.newStatus == 4}">
+                                                                            <span class="l1">4</span><span
+                                                                                class="l2">Complete</span>
+                                                                        </a>
+                                                                    </li>
+                                                                    <li role="menuitem" class="new-option"
+                                                                        *ngIf="!undoButtonVisible">
+                                                                        <a class="dropdown-item"
+                                                                            href="javascript:void(0);"
+                                                                            (click)="onTaskClick(record.taskId)">Go
+                                                                            To
+                                                                            Task</a>
+                                                                    </li>
+                                                                </ul>
+                                                            </li>
+                                                        </ul>
+                                                        <ul class="undoButtonsUL dropdown-table dark right dropdown-progress d-flex flex-column align-items-center justify-content-center progressWidthExtend"
+                                                            [ngClass]="{'show' : (showId == record.id) && undoButtonVisible}">
+                                                            <li [ngClass]="{'show' : undoButtonVisible}">
+                                                                <ul>
+                                                                    <li role="menuitem"
+                                                                        class="new-option changeStatusList">
+                                                                        <a class="mtop-5 changeStatus">Change Status
+                                                                        </a>
+                                                                    </li>
+                                                                    <li role="menuitem" class="new-option">
+                                                                        <a class="dropdown-item undo-text"
+                                                                            href="javascript:void(0);"
+                                                                            (click)="undoToOldStatus(record,undoOldStatus,undoNewStatus,j);$event.stopPropagation()">
+                                                                            Undo
+                                                                        </a>
+                                                                    </li>
+                                                                </ul>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr class="inner-table-tr accordion-table-content x-animated fadeIn d-1 in"
+                                            fxFlex="100" *ngIf="record?.subTaskId !== null">
+                                            <!-- <tr class="inner-table-tr accordion-table-content x-animated fadeIn d-1 in"
+                                            fxFlex="100"
+                                            *ngIf="record?.relatedTaskList.length > 0 && record?.subTaskId !== null"> -->
+                                            <td colspan="4" class="inner-table">
+                                                <div class="task-tabing">
+                                                    <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                                                        <li class="nav-item">
+                                                            <a class="nav-link active" id="pills-list-tab"
+                                                                data-toggle="pill" href="#pills-list{{record?.taskId}}"
+                                                                role="tab" aria-controls="pills-list"
+                                                                aria-selected="true" #pillsListAnchor
+                                                                id="pillsListAnchor{{record?.taskId}}"
+                                                                (click)="checkActivenesList(record)"><img
+                                                                    src="assets/images/list-icon-g.svg"
+                                                                    *ngIf="!record?.showBlackListIcon" />
+                                                                <img src="assets/images/list-icon.svg"
+                                                                    *ngIf="record?.showBlackListIcon" /></a>
+                                                        </li>
+                                                        <li class="nav-item">
+                                                            <a class="nav-link" id="pills-chat-tab" data-toggle="pill"
+                                                                href="#pills-chat{{record?.taskId}}" role="tab"
+                                                                aria-controls="pills-chat" aria-selected="false"
+                                                                (click)="checkActivenesChat(record); getChatDetails(record?.taskId, record?.subTaskId, record)"
+                                                                id="pillsChatAnchor{{record?.taskId}}"
+                                                                #pillsChatAnchor><img src="assets/images/chat-icon.svg"
+                                                                    *ngIf="!record?.showBlackChatIcon" />
+                                                                <img src="assets/images/chat-icon-b.svg"
+                                                                    *ngIf="record?.showBlackChatIcon" /></a>
+                                                        </li>
+                                                        <li class="nav-item">
+                                                            <a class="nav-link" id="pills-folder-tab" data-toggle="pill"
+                                                                href="#pills-folder{{record?.taskId}}" role="tab"
+                                                                aria-controls="pills-folder" aria-selected="false"
+                                                                id="pillsFolderAnchor{{record?.taskId}}"
+                                                                (click)="checkActivenesDetails(record); getTaskDetails(record?.taskId, record?.subTaskId, record)"
+                                                                #pillsFolderAnchor><img
+                                                                    src="assets/images/folder-icon.svg"
+                                                                    *ngIf="!record?.showBlackFolderIcon" />
+                                                                <img src="assets/images/folder-icon-b.svg"
+                                                                    *ngIf="record?.showBlackFolderIcon" /></a>
+                                                        </li>
+                                                    </ul>
+                                                    <div class="tab-content" id="pills-tabContent">
+                                                        <div class="tab-pane fade" id="pills-list{{record?.taskId}}"
+                                                            role="tabpanel" aria-labelledby="pills-list-tab"
+                                                            *ngIf="record?.showBlackListIcon"
+                                                            [ngClass]="{'show active': record?.showBlackListIcon}">
+                                                            <div class="list-div-tab-main">
+                                                                <div class="lst-icon">
+                                                                    <img src="assets/images/list-icon-g.svg">
+                                                                    <div class="hov-ico"
+                                                                        (click)="openQueryTaskPopup(record, queryTaskPopup)">
+                                                                        <img src="assets/images/add-ic.svg">
                                                                     </div>
-                                                                    <div class="list-div-main">
-                                                                        <ul class="scrollbar">
-                                                                            <li
-                                                                                *ngFor="let innerRecords of record?.relatedTaskList; let index = index">
-                                                                                <span class="circle"
-                                                                                    [ngClass]="{'yellow': 0 === (index+1) % 2}"></span>
-                                                                                <div class="date-name">
-                                                                                    <span>{{innerRecords?.interactionOn
-                                                                                        |
-                                                                                        date: 'MMM d, y'}}</span>
-                                                                                    <span>{{innerRecords?.interactionOn
-                                                                                        |
-                                                                                        date: 'H:mm'}}</span>
-                                                                                    <span>{{innerRecords?.interactionBy}}</span>
-                                                                                </div>
-                                                                                <div class="small help-block">
-                                                                                    <div class="button-main-div">
-                                                                                        <ng-container
-                                                                                            *ngIf="innerRecords.newStatus !== 7">
-                                                                                            <span
-                                                                                                *ngIf="innerRecords.previousStatus == null"
-                                                                                                class="color-tab-span plus question"><i
-                                                                                                    class="fa fa-exclamation"></i></span>
-                                                                                            <span
-                                                                                                class="color-tab-span plus"
-                                                                                                *ngIf="innerRecords.previousStatus === 0"><i
-                                                                                                    class="fa fa-plus"></i></span>
-                                                                                            <span
-                                                                                                class="color-tab-span grey"
-                                                                                                *ngIf="innerRecords.previousStatus === 1">Added</span>
-                                                                                            <span class="color-tab-span"
-                                                                                                *ngIf="innerRecords.previousStatus === 2">In
-                                                                                                Progress</span>
-                                                                                            <span
-                                                                                                class="color-tab-span yellow"
-                                                                                                *ngIf="innerRecords.previousStatus === 3">In
-                                                                                                Querry</span>
-                                                                                            <span
-                                                                                                class="color-tab-span green"
-                                                                                                *ngIf="innerRecords.previousStatus === 4">Completed</span>
-                                                                                            <span
-                                                                                                class="color-tab-span indianred"
-                                                                                                *ngIf="innerRecords.previousStatus === 5">Over
-                                                                                                Due</span>
-                                                                                            <span
-                                                                                                class="color-tab-span red"
-                                                                                                *ngIf="innerRecords.previousStatus === 6">Forgotten</span>
-                                                                                            <span
-                                                                                                class="color-tab-span grey"
-                                                                                                *ngIf="innerRecords.previousStatus === 8">Planned</span>
-                                                                                            <span class="color-tab-span"
-                                                                                                *ngIf="innerRecords.previousStatus === 9">Current</span>
-                                                                                        </ng-container>
-                                                                                        <ng-container
-                                                                                            *ngIf="innerRecords.newStatus === 7">
-                                                                                            <span
-                                                                                                class="color-tab-span plus question"><i
-                                                                                                    class="fa fa-question"></i></span>
-                                                                                        </ng-container>
-                                                                                        <i
-                                                                                            class="fa fa-angle-right"></i>
+                                                                </div>
+                                                                <div class="list-div-main">
+                                                                    <ul class="scrollbar">
+                                                                        <li
+                                                                            *ngFor="let innerRecords of record?.relatedTaskList; let index = index">
+                                                                            <span class="circle"
+                                                                                [ngClass]="{'yellow': 0 === (index+1) % 2}"></span>
+                                                                            <div class="date-name">
+                                                                                <span>{{innerRecords?.interactionOn
+                                                                                    |
+                                                                                    date: 'MMM d, y'}}</span>
+                                                                                <span>{{innerRecords?.interactionOn
+                                                                                    |
+                                                                                    date: 'H:mm'}}</span>
+                                                                                <span>{{innerRecords?.interactionBy}}</span>
+                                                                            </div>
+                                                                            <div class="small help-block">
+                                                                                <div class="button-main-div">
+                                                                                    <ng-container
+                                                                                        *ngIf="innerRecords.newStatus !== 7">
+                                                                                        <span
+                                                                                            *ngIf="innerRecords.previousStatus == null"
+                                                                                            class="color-tab-span plus question"><i
+                                                                                                class="fa fa-exclamation"></i></span>
                                                                                         <span
                                                                                             class="color-tab-span plus"
-                                                                                            *ngIf="innerRecords.newStatus === 0"><i
+                                                                                            *ngIf="innerRecords.previousStatus === 0"><i
                                                                                                 class="fa fa-plus"></i></span>
                                                                                         <span
                                                                                             class="color-tab-span grey"
-                                                                                            *ngIf="innerRecords.newStatus === 1">Added</span>
+                                                                                            *ngIf="innerRecords.previousStatus === 1">Added</span>
                                                                                         <span class="color-tab-span"
-                                                                                            *ngIf="innerRecords.newStatus === 2">In
+                                                                                            *ngIf="innerRecords.previousStatus === 2">In
                                                                                             Progress</span>
                                                                                         <span
                                                                                             class="color-tab-span yellow"
-                                                                                            *ngIf="innerRecords.newStatus === 3">In
-                                                                                            Query</span>
+                                                                                            *ngIf="innerRecords.previousStatus === 3">In
+                                                                                            Querry</span>
                                                                                         <span
                                                                                             class="color-tab-span green"
-                                                                                            *ngIf="innerRecords.newStatus === 4">Completed</span>
+                                                                                            *ngIf="innerRecords.previousStatus === 4">Completed</span>
                                                                                         <span
                                                                                             class="color-tab-span indianred"
-                                                                                            *ngIf="innerRecords.newStatus === 5">Over
+                                                                                            *ngIf="innerRecords.previousStatus === 5">Over
                                                                                             Due</span>
                                                                                         <span class="color-tab-span red"
-                                                                                            *ngIf="innerRecords.newStatus === 6">Forgotten</span>
+                                                                                            *ngIf="innerRecords.previousStatus === 6">Forgotten</span>
                                                                                         <span
                                                                                             class="color-tab-span grey"
-                                                                                            *ngIf="innerRecords.newStatus === 8">Planned</span>
+                                                                                            *ngIf="innerRecords.previousStatus === 8">Planned</span>
                                                                                         <span class="color-tab-span"
-                                                                                            *ngIf="innerRecords.newStatus === 9">Current</span>
-                                                                                        <div
-                                                                                            class="hover-icon-h subtask-hover-h">
-                                                                                            <span
-                                                                                                class="text task-querytab-h"
-                                                                                                *ngIf="innerRecords.newStatus === 7">{{innerRecords?.queryDetailsString}}</span>
-                                                                                            <div class="table-fulldesc"
-                                                                                                *ngIf="innerRecords.newStatus === 7 && innerRecords?.queryDetailsString?.length > 50">
-                                                                                                {{innerRecords?.queryDetailsString}}
-                                                                                            </div>
+                                                                                            *ngIf="innerRecords.previousStatus === 9">Current</span>
+                                                                                    </ng-container>
+                                                                                    <ng-container
+                                                                                        *ngIf="innerRecords.newStatus === 7">
+                                                                                        <span
+                                                                                            class="color-tab-span plus question"><i
+                                                                                                class="fa fa-question"></i></span>
+                                                                                    </ng-container>
+                                                                                    <i class="fa fa-angle-right"></i>
+                                                                                    <span class="color-tab-span plus"
+                                                                                        *ngIf="innerRecords.newStatus === 0"><i
+                                                                                            class="fa fa-plus"></i></span>
+                                                                                    <span class="color-tab-span grey"
+                                                                                        *ngIf="innerRecords.newStatus === 1">Added</span>
+                                                                                    <span class="color-tab-span"
+                                                                                        *ngIf="innerRecords.newStatus === 2">In
+                                                                                        Progress</span>
+                                                                                    <span class="color-tab-span yellow"
+                                                                                        *ngIf="innerRecords.newStatus === 3">In
+                                                                                        Query</span>
+                                                                                    <span class="color-tab-span green"
+                                                                                        *ngIf="innerRecords.newStatus === 4">Completed</span>
+                                                                                    <span
+                                                                                        class="color-tab-span indianred"
+                                                                                        *ngIf="innerRecords.newStatus === 5">Over
+                                                                                        Due</span>
+                                                                                    <span class="color-tab-span red"
+                                                                                        *ngIf="innerRecords.newStatus === 6">Forgotten</span>
+                                                                                    <span class="color-tab-span grey"
+                                                                                        *ngIf="innerRecords.newStatus === 8">Planned</span>
+                                                                                    <span class="color-tab-span"
+                                                                                        *ngIf="innerRecords.newStatus === 9">Current</span>
+                                                                                    <div
+                                                                                        class="hover-icon-h subtask-hover-h">
+                                                                                        <span
+                                                                                            class="text task-querytab-h"
+                                                                                            *ngIf="innerRecords.newStatus === 7">{{innerRecords?.queryDetailsString}}</span>
+                                                                                        <div class="table-fulldesc"
+                                                                                            *ngIf="innerRecords.newStatus === 7 && innerRecords?.queryDetailsString?.length > 50">
+                                                                                            {{innerRecords?.queryDetailsString}}
                                                                                         </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="tab-pane fade" id="pills-chat{{record?.taskId}}"
+                                                            role="tabpanel" aria-labelledby="pills-chat-tab"
+                                                            *ngIf="record?.showBlackChatIcon"
+                                                            [ngClass]="{'show active': record?.showBlackChatIcon}">
+                                                            <div class="list-div-tab-main">
+                                                                <div class="lst-icon">
+                                                                    <img src="assets/images/chat-icon.svg">
+                                                                    <div class="hov-ico"
+                                                                        (click)="openTaskChatPopup(record, taskChatPopup)">
+                                                                        <img src="assets/images/add-ic.svg">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="list-div-main chat-div-main">
+                                                                    <ul class="scrollbar chat-div-main-h">
+                                                                        <li
+                                                                            *ngFor="let chat of record?.chatData?.listOfDetails; let index = index">
+                                                                            <span class="circle"
+                                                                                [ngClass]="{'yellow': 0 === (index+1) % 2}"></span>
+                                                                            <div class="date-name">
+                                                                                <span>{{chat?.createdOn |
+                                                                                    date: 'MMM d, y'}}</span>
+                                                                                <span>{{chat?.createdOn |
+                                                                                    date: 'H:mm'}}</span>
+                                                                                <span>{{chat?.createdBy}}</span>
+                                                                            </div>
+                                                                            <div class="text-line">
+                                                                                <span>{{chat?.note}}</span>
+                                                                            </div>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="tab-pane fade" id="pills-folder{{record?.taskId}}"
+                                                            role="tabpanel" aria-labelledby="pills-folder-tab"
+                                                            *ngIf="record?.showBlackFolderIcon"
+                                                            [ngClass]="{'show active': record?.showBlackFolderIcon}">
+                                                            <div class="list-div-tab-main">
+                                                                <div class="lst-icon">
+                                                                    <img src="assets/images/folder-icon.svg">
+                                                                    <div class="hov-ico"
+                                                                        (click)="openAddTaskDetailsPopup(record, addTaskDetailsPopup)">
+                                                                        <img src="assets/images/add-ic.svg">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="list-div-main folder-div-main">
+                                                                    <div class="mcs-horizontal-scrollbar-newui">
+                                                                        <ul>
+                                                                            <li *ngFor="let details of record?.detailsData?.listOfDetails"
+                                                                                class="task-details-image">
+                                                                                <div class="folder-img"
+                                                                                    *ngIf="details?.src"
+                                                                                    (click)="openTaskDetailsView(record, details, addTaskDetailsViewsPopup)">
+                                                                                    <img [src]="details?.src"
+                                                                                        *ngIf="details?.src">
+                                                                                </div>
+                                                                                <div class="folder-text"
+                                                                                    [ngClass]="{'width-100': !details?.src}">
+                                                                                    <div class="date-name">
+                                                                                        <span>{{details?.createdOn |
+                                                                                            date: 'MMM d, y'}}</span>
+                                                                                        <span>{{details?.createdOn |
+                                                                                            date: 'H:mm'}}</span>
+                                                                                        <span>{{details?.createdBy}}</span>
+                                                                                    </div>
+                                                                                    <div class="text-line">
+                                                                                        <span>{{details?.note}}</span>
                                                                                     </div>
                                                                                 </div>
                                                                             </li>
                                                                         </ul>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="tab-pane fade" id="pills-chat{{record?.taskId}}"
-                                                                role="tabpanel" aria-labelledby="pills-chat-tab"
-                                                                *ngIf="record?.showBlackChatIcon"
-                                                                [ngClass]="{'show active': record?.showBlackChatIcon}">
-                                                                <div class="list-div-tab-main">
-                                                                    <div class="lst-icon">
-                                                                        <img src="assets/images/chat-icon.svg">
-                                                                        <div class="hov-ico"
-                                                                            (click)="openTaskChatPopup(record, taskChatPopup)">
-                                                                            <img src="assets/images/add-ic.svg">
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="list-div-main chat-div-main">
-                                                                        <ul
-                                                                            class="scrollbar chat-div-main-h">
-                                                                            <li
-                                                                                *ngFor="let chat of record?.chatData?.listOfDetails; let index = index">
-                                                                                <span class="circle"
-                                                                                    [ngClass]="{'yellow': 0 === (index+1) % 2}"></span>
-                                                                                <div class="date-name">
-                                                                                    <span>{{chat?.createdOn |
-                                                                                        date: 'MMM d, y'}}</span>
-                                                                                    <span>{{chat?.createdOn |
-                                                                                        date: 'H:mm'}}</span>
-                                                                                    <span>{{chat?.createdBy}}</span>
-                                                                                </div>
-                                                                                <div class="text-line">
-                                                                                    <span>{{chat?.note}}</span>
-                                                                                </div>
-                                                                            </li>
-                                                                        </ul>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="tab-pane fade"
-                                                                id="pills-folder{{record?.taskId}}" role="tabpanel"
-                                                                aria-labelledby="pills-folder-tab"
-                                                                *ngIf="record?.showBlackFolderIcon"
-                                                                [ngClass]="{'show active': record?.showBlackFolderIcon}">
-                                                                <div class="list-div-tab-main">
-                                                                    <div class="lst-icon">
-                                                                        <img src="assets/images/folder-icon.svg">
-                                                                        <div class="hov-ico"
-                                                                            (click)="openAddTaskDetailsPopup(record, addTaskDetailsPopup)">
-                                                                            <img src="assets/images/add-ic.svg">
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="list-div-main folder-div-main">
-                                                                        <div class="mcs-horizontal-scrollbar-newui"
-                                                                        >
-                                                                            <ul>
-                                                                                <li *ngFor="let details of record?.detailsData?.listOfDetails"
-                                                                                    class="task-details-image">
-                                                                                    <div class="folder-img"
-                                                                                        *ngIf="details?.src"
-                                                                                        (click)="openTaskDetailsView(record, details, addTaskDetailsViewsPopup)">
-                                                                                        <img [src]="details?.src"
-                                                                                            *ngIf="details?.src">
-                                                                                    </div>
-                                                                                    <div class="folder-text"
-                                                                                        [ngClass]="{'width-100': !details?.src}">
-                                                                                        <div class="date-name">
-                                                                                            <span>{{details?.createdOn | date: 'MMM d, y'}}</span>
-                                                                                            <span>{{details?.createdOn |
-                                                                                                date: 'H:mm'}}</span>
-                                                                                            <span>{{details?.createdBy}}</span>
-                                                                                        </div>
-                                                                                        <div class="text-line">
-                                                                                            <span>{{details?.note}}</span>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </li>
-                                                                            </ul>
-                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
-
-                    
                         </div>
+
+
+                    </div>
                 </div>
             </div>
         </div>
@@ -1458,11 +1441,14 @@
                                 </bs-datepicker-inline>
                             </div>
                             <div *ngIf="!timeSelected" class="calendars-task calendar-time-list">
-                                <div *ngFor="let time of calendarTimeList" class="calendar-time"
-                                    (click)="timeClicked(time)">
-                                    <div class="flex-child time-span">{{time.time}}</div>
-                                    <div class="flex-child time-description">{{time.description}}</div>
-                                </div>
+                                <ng-scrollbar visibility="hover" #scrollEl thumbClass="custom-scrollbars"
+                                    orientation="vertical">
+                                    <div *ngFor="let time of calendarTimeList" class="calendar-time"
+                                        (click)="timeClicked(time)">
+                                        <div class="flex-child time-span">{{time.time}}</div>
+                                        <div class="flex-child time-description">{{time.description}}</div>
+                                    </div>
+                                </ng-scrollbar>
                             </div>
                             <div *ngIf="timeSelected" class="calendars-task calendar-time-select">
                                 <div class="row calendar-event-section-1">

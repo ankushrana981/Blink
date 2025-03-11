@@ -92,21 +92,14 @@
                       <li class="customanimate order-animate5" [ngClass]="selectedSecond ? 'active':''" (click)="isSelected('second')"><a class="active">Sugar</a></li>
                       <li class="customanimate order-animate6"><a>Vegemite</a></li>
                     </ul> -->
-                    <!-- <alphabet-filter 
-                        propAlphaOrder="name"
-                        propsSearch="name"
-                        placeholder=""
-                        height="100%"
-                        [data]="items"
-                        (onClick)="selectedItem($event)"
-                        [withTemplate]="true"
-                        (keyup)="change()">
-                        <ng-template let-item>
-                          <div class="search-list-item">
-                            <span [ngClass]="item.name == selectedValue ? 'active' : ''">{{item.name}}</span>
-                          </div>
-                        </ng-template>
-                      </alphabet-filter> -->
+                    <!-- <alphabet-filter propAlphaOrder="name" propsSearch="name" placeholder="" height="100%"
+                      [data]="items" (onClick)="selectedItem($event)" [withTemplate]="true" (keyup)="change()">
+                      <ng-template let-item>
+                        <div class="search-list-item">
+                          <span [ngClass]="item.name == selectedValue ? 'active' : ''">{{item.name}}</span>
+                        </div>
+                      </ng-template>
+                    </alphabet-filter> -->
 
                   </div>
                 </div>

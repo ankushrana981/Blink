@@ -188,8 +188,9 @@
         </div>
         <!-- <perfect-scrollbar #perfectScroll *ngIf="type === 'component'" fxFlex="auto" [config]="config"
           [scrollIndicators]="false" (psXReachEnd)="onScrollEvent($event)" (psYReachEnd)="onScrollDown($event)"
-          (psXReachStart)="onScrollEvent($event)" (psYReachStart)="onScrollUp($event)">
-          <div class="scrollbar">
+          (psXReachStart)="onScrollEvent($event)" (psYReachStart)="onScrollUp($event)"> -->
+        <div class="scrollbar">
+          <ng-scrollbar visibility="hover" #scrollEl thumbClass="custom-scrollbars" orientation="vertical">
             <div class="table-box mb-20">
               <div class="table-respons task-crm-table task-note-table">
                 <table style="width:100%" class="table-hover default-to-custom">
@@ -274,10 +275,10 @@
                                         <a class="dropdown-item singled-out" href="javascript:void(0);"
                                           (click)="deSingleClient()">Singled Out</a>
                                       </li>
-                                      <li role="menuitem" class="new-option">
-                                        <a class="dropdown-item" href="javascript:void(0);"
-                                          (click)="addQuickModal(quickcustomer);$event.preventDefault()">Analytics</a>
-                                      </li>
+                                      <!-- <li role="menuitem" class="new-option">
+                                      <a class="dropdown-item" href="javascript:void(0);"
+                                        (click)="addQuickModal(quickcustomer);$event.preventDefault()">Analytics</a>
+                                    </li> -->
                                       <li role="menuitem" class="new-option">
                                         <a class="dropdown-item" href="javascript:void(0);">Query</a>
                                       </li>
@@ -295,7 +296,7 @@
                         <div class="line-divider td-des taskcrm-des-h bottom-td-h" id="table-text-main-{{record?.id}}">
                           <ng-container *ngIf="record?.note !== null">
                             <p class="table-text taskcrm-text-h" id="table-text-{{record?.id}}"
-                              *ngIf="record?.note && record.note.length > 0" (click)="showTaskDetails(record)" >
+                              *ngIf="record?.note && record.note.length > 0" (click)="showTaskDetails(record)">
                               {{record.note.substring(0,75)}}<ng-container *ngIf="record.note.length > 75">...
                               </ng-container>
                             </p>
@@ -304,7 +305,8 @@
                             </div>
                           </ng-container>
                           <ng-container *ngIf="record?.note == null || record?.note == ''"><span
-                              class="table-text taskcrm-text-h" id="table-text-{{record?.id}}" (click)="showTaskDetails(record)" >-</span></ng-container>
+                              class="table-text taskcrm-text-h" id="table-text-{{record?.id}}"
+                              (click)="showTaskDetails(record)">-</span></ng-container>
                         </div>
                       </td>
                       <td class="text-left" (click)="showTaskDetails(record)">
@@ -335,7 +337,8 @@
                               (click)="subDropdownClose();$event.stopPropagation();dropdownClose();$event.stopPropagation()"></a>
                             <ul [ngClass]="(showId == record.id) ? 'show' : ''"
                               class="dropdown-table dark right dropdown-progress d-flex flex-column align-items-center justify-content-center more-dropdown">
-                              <li [ngClass]="{'show': !progressinfo}">
+                              <!-- <li [ngClass]="{'show': !progressinfo}"> -->
+                              <li>
                                 <ul>
                                   <li role="menuitem" class="new-option">
                                     <a class="dropdown-item" href="javascript:void(0);"
@@ -359,8 +362,9 @@
                 </table>
               </div>
             </div>
-          </div>
-        </perfect-scrollbar> -->
+          </ng-scrollbar>
+        </div>
+        <!-- </perfect-scrollbar> -->
       </div>
       <div class="notes-btn text-end btn-task-main wow fadeIn" data-wow-delay="500ms" style="margin-right: 0px;">
         <a *ngIf="showAddNewTaskButton" class="btn btn-main btn-blue wh-btn" (click)="changeIc('dots')">Add New Task</a>

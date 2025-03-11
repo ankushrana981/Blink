@@ -92,9 +92,10 @@
         <div class="d-flex" style="margin-top: -20px;">
           <a class="icon-task" href="javascript:void(0)" icon-more title="More"></a>
           <div class="dropdown reladex-add-dropdown">
-            <a class="icon-task" href="javascript:void(0);" id="dropdownMenuButton" data-toggle="dropdown"
-              aria-haspopup="true" aria-expanded="false" icon-pluse></a>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+
+            <a class="icon-task dropdown-toggle" href="javascript:void(0);" id="dropdownMenuButton" role="button"
+              data-bs-toggle="dropdown" aria-expanded="false" icon-pluse></a>
+            <div class="dropdown-menu mt-8" aria-labelledby="dropdownMenuButton">
               <a class="dropdown-item" href="javascript:void(0);"
                 (click)="showCustomerDetailsPopup(addCustomerPopup)">Customer</a>
               <a class="dropdown-item" href="javascript:void(0);"
@@ -172,10 +173,13 @@
         </div>
         <!-- <perfect-scrollbar #perfectScroll *ngIf="type === 'component'" fxFlex="auto" [config]="config"
           [scrollIndicators]="false" (psXReachEnd)="onScrollEvent($event)" (psYReachEnd)="onScrollDown($event)"
-          (psXReachStart)="onScrollEvent($event)" (psYReachStart)="onScrollUp($event)">
-          <div class="scrollbar">
+          (psXReachStart)="onScrollEvent($event)" (psYReachStart)="onScrollUp($event)"> -->
+
+        <div class="scrollbar">
+          <ng-scrollbar visibility="hover" #scrollEl thumbClass="custom-scrollbars" orientation="vertical">
             <div class="table-box mb-20">
               <div class="table-respons task-note-table reladex-table">
+
                 <table style="width:100%" class="table-hover default-to-custom">
                   <thead class="thead-none">
                     <tr class="x-animated fadeIn d-1 in">
@@ -229,7 +233,9 @@
                       <th class="table-action" width="36"></th>
                     </tr>
                   </thead>
+
                   <tbody [@fadeIn]="listrecords?.length" fxLayout="row wrap" class="list">
+
                     <tr style="vertical-align:top;" class="x-animated fadeIn d-1 in cursor-pointer"
                       *ngFor="let record of listrecords; index as j" fxFlex="100" fxFlex.lt-sm="200">
                       <td width="57px" class="text-center" (click)="showDetails(record)">
@@ -268,7 +274,7 @@
                             </td>
                           </tr>
                           <tr>
-                            <td colspan="3" class="reladex-region-des p-0" (click)="showDetails(record)" >
+                            <td colspan="3" class="reladex-region-des p-0" (click)="showDetails(record)">
                               <div class="small help-block line-divider help-desc bottom-reladex-td-h">
                                 <span class="table-text">
                                   <span *ngIf="record?.clientType === 1">
@@ -319,7 +325,8 @@
                               (click)="subDropdownClose();$event.stopPropagation();dropdownClose();$event.stopPropagation()"></a>
                             <ul [ngClass]="(showId == record.id) ? 'show' : ''"
                               class="dropdown-table dark right dropdown-progress d-flex flex-column align-items-center justify-content-center more-dropdown">
-                              <li [ngClass]="{'show': !progressinfo}">
+                              <!-- <li [ngClass]="{'show': !progressinfo}"> -->
+                              <li>
                                 <ul>
                                   <li role="menuitem" class="new-option">
                                     <a class="dropdown-item" href="javascript:void(0);"
@@ -341,12 +348,17 @@
                         </div>
                       </td>
                     </tr>
+
                   </tbody>
+
                 </table>
+
               </div>
             </div>
-          </div>
-        </perfect-scrollbar> -->
+          </ng-scrollbar>
+        </div>
+
+        <!-- </perfect-scrollbar>  -->
       </div>
       <div class="notes-btn text-end btn-task-main wow fadeIn " data-wow-delay="500ms">
         <a *ngIf="showAddNewTaskButton" class="btn btn-main btn-blue wh-btn" (click)="changeIc('dots')">Add New Task</a>

@@ -5,33 +5,33 @@ import {
   TemplateRef,
   ElementRef,
   ViewChild,
-} from "@angular/core";
-import { BsModalService, BsModalRef } from "ngx-bootstrap/modal";
-import { DatePipe } from "@angular/common";
-import { BaseComponent } from "../../../common/commonComponent";
+} from '@angular/core';
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+import { DatePipe } from '@angular/common';
+import { BaseComponent } from '../../../common/commonComponent';
 // import { PerfectScrollbarConfigInterface } from "ngx-perfect-scrollbar";
-import { trigger } from "@angular/animations";
-import { fadeIn, fadeOut } from "../../../reusable/fade-animations";
-import moment from "moment";
-import { Subject, Observable, of, concat } from "rxjs";
+import { trigger } from '@angular/animations';
+import { fadeIn, fadeOut } from '../../../reusable/fade-animations';
+import moment from 'moment';
+import { Subject, Observable, of, concat } from 'rxjs';
 import {
   catchError,
   debounceTime,
   distinctUntilChanged,
   map,
   switchMap,
-} from "rxjs/operators";
-import { FormControl, FormGroup, Validators } from "@angular/forms";
-import { NgSelectComponent } from "@ng-select/ng-select";
-import { ActivatedRoute } from "@angular/router";
-import { BsDatepickerConfig } from "ngx-bootstrap/datepicker";
+} from 'rxjs/operators';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { NgSelectComponent } from '@ng-select/ng-select';
+import { ActivatedRoute } from '@angular/router';
+import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 @Component({
-  selector: "app-tasks",
-  standalone:false,
-  templateUrl: "./tasks.component.html",
+  selector: 'app-tasks',
+  standalone: false,
+  templateUrl: './tasks.component.html',
   animations: [
-    trigger("fadeOut", fadeOut()),
-    trigger("fadeIn", fadeIn(":enter")),
+    trigger('fadeOut', fadeOut()),
+    trigger('fadeIn', fadeIn(':enter')),
   ],
   styles: [],
 })
@@ -42,20 +42,20 @@ export class TasksComponent extends BaseComponent implements OnInit {
   public offset: any = 0;
   public limit: any = 25;
   total: any;
-  public type: string = "component";
+  public type: string = 'component';
   // public config: PerfectScrollbarConfigInterface = {};
   public page: number = 0;
   public showingPage: number = 0;
   public maxPage: number = 0;
   showAddNewTaskButton: boolean = false;
   typeArray = [
-    "",
-    "General",
-    "Customer",
-    "Company",
-    "Contact",
-    "Task",
-    "Undefined",
+    '',
+    'General',
+    'Customer',
+    'Company',
+    'Contact',
+    'Task',
+    'Undefined',
   ];
   showTaskDetailsDiv: boolean = false;
   taskDetailsData: any;
@@ -70,10 +70,10 @@ export class TasksComponent extends BaseComponent implements OnInit {
   titleArr: any = [];
   tasks = [
     // { type: 1, name: "General", id: 1 },
-    { type: 2, name: "Customer", id: 2 },
-    { type: 3, name: "Company", id: 3 },
-    { type: 4, name: "Contact", id: 4 },
-    { type: 5, name: "Task", id: 5 },
+    { type: 2, name: 'Customer', id: 2 },
+    { type: 3, name: 'Company', id: 3 },
+    { type: 4, name: 'Contact', id: 4 },
+    { type: 5, name: 'Task', id: 5 },
   ];
   clientNameItem: Observable<any>;
   MainSearchdataSource = new Subject<string>();
@@ -92,96 +92,96 @@ export class TasksComponent extends BaseComponent implements OnInit {
   contactList: any = [];
   companyList: any = [];
   statusArray: any = [
-    { id: 1, title: "Active" },
-    { id: 2, title: "Completed" },
-    { id: 3, title: "Indefinite Hold" },
+    { id: 1, title: 'Active' },
+    { id: 2, title: 'Completed' },
+    { id: 3, title: 'Indefinite Hold' },
   ];
   showBlankSideBar: boolean = false;
   fliterflag: boolean = false;
   activateSecondComapanyFilter: boolean = false;
   activateSecondFilter: boolean = false;
   filterData: any = {};
-  @ViewChild("filterName") filterName: NgSelectComponent;
+  @ViewChild('filterName') filterName: NgSelectComponent;
   isOpenFilter = false;
   tempArr = [];
   filterstart = [
     {
       id: 1,
-      title: "Date of Entry",
+      title: 'Date of Entry',
       option: [],
       async: false,
-      labelName: "Date of Entry",
-      bindedValue: "",
+      labelName: 'Date of Entry',
+      bindedValue: '',
     },
     {
       id: 2,
-      title: "Due Date",
+      title: 'Due Date',
       option: [],
       async: false,
-      labelName: "Due Date",
-      bindedValue: "",
+      labelName: 'Due Date',
+      bindedValue: '',
     },
     {
       id: 3,
-      title: "Past Due",
+      title: 'Past Due',
       option: [],
       async: false,
-      labelName: "Past Due",
-      bindedValue: "",
+      labelName: 'Past Due',
+      bindedValue: '',
     },
     {
       id: 4,
-      title: "Completed",
+      title: 'Completed',
       option: [],
       async: false,
-      labelName: "Completed",
-      bindedValue: "",
+      labelName: 'Completed',
+      bindedValue: '',
     },
     {
       id: 5,
-      title: "Type of task",
+      title: 'Type of task',
       option: [],
       async: false,
-      labelName: "Type of task",
-      bindedValue: "",
+      labelName: 'Type of task',
+      bindedValue: '',
     },
     {
       id: 6,
-      title: "Note",
+      title: 'Note',
       option: [],
       async: false,
-      labelName: "Note",
-      bindedValue: "",
+      labelName: 'Note',
+      bindedValue: '',
     },
     {
       id: 7,
-      title: "Assigned To",
+      title: 'Assigned To',
       option: [],
       async: false,
-      labelName: "Assigned To",
-      bindedValue: "",
+      labelName: 'Assigned To',
+      bindedValue: '',
     },
     {
       id: 8,
-      title: "Branch",
+      title: 'Branch',
       option: [],
       async: false,
-      labelName: "Branch",
-      bindedValue: "",
+      labelName: 'Branch',
+      bindedValue: '',
     },
     {
       id: 9,
-      title: "Overdue",
+      title: 'Overdue',
       option: [],
       async: false,
-      labelName: "Overdue",
-      bindedValue: "",
+      labelName: 'Overdue',
+      bindedValue: '',
     },
   ];
   data: any = {};
   refFilter = [...this.filterstart];
-  @ViewChild("secondFilter1") secondFilter: NgSelectComponent;
-  @ViewChild("secondFilter1") secondFilter1: ElementRef;
+  @ViewChild('secondFilter1') secondFilter: NgSelectComponent;
+  @ViewChild('secondFilter1') secondFilter1: ElementRef;
   isOpen = false;
   presetActivities: [];
   customers: Observable<any>;
@@ -205,8 +205,8 @@ export class TasksComponent extends BaseComponent implements OnInit {
   showDummySidebar: boolean = true;
   disableStatusArray: boolean = true;
   isScrollUp: boolean = false;
-  businessPartnerId: any = "";
-  listApiFilterType: any = "";
+  businessPartnerId: any = '';
+  listApiFilterType: any = '';
   crmNotePopupData: any = {};
   noteDetailBusinessPartnerID: any;
   taskDetailBusinessPartnerID: any;
@@ -215,7 +215,7 @@ export class TasksComponent extends BaseComponent implements OnInit {
   addForm: FormGroup;
   bsConfig: Partial<BsDatepickerConfig>;
   bsConfigCreated_Date: Partial<BsDatepickerConfig>;
-  customerNameCreateTask: any = "";
+  customerNameCreateTask: any = '';
   businessPartnerCreateTask: any;
   isSaveButtonDisabled: boolean = false;
   presetActivity = {};
@@ -225,9 +225,9 @@ export class TasksComponent extends BaseComponent implements OnInit {
   created_Date: any = new Date();
   due_date: any = new Date();
   public scrollbarOptionsFilterMenu = {
-    axis: "x",
-    theme: "light",
-    scrollbarPosition: "inside",
+    axis: 'x',
+    theme: 'light',
+    scrollbarPosition: 'inside',
     advanced: { autoExpandHorizontalScroll: true },
     autoHideScrollbar: false,
     callbacks: {
@@ -237,8 +237,13 @@ export class TasksComponent extends BaseComponent implements OnInit {
   isSingledOut: boolean = false;
   singledOutUserID: number = 0;
   clientList: any = [];
-accessLevel: any;
-taskDataObj: any;
+  accessLevel: any;
+  taskDataObj: any;
+  addQuickModal(quickcustomer: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(quickcustomer, {
+      class: 'modal-xl task-modal modal-dialog-centered quick-popup',
+    });
+  }
   constructor(
     inj: Injector,
     public override modalService: BsModalService,
@@ -247,9 +252,9 @@ taskDataObj: any;
   ) {
     super(inj);
     this.route.params.subscribe((params) => {
-      if (params["businessPartnerId"]) {
-        this.businessPartnerId = params["businessPartnerId"];
-        this.listApiFilterType = params["type"];
+      if (params['businessPartnerId']) {
+        this.businessPartnerId = params['businessPartnerId'];
+        this.listApiFilterType = params['type'];
       }
     });
   }
@@ -296,32 +301,32 @@ taskDataObj: any;
   listApi(alreadyCalled?) {
     if (!alreadyCalled) {
       this.tempArr.push({
-        parentFilter: "Overdue",
-        secondFilter: "",
+        parentFilter: 'Overdue',
+        secondFilter: '',
         selectedObj: this.filterstart.filter((X) => X.id === 9)[0],
       });
       this.filterstart = this.filterstart.filter((X) => X.id != 9);
     }
     var queryParams =
-      "ts=" +
+      'ts=' +
       this.ts +
-      "&offset=" +
+      '&offset=' +
       this.offset +
-      "&limit=" +
+      '&limit=' +
       this.limit +
-      "&isShowCreatedDate=true&excludeGeneralTasks=true";
-    if (this.businessPartnerId && this.businessPartnerId !== "") {
+      '&isShowCreatedDate=true&excludeGeneralTasks=true';
+    if (this.businessPartnerId && this.businessPartnerId !== '') {
       queryParams =
         queryParams +
-        "&businessPartnerId=" +
+        '&businessPartnerId=' +
         this.businessPartnerId +
-        "&type=" +
+        '&type=' +
         this.listApiFilterType;
     }
-    this.data["isShowCreatedDate"] = true;
-    this.data["excludeGeneralTasks"] = true;
+    this.data['isShowCreatedDate'] = true;
+    this.data['excludeGeneralTasks'] = true;
     this.commonService
-      .callApi("api/clients/tasks?" + queryParams, "", "get")
+      .callApi('api/clients/tasks?' + queryParams, '', 'get')
       .then((success) => {
         if (success) {
           this.listrecords = success.records;
@@ -344,19 +349,15 @@ taskDataObj: any;
             }
           }, 100);
         } else {
-          this.popToast("error", success.message);
+          this.popToast('error', success.message);
         }
       })
       .catch((e) => {
-        console.log("there is an error:", e);
+        console.log('there is an error:', e);
       });
   }
-  onOpenCalendar(event:any){
-
-  }
-  onOpenyearCalendar(event:any){
-
-  }
+  onOpenCalendar(event: any) {}
+  onOpenyearCalendar(event: any) {}
   setProperWidth(width) {
     setTimeout(() => {
       if (this.listrecords.length > 0) {
@@ -370,10 +371,10 @@ taskDataObj: any;
           var ele2 = document.getElementById(
             `taskcrm-description-h`
           ) as HTMLElement;
-          ele.style.width = String(width - 40) + "px !important";
-          ele1.style.width = String(width) + "px !important";
-          ele1.style.minWidth = String(width) + "px !important";
-          ele2.style.width = String(width) + "px !important";
+          ele.style.width = String(width - 40) + 'px !important';
+          ele1.style.width = String(width) + 'px !important';
+          ele1.style.minWidth = String(width) + 'px !important';
+          ele2.style.width = String(width) + 'px !important';
         });
       }
     }, 100);
@@ -440,23 +441,23 @@ taskDataObj: any;
         value.InProgressPercentage = 0;
       }
 
-      value.progressStatusText = "Not Started";
+      value.progressStatusText = 'Not Started';
       if (value.InProgressPercentage > 0 && value.InProgressPercentage < 100) {
-        value.progressStatusText = "In Progress";
+        value.progressStatusText = 'In Progress';
       } else {
         if (value.InProgressPercentage == 0) {
-          value.progressStatusText = "Not Started";
+          value.progressStatusText = 'Not Started';
         } else if (value.InProgressPercentage == 100) {
-          value.progressStatusText = "Completed";
+          value.progressStatusText = 'Completed';
         }
       }
     } else {
       if (value.type === 1) {
         value.InProgressPercentage = 0;
       } else {
-        value.InProgressPercentage = "-";
+        value.InProgressPercentage = '-';
       }
-      value.progressStatusText = "Not Started";
+      value.progressStatusText = 'Not Started';
     }
   }
   onScrollDown(ev) {
@@ -464,15 +465,15 @@ taskDataObj: any;
       this.page++;
       this.offset = this.page * this.limit;
       var queryParams =
-        "ts=" +
+        'ts=' +
         this.ts +
-        "&offset=" +
+        '&offset=' +
         this.offset +
-        "&limit=" +
+        '&limit=' +
         this.limit +
-        "&isShowCreatedDate=true&excludeGeneralTasks=true";
+        '&isShowCreatedDate=true&excludeGeneralTasks=true';
       this.commonService
-        .callApi("api/clients/tasks?" + queryParams, "", "get")
+        .callApi('api/clients/tasks?' + queryParams, '', 'get')
         .then((success) => {
           if (success) {
             if (success.records.length > 0) {
@@ -494,17 +495,17 @@ taskDataObj: any;
               }
             }, 1000);
           } else {
-            this.popToast("error", success.message);
+            this.popToast('error', success.message);
           }
         })
         .catch((e) => {
-          console.log("there is an error:", e);
+          console.log('there is an error:', e);
         });
     }
   }
   showTaskDetails(data) {
     if (this.showTaskDetailsDiv === true) {
-      this.changeIc("");
+      this.changeIc('');
     } else if (this.showTaskDetailsDiv === false) {
       this.taskDetailsData = {};
       this.clientTasks = [];
@@ -519,16 +520,16 @@ taskDataObj: any;
       }
       this.taskDetailsData = data;
       setTimeout(() => {
-        this.changeIc("details");
+        this.changeIc('details');
       }, 100);
     }
   }
   getClientTasksDetails(clientID) {
     this.commonService
       .callApi(
-        "api/clients/tasks?BusinessPartnerId=" + clientID + "&type=2",
-        "",
-        "get"
+        'api/clients/tasks?BusinessPartnerId=' + clientID + '&type=2',
+        '',
+        'get'
       )
       .then((success) => {
         if (success) {
@@ -542,11 +543,11 @@ taskDataObj: any;
             this.showTaskShowMore = true;
           }
         } else {
-          this.popToast("error", success.message);
+          this.popToast('error', success.message);
         }
       })
       .catch((e) => {
-        console.log("there is an error:", e);
+        console.log('there is an error:', e);
       });
   }
   showMoreTasks() {
@@ -562,9 +563,9 @@ taskDataObj: any;
   getClientNotesDetails(clientID) {
     this.commonService
       .callApi(
-        "api/clients/notes?BusinessPartnerId=" + clientID + "&type=2",
-        "",
-        "get"
+        'api/clients/notes?BusinessPartnerId=' + clientID + '&type=2',
+        '',
+        'get'
       )
       .then((success) => {
         if (success) {
@@ -578,11 +579,11 @@ taskDataObj: any;
             this.showNotesShowMore = true;
           }
         } else {
-          this.popToast("error", success.message);
+          this.popToast('error', success.message);
         }
       })
       .catch((e) => {
-        console.log("there is an error:", e);
+        console.log('there is an error:', e);
       });
   }
   showMoreNotes() {
@@ -596,27 +597,27 @@ taskDataObj: any;
     this.showNotesShowMore = true;
   }
   changeIc(type) {
-    if (type == "dots") {
+    if (type == 'dots') {
       this.icon1 = true;
       this.task = {};
-      this.task["dateOfEntry"] = this.maxDate;
-      this.task["status"] = 1;
+      this.task['dateOfEntry'] = this.maxDate;
+      this.task['status'] = 1;
       this.showTaskDetailsDiv = false;
       this.showBlankSideBar = false;
       this.showDummySidebar = false;
       this.disableStatusArray = true;
-    } else if (type == "edit") {
+    } else if (type == 'edit') {
       this.icon1 = true;
       this.showTaskDetailsDiv = false;
       this.showBlankSideBar = false;
       this.showDummySidebar = false;
       this.disableStatusArray = false;
-    } else if (type == "details") {
+    } else if (type == 'details') {
       this.icon1 = true;
       this.showTaskDetailsDiv = true;
       this.showBlankSideBar = false;
       this.showDummySidebar = false;
-    } else if (type == "default") {
+    } else if (type == 'default') {
       this.icon1 = true;
       this.showTaskDetailsDiv = false;
       this.showBlankSideBar = true;
@@ -644,16 +645,16 @@ taskDataObj: any;
   }
   presetTitle() {
     this.commonService
-      .callApi("api/tenants/presetactivities/lookup", "", "get")
+      .callApi('api/tenants/presetactivities/lookup', '', 'get')
       .then((success) => {
         if (success) {
           this.titleArr = success;
         } else {
-          this.popToast("error", success.message);
+          this.popToast('error', success.message);
         }
       })
       .catch((e) => {
-        console.log("there is an error:", e);
+        console.log('there is an error:', e);
       });
   }
   ModelDatepicker(event) {}
@@ -666,10 +667,10 @@ taskDataObj: any;
       this.displayStepFour = false;
       this.modalRef = this.modalService.show(addCustomerPopup, {
         class:
-          "modal-xl task-modal modal-dialog-centered quick-popup add-new-customer-popup",
+          'modal-xl task-modal modal-dialog-centered quick-popup add-new-customer-popup',
       });
     } else {
-      $("#taskname :input").blur();
+      $('#taskname :input').blur();
     }
   }
   private loadTypehead() {
@@ -690,21 +691,21 @@ taskDataObj: any;
     this.supplierLoading = true;
     let data = {};
     if (value) {
-      data["entityType"] = "client";
-      data["q"] = value;
+      data['entityType'] = 'client';
+      data['q'] = value;
     }
     let items;
     return this.commonService
-      .callApiObservable("api/clients/lookup", data)
+      .callApiObservable('api/clients/lookup', data)
       .pipe(
         catchError(() => of({ items: [] })),
         map((success) => {
           items = success;
           if (allow) {
-            this.clientNameItem = success["records"];
+            this.clientNameItem = success['records'];
           }
           if (items.length === 0) {
-            items.push({ title: "Add new ?", id: 0 });
+            items.push({ title: 'Add new ?', id: 0 });
           }
           this.supplierLoading = false;
           return items ? items : [];
@@ -713,48 +714,49 @@ taskDataObj: any;
   }
   setAddCustomerBasicForm() {
     this.addCustomerBasicInfo = new FormGroup({
-      title: new FormControl("", [Validators.required]),
-      address1: new FormControl("", []),
-      address2: new FormControl("", []),
-      city: new FormControl("", []),
-      state: new FormControl("", []),
-      country: new FormControl("", []),
-      zip: new FormControl("", []),
-      email: new FormControl("", []),
-      faceBook: new FormControl("", []),
-      instaGram: new FormControl("", []),
-      google: new FormControl("", []),
-      tiktok: new FormControl("", []),
-      webSite: new FormControl("", []),
-      contactPerson: new FormControl("", []),
-      company: new FormControl("", []),
-      internalNotes: new FormControl("", []),
-      externalNotes: new FormControl("", []),
-      paymentTermDuration: new FormControl("", []),
-      allowedCreditAmount: new FormControl("", []),
-      salesRepresentative: new FormControl("", []),
-      area: new FormControl("", []),
-      branch: new FormControl("", []),
-      establishmentType: new FormControl("", []),
+      title: new FormControl('', [Validators.required]),
+      address1: new FormControl('', []),
+      address2: new FormControl('', []),
+      city: new FormControl('', []),
+      state: new FormControl('', []),
+      country: new FormControl('', []),
+      zip: new FormControl('', []),
+      email: new FormControl('', []),
+      faceBook: new FormControl('', []),
+      instaGram: new FormControl('', []),
+      google: new FormControl('', []),
+      tiktok: new FormControl('', []),
+      webSite: new FormControl('', []),
+      contactPerson: new FormControl('', []),
+      company: new FormControl('', []),
+      internalNotes: new FormControl('', []),
+      externalNotes: new FormControl('', []),
+      paymentTermDuration: new FormControl('', []),
+      allowedCreditAmount: new FormControl('', []),
+      salesRepresentative: new FormControl('', []),
+      area: new FormControl('', []),
+      branch: new FormControl('', []),
+      establishmentType: new FormControl('', []),
     });
   }
   addBasicInfo() {
     if (this.addCustomerBasicInfo.valid) {
       if (this.addCustomerBasicInfo.value.paymentTermDuration) {
-        this.addCustomerBasicInfo.value.paymentTermDuration = this.addCustomerBasicInfo.value.paymentTermDuration.days;
+        this.addCustomerBasicInfo.value.paymentTermDuration =
+          this.addCustomerBasicInfo.value.paymentTermDuration.days;
       }
       this.commonService
-        .callApi("/api/clients", this.addCustomerBasicInfo.value, "post")
+        .callApi('/api/clients', this.addCustomerBasicInfo.value, 'post')
         .then((success) => {
           if (success) {
             this.modalRef.hide();
             this.task.businessPartner = success.title;
           } else {
-            this.popToast("error", success.message);
+            this.popToast('error', success.message);
           }
         })
         .catch((e) => {
-          console.log("there is an error:", e);
+          console.log('there is an error:', e);
         });
     }
   }
@@ -784,16 +786,16 @@ taskDataObj: any;
   }
   getPaymentTerms() {
     this.commonService
-      .callApi("api/clients/PaymentTerms/lookup", "", "get")
+      .callApi('api/clients/PaymentTerms/lookup', '', 'get')
       .then((success) => {
         if (success) {
           this.paymentList = success;
         } else {
-          this.popToast("error", success.message);
+          this.popToast('error', success.message);
         }
       })
       .catch((e) => {
-        console.log("there is an error:", e);
+        console.log('there is an error:', e);
       });
   }
   numberOnly(event): boolean {
@@ -805,86 +807,86 @@ taskDataObj: any;
   }
   getTenantLookup() {
     this.commonService
-      .callApi("api/tenants/users/lookup", "", "get")
+      .callApi('api/tenants/users/lookup', '', 'get')
       .then((success) => {
         if (success) {
           this.tenantUsers = success;
         } else {
-          this.popToast("error", success.message);
+          this.popToast('error', success.message);
         }
       })
       .catch((e) => {
-        console.log("there is an error:", e);
+        console.log('there is an error:', e);
       });
   }
   getArearLookup() {
     this.commonService
-      .callApi("api/clients/areas/lookup", "", "get")
+      .callApi('api/clients/areas/lookup', '', 'get')
       .then((success) => {
         if (success) {
           this.areaLookup = success;
         } else {
-          this.popToast("error", success.message);
+          this.popToast('error', success.message);
         }
       })
       .catch((e) => {
-        console.log("there is an error:", e);
+        console.log('there is an error:', e);
       });
   }
   getRegionList() {
     this.commonService
-      .callApi("api/tenants/branches/lookup", "", "get")
+      .callApi('api/tenants/branches/lookup', '', 'get')
       .then((success) => {
         if (success) {
           this.regionList = success;
         } else {
-          this.popToast("error", success.message);
+          this.popToast('error', success.message);
         }
       })
       .catch((e) => {
-        console.log("there is an error:", e);
+        console.log('there is an error:', e);
       });
   }
   getEstablishmentType() {
     this.commonService
-      .callApi("api/clients/establishmenttypes/lookup", "", "get")
+      .callApi('api/clients/establishmenttypes/lookup', '', 'get')
       .then((success) => {
         if (success) {
           this.establishmentTypes = success;
         } else {
-          this.popToast("error", success.message);
+          this.popToast('error', success.message);
         }
       })
       .catch((e) => {
-        console.log("there is an error:", e);
+        console.log('there is an error:', e);
       });
   }
   getContactList() {
     this.commonService
-      .callApi("api/clients/lookup?clientType=2", "", "get")
+      .callApi('api/clients/lookup?clientType=2', '', 'get')
       .then((success) => {
         if (success) {
           this.contactList = success;
         } else {
-          this.popToast("error", success.message);
+          this.popToast('error', success.message);
         }
       })
       .catch((e) => {
-        console.log("there is an error:", e);
+        console.log('there is an error:', e);
       });
   }
   getCompanytList() {
     this.commonService
-      .callApi("api/clients/lookup?clientType=3", "", "get")
+      .callApi('api/clients/lookup?clientType=3', '', 'get')
       .then((success) => {
         if (success) {
           this.companyList = success;
         } else {
-          this.popToast("error", success.message);
+          this.popToast('error', success.message);
         }
       })
       .catch((e) => {
-        console.log("there is an error:", e);
+        console.log('there is an error:', e);
       });
   }
   createThisTask(data) {
@@ -892,35 +894,35 @@ taskDataObj: any;
       data.dueDate = data.dateOfEntry;
     }
     this.commonService
-      .callApi("api/clients/tasks", data, "post")
+      .callApi('api/clients/tasks', data, 'post')
       .then((success) => {
         if (success) {
           this.icon1 = false;
           this.listApi(true);
-          this.changeIc("");
+          this.changeIc('');
         } else {
-          this.popToast("error", success.message);
+          this.popToast('error', success.message);
         }
       })
       .catch((e) => {
-        console.log("there is an error:", e);
+        console.log('there is an error:', e);
       });
   }
   updatedTask(data) {
     this.commonService
-      .callApi("api/clients/tasks/" + data.id, data, "put")
+      .callApi('api/clients/tasks/' + data.id, data, 'put')
       .then((success) => {
         if (success) {
           this.icon1 = false;
           this.offset = 0;
           this.listApi(true);
-          this.changeIc("");
+          this.changeIc('');
         } else {
-          this.popToast("error", success.message);
+          this.popToast('error', success.message);
         }
       })
       .catch((e) => {
-        console.log("there is an error:", e);
+        console.log('there is an error:', e);
       });
   }
   startingFilter() {
@@ -938,7 +940,7 @@ taskDataObj: any;
     }
   }
   changedParentFilter(event) {
-    $("#filterName :input").blur();
+    $('#filterName :input').blur();
     let options;
     if (event.id == 1) {
       this.filterData.suboptions = [];
@@ -951,11 +953,11 @@ taskDataObj: any;
       this.filterData.enddate = false;
       this.isDueDateFilter = true;
     } else if (event.id == 3) {
-      this.data["pastDue"] = true;
-      this.applyFilter(this.data, "end");
+      this.data['pastDue'] = true;
+      this.applyFilter(this.data, 'end');
     } else if (event.id == 4) {
-      this.data["completed"] = true;
-      this.applyFilter(this.data, "end");
+      this.data['completed'] = true;
+      this.applyFilter(this.data, 'end');
     } else if (event.id == 5) {
       if (this.tasks.length > 0) {
         this.tasks.map((task: any) => {
@@ -973,7 +975,7 @@ taskDataObj: any;
     } else if (event.id == 6) {
       if (this.tempArr.length == 0) {
         setTimeout(() => {
-          $("#txtNotes").focus();
+          $('#txtNotes').focus();
         }, 100);
       }
     } else if (event.id == 7) {
@@ -995,8 +997,8 @@ taskDataObj: any;
         });
       }
     } else if (event.id == 9) {
-      this.data["isShowCreatedDate"] = true;
-      this.applyFilter(this.data, "end");
+      this.data['isShowCreatedDate'] = true;
+      this.applyFilter(this.data, 'end');
     }
     this.filterstart.forEach((obj) => {
       if (obj.id == event.id) {
@@ -1007,62 +1009,62 @@ taskDataObj: any;
     });
   }
   changedChildFilter(event) {
-    $("#secondFilter :input").blur();
-    $("#supplierName :input").blur();
+    $('#secondFilter :input').blur();
+    $('#supplierName :input').blur();
     if (this.filterData.id === 5) {
       this.filterData.suboptions = [];
       if (this.filterData.bindedValue.id === 1) {
         this.filterData.suboptions.push({
           options: this.presetActivites,
-          bindvalue: "",
+          bindvalue: '',
           async: false,
-          type: "select",
-          labelName: "Search Title",
+          type: 'select',
+          labelName: 'Search Title',
         });
       } else if (this.filterData.bindedValue.id === 2) {
         this.filterData.suboptions.push({
           options: this.customers,
-          bindvalue: "",
+          bindvalue: '',
           async: true,
-          type: "select",
-          labelName: "Search Customer",
+          type: 'select',
+          labelName: 'Search Customer',
         });
       } else if (this.filterData.bindedValue.id === 3) {
         this.filterData.suboptions.push({
           options: this.companies,
           async: true,
-          bindvalue: "",
-          type: "select",
-          labelName: "Search Company",
+          bindvalue: '',
+          type: 'select',
+          labelName: 'Search Company',
         });
       } else if (this.filterData.bindedValue.id === 4) {
         this.filterData.suboptions.push({
           options: this.contacts,
           async: true,
-          bindvalue: "",
-          type: "select",
-          labelName: "Search Contact",
+          bindvalue: '',
+          type: 'select',
+          labelName: 'Search Contact',
         });
       } else if (this.filterData.bindedValue.id === 5) {
         this.filterData.suboptions.push({
           options: this.taskrecords,
-          bindvalue: "",
+          bindvalue: '',
           async: false,
-          type: "select",
-          labelName: "Search Tasks",
+          type: 'select',
+          labelName: 'Search Tasks',
         });
       }
     } else if (this.filterData.id === 6) {
-      if (this.filterData.note != undefined && this.filterData.note != "") {
-        this.data["note"] = this.filterData.note;
-        this.applyFilter(this.data, "end");
+      if (this.filterData.note != undefined && this.filterData.note != '') {
+        this.data['note'] = this.filterData.note;
+        this.applyFilter(this.data, 'end');
       }
     } else if (this.filterData.id === 7) {
-      this.data["assignedTo"] = this.filterData.bindedValue.id;
-      this.applyFilter(this.data, "end");
+      this.data['assignedTo'] = this.filterData.bindedValue.id;
+      this.applyFilter(this.data, 'end');
     } else if (this.filterData.id === 8) {
-      this.data["branchId"] = this.filterData.bindedValue.id;
-      this.applyFilter(this.data, "end");
+      this.data['branchId'] = this.filterData.bindedValue.id;
+      this.applyFilter(this.data, 'end');
     }
   }
   applyFilter(queryParams, terminate?) {
@@ -1070,9 +1072,9 @@ taskDataObj: any;
     this.page = 0;
     this.offset = 0;
     var queryParams1 =
-      "ts=" + this.ts + "&offset=" + this.offset + "&limit=" + this.limit;
+      'ts=' + this.ts + '&offset=' + this.offset + '&limit=' + this.limit;
     this.commonService
-      .callApi("api/clients/tasks?" + queryParams1, queryParams, "get")
+      .callApi('api/clients/tasks?' + queryParams1, queryParams, 'get')
       .then((success) => {
         if (success) {
           this.listrecords = success.records;
@@ -1092,20 +1094,20 @@ taskDataObj: any;
             }
           }, 100);
         } else {
-          this.popToast("error", success.message);
+          this.popToast('error', success.message);
         }
       })
       .catch((e) => {
-        console.log("there is an error:", e);
+        console.log('there is an error:', e);
       });
 
     if (terminate) {
       let tempconfig: any = {};
       if (this.filterData.id == 1) {
-        tempconfig["parentFilter"] = this.filterData.title;
-        tempconfig["childFilter"] = this.startDateInput;
-        tempconfig["subchildrange"] = this.startDateTo;
-        tempconfig["selectedObj"] = this.filterData;
+        tempconfig['parentFilter'] = this.filterData.title;
+        tempconfig['childFilter'] = this.startDateInput;
+        tempconfig['subchildrange'] = this.startDateTo;
+        tempconfig['selectedObj'] = this.filterData;
         this.tempArr.push(tempconfig);
         const index = this.filterstart
           .map((e) => {
@@ -1116,11 +1118,11 @@ taskDataObj: any;
         this.filterstart.splice(0, index + 1);
         this.filterstart = [...this.filterstart];
       } else if (this.filterData.id === 2) {
-        tempconfig["parentFilter"] = this.filterData.title;
-        tempconfig["secondFilter"] = moment(this.startDateInput).format(
-          "DD-MM-YYYY"
+        tempconfig['parentFilter'] = this.filterData.title;
+        tempconfig['secondFilter'] = moment(this.startDateInput).format(
+          'DD-MM-YYYY'
         );
-        tempconfig["selectedObj"] = this.filterData;
+        tempconfig['selectedObj'] = this.filterData;
         this.tempArr.push(tempconfig);
         const index = this.filterstart
           .map((e) => {
@@ -1131,9 +1133,9 @@ taskDataObj: any;
         this.filterstart.splice(0, index + 1);
         this.filterstart = [...this.filterstart];
       } else if (this.filterData.id === 3) {
-        tempconfig["parentFilter"] = this.filterData.title;
-        tempconfig["secondFilter"] = "true";
-        tempconfig["selectedObj"] = this.filterData;
+        tempconfig['parentFilter'] = this.filterData.title;
+        tempconfig['secondFilter'] = 'true';
+        tempconfig['selectedObj'] = this.filterData;
         this.tempArr.push(tempconfig);
         const index = this.filterstart
           .map((e) => {
@@ -1144,9 +1146,9 @@ taskDataObj: any;
         this.filterstart.splice(0, index + 1);
         this.filterstart = [...this.filterstart];
       } else if (this.filterData.id === 4) {
-        tempconfig["parentFilter"] = this.filterData.title;
-        tempconfig["secondFilter"] = "true";
-        tempconfig["selectedObj"] = this.filterData;
+        tempconfig['parentFilter'] = this.filterData.title;
+        tempconfig['secondFilter'] = 'true';
+        tempconfig['selectedObj'] = this.filterData;
         this.tempArr.push(tempconfig);
         const index = this.filterstart
           .map((e) => {
@@ -1157,9 +1159,9 @@ taskDataObj: any;
         this.filterstart.splice(0, index + 1);
         this.filterstart = [...this.filterstart];
       } else if (this.filterData.id == 5) {
-        tempconfig["parentFilter"] = this.filterData.title;
-        tempconfig["secondFilter"] = this.filterData.bindedValue.title;
-        tempconfig["selectedObj"] = this.filterData;
+        tempconfig['parentFilter'] = this.filterData.title;
+        tempconfig['secondFilter'] = this.filterData.bindedValue.title;
+        tempconfig['selectedObj'] = this.filterData;
         this.tempArr.push(tempconfig);
         const index = this.filterstart
           .map((e) => {
@@ -1170,9 +1172,9 @@ taskDataObj: any;
         this.filterstart.splice(0, index + 1);
         this.filterstart = [...this.filterstart];
       } else if (this.filterData.id == 6) {
-        tempconfig["parentFilter"] = this.filterData.title;
-        tempconfig["secondFilter"] = this.filterData.note;
-        tempconfig["selectedObj"] = this.filterData;
+        tempconfig['parentFilter'] = this.filterData.title;
+        tempconfig['secondFilter'] = this.filterData.note;
+        tempconfig['selectedObj'] = this.filterData;
         this.tempArr.push(tempconfig);
         const index = this.filterstart
           .map((e) => {
@@ -1183,9 +1185,9 @@ taskDataObj: any;
         this.filterstart.splice(0, index + 1);
         this.filterstart = [...this.filterstart];
       } else if (this.filterData.id == 7) {
-        tempconfig["parentFilter"] = this.filterData.title;
-        tempconfig["secondFilter"] = this.filterData.bindedValue.title;
-        tempconfig["selectedObj"] = this.filterData;
+        tempconfig['parentFilter'] = this.filterData.title;
+        tempconfig['secondFilter'] = this.filterData.bindedValue.title;
+        tempconfig['selectedObj'] = this.filterData;
         this.tempArr.push(tempconfig);
         const index = this.filterstart
           .map((e) => {
@@ -1196,9 +1198,9 @@ taskDataObj: any;
         this.filterstart.splice(0, index + 1);
         this.filterstart = [...this.filterstart];
       } else if (this.filterData.id == 8) {
-        tempconfig["parentFilter"] = this.filterData.title;
-        tempconfig["secondFilter"] = this.filterData.bindedValue.title;
-        tempconfig["selectedObj"] = this.filterData;
+        tempconfig['parentFilter'] = this.filterData.title;
+        tempconfig['secondFilter'] = this.filterData.bindedValue.title;
+        tempconfig['selectedObj'] = this.filterData;
         this.tempArr.push(tempconfig);
         const index = this.filterstart
           .map((e) => {
@@ -1209,9 +1211,9 @@ taskDataObj: any;
         this.filterstart.splice(0, index + 1);
         this.filterstart = [...this.filterstart];
       } else if (this.filterData.id == 9) {
-        tempconfig["parentFilter"] = this.filterData.title;
-        tempconfig["secondFilter"] = "True";
-        tempconfig["selectedObj"] = this.filterData;
+        tempconfig['parentFilter'] = this.filterData.title;
+        tempconfig['secondFilter'] = 'True';
+        tempconfig['selectedObj'] = this.filterData;
         this.tempArr.push(tempconfig);
         const index = this.filterstart
           .map((e) => {
@@ -1272,18 +1274,18 @@ taskDataObj: any;
   refreshClients(value: string = null, allow): Observable<any[]> {
     let data = {};
     if (value) {
-      data["entityType"] = "client";
-      data["q"] = value;
+      data['entityType'] = 'client';
+      data['q'] = value;
     }
     let items;
     return this.commonService
-      .callApiObservable("api/clients/lookup", data)
+      .callApiObservable('api/clients/lookup', data)
       .pipe(
         catchError(() => of({ items: [] })),
         map((success) => {
           items = success;
           if (allow) {
-            this.customers = success["records"];
+            this.customers = success['records'];
           }
 
           return items ? items : [];
@@ -1293,19 +1295,19 @@ taskDataObj: any;
   refreshCompanies(value: string = null, allow): Observable<any[]> {
     let data = {};
     if (value) {
-      data["entityType"] = "client";
-      data["ClientType"] = "3";
-      data["q"] = value;
+      data['entityType'] = 'client';
+      data['ClientType'] = '3';
+      data['q'] = value;
     }
     let items;
     return this.commonService
-      .callApiObservable("api/clients/lookup", data)
+      .callApiObservable('api/clients/lookup', data)
       .pipe(
         catchError(() => of({ items: [] })),
         map((success) => {
           items = success;
           if (allow) {
-            this.companies = success["records"];
+            this.companies = success['records'];
           }
 
           return items ? items : [];
@@ -1315,19 +1317,19 @@ taskDataObj: any;
   refreshContacts(value: string = null, allow): Observable<any[]> {
     let data = {};
     if (value) {
-      data["entityType"] = "client";
-      data["ClientType"] = "2";
-      data["q"] = value;
+      data['entityType'] = 'client';
+      data['ClientType'] = '2';
+      data['q'] = value;
     }
     let items;
     return this.commonService
-      .callApiObservable("api/clients/lookup", data)
+      .callApiObservable('api/clients/lookup', data)
       .pipe(
         catchError(() => of({ items: [] })),
         map((success) => {
           items = success;
           if (allow) {
-            this.contacts = success["records"];
+            this.contacts = success['records'];
           }
 
           return items ? items : [];
@@ -1337,46 +1339,46 @@ taskDataObj: any;
   changedsubChildFilter(event) {
     if (this.filterData.id === 5 && this.filterData.bindedValue.type !== 5) {
       if (this.filterData.bindedValue.type === 1) {
-        this.data["type"] = this.filterData.bindedValue.id;
-        this.data["presetActivityId"] = event.id;
+        this.data['type'] = this.filterData.bindedValue.id;
+        this.data['presetActivityId'] = event.id;
       } else {
-        this.data["type"] = this.filterData.bindedValue.id;
-        this.data["businessPartnerId"] = event.id;
+        this.data['type'] = this.filterData.bindedValue.id;
+        this.data['businessPartnerId'] = event.id;
       }
-      this.applyFilter(this.data, "end");
+      this.applyFilter(this.data, 'end');
     } else if (this.filterData.bindedValue.type === 5) {
-      this.data["type"] = 3;
-      this.data["taskId"] = event.id;
-      this.applyFilter(this.data, "end");
+      this.data['type'] = 3;
+      this.data['taskId'] = event.id;
+      this.applyFilter(this.data, 'end');
     }
   }
   getPresetActivities() {
     this.commonService
-      .callApi("api/tenants/presetactivities/lookup", "", "get")
+      .callApi('api/tenants/presetactivities/lookup', '', 'get')
       .then((success) => {
         if (success) {
           this.presetActivites = success;
         } else {
-          this.popToast("error", success.message);
+          this.popToast('error', success.message);
         }
       })
       .catch((e) => {
-        console.log("there is an error:", e);
+        console.log('there is an error:', e);
       });
   }
   taskdropdown() {
-    var queryParams1 = "includeActiveTasksForCurrentUser=" + true + "&q=";
+    var queryParams1 = 'includeActiveTasksForCurrentUser=' + true + '&q=';
     this.commonService
-      .callApi("api/clients/tasks/lookup?" + queryParams1, "", "get")
+      .callApi('api/clients/tasks/lookup?' + queryParams1, '', 'get')
       .then((success) => {
         if (success) {
           this.taskrecords = success;
         } else {
-          this.popToast("error", success.message);
+          this.popToast('error', success.message);
         }
       })
       .catch((e) => {
-        console.log("there is an error:", e);
+        console.log('there is an error:', e);
       });
   }
   subDropdownClose() {
@@ -1393,7 +1395,7 @@ taskDataObj: any;
     this.task = data;
     this.task.dateOfEntry = moment.utc(data.dateOfEntry).format();
     this.task.presetActivity = data.presetActivity;
-    this.changeIc("edit");
+    this.changeIc('edit');
   }
   subClientDropdownClose() {
     this.subClientShowId = 0;
@@ -1407,12 +1409,12 @@ taskDataObj: any;
   }
   openDeletePopup(deleteTaskPopup: TemplateRef<any>) {
     this.modalRef = this.modalService.show(deleteTaskPopup, {
-      class: "modal-dialog-centered quick-popup delete-popup",
+      class: 'modal-dialog-centered quick-popup delete-popup',
     });
   }
   deleteThisTask() {
     this.commonService
-      .callApi("api/clients/tasks/" + this.deleteTaskId, "", "delete")
+      .callApi('api/clients/tasks/' + this.deleteTaskId, '', 'delete')
       .then((success) => {
         if (this.total <= this.offset) {
           this.offset = 0;
@@ -1423,14 +1425,14 @@ taskDataObj: any;
         }
         if (success) {
           this.deleteTaskId = 0;
-          this.popToast("success", "Task deleted");
+          this.popToast('success', 'Task deleted');
         } else {
           this.deleteTaskId = 0;
-          this.popToast("error", success.message);
+          this.popToast('error', success.message);
         }
       })
       .catch((e) => {
-        console.log("there is an error:", e);
+        console.log('there is an error:', e);
       });
   }
   clientDropdownClick(id, taskID) {
@@ -1439,30 +1441,30 @@ taskDataObj: any;
   }
   getAssignedUserList() {
     this.commonService
-      .callApi("api/clients/tasks/assignTask/userList", "", "get")
+      .callApi('api/clients/tasks/assignTask/userList', '', 'get')
       .then((success) => {
         if (success) {
           this.assignedUsers = success;
         } else {
-          this.popToast("error", success.message);
+          this.popToast('error', success.message);
         }
       })
       .catch((e) => {
-        console.log("there is an error:", e);
+        console.log('there is an error:', e);
       });
   }
   getBranches() {
     this.commonService
-      .callApi("api/tenants/branches/lookup?q=", "", "get")
+      .callApi('api/tenants/branches/lookup?q=', '', 'get')
       .then((success) => {
         if (success) {
           this.branchrecords = success;
         } else {
-          this.popToast("error", success.message);
+          this.popToast('error', success.message);
         }
       })
       .catch((e) => {
-        console.log("there is an error:", e);
+        console.log('there is an error:', e);
       });
   }
   resetFilter(i) {
@@ -1510,45 +1512,45 @@ taskDataObj: any;
   }
   modelDatepickerDate(event, type) {
     if (event !== null) {
-      $("#minDatepicker :input").blur();
-      $("#maxDatepicker :input").blur();
+      $('#minDatepicker :input').blur();
+      $('#maxDatepicker :input').blur();
       if (this.filterData.id == 1) {
-        if (type === "start") {
+        if (type === 'start') {
           this.startDateFrom = moment.utc(event).format();
-        } else if (type === "end") {
+        } else if (type === 'end') {
           this.startDateTo = moment.utc(event).format();
           this.endDateInput = event;
         }
-        this.data["createdOnType"] = 1;
-        this.data["createdOnAfter"] = this.startDateFrom;
-        this.data["createdOnBefore"] = this.startDateTo;
+        this.data['createdOnType'] = 1;
+        this.data['createdOnAfter'] = this.startDateFrom;
+        this.data['createdOnBefore'] = this.startDateTo;
         if (this.startDateFrom && this.startDateTo) {
-          this.applyFilter(this.data, "end");
+          this.applyFilter(this.data, 'end');
         }
       } else if (this.filterData.id == 2) {
         this.startDateFrom = moment.utc(event).format();
-        this.data["dueDateType"] = 0;
-        this.data["dueDate"] = this.startDateFrom;
+        this.data['dueDateType'] = 0;
+        this.data['dueDate'] = this.startDateFrom;
         this.startDateInput = event;
-        this.applyFilter(this.data, "end");
+        this.applyFilter(this.data, 'end');
       }
     }
   }
   showNotesDetails(data, crmNotePopup) {
     this.commonService
-      .callApi("api/clients/notes/" + data.id, "", "get")
+      .callApi('api/clients/notes/' + data.id, '', 'get')
       .then((success) => {
         if (success) {
           this.crmNotePopupData = success;
           this.modalRef = this.modalService.show(crmNotePopup, {
-            class: "modal-xl modal-dialog-centered crm-popup",
+            class: 'modal-xl modal-dialog-centered crm-popup',
           });
         } else {
-          this.popToast("error", success.message);
+          this.popToast('error', success.message);
         }
       })
       .catch((e) => {
-        console.log("there is an error:", e);
+        console.log('there is an error:', e);
       });
   }
   resetCRMNotesData() {
@@ -1559,19 +1561,19 @@ taskDataObj: any;
   }
   showTaskDetailsPopup(data, crmTaskPopup) {
     this.commonService
-      .callApi("api/clients/tasks/" + data.id, "", "get")
+      .callApi('api/clients/tasks/' + data.id, '', 'get')
       .then((success) => {
         if (success) {
           this.crmTaskPopupData = success;
           this.modalRef = this.modalService.show(crmTaskPopup, {
-            class: "modal-xl modal-dialog-centered crm-popup",
+            class: 'modal-xl modal-dialog-centered crm-popup',
           });
         } else {
-          this.popToast("error", success.message);
+          this.popToast('error', success.message);
         }
       })
       .catch((e) => {
-        console.log("there is an error:", e);
+        console.log('there is an error:', e);
       });
   }
   resetCRMTaskData() {
@@ -1580,17 +1582,17 @@ taskDataObj: any;
   singleOutClient(clientID) {
     this.offset = 0;
     var queryParams =
-      "ts=" +
+      'ts=' +
       this.ts +
-      "&offset=" +
+      '&offset=' +
       this.offset +
-      "&limit=" +
+      '&limit=' +
       this.limit +
-      "&businessPartnerId=" +
+      '&businessPartnerId=' +
       clientID +
-      "&type=2";
+      '&type=2';
     this.commonService
-      .callApi("api/clients/tasks?" + queryParams, "", "get")
+      .callApi('api/clients/tasks?' + queryParams, '', 'get')
       .then((success) => {
         if (success) {
           this.listrecords = success.records;
@@ -1600,18 +1602,18 @@ taskDataObj: any;
           this.total = success.total;
           this.maxPage = Math.floor(success.total / this.limit);
           setTimeout(() => {
-            this.changeIc("");
+            this.changeIc('');
           }, 500);
           this.isSingledOut = true;
           this.singledOutUserID = clientID;
         } else {
           this.isSingledOut = false;
           this.singledOutUserID = 0;
-          this.popToast("error", success.message);
+          this.popToast('error', success.message);
         }
       })
       .catch((e) => {
-        console.log("there is an error:", e);
+        console.log('there is an error:', e);
       });
   }
   deSingleClient() {
@@ -1623,7 +1625,7 @@ taskDataObj: any;
   createTaskModal(createTask: TemplateRef<any>, customerName, businessPartner) {
     this.refreshUsers();
     this.addForm = new FormGroup({
-      dateOfEntry: new FormControl("", [Validators.required]),
+      dateOfEntry: new FormControl('', [Validators.required]),
       dueDate: new FormControl(),
       title: new FormControl(null, [Validators.required]),
       subTitle: new FormControl(),
@@ -1635,84 +1637,84 @@ taskDataObj: any;
       dateOfEntryTemp: new FormControl(),
     });
     this.addForm
-      .get("dateOfEntry")
-      .setValue(this.datePipe.transform(new Date(), "MMM d, y"));
+      .get('dateOfEntry')
+      .setValue(this.datePipe.transform(new Date(), 'MMM d, y'));
     this.addForm
-      .get("dateOfEntryTemp")
-      .setValue(this.datePipe.transform(new Date(), "MMM d, y"));
+      .get('dateOfEntryTemp')
+      .setValue(this.datePipe.transform(new Date(), 'MMM d, y'));
     this.bsConfig = Object.assign(
       {},
       {
-        containerClass: "custom-picker theme-white theme-green",
+        containerClass: 'custom-picker theme-white theme-green',
         adaptivePosition: true,
-        dateInputFormat: "MM DD,YYYY",
+        dateInputFormat: 'MM DD,YYYY',
       }
     );
     this.bsConfigCreated_Date = Object.assign(
       {},
       {
-        containerClass: "custom-picker theme-white theme-green",
+        containerClass: 'custom-picker theme-white theme-green',
         adaptivePosition: true,
-        dateInputFormat: "MM DD,YYYY",
+        dateInputFormat: 'MM DD,YYYY',
       }
     );
     this.customerNameCreateTask = customerName;
     this.businessPartnerCreateTask = businessPartner;
     this.modalRef = this.modalService.show(createTask, {
-      class: "modal-lg modal-dialog-centered quick-task-modal",
+      class: 'modal-lg modal-dialog-centered quick-task-modal',
     });
   }
   refreshUsers() {
     this.commonService
-      .callApi("api/clients/tasks/getAssignedUsers?q=", "", "get")
+      .callApi('api/clients/tasks/getAssignedUsers?q=', '', 'get')
       .then((success) => {
         if (success) {
           this.users = success;
         } else {
-          this.popToast("error", success.message);
+          this.popToast('error', success.message);
         }
       })
       .catch((e) => {
-        console.log("there is an error:", e);
+        console.log('there is an error:', e);
       });
   }
   submitAddForm() {
     this.isSaveButtonDisabled = true;
     this.addForm.value.type = 2;
     var addTask = {
-      dateOfEntry: this.addForm.value["dateOfEntryTemp"],
-      dueDate: this.addForm.value["dueDateTemp"],
-      type: this.addForm.value["type"],
-      board: this.addForm.value["boardName"],
-      subTitle: this.addForm.value["subTitle"],
-      note: this.addForm.value["note"],
-      status: "1",
+      dateOfEntry: this.addForm.value['dateOfEntryTemp'],
+      dueDate: this.addForm.value['dueDateTemp'],
+      type: this.addForm.value['type'],
+      board: this.addForm.value['boardName'],
+      subTitle: this.addForm.value['subTitle'],
+      note: this.addForm.value['note'],
+      status: '1',
     };
-    addTask["businessPartner"] = this.businessPartnerCreateTask;
-    addTask["presetActivity"] = this.presetActivity;
-    let associatedUserIds = this.addForm.value["associatedUserIds"];
+    addTask['businessPartner'] = this.businessPartnerCreateTask;
+    addTask['presetActivity'] = this.presetActivity;
+    let associatedUserIds = this.addForm.value['associatedUserIds'];
     if (
       associatedUserIds != null &&
-      associatedUserIds != "" &&
+      associatedUserIds != '' &&
       associatedUserIds.length > 0
     ) {
-      addTask["associatedUserIds"] = associatedUserIds.toString();
+      addTask['associatedUserIds'] = associatedUserIds.toString();
     }
-    let user = this.addForm.value["user"];
-    if (user != null && user != "") {
-      addTask["user"] = this.assignToData;
+    let user = this.addForm.value['user'];
+    if (user != null && user != '') {
+      addTask['user'] = this.assignToData;
     }
     this.commonService
-      .callApi("api/clients/tasks", addTask, "post")
+      .callApi('api/clients/tasks', addTask, 'post')
       .then((success) => {
         this.isSaveButtonDisabled = false;
         if (success) {
           this.modalRef.hide();
           this.listApi();
           this.businessPartnerCreateTask = {};
-          this.customerNameCreateTask = "";
+          this.customerNameCreateTask = '';
         } else {
-          this.popToast("error", success.message);
+          this.popToast('error', success.message);
         }
       })
       .catch((e) => {
@@ -1733,14 +1735,14 @@ taskDataObj: any;
   }
   onChangepresetActivity(e) {
     this.presetActivity = e;
-    if (e.dueDays != null && e.dueDays != undefined && e.dueDays != "") {
+    if (e.dueDays != null && e.dueDays != undefined && e.dueDays != '') {
       this.due_date = new Date();
       var pastDate = this.due_date.getDate() + e.dueDays;
       this.due_date.setDate(pastDate);
       this.addForm
-        .get("dueDate")
-        .setValue(this.datePipe.transform(this.due_date, "MMM d, y"));
-      this.addForm.get("dueDateTemp").setValue(this.due_date);
+        .get('dueDate')
+        .setValue(this.datePipe.transform(this.due_date, 'MMM d, y'));
+      this.addForm.get('dueDateTemp').setValue(this.due_date);
     }
   }
   changeAssignTo(e) {
@@ -1749,9 +1751,9 @@ taskDataObj: any;
   createdDateValueChange(e, bsConfig) {
     if (!bsConfig.adaptivePosition) {
       this.addForm
-        .get("dateOfEntry")
-        .setValue(this.datePipe.transform(e, "MMM d, y"));
-      this.addForm.get("dateOfEntryTemp").setValue(e);
+        .get('dateOfEntry')
+        .setValue(this.datePipe.transform(e, 'MMM d, y'));
+      this.addForm.get('dateOfEntryTemp').setValue(e);
       this.createedDate = false;
       this.created_Date = e;
       bsConfig.adaptivePosition = true;
@@ -1764,9 +1766,9 @@ taskDataObj: any;
   dueDateValueChange(e, bsConfig) {
     if (!bsConfig.adaptivePosition) {
       this.addForm
-        .get("dueDate")
-        .setValue(this.datePipe.transform(e, "MMM d, y"));
-      this.addForm.get("dueDateTemp").setValue(e);
+        .get('dueDate')
+        .setValue(this.datePipe.transform(e, 'MMM d, y'));
+      this.addForm.get('dueDateTemp').setValue(e);
       this.dueDate = false;
       this.due_date = e;
       bsConfig.adaptivePosition = true;
@@ -1778,18 +1780,18 @@ taskDataObj: any;
   }
   getClientNames() {
     this.commonService
-      .callApi("api/clients/lookup?entityType=client", "", "get")
+      .callApi('api/clients/lookup?entityType=client', '', 'get')
       .then((success) => {
         if (success) {
           if (success) {
             this.clientList = success;
           }
         } else {
-          this.popToast("error", success.message);
+          this.popToast('error', success.message);
         }
       })
       .catch((e) => {
-        console.log("there is an error:", e);
+        console.log('there is an error:', e);
       });
   }
 }

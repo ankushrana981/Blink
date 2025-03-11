@@ -4,7 +4,11 @@ import { HttpClientModule, HttpClientXsrfModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatPaginatorModule } from '@angular/material/paginator';
-import { NgLabelTemplateDirective, NgOptionTemplateDirective, NgSelectModule } from '@ng-select/ng-select';
+import {
+  NgLabelTemplateDirective,
+  NgOptionTemplateDirective,
+  NgSelectModule,
+} from '@ng-select/ng-select';
 // import { SweetAlert2Module } from 'ngx-sweetalert2';
 import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
@@ -120,7 +124,7 @@ import { NgScrollbarModule } from 'ngx-scrollbar';
     NgSelectModule,
     //         SweetAlert2Module.forRoot(),
     TabsModule.forRoot(),
-//     MalihuScrollbarModule.forRoot(),
+    //     MalihuScrollbarModule.forRoot(),
     BnDatatableModule,
     LoadingBarHttpClientModule,
     PaginationModule.forRoot(),
@@ -205,7 +209,7 @@ import { NgScrollbarModule } from 'ngx-scrollbar';
     TabsModule,
     //         NgxSpinnerModule,
     ModalModule,
-    NgScrollbarModule ,
+    NgScrollbarModule,
     FormsModule,
     MatPaginatorModule,
     MatSlideToggleModule,
@@ -275,4 +279,4 @@ import { NgScrollbarModule } from 'ngx-scrollbar';
     IconSquareRightComponent,
   ],
 })
-export class SharedModule { }
+export class SharedModule {}

@@ -461,9 +461,10 @@
             <!-- Tab panes -->
             <div class="tab-content">
                 <div class="tab-pane active" role="tabpanel">
-                    <div class="scrollbar h-424 filterDashboardDataTable scrollbar-table" (scroll)="onScroll($event)">
-                        <ng-scrollbar visibility="hover" #scrollbar thumbClass="custom-scrollbars"
-                            orientation="vertical">
+                    <div class="scrollbar h-424 filterDashboardDataTable scrollbar-table overflow-x-hidden"
+                        (scroll)="onScroll($event)">
+                        <!-- <ng-scrollbar visibility="hover" #scrollbar thumbClass="custom-scrollbars"
+                            orientation="vertical"> -->
 
                         <div class="table-box mb-20 attension-table">
                             <div class="table-respons">
@@ -1024,7 +1025,7 @@
                                 </table>
                             </div>
                         </div>
-                        </ng-scrollbar>
+                        <!-- </ng-scrollbar> -->
 
                     </div>
                 </div>

@@ -35,7 +35,6 @@ import { DatePipe } from '@angular/common';
 import { NgScrollbar } from 'ngx-scrollbar';
 import { fromEvent } from 'rxjs';
 
-
 declare var jquery: any;
 declare var $: any;
 @Component({
@@ -586,7 +585,6 @@ export class TasksComponent extends BaseComponent implements OnInit {
     this.calendarConfig();
   }
 
-
   /*****************************************************
       @purpose :For getting the producrts for dropdown
       @parameters :
@@ -754,7 +752,7 @@ export class TasksComponent extends BaseComponent implements OnInit {
       @return :
       *****************************************************/
   listApi(alreadyCalled?, isScrolled?) {
-    console.log(isScrolled, "isScrolled")
+    console.log(isScrolled, 'isScrolled');
     let queryParams: any;
     if (!alreadyCalled) {
       //const today = moment();
@@ -771,7 +769,7 @@ export class TasksComponent extends BaseComponent implements OnInit {
       queryParams['offset'] = this.offset;
     } else {
       if (alreadyCalled && isScrolled) {
-        console.log(isScrolled, "isScrolling 1")
+        console.log(isScrolled, 'isScrolling 1');
         queryParams = {};
         if (this.filterData.length > 0) {
           for (let i = 0; i < this.filterData.length; i++) {
@@ -957,7 +955,7 @@ export class TasksComponent extends BaseComponent implements OnInit {
       .callApi('api/clients/taskDashboard?', queryParams, 'get')
       .then((success) => {
         if (success) {
-          console.log(isScrolled, "isscrolled 2")
+          console.log(isScrolled, 'isscrolled 2');
           if (isScrolled) {
             var listrecords1 = success.records;
             for (var i = 0; i < listrecords1.length; i++) {
@@ -1121,7 +1119,7 @@ export class TasksComponent extends BaseComponent implements OnInit {
 
           let data = success.records;
           this.maxPage = Math.floor(success.total / this.limit);
-          console.log(this.limit, "limit", this.maxPage)
+          console.log(this.limit, 'limit', this.maxPage);
           for (let i = 0; i < data.length; i++) {
             this.listrecords.push(data[i]);
           }
@@ -1251,18 +1249,25 @@ export class TasksComponent extends BaseComponent implements OnInit {
   onScroll(event: any) {
     const target = event.target;
     if (!target) return;
-  
-    const atBottom = target.scrollTop + target.clientHeight >= target.scrollHeight - 10;
-    
-    console.log("Scrolled to bottom:",target.scrollTop,target.clientHeight,target.scrollHeight, atBottom); 
-    
+
+    const atBottom =
+      target.scrollTop + target.clientHeight >= target.scrollHeight - 10;
+
+    console.log(
+      'Scrolled to bottom:',
+      target.scrollTop,
+      target.clientHeight,
+      target.scrollHeight,
+      atBottom
+    );
+
     if (atBottom) {
       this.onScrollDown(event);
     }
   }
 
   onScrollDown(ev) {
-    this.onScrollDownTaskDashboard(this)
+    this.onScrollDownTaskDashboard(this);
   }
 
   onScrollDownTaskDashboard(ev) {
@@ -3416,21 +3421,24 @@ export class TasksComponent extends BaseComponent implements OnInit {
       class: 'modal-dialog-centered quick-popup task-detail-view-popup',
     });
   }
-  checkActivenesList(data) {
+  checkActivenesList(event: Event, data) {
+    event.preventDefault();
     setTimeout(() => {
       data.showBlackChatIcon = false;
       data.showBlackFolderIcon = false;
       data.showBlackListIcon = true;
     }, 100);
   }
-  checkActivenesChat(data) {
+  checkActivenesChat(event: Event, data) {
+    event.preventDefault();
     setTimeout(() => {
       data.showBlackListIcon = false;
       data.showBlackFolderIcon = false;
       data.showBlackChatIcon = true;
     }, 100);
   }
-  checkActivenesDetails(data) {
+  checkActivenesDetails(event: Event, data) {
+    event.preventDefault();
     setTimeout(() => {
       data.showBlackChatIcon = false;
       data.showBlackListIcon = false;

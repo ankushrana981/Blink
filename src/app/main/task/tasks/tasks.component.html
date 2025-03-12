@@ -462,8 +462,8 @@
             <div class="tab-content">
                 <div class="tab-pane active" role="tabpanel">
                     <div class="scrollbar h-424 filterDashboardDataTable scrollbar-table" (scroll)="onScroll($event)">
-                        <!-- <ng-scrollbar visibility="hover" #scrollbar thumbClass="custom-scrollbars"
-                            orientation="vertical"> -->
+                        <ng-scrollbar visibility="hover" #scrollbar thumbClass="custom-scrollbars"
+                            orientation="vertical">
 
                         <div class="table-box mb-20 attension-table">
                             <div class="table-respons">
@@ -799,7 +799,7 @@
                                                                 role="tab" aria-controls="pills-list"
                                                                 aria-selected="true" #pillsListAnchor
                                                                 id="pillsListAnchor{{record?.taskId}}"
-                                                                (click)="checkActivenesList(record)"><img
+                                                                (click)="checkActivenesList($event, record)"><img
                                                                     src="assets/images/list-icon-g.svg"
                                                                     *ngIf="!record?.showBlackListIcon" />
                                                                 <img src="assets/images/list-icon.svg"
@@ -809,7 +809,7 @@
                                                             <a class="nav-link" id="pills-chat-tab" data-toggle="pill"
                                                                 href="#pills-chat{{record?.taskId}}" role="tab"
                                                                 aria-controls="pills-chat" aria-selected="false"
-                                                                (click)="checkActivenesChat(record); getChatDetails(record?.taskId, record?.subTaskId, record)"
+                                                                (click)="checkActivenesChat($event, record); getChatDetails(record?.taskId, record?.subTaskId, record)"
                                                                 id="pillsChatAnchor{{record?.taskId}}"
                                                                 #pillsChatAnchor><img src="assets/images/chat-icon.svg"
                                                                     *ngIf="!record?.showBlackChatIcon" />
@@ -821,7 +821,7 @@
                                                                 href="#pills-folder{{record?.taskId}}" role="tab"
                                                                 aria-controls="pills-folder" aria-selected="false"
                                                                 id="pillsFolderAnchor{{record?.taskId}}"
-                                                                (click)="checkActivenesDetails(record); getTaskDetails(record?.taskId, record?.subTaskId, record)"
+                                                                (click)="checkActivenesDetails($event,record); getTaskDetails(record?.taskId, record?.subTaskId, record)"
                                                                 #pillsFolderAnchor><img
                                                                     src="assets/images/folder-icon.svg"
                                                                     *ngIf="!record?.showBlackFolderIcon" />
@@ -1024,7 +1024,7 @@
                                 </table>
                             </div>
                         </div>
-
+                        </ng-scrollbar>
 
                     </div>
                 </div>

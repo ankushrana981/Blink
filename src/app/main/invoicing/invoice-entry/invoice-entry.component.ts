@@ -61,6 +61,7 @@ export class InvoiceEntryComponent extends BaseComponent implements OnInit {
   public approveReqSecond: Boolean = false;
   public approveReqThird: Boolean = false;
   public establishmentTypeRecords: any = [];
+  
 
   constructor(inj: Injector, public route: ActivatedRoute) {
     super(inj);

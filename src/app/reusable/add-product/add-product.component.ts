@@ -2,89 +2,87 @@ import { Component, Output, EventEmitter, OnInit } from '@angular/core';
 
 @Component({
   selector: '[app-add-product]',
-  standalone:false,
+  standalone: false,
   templateUrl: './add-product.component.html',
-  styles: []
+  styles: [],
 })
 export class AddProductComponent implements OnInit {
   setp1: boolean = true;
   setp2: boolean = false;
   setp3: boolean = false;
   assignto: boolean = false;
-  
 
   @Output() closeClick = new EventEmitter();
 
   closeTask() {
-    this.closeClick.emit("close"); // Pass any payload as argument
+    this.closeClick.emit('close'); // Pass any payload as argument
   }
-  
-  constructor() { }
+
+  constructor() {}
   tasks: any[] = [
     {
-        id: 1,
-        name: 'Customer',
+      id: 1,
+      name: 'Customer',
     },
     {
-        id: 2,
-        name: 'Contact',
-    },
-    {
-        id: 3,
-        name: 'Company',
-    },
-    {
-        id: 4,
-        name: 'Product',
-    },
-    {
-        id: 5,
-        name: 'General Task',
-    }
-];
-people: any[] = [
-  {
-    id: 1,
-    name: 'GroStore',
-  },
-  {
       id: 2,
-      name: 'Wiresupply',
-  },
-  {
+      name: 'Contact',
+    },
+    {
       id: 3,
-      name: 'Bulk Market',
-  },
-  {
+      name: 'Company',
+    },
+    {
       id: 4,
-      name: 'FoodsrUs',
-  }
-];   
-Vendor: any[] = [
-  {
+      name: 'Product',
+    },
+    {
+      id: 5,
+      name: 'General Task',
+    },
+  ];
+  people: any[] = [
+    {
       id: 1,
       name: 'GroStore',
-  },
-  {
+    },
+    {
       id: 2,
       name: 'Wiresupply',
-  },
-  {
+    },
+    {
       id: 3,
       name: 'Bulk Market',
-  },
-  {
+    },
+    {
       id: 4,
       name: 'FoodsrUs',
+    },
+  ];
+  Vendor: any[] = [
+    {
+      id: 1,
+      name: 'GroStore',
+    },
+    {
+      id: 2,
+      name: 'Wiresupply',
+    },
+    {
+      id: 3,
+      name: 'Bulk Market',
+    },
+    {
+      id: 4,
+      name: 'FoodsrUs',
+    },
+  ];
+  scroll(el: HTMLElement) {
+    setTimeout(() => {
+      el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }, 200);
   }
-];
-scroll(el: HTMLElement) {
-  setTimeout(() => {
-      el.scrollIntoView({behavior: 'smooth', block: 'center'});
-  }, 200);
-}
-  ngOnInit() {
-  }
+  ngOnInit() {}
   setpOne() {
     this.setp1 = true;
     this.setp2 = false;
@@ -101,12 +99,8 @@ scroll(el: HTMLElement) {
     this.setp3 = true;
   }
   assigntoClick() {
-      this.assignto = !this.assignto;
+    this.assignto = !this.assignto;
   }
-  chnageTypeValue(){
-
-  }
+  chnageTypeValue() {}
   
-  
-
 }

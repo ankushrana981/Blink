@@ -205,12 +205,20 @@
                                     </div>
                                 </div>
                                 <div class="desc form-group form-task form-border">
+                                    <!-- <mat-form-field floatLabel="always">
+                                        <mat-label>Amount</mat-label>
+                                        <input matInput type="number" class="example-right-align" placeholder="0" />
+                                        <span matTextPrefix>$&nbsp;</span>
+                                        <span matTextSuffix>.00</span>
+                                      </mat-form-field> -->
                                     <!-- <label class="title">Source Price</label>
                                     <input id="productname" type="text" class="form-control"> -->
-                                    <mat-form-field class="example-full-width mat-input">
-                                        <input formControlName="focus" matInput type="text" placeholder="Source Price"
-                                            value="" autocomplete="off" prefix="Rp. " mask="separator"
-                                            thousandSeparator=".">
+                                    <mat-form-field class="example-full-width mat-input label-style">
+                                        <mat-label>Source Price</mat-label>
+                                        <!-- <mat-prefix>Rp. </mat-prefix> -->
+                                        <input formControlName="focus" matInput type="text" value="" autocomplete="off"
+                                            prefix="Rp. " mask="separator" thousandSeparator="." id="innn">
+                                        <span matTextPrefix id="iooo">Rp. </span>
                                     </mat-form-field>
                                 </div>
                             </div>
@@ -245,6 +253,7 @@
                                 <a class="modifier-btn">Save Product and go to Modifier</a>
                             </div>
                         </div>
+
                     </form>
                 </div>
                 <!-- </div> -->

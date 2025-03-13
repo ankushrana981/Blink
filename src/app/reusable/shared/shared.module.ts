@@ -84,7 +84,6 @@ import { ReturnBalanceComponent } from '../../reusable/return-balance/return-bal
 import { DiscountSettingComponent } from '../../reusable/discount-setting/discount-setting.component';
 import { IconFolderComponent } from '../../common/svg/icon-folder';
 import { QuickCustomerComponent } from '../../reusable/quick-customer/quick-customer.component';
-import { AlphabetFilterModule } from 'alphabet-filter';
 import { CarouselModule } from 'ngx-bootstrap/carousel';
 import { NgApexchartsModule } from 'ng-apexcharts';
 import { IconSquareQuestionComponent } from '../../common/svg/icon-square-question';

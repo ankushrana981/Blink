@@ -1,16 +1,17 @@
-<div class="crm-Wrap inventoryreports-Wrap product-view" >
+<div class="crm-Wrap inventoryreports-Wrap product-view">
     <div class="">
         <!-- [ngClass]="(icon1 || icon2 || icon3)?'active':''" -->
         <div class="">
-            <div class="contentBox task-page " >
+            <div class="contentBox task-page ">
                 <!-- [ngClass]="(icon1 || icon2 || icon3)?'active':''" -->
 
                 <div class="leftContent overflow-0 task-board">
                     <div class="viewdata-title task-title d-flex flex-wrap align-items-center justify-content-between">
                         <h2>Product View</h2>
                         <div class="d-flex flex-wrap">
-                            <a class="icon-task" href="javascript:void(0)" icon-more title="More" ></a>
-                            <a class="icon-task" href="javascript:void(0);" (click)="addProductModal(addProduct);$event.preventDefault()" icon-pluse
+                            <a class="icon-task" href="javascript:void(0)" icon-more title="More"></a>
+                            <a class="icon-task" href="javascript:void(0);"
+                                (click)="addProductModal(addProduct);$event.preventDefault()" icon-pluse
                                 title="Create Task"></a>
                             <a class="icon-task" href="javascript:void(0)" icon-filter title="Filter"></a>
                             <a class="icon-task" href="javascript:void(0)" icon-upload title="Upload"></a>
@@ -106,7 +107,9 @@
                                             </tr>
                                         </thead>
                                         <tbody fxLayout="row wrap" class="list">
-                                            <tr class="x-animated fadeIn d-1 in" [ngClass]="{'active':dropdown ? 'active' : '','trActive1':icon1 ? 'trActive1' : ''}" (click)="changeIc2('dots','icon1');$event.preventDefault()">
+                                            <tr class="x-animated fadeIn d-1 in"
+                                                [ngClass]="{'active':dropdown ? 'active' : '','trActive1':icon1 ? 'trActive1' : ''}"
+                                                (click)="changeIc2('dots','icon1');$event.preventDefault()">
                                                 <td class="text-center">
                                                     <h4 class="rownumber ng-binding">1</h4>
                                                 </td>
@@ -235,7 +238,9 @@
                                             </tr>
                                         </tbody>
                                         <tbody fxLayout="row wrap" class="list">
-                                            <tr class="x-animated fadeIn d-1 in" (click)="changeIc2('dots','icon2');$event.preventDefault()" [ngClass]="icon2 ? 'trActive2' :''">
+                                            <tr class="x-animated fadeIn d-1 in"
+                                                (click)="changeIc2('dots','icon2');$event.preventDefault()"
+                                                [ngClass]="icon2 ? 'trActive2' :''">
                                                 <td class="text-center">
                                                     <h4 class="rownumber ng-binding">2</h4>
                                                 </td>
@@ -285,7 +290,9 @@
                                             </tr>
                                         </tbody>
                                         <tbody fxLayout="row wrap" class="list">
-                                            <tr class="x-animated fadeIn d-1 in" (click)="changeIc2('dots','icon3');$event.preventDefault()" [ngClass]="icon3 ? 'trActive3' :''">
+                                            <tr class="x-animated fadeIn d-1 in"
+                                                (click)="changeIc2('dots','icon3');$event.preventDefault()"
+                                                [ngClass]="icon3 ? 'trActive3' :''">
                                                 <td class="text-center">
                                                     <h4 class="rownumber ng-binding">3</h4>
                                                 </td>
@@ -545,7 +552,8 @@
                         data-wow-delay="500ms" #addNewTskBtn>
                         <h5 class="p-title">Inventory Cost <span>Rp. 23.353.256,45</span></h5>
                         <h5 class="p-title">Inventory Value <span>Rp. 23.353..252.256,45</span></h5>
-                        <button type="button" class="btn btn-main btn-green" (click)="addProductModal(addProduct);$event.preventDefault()">Add New Product</button>
+                        <button type="button" class="btn btn-main btn-green"
+                            (click)="addProductModal(addProduct);$event.preventDefault()">Add New Product</button>
                     </div>
                 </div>
 

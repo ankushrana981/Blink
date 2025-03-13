@@ -24,10 +24,10 @@
                     <button class="all-btn">All Products</button>
                     <!-- <button class="all-btn" (click)="profileShow = !profileShow">All Products</button> -->
                     <!-- <ul class="all-list customanimate order-animate1" [ngClass]="{active: profileShow, inactive: !profileShow}"> -->
-                    <ul class="all-list customanimate order-animate1">
+                    <ul class="all-list customanimate order-animate1" [formGroup]="yourForm">
                       <li>
                         <div class="form-group form-task remove-border">
-                          <ng-select formControlName="task_type" class="w-100 form-task-mc" [items]="tasks"
+                          <ng-select formControlName="product_type" class="w-100 form-task-mc" [items]="tasks"
                             placeholder="PRODUCT" bindLabel="name" (change)="chnageTypeValue()" bindValue="name"
                             [searchable]="false" [hideSelected]="true">
                             <ng-template ng-label-tmp let-item="item" let-clear="clear">

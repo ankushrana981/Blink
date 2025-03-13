@@ -23694,3 +23694,17 @@ app-vendor-setup
 .reladex-add-dropdown .dropdown-menu.mt-8 {
   margin-top: 8px !important;
 }
+
+.label-style label mat-label {
+  font-family: SF UI Display Bold;
+  font-size: 9px;
+  line-height: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #a0a3b9;
+}
+span#iooo {
+  font-family: "SF UI Display Semibold";
+  font-size: 12px;
+  line-height: 14px;
+}

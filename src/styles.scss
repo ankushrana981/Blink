@@ -83,7 +83,7 @@ div.mat-mdc-select-panel mat-pseudo-checkbox,
 .newMemo-Modal .mat-mdc-form-field-subscript-wrapper {
   display: none;
 }
-.mat-mdc-select-arrow{
+.mat-mdc-select-arrow {
   height: 15px !important;
 }
 div.mat-mdc-select-panel .mat-mdc-option {
@@ -112,4 +112,99 @@ div.mat-mdc-select-panel .mat-mdc-option {
 .dashboardWrap .mdc-text-field--no-label .mat-mdc-form-field-infix {
   padding-top: 4px;
   padding-bottom: 4px;
+}
+
+// date picker calendar
+.p-datepicker-calendar-container {
+  width: 100%;
+  left: 0 !important;
+  border-color: rgba(0, 0, 0, 0.15) !important;
+  padding: 5px 0 !important;
+}
+
+.p-datepicker-header {
+  background-color: transparent !important;
+  padding: 8px 0 !important;
+  border-bottom: 2px solid #08d9d6;
+}
+
+button.p-ripple.p-datepicker-select-month,
+button.p-ripple.p-datepicker-select-year {
+  color: #08d9d6;
+  text-transform: uppercase;
+  font-size: 11px;
+  font-weight: 600;
+  padding-left: 5px;
+}
+
+p-button .p-datepicker-prev-button,
+p-button .p-datepicker-next-button {
+  color: #08d9d6 !important;
+  padding: 0 0.5em;
+}
+
+th.p-datepicker-weekday-cell {
+  text-align: center;
+  font-weight: 700;
+  border: 0;
+  padding: 0.5em;
+}
+.p-datepicker-panel .p-datepicker-calendar-container {
+  display: flex;
+  border-color: #00000000 !important;
+  border-width: 0 !important;
+  background-color: rgb(54, 74, 101) !important;
+}
+
+.p-datepicker .p-datepicker-panel {
+  border: none;
+  background: rgb(54, 74, 101) !important;
+  top: 28px !important;
+  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+  padding-bottom: 2px;
+}
+p-datepicker {
+  display: grid;
+}
+span.p-ripple.p-datepicker-day {
+  color: #08d9d6 !important;
+}
+td.p-datepicker-day-cell.p-datepicker-other-month span {
+  color: rgba(255, 255, 255, 0.5) !important;
+  font-weight: 600;
+}
+
+.p-datepicker-buttonbar {
+  padding: 0.75rem 0.5rem;
+  display: inline-flex !important;
+  justify-content: flex-start !important;
+  width: 82%;
+  padding: 0 0.5rem !important;
+  gap: 20px;
+}
+
+.bb-2 {
+  border-bottom: 2px solid #08d9d6;
+}
+button.p-datepicker-dropdown {
+  color: rgb(8, 217, 214);
+}
+input.p-inputtext.p-component.p-datepicker-input.p-filled {
+  color: #08d9d6;
+  font-size: 20px;
+  text-align: end;
+  font-family: "Open Sans";
+}
+
+.p-datepicker button.close-btn {
+  color: #8bc34a;
+  margin: 9px 0;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  border: none;
+  background: transparent;
+}
+button.p-ripple.p-button.p-component.p-button-sm.p-datepicker-clear-button {
+  color: #ff5656 !important;
 }

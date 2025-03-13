@@ -65,8 +65,8 @@
 			<div class="form-group" *ngIf="filterData?.option?.length && filterData.async">
 				<label class="gray-label">{{filterData.labelName}}</label>
 				<ng-select [clearable]="false" [items]="clientNameItem | async" bindLabel="title"
-					[(ngModel)]="filterData.bindedValue" [loading]="supplierLoading"
-					name="supplierName" id="supplierName" autocomplete="off" [typeahead]="MainSearchdataSource"
+					[(ngModel)]="filterData.bindedValue" [loading]="supplierLoading" name="supplierName"
+					id="supplierName" autocomplete="off" [typeahead]="MainSearchdataSource"
 					(change)="changedChildFilter($event)">
 				</ng-select>
 			</div>
@@ -164,14 +164,16 @@
 	<div class="contentBox" [ngClass]="icon1?'active':''">
 		<div class="leftContent">
 			<div class="card">
-				<div class="table-box" data-infinite-scroll debounce
-					(scrolled)="onScrollDown($event)" (scrolledUp)="onUp($event)"
-					style="overflow-y: scroll;">
+				<div class="table-box" data-infinite-scroll debounce (scrolled)="onScrollDown($event)"
+					(scrolledUp)="onUp($event)" style="overflow-y: scroll;">
 
 					<table style="width:100%;" class="table-hover default-to-custom ng-isolate-scope">
 						<tbody [@fadeIn]="listrecords?.length" fxLayout="row wrap" class="list">
+
 							<tr style="vertical-align:top;" class="x-animated fadeIn d-1 in"
 								*ngFor="let i of listrecords; index as j" fxFlex="100" fxFlex.lt-sm="200">
+
+
 								<!-- start tr -->
 								<td width="64px" class="text-center">
 									<h4 class="rownumber">{{j+1}}</h4>

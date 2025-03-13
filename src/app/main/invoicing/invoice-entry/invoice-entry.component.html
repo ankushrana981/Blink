@@ -216,15 +216,30 @@
 			<div class="data-penal-body">
 				<div class="row" *ngIf="isNew">
 					<div class="col-12  x-animated fadeIn d-3">
-						<div class="form-group">
+						<div class="form-group bb-2">
 							<label class="text-uppercase">Date of issue</label>
-							<p-calendar #cal2 [(ngModel)]="user.dateOfIssue" dateFormat="dd.mm.yy" [showIcon]="true"
+							<!-- <p-calendar #cal2 [(ngModel)]="user.dateOfIssue" dateFormat="dd.mm.yy" [showIcon]="true"
 								[showButtonBar]="true">
 								<p-footer class="calendar-footer">
 									<button class="close-btn" pButton label="Close"
 										(click)="cal2.overlayVisible = false"></button>
 								</p-footer>
-							</p-calendar>
+							</p-calendar> -->
+
+							<p-datePicker #cal2 [(ngModel)]="user.dateOfIssue" dateFormat="dd.mm.yy" [showIcon]="true"
+								[showButtonBar]="true">
+								<p-footer class="calendar-footer">
+									<button class="close-btn" pButton label="Close"
+										(click)="cal2.overlayVisible = false">close</button>
+								</p-footer>
+							</p-datePicker>
+
+
+
+
+
+
+
 
 
 

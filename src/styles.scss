@@ -115,13 +115,13 @@ div.mat-mdc-select-panel .mat-mdc-option {
 }
 
 .sub-product li:hover .search-list-item span {
-  background-color: rgba(61, 179, 158, .1);
+  background-color: rgba(61, 179, 158, 0.1);
   color: #3db39e;
   border: 2px solid rgba(61, 179, 158, 1);
 }
 
 .sub-product li .search-list-item span {
-  font-family: 'Mulish';
+  font-family: "Mulish";
   font-weight: 700;
   font-size: 12px;
   line-height: 15px;
@@ -227,4 +227,110 @@ input.p-inputtext.p-component.p-datepicker-input.p-filled {
 }
 button.p-ripple.p-button.p-component.p-button-sm.p-datepicker-clear-button {
   color: #ff5656 !important;
+}
+
+// testing css
+.alpha-container {
+  display: flex;
+  gap: 10px;
+  height: 336px;
+  position: relative;
+  z-index: 1;
+}
+
+/* Alphabet List */
+.alphabet-container {
+  width: 50px;
+  height: 100%;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+.alphabet-container span {
+  cursor: pointer;
+  margin: 2px 0;
+  transition: 0.3s;
+  font-size: 10px;
+  line-height: 14px;
+}
+
+.alphabet-container .active {
+  color: #007bff;
+  border-radius: 50%;
+}
+
+.alphabet-container .disabled {
+  // color: #aaa;
+  // cursor: default;
+  // pointer-events: none;
+  display: table;
+  width: 50px;
+  padding: 1px 0;
+  text-align: center;
+  margin: 2px 0;
+  transition: 0.3s;
+  font-size: 10px;
+}
+
+/* Item List */
+.list-container {
+  flex: 1;
+  height: 100%;
+  overflow-y: auto;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.search-list-item span {
+  display: block;
+  transition: 0.3s;
+}
+
+.alpha-container .list-container {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.alpha-search-input input {
+  padding: 5px !important;
+  width: 33px !important;
+  height: 33px;
+  background-color: #d8dbe3 !important;
+  border-radius: 50px;
+  transition: all 0.3s ease-in-out;
+  box-sizing: inherit;
+  position: absolute;
+  right: 0;
+  background-image: url("../src/assets/images/serach.svg");
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  cursor: pointer;
+  border: 0;
+}
+
+.alpha-search-input input:focus,
+.alpha-search-input input:active,
+.alpha-search-input input:not(:placeholder-shown) {
+  width: 100% !important;
+  padding: 5px 30px !important;
+  background-position: 5% 50%;
+  cursor: inherit;
+}
+.alpha-search-input {
+  position: relative;
+}
+.alphaMain {
+  width: 83%;
+  height: calc(100% - 77px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }

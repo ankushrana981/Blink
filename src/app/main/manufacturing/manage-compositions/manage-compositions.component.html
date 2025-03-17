@@ -72,7 +72,7 @@
                           </ng-select>
                         </div>
                       </li>
-                    </ul> 
+                    </ul>
                   </div>
                   <div class="sub-product customanimate order-animate2" *ngIf="selectedFirst">
                     <button class="all-btn" (click)="this.sublistShow = !this.sublistShow"
@@ -100,11 +100,63 @@
                         </div>
                       </ng-template>
                     </alphabet-filter> -->
-                    <li *ngFor="let item of items" (click)="selectedItem(item)" (keyup)="change()">
-                      <div class="search-list-item">
-                        <span [ngClass]="item.name == selectedValue ? 'active' : ''">{{item.name}}</span>
+
+
+                    <!-- <ng-scrollbar visibility="hover" #scrollEl thumbClass="custom-scrollbars" orientation="vertical">
+                      <li *ngFor="let item of items" (click)="selectedItem(item)" (keyup)="change()">
+                        <div class="search-list-item">
+                          <span [ngClass]="item.name == selectedValue ? 'active' : ''">{{item.name}}</span>
+                        </div>
+                      </li>
+                    </ng-scrollbar> -->
+
+
+                    <!-- testing -->
+
+                    <div class="alphaMain">
+                      <div class="alpha-container ">
+
+
+                        <!-- Items List -->
+                        <div class="list-container" #itemList>
+                          <ul>
+                            <li *ngFor="let item of (searchQuery ? filteredItems : items)" [id]="item.name">
+                              <div class="search-list-item">
+                                <span (click)="selectedItem(item)">{{ item.name }}</span>
+                              </div>
+                            </li>
+                          </ul>
+                        </div>
+                        <!-- Alphabet List -->
+                        <div class="alphabet-container" #alphabetList>
+                          <span *ngFor="let letter of alphabet" [id]="'letter-' + letter"
+                            (click)="filterByLetter(letter)" [ngClass]="{
+                              'active': letter === activeLetter,
+                              'disabled': !availableLetters.has(letter)
+                            }">
+                            {{ letter }}
+                          </span>
+                        </div>
                       </div>
-                  </li>
+                      <!-- Search Box -->
+                      <!-- <div class="search-box">
+                        <input type="text" [(ngModel)]="searchQuery" (input)="searchItems()"
+                          placeholder="Search item..." />
+                      </div> -->
+
+                      <div class="alpha-search-input fadeEnter d-flex">
+
+                        <input type="search" placeholder=" " class="" [(ngModel)]="searchQuery"
+                          (input)="searchItems()" />
+
+
+                      </div>
+
+                    </div>
+
+
+
+                    <!-- testing end -->
 
                   </div>
                 </div>
@@ -114,7 +166,8 @@
                   <div class="variable-detail" *ngIf="selectedSecond">
                     <h2 class="title">Variables</h2>
                     <ul class="variable-list">
-                      <li><a (click)="variableShow = !variableShow" class="customanimate order-animate2">Amount</a></li>
+                      <li><a (click)="variableShow = !variableShow" class="customanimate order-animate2">Amount</a>
+                      </li>
                       <li><a class="customanimate order-animate3">Metric</a></li>
                     </ul>
                     <div class="variable-modal" [ngClass]="{active: variableShow, inactive: !variableShow}">

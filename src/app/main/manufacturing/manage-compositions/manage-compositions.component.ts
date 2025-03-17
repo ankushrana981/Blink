@@ -47,6 +47,7 @@ export class ManageCompositionsComponent implements OnInit {
   ];
   selectedItem(event: any) {
     this.selectedValue = event.name;
+    console.log('clicked')
     this.isSelected('second');
   }
 

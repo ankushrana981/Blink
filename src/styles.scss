@@ -114,6 +114,26 @@ div.mat-mdc-select-panel .mat-mdc-option {
   padding-bottom: 4px;
 }
 
+.sub-product li:hover .search-list-item span {
+  background-color: rgba(61, 179, 158, .1);
+  color: #3db39e;
+  border: 2px solid rgba(61, 179, 158, 1);
+}
+
+.sub-product li .search-list-item span {
+  font-family: 'Mulish';
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 15px;
+  text-transform: capitalize;
+  color: #85a1c7;
+  padding: 6px 15px !important;
+  border-radius: 8px;
+  display: inline-block;
+  min-width: 150px;
+  border: 2px solid transparent;
+  cursor: pointer;
+}
 // date picker calendar
 .p-datepicker-calendar-container {
   width: 100%;

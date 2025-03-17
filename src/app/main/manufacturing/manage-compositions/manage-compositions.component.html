@@ -72,7 +72,7 @@
                           </ng-select>
                         </div>
                       </li>
-                    </ul>
+                    </ul> 
                   </div>
                   <div class="sub-product customanimate order-animate2" *ngIf="selectedFirst">
                     <button class="all-btn" (click)="this.sublistShow = !this.sublistShow"
@@ -100,6 +100,11 @@
                         </div>
                       </ng-template>
                     </alphabet-filter> -->
+                    <li *ngFor="let item of items" (click)="selectedItem(item)" (keyup)="change()">
+                      <div class="search-list-item">
+                        <span [ngClass]="item.name == selectedValue ? 'active' : ''">{{item.name}}</span>
+                      </div>
+                  </li>
 
                   </div>
                 </div>

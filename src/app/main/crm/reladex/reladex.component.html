@@ -514,7 +514,7 @@
             <a class="btn-task" href="javascript:void(0)" [ngClass]="{'active': displayStepFour}"
               (click)="showStepFour()">Sales Info</a>
           </div>
-          <form class="example-form" [formGroup]="addCustomerBasicInfo" (ngSubmit)="addBasicInfo()">
+          <form class="example-form updated-mat-form" [formGroup]="addCustomerBasicInfo" (ngSubmit)="addBasicInfo()">
             <div class="task-content" [ngClass]="{'d-none': !displayStepOne}">
               <div class="">
                 <div class="step-block d-flex justify-content-between">
@@ -525,8 +525,8 @@
                           <div class="col-md-6">
                             <div class="form-group form-task">
                               <mat-form-field class="example-full-width mat-input">
-                                <input matInput formControlName="title" type="text" placeholder="Customer Name" value=""
-                                  autocomplete="off">
+                                <input matInput formControlName="title" type="text" value="" autocomplete="off">
+                                <mat-label>Customer Name</mat-label>
                               </mat-form-field>
                             </div>
                           </div>
@@ -535,8 +535,8 @@
                           <div class="col-md-12">
                             <div class="form-group form-task">
                               <mat-form-field class="example-full-width mat-input">
-                                <input matInput formControlName="address1" type="text" placeholder="Address Line 1"
-                                  value="" autocomplete="off">
+                                <input matInput formControlName="address1" type="text" value="" autocomplete="off">
+                                <mat-label>Address Line 1</mat-label>
                               </mat-form-field>
                             </div>
                           </div>
@@ -545,8 +545,8 @@
                           <div class="col-md-12">
                             <div class="form-group form-task">
                               <mat-form-field class="example-full-width mat-input">
-                                <input matInput formControlName="address2" type="text" placeholder="Address Line 2"
-                                  value="" autocomplete="off">
+                                <input matInput formControlName="address2" type="text" value="" autocomplete="off">
+                                <mat-label>Address Line 2</mat-label>
                               </mat-form-field>
                             </div>
                           </div>
@@ -555,34 +555,17 @@
                           <div class="col-md-6">
                             <div class="form-group form-task">
                               <mat-form-field class="example-full-width mat-input">
-                                <input matInput formControlName="city" type="text" placeholder="City" value=""
-                                  autocomplete="off">
+                                <input matInput formControlName="city" type="text" value="" autocomplete="off">
+                                <mat-label>City</mat-label>
                               </mat-form-field>
+
                             </div>
                           </div>
                           <div class="col-md-6">
                             <div class="form-group form-task">
                               <mat-form-field class="example-full-width mat-input">
-                                <input matInput formControlName="state" type="text" placeholder="State" value=""
-                                  autocomplete="off">
-                              </mat-form-field>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="row">
-                          <div class="col-md-6">
-                            <div class="form-group form-task">
-                              <mat-form-field class="example-full-width mat-input">
-                                <input matInput formControlName="country" type="text" placeholder="Country" value=""
-                                  autocomplete="off">
-                              </mat-form-field>
-                            </div>
-                          </div>
-                          <div class="col-md-6">
-                            <div class="form-group form-task">
-                              <mat-form-field class="example-full-width mat-input">
-                                <input matInput formControlName="zip" type="text" placeholder="Zip" value=""
-                                  autocomplete="off">
+                                <input matInput formControlName="state" type="text" value="" autocomplete="off">
+                                <mat-label>State</mat-label>
                               </mat-form-field>
                             </div>
                           </div>
@@ -591,16 +574,34 @@
                           <div class="col-md-6">
                             <div class="form-group form-task">
                               <mat-form-field class="example-full-width mat-input">
-                                <input matInput formControlName="phone1" type="text" placeholder="Phone Number 1"
-                                  value="" autocomplete="off">
+                                <input matInput formControlName="country" type="text" value="" autocomplete="off">
+                                <mat-label>Country</mat-label>
                               </mat-form-field>
                             </div>
                           </div>
                           <div class="col-md-6">
                             <div class="form-group form-task">
                               <mat-form-field class="example-full-width mat-input">
-                                <input matInput formControlName="phone2" type="text" placeholder="Phone Number 2"
-                                  value="" autocomplete="off">
+                                <input matInput formControlName="zip" type="text" value="" autocomplete="off">
+                                <mat-label>Zip</mat-label>
+                              </mat-form-field>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-6">
+                            <div class="form-group form-task">
+                              <mat-form-field class="example-full-width mat-input">
+                                <input matInput formControlName="phone1" type="text" value="" autocomplete="off">
+                                <mat-label>Phone Number 1</mat-label>
+                              </mat-form-field>
+                            </div>
+                          </div>
+                          <div class="col-md-6">
+                            <div class="form-group form-task">
+                              <mat-form-field class="example-full-width mat-input">
+                                <input matInput formControlName="phone2" type="text" value="" autocomplete="off">
+                                <mat-label>Phone Number 2</mat-label>
                               </mat-form-field>
                             </div>
                           </div>
@@ -615,16 +616,16 @@
                           <div class="col-md-6">
                             <div class="form-group form-task">
                               <mat-form-field class="example-full-width mat-input">
-                                <input matInput formControlName="email" type="text" placeholder="Email" value=""
-                                  autocomplete="off">
+                                <input matInput formControlName="email" type="text" value="" autocomplete="off">
+                                <mat-label>Email</mat-label>
                               </mat-form-field>
                             </div>
                           </div>
                           <div class="col-md-6">
                             <div class="form-group form-task">
                               <mat-form-field class="example-full-width mat-input">
-                                <input matInput formControlName="faceBook" type="text" placeholder="FaceBook" value=""
-                                  autocomplete="off">
+                                <input matInput formControlName="faceBook" type="text" value="" autocomplete="off">
+                                <mat-label>FaceBook</mat-label>
                               </mat-form-field>
                             </div>
                           </div>
@@ -633,16 +634,16 @@
                           <div class="col-md-6">
                             <div class="form-group form-task">
                               <mat-form-field class="example-full-width mat-input">
-                                <input matInput formControlName="instaGram" type="text" placeholder="Instagram" value=""
-                                  autocomplete="off">
+                                <input matInput formControlName="instaGram" type="text" value="" autocomplete="off">
+                                <mat-label>Instagram</mat-label>
                               </mat-form-field>
                             </div>
                           </div>
                           <div class="col-md-6">
                             <div class="form-group form-task">
                               <mat-form-field class="example-full-width mat-input">
-                                <input matInput formControlName="google" type="text" placeholder="Google" value=""
-                                  autocomplete="off">
+                                <input matInput formControlName="google" type="text" value="" autocomplete="off">
+                                <mat-label>Google</mat-label>
                               </mat-form-field>
                             </div>
                           </div>
@@ -651,16 +652,16 @@
                           <div class="col-md-6">
                             <div class="form-group form-task mb-0">
                               <mat-form-field class="example-full-width mat-input">
-                                <input matInput formControlName="tiktok" type="text" placeholder="Tiktok" value=""
-                                  autocomplete="off">
+                                <input matInput formControlName="tiktok" type="text" value="" autocomplete="off">
+                                <mat-label>Tiktok</mat-label>
                               </mat-form-field>
                             </div>
                           </div>
                           <div class="col-md-6">
                             <div class="form-group form-task mb-0">
                               <mat-form-field class="example-full-width mat-input">
-                                <input matInput formControlName="webSite" type="text" placeholder="Website" value=""
-                                  autocomplete="off">
+                                <input matInput formControlName="webSite" type="text" value="" autocomplete="off">
+                                <mat-label>Website</mat-label>
                               </mat-form-field>
                             </div>
                           </div>
@@ -696,8 +697,8 @@
                           <div class="col-md-12">
                             <div class="form-group form-task">
                               <mat-form-field class="example-full-width mat-input">
-                                <input matInput formControlName="internalNotes" type="text"
-                                  placeholder="Internal Notes (Private)" value="" autocomplete="off">
+                                <input matInput formControlName="internalNotes" type="text" value="" autocomplete="off">
+                                <mat-label>Internal Notes (Private)</mat-label>
                               </mat-form-field>
                             </div>
                           </div>
@@ -706,8 +707,8 @@
                           <div class="col-md-12">
                             <div class="form-group form-task">
                               <mat-form-field class="example-full-width mat-input">
-                                <input matInput formControlName="externalNotes" type="text"
-                                  placeholder="External Notes (Shows on Invoice)" value="" autocomplete="off">
+                                <input matInput formControlName="externalNotes" type="text" value="" autocomplete="off">
+                                <mat-label>External Notes (Shows on Invoice)</mat-label>
                               </mat-form-field>
                             </div>
                           </div>
@@ -738,9 +739,9 @@
                           <div class="col-md-12">
                             <div class="form-group form-task">
                               <mat-form-field class="example-full-width mat-input">
-                                <input matInput formControlName="allowedCreditAmount" type="number"
-                                  placeholder="Extendable Credit" value="" autocomplete="off"
-                                  (keypress)="numberOnly($event)">
+                                <input matInput formControlName="allowedCreditAmount" type="number" value=""
+                                  autocomplete="off" (keypress)="numberOnly($event)">
+                                <mat-label>Extendable Credit</mat-label>
                               </mat-form-field>
                             </div>
                           </div>
@@ -832,7 +833,8 @@
             <a class="btn-task" href="javascript:void(0)" [ngClass]="{'active': contactDisplayStepTwo}"
               (click)="contactPopupshowStepTwo()">Notes</a>
           </div>
-          <form class="example-form" [formGroup]="addContactBasicInfo" (ngSubmit)="submitContactBasicInfo()">
+          <form class="example-form updated-mat-form" [formGroup]="addContactBasicInfo"
+            (ngSubmit)="submitContactBasicInfo()">
             <div class="task-content" [ngClass]="{'d-none': !contactDisplayStepOne}">
               <div class="">
                 <div class="step-block d-flex justify-content-between">
@@ -843,8 +845,8 @@
                           <div class="col-md-6">
                             <div class="form-group form-task">
                               <mat-form-field class="example-full-width mat-input">
-                                <input matInput formControlName="title" type="text" placeholder="Contact Name" value=""
-                                  autocomplete="off">
+                                <input matInput formControlName="title" type="text" value="" autocomplete="off">
+                                <mat-label>Contact Name</mat-label>
                               </mat-form-field>
                             </div>
                           </div>
@@ -853,8 +855,8 @@
                           <div class="col-md-12">
                             <div class="form-group form-task">
                               <mat-form-field class="example-full-width mat-input">
-                                <input matInput formControlName="address1" type="text" placeholder="Address Line 1"
-                                  value="" autocomplete="off">
+                                <input matInput formControlName="address1" type="text" value="" autocomplete="off">
+                                <mat-label>Address Line 1</mat-label>
                               </mat-form-field>
                             </div>
                           </div>
@@ -863,8 +865,8 @@
                           <div class="col-md-12">
                             <div class="form-group form-task">
                               <mat-form-field class="example-full-width mat-input">
-                                <input matInput formControlName="address2" type="text" placeholder="Address Line 2"
-                                  value="" autocomplete="off">
+                                <input matInput formControlName="address2" type="text" value="" autocomplete="off">
+                                <mat-label>Address Line 2</mat-label>
                               </mat-form-field>
                             </div>
                           </div>
@@ -873,16 +875,16 @@
                           <div class="col-md-6">
                             <div class="form-group form-task">
                               <mat-form-field class="example-full-width mat-input">
-                                <input matInput formControlName="city" type="text" placeholder="City" value=""
-                                  autocomplete="off">
+                                <input matInput formControlName="city" type="text" value="" autocomplete="off">
+                                <mat-label>City</mat-label>
                               </mat-form-field>
                             </div>
                           </div>
                           <div class="col-md-6">
                             <div class="form-group form-task">
                               <mat-form-field class="example-full-width mat-input">
-                                <input matInput formControlName="state" type="text" placeholder="State" value=""
-                                  autocomplete="off">
+                                <input matInput formControlName="state" type="text" value="" autocomplete="off">
+                                <mat-label>State</mat-label>
                               </mat-form-field>
                             </div>
                           </div>
@@ -902,8 +904,8 @@
                           <div class="col-md-6">
                             <div class="form-group form-task">
                               <mat-form-field class="example-full-width mat-input">
-                                <input matInput formControlName="zip" type="text" placeholder="Zip" value=""
-                                  autocomplete="off">
+                                <input matInput formControlName="zip" type="text" value="" autocomplete="off">
+                                <mat-label>Zip</mat-label>
                               </mat-form-field>
                             </div>
                           </div>
@@ -912,16 +914,16 @@
                           <div class="col-md-6">
                             <div class="form-group form-task">
                               <mat-form-field class="example-full-width mat-input">
-                                <input matInput formControlName="phone1" type="text" placeholder="Phone Number 1"
-                                  value="" autocomplete="off">
+                                <input matInput formControlName="phone1" type="text" value="" autocomplete="off">
+                                <mat-label>Phone Number 1</mat-label>
                               </mat-form-field>
                             </div>
                           </div>
                           <div class="col-md-6">
                             <div class="form-group form-task">
                               <mat-form-field class="example-full-width mat-input">
-                                <input matInput formControlName="phone2" type="text" placeholder="Phone Number 2"
-                                  value="" autocomplete="off">
+                                <input matInput formControlName="phone2" type="text" value="" autocomplete="off">
+                                <mat-label>Phone Number 2</mat-label>
                               </mat-form-field>
                             </div>
                           </div>
@@ -930,16 +932,16 @@
                           <div class="col-md-6">
                             <div class="form-group form-task">
                               <mat-form-field class="example-full-width mat-input">
-                                <input matInput formControlName="email" type="text" placeholder="Email" value=""
-                                  autocomplete="off">
+                                <input matInput formControlName="email" type="text" value="" autocomplete="off">
+                                <mat-label>Email</mat-label>
                               </mat-form-field>
                             </div>
                           </div>
                           <div class="col-md-6">
                             <div class="form-group form-task">
                               <mat-form-field class="example-full-width mat-input">
-                                <input matInput formControlName="webSite" type="text" placeholder="Web Site" value=""
-                                  autocomplete="off">
+                                <input matInput formControlName="webSite" type="text" value="" autocomplete="off">
+                                <mat-label>Web Site</mat-label>
                               </mat-form-field>
                             </div>
                           </div>
@@ -984,8 +986,8 @@
                           <div class="col-md-12">
                             <div class="form-group form-task">
                               <mat-form-field class="example-full-width mat-input">
-                                <input matInput formControlName="internalNotes" type="text"
-                                  placeholder="Internal Notes (Private)" value="" autocomplete="off">
+                                <input matInput formControlName="internalNotes" type="text" value="" autocomplete="off">
+                                <mat-label>Internal Notes (Private)</mat-label>
                               </mat-form-field>
                             </div>
                           </div>
@@ -994,8 +996,8 @@
                           <div class="col-md-12">
                             <div class="form-group form-task">
                               <mat-form-field class="example-full-width mat-input">
-                                <input matInput formControlName="externalNotes" type="text"
-                                  placeholder="External Notes (Shows on Invoice)" value="" autocomplete="off">
+                                <input matInput formControlName="externalNotes" type="text" value="" autocomplete="off">
+                                <mat-label>External Notes (Shows on Invoice)</mat-label>
                               </mat-form-field>
                             </div>
                           </div>
@@ -1039,7 +1041,8 @@
             <a class="btn-task" href="javascript:void(0)" [ngClass]="{'active': companyDisplayStepThree}"
               (click)="companyShowStepThree()">Sales Info</a>
           </div>
-          <form class="example-form" [formGroup]="addCompanyBasicInfo" (ngSubmit)="submitCompanyBasicInfo()">
+          <form class="example-form updated-mat-form" [formGroup]="addCompanyBasicInfo"
+            (ngSubmit)="submitCompanyBasicInfo()">
             <div class="task-content" [ngClass]="{'d-none': !companyDisplayStepOne}">
               <div class="">
                 <div class="step-block d-flex justify-content-between">
@@ -1050,8 +1053,8 @@
                           <div class="col-md-6">
                             <div class="form-group form-task">
                               <mat-form-field class="example-full-width mat-input">
-                                <input matInput formControlName="title" type="text" placeholder="Company Name" value=""
-                                  autocomplete="off">
+                                <input matInput formControlName="title" type="text" value="" autocomplete="off">
+                                <mat-label>Company Name</mat-label>
                               </mat-form-field>
                             </div>
                           </div>
@@ -1060,8 +1063,8 @@
                           <div class="col-md-12">
                             <div class="form-group form-task">
                               <mat-form-field class="example-full-width mat-input">
-                                <input matInput formControlName="address1" type="text" placeholder="Address Line 1"
-                                  value="" autocomplete="off">
+                                <input matInput formControlName="address1" type="text" value="" autocomplete="off">
+                                <mat-label>Address Line 1</mat-label>
                               </mat-form-field>
                             </div>
                           </div>
@@ -1070,8 +1073,8 @@
                           <div class="col-md-12">
                             <div class="form-group form-task">
                               <mat-form-field class="example-full-width mat-input">
-                                <input matInput formControlName="address2" type="text" placeholder="Address Line 2"
-                                  value="" autocomplete="off">
+                                <input matInput formControlName="address2" type="text" value="" autocomplete="off">
+                                <mat-label>Address Line 2</mat-label>
                               </mat-form-field>
                             </div>
                           </div>
@@ -1080,16 +1083,16 @@
                           <div class="col-md-6">
                             <div class="form-group form-task">
                               <mat-form-field class="example-full-width mat-input">
-                                <input matInput formControlName="city" type="text" placeholder="City" value=""
-                                  autocomplete="off">
+                                <input matInput formControlName="city" type="text" value="" autocomplete="off">
+                                <mat-label>City</mat-label>
                               </mat-form-field>
                             </div>
                           </div>
                           <div class="col-md-6">
                             <div class="form-group form-task">
                               <mat-form-field class="example-full-width mat-input">
-                                <input matInput formControlName="state" type="text" placeholder="State" value=""
-                                  autocomplete="off">
+                                <input matInput formControlName="state" type="text" value="" autocomplete="off">
+                                <mat-label>State</mat-label>
                               </mat-form-field>
                             </div>
                           </div>
@@ -1109,8 +1112,8 @@
                           <div class="col-md-6">
                             <div class="form-group form-task">
                               <mat-form-field class="example-full-width mat-input">
-                                <input matInput formControlName="zip" type="text" placeholder="Zip" value=""
-                                  autocomplete="off">
+                                <input matInput formControlName="zip" type="text" value="" autocomplete="off">
+                                <mat-label>Zip</mat-label>
                               </mat-form-field>
                             </div>
                           </div>
@@ -1119,16 +1122,16 @@
                           <div class="col-md-6">
                             <div class="form-group form-task">
                               <mat-form-field class="example-full-width mat-input">
-                                <input matInput formControlName="phone1" type="text" placeholder="Phone Number 1"
-                                  value="" autocomplete="off">
+                                <input matInput formControlName="phone1" type="text" value="" autocomplete="off">
+                                <mat-label>Phone Number 1</mat-label>
                               </mat-form-field>
                             </div>
                           </div>
                           <div class="col-md-6">
                             <div class="form-group form-task">
                               <mat-form-field class="example-full-width mat-input">
-                                <input matInput formControlName="phone2" type="text" placeholder="Phone Number 2"
-                                  value="" autocomplete="off">
+                                <input matInput formControlName="phone2" type="text" value="" autocomplete="off">
+                                <mat-label>Phone Number 2</mat-label>
                               </mat-form-field>
                             </div>
                           </div>
@@ -1143,16 +1146,16 @@
                           <div class="col-md-6">
                             <div class="form-group form-task">
                               <mat-form-field class="example-full-width mat-input">
-                                <input matInput formControlName="email" type="text" placeholder="Email" value=""
-                                  autocomplete="off">
+                                <input matInput formControlName="email" type="text" value="" autocomplete="off">
+                                <mat-label>Email</mat-label>
                               </mat-form-field>
                             </div>
                           </div>
                           <div class="col-md-6">
                             <div class="form-group form-task">
                               <mat-form-field class="example-full-width mat-input">
-                                <input matInput formControlName="webSite" type="text" placeholder="Website" value=""
-                                  autocomplete="off">
+                                <input matInput formControlName="webSite" type="text" value="" autocomplete="off">
+                                <mat-label>Website</mat-label>
                               </mat-form-field>
                             </div>
                           </div>
@@ -1197,8 +1200,8 @@
                           <div class="col-md-12">
                             <div class="form-group form-task">
                               <mat-form-field class="example-full-width mat-input">
-                                <input matInput formControlName="internalNotes" type="text"
-                                  placeholder="Internal Notes (Private)" value="" autocomplete="off">
+                                <input matInput formControlName="internalNotes" type="text" value="" autocomplete="off">
+                                <mat-label>Internal Notes (Private)</mat-label>
                               </mat-form-field>
                             </div>
                           </div>
@@ -1207,8 +1210,8 @@
                           <div class="col-md-12">
                             <div class="form-group form-task">
                               <mat-form-field class="example-full-width mat-input">
-                                <input matInput formControlName="externalNotes" type="text"
-                                  placeholder="External Notes (Shows on Invoice)" value="" autocomplete="off">
+                                <input matInput formControlName="externalNotes" type="text" value="" autocomplete="off">
+                                <mat-label>External Notes (Shows on Invoice)</mat-label>
                               </mat-form-field>
                             </div>
                           </div>
@@ -1295,7 +1298,8 @@
             <a class="btn-task" href="javascript:void(0)" [ngClass]="{'active': leadsDisplayStepFour}"
               (click)="showLeadsStepFour()">Sales Info</a>
           </div>
-          <form class="example-form" [formGroup]="addLeadsBasicInfo" (ngSubmit)="submitBasicLeadInfo()">
+          <form class="example-form updated-mat-form" [formGroup]="addLeadsBasicInfo"
+            (ngSubmit)="submitBasicLeadInfo()">
             <div class="task-content" [ngClass]="{'d-none': !leadsDisplayStepOne}">
               <div class="">
                 <div class="step-block d-flex justify-content-between">
@@ -1306,8 +1310,8 @@
                           <div class="col-md-6">
                             <div class="form-group form-task">
                               <mat-form-field class="example-full-width mat-input">
-                                <input matInput formControlName="title" type="text" placeholder="Customer Name" value=""
-                                  autocomplete="off">
+                                <input matInput formControlName="title" type="text" value="" autocomplete="off">
+                                <mat-label>Customer Name</mat-label>
                               </mat-form-field>
                             </div>
                           </div>
@@ -1316,8 +1320,8 @@
                           <div class="col-md-12">
                             <div class="form-group form-task">
                               <mat-form-field class="example-full-width mat-input">
-                                <input matInput formControlName="address1" type="text" placeholder="Address Line 1"
-                                  value="" autocomplete="off">
+                                <input matInput formControlName="address1" type="text" value="" autocomplete="off">
+                                <mat-label>Address Line 1</mat-label>
                               </mat-form-field>
                             </div>
                           </div>
@@ -1326,8 +1330,8 @@
                           <div class="col-md-12">
                             <div class="form-group form-task">
                               <mat-form-field class="example-full-width mat-input">
-                                <input matInput formControlName="address2" type="text" placeholder="Address Line 2"
-                                  value="" autocomplete="off">
+                                <input matInput formControlName="address2" type="text" value="" autocomplete="off">
+                                <mat-label>Address Line 2</mat-label>
                               </mat-form-field>
                             </div>
                           </div>
@@ -1336,34 +1340,16 @@
                           <div class="col-md-6">
                             <div class="form-group form-task">
                               <mat-form-field class="example-full-width mat-input">
-                                <input matInput formControlName="city" type="text" placeholder="City" value=""
-                                  autocomplete="off">
+                                <input matInput formControlName="city" type="text" value="" autocomplete="off">
+                                <mat-label>City</mat-label>
                               </mat-form-field>
                             </div>
                           </div>
                           <div class="col-md-6">
                             <div class="form-group form-task">
                               <mat-form-field class="example-full-width mat-input">
-                                <input matInput formControlName="state" type="text" placeholder="State" value=""
-                                  autocomplete="off">
-                              </mat-form-field>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="row">
-                          <div class="col-md-6">
-                            <div class="form-group form-task">
-                              <mat-form-field class="example-full-width mat-input">
-                                <input matInput formControlName="country" type="text" placeholder="Country" value=""
-                                  autocomplete="off">
-                              </mat-form-field>
-                            </div>
-                          </div>
-                          <div class="col-md-6">
-                            <div class="form-group form-task">
-                              <mat-form-field class="example-full-width mat-input">
-                                <input matInput formControlName="zip" type="text" placeholder="Zip" value=""
-                                  autocomplete="off">
+                                <input matInput formControlName="state" type="text" value="" autocomplete="off">
+                                <mat-label>State</mat-label>
                               </mat-form-field>
                             </div>
                           </div>
@@ -1372,16 +1358,34 @@
                           <div class="col-md-6">
                             <div class="form-group form-task">
                               <mat-form-field class="example-full-width mat-input">
-                                <input matInput formControlName="phone1" type="text" placeholder="Phone Number 1"
-                                  value="" autocomplete="off">
+                                <input matInput formControlName="country" type="text" value="" autocomplete="off">
+                                <mat-label>Country</mat-label>
                               </mat-form-field>
                             </div>
                           </div>
                           <div class="col-md-6">
                             <div class="form-group form-task">
                               <mat-form-field class="example-full-width mat-input">
-                                <input matInput formControlName="phone2" type="text" placeholder="Phone Number 2"
-                                  value="" autocomplete="off">
+                                <input matInput formControlName="zip" type="text" value="" autocomplete="off">
+                                <mat-label>Zip</mat-label>
+                              </mat-form-field>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-6">
+                            <div class="form-group form-task">
+                              <mat-form-field class="example-full-width mat-input">
+                                <input matInput formControlName="phone1" type="text" value="" autocomplete="off">
+                                <mat-label>Phone Number 1</mat-label>
+                              </mat-form-field>
+                            </div>
+                          </div>
+                          <div class="col-md-6">
+                            <div class="form-group form-task">
+                              <mat-form-field class="example-full-width mat-input">
+                                <input matInput formControlName="phone2" type="text" value="" autocomplete="off">
+                                <mat-label>Phone Number 2</mat-label>
                               </mat-form-field>
                             </div>
                           </div>
@@ -1396,16 +1400,16 @@
                           <div class="col-md-6">
                             <div class="form-group form-task">
                               <mat-form-field class="example-full-width mat-input">
-                                <input matInput formControlName="email" type="text" placeholder="Email" value=""
-                                  autocomplete="off">
+                                <input matInput formControlName="email" type="text" value="" autocomplete="off">
+                                <mat-label>Email</mat-label>
                               </mat-form-field>
                             </div>
                           </div>
                           <div class="col-md-6">
                             <div class="form-group form-task">
                               <mat-form-field class="example-full-width mat-input">
-                                <input matInput formControlName="webSite" type="text" placeholder="Website" value=""
-                                  autocomplete="off">
+                                <input matInput formControlName="webSite" type="text" value="" autocomplete="off">
+                                <mat-label>Website</mat-label>
                               </mat-form-field>
                             </div>
                           </div>
@@ -1421,8 +1425,9 @@
                           <div class="col-md-6">
                             <div class="form-group form-task">
                               <mat-form-field class="example-full-width mat-input">
-                                <input matInput formControlName="estimatedAmount" type="text"
-                                  placeholder="Estimated Ammount" value="" autocomplete="off">
+                                <input matInput formControlName="estimatedAmount" type="text" value=""
+                                  autocomplete="off">
+                                <mat-label>Estimated Ammount</mat-label>
                               </mat-form-field>
                             </div>
                           </div>
@@ -1458,8 +1463,8 @@
                           <div class="col-md-12">
                             <div class="form-group form-task">
                               <mat-form-field class="example-full-width mat-input">
-                                <input matInput formControlName="internalNotes" type="text"
-                                  placeholder="Internal Notes (Private)" value="" autocomplete="off">
+                                <input matInput formControlName="internalNotes" type="text" value="" autocomplete="off">
+                                <mat-label>Internal Notes (Private)</mat-label>
                               </mat-form-field>
                             </div>
                           </div>
@@ -1468,8 +1473,8 @@
                           <div class="col-md-12">
                             <div class="form-group form-task">
                               <mat-form-field class="example-full-width mat-input">
-                                <input matInput formControlName="externalNotes" type="text"
-                                  placeholder="External Notes (Shows on Invoice)" value="" autocomplete="off">
+                                <input matInput formControlName="externalNotes" type="text" value="" autocomplete="off">
+                                <mat-label>External Notes (Shows on Invoice)</mat-label>
                               </mat-form-field>
                             </div>
                           </div>
@@ -1500,9 +1505,9 @@
                           <div class="col-md-12">
                             <div class="form-group form-task">
                               <mat-form-field class="example-full-width mat-input">
-                                <input matInput formControlName="allowedCreditAmount" type="number"
-                                  placeholder="Extendable Credit" value="" autocomplete="off"
-                                  (keypress)="numberOnly($event)">
+                                <input matInput formControlName="allowedCreditAmount" type="number" value=""
+                                  autocomplete="off" (keypress)="numberOnly($event)">
+                                <mat-label>Extendable Credit</mat-label>
                               </mat-form-field>
                             </div>
                           </div>
@@ -1618,8 +1623,8 @@
                 </div>
                 <div>
                   <label>Created</label>
-                  <p>{{crmNotePopupData?.createdBy?.title}} - {{crmNotePopupData?.createdOn | date: 'MMM d,
-                    y h:mm a '}} </p>
+                  <p>{{crmNotePopupData?.createdBy?.title}} - {{crmNotePopupData?.createdOn | date: 'MMM d, y h:mm a '}}
+                  </p>
                 </div>
               </div>
               <div class="right-section">

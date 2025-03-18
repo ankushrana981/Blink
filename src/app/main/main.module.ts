@@ -110,31 +110,46 @@ import { ErrorMessages } from '../common/errorMessages';
           },
           {
             path: 'invoicing',
-            loadChildren : () => import('./invoicing/invoicing.module').then(m=> m.InvoicingModule)
+            loadChildren: () =>
+              import('./invoicing/invoicing.module').then(
+                (m) => m.InvoicingModule
+              ),
           },
           {
             path: 'crm',
-            loadChildren: () => import('./crm/crm.module').then(m => m.CrmModule)
+            loadChildren: () =>
+              import('./crm/crm.module').then((m) => m.CrmModule),
           },
           {
             path: 'manufacturing',
-            loadChildren: () => import('./manufacturing/manufacturing.module').then(m => m.ManufacturingModule)
+            loadChildren: () =>
+              import('./manufacturing/manufacturing.module').then(
+                (m) => m.ManufacturingModule
+              ),
           },
           {
             path: 'inventory',
-            loadChildren: () => import('./inventory/inventory.module').then(m => m.InventoryModule)
+            loadChildren: () =>
+              import('./inventory/inventory.module').then(
+                (m) => m.InventoryModule
+              ),
           },
           {
             path: 'accounting',
-            loadChildren: () => import('./accounting/accounting.module').then(m => m.AccountingModule)
+            loadChildren: () =>
+              import('./accounting/accounting.module').then(
+                (m) => m.AccountingModule
+              ),
           },
           {
             path: 'finance',
-            loadChildren: () => import('./finance/finance.module').then(m=>  m.FinanceModule)
+            loadChildren: () =>
+              import('./finance/finance.module').then((m) => m.FinanceModule),
           },
           {
             path: 'finance',
-            loadChildren: () => import('./finance/finance.module').then(m => m.FinanceModule)
+            loadChildren: () =>
+              import('./finance/finance.module').then((m) => m.FinanceModule),
           },
           {
             path: 'settings',
@@ -153,11 +168,15 @@ import { ErrorMessages } from '../common/errorMessages';
           },
           {
             path: 'task',
-            loadChildren: () => import('./task/task.module').then(m => m.TaskModule),
+            loadChildren: () =>
+              import('./task/task.module').then((m) => m.TaskModule),
           },
           {
             path: 'transcations',
-            loadChildren:() => import('./transcations/transcations.module').then(m => m.TranscationsModule)
+            loadChildren: () =>
+              import('./transcations/transcations.module').then(
+                (m) => m.TranscationsModule
+              ),
           },
         ],
       },

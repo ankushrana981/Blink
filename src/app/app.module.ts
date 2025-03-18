@@ -1,5 +1,9 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
-import { BrowserModule, provideClientHydration, withEventReplay } from '@angular/platform-browser';
+import {
+  BrowserModule,
+  provideClientHydration,
+  withEventReplay,
+} from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -19,12 +23,10 @@ import { CacheInterceptor } from './common/interceptors/cache.interceptor';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { NgScrollbarModule } from 'ngx-scrollbar';
 import { SharedModule } from './reusable/shared/shared.module';
-
+import { provideAnimations } from '@angular/platform-browser/animations';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-  ],
+  declarations: [AppComponent],
   imports: [
     SharedModule,
     BrowserModule,
@@ -37,14 +39,14 @@ import { SharedModule } from './reusable/shared/shared.module';
       preventDuplicates: true,
     }),
     NgApexchartsModule,
-    
   ],
-   schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [
     provideHttpClient(),
     provideClientHydration(withEventReplay()),
     provideAnimationsAsync('noop'),
-    CommonService, CanLoginActivate,
+    CommonService,
+    CanLoginActivate,
     CanAuthActivate,
     BsDropdownDirective,
     ErrorMessages,
@@ -52,9 +54,13 @@ import { SharedModule } from './reusable/shared/shared.module';
     CanLoginActivate,
     BsModalService,
     CanAuthActivate,
-    { provide: HTTP_INTERCEPTORS, useClass: CacheInterceptor, multi: true},
-    {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'fill'}}
+    provideAnimations(),
+    { provide: HTTP_INTERCEPTORS, useClass: CacheInterceptor, multi: true },
+    {
+      provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
+      useValue: { appearance: 'fill' },
+    },
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

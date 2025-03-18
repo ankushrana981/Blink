@@ -15,7 +15,14 @@ import {
   startWith,
   mergeMap,
 } from 'rxjs/operators';
-import { state, style, animate, transition } from '@angular/animations';
+import {
+  state,
+  style,
+  animate,
+  transition,
+  animation,
+  useAnimation,
+} from '@angular/animations';
 import moment from 'moment';
 
 @Component({
@@ -39,7 +46,6 @@ import moment from 'moment';
       ]),
     ]),
   ],
-
   styles: [],
 })
 export class InvoiceViewComponent extends BaseComponent implements OnInit {

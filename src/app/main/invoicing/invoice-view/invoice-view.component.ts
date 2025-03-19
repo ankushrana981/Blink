@@ -233,6 +233,18 @@ export class InvoiceViewComponent extends BaseComponent implements OnInit {
     }
   }
 
+  // onScroll function
+
+  onScroll(event: any) {
+    const target = event.target;
+    const atBottom =
+      target.scrollTop + target.clientHeight >= target.scrollHeight - 5;
+    console.log('bottom');
+    if (atBottom) {
+      this.onScrollDown(event);
+    }
+  }
+
   // calling the api for every scroll down
 
   onScrollDown(ev) {

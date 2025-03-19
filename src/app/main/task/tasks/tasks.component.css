@@ -7,9 +7,46 @@
   border-radius: 4px;
 }
 .scrollbar-table {
-  overflow-y: hidden;
+  position: relative;
+  background: white;
+  overflow: hidden;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
-.scrollbar-table:hover {
+
+.table-box {
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  padding: 15px;
+  /* scrollbar-width: thin;
+  scrollbar-color: transparent transparent;  */
+}
+
+/* Show scrollbar only on hover */
+/* .scrollbar-table:hover .table-box {
+  scrollbar-color: rgba(0, 0, 0, 0.5) transparent;
+} */
+
+/* For Chrome, Edge, and Safari */
+/* .table-box::-webkit-scrollbar {
+  width: 8px;
+  background: transparent;
+} */
+
+/* .table-box::-webkit-scrollbar-thumb {
+  background: transparent;
+  border-radius: 4px;
+} */
+
+/* Show scrollbar thumb only on hover */
+/* .scrollbar-table:hover .table-box::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.5);
+} */
+
+/* end scrollbar */
+
+/* .scrollbar-table:hover {
   overflow-y: auto;
 }
 .scrollbar-table::-webkit-scrollbar {
@@ -25,7 +62,7 @@
 ::ng-deep.custom-scrollbars {
   background-color: #efefef !important;
   border-radius: 5px !important;
-}
+} */
 .title-span-border {
   border-right: solid 1px black;
   padding-right: 9px;
@@ -322,6 +359,9 @@
 .width-100 {
   width: 100% !important;
 }
+.inner-div-list {
+  min-height: 450px;
+}
 @media only screen and (max-width: 1199px) {
   .filterDashboardData {
     display: block;
@@ -354,3 +394,36 @@
   }
 }
 /* Scrollable in a Task Tab is added for less than 1199px devices */
+
+::-webkit-scrollbar,
+.table-respons::-webkit-scrollbar,
+.list-div-main::-webkit-scrollbar {
+  width: thin;
+}
+
+::-webkit-scrollbar-track,
+.table-respons::-webkit-scrollbar-track,
+.list-div-main::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb,
+.table-respons::-webkit-scrollbar-thumb,
+.list-div-main::-webkit-scrollbar-thumb {
+  background-color: transparent;
+  border-radius: 0 !important;
+
+  /* height: 2vh; */
+}
+::-webkit-scrollbar-track,
+.table-respons:hover::-webkit-scrollbar-track,
+.list-div-main:hover::-webkit-scrollbar-track {
+  background-color: #f5f5f500 !important;
+}
+
+::-webkit-scrollbar-thumb,
+.table-respons:hover::-webkit-scrollbar-thumb,
+.list-div-main:hover::-webkit-scrollbar-thumb {
+  background-color: #f1f0f5 !important;
+  border-radius: 0 !important;
+}

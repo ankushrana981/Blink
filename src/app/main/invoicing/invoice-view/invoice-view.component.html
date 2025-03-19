@@ -164,7 +164,9 @@
 	<div class="contentBox" [ngClass]="icon1?'active':''">
 		<div class="leftContent">
 			<div class="card">
-				<div class="table-box" data-infinite-scroll debounce (scrolled)="onScrollDown($event)"
+				<!-- <div class="table-box" data-infinite-scroll debounce (scrolled)="onScrollDown($event)"
+					(scrolledUp)="onUp($event)" style="overflow-y: scroll;"> -->
+				<div class="table-box" data-infinite-scroll debounce (scroll)="onScroll($event)"
 					(scrolledUp)="onUp($event)" style="overflow-y: scroll;">
 
 

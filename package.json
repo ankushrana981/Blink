@@ -39,6 +39,7 @@
     "ng-apexcharts": "^1.15.0",
     "ng-circle-progress": "^1.7.1",
     "ng-modal-lib": "^0.0.9",
+    "ng-scrollbar": "^0.0.8",
     "ngx-bootstrap": "^19.0.1",
     "ngx-currency": "^19.0.0",
     "ngx-drag-drop": "^19.0.0",

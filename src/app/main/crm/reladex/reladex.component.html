@@ -175,188 +175,191 @@
           [scrollIndicators]="false" (psXReachEnd)="onScrollEvent($event)" (psYReachEnd)="onScrollDown($event)"
           (psXReachStart)="onScrollEvent($event)" (psYReachStart)="onScrollUp($event)"> -->
 
-        <div class="scrollbar">
-          <ng-scrollbar visibility="hover" #scrollEl thumbClass="custom-scrollbars" orientation="vertical">
-            <div class="table-box mb-20">
-              <div class="table-respons task-note-table reladex-table">
+        <!-- <div class="scrollbar"> -->
+        <!-- <ng-scrollbar visibility="hover" #scrollEl thumbClass="custom-scrollbars" orientation="vertical"> -->
+        <!-- <ng-scrollbar visibility="hover" #scrollbarRef thumbClass="custom-scrollbars" orientation="vertical"> -->
+        <div class="table-box mb-20 h-100">
 
-                <table style="width:100%" class="table-hover default-to-custom">
-                  <thead class="thead-none">
-                    <tr class="x-animated fadeIn d-1 in">
-                      <th width="57"></th>
-                      <th class="table-date reladex-name-th">
-                        <b class="table-title">
-                          <span>Name</span>&nbsp;
-                        </b>
-                        <div class="small help-block line-divider before-line type">
-                          <span class="table-text">Type</span>
-                        </div>
-                      </th>
-                      <th class="reladex-middle-th">
-                        <table class="w-100">
-                          <tr>
-                            <th class="table-description">
-                              <b class="table-title">
-                                <span>Region</span>&nbsp;
-                              </b>
-                              <div class="small help-block line-divider before-line board">
-                                <span class="table-text">Association</span>
-                              </div>
-                            </th>
-                            <th class="table-cdate reladex-phone-th">
-                              <b class="table-title">
-                                <span>Phone</span>&nbsp;
-                              </b>
-                              <div class="small help-block line-divider before-line board">
-                                <span class="table-text"></span>
-                              </div>
-                            </th>
-                            <th class="table-cdate">
-                              <b class="table-title">
-                                <span>Email</span>&nbsp;
-                              </b>
-                              <div class="small help-block line-divider before-line board">
-                                <span class="table-text"></span>
-                              </div>
-                            </th>
-                          </tr>
-                        </table>
-                      </th>
-                      <th class="table-cdate reladex-date-th">
-                        <b class="table-title">
-                          <span>Last Interaction</span>&nbsp;
-                        </b>
-                        <div class="small help-block line-divider before-line board">
-                          <span class="table-text">By</span>
-                        </div>
-                      </th>
-                      <th class="table-action" width="36"></th>
-                    </tr>
-                  </thead>
+          <div class="table-respons task-note-table reladex-table h-100" (scroll)="onScroll($event)"
+            style="overflow-y:scroll">
 
-                  <tbody [@fadeIn]="listrecords?.length" fxLayout="row wrap" class="list">
+            <table style="width:100%" class="table-hover default-to-custom">
+              <thead class="thead-none">
+                <tr class="x-animated fadeIn d-1 in">
+                  <th width="57"></th>
+                  <th class="table-date reladex-name-th">
+                    <b class="table-title">
+                      <span>Name</span>&nbsp;
+                    </b>
+                    <div class="small help-block line-divider before-line type">
+                      <span class="table-text">Type</span>
+                    </div>
+                  </th>
+                  <th class="reladex-middle-th">
+                    <table class="w-100">
+                      <tr>
+                        <th class="table-description">
+                          <b class="table-title">
+                            <span>Region</span>&nbsp;
+                          </b>
+                          <div class="small help-block line-divider before-line board">
+                            <span class="table-text">Association</span>
+                          </div>
+                        </th>
+                        <th class="table-cdate reladex-phone-th">
+                          <b class="table-title">
+                            <span>Phone</span>&nbsp;
+                          </b>
+                          <div class="small help-block line-divider before-line board">
+                            <span class="table-text"></span>
+                          </div>
+                        </th>
+                        <th class="table-cdate">
+                          <b class="table-title">
+                            <span>Email</span>&nbsp;
+                          </b>
+                          <div class="small help-block line-divider before-line board">
+                            <span class="table-text"></span>
+                          </div>
+                        </th>
+                      </tr>
+                    </table>
+                  </th>
+                  <th class="table-cdate reladex-date-th">
+                    <b class="table-title">
+                      <span>Last Interaction</span>&nbsp;
+                    </b>
+                    <div class="small help-block line-divider before-line board">
+                      <span class="table-text">By</span>
+                    </div>
+                  </th>
+                  <th class="table-action" width="36"></th>
+                </tr>
+              </thead>
 
-                    <tr style="vertical-align:top;" class="x-animated fadeIn d-1 in cursor-pointer"
-                      *ngFor="let record of listrecords; index as j" fxFlex="100" fxFlex.lt-sm="200">
-                      <td width="57px" class="text-center" (click)="showDetails(record)">
-                        <h4 ng-bind="($index + 1)" class="rownumber ng-binding">{{j+1}}</h4>
-                      </td>
-                      <td class="text-left reladex-name-td" (click)="showDetails(record)">
-                        <b class="table-title top-reladex-td-h">
-                          <span>{{record?.title}} </span>
-                        </b>
-                        <div class="small help-block line-divider help-desc bottom-reladex-td-h">
-                          <span class="table-text">
-                            <span>{{typeArray[record?.clientType]}}</span>
-                          </span>
-                        </div>
-                      </td>
-                      <td class="reladex-middle-td">
-                        <table class="w-100">
-                          <tr>
-                            <td (click)="showDetails(record)" class="p-0">
-                              <b class="table-title top-reladex-td-h">
-                                <span *ngIf="record?.branch?.title">{{record?.branch?.title}} </span>
-                                <span *ngIf="!record?.branch?.title">&nbsp;</span>
-                              </b>
-                            </td>
-                            <td (click)="showDetails(record)" class="p-0 reladex-phone-td">
-                              <b class="table-title top-reladex-td-h">
-                                <span *ngIf="record?.phone1">{{record?.phone1}} </span>
-                                <span *ngIf="!record?.phone1">&nbsp;</span>
-                              </b>
-                            </td>
-                            <td class="p-0">
-                              <b class="table-title top-reladex-td-h" (click)="showDetails(record)">
-                                <span *ngIf="record?.email">{{record?.email}} </span>
-                                <span *ngIf="!record?.email">&nbsp;</span>
-                              </b>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td colspan="3" class="reladex-region-des p-0" (click)="showDetails(record)">
-                              <div class="small help-block line-divider help-desc bottom-reladex-td-h">
-                                <span class="table-text">
-                                  <span *ngIf="record?.clientType === 1">
-                                    <ng-container *ngIf="record?.contactPerson?.title">
-                                      {{record?.contactPerson?.title}}(Contact) -</ng-container>
-                                    <ng-container *ngIf="record?.company?.title">{{record?.company?.title}}(Company)
-                                    </ng-container>
-                                  </span>
-                                  <span *ngIf="record?.clientType === 2">
-                                    <ng-container *ngIf="record?.customer?.title">
-                                      {{record?.customer?.title}}(Customer) -</ng-container>
-                                    <ng-container *ngIf="record?.contactPerson?.title">
-                                      {{record?.contactPerson?.title}}(Contact)
-                                    </ng-container>
-                                  </span>
-                                  <span *ngIf="record?.clientType === 3">
-                                    <ng-container *ngIf="record?.company?.title">
-                                      {{record?.company?.title}}(Company) -</ng-container>
-                                    <ng-container *ngIf="record?.customer?.title">
-                                      {{record?.customer?.title}}(Customer)
-                                    </ng-container>
-                                  </span>
-                                </span>
-                              </div>
-                            </td>
-                          </tr>
-                        </table>
-                      </td>
+              <tbody [@fadeIn]="listrecords?.length" fxLayout="row wrap" class="list">
+
+                <tr style="vertical-align:top;" class="x-animated fadeIn d-1 in cursor-pointer"
+                  *ngFor="let record of listrecords; index as j" fxFlex="100" fxFlex.lt-sm="200">
+                  <td width="57px" class="text-center" (click)="showDetails(record)">
+                    <h4 ng-bind="($index + 1)" class="rownumber ng-binding">{{j+1}}</h4>
+                  </td>
+                  <td class="text-left reladex-name-td" (click)="showDetails(record)">
+                    <b class="table-title top-reladex-td-h">
+                      <span>{{record?.title}} </span>
+                    </b>
+                    <div class="small help-block line-divider help-desc bottom-reladex-td-h">
+                      <span class="table-text">
+                        <span>{{typeArray[record?.clientType]}}</span>
+                      </span>
+                    </div>
+                  </td>
+                  <td class="reladex-middle-td">
+                    <table class="w-100">
+                      <tr>
+                        <td (click)="showDetails(record)" class="p-0">
+                          <b class="table-title top-reladex-td-h">
+                            <span *ngIf="record?.branch?.title">{{record?.branch?.title}} </span>
+                            <span *ngIf="!record?.branch?.title">&nbsp;</span>
+                          </b>
+                        </td>
+                        <td (click)="showDetails(record)" class="p-0 reladex-phone-td">
+                          <b class="table-title top-reladex-td-h">
+                            <span *ngIf="record?.phone1">{{record?.phone1}} </span>
+                            <span *ngIf="!record?.phone1">&nbsp;</span>
+                          </b>
+                        </td>
+                        <td class="p-0">
+                          <b class="table-title top-reladex-td-h" (click)="showDetails(record)">
+                            <span *ngIf="record?.email">{{record?.email}} </span>
+                            <span *ngIf="!record?.email">&nbsp;</span>
+                          </b>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td colspan="3" class="reladex-region-des p-0" (click)="showDetails(record)">
+                          <div class="small help-block line-divider help-desc bottom-reladex-td-h">
+                            <span class="table-text">
+                              <span *ngIf="record?.clientType === 1">
+                                <ng-container *ngIf="record?.contactPerson?.title">
+                                  {{record?.contactPerson?.title}}(Contact) -</ng-container>
+                                <ng-container *ngIf="record?.company?.title">{{record?.company?.title}}(Company)
+                                </ng-container>
+                              </span>
+                              <span *ngIf="record?.clientType === 2">
+                                <ng-container *ngIf="record?.customer?.title">
+                                  {{record?.customer?.title}}(Customer) -</ng-container>
+                                <ng-container *ngIf="record?.contactPerson?.title">
+                                  {{record?.contactPerson?.title}}(Contact)
+                                </ng-container>
+                              </span>
+                              <span *ngIf="record?.clientType === 3">
+                                <ng-container *ngIf="record?.company?.title">
+                                  {{record?.company?.title}}(Company) -</ng-container>
+                                <ng-container *ngIf="record?.customer?.title">
+                                  {{record?.customer?.title}}(Customer)
+                                </ng-container>
+                              </span>
+                            </span>
+                          </div>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
 
 
-                      <td class="text-left reladex-date-td" (click)="showDetails(record)">
-                        <b class="table-title top-reladex-td-h">
-                          <span>{{record?.lastCRMInteractionDate | date: 'MMM d, y' }} &nbsp;
-                            {{record?.lastCRMInteractionTitle }} </span>
-                        </b>
-                        <div class="small help-block line-divider help-desc bottom-reladex-td-h">
-                          <span class="table-text">
-                            <span>{{record?.lastCRMInteraction}}</span>
-                          </span>
-                        </div>
-                      </td>
-                      <td class="action-td" width="36">
-                        <div class="d-flex justify-content-center">
-                          <div class="btn-group" (clickOutside)="dropdownClose()">
-                            <a *ngIf="showId != record.id" class="icon-more" href="javascript:void(0)" icon-more
-                              (click)="subDropdownClose();$event.stopPropagation();dropdownClick(record.id);$event.stopPropagation()"></a>
-                            <a *ngIf="showId == record.id" class="icon-more" href="javascript:void(0)" icon-more
-                              (click)="subDropdownClose();$event.stopPropagation();dropdownClose();$event.stopPropagation()"></a>
-                            <ul [ngClass]="(showId == record.id) ? 'show' : ''"
-                              class="dropdown-table dark right dropdown-progress d-flex flex-column align-items-center justify-content-center more-dropdown">
-                              <!-- <li [ngClass]="{'show': !progressinfo}"> -->
-                              <li>
-                                <ul>
-                                  <li role="menuitem" class="new-option">
-                                    <a class="dropdown-item" href="javascript:void(0);"
-                                      (click)="createTaskModal(createTask, record?.title, record)">Create
-                                      Task</a>
-                                  </li>
-                                  <li role="menuitem" class="new-option">
-                                    <a class="dropdown-item" href="javascript:void(0);"
-                                      (click)="$event.preventDefault();editThisRecord(record)">Edit</a>
-                                  </li>
-                                  <li role="menuitem" class="new-option">
-                                    <a class="dropdown-item" href="javascript:void(0);"
-                                      (click)="setDeleteIDAndType(record.id, record?.clientType);openDeletePopup(deleteRecordPopup)">Delete</a>
-                                  </li>
-                                </ul>
+                  <td class="text-left reladex-date-td" (click)="showDetails(record)">
+                    <b class="table-title top-reladex-td-h">
+                      <span>{{record?.lastCRMInteractionDate | date: 'MMM d, y' }} &nbsp;
+                        {{record?.lastCRMInteractionTitle }} </span>
+                    </b>
+                    <div class="small help-block line-divider help-desc bottom-reladex-td-h">
+                      <span class="table-text">
+                        <span>{{record?.lastCRMInteraction}}</span>
+                      </span>
+                    </div>
+                  </td>
+                  <td class="action-td" width="36">
+                    <div class="d-flex justify-content-center">
+                      <div class="btn-group" (clickOutside)="dropdownClose()">
+                        <a *ngIf="showId != record.id" class="icon-more" href="javascript:void(0)" icon-more
+                          (click)="subDropdownClose();$event.stopPropagation();dropdownClick(record.id);$event.stopPropagation()"></a>
+                        <a *ngIf="showId == record.id" class="icon-more" href="javascript:void(0)" icon-more
+                          (click)="subDropdownClose();$event.stopPropagation();dropdownClose();$event.stopPropagation()"></a>
+                        <ul [ngClass]="(showId == record.id) ? 'show' : ''"
+                          class="dropdown-table dark right dropdown-progress d-flex flex-column align-items-center justify-content-center more-dropdown">
+                          <!-- <li [ngClass]="{'show': !progressinfo}"> -->
+                          <li>
+                            <ul>
+                              <li role="menuitem" class="new-option">
+                                <a class="dropdown-item" href="javascript:void(0);"
+                                  (click)="createTaskModal(createTask, record?.title, record)">Create
+                                  Task</a>
+                              </li>
+                              <li role="menuitem" class="new-option">
+                                <a class="dropdown-item" href="javascript:void(0);"
+                                  (click)="$event.preventDefault();editThisRecord(record)">Edit</a>
+                              </li>
+                              <li role="menuitem" class="new-option">
+                                <a class="dropdown-item" href="javascript:void(0);"
+                                  (click)="setDeleteIDAndType(record.id, record?.clientType);openDeletePopup(deleteRecordPopup)">Delete</a>
                               </li>
                             </ul>
-                          </div>
-                        </div>
-                      </td>
-                    </tr>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
 
-                  </tbody>
+              </tbody>
 
-                </table>
+            </table>
 
-              </div>
-            </div>
-          </ng-scrollbar>
+          </div>
         </div>
+        <!-- </ng-scrollbar> -->
+        <!-- </div> -->
 
         <!-- </perfect-scrollbar>  -->
       </div>

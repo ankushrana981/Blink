@@ -23756,3 +23756,59 @@ span#iooo {
   border-bottom-color: #d2d7db !important;
   border-bottom-width: 1px;
 }
+/* Query mat form */
+.updated-mat-form.query-mat-form mat-label {
+  color: #a0a3b9;
+  font-size: 12px;
+  line-height: 14px;
+}
+.updated-mat-form.query-mat-form
+  .mat-mdc-text-field-wrapper.mdc-text-field.mdc-text-field--filled {
+  height: 42px !important;
+}
+.updated-mat-form.query-mat-form .mat-mdc-form-field-infix {
+  padding: 15px 0;
+  min-height: 42px;
+}
+.updated-mat-form.query-mat-form
+  .mdc-floating-label.mat-mdc-floating-label.mdc-floating-label--float-above {
+  bottom: 12px !important;
+}
+.updated-mat-form.query-mat-form .mdc-floating-label.mat-mdc-floating-label {
+  bottom: 8px !important;
+}
+
+/* query form end */
+
+/* Scrollbar */
+.table-box::-webkit-scrollbar,
+.table-respons::-webkit-scrollbar,
+.list-div-main::-webkit-scrollbar {
+  width: thin;
+}
+
+.table-box::-webkit-scrollbar-track,
+.table-respons::-webkit-scrollbar-track,
+.list-div-main::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+.table-box::-webkit-scrollbar-thumb,
+.table-respons::-webkit-scrollbar-thumb,
+.list-div-main::-webkit-scrollbar-thumb {
+  background-color: transparent;
+  border-radius: 3px;
+  /* height: 2vh; */
+}
+.table-box:hover::-webkit-scrollbar-track,
+.table-respons:hover::-webkit-scrollbar-track,
+.list-div-main:hover::-webkit-scrollbar-track {
+  background-color: #f5f5f5;
+}
+
+.table-box:hover::-webkit-scrollbar-thumb,
+.table-respons:hover::-webkit-scrollbar-thumb,
+.list-div-main:hover::-webkit-scrollbar-thumb {
+  background-color: #d3d3d3;
+  border-radius: 3px;
+}

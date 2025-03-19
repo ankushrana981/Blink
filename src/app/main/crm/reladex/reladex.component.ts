@@ -1,35 +1,35 @@
-import { trigger } from "@angular/animations";
-import { DatePipe } from "@angular/common";
+import { trigger } from '@angular/animations';
+import { DatePipe } from '@angular/common';
 import {
   Component,
   ElementRef,
   Injector,
   OnInit,
   ViewChild,
-} from "@angular/core";
-import { FormControl, FormGroup, Validators } from "@angular/forms";
-import { NgSelectComponent } from "@ng-select/ng-select";
-import { fadeIn, fadeOut } from "../../../reusable/fade-animations";
-import { BsDatepickerConfig} from "ngx-bootstrap/datepicker";
-import { BsModalRef} from "ngx-bootstrap/modal";
-import { CarouselConfig } from "ngx-bootstrap/carousel";
-import { concat, Observable, of, Subject } from "rxjs";
+} from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { NgSelectComponent } from '@ng-select/ng-select';
+import { fadeIn, fadeOut } from '../../../reusable/fade-animations';
+import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
+import { BsModalRef } from 'ngx-bootstrap/modal';
+import { CarouselConfig } from 'ngx-bootstrap/carousel';
+import { concat, Observable, of, Subject } from 'rxjs';
 import {
   catchError,
   debounceTime,
   distinctUntilChanged,
   map,
   switchMap,
-} from "rxjs/operators";
-import { BaseComponent } from "../../../common/commonComponent";
+} from 'rxjs/operators';
+import { BaseComponent } from '../../../common/commonComponent';
 
 @Component({
-  selector: "app-reladex",
-  standalone:false,
-  templateUrl: "./reladex.component.html",
+  selector: 'app-reladex',
+  standalone: false,
+  templateUrl: './reladex.component.html',
   animations: [
-    trigger("fadeOut", fadeOut()),
-    trigger("fadeIn", fadeIn(":enter")),
+    trigger('fadeOut', fadeOut()),
+    trigger('fadeIn', fadeIn(':enter')),
   ],
   providers: [
     {
@@ -40,31 +40,32 @@ import { BaseComponent } from "../../../common/commonComponent";
   styles: [],
 })
 export class ReladexComponent extends BaseComponent implements OnInit {
-  @ViewChild("addCustomerPopup") addCustomerPopup!: ElementRef;
-  @ViewChild("addContactPopup") addContactPopup!: ElementRef;
-  @ViewChild("addCompanyPopup") addCompanyPopup!: ElementRef;
-  @ViewChild("addLeadsPopup") addLeadsPopup!: ElementRef;
-  @ViewChild("secondFilter1") secondFilter!: NgSelectComponent;
+  @ViewChild('addCustomerPopup') addCustomerPopup!: ElementRef;
+  @ViewChild('addContactPopup') addContactPopup!: ElementRef;
+  @ViewChild('addCompanyPopup') addCompanyPopup!: ElementRef;
+  @ViewChild('addLeadsPopup') addLeadsPopup!: ElementRef;
+  @ViewChild('secondFilter1') secondFilter!: NgSelectComponent;
+
   public ts = this.getTimeStap();
   public offset: any = 0;
   public limit: any = 20;
-  public type: string = "component";
+  public type: string = 'component';
   listrecords: any = [];
   total: any;
   public maxPage: number = 0;
   showAddNewTaskButton: boolean = false;
   typesArray: any = [
-    { id: 4, name: "All" },
-    { id: 3, name: "Company" },
-    { id: 2, name: "Contact" },
-    { id: 1, name: "Customers" },
-    { id: 5, name: "Leads" },
+    { id: 4, name: 'All' },
+    { id: 3, name: 'Company' },
+    { id: 2, name: 'Contact' },
+    { id: 1, name: 'Customers' },
+    { id: 5, name: 'Leads' },
   ];
   selectedTypeID: number = 1;
   showDummySidebar: boolean = true;
   public showingPage: number = 0;
   public page: number = 0;
-  typeArray: any = ["Unknown", "Client", "Contact", "Company", "Vendor"];
+  typeArray: any = ['Unknown', 'Client', 'Contact', 'Company', 'Vendor'];
   public icon1: boolean = false;
   addCustomerBasicInfo!: FormGroup;
   addContactBasicInfo!: FormGroup;
@@ -93,24 +94,24 @@ export class ReladexComponent extends BaseComponent implements OnInit {
   contactDisplayStepOne: boolean = false;
   contactDisplayStepTwo: boolean = false;
   contactStatusArray: any = [
-    { id: 0, name: "", title: "" },
-    { id: 1, name: "Potential", title: "Potential" },
-    { id: 2, name: "Non Active", title: "Non Active" },
-    { id: 3, name: "Ordering Customer", title: "Ordering Customer" },
-    { id: 4, name: "Non Ordering Customer", title: "Non Ordering Customer" },
-    { id: 5, name: "Out of Business", title: "Out of Business" },
-    { id: 6, name: "Deleted", title: "Deleted" },
-    { id: 7, name: "Rejected", title: "Rejected" },
+    { id: 0, name: '', title: '' },
+    { id: 1, name: 'Potential', title: 'Potential' },
+    { id: 2, name: 'Non Active', title: 'Non Active' },
+    { id: 3, name: 'Ordering Customer', title: 'Ordering Customer' },
+    { id: 4, name: 'Non Ordering Customer', title: 'Non Ordering Customer' },
+    { id: 5, name: 'Out of Business', title: 'Out of Business' },
+    { id: 6, name: 'Deleted', title: 'Deleted' },
+    { id: 7, name: 'Rejected', title: 'Rejected' },
   ];
   displayContactStatusArray: any = [
-    "",
-    "Potential",
-    "Non Active",
-    "Ordering Customer",
-    "Non Ordering Customer",
-    "Out of Business",
-    "Deleted",
-    "Rejected",
+    '',
+    'Potential',
+    'Non Active',
+    'Ordering Customer',
+    'Non Ordering Customer',
+    'Out of Business',
+    'Deleted',
+    'Rejected',
   ];
   companyDisplayStepOne: boolean = false;
   companyDisplayStepTwo: boolean = false;
@@ -142,7 +143,7 @@ export class ReladexComponent extends BaseComponent implements OnInit {
   addForm!: FormGroup;
   bsConfig!: Partial<BsDatepickerConfig>;
   bsConfigCreated_Date!: Partial<BsDatepickerConfig>;
-  customerNameCreateTask: any = "";
+  customerNameCreateTask: any = '';
   businessPartnerCreateTask: any;
   createedDate: boolean = false;
   dueDate: boolean = false;
@@ -161,17 +162,17 @@ export class ReladexComponent extends BaseComponent implements OnInit {
   activateSecondComapanyFilter: boolean = false;
   activateSecondFilter: boolean = false;
   filterData: any = {};
-  @ViewChild("filterName") filterName!: NgSelectComponent;
+  @ViewChild('filterName') filterName!: NgSelectComponent;
   isOpenFilter = false;
   tempArr = [];
-  filterstart:any = [];
+  filterstart: any = [];
   data: any = {};
   refFilter: any = [];
   isOpen = false;
   public scrollbarOptionsFilterMenu = {
-    axis: "x",
-    theme: "light",
-    scrollbarPosition: "inside",
+    axis: 'x',
+    theme: 'light',
+    scrollbarPosition: 'inside',
     advanced: { autoExpandHorizontalScroll: true },
     autoHideScrollbar: false,
     callbacks: {
@@ -179,13 +180,13 @@ export class ReladexComponent extends BaseComponent implements OnInit {
     },
   };
   filterActivityArray: any = [
-    { id: 1, name: "30", title: "30", value: 30 },
-    { id: 2, name: "60", title: "60", value: 60 },
-    { id: 3, name: "90", title: "90", value: 90 },
-    { id: 4, name: "Custom", title: "Custom", value: "" },
+    { id: 1, name: '30', title: '30', value: 30 },
+    { id: 2, name: '60', title: '60', value: 60 },
+    { id: 3, name: '90', title: '90', value: 90 },
+    { id: 4, name: 'Custom', title: 'Custom', value: '' },
   ];
-record: any;
-taskDataObj: any;
+  record: any;
+  taskDataObj: any;
   constructor(inj: Injector, private datePipe: DatePipe) {
     super(inj);
   }
@@ -208,7 +209,7 @@ taskDataObj: any;
     this.presetTitle();
     this.getBrands();
     this.getProducts();
-    this.commonService.getCurrentUser().then((user:any) => {
+    this.commonService.getCurrentUser().then((user: any) => {
       this.accessLevel = this.lookupService.getNumericAccessLevel(
         user.tenant.accessLevel
       );
@@ -219,21 +220,21 @@ taskDataObj: any;
   }
   listApi() {
     var queryParams =
-      "ts=" + this.ts + "&offset=" + this.offset + "&limit=" + this.limit;
+      'ts=' + this.ts + '&offset=' + this.offset + '&limit=' + this.limit;
     if (this.selectedTypeID === 1) {
       queryParams =
-        queryParams + "&ClientType=1&entityType=client&showInActive=false";
+        queryParams + '&ClientType=1&entityType=client&showInActive=false';
     } else if (this.selectedTypeID === 2) {
-      queryParams = queryParams + "&ClientType=2&entityType=client";
+      queryParams = queryParams + '&ClientType=2&entityType=client';
     } else if (this.selectedTypeID === 3) {
-      queryParams = queryParams + "&ClientType=3&entityType=client";
+      queryParams = queryParams + '&ClientType=3&entityType=client';
     } else if (this.selectedTypeID === 4) {
-      queryParams = queryParams + "&entityType=client";
+      queryParams = queryParams + '&entityType=client';
     } else if (this.selectedTypeID === 5) {
-      queryParams = queryParams + "&clientStatus=0&entityType=client&status=0";
+      queryParams = queryParams + '&clientStatus=0&entityType=client&status=0';
     }
     this.commonService
-      .callApi("api/clients?" + queryParams, this.data, "get")
+      .callApi('api/clients?' + queryParams, this.data, 'get')
       .then((success) => {
         if (success) {
           this.listrecords = success.records;
@@ -243,14 +244,14 @@ taskDataObj: any;
             this.showAddNewTaskButton = true;
           }, 1000);
         } else {
-          this.popToast("error", success.message);
+          this.popToast('error', success.message);
         }
       })
       .catch((e) => {
-        console.log("there is an error:", e);
+        console.log('there is an error:', e);
       });
   }
-  onScrollUp(ev:any) {
+  onScrollUp(ev: any) {
     if (
       this.showingPage != undefined &&
       this.showingPage != null &&
@@ -263,34 +264,53 @@ taskDataObj: any;
       }
     }
   }
-  changedselectedType(event:any) {
+  changedselectedType(event: any) {
     this.offset = 0;
     this.limit = 20;
     this.setFilters();
     this.listApi();
   }
   public onScrollEvent(event: any): void {}
-  onScrollDown(ev:any) {
+
+  onScroll(event: any) {
+    const target = event.target;
+    const atBottom =
+      target.scrollTop + target.clientHeight >= target.scrollHeight;
+    console.log('bottom');
+    if (atBottom) {
+      this.onScrollDown(event);
+      console.log(
+        'scrollTop',
+        target.scrollTop,
+        'clientHeight',
+        target.clientHeight,
+        'scrollHeight ',
+        target.scrollHeight
+      );
+    }
+  }
+
+  onScrollDown(ev: any) {
     if (this.page < this.maxPage) {
       this.page++;
       this.offset = this.page * this.limit;
       var queryParams =
-        "ts=" + this.ts + "&offset=" + this.offset + "&limit=" + this.limit;
+        'ts=' + this.ts + '&offset=' + this.offset + '&limit=' + this.limit;
       if (this.selectedTypeID === 1) {
         queryParams =
-          queryParams + "&ClientType=1&entityType=client&showInActive=false";
+          queryParams + '&ClientType=1&entityType=client&showInActive=false';
       } else if (this.selectedTypeID === 2) {
-        queryParams = queryParams + "&ClientType=2&entityType=client";
+        queryParams = queryParams + '&ClientType=2&entityType=client';
       } else if (this.selectedTypeID === 3) {
-        queryParams = queryParams + "&ClientType=3&entityType=client";
+        queryParams = queryParams + '&ClientType=3&entityType=client';
       } else if (this.selectedTypeID === 4) {
-        queryParams = queryParams + "&entityType=client";
+        queryParams = queryParams + '&entityType=client';
       } else if (this.selectedTypeID === 5) {
         queryParams =
-          queryParams + "&clientStatus=0&entityType=client&status=0";
+          queryParams + '&clientStatus=0&entityType=client&status=0';
       }
       this.commonService
-        .callApi("api/clients?" + queryParams, this.data, "get")
+        .callApi('api/clients?' + queryParams, this.data, 'get')
         .then((success) => {
           if (success) {
             if (success.records.length > 0) {
@@ -301,26 +321,26 @@ taskDataObj: any;
             this.total = success.total;
             this.maxPage = Math.floor(success.total / this.limit);
           } else {
-            this.popToast("error", success.message);
+            this.popToast('error', success.message);
           }
         })
         .catch((e) => {
-          console.log("there is an error:", e);
+          console.log('there is an error:', e);
         });
     }
   }
-  changeIc(type:any) {
-    if (type == "dots") {
+  changeIc(type: any) {
+    if (type == 'dots') {
       this.icon1 = true;
       this.sidemenu = true;
       this.showNoteDetailsDiv = false;
       this.showDummySidebar = false;
-    } else if (type == "edit") {
+    } else if (type == 'edit') {
       this.icon1 = true;
       this.sidemenu = true;
       this.showNoteDetailsDiv = false;
       this.showDummySidebar = false;
-    } else if (type == "details") {
+    } else if (type == 'details') {
       this.icon1 = true;
       this.sidemenu = true;
       this.showNoteDetailsDiv = true;
@@ -352,7 +372,7 @@ taskDataObj: any;
   dropdownClose() {
     this.showId = 0;
   }
-  showCustomerDetailsPopup(addCustomerPopup:any) {
+  showCustomerDetailsPopup(addCustomerPopup: any) {
     this.setAddCustomerBasicForm();
     this.displayStepOne = true;
     this.displayStepTwo = false;
@@ -360,41 +380,41 @@ taskDataObj: any;
     this.displayStepFour = false;
     this.modalRef = this.modalService.show(addCustomerPopup, {
       class:
-        "modal-xl task-modal modal-dialog-centered quick-popup add-new-customer-popup add-new-customer-popup-reladex",
+        'modal-xl task-modal modal-dialog-centered quick-popup add-new-customer-popup add-new-customer-popup-reladex',
     });
   }
   setAddCustomerBasicForm() {
     this.addCustomerBasicInfo = new FormGroup({
-      title: new FormControl("", [Validators.required]),
-      address1: new FormControl("", []),
-      address2: new FormControl("", []),
-      phone1: new FormControl("", []),
-      phone2: new FormControl("", []),
-      city: new FormControl("", []),
-      state: new FormControl("", []),
-      country: new FormControl("", []),
-      zip: new FormControl("", []),
-      email: new FormControl("", []),
-      faceBook: new FormControl("", []),
-      instaGram: new FormControl("", []),
-      google: new FormControl("", []),
-      tiktok: new FormControl("", []),
-      webSite: new FormControl("", []),
-      contactPerson: new FormControl("", []),
-      company: new FormControl("", []),
-      internalNotes: new FormControl("", []),
-      externalNotes: new FormControl("", []),
-      paymentTermDuration: new FormControl("", []),
-      allowedCreditAmount: new FormControl("", []),
-      salesRepresentative: new FormControl("", []),
-      area: new FormControl("", []),
-      branch: new FormControl("", []),
-      establishmentType: new FormControl("", []),
-      id: new FormControl("", []),
-      businessPartnerType: new FormControl("", []),
-      sourceCurrency: new FormControl("", []),
-      discount: new FormControl("", []),
-      clientType: new FormControl("", []),
+      title: new FormControl('', [Validators.required]),
+      address1: new FormControl('', []),
+      address2: new FormControl('', []),
+      phone1: new FormControl('', []),
+      phone2: new FormControl('', []),
+      city: new FormControl('', []),
+      state: new FormControl('', []),
+      country: new FormControl('', []),
+      zip: new FormControl('', []),
+      email: new FormControl('', []),
+      faceBook: new FormControl('', []),
+      instaGram: new FormControl('', []),
+      google: new FormControl('', []),
+      tiktok: new FormControl('', []),
+      webSite: new FormControl('', []),
+      contactPerson: new FormControl('', []),
+      company: new FormControl('', []),
+      internalNotes: new FormControl('', []),
+      externalNotes: new FormControl('', []),
+      paymentTermDuration: new FormControl('', []),
+      allowedCreditAmount: new FormControl('', []),
+      salesRepresentative: new FormControl('', []),
+      area: new FormControl('', []),
+      branch: new FormControl('', []),
+      establishmentType: new FormControl('', []),
+      id: new FormControl('', []),
+      businessPartnerType: new FormControl('', []),
+      sourceCurrency: new FormControl('', []),
+      discount: new FormControl('', []),
+      clientType: new FormControl('', []),
     });
     this.addCustomerBasicInfo.patchValue({ id: 0, businessPartnerType: 1 });
   }
@@ -424,44 +444,44 @@ taskDataObj: any;
   }
   getContactList() {
     this.commonService
-      .callApi("api/clients/lookup?clientType=2", "", "get")
+      .callApi('api/clients/lookup?clientType=2', '', 'get')
       .then((success) => {
         if (success) {
           this.contactList = success;
         } else {
-          this.popToast("error", success.message);
+          this.popToast('error', success.message);
         }
       })
       .catch((e) => {
-        console.log("there is an error:", e);
+        console.log('there is an error:', e);
       });
   }
   getCompanytList() {
     this.commonService
-      .callApi("api/clients/lookup?clientType=3", "", "get")
+      .callApi('api/clients/lookup?clientType=3', '', 'get')
       .then((success) => {
         if (success) {
           this.companyList = success;
         } else {
-          this.popToast("error", success.message);
+          this.popToast('error', success.message);
         }
       })
       .catch((e) => {
-        console.log("there is an error:", e);
+        console.log('there is an error:', e);
       });
   }
   getPaymentTerms() {
     this.commonService
-      .callApi("api/clients/PaymentTerms/lookup", "", "get")
+      .callApi('api/clients/PaymentTerms/lookup', '', 'get')
       .then((success) => {
         if (success) {
           this.paymentList = success;
         } else {
-          this.popToast("error", success.message);
+          this.popToast('error', success.message);
         }
       })
       .catch((e) => {
-        console.log("there is an error:", e);
+        console.log('there is an error:', e);
       });
   }
   numberOnly(event): boolean {
@@ -473,75 +493,75 @@ taskDataObj: any;
   }
   getTenantLookup() {
     this.commonService
-      .callApi("api/tenants/users/lookup", "", "get")
+      .callApi('api/tenants/users/lookup', '', 'get')
       .then((success) => {
         if (success) {
           this.tenantUsers = success;
         } else {
-          this.popToast("error", success.message);
+          this.popToast('error', success.message);
         }
       })
       .catch((e) => {
-        console.log("there is an error:", e);
+        console.log('there is an error:', e);
       });
   }
   getArearLookup() {
     this.commonService
-      .callApi("api/clients/areas/lookup", "", "get")
+      .callApi('api/clients/areas/lookup', '', 'get')
       .then((success) => {
         if (success) {
           this.areaLookup = success;
         } else {
-          this.popToast("error", success.message);
+          this.popToast('error', success.message);
         }
       })
       .catch((e) => {
-        console.log("there is an error:", e);
+        console.log('there is an error:', e);
       });
   }
   getRegionList() {
     this.commonService
-      .callApi("api/tenants/branches/lookup", "", "get")
+      .callApi('api/tenants/branches/lookup', '', 'get')
       .then((success) => {
         if (success) {
           this.regionList = success;
         } else {
-          this.popToast("error", success.message);
+          this.popToast('error', success.message);
         }
       })
       .catch((e) => {
-        console.log("there is an error:", e);
+        console.log('there is an error:', e);
       });
   }
   getEstablishmentType() {
     this.commonService
-      .callApi("api/clients/establishmenttypes/lookup", "", "get")
+      .callApi('api/clients/establishmenttypes/lookup', '', 'get')
       .then((success) => {
         if (success) {
           this.establishmentTypes = success;
         } else {
-          this.popToast("error", success.message);
+          this.popToast('error', success.message);
         }
       })
       .catch((e) => {
-        console.log("there is an error:", e);
+        console.log('there is an error:', e);
       });
   }
   refreshClients(value: string = null, allow): Observable<any[]> {
     let data = {};
     if (value) {
-      data["entityType"] = "client";
-      data["q"] = value;
+      data['entityType'] = 'client';
+      data['q'] = value;
     }
     let items;
     return this.commonService
-      .callApiObservable("api/clients/lookup", data)
+      .callApiObservable('api/clients/lookup', data)
       .pipe(
         catchError(() => of({ items: [] })),
         map((success) => {
           items = success;
           if (allow) {
-            this.customers = success["records"];
+            this.customers = success['records'];
           }
 
           return items ? items : [];
@@ -590,19 +610,19 @@ taskDataObj: any;
   refreshCompanies(value: string = null, allow): Observable<any[]> {
     let data = {};
     if (value) {
-      data["entityType"] = "client";
-      data["ClientType"] = "3";
-      data["q"] = value;
+      data['entityType'] = 'client';
+      data['ClientType'] = '3';
+      data['q'] = value;
     }
     let items;
     return this.commonService
-      .callApiObservable("api/clients/lookup", data)
+      .callApiObservable('api/clients/lookup', data)
       .pipe(
         catchError(() => of({ items: [] })),
         map((success) => {
           items = success;
           if (allow) {
-            this.companies = success["records"];
+            this.companies = success['records'];
           }
 
           return items ? items : [];
@@ -612,19 +632,19 @@ taskDataObj: any;
   refreshContacts(value: string = null, allow): Observable<any[]> {
     let data = {};
     if (value) {
-      data["entityType"] = "client";
-      data["ClientType"] = "2";
-      data["q"] = value;
+      data['entityType'] = 'client';
+      data['ClientType'] = '2';
+      data['q'] = value;
     }
     let items;
     return this.commonService
-      .callApiObservable("api/clients/lookup", data)
+      .callApiObservable('api/clients/lookup', data)
       .pipe(
         catchError(() => of({ items: [] })),
         map((success) => {
           items = success;
           if (allow) {
-            this.contacts = success["records"];
+            this.contacts = success['records'];
           }
 
           return items ? items : [];
@@ -635,57 +655,59 @@ taskDataObj: any;
     if (this.addCustomerBasicInfo.value.id === 0) {
       if (this.addCustomerBasicInfo.valid) {
         if (this.addCustomerBasicInfo.value.paymentTermDuration) {
-          this.addCustomerBasicInfo.value.paymentTermDuration = this.addCustomerBasicInfo.value.paymentTermDuration.days;
+          this.addCustomerBasicInfo.value.paymentTermDuration =
+            this.addCustomerBasicInfo.value.paymentTermDuration.days;
         }
         this.addCustomerBasicInfo.value.sourceCurrency = {
           id: 66,
-          title: "[IDR] Rupiah",
+          title: '[IDR] Rupiah',
         };
         this.addCustomerBasicInfo.value.discount = 0;
         this.addCustomerBasicInfo.value.clientType = 1;
         this.addCustomerBasicInfo.value.status = 1;
         this.commonService
-          .callApi("/api/clients", this.addCustomerBasicInfo.value, "post")
+          .callApi('/api/clients', this.addCustomerBasicInfo.value, 'post')
           .then((success) => {
             if (success) {
               this.modalRef.hide();
             } else {
-              this.popToast("error", success.message);
+              this.popToast('error', success.message);
             }
           })
           .catch((e) => {
-            console.log("there is an error:", e);
+            console.log('there is an error:', e);
           });
       }
     } else if (this.addCustomerBasicInfo.value.id > 0) {
       if (this.addCustomerBasicInfo.valid) {
         if (this.addCustomerBasicInfo.value.paymentTermDuration) {
-          this.addCustomerBasicInfo.value.paymentTermDuration = this.addCustomerBasicInfo.value.paymentTermDuration.days;
+          this.addCustomerBasicInfo.value.paymentTermDuration =
+            this.addCustomerBasicInfo.value.paymentTermDuration.days;
         }
         this.addCustomerBasicInfo.value.sourceCurrency = {
           id: 66,
-          title: "[IDR] Rupiah",
+          title: '[IDR] Rupiah',
         };
         this.addCustomerBasicInfo.value.discount = 0;
-        this.addCustomerBasicInfo.value.businessPartnerType = "1";
+        this.addCustomerBasicInfo.value.businessPartnerType = '1';
         this.addCustomerBasicInfo.value.clientType = 1;
         this.addCustomerBasicInfo.value.status = 1;
         this.commonService
           .callApi(
-            "api/clients/" + this.addCustomerBasicInfo.value.id,
+            'api/clients/' + this.addCustomerBasicInfo.value.id,
             this.addCustomerBasicInfo.value,
-            "put"
+            'put'
           )
           .then((success) => {
             if (success) {
               this.modalRef.hide();
               this.listApi();
             } else {
-              this.popToast("error", success.message);
+              this.popToast('error', success.message);
             }
           })
           .catch((e) => {
-            console.log("there is an error:", e);
+            console.log('there is an error:', e);
           });
       }
     }
@@ -697,24 +719,25 @@ taskDataObj: any;
         this.addContactBasicInfo.value.clientType = 2;
         this.addContactBasicInfo.value.discount = 0;
         if (this.addContactBasicInfo.value.status.id) {
-          this.addContactBasicInfo.value.status = this.addContactBasicInfo.value.status.id;
+          this.addContactBasicInfo.value.status =
+            this.addContactBasicInfo.value.status.id;
         }
         this.addContactBasicInfo.value.sourceCurrency = {
           id: 66,
-          title: "[IDR] Rupiah",
+          title: '[IDR] Rupiah',
         };
         this.commonService
-          .callApi("/api/clients", this.addContactBasicInfo.value, "post")
+          .callApi('/api/clients', this.addContactBasicInfo.value, 'post')
           .then((success) => {
             if (success) {
               this.modalRef.hide();
               this.listApi();
             } else {
-              this.popToast("error", success.message);
+              this.popToast('error', success.message);
             }
           })
           .catch((e) => {
-            console.log("there is an error:", e);
+            console.log('there is an error:', e);
           });
       }
     } else if (this.addContactBasicInfo.value.id > 0) {
@@ -723,58 +746,59 @@ taskDataObj: any;
         this.addContactBasicInfo.value.clientType = 2;
         this.addContactBasicInfo.value.discount = 0;
         if (this.addContactBasicInfo.value.status.id) {
-          this.addContactBasicInfo.value.status = this.addContactBasicInfo.value.status.id;
+          this.addContactBasicInfo.value.status =
+            this.addContactBasicInfo.value.status.id;
         }
         this.addContactBasicInfo.value.sourceCurrency = {
           id: 66,
-          title: "[IDR] Rupiah",
+          title: '[IDR] Rupiah',
         };
         this.commonService
           .callApi(
-            "/api/clients/" + this.addContactBasicInfo.value.id,
+            '/api/clients/' + this.addContactBasicInfo.value.id,
             this.addContactBasicInfo.value,
-            "put"
+            'put'
           )
           .then((success) => {
             if (success) {
               this.modalRef.hide();
               this.listApi();
             } else {
-              this.popToast("error", success.message);
+              this.popToast('error', success.message);
             }
           })
           .catch((e) => {
-            console.log("there is an error:", e);
+            console.log('there is an error:', e);
           });
       }
     }
   }
   getCountries() {
     this.commonService
-      .callApi("api/countries", "", "get")
+      .callApi('api/countries', '', 'get')
       .then((success) => {
         if (success) {
           this.countryList = success;
         } else {
-          this.popToast("error", success.message);
+          this.popToast('error', success.message);
         }
       })
       .catch((e) => {
-        console.log("there is an error:", e);
+        console.log('there is an error:', e);
       });
   }
   getCustomerList() {
     this.commonService
-      .callApi("api/clients?entityType=client", "", "get")
+      .callApi('api/clients?entityType=client', '', 'get')
       .then((success) => {
         if (success) {
           this.customerList = success.records;
         } else {
-          this.popToast("error", success.message);
+          this.popToast('error', success.message);
         }
       })
       .catch((e) => {
-        console.log("there is an error:", e);
+        console.log('there is an error:', e);
       });
   }
   showContactDetailsPopup(addContactPopup) {
@@ -783,31 +807,31 @@ taskDataObj: any;
     this.contactDisplayStepTwo = false;
     this.modalRef = this.modalService.show(addContactPopup, {
       class:
-        "modal-xl task-modal modal-dialog-centered quick-popup add-new-customer-popup add-new-customer-popup-reladex",
+        'modal-xl task-modal modal-dialog-centered quick-popup add-new-customer-popup add-new-customer-popup-reladex',
     });
   }
   setAddContactBasicForm() {
     this.addContactBasicInfo = new FormGroup({
-      title: new FormControl("", [Validators.required]),
-      address1: new FormControl("", []),
-      address2: new FormControl("", []),
-      city: new FormControl("", []),
-      state: new FormControl("", []),
-      country: new FormControl("", []),
-      zip: new FormControl("", []),
-      phone1: new FormControl("", []),
-      phone2: new FormControl("", []),
-      email: new FormControl("", []),
-      webSite: new FormControl("", []),
-      company: new FormControl("", []),
-      status: new FormControl("", []),
-      customer: new FormControl("", []),
-      internalNotes: new FormControl("", []),
-      externalNotes: new FormControl("", []),
-      businessPartnerType: new FormControl("", []),
-      clientType: new FormControl("", []),
-      discount: new FormControl("", []),
-      id: new FormControl("", []),
+      title: new FormControl('', [Validators.required]),
+      address1: new FormControl('', []),
+      address2: new FormControl('', []),
+      city: new FormControl('', []),
+      state: new FormControl('', []),
+      country: new FormControl('', []),
+      zip: new FormControl('', []),
+      phone1: new FormControl('', []),
+      phone2: new FormControl('', []),
+      email: new FormControl('', []),
+      webSite: new FormControl('', []),
+      company: new FormControl('', []),
+      status: new FormControl('', []),
+      customer: new FormControl('', []),
+      internalNotes: new FormControl('', []),
+      externalNotes: new FormControl('', []),
+      businessPartnerType: new FormControl('', []),
+      clientType: new FormControl('', []),
+      discount: new FormControl('', []),
+      id: new FormControl('', []),
     });
     this.addContactBasicInfo.patchValue({ id: 0 });
   }
@@ -826,37 +850,37 @@ taskDataObj: any;
     this.companyDisplayStepThree = false;
     this.modalRef = this.modalService.show(addCompanyPopup, {
       class:
-        "modal-xl task-modal modal-dialog-centered quick-popup add-new-customer-popup add-new-customer-popup-reladex",
+        'modal-xl task-modal modal-dialog-centered quick-popup add-new-customer-popup add-new-customer-popup-reladex',
     });
   }
   setAddCompanyBasicForm() {
     this.addCompanyBasicInfo = new FormGroup({
-      title: new FormControl("", [Validators.required]),
-      address1: new FormControl("", []),
-      address2: new FormControl("", []),
-      city: new FormControl("", []),
-      state: new FormControl("", []),
-      country: new FormControl("", []),
-      zip: new FormControl("", []),
-      phone1: new FormControl("", []),
-      phone2: new FormControl("", []),
-      email: new FormControl("", []),
-      webSite: new FormControl("", []),
-      status: new FormControl("", []),
-      contactPerson: new FormControl("", []),
-      customer: new FormControl("", []),
-      company: new FormControl("", []),
-      internalNotes: new FormControl("", []),
-      externalNotes: new FormControl("", []),
-      salesRepresentative: new FormControl("", []),
-      area: new FormControl("", []),
-      branch: new FormControl("", []),
-      multipleCustomerList: new FormControl("", []),
-      id: new FormControl("", []),
-      sourceCurrency: new FormControl("", []),
-      businessPartnerType: new FormControl("", []),
-      discount: new FormControl("", []),
-      clientType: new FormControl("", []),
+      title: new FormControl('', [Validators.required]),
+      address1: new FormControl('', []),
+      address2: new FormControl('', []),
+      city: new FormControl('', []),
+      state: new FormControl('', []),
+      country: new FormControl('', []),
+      zip: new FormControl('', []),
+      phone1: new FormControl('', []),
+      phone2: new FormControl('', []),
+      email: new FormControl('', []),
+      webSite: new FormControl('', []),
+      status: new FormControl('', []),
+      contactPerson: new FormControl('', []),
+      customer: new FormControl('', []),
+      company: new FormControl('', []),
+      internalNotes: new FormControl('', []),
+      externalNotes: new FormControl('', []),
+      salesRepresentative: new FormControl('', []),
+      area: new FormControl('', []),
+      branch: new FormControl('', []),
+      multipleCustomerList: new FormControl('', []),
+      id: new FormControl('', []),
+      sourceCurrency: new FormControl('', []),
+      businessPartnerType: new FormControl('', []),
+      discount: new FormControl('', []),
+      clientType: new FormControl('', []),
     });
     this.addCompanyBasicInfo.patchValue({ id: 0 });
   }
@@ -892,24 +916,25 @@ taskDataObj: any;
           this.addCompanyBasicInfo.value.multipleCustomerList = [];
         }
         if (this.addCompanyBasicInfo.value.status.id) {
-          this.addCompanyBasicInfo.value.status = this.addCompanyBasicInfo.value.status.id;
+          this.addCompanyBasicInfo.value.status =
+            this.addCompanyBasicInfo.value.status.id;
         }
         this.addCompanyBasicInfo.value.sourceCurrency = {
           id: 66,
-          title: "[IDR] Rupiah",
+          title: '[IDR] Rupiah',
         };
         this.commonService
-          .callApi("/api/clients", this.addCompanyBasicInfo.value, "post")
+          .callApi('/api/clients', this.addCompanyBasicInfo.value, 'post')
           .then((success) => {
             if (success) {
               this.modalRef.hide();
               this.listApi();
             } else {
-              this.popToast("error", success.message);
+              this.popToast('error', success.message);
             }
           })
           .catch((e) => {
-            console.log("there is an error:", e);
+            console.log('there is an error:', e);
           });
       }
     } else if (this.addCompanyBasicInfo.value.id > 0) {
@@ -928,28 +953,29 @@ taskDataObj: any;
           this.addCompanyBasicInfo.value.multipleCustomerList = [];
         }
         if (this.addCompanyBasicInfo.value.status.id) {
-          this.addCompanyBasicInfo.value.status = this.addCompanyBasicInfo.value.status.id;
+          this.addCompanyBasicInfo.value.status =
+            this.addCompanyBasicInfo.value.status.id;
         }
         this.addCompanyBasicInfo.value.sourceCurrency = {
           id: 66,
-          title: "[IDR] Rupiah",
+          title: '[IDR] Rupiah',
         };
         this.commonService
           .callApi(
-            "/api/clients/" + this.addCompanyBasicInfo.value.id,
+            '/api/clients/' + this.addCompanyBasicInfo.value.id,
             this.addCompanyBasicInfo.value,
-            "put"
+            'put'
           )
           .then((success) => {
             if (success) {
               this.modalRef.hide();
               this.listApi();
             } else {
-              this.popToast("error", success.message);
+              this.popToast('error', success.message);
             }
           })
           .catch((e) => {
-            console.log("there is an error:", e);
+            console.log('there is an error:', e);
           });
       }
     }
@@ -962,35 +988,35 @@ taskDataObj: any;
     this.leadsDisplayStepFour = false;
     this.modalRef = this.modalService.show(addLeadsPopup, {
       class:
-        "modal-xl task-modal modal-dialog-centered quick-popup add-new-customer-popup add-new-customer-popup-reladex",
+        'modal-xl task-modal modal-dialog-centered quick-popup add-new-customer-popup add-new-customer-popup-reladex',
     });
   }
   setAddLeadsBasicForm() {
     this.addLeadsBasicInfo = new FormGroup({
-      title: new FormControl("", [Validators.required]),
-      address1: new FormControl("", []),
-      address2: new FormControl("", []),
-      city: new FormControl("", []),
-      state: new FormControl("", []),
-      zip: new FormControl("", []),
-      phone1: new FormControl("", []),
-      phone2: new FormControl("", []),
-      country: new FormControl("", []),
-      email: new FormControl("", []),
-      webSite: new FormControl("", []),
-      status: new FormControl("", []),
-      estimatedAmount: new FormControl("", []),
-      contactPerson: new FormControl("", []),
-      customer: new FormControl("", []),
-      internalNotes: new FormControl("", []),
-      externalNotes: new FormControl("", []),
-      paymentTermDuration: new FormControl("", []),
-      allowedCreditAmount: new FormControl("", []),
-      salesRepresentative: new FormControl("", []),
-      area: new FormControl("", []),
-      branch: new FormControl("", []),
-      establishmentType: new FormControl("", []),
-      id: new FormControl("", []),
+      title: new FormControl('', [Validators.required]),
+      address1: new FormControl('', []),
+      address2: new FormControl('', []),
+      city: new FormControl('', []),
+      state: new FormControl('', []),
+      zip: new FormControl('', []),
+      phone1: new FormControl('', []),
+      phone2: new FormControl('', []),
+      country: new FormControl('', []),
+      email: new FormControl('', []),
+      webSite: new FormControl('', []),
+      status: new FormControl('', []),
+      estimatedAmount: new FormControl('', []),
+      contactPerson: new FormControl('', []),
+      customer: new FormControl('', []),
+      internalNotes: new FormControl('', []),
+      externalNotes: new FormControl('', []),
+      paymentTermDuration: new FormControl('', []),
+      allowedCreditAmount: new FormControl('', []),
+      salesRepresentative: new FormControl('', []),
+      area: new FormControl('', []),
+      branch: new FormControl('', []),
+      establishmentType: new FormControl('', []),
+      id: new FormControl('', []),
     });
     this.addLeadsBasicInfo.patchValue({ id: 0 });
   }
@@ -1002,7 +1028,7 @@ taskDataObj: any;
         this.addLeadsBasicInfo.value.discount = 0;
         this.addLeadsBasicInfo.value.sourceCurrency = {
           id: 66,
-          title: "[IDR] Rupiah",
+          title: '[IDR] Rupiah',
         };
         if (
           this.addLeadsBasicInfo.value.customer &&
@@ -1016,21 +1042,22 @@ taskDataObj: any;
         }
 
         if (this.addLeadsBasicInfo.value.paymentTermDuration) {
-          this.addLeadsBasicInfo.value.paymentTermDuration = this.addLeadsBasicInfo.value.paymentTermDuration.days;
+          this.addLeadsBasicInfo.value.paymentTermDuration =
+            this.addLeadsBasicInfo.value.paymentTermDuration.days;
         }
         this.addLeadsBasicInfo.value.status = 0;
         this.commonService
-          .callApi("/api/clients", this.addLeadsBasicInfo.value, "post")
+          .callApi('/api/clients', this.addLeadsBasicInfo.value, 'post')
           .then((success) => {
             if (success) {
               this.modalRef.hide();
               this.listApi();
             } else {
-              this.popToast("error", success.message);
+              this.popToast('error', success.message);
             }
           })
           .catch((e) => {
-            console.log("there is an error:", e);
+            console.log('there is an error:', e);
           });
       }
     } else if (this.addLeadsBasicInfo.value.id > 0) {
@@ -1040,7 +1067,7 @@ taskDataObj: any;
         this.addLeadsBasicInfo.value.discount = 0;
         this.addLeadsBasicInfo.value.sourceCurrency = {
           id: 66,
-          title: "[IDR] Rupiah",
+          title: '[IDR] Rupiah',
         };
         if (
           this.addLeadsBasicInfo.value.customer &&
@@ -1054,25 +1081,26 @@ taskDataObj: any;
         }
 
         if (this.addLeadsBasicInfo.value.paymentTermDuration) {
-          this.addLeadsBasicInfo.value.paymentTermDuration = this.addLeadsBasicInfo.value.paymentTermDuration.days;
+          this.addLeadsBasicInfo.value.paymentTermDuration =
+            this.addLeadsBasicInfo.value.paymentTermDuration.days;
         }
         this.addLeadsBasicInfo.value.status = 0;
         this.commonService
           .callApi(
-            "/api/clients/" + this.addLeadsBasicInfo.value.id,
+            '/api/clients/' + this.addLeadsBasicInfo.value.id,
             this.addLeadsBasicInfo.value,
-            "put"
+            'put'
           )
           .then((success) => {
             if (success) {
               this.modalRef.hide();
               this.listApi();
             } else {
-              this.popToast("error", success.message);
+              this.popToast('error', success.message);
             }
           })
           .catch((e) => {
-            console.log("there is an error:", e);
+            console.log('there is an error:', e);
           });
       }
     }
@@ -1119,15 +1147,15 @@ taskDataObj: any;
     }
     this.noteDetailsData = data;
     setTimeout(() => {
-      this.changeIc("details");
+      this.changeIc('details');
     }, 1000);
   }
   getClientTasksDetails(clientID) {
     this.commonService
       .callApi(
-        "api/clients/tasks?BusinessPartnerId=" + clientID + "&type=2",
-        "",
-        "get"
+        'api/clients/tasks?BusinessPartnerId=' + clientID + '&type=2',
+        '',
+        'get'
       )
       .then((success) => {
         if (success) {
@@ -1143,19 +1171,19 @@ taskDataObj: any;
             this.showTaskShowMore = true;
           }
         } else {
-          this.popToast("error", success.message);
+          this.popToast('error', success.message);
         }
       })
       .catch((e) => {
-        console.log("there is an error:", e);
+        console.log('there is an error:', e);
       });
   }
   getClientNotesDetails(clientID) {
     this.commonService
       .callApi(
-        "api/clients/notes?BusinessPartnerId=" + clientID + "&type=2",
-        "",
-        "get"
+        'api/clients/notes?BusinessPartnerId=' + clientID + '&type=2',
+        '',
+        'get'
       )
       .then((success) => {
         if (success) {
@@ -1171,19 +1199,19 @@ taskDataObj: any;
             this.showNotesShowMore = true;
           }
         } else {
-          this.popToast("error", success.message);
+          this.popToast('error', success.message);
         }
       })
       .catch((e) => {
-        console.log("there is an error:", e);
+        console.log('there is an error:', e);
       });
   }
   getClientDiscountRules(clientID) {
     this.commonService
       .callApi(
-        "api/clients/discountrules?BusinessPartnerId=" + clientID,
-        "",
-        "get"
+        'api/clients/discountrules?BusinessPartnerId=' + clientID,
+        '',
+        'get'
       )
       .then((success) => {
         if (success) {
@@ -1196,16 +1224,16 @@ taskDataObj: any;
           }
           this.tempClientDiscountArray = success.records;
         } else {
-          this.popToast("error", success.message);
+          this.popToast('error', success.message);
         }
       })
       .catch((e) => {
-        console.log("there is an error:", e);
+        console.log('there is an error:', e);
       });
   }
   getClientTaxRules(clientID) {
     this.commonService
-      .callApi("api/clients/taxrules?BusinessPartnerId=" + clientID, "", "get")
+      .callApi('api/clients/taxrules?BusinessPartnerId=' + clientID, '', 'get')
       .then((success) => {
         if (success) {
           if (success.records.length > 0) {
@@ -1217,28 +1245,28 @@ taskDataObj: any;
           }
           this.tempClientTaxesArray = success.records;
         } else {
-          this.popToast("error", success.message);
+          this.popToast('error', success.message);
         }
       })
       .catch((e) => {
-        console.log("there is an error:", e);
+        console.log('there is an error:', e);
       });
   }
   showNotesDetails(data, crmNotePopup) {
     this.commonService
-      .callApi("api/clients/notes/" + data.id, "", "get")
+      .callApi('api/clients/notes/' + data.id, '', 'get')
       .then((success) => {
         if (success) {
           this.crmNotePopupData = success;
           this.modalRef = this.modalService.show(crmNotePopup, {
-            class: "modal-xl modal-dialog-centered crm-popup",
+            class: 'modal-xl modal-dialog-centered crm-popup',
           });
         } else {
-          this.popToast("error", success.message);
+          this.popToast('error', success.message);
         }
       })
       .catch((e) => {
-        console.log("there is an error:", e);
+        console.log('there is an error:', e);
       });
   }
   resetCRMNotesData() {
@@ -1246,19 +1274,19 @@ taskDataObj: any;
   }
   showTaskDetails(data, crmTaskPopup) {
     this.commonService
-      .callApi("api/clients/tasks/" + data.id, "", "get")
+      .callApi('api/clients/tasks/' + data.id, '', 'get')
       .then((success) => {
         if (success) {
           this.crmTaskPopupData = success;
           this.modalRef = this.modalService.show(crmTaskPopup, {
-            class: "modal-xl modal-dialog-centered crm-popup",
+            class: 'modal-xl modal-dialog-centered crm-popup',
           });
         } else {
-          this.popToast("error", success.message);
+          this.popToast('error', success.message);
         }
       })
       .catch((e) => {
-        console.log("there is an error:", e);
+        console.log('there is an error:', e);
       });
   }
   resetCRMTaskData() {
@@ -1276,7 +1304,7 @@ taskDataObj: any;
   createTaskModal(createTask, customerName, businessPartner) {
     this.refreshUsers();
     this.addForm = new FormGroup({
-      dateOfEntry: new FormControl("", [Validators.required]),
+      dateOfEntry: new FormControl('', [Validators.required]),
       dueDate: new FormControl(),
       title: new FormControl(null, [Validators.required]),
       subTitle: new FormControl(),
@@ -1288,47 +1316,47 @@ taskDataObj: any;
       dateOfEntryTemp: new FormControl(),
     });
     this.addForm
-      .get("dateOfEntry")
-      .setValue(this.datePipe.transform(new Date(), "MMM d, y"));
+      .get('dateOfEntry')
+      .setValue(this.datePipe.transform(new Date(), 'MMM d, y'));
     this.addForm
-      .get("dateOfEntryTemp")
-      .setValue(this.datePipe.transform(new Date(), "MMM d, y"));
+      .get('dateOfEntryTemp')
+      .setValue(this.datePipe.transform(new Date(), 'MMM d, y'));
 
     // this.user.dateOfEntry = new Date();
     this.bsConfig = Object.assign(
       {},
       {
-        containerClass: "custom-picker theme-white theme-green",
+        containerClass: 'custom-picker theme-white theme-green',
         adaptivePosition: true,
-        dateInputFormat: "MM DD,YYYY",
+        dateInputFormat: 'MM DD,YYYY',
       }
     );
     this.bsConfigCreated_Date = Object.assign(
       {},
       {
-        containerClass: "custom-picker theme-white theme-green",
+        containerClass: 'custom-picker theme-white theme-green',
         adaptivePosition: true,
-        dateInputFormat: "MM DD,YYYY",
+        dateInputFormat: 'MM DD,YYYY',
       }
     );
     this.customerNameCreateTask = customerName;
     this.businessPartnerCreateTask = businessPartner;
     this.modalRef = this.modalService.show(createTask, {
-      class: "modal-lg modal-dialog-centered quick-task-modal",
+      class: 'modal-lg modal-dialog-centered quick-task-modal',
     });
   }
   refreshUsers() {
     this.commonService
-      .callApi("api/clients/tasks/getAssignedUsers?q=", "", "get")
+      .callApi('api/clients/tasks/getAssignedUsers?q=', '', 'get')
       .then((success) => {
         if (success) {
           this.users = success;
         } else {
-          this.popToast("error", success.message);
+          this.popToast('error', success.message);
         }
       })
       .catch((e) => {
-        console.log("there is an error:", e);
+        console.log('there is an error:', e);
       });
   }
   createdDateClick() {
@@ -1345,24 +1373,24 @@ taskDataObj: any;
   }
   presetTitle() {
     this.commonService
-      .callApi("api/tenants/presetactivities/lookup", "", "get")
+      .callApi('api/tenants/presetactivities/lookup', '', 'get')
       .then((success) => {
         if (success) {
           this.titleArr = success;
         } else {
-          this.popToast("error", success.message);
+          this.popToast('error', success.message);
         }
       })
       .catch((e) => {
-        console.log("there is an error:", e);
+        console.log('there is an error:', e);
       });
   }
   createdDateValueChange(e, bsConfig) {
     if (!bsConfig.adaptivePosition) {
       this.addForm
-        .get("dateOfEntry")
-        .setValue(this.datePipe.transform(e, "MMM d, y"));
-      this.addForm.get("dateOfEntryTemp").setValue(e);
+        .get('dateOfEntry')
+        .setValue(this.datePipe.transform(e, 'MMM d, y'));
+      this.addForm.get('dateOfEntryTemp').setValue(e);
       this.createedDate = false;
       this.created_Date = e;
       bsConfig.adaptivePosition = true;
@@ -1375,9 +1403,9 @@ taskDataObj: any;
   dueDateValueChange(e, bsConfig) {
     if (!bsConfig.adaptivePosition) {
       this.addForm
-        .get("dueDate")
-        .setValue(this.datePipe.transform(e, "MMM d, y"));
-      this.addForm.get("dueDateTemp").setValue(e);
+        .get('dueDate')
+        .setValue(this.datePipe.transform(e, 'MMM d, y'));
+      this.addForm.get('dueDateTemp').setValue(e);
       this.dueDate = false;
       this.due_date = e;
       bsConfig.adaptivePosition = true;
@@ -1391,91 +1419,92 @@ taskDataObj: any;
     this.isSaveButtonDisabled = true;
     this.addForm.value.type = 2;
     var addTask = {
-      dateOfEntry: this.addForm.value["dateOfEntryTemp"],
-      dueDate: this.addForm.value["dueDateTemp"],
-      type: this.addForm.value["type"],
-      board: this.addForm.value["boardName"],
-      subTitle: this.addForm.value["subTitle"],
-      note: this.addForm.value["note"],
-      status: "1",
+      dateOfEntry: this.addForm.value['dateOfEntryTemp'],
+      dueDate: this.addForm.value['dueDateTemp'],
+      type: this.addForm.value['type'],
+      board: this.addForm.value['boardName'],
+      subTitle: this.addForm.value['subTitle'],
+      note: this.addForm.value['note'],
+      status: '1',
     };
-    addTask["businessPartner"] = this.businessPartnerCreateTask;
-    addTask["presetActivity"] = this.presetActivity;
-    let associatedUserIds = this.addForm.value["associatedUserIds"];
+    addTask['businessPartner'] = this.businessPartnerCreateTask;
+    addTask['presetActivity'] = this.presetActivity;
+    let associatedUserIds = this.addForm.value['associatedUserIds'];
     if (
       associatedUserIds != null &&
-      associatedUserIds != "" &&
+      associatedUserIds != '' &&
       associatedUserIds.length > 0
     ) {
-      addTask["associatedUserIds"] = associatedUserIds.toString();
+      addTask['associatedUserIds'] = associatedUserIds.toString();
     }
-    let user = this.addForm.value["user"];
-    if (user != null && user != "") {
-      addTask["user"] = this.assignToData;
+    let user = this.addForm.value['user'];
+    if (user != null && user != '') {
+      addTask['user'] = this.assignToData;
     }
     this.commonService
-      .callApi("api/clients/tasks", addTask, "post")
+      .callApi('api/clients/tasks', addTask, 'post')
       .then((success) => {
         this.isSaveButtonDisabled = false;
         if (success) {
           this.modalRef.hide();
           this.businessPartnerCreateTask = {};
-          this.customerNameCreateTask = "";
+          this.customerNameCreateTask = '';
         } else {
-          this.popToast("error", success.message);
+          this.popToast('error', success.message);
         }
       })
       .catch((e) => {
         this.isSaveButtonDisabled = false;
       });
   }
-  onChangepresetActivity(e:any) {
+  onChangepresetActivity(e: any) {
     this.presetActivity = e;
-    if (e.dueDays != null && e.dueDays != undefined && e.dueDays != "") {
+    if (e.dueDays != null && e.dueDays != undefined && e.dueDays != '') {
       this.due_date = new Date();
       var pastDate = this.due_date.getDate() + e.dueDays;
       this.due_date.setDate(pastDate);
-      this.addForm.get("dueDate")
-        .setValue(this.datePipe.transform(this.due_date, "MMM d, y"));
-      this.addForm.get("dueDateTemp").setValue(this.due_date);
+      this.addForm
+        .get('dueDate')
+        .setValue(this.datePipe.transform(this.due_date, 'MMM d, y'));
+      this.addForm.get('dueDateTemp').setValue(this.due_date);
     }
   }
-  changeAssignTo(e:any) {
+  changeAssignTo(e: any) {
     this.assignToData = e;
   }
-  setDeleteIDAndType(id:any, type:any) {
+  setDeleteIDAndType(id: any, type: any) {
     this.deleteRecordId = id;
     this.deleteRecordtype = type;
   }
-  openDeletePopup(deleteRecordPopup:any) {
+  openDeletePopup(deleteRecordPopup: any) {
     this.modalRef = this.modalService.show(deleteRecordPopup, {
-      class: "modal-dialog-centered quick-popup delete-popup",
+      class: 'modal-dialog-centered quick-popup delete-popup',
     });
   }
   unsetDeleteIdAndType() {
     this.deleteRecordId = 0;
-    this.deleteRecordtype = "";
+    this.deleteRecordtype = '';
   }
   deleteThisRecord() {
     this.commonService
-      .callApi("api/clients/" + this.deleteRecordId, "", "delete")
+      .callApi('api/clients/' + this.deleteRecordId, '', 'delete')
       .then((success) => {
         this.listApi();
         this.deleteRecordId = 0;
-        this.popToast("success", "Record deleted");
+        this.popToast('success', 'Record deleted');
       })
       .catch((e) => {
-        console.log("there is an error:", e);
+        console.log('there is an error:', e);
       });
   }
-  editThisRecord(data:any) {
+  editThisRecord(data: any) {
     if (this.selectedTypeID === 5 && data.clientType === 1) {
       this.showLeadsDetailsPopup(this.addLeadsPopup);
       if (data.paymentTermDuration === 0) {
-        data.paymentTermDuration = "";
+        data.paymentTermDuration = '';
       }
       if (data.allowedCreditAmount === 0) {
-        data.allowedCreditAmount = "";
+        data.allowedCreditAmount = '';
       }
       setTimeout(() => {
         this.addLeadsBasicInfo.patchValue(data);
@@ -1483,10 +1512,10 @@ taskDataObj: any;
     } else if (data.clientType === 1 && this.selectedTypeID !== 5) {
       this.showCustomerDetailsPopup(this.addCustomerPopup);
       if (data.paymentTermDuration === 0) {
-        data.paymentTermDuration = "";
+        data.paymentTermDuration = '';
       }
       if (data.allowedCreditAmount === 0) {
-        data.allowedCreditAmount = "";
+        data.allowedCreditAmount = '';
       }
       setTimeout(() => {
         this.addCustomerBasicInfo.patchValue(data);
@@ -1495,7 +1524,7 @@ taskDataObj: any;
       this.showContactDetailsPopup(this.addContactPopup);
       setTimeout(() => {
         let fetchedStatus = this.contactStatusArray.filter(
-          (X:any) => X.id === data.status
+          (X: any) => X.id === data.status
         )[0];
         data.status = fetchedStatus;
         this.addContactBasicInfo.patchValue(data);
@@ -1504,7 +1533,7 @@ taskDataObj: any;
       this.showCompanyDetailsPopup(this.addCompanyPopup);
       setTimeout(() => {
         let fetchedStatus = this.contactStatusArray.filter(
-          (X:any) => X.id === data.status
+          (X: any) => X.id === data.status
         )[0];
         data.status = fetchedStatus;
         this.addCompanyBasicInfo.patchValue(data);
@@ -1517,67 +1546,67 @@ taskDataObj: any;
       this.filterstart = [
         {
           id: 1,
-          title: "Branch",
+          title: 'Branch',
           option: [],
           async: false,
-          labelName: "Branch",
-          bindedValue: "",
+          labelName: 'Branch',
+          bindedValue: '',
         },
         {
           id: 2,
-          title: "Sales Representative",
+          title: 'Sales Representative',
           option: [],
           async: false,
-          labelName: "Sales Representative",
-          bindedValue: "",
+          labelName: 'Sales Representative',
+          bindedValue: '',
         },
         {
           id: 3,
-          title: "Name",
+          title: 'Name',
           option: [],
           async: false,
-          labelName: "Name",
-          bindedValue: "",
+          labelName: 'Name',
+          bindedValue: '',
         },
         {
           id: 4,
-          title: "Brand",
+          title: 'Brand',
           option: [],
           async: false,
-          labelName: "Brand",
-          bindedValue: "",
+          labelName: 'Brand',
+          bindedValue: '',
         },
         {
           id: 5,
-          title: "Product",
+          title: 'Product',
           option: [],
           async: false,
-          labelName: "Product",
-          bindedValue: "",
+          labelName: 'Product',
+          bindedValue: '',
         },
         {
           id: 6,
-          title: "Status",
+          title: 'Status',
           option: [],
           async: false,
-          labelName: "Status",
-          bindedValue: "",
+          labelName: 'Status',
+          bindedValue: '',
         },
         {
           id: 7,
-          title: "Last Activity Within",
+          title: 'Last Activity Within',
           option: [],
           async: false,
-          labelName: "Last Activity Within",
-          bindedValue: "",
+          labelName: 'Last Activity Within',
+          bindedValue: '',
         },
         {
           id: 8,
-          title: "Last Activity Beyond",
+          title: 'Last Activity Beyond',
           option: [],
           async: false,
-          labelName: "Last Activity Beyond",
-          bindedValue: "",
+          labelName: 'Last Activity Beyond',
+          bindedValue: '',
         },
       ];
     } else if (
@@ -1589,17 +1618,17 @@ taskDataObj: any;
       this.filterstart = [
         {
           id: 1,
-          title: "Name",
+          title: 'Name',
           option: [],
           async: false,
-          labelName: "Name",
-          bindedValue: "",
+          labelName: 'Name',
+          bindedValue: '',
         },
       ];
     }
     this.refFilter = [...this.filterstart];
   }
-  changedParentFilter(event:any) {
+  changedParentFilter(event: any) {
     if (this.selectedTypeID === 1) {
       let options: any[];
       if (event.id == 1) {
@@ -1623,7 +1652,7 @@ taskDataObj: any;
       } else if (event.id == 3) {
         if (this.tempArr.length == 0) {
           setTimeout(() => {
-            $("#txtNotes1").focus();
+            $('#txtNotes1').focus();
           }, 100);
         }
       } else if (event.id == 4) {
@@ -1672,7 +1701,7 @@ taskDataObj: any;
           });
         }
       }
-      this.filterstart.forEach((obj:any) => {
+      this.filterstart.forEach((obj: any) => {
         if (obj.id == event.id) {
           obj.option = options;
         } else {
@@ -1687,35 +1716,35 @@ taskDataObj: any;
     ) {
       if (this.tempArr.length == 0) {
         setTimeout(() => {
-          $("#txtNotes").focus();
+          $('#txtNotes').focus();
         }, 100);
       }
     }
   }
-  changedChildFilter(event:any) {
-    $("#secondFilter :input").blur();
-    $("#supplierName :input").blur();
+  changedChildFilter(event: any) {
+    $('#secondFilter :input').blur();
+    $('#supplierName :input').blur();
     if (this.selectedTypeID === 1) {
       if (this.filterData.id === 1) {
-        this.data["branchId"] = this.filterData.bindedValue.id;
-        this.applyFilter(this.data, "end");
+        this.data['branchId'] = this.filterData.bindedValue.id;
+        this.applyFilter(this.data, 'end');
       } else if (this.filterData.id === 2) {
-        this.data["salesRepresentativeId"] = this.filterData.bindedValue.id;
-        this.applyFilter(this.data, "end");
+        this.data['salesRepresentativeId'] = this.filterData.bindedValue.id;
+        this.applyFilter(this.data, 'end');
       } else if (this.filterData.id === 3) {
-        if (this.filterData.name != undefined && this.filterData.name != "") {
-          this.data["q"] = this.filterData.name;
-          this.applyFilter(this.data, "end");
+        if (this.filterData.name != undefined && this.filterData.name != '') {
+          this.data['q'] = this.filterData.name;
+          this.applyFilter(this.data, 'end');
         }
       } else if (this.filterData.id === 4) {
-        this.data["brandId"] = this.filterData.bindedValue.id;
-        this.applyFilter(this.data, "end");
+        this.data['brandId'] = this.filterData.bindedValue.id;
+        this.applyFilter(this.data, 'end');
       } else if (this.filterData.id === 5) {
-        this.data["productId"] = this.filterData.bindedValue.id;
-        this.applyFilter(this.data, "end");
+        this.data['productId'] = this.filterData.bindedValue.id;
+        this.applyFilter(this.data, 'end');
       } else if (this.filterData.id === 6) {
-        this.data["status"] = this.filterData.bindedValue.id;
-        this.applyFilter(this.data, "end");
+        this.data['status'] = this.filterData.bindedValue.id;
+        this.applyFilter(this.data, 'end');
       } else if (this.filterData.id === 7) {
         this.filterData.suboptions = [];
         if (
@@ -1723,12 +1752,12 @@ taskDataObj: any;
           this.filterData.bindedValue.id === 2 ||
           this.filterData.bindedValue.id === 3
         ) {
-          this.data["lastActivityDays"] = this.filterData.bindedValue.value;
-          this.applyFilter(this.data, "end");
+          this.data['lastActivityDays'] = this.filterData.bindedValue.value;
+          this.applyFilter(this.data, 'end');
         } else if (this.filterData.bindedValue.id === 4) {
           if (this.tempArr.length == 0) {
             setTimeout(() => {
-              $("#numDaysInput").focus();
+              $('#numDaysInput').focus();
             }, 100);
           }
         }
@@ -1739,14 +1768,13 @@ taskDataObj: any;
           this.filterData.bindedValue.id === 2 ||
           this.filterData.bindedValue.id === 3
         ) {
-          this.data[
-            "beyondLastActivityDays"
-          ] = this.filterData.bindedValue.value;
-          this.applyFilter(this.data, "end");
+          this.data['beyondLastActivityDays'] =
+            this.filterData.bindedValue.value;
+          this.applyFilter(this.data, 'end');
         } else if (this.filterData.bindedValue.id === 4) {
           if (this.tempArr.length == 0) {
             setTimeout(() => {
-              $("#numDaysInput").focus();
+              $('#numDaysInput').focus();
             }, 100);
           }
         }
@@ -1759,54 +1787,54 @@ taskDataObj: any;
           this.selectedTypeID === 4 ||
           this.selectedTypeID === 5)
       ) {
-        if (this.filterData.name != undefined && this.filterData.name != "") {
-          this.data["q"] = this.filterData.name;
-          this.applyFilter(this.data, "end");
+        if (this.filterData.name != undefined && this.filterData.name != '') {
+          this.data['q'] = this.filterData.name;
+          this.applyFilter(this.data, 'end');
         }
       }
     }
   }
-  changedsubChildFilter(event:any) {
+  changedsubChildFilter(event: any) {
     if (this.filterData.id === 7) {
-      this.data["lastActivityDays"] = this.filterData.numDaysInput;
-      this.applyFilter(this.data, "end");
+      this.data['lastActivityDays'] = this.filterData.numDaysInput;
+      this.applyFilter(this.data, 'end');
     } else if (this.filterData.id === 8) {
-      this.data["beyondLastActivityDays"] = this.filterData.numDaysInput;
-      this.applyFilter(this.data, "end");
+      this.data['beyondLastActivityDays'] = this.filterData.numDaysInput;
+      this.applyFilter(this.data, 'end');
     }
   }
-  applyFilter(queryParams:any, terminate:any) {
+  applyFilter(queryParams: any, terminate: any) {
     this.showingPage = 0;
     this.page = 0;
     this.offset = 0;
     var queryParams1 =
-      "ts=" + this.ts + "&offset=" + this.offset + "&limit=" + this.limit;
+      'ts=' + this.ts + '&offset=' + this.offset + '&limit=' + this.limit;
     if (this.selectedTypeID === 1) {
       queryParams1 =
-        queryParams1 + "&ClientType=1&entityType=client&showInActive=false";
+        queryParams1 + '&ClientType=1&entityType=client&showInActive=false';
     } else if (this.selectedTypeID === 2) {
-      queryParams1 = queryParams1 + "&ClientType=2&entityType=client";
+      queryParams1 = queryParams1 + '&ClientType=2&entityType=client';
     } else if (this.selectedTypeID === 3) {
-      queryParams1 = queryParams1 + "&ClientType=3&entityType=client";
+      queryParams1 = queryParams1 + '&ClientType=3&entityType=client';
     } else if (this.selectedTypeID === 4) {
-      queryParams1 = queryParams1 + "&entityType=client";
+      queryParams1 = queryParams1 + '&entityType=client';
     } else if (this.selectedTypeID === 5) {
       queryParams1 =
-        queryParams1 + "&clientStatus=0&entityType=client&status=0";
+        queryParams1 + '&clientStatus=0&entityType=client&status=0';
     }
     this.commonService
-      .callApi("api/clients?" + queryParams1, queryParams, "get")
+      .callApi('api/clients?' + queryParams1, queryParams, 'get')
       .then((success) => {
         if (success) {
           this.listrecords = success.records;
           this.maxPage = Math.floor(success.total / this.limit);
           this.total = success.total;
         } else {
-          this.popToast("error", success.message);
+          this.popToast('error', success.message);
         }
       })
       .catch((e) => {
-        console.log("there is an error:", e);
+        console.log('there is an error:', e);
       });
 
     if (terminate) {
@@ -1819,9 +1847,9 @@ taskDataObj: any;
           this.filterData.id === 5 ||
           this.filterData.id === 6
         ) {
-          tempconfig["parentFilter"] = this.filterData.title;
-          tempconfig["secondFilter"] = this.filterData.bindedValue.title;
-          tempconfig["selectedObj"] = this.filterData;
+          tempconfig['parentFilter'] = this.filterData.title;
+          tempconfig['secondFilter'] = this.filterData.bindedValue.title;
+          tempconfig['selectedObj'] = this.filterData;
           this.tempArr.push(tempconfig);
           const index = this.filterstart
             .map((e) => {
@@ -1832,9 +1860,9 @@ taskDataObj: any;
           this.filterstart.splice(0, index + 1);
           this.filterstart = [...this.filterstart];
         } else if (this.filterData.id === 3) {
-          tempconfig["parentFilter"] = this.filterData.title;
-          tempconfig["secondFilter"] = this.filterData.name;
-          tempconfig["selectedObj"] = this.filterData;
+          tempconfig['parentFilter'] = this.filterData.title;
+          tempconfig['secondFilter'] = this.filterData.name;
+          tempconfig['selectedObj'] = this.filterData;
           this.tempArr.push(tempconfig);
           const index = this.filterstart
             .map((e) => {
@@ -1850,10 +1878,10 @@ taskDataObj: any;
             this.filterData.bindedValue.id === 2 ||
             this.filterData.bindedValue.id === 3
           ) {
-            tempconfig["parentFilter"] = this.filterData.title;
-            tempconfig["secondFilter"] =
-              this.filterData.bindedValue.value + " Days";
-            tempconfig["selectedObj"] = this.filterData;
+            tempconfig['parentFilter'] = this.filterData.title;
+            tempconfig['secondFilter'] =
+              this.filterData.bindedValue.value + ' Days';
+            tempconfig['selectedObj'] = this.filterData;
             this.tempArr.push(tempconfig);
             const index = this.filterstart
               .map((e) => {
@@ -1864,9 +1892,9 @@ taskDataObj: any;
             this.filterstart.splice(0, index + 1);
             this.filterstart = [...this.filterstart];
           } else if (this.filterData.bindedValue.id === 4) {
-            tempconfig["parentFilter"] = this.filterData.title;
-            tempconfig["secondFilter"] = this.filterData.numDaysInput + " Days";
-            tempconfig["selectedObj"] = this.filterData;
+            tempconfig['parentFilter'] = this.filterData.title;
+            tempconfig['secondFilter'] = this.filterData.numDaysInput + ' Days';
+            tempconfig['selectedObj'] = this.filterData;
             this.tempArr.push(tempconfig);
             const index = this.filterstart
               .map((e) => {
@@ -1883,10 +1911,10 @@ taskDataObj: any;
             this.filterData.bindedValue.id === 2 ||
             this.filterData.bindedValue.id === 3
           ) {
-            tempconfig["parentFilter"] = this.filterData.title;
-            tempconfig["secondFilter"] =
-              this.filterData.bindedValue.value + " Days";
-            tempconfig["selectedObj"] = this.filterData;
+            tempconfig['parentFilter'] = this.filterData.title;
+            tempconfig['secondFilter'] =
+              this.filterData.bindedValue.value + ' Days';
+            tempconfig['selectedObj'] = this.filterData;
             this.tempArr.push(tempconfig);
             const index = this.filterstart
               .map((e) => {
@@ -1897,9 +1925,9 @@ taskDataObj: any;
             this.filterstart.splice(0, index + 1);
             this.filterstart = [...this.filterstart];
           } else if (this.filterData.bindedValue.id === 4) {
-            tempconfig["parentFilter"] = this.filterData.title;
-            tempconfig["secondFilter"] = this.filterData.numDaysInput + " Days";
-            tempconfig["selectedObj"] = this.filterData;
+            tempconfig['parentFilter'] = this.filterData.title;
+            tempconfig['secondFilter'] = this.filterData.numDaysInput + ' Days';
+            tempconfig['selectedObj'] = this.filterData;
             this.tempArr.push(tempconfig);
             const index = this.filterstart
               .map((e) => {
@@ -1919,9 +1947,9 @@ taskDataObj: any;
           this.selectedTypeID === 5)
       ) {
         this.tempArr = [];
-        tempconfig["parentFilter"] = this.filterData.title;
-        tempconfig["secondFilter"] = this.filterData.name;
-        tempconfig["selectedObj"] = this.filterData;
+        tempconfig['parentFilter'] = this.filterData.title;
+        tempconfig['secondFilter'] = this.filterData.name;
+        tempconfig['selectedObj'] = this.filterData;
         this.tempArr.push(tempconfig);
         const index = this.filterstart
           .map((e) => {
@@ -1984,30 +2012,30 @@ taskDataObj: any;
   }
   getBrands() {
     this.commonService
-      .callApi("api/inventory/brands/lookup?q=", "", "get")
+      .callApi('api/inventory/brands/lookup?q=', '', 'get')
       .then((success) => {
         if (success) {
           this.brandList = success;
         } else {
-          this.popToast("error", success.message);
+          this.popToast('error', success.message);
         }
       })
       .catch((e) => {
-        console.log("there is an error:", e);
+        console.log('there is an error:', e);
       });
   }
   getProducts() {
     this.commonService
-      .callApi("api/inventory/products/lookup?q=", "", "get")
+      .callApi('api/inventory/products/lookup?q=', '', 'get')
       .then((success) => {
         if (success) {
           this.productList = success;
         } else {
-          this.popToast("error", success.message);
+          this.popToast('error', success.message);
         }
       })
       .catch((e) => {
-        console.log("there is an error:", e);
+        console.log('there is an error:', e);
       });
   }
 }

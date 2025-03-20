@@ -1248,6 +1248,7 @@ export class TasksComponent extends BaseComponent implements OnInit {
   plannedTask(record) {}
 
   onScroll(event: any) {
+    console.log('onscroll');
     const target = event.target;
     if (!target) return;
 
@@ -1266,6 +1267,10 @@ export class TasksComponent extends BaseComponent implements OnInit {
       this.onScrollDown(event);
     }
   }
+
+  // onScroll(event: any) {
+  //   console.log('Scroll detected!', event);
+  // }
 
   onScrollDown(ev) {
     this.onScrollDownTaskDashboard(this);

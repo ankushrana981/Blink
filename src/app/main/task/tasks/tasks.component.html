@@ -3,29 +3,29 @@
         <div class="viewdata-title" (clickOutside)="isWorkspaceSelection=false">
             <h2><span *ngIf="isTaskDashboard">Task Dashboard</span><span *ngIf="!isTaskDashboard">Workspace</span>
                 <span class="title-span-border"></span>
-                <span class="title-span clickable" *ngIf="isTaskDashboard" (click)="showWorkspaceSelection()"> Workspace
+                <span class="clickable title-span" *ngIf="isTaskDashboard" (click)="showWorkspaceSelection()"> Workspace
                     <i class="fa" [ngClass]="isWorkspaceSelection ? 'fa-angle-up' : 'fa-angle-down'"></i> </span>
-                <span class="title-span clickable" *ngIf="!isTaskDashboard" (click)="showWorkspaceSelection()">
+                <span class="clickable title-span" *ngIf="!isTaskDashboard" (click)="showWorkspaceSelection()">
                     {{workspaceData.title}} <i class="fa"
                         [ngClass]="isWorkspaceSelection ? 'fa-angle-up' : 'fa-angle-down'"></i> </span>
 
             </h2>
             <span *ngIf="isWorkspaceSelection">
-                <ul class="dropdown-table show dark right d-flex flex-column workspace-list align-items-center workspaceWidth"
+                <ul class="d-flex flex-column dropdown-table align-items-center dark right show workspace-list workspaceWidth"
                     [ngClass]="isTaskDashboard ? 'taskDashboardSelectionPopUp' : 'workspaceSelectionPopUp'">
                     <li class="mb-1" *ngFor="let data of usersForWorkspaceSelection;let index=index;">
-                        <span class="clickable customanimate order-animate1"
+                        <span class="order-animate1 clickable customanimate"
                             (click)="changeWorkspace(data)">{{data.title && data.title.trim().length !== 0? data.title :
                             '-'}}</span>
                     </li>
                 </ul>
             </span>
         </div>
-        <div class="space-10 rightSideFilter" [ngClass]="{'filteropen': isFilterOpen, 'dayopen': addDayClass}">
-            <div class="nav-filter-wrap max-w-100 wow fadeIn" data-wow-delay="100ms">
-                <div class="nav-filter-header card align-items-center" href="#collapseExample" role="button"
+        <div class="rightSideFilter space-10" [ngClass]="{'filteropen': isFilterOpen, 'dayopen': addDayClass}">
+            <div class="nav-filter-wrap fadeIn max-w-100 wow" data-wow-delay="100ms">
+                <div class="card nav-filter-header align-items-center" href="#collapseExample" role="button"
                     aria-controls="collapseExample">
-                    <div class="filterednav flex-1">
+                    <div class="flex-1 filterednav">
                         <span class="filter-icon" (click)="filterReport()" *ngIf="filterstart.length > 0">
                             <svg width="15" height="15" viewBox="0 0 15 15" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
@@ -37,7 +37,7 @@
                         <div class="scrollbar">
                             <ng-scrollbar visibility="hover" #scrollEl thumbClass="custom-scrollbars"
                                 orientation="vertical">
-                                <ul class="selected-tags flex-1 filter-main-selected-tag">
+                                <ul class="flex-1 filter-main-selected-tag selected-tags">
                                     <li *ngFor="let i of filterData;index as index" id="{{i?.id}}" class={{i?.class}}
                                         [@fadeIn]>
                                         <h6 (click)="filterReport()">
@@ -91,16 +91,16 @@
                     <button type="btn" class="dropdown-btn" (click)="filterReport()"
                         *ngIf="filterstart.length > 0"></button>
                 </div>
-                <div class="card filternav-dropdown customanimate order-animate1" [hidden]="!filterIReport"
+                <div class="order-animate1 card customanimate filternav-dropdown" [hidden]="!filterIReport"
                     id="collapseExample">
                     <ul class="navlist navlist-parent">
                         <li *ngFor="let data of filterstart;let index=index;" [ngClass]="data.classname"
-                            class="customanimate order-animate1">
+                            class="order-animate1 customanimate">
                             <a (click)="changedParentFilter(data)">{{data.title}}</a>
                         </li>
                     </ul>
                     <ul class="navlist subnav" style="overflow: initial;" *ngIf="selectedFilterValue === 1">
-                        <ul class="selected-tags flex-1 selected-title">
+                        <ul class="flex-1 selected-tags selected-title">
                             <li *ngFor="let subFilter of filterDataNew?.options;index as index"
                                 class={{subFilter?.class}} [@fadeIn]>
                                 <a (click)="changeNewSubFilter(subFilter)">{{subFilter?.title}}</a>
@@ -117,14 +117,14 @@
                             </div>
                         </ng-container>
                         <div class="selected-month-main">
-                            <ul class="selected-tags selected-month right-side-selector flex-1"
+                            <ul class="flex-1 right-side-selector selected-month selected-tags"
                                 *ngIf="showMonthsLIsting && monthsListingArray.length > 0">
                                 <li *ngFor="let month of monthsListingArray;index as index" [@fadeIn]>
                                     <a (click)="applySelectedMOnthFilter(month)">{{month}}</a>
                                 </li>
                             </ul>
                         </div>
-                        <ul class="selected-tags right-side-selector flex-1"
+                        <ul class="flex-1 right-side-selector selected-tags"
                             *ngIf="showYearsListing && yearsListingArray.length > 0">
                             <li *ngFor="let year of yearsListingArray;index as index" [@fadeIn]>
                                 <a (click)="applySelectedYearFilter(year)">{{year}}</a>
@@ -133,7 +133,7 @@
 
                         <div class="form-group right-side-selector"
                             *ngIf="filterDataNew?.date || filterDataNew?.enddate">
-                            <div class="custom-picker move theme-white theme-green">
+                            <div class="custom-picker move theme-green theme-white">
                                 <bs-datepicker-inline name="minDatepicker" [maxDate]="maxDate" id="minDatepicker"
                                     (bsValueChange)="modelDatepickerDate($event,'specific','date')"
                                     [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY' }" [bsValue]="subTask_due_date">
@@ -274,7 +274,7 @@
                     </ul>
                     <ul class="navlist subnav" style="overflow: initial;" *ngIf="selectedFilterValue === 3">
                         <div class="form-group">
-                            <div class="custom-control custom-checkbox">
+                            <div class="custom-checkbox custom-control">
                                 <label class="custom-control-label" for="defaultChecked2">PAST DUE</label>
                                 <input type="checkbox" class="custom-control-input" id="defaultChecked2" name="check"
                                     (change)="changedChildFilter($event)" [(ngModel)]="filterDataNew.pastDue">
@@ -284,7 +284,7 @@
                     </ul>
                     <ul class="navlist subnav" style="overflow: initial;" *ngIf="selectedFilterValue === 4">
                         <div class="form-group">
-                            <div class="custom-control custom-checkbox">
+                            <div class="custom-checkbox custom-control">
                                 <input type="checkbox" class="custom-control-input" id="defaultChecked2" name="check"
                                     (change)="changedChildFilter($event)" [(ngModel)]="filterDataNew.completed">
                                 <label class="custom-control-label" for="defaultChecked2">COMPLETED</label>
@@ -330,9 +330,9 @@
                             </ng-select>
                         </div>
                     </ul>
-                    <ul class="navlist subnav selected-title-main" style="overflow: initial;"
+                    <ul class="navlist selected-title-main subnav" style="overflow: initial;"
                         *ngIf="selectedFilterValue === 6">
-                        <ul class="selected-tags flex-1 selected-title">
+                        <ul class="flex-1 selected-tags selected-title">
                             <li *ngFor="let activites of presetActivities">
                                 <a (click)="changedChildFilter(activites, activites, activites)">{{activites}}</a>
                             </li>
@@ -371,7 +371,7 @@
         </div>
     </div>
     <div class="row space-10 task-height task-tab-main">
-        <div class="col-xl-9  wow fadeIn card card-box task-tab">
+        <div class="col-xl-9 card card-box fadeIn task-tab wow">
 
             <!-- <ul class="nav nav-tabs filterDashboardData" role="tablist">
                 <li class="nav-item" *ngIf="isTaskDashboard">
@@ -418,7 +418,7 @@
 
             <ul class="nav nav-tabs filterDashboardData" role="tablist">
                 <li class="nav-item" *ngIf="isTaskDashboard">
-                    <a class="nav-link " [ngClass]="{ 'active': selectedTab === 0 }" href="javascript:void(0);"
+                    <a class="nav-link" [ngClass]="{ 'active': selectedTab === 0 }" href="javascript:void(0);"
                         role="tab" (click)="filterDashboardData(0)">All</a>
                 </li>
                 <li class="nav-item" *ngIf="isTaskDashboard">
@@ -460,24 +460,24 @@
             </ul>
             <!-- Tab panes -->
             <div class="tab-content">
-                <div class="tab-pane active" role="tabpanel">
-                    <div class="scrollbar h-424 filterDashboardDataTable scrollbar-table overflow-x-hidden overflow-hidden"
-                        (scroll)="onScroll($event)">
-                        <!-- <ng-scrollbar visibility="hover" #scrollbar thumbClass="custom-scrollbars"
-                            orientation="vertical"> -->
+                <div class="active tab-pane" role="tabpanel">
+                    <div
+                        class="h-424 shadow-none filterDashboardDataTable overflow-hidden overflow-x-hidden scrollbar scrollbar-table">
+                        <!-- <ng-scrollbar visibility=" hover" #scrollbar thumbClass="custom-scrollbars"
+                        orientation="vertical"> -->
 
-                        <div class="table-box mb-20 attension-table">
-                            <div class="table-respons">
-                                <table style="width:100%"
-                                    class="table-hover table-dashboard default-to-custom first-padding-0 task-list-table">
+                        <div class="table-box p-0 attension-table mb-20">
+                            <div class="table-respons h-100 overflow-x-hidden overflow-y-auto" (scroll)="onScroll($event)">
+                                <table style=" width:100%"
+                                    class="table-dashboard table-hover default-to-custom first-padding-0 task-list-table">
                                     <thead class="task-list-head">
-                                        <tr class="x-animated fadeIn d-1 in">
+                                        <tr class="d-1 fadeIn in x-animated">
                                             <th width="30"></th>
                                             <th class="table-date">
                                                 <b class="table-title">
                                                     <span class="table-text">Board</span>
                                                 </b>
-                                                <div class="small help-block line-divider before-line type">
+                                                <div class="before-line help-block line-divider small type">
                                                     <span>Interaction</span>&nbsp;
                                                 </div>
                                             </th>
@@ -485,9 +485,9 @@
                                                 <b class="table-title">
                                                     <span>Description</span>&nbsp;
                                                 </b>
-                                                <div class="small help-block line-divider before-line board">
+                                                <div class="before-line board help-block line-divider small">
                                                     <span class="table-text">Activity</span>
-                                                    <div class="line-divider before-line board interaction-divider">
+                                                    <div class="before-line board interaction-divider line-divider">
                                                         <span class="table-text" style="padding-top: 5px;">Interaction
                                                             By</span>
                                                     </div>
@@ -500,13 +500,13 @@
                                         *ngFor="let record of listrecords; index as j" fxLayout="row wrap"
                                         class="list task-list-body">
                                         <tr style="vertical-align:top;" id="tr{{j}}"
-                                            class=" x-animated fadeIn d-1 in accordion-table cursor-pointer"
-                                            fxFlex="100" fxFlex.lt-sm="200" accordion>
+                                            class="d-1 accordion-table cursor-pointer fadeIn in x-animated" fxFlex="100"
+                                            fxFlex.lt-sm="200" accordion>
                                             <td width="58px" class="text-center">
                                                 <h4 ng-bind="($index + 1)" class="rownumber ng-binding">{{j+1}}</h4>
                                             </td>
                                             <td class="text-left task-board">
-                                                <b class="table-title help-desc help-block">
+                                                <b class="table-title help-block help-desc">
                                                     <ng-container *ngIf="record.board !== null">
                                                         <span class="table-text">
                                                             <span class="baord-name">{{record.board}}</span>
@@ -520,12 +520,12 @@
                                                     </ng-container>
                                                     <ng-container *ngIf="record.board == null">-</ng-container>
                                                 </b>
-                                                <div class="small help-block line-divider help-desc">
+                                                <div class="help-block help-desc line-divider small">
                                                     <span>{{record.interactionOn | date: 'MMM d, y'}}</span>
                                                 </div>
                                             </td>
                                             <td class="text-left task-description" style="position: relative;">
-                                                <b class="table-title help-desc help-block task-main-des"
+                                                <b class="table-title help-block help-desc task-main-des"
                                                     style="position: static;">
                                                     <ng-container *ngIf="record.description !== null">
                                                         <span id="table-text-{{record?.id}}"
@@ -540,7 +540,7 @@
                                                     </ng-container>
                                                     <ng-container *ngIf="record.description == null">-</ng-container>
                                                 </b>
-                                                <div class="small help-block line-divider">
+                                                <div class="help-block line-divider small">
                                                     <div class="button-main-div">
                                                         <ng-container *ngIf="record.newStatus !== 7">
                                                             <span class="color-tab-span plus"
@@ -590,7 +590,7 @@
                                                         <span class="color-tab-span" style="background: red;"
                                                               *ngIf="record.newStatus === 6">Forgotten</span>-->
                                                         <div class="hover-icon-h task-hover-h">
-                                                            <span class="text task-record-h "
+                                                            <span class="task-record-h text"
                                                                 *ngIf="record.newStatus === 7">{{record?.queryDetailString}}</span>
                                                             <div *ngIf="record.newStatus === 7 && record?.queryDetailString?.length > 90 && loadTooltipData "
                                                                 class="table-fulldesc">
@@ -612,7 +612,7 @@
                                                         <a *ngIf="showId == record.id" class="icon-more"
                                                             href="javascript:void(0)" icon-more
                                                             (click)="subDropdownClose();$event.stopPropagation();dropdownClose();$event.stopPropagation()"></a>
-                                                        <ul class="dropdown-table dark right dropdown-progress d-flex flex-column align-items-center justify-content-center progressWidthExtend"
+                                                        <ul class="d-flex flex-column dropdown-progress dropdown-table align-items-center justify-content-center dark progressWidthExtend right"
                                                             [ngClass]="{'show' : (showId == record.id) && !undoButtonVisible && flagIsProgressRevert == 0}">
                                                             <li [ngClass]="{'show': !progressinfo}">
                                                                 <ul>
@@ -642,7 +642,7 @@
                                                                     <li role="menuitem"
                                                                         *ngIf="flagIsProgressRevert == 0 && !undoButtonVisible"
                                                                         class="new-option">
-                                                                        <a class="dropdown-item "
+                                                                        <a class="dropdown-item"
                                                                             (click)="plannedTask(record);$event.stopPropagation()"
                                                                             href="javascript:void(0)">Planned
                                                                             Task</a>
@@ -655,7 +655,7 @@
                                                                             To
                                                                             Task</a>
                                                                     </li>
-                                                                    <li class="modal-body text-center modal-revert w-100 confirmationBox"
+                                                                    <li class="modal-body modal-revert text-center w-100 confirmationBox"
                                                                         [ngClass]="{'show': progressinfo}">
                                                                         <p class="modal-name">
                                                                             Progress
@@ -675,7 +675,7 @@
                                                                         </div>
                                                                     </li>
 
-                                                                    <li class="modal-body text-center modal-revert w-100 confirmationBox"
+                                                                    <li class="modal-body modal-revert text-center w-100 confirmationBox"
                                                                         [ngClass]="{'show': revertinfo}">
                                                                         <p class="modal-name">
                                                                             Revert
@@ -694,7 +694,7 @@
                                                                             </button>
                                                                         </div>
                                                                     </li>
-                                                                    <li class="modal-body text-center modal-revert w-100 confirmationBox"
+                                                                    <li class="modal-body modal-revert text-center w-100 confirmationBox"
                                                                         [ngClass]="{'show': updateProgressionStatus}">
                                                                         <p class="modal-name">
                                                                             Update
@@ -716,14 +716,14 @@
                                                                 </ul>
                                                             </li>
                                                         </ul>
-                                                        <ul class="dropdown-table dark right dropdown-progress d-flex flex-column align-items-center justify-content-center progressWidthExtend"
+                                                        <ul class="d-flex flex-column dropdown-progress dropdown-table align-items-center justify-content-center dark progressWidthExtend right"
                                                             [ngClass]="{'show' : (showId == record.id) && flagIsProgressRevert !=0 && record?.subTaskId !== null && !undoButtonVisible}">
                                                             <li
                                                                 [ngClass]="{'show':flagIsProgressRevert !=0 && record?.subTaskId !== null && !undoButtonVisible}">
                                                                 <ul class="progressbar">
                                                                     <li role="menuitem"
-                                                                        class="new-option changeStatusList">
-                                                                        <a class="mtop-5 changeStatus">Change Status
+                                                                        class="changeStatusList new-option">
+                                                                        <a class="changeStatus mtop-5">Change Status
                                                                         </a>
                                                                     </li>
                                                                     <li role="menuitem" class="new-option pagination">
@@ -731,7 +731,7 @@
                                                                             (click)="progressRevertClick(record,record.newStatus,1,j);$event.stopPropagation()"
                                                                             [ngClass]="{'orangeOnHover': record.newStatus == 1,'redOnHover':record.newStatus >=2}">
                                                                             <span class="l1">1</span><span
-                                                                                class="l2 ">Added</span>
+                                                                                class="l2">Added</span>
                                                                         </a>
                                                                         <a class="dropdown-item label2 orange progressLabel"
                                                                             (click)="progressRevertClick(record,record.newStatus,2,j);$event.stopPropagation()"
@@ -763,13 +763,13 @@
                                                                 </ul>
                                                             </li>
                                                         </ul>
-                                                        <ul class="undoButtonsUL dropdown-table dark right dropdown-progress d-flex flex-column align-items-center justify-content-center progressWidthExtend"
+                                                        <ul class="d-flex flex-column dropdown-progress dropdown-table align-items-center justify-content-center dark progressWidthExtend right undoButtonsUL"
                                                             [ngClass]="{'show' : (showId == record.id) && undoButtonVisible}">
                                                             <li [ngClass]="{'show' : undoButtonVisible}">
                                                                 <ul>
                                                                     <li role="menuitem"
-                                                                        class="new-option changeStatusList">
-                                                                        <a class="mtop-5 changeStatus">Change Status
+                                                                        class="changeStatusList new-option">
+                                                                        <a class="changeStatus mtop-5">Change Status
                                                                         </a>
                                                                     </li>
                                                                     <li role="menuitem" class="new-option">
@@ -786,9 +786,9 @@
                                                 </div>
                                             </td>
                                         </tr>
-                                        <tr class="inner-table-tr accordion-table-content x-animated fadeIn d-1 in"
+                                        <tr class="d-1 accordion-table-content fadeIn in inner-table-tr x-animated"
                                             fxFlex="100" *ngIf="record?.subTaskId !== null">
-                                            <!-- <tr class="inner-table-tr accordion-table-content x-animated fadeIn d-1 in"
+                                            <!-- <tr class="d-1 accordion-table-content fadeIn in inner-table-tr x-animated"
                                             fxFlex="100"
                                             *ngIf="record?.relatedTaskList.length > 0 && record?.subTaskId !== null"> -->
                                             <td colspan="4" class="inner-table">
@@ -831,7 +831,7 @@
                                                         </li>
                                                     </ul>
                                                     <div class="tab-content" id="pills-tabContent">
-                                                        <div class="tab-pane fade" id="pills-list{{record?.taskId}}"
+                                                        <div class="fade tab-pane" id="pills-list{{record?.taskId}}"
                                                             role="tabpanel" aria-labelledby="pills-list-tab"
                                                             *ngIf="record?.showBlackListIcon"
                                                             [ngClass]="{'show active': record?.showBlackListIcon}">
@@ -860,7 +860,7 @@
                                                                                         date: 'H:mm'}}</span>
                                                                                     <span>{{innerRecords?.interactionBy}}</span>
                                                                                 </div>
-                                                                                <div class="small help-block">
+                                                                                <div class="help-block small">
                                                                                     <div class="button-main-div">
                                                                                         <ng-container
                                                                                             *ngIf="innerRecords.newStatus !== 7">
@@ -937,7 +937,7 @@
                                                                                         <div
                                                                                             class="hover-icon-h subtask-hover-h">
                                                                                             <span
-                                                                                                class="text task-querytab-h"
+                                                                                                class="task-querytab-h text"
                                                                                                 *ngIf="innerRecords.newStatus === 7">{{innerRecords?.queryDetailsString}}</span>
                                                                                             <div class="table-fulldesc"
                                                                                                 *ngIf="innerRecords.newStatus === 7 && innerRecords?.queryDetailsString?.length > 50">
@@ -952,7 +952,7 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div class="tab-pane fade" id="pills-chat{{record?.taskId}}"
+                                                        <div class="fade tab-pane" id="pills-chat{{record?.taskId}}"
                                                             role="tabpanel" aria-labelledby="pills-chat-tab"
                                                             *ngIf="record?.showBlackChatIcon"
                                                             [ngClass]="{'show active': record?.showBlackChatIcon}">
@@ -965,7 +965,7 @@
                                                                     </div>
                                                                 </div>
                                                                 <div class="list-div-main chat-div-main">
-                                                                    <ul class="scrollbar chat-div-main-h">
+                                                                    <ul class="chat-div-main-h scrollbar">
                                                                         <li
                                                                             *ngFor="let chat of record?.chatData?.listOfDetails; let index = index">
                                                                             <span class="circle"
@@ -985,7 +985,7 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div class="tab-pane fade" id="pills-folder{{record?.taskId}}"
+                                                        <div class="fade tab-pane" id="pills-folder{{record?.taskId}}"
                                                             role="tabpanel" aria-labelledby="pills-folder-tab"
                                                             *ngIf="record?.showBlackFolderIcon"
                                                             [ngClass]="{'show active': record?.showBlackFolderIcon}">
@@ -1041,21 +1041,21 @@
                 </div>
             </div>
         </div>
-        <div class="col-xl-9  wow fadeIn d-none">
+        <div class="col-xl-9 d-none fadeIn wow">
             <div class="contentBox task-page">
-                <div class="w-100 h-100">
-                    <div class="card card-box pl-0 card-attention min-h-50 wow fadeIn" data-wow-delay="200ms">
+                <div class="h-100 w-100">
+                    <div class="card card-attention card-box fadeIn min-h-50 pl-0 wow" data-wow-delay="200ms">
                         <div class="card-header">
                             <h5>Needs Attention</h5>
                         </div>
                         <div class="h-211 scrollbar">
-                            <div class="table-box mb-20 attension-table">
+                            <div class="table-box attension-table mb-20">
                                 <div class="table-respons table-sticky-header">
                                     <table style="width:100%"
-                                        class="table-hover table-dashboard default-to-custom heightOfTasks first-padding-0 task-table-main">
+                                        class="table-dashboard table-hover default-to-custom first-padding-0 heightOfTasks task-table-main">
                                         <tbody [@fadeIn]="listrecords?.length" fxLayout="row wrap" class="list">
                                             <tr style="vertical-align:top;"
-                                                class="x-animated fadeIn d-1 in cursor-pointer"
+                                                class="d-1 cursor-pointer fadeIn in x-animated"
                                                 *ngFor="let i of listrecords; index as j" fxFlex="100"
                                                 fxFlex.lt-sm="200" (click)="onTaskClick(i.id)">
                                                 <td width="58px" class="text-center">
@@ -1065,7 +1065,7 @@
                                                     <b class="table-title">
                                                         <span>{{i.dueDate | date: 'MMM d, y'}}</span>
                                                     </b>
-                                                    <div class="small help-block line-divider">
+                                                    <div class="help-block line-divider small">
                                                         <span *ngIf="i.type === 1" class="table-text">General</span>
                                                         <span *ngIf="i.type === 2" class="table-text">Customer</span>
                                                         <span *ngIf="i.type === 6" class="table-text">Company</span>
@@ -1082,7 +1082,7 @@
                                                             </ng-container>
                                                         </span>
                                                     </b>
-                                                    <div class="small help-block line-divider">
+                                                    <div class="help-block line-divider small">
                                                         <span *ngIf="i.type != 1" class="table-text">{{i?.title}}</span>
                                                         <span *ngIf="i.type === 1"
                                                             class="table-text">{{i?.board}}</span>
@@ -1097,7 +1097,7 @@
                                                             </ng-container>
                                                         </span>
                                                     </b>
-                                                    <div class="small help-block line-divider">
+                                                    <div class="help-block line-divider small">
                                                         <span class="table-text" *ngIf="i.InProgressPercentage != '-'">
                                                             {{i.InProgressPercentage}}%
                                                         </span>
@@ -1114,7 +1114,7 @@
                                                             </span>
                                                         </b>
                                                     </div>
-                                                    <div class="small help-block line-divider help-desc">
+                                                    <div class="help-block help-desc line-divider small">
                                                         <ng-container *ngIf="i.type === 1">
                                                             <span class="table-text">
                                                                 <ng-container
@@ -1145,32 +1145,32 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row space-5 min-h-50 d-none">
+                    <div class="d-none row min-h-50 space-5">
                         <div class="col-md-6 h-100 chart-aside chat-streem-main">
-                            <div class="card card-box card-chat h-100 wow fadeIn" data-wow-delay="600ms"
+                            <div class="card card-box card-chat h-100 fadeIn wow" data-wow-delay="600ms"
                                 (click)="openChatModal()">
                                 <div class="card-header pl-25">
                                     <h5>Chat Stream</h5>
                                 </div>
                                 <div class="card-body pb-0">
-                                    <div class="h-100 scrollbar chart-scroll">
+                                    <div class="h-100 chart-scroll scrollbar">
                                         <ul class="chat-ul">
-                                            <li class="chat-li d-flex flex-wrap">
+                                            <li class="d-flex flex-wrap chat-li">
                                                 <div>
-                                                    <span class="user-img user-activation active"
+                                                    <span class="active user-activation user-img"
                                                         style="background-image: url(assets/images/user-1.png);"></span>
                                                 </div>
                                                 <div class="flex-1">
                                                     <div
-                                                        class="w-100 d-flex flex-wrap justify-content-between align-items-center user-header">
-                                                        <h4 class="chart-name flex-1">John Doe</h4>
+                                                        class="d-flex flex-wrap align-items-center justify-content-between w-100 user-header">
+                                                        <h4 class="flex-1 chart-name">John Doe</h4>
                                                         <div class="d-flex flex-wrap align-items-center">
                                                             <time class="chart-date">May 12, 2018</time>
                                                             <time class="chart-time">4:41P</time>
                                                         </div>
                                                     </div>
 
-                                                    <div class="chat-message flex-1">
+                                                    <div class="flex-1 chat-message">
                                                         <p>
                                                             When our power of choice is untrammelled and when nothing
                                                             prevents our being able to do what we like best, every
@@ -1180,23 +1180,23 @@
                                                     </div>
                                                 </div>
                                             </li>
-                                            <li class="chat-li d-flex flex-wrap">
+                                            <li class="d-flex flex-wrap chat-li">
                                                 <div>
-                                                    <span class="user-img user-activation active"
+                                                    <span class="active user-activation user-img"
                                                         style="background-image: url(assets/images/user-1.png);">
                                                     </span>
                                                 </div>
                                                 <div class="flex-1">
                                                     <div
-                                                        class="w-100 d-flex flex-wrap justify-content-between align-items-center user-header">
-                                                        <h4 class="chart-name flex-1">Bart Stathes</h4>
+                                                        class="d-flex flex-wrap align-items-center justify-content-between w-100 user-header">
+                                                        <h4 class="flex-1 chart-name">Bart Stathes</h4>
                                                         <div class="d-flex flex-wrap align-items-center">
                                                             <time class="chart-date">May 15, 2018</time>
                                                             <time class="chart-time">9:46P</time>
                                                         </div>
                                                     </div>
 
-                                                    <div class="chat-message flex-1">
+                                                    <div class="flex-1 chat-message">
                                                         <p>
                                                             Long t officiis debitis aut rerum necessitatibus saepe
                                                             eveniet ut et voluptates
@@ -1205,21 +1205,21 @@
                                                     </div>
                                                 </div>
                                             </li>
-                                            <li class="chat-li d-flex flex-wrap">
+                                            <li class="d-flex flex-wrap chat-li">
                                                 <div>
-                                                    <span class="user-img user-activation active"
+                                                    <span class="active user-activation user-img"
                                                         style="background-image: url(assets/images/user-1.png);"></span>
                                                 </div>
                                                 <div class="flex-1">
                                                     <div
-                                                        class="w-100 d-flex flex-wrap justify-content-between align-items-center user-header">
-                                                        <h4 class="chart-name flex-1 text-warning">Management Group</h4>
+                                                        class="d-flex flex-wrap align-items-center justify-content-between w-100 user-header">
+                                                        <h4 class="flex-1 text-warning chart-name">Management Group</h4>
                                                         <div class="d-flex flex-wrap align-items-center">
                                                             <time class="chart-date">May 16, 2018</time>
                                                             <time class="chart-time">12:41P</time>
                                                         </div>
                                                     </div>
-                                                    <div class="chat-message chart-img flex-1">
+                                                    <div class="flex-1 chart-img chat-message">
                                                         <img src="assets/images/chart-img.jpg" alt="Chart Image">
                                                         <p>
                                                             Suprele ehenderit qui in ea voluptate velit esse quam nihil
@@ -1230,22 +1230,22 @@
                                                     </div>
                                                 </div>
                                             </li>
-                                            <li class="chat-li d-flex flex-wrap">
+                                            <li class="d-flex flex-wrap chat-li">
                                                 <div>
-                                                    <span class="user-img user-activation active"
+                                                    <span class="active user-activation user-img"
                                                         style="background-image: url(assets/images/user-1.png);"></span>
                                                 </div>
                                                 <div class="flex-1">
                                                     <div
-                                                        class="w-100 d-flex flex-wrap justify-content-between align-items-center user-header">
-                                                        <h4 class="chart-name flex-1">John Doe</h4>
+                                                        class="d-flex flex-wrap align-items-center justify-content-between w-100 user-header">
+                                                        <h4 class="flex-1 chart-name">John Doe</h4>
                                                         <div class="d-flex flex-wrap align-items-center">
                                                             <time class="chart-date">May 12, 2018</time>
                                                             <time class="chart-time">4:41P</time>
                                                         </div>
                                                     </div>
 
-                                                    <div class="chat-message flex-1">
+                                                    <div class="flex-1 chat-message">
                                                         <p>
                                                             When our power of choice is untrammelled and when nothing
                                                             prevents our being able to do what we like best, every
@@ -1255,23 +1255,23 @@
                                                     </div>
                                                 </div>
                                             </li>
-                                            <li class="chat-li d-flex flex-wrap">
+                                            <li class="d-flex flex-wrap chat-li">
                                                 <div>
-                                                    <span class="user-img user-activation active"
+                                                    <span class="active user-activation user-img"
                                                         style="background-image: url(assets/images/user-1.png);">
                                                     </span>
                                                 </div>
                                                 <div class="flex-1">
                                                     <div
-                                                        class="w-100 d-flex flex-wrap justify-content-between align-items-center user-header">
-                                                        <h4 class="chart-name flex-1">Bart Stathes</h4>
+                                                        class="d-flex flex-wrap align-items-center justify-content-between w-100 user-header">
+                                                        <h4 class="flex-1 chart-name">Bart Stathes</h4>
                                                         <div class="d-flex flex-wrap align-items-center">
                                                             <time class="chart-date">May 15, 2018</time>
                                                             <time class="chart-time">9:46P</time>
                                                         </div>
                                                     </div>
 
-                                                    <div class="chat-message flex-1">
+                                                    <div class="flex-1 chat-message">
                                                         <p>
                                                             Long t officiis debitis aut rerum necessitatibus saepe
                                                             eveniet ut et voluptates
@@ -1280,22 +1280,22 @@
                                                     </div>
                                                 </div>
                                             </li>
-                                            <li class="chat-li d-flex flex-wrap">
+                                            <li class="d-flex flex-wrap chat-li">
                                                 <div>
-                                                    <span class="user-img user-activation active"
+                                                    <span class="active user-activation user-img"
                                                         style="background-image: url(assets/images/user-1.png);"></span>
                                                 </div>
                                                 <div class="flex-1">
                                                     <div
-                                                        class="w-100 d-flex flex-wrap justify-content-between align-items-center user-header">
-                                                        <h4 class="chart-name flex-1">John Doe</h4>
+                                                        class="d-flex flex-wrap align-items-center justify-content-between w-100 user-header">
+                                                        <h4 class="flex-1 chart-name">John Doe</h4>
                                                         <div class="d-flex flex-wrap align-items-center">
                                                             <time class="chart-date">May 12, 2018</time>
                                                             <time class="chart-time">4:41P</time>
                                                         </div>
                                                     </div>
 
-                                                    <div class="chat-message flex-1">
+                                                    <div class="flex-1 chat-message">
                                                         <p>
                                                             When our power of choice is untrammelled and when nothing
                                                             prevents our being able to do what we like best, every
@@ -1305,22 +1305,22 @@
                                                     </div>
                                                 </div>
                                             </li>
-                                            <li class="chat-li d-flex flex-wrap">
+                                            <li class="d-flex flex-wrap chat-li">
                                                 <div>
-                                                    <span class="user-img user-activation active"
+                                                    <span class="active user-activation user-img"
                                                         style="background-image: url(assets/images/user-1.png);">
                                                     </span>
                                                 </div>
                                                 <div class="flex-1">
                                                     <div
-                                                        class="w-100 d-flex flex-wrap justify-content-between align-items-center user-header">
-                                                        <h4 class="chart-name flex-1">Bart Stathes</h4>
+                                                        class="d-flex flex-wrap align-items-center justify-content-between w-100 user-header">
+                                                        <h4 class="flex-1 chart-name">Bart Stathes</h4>
                                                         <div class="d-flex flex-wrap align-items-center">
                                                             <time class="chart-date">May 15, 2018</time>
                                                             <time class="chart-time">9:46P</time>
                                                         </div>
                                                     </div>
-                                                    <div class="chat-message flex-1">
+                                                    <div class="flex-1 chat-message">
                                                         <p>
                                                             Long t officiis debitis aut rerum necessitatibus saepe
                                                             eveniet ut et voluptates
@@ -1336,14 +1336,14 @@
                         </div>
 
                         <div class="col-md-6 h-100">
-                            <div class="card card-box card-memos h-100 wow fadeIn" data-wow-delay="800ms">
-                                <div class="card-header pl-25  d-flex flex-wrap justify-content-between">
+                            <div class="card card-box card-memos h-100 fadeIn wow" data-wow-delay="800ms">
+                                <div class="d-flex flex-wrap card-header justify-content-between pl-25">
                                     <h5 class="position-relative" dropdown placement="auto">
-                                        Memos <a href="javascript:void(0);" class="inventory-label text-info"
+                                        Memos <a href="javascript:void(0);" class="text-info inventory-label"
                                             dropdownToggle aria-controls="dropdown-basic2"
                                             (click)="memoType=''">{{memoTypeName}}</a>
                                         <ul id="dropdown-basic2" *dropdownMenu
-                                            class="dropdown-menu dropdown-notifications dropdown-gray light left w-140"
+                                            class="dropdown-gray dropdown-menu dropdown-notifications w-140 left light"
                                             role="menu" aria-labelledby="button-basic">
 
                                             <li role="menuitem" *ngIf="memoType != 'Users'">
@@ -1372,7 +1372,7 @@
                                     <div class="h-100 scrollbar">
                                         <ul class="memos-list">
                                             <li *ngFor="let i of memoListRecords; index as index">
-                                                <div class="memos-header d-flex flex-wrap justify-content-between">
+                                                <div class="d-flex flex-wrap justify-content-between memos-header">
                                                     <strong class="memos-date">{{i.createdOn}}</strong>
                                                     <b class="memos-rules"> {{i.title}}</b>
                                                 </div>
@@ -1391,18 +1391,18 @@
         </div>
         <div class="col-xl-3 Notification-calendar-section">
             <div class="contentBox task-page task-page-margin">
-                <div class="w-100 h-100">
-                    <div class="card card-box card-notifications wow fadeIn"
+                <div class="h-100 w-100">
+                    <div class="card card-box card-notifications fadeIn wow"
                         [ngClass]="showCalendar ? 'card-calendar' : ''" data-wow-delay="400ms">
-                        <div class="card-header pl-25 d-flex flex-wrap justify-content-start">
+                        <div class="d-flex flex-wrap card-header justify-content-start pl-25">
                             <h5 class="position-relative" dropdown placement="auto">
                                 <span class="notification-title"
                                     (click)="changeNotificationFilter('All','ALL');$event.stopPropagation()">
-                                    Notifications </span> <a href="javascript:void(0)" class="inventory-label text-info"
+                                    Notifications </span> <a href="javascript:void(0)" class="text-info inventory-label"
                                     [ngClass]="showCalendar ? 'unSelectedNotifications' : ''" dropdownToggle
                                     aria-controls="dropdown-basic">{{notificationTypeName}}</a>
                                 <ul id="dropdown-basic" *dropdownMenu
-                                    class="dropdown-menu dropdown-notifications dropdown-gray light left w-140"
+                                    class="dropdown-gray dropdown-menu dropdown-notifications w-140 left light"
                                     role="menu" aria-labelledby="button-basic">
 
                                     <li role="menuitem">
@@ -1427,20 +1427,20 @@
                                     <span>Calendar</span>
                                 </a>
                             </div>
-                            <div class="text-end btn-group margin-auto">
+                            <div class="btn-group text-end margin-auto">
                                 <a class="btn-link"
                                     (click)="changeNotificationFilter('All','ALL');$event.stopPropagation()">
-                                    <i class="fa fa-refresh fa-lg"></i>
+                                    <i class="fa fa-lg fa-refresh"></i>
                                 </a>
                             </div>
                         </div>
-                        <div *ngIf="showNotifications" class="card-body pb-0 overflow-y-scroll">
+                        <div *ngIf="showNotifications" class="card-body overflow-y-scroll pb-0">
                             <div class="h-475 scrollbar">
                                 <ul class="notification-list" [@fadeIn]="notificationList?.length">
 
                                     <li *ngFor="let item of notificationList">
                                         {{item?.recordTitle}} <span
-                                            class="text-yellow x-animated fadeIn d-1 in">{{getActionType(item?.actionType)}}</span>
+                                            class="d-1 text-yellow fadeIn in x-animated">{{getActionType(item?.actionType)}}</span>
                                         {{item?.createdBy?.title}}
                                         | {{item?.createdOn | date: 'dd.MM.yyyy'}}
                                     </li>
@@ -1449,13 +1449,13 @@
                             </div>
                         </div>
                         <div *ngIf="showCalendar">
-                            <div class="custom-picker theme-white theme-green calendar-datepiker">
+                            <div class="calendar-datepiker custom-picker theme-green theme-white">
                                 <bs-datepicker-inline class="calendar-width"
                                     (bsValueChange)="calendarValueChange($event,bsConfig)" [bsConfig]="bsConfig"
                                     [bsValue]="todays_date">
                                 </bs-datepicker-inline>
                             </div>
-                            <div *ngIf="!timeSelected" class="calendars-task calendar-time-list">
+                            <div *ngIf="!timeSelected" class="calendar-time-list calendars-task">
                                 <ng-scrollbar visibility="hover" #scrollEl thumbClass="custom-scrollbars"
                                     orientation="vertical">
                                     <div *ngFor="let time of calendarTimeList" class="calendar-time"
@@ -1465,11 +1465,11 @@
                                     </div>
                                 </ng-scrollbar>
                             </div>
-                            <div *ngIf="timeSelected" class="calendars-task calendar-time-select">
+                            <div *ngIf="timeSelected" class="calendar-time-select calendars-task">
                                 <div class="row calendar-event-section-1">
                                     <div class="col-md-6">
                                         <label class="time-label">Time</label>
-                                        <div class="time-of-entry time-entry-change">
+                                        <div class="time-entry-change time-of-entry">
                                             <mat-form-field class="example-full-width">
                                                 <input matInput value="" name="hours" type="number"
                                                     [(ngModel)]="calendar.hourSelection" min="0" max="23" required
@@ -1528,14 +1528,14 @@
                         </div>
                     </div>
 
-                    <div *ngIf="showStatistics" class="card card-box card-notifications card-statistics wow fadeIn"
+                    <div *ngIf="showStatistics" class="card card-box card-notifications card-statistics fadeIn wow"
                         data-wow-delay="1000ms">
-                        <div class="card-header pl-25 d-flex flex-wrap justify-content-between">
+                        <div class="d-flex flex-wrap card-header justify-content-between pl-25">
                             <h5 class="position-relative" dropdown placement="auto">
-                                Statistics <a href="javascript:void(0)" class="inventory-label text-info" dropdownToggle
+                                Statistics <a href="javascript:void(0)" class="text-info inventory-label" dropdownToggle
                                     aria-controls="dropdown-basic1">{{statisticsTypeName}}</a>
                                 <ul id="dropdown-basic1" *dropdownMenu
-                                    class="dropdown-menu dropdown-notifications dropdown-gray light left w-140"
+                                    class="dropdown-gray dropdown-menu dropdown-notifications w-140 left light"
                                     role="menu" aria-labelledby="button-basic">
                                     <li role="menuitem">
                                         <a class="dropdown-item" href="javascript:void(0)"
@@ -1559,10 +1559,10 @@
                                     </li>
                                 </ul>
                             </h5>
-                            <div class="text-end btn-group">
+                            <div class="btn-group text-end">
                                 <a class="btn-link"
                                     (click)="changeStatisticsFilter('Today','Today');$event.stopPropagation()">
-                                    <i class="fa fa-refresh fa-lg"></i>
+                                    <i class="fa fa-lg fa-refresh"></i>
                                 </a>
                             </div>
                         </div>
@@ -1591,9 +1591,9 @@
             </div>
         </div>
     </div>
-    <div class="rightSidebar-wrap rightSidebar-wrap-right-0 rightSide-data-penal comman-sidebar">
+    <div class="comman-sidebar rightSide-data-penal rightSidebar-wrap rightSidebar-wrap-right-0">
         <div class="data-penal-body">
-            <h3 class="rightSidebar-main_title mb-40">Manage Task</h3>
+            <h3 class="mb-40 rightSidebar-main_title">Manage Task</h3>
             <form>
                 <div class="row">
                     <div class="col-12">
@@ -1674,7 +1674,7 @@
                 </div>
                 <div class="row">
                     <div class="col-12">
-                        <div class="form-group mb-40  ">
+                        <div class="form-group mb-40">
                             <mat-form-field class="example-full-width">
                                 <input matInput placeholder="Notes" value="" name="notes" [(ngModel)]="user.note">
                             </mat-form-field>
@@ -1684,7 +1684,7 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="form-group">
-                            <div class="custom-control custom-checkbox">
+                            <div class="custom-checkbox custom-control">
                                 <input type="checkbox" class="custom-control-input" id="defaultChecked2" name="check"
                                     (change)="changedCheck($event)" [(ngModel)]="user.isComplete">
                                 <label class="custom-control-label" for="defaultChecked2">
@@ -1721,15 +1721,15 @@
     <div class="modal-body p-0 delete-modal" (closeClick)="modalRef.hide()">
         <div class="d-flex flex-wrap position-relative quick-modal">
             <div class="d-flex flex-wrap w-100 Query-popup">
-                <div class="chart-header w-100 d-flex flex-wrap">
-                    <div class="chart-right flex-1 d-flex flex-wrap align-items-center">
+                <div class="d-flex flex-wrap w-100 chart-header">
+                    <div class="d-flex flex-1 flex-wrap align-items-center chart-right">
                         <h3 class=text-title>Query Task</h3>
                         <a href="javascript:void(0)" icon-close (click)="modalRef.hide()" class="close-ic"></a>
                     </div>
                 </div>
-                <form class="example-form updated-mat-form query-mat-form" [formGroup]="addTaskQueryForm"
+                <form class="example-form query-mat-form updated-mat-form" [formGroup]="addTaskQueryForm"
                     (ngSubmit)="addTaskQuery()">
-                    <div class="w-100 ">
+                    <div class="w-100">
                         <div class="task-body">
                             <div class="task-board-field">
                                 <span class="fnt">Board Name</span>
@@ -1746,7 +1746,7 @@
                                     <mat-label>Note</mat-label>
                                 </mat-form-field>
                             </div>
-                            <div class="task-btn-grp d-flex flex-wrap align-items-start justify-content-end">
+                            <div class="d-flex flex-wrap align-items-start justify-content-end task-btn-grp">
                                 <button type="submit" class="btn-save"
                                     [ngClass]="addTaskQueryForm.valid  ? '' : 'disabled'"
                                     [disabled]="!addTaskQueryForm.valid">
@@ -1764,16 +1764,16 @@
     <div class="modal-body p-0 delete-modal" (closeClick)="modalRef.hide()">
         <div class="d-flex flex-wrap position-relative quick-modal">
             <div class="d-flex flex-wrap w-100 Query-popup">
-                <div class="chart-header w-100 d-flex flex-wrap">
-                    <div class="chart-right flex-1 d-flex flex-wrap align-items-center">
+                <div class="d-flex flex-wrap w-100 chart-header">
+                    <div class="d-flex flex-1 flex-wrap align-items-center chart-right">
                         <h3 class=text-title>Task Chat</h3>
                         <a href="javascript:void(0)" icon-close (click)="modalRef.hide(); resetChatData();"
                             class="close-ic"></a>
                     </div>
                 </div>
-                <form class="example-form updated-mat-form query-mat-form" [formGroup]="addTaskChatForm"
+                <form class="example-form query-mat-form updated-mat-form" [formGroup]="addTaskChatForm"
                     (ngSubmit)="addTaskChat()">
-                    <div class="w-100 ">
+                    <div class="w-100">
                         <div class="task-body">
                             <div class="task-board-field">
                                 <span class="fnt">Board Name</span>
@@ -1783,7 +1783,7 @@
                                 <span class="fnt">Task Description </span>
                                 <p>{{taskChatData?.description}}</p>
                             </div>
-                            <div class="task-tabing popup-task-tabbing task-chat-tabbing">
+                            <div class="popup-task-tabbing task-chat-tabbing task-tabing">
                                 <div class="list-div-main">
                                     <ul>
                                         <li *ngFor="let record of taskChatData?.listOfDetails; let index = index">
@@ -1806,7 +1806,7 @@
                                         value="" autocomplete="off">
                                     <mat-label>Message</mat-label>
                                 </mat-form-field>
-                                <div class="task-btn-grp d-flex align-items-start img-btn">
+                                <div class="d-flex align-items-start img-btn task-btn-grp">
                                     <button type="submit" class="btn-save"
                                         [ngClass]="addTaskChatForm.valid  ? '' : 'disabled'"
                                         [disabled]="!addTaskChatForm.valid">
@@ -1825,15 +1825,15 @@
     <div class="modal-body p-0 delete-modal" (closeClick)="modalRef.hide()">
         <div class="d-flex flex-wrap position-relative quick-modal">
             <div class="d-flex flex-wrap w-100 Query-popup">
-                <div class="chart-header w-100 d-flex flex-wrap">
-                    <div class="chart-right flex-1 d-flex flex-wrap align-items-center">
+                <div class="d-flex flex-wrap w-100 chart-header">
+                    <div class="d-flex flex-1 flex-wrap align-items-center chart-right">
                         <h3 class=text-title>Task Details</h3>
                         <a href="javascript:void(0)" icon-close (click)="modalRef.hide()" class="close-ic"></a>
                     </div>
                 </div>
-                <form class="example-form updated-mat-form query-mat-form" [formGroup]="addTaskDetailsForm"
+                <form class="example-form query-mat-form updated-mat-form" [formGroup]="addTaskDetailsForm"
                     (ngSubmit)="addTaskDetails()">
-                    <div class="w-100 ">
+                    <div class="w-100">
                         <div class="task-body">
                             <div class="task-detail-main">
                                 <div class="task-detail-inner">
@@ -1846,7 +1846,7 @@
                                         <p>{{addTaskData?.description}}</p>
                                     </div>
                                 </div>
-                                <div class="upload-sec file-input">
+                                <div class="file-input upload-sec">
                                     <div class="camera-sec">
                                         <div class="inner-sec">
                                             <img src="assets/images/camera-b.svg" alt="">
@@ -1871,7 +1871,7 @@
                                     <mat-label>Note</mat-label>
                                 </mat-form-field>
                             </div>
-                            <div class="task-btn-grp mt-25 d-flex flex-wrap align-items-start justify-content-end">
+                            <div class="d-flex flex-wrap align-items-start justify-content-end mt-25 task-btn-grp">
                                 <button type="submit" class="btn-save"
                                     [ngClass]="addTaskDetailsForm.valid  ? '' : 'disabled'"
                                     [disabled]="!addTaskDetailsForm.valid">
@@ -1890,15 +1890,15 @@
     <div class="modal-body p-0 delete-modal" (closeClick)="modalRef.hide()">
         <div class="d-flex flex-wrap position-relative quick-modal">
             <div class="d-flex flex-wrap w-100 Query-popup">
-                <div class="chart-header w-100 d-flex flex-wrap">
-                    <div class="chart-right flex-1 d-flex flex-wrap align-items-center">
+                <div class="d-flex flex-wrap w-100 chart-header">
+                    <div class="d-flex flex-1 flex-wrap align-items-center chart-right">
                         <h3 class=text-title>Task Detail View</h3>
                         <a href="javascript:void(0)" icon-close (click)="modalRef.hide()" class="close-ic"></a>
                     </div>
                 </div>
-                <div class="w-100 ">
+                <div class="w-100">
                     <div class="task-body">
-                        <div class="upload-sec file-input">
+                        <div class="file-input upload-sec">
                             <div class="after-fill">
                                 <img [src]="taskDetailsViewData?.src">
                             </div>

@@ -397,32 +397,37 @@
 
 ::-webkit-scrollbar,
 .table-respons::-webkit-scrollbar,
+.card-body::-webkit-scrollbar,
 .list-div-main::-webkit-scrollbar {
   width: thin;
 }
 
 ::-webkit-scrollbar-track,
 .table-respons::-webkit-scrollbar-track,
+.card-body::-webkit-scrollbar-track,
 .list-div-main::-webkit-scrollbar-track {
   background-color: transparent;
 }
 
 ::-webkit-scrollbar-thumb,
 .table-respons::-webkit-scrollbar-thumb,
+.card-body::-webkit-scrollbar-thumb,
 .list-div-main::-webkit-scrollbar-thumb {
-  background-color: transparent;
+  background-color: transparent !important;
   border-radius: 0 !important;
 
   /* height: 2vh; */
 }
 ::-webkit-scrollbar-track,
 .table-respons:hover::-webkit-scrollbar-track,
+.card-body:hover::-webkit-scrollbar-track,
 .list-div-main:hover::-webkit-scrollbar-track {
   background-color: #f5f5f500 !important;
 }
 
 ::-webkit-scrollbar-thumb,
 .table-respons:hover::-webkit-scrollbar-thumb,
+.card-body:hover::-webkit-scrollbar-thumb,
 .list-div-main:hover::-webkit-scrollbar-thumb {
   background-color: #f1f0f5 !important;
   border-radius: 0 !important;

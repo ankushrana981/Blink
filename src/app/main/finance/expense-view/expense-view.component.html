@@ -12,42 +12,42 @@
 	<div class="contentBox">
 		<div class="leftContent">
 			<div class="card">
-				<div class="table-box viewTable" data-infinite-scroll debounce (scrolled)="onScrollDown($event)">
+				<div class="table-box viewTable" data-infinite-scroll debounce (scroll)="onScroll($event)">
 					<table style="width:100%" class="table-hover default-to-custom ng-isolate-scope">
 						<tbody [@fadeIn]="listrecords?.length" fxLayout="row wrap" class="list">
-							<tr style="vertical-align:top;" class="x-animated fadeIn d-1 in"
+							<tr style="vertical-align:top;" class="d-1 fadeIn in x-animated"
 								*ngFor="let i of listrecords; index as j" fxFlex="100" fxFlex.lt-sm="200">
 								<td width="64px" class="text-center">
 									<h4 class="rownumber ng-binding">{{j+1}}</h4>
 								</td>
 								<td class="text-left">
 									<b><span class="ng-binding">{{i?.createdOn | date:'d-MMM-y'}}</span> &nbsp;</b>
-									<div class="small help-block line-divider">&nbsp;</div>
+									<div class="help-block line-divider small">&nbsp;</div>
 								</td>
 								<td class="text-left">
 									<b><span class="ng-binding">{{i?.description}}</span>&nbsp;</b>
-									<div class="small help-block line-divider ng-binding">&nbsp;</div>
+									<div class="help-block line-divider ng-binding small">&nbsp;</div>
 								</td>
 								<td class="text-end">
 									<b><span class="ng-binding">{{i?.currency?.title}}</span>&nbsp;</b>
 									<div *ngIf="i?.isDebit == false"
-										class="small help-block line-divider green paymentstatus" aria-hidden="false">
+										class="green help-block line-divider paymentstatus small" aria-hidden="false">
 										Credit</div>
 									<div *ngIf="i?.isDebit == true"
-										class="small help-block line-divider red paymentstatus ng-hide"
+										class="help-block line-divider ng-hide paymentstatus red small"
 										aria-hidden="true">Debit</div>
 								</td>
 								<td class="text-end">
 									<div><span class="ng-binding">{{i?.department?.title}}</span>&nbsp;</div>
-									<div class="small help-block line-divider">&nbsp;</div>
+									<div class="help-block line-divider small">&nbsp;</div>
 								</td>
 								<td class="text-end">
 									<div><span class="ng-binding">{{i?.division?.title}}</span>&nbsp;</div>
-									<div class="small help-block line-divider">&nbsp;</div>
+									<div class="help-block line-divider small">&nbsp;</div>
 								</td>
 								<td class="text-end">
 									<div><span class="ng-binding">{{i?.amount}}</span>&nbsp;</div>
-									<div class="small help-block line-divider ng-binding"
+									<div class="help-block line-divider ng-binding small"
 										ng-bind="r.expenseCategory.title">{{i?.expenseCategory?.title}}</div>
 								</td>
 								<td width="100px" class="text-left">
@@ -55,7 +55,7 @@
 										<a class="btn btn-link" hov-title="View/Edit" (click)="editAdjustment(i)"><i
 												class="fa fa-pencil"></i></a>
 										<a class="btn btn-link" hov-title="Delete" (click)="deleteAdjustment(i)"><i
-												class="fa fa-remove text-danger"></i></a>
+												class="text-danger fa fa-remove"></i></a>
 									</div>
 								</td>
 							</tr>
@@ -65,13 +65,13 @@
 				</div>
 			</div>
 		</div>
-		<div class="rightSidebar-wrap rightSidebar-wrap-right-0 rightSide-data-penal comman-sidebar">
+		<div class="comman-sidebar rightSide-data-penal rightSidebar-wrap rightSidebar-wrap-right-0">
 			<!-- <div class="data-penal-header">
 			<h3>Manage Entry</h3>
 		</div> -->
 			<div class="data-penal-body">
 				<form class="manageNote-form">
-					<h3 class="rightSidebar-main_title mb-40">Manage Entry</h3>
+					<h3 class="mb-40 rightSidebar-main_title">Manage Entry</h3>
 					<div class="row">
 						<div class="col-12">
 							<div class="form-group datepicker-formGroup mb-20">
@@ -88,7 +88,7 @@
 					<div class="row">
 						<div class="col-12">
 							<div class="mb-20">
-								<mat-form-field class="example-full-width notes2 desc1 ">
+								<mat-form-field class="desc1 example-full-width notes2">
 									<mat-label>Description</mat-label>
 									<textarea matInput name="description" id="description"
 										[(ngModel)]="user.description" required></textarea>
@@ -99,7 +99,7 @@
 					<div class="row">
 						<div class="col-12">
 							<div class="form-group custom-selectBox mb-20">
-								<mat-form-field class="example-full-width amot desc2 ev-amount">
+								<mat-form-field class="amot desc2 ev-amount example-full-width">
 									<mat-label>Amount</mat-label>
 									<input matInput name="amount" id="amount" [(ngModel)]="user.amount"
 										(keydown)="AllowNumbers($event)" required>
@@ -124,11 +124,11 @@
 						<div class="col-12">
 							<form class="example-form">
 								<div class="fieldsBox" [ngClass]="accclose?'more-fields':''">
-									<a href="javascript:;" class="more-fields-btn a-btn mb-15"
+									<a href="javascript:;" class="a-btn mb-15 more-fields-btn"
 										(click)="accordianview('more')">More Details
 										<i class="fa fa-angle-down" aria-hidden="true"></i>
 									</a>
-									<a href="javascript:;" class="less-fields-btn a-btn mb-15"
+									<a href="javascript:;" class="a-btn less-fields-btn mb-15"
 										(click)="accordianview('less')">Less Details
 										<i class="fa fa-angle-up" aria-hidden="true"></i>
 									</a>
@@ -149,7 +149,7 @@
 									  </mat-radio-group>
 								</div>
 							</div> -->
-										<div class="radioBtngroup mb-20">
+										<div class="mb-20 radioBtngroup">
 											<div class="form-group">
 												<label class="radio-inline">
 													<input type="radio" name="optradio" (change)="debitselected($event)"
@@ -173,7 +173,7 @@
 												[typeahead]="MainSearchdataSource">
 											</ng-select>
 										</div>
-										<div class="ngSelectBox form-group mb-30">
+										<div class="form-group mb-30 ngSelectBox">
 											<!-- <label class="gray-label select-label">Department</label> -->
 											<ng-select [clearable]="false" [(ngModel)]="user.department"
 												placeholder="Department" id="department" [items]="departmentArr"

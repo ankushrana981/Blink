@@ -16,29 +16,29 @@
 		<div class="contentBox">
 			<div class="leftContent">
 				<div class="card">
-					<div class="table-box viewTable mb-20" (scrolled)="onScrollDown($event)">
+					<div class="table-box h-100 mb-20 viewTable" (scroll)="onScroll($event)">
 						<table style="width:100%" class="table-hover default-to-custom">
 							<tbody fxLayout="row wrap" class="list">
 								<tr style="vertical-align:top;" *ngFor="let r of usersList; let i = index"
-									class="x-animated fadeIn d-1 in" fxFlex="100" fxFlex.lt-sm="200">
+									class="d-1 fadeIn in x-animated" fxFlex="100" fxFlex.lt-sm="200">
 									<td width="64px" class="text-center">
 										<h4 class="rownumber ng-binding">{{i+1}}</h4>
 									</td>
 									<td class="text-left">
 										<b>
 											<span class="ng-binding">{{r.title}}</span>&nbsp;</b>
-										<div class="small help-block line-divider">&nbsp;</div>
+										<div class="help-block line-divider small">&nbsp;</div>
 									</td>
 									<td class="text-left">
 										<b>
 											<span class="ng-binding">{{r.contactPerson?.title}}</span>&nbsp;</b>
-										<div class="small help-block line-divider">&nbsp;</div>
+										<div class="help-block line-divider small">&nbsp;</div>
 									</td>
 									<td class="text-left">
 										<b>
 											<span class="ng-binding ng-hide"
 												aria-hidden="true">{{r.area?.title}}</span>&nbsp;</b>
-										<div class="small help-block line-divider">&nbsp;</div>
+										<div class="help-block line-divider small">&nbsp;</div>
 									</td>
 									<td class="text-end">
 										<div>
@@ -46,21 +46,21 @@
 												class="ng-binding ng-hide"
 												aria-hidden="true">{{r.region?.title}}</span>&nbsp;
 										</div>
-										<div class="small help-block line-divider">&nbsp;</div>
+										<div class="help-block line-divider small">&nbsp;</div>
 									</td>
 									<td class="text-end">
 										<div>
 											<span ng-show="vm.isClient" ng-bind="r.establishmentType.title || '&nbsp;'"
 												class="ng-binding ng-hide" aria-hidden="true">&nbsp;</span>&nbsp;
 										</div>
-										<div class="small help-block line-divider">&nbsp;</div>
+										<div class="help-block line-divider small">&nbsp;</div>
 									</td>
 									<td class="text-end">
 										<div>
 											<span ng-show="vm.isClient" ng-bind="r.discount || '&nbsp;'"
 												class="ng-binding ng-hide" aria-hidden="true">&nbsp;</span>&nbsp;
 										</div>
-										<div class="small help-block line-divider">&nbsp;</div>
+										<div class="help-block line-divider small">&nbsp;</div>
 									</td>
 									<td class="text-end">
 										<div>
@@ -68,7 +68,7 @@
 												ng-bind="r.paymentTermDuration + ' days' || '&nbsp;'"
 												class="ng-binding ng-hide" aria-hidden="true"></span>&nbsp;
 										</div>
-										<div class="small help-block line-divider">&nbsp;</div>
+										<div class="help-block line-divider small">&nbsp;</div>
 									</td>
 									<td width="100px" class="text-left">
 										<div class="rowactions">
@@ -77,14 +77,14 @@
 											</a>
 
 											<a class="btn btn-link" hov-title="Delete" (click)="deleteItem(r)">
-												<i class="fa fa-remove text-danger"></i>
+												<i class="text-danger fa fa-remove"></i>
 											</a>
 
 										</div>
 									</td>
 
-									<!--<td ng-show="vm.isDraftMode"><a class="btn btn-link hover-btn" ng-click="vm.editItem(r)"><i class="fa fa-pencil text-muted"></i></a></td>
-								<td ng-show="vm.isDraftMode"><a class="btn btn-link hover-btn" ng-click="vm.deleteItem(r)"><i class="fa fa-trash text-muted"></i></a></td>-->
+									<!--<td ng-show="vm.isDraftMode"><a class="btn btn-link hover-btn" ng-click="vm.editItem(r)"><i class="text-muted fa fa-pencil"></i></a></td>
+								<td ng-show="vm.isDraftMode"><a class="btn btn-link hover-btn" ng-click="vm.deleteItem(r)"><i class="text-muted fa fa-trash"></i></a></td>-->
 								</tr>
 							</tbody>
 						</table>
@@ -97,9 +97,9 @@
 <div class="add-customer-setup-wrap" *ngIf="!SwitchUi">
 	<div class="viewdata-title">
 		<div class="right-top-btns">
-			<a ng-click="vm.isEditorVisible = false" class="btn btn-link pull-right text-decoration-none"
+			<a ng-click="vm.isEditorVisible = false" class="btn btn-link text-decoration-none pull-right"
 				(click)="closeAddEditView()">
-				<!-- <i class="fa fa-remove fa-2w mr-1"></i> -->
+				<!-- <i class="fa fa-2w fa-remove mr-1"></i> -->
 				<img src="assets/images/icon-close-dark.svg" height="13" width="13" alt="" style="margin-right: 8px">
 
 				<span>Close</span>
@@ -118,26 +118,26 @@
 				<div class="col-md-1 tier-menu">
 					<ol class="nav">
 						<li [ngClass]="config.stepOne ? 'active' : ''" id="stepOne"
-							class="customanimate order-animate1">
+							class="order-animate1 customanimate">
 							<a>
 								<span>Basic profile</span>
 							</a>
 						</li>
 						<li [ngClass]="config.stepTwo ? 'active' : ''" id="stepTwo"
-							class="customanimate order-animate2">
+							class="order-animate2 customanimate">
 							<a>
 								<span>Notes</span>
 							</a>
 						</li>
 						<li [ngClass]="config.stepThree ? 'active' : ''" id="stepThree"
-							class="customanimate order-animate3">
+							class="order-animate3 customanimate">
 							<a>
 								<span>Alias Inforamtion</span>
 							</a>
 						</li>
 						<!-- <li [ngClass]="blinktitle3 == 'basicprofile'?'active':''"><a><span>Bank information</span></a></li> -->
 						<li [ngClass]="config.stepFour ? 'active' : ''" id="stepFour"
-							class="customanimate order-animate4">
+							class="order-animate4 customanimate">
 							<a>
 								<span>Bank information</span>
 							</a>
@@ -145,19 +145,19 @@
 						<!-- <li class=""><a><span>Sales information</span></a></li> -->
 					</ol>
 				</div>
-				<div class="col-sm-10 tier-content comman-form customanimate order-animate2">
+				<div class="col-sm-10 order-animate2 comman-form customanimate tier-content">
 					<form>
 						<div *ngIf="config.stepOne" class="infoBox">
-							<h3 class="mb-30 customanimate order-animate1">Basic profile</h3>
+							<h3 class="order-animate1 customanimate mb-30">Basic profile</h3>
 							<div class="row">
 								<div class="col-md-8 mb-20 mt--21">
-									<mat-form-field class="example-full-width customanimate order-animate2">
+									<mat-form-field class="order-animate2 customanimate example-full-width">
 										<mat-label>Vendor</mat-label>
 										<input matInput name="title" [(ngModel)]="user.title" required>
 									</mat-form-field>
 								</div>
 								<div class="col-md-4 mb-20">
-									<ng-select class="customanimate order-animate3" [clearable]="false"
+									<ng-select class="order-animate3 customanimate" [clearable]="false"
 										[(ngModel)]="user.contactPerson" placeholder="Contact Person" id="contactPersn"
 										[items]="contactPersn" bindLabel="title" name="contactperson"
 										(change)="Cpersonselected($event)"></ng-select>
@@ -165,27 +165,27 @@
 							</div>
 							<div class="row mt--21">
 								<div class="col-md-3 mb-20">
-									<mat-form-field class="example-full-width customanimate order-animate4">
+									<mat-form-field class="order-animate4 customanimate example-full-width">
 										<mat-label>Address line 1</mat-label>
 										<input matInput name="addressline1" [(ngModel)]="user.address1">
 									</mat-form-field>
 								</div>
 								<div class="col-md-3 mb-20">
-									<mat-form-field class="example-full-width customanimate order-animate5">
+									<mat-form-field class="order-animate5 customanimate example-full-width">
 										<mat-label>Address line 2</mat-label>
 										<input matInput name="addressline2" [(ngModel)]="user.address2">
 									</mat-form-field>
 
 								</div>
 								<div class="col-md-3 mb-20">
-									<mat-form-field class="example-full-width customanimate order-animate6">
+									<mat-form-field class="order-animate6 customanimate example-full-width">
 										<mat-label>city</mat-label>
 										<input matInput name="city" [(ngModel)]="user.city">
 									</mat-form-field>
 
 								</div>
 								<div class="col-md-3 mb-20">
-									<mat-form-field class="example-full-width customanimate order-animate7">
+									<mat-form-field class="order-animate7 customanimate example-full-width">
 										<mat-label>state</mat-label>
 										<input matInput name="state" [(ngModel)]="user.state">
 									</mat-form-field>
@@ -195,27 +195,27 @@
 
 							<div class="row mt--21">
 								<div class="col-md-3 mb-20 mt-21">
-									<ng-select class="customanimate order-animate8" [clearable]="false"
+									<ng-select class="order-animate8 customanimate" [clearable]="false"
 										[(ngModel)]="user.country" placeholder="Country" id="countryName"
 										[items]="countryrecords" bindLabel="title" name="country"
 										(change)="countrySelected($event)">
 									</ng-select>
 								</div>
 								<div class="col-md-3 mb-20">
-									<mat-form-field class="example-full-width customanimate order-animate9">
+									<mat-form-field class="order-animate9 customanimate example-full-width">
 										<mat-label>Zipcode</mat-label>
 										<input matInput name="zipcode" [(ngModel)]="user.zip">
 									</mat-form-field>
 
 								</div>
 								<div class="col-md-3 mb-20">
-									<mat-form-field class="example-full-width customanimate order-animate10">
+									<mat-form-field class="order-animate10 customanimate example-full-width">
 										<mat-label>Email</mat-label>
 										<input matInput name="email" [(ngModel)]="user.email">
 									</mat-form-field>
 								</div>
 								<div class="col-md-3 mb-20">
-									<mat-form-field class="example-full-width customanimate order-animate11">
+									<mat-form-field class="order-animate11 customanimate example-full-width">
 										<mat-label>Website</mat-label>
 
 										<input matInput name="website" [(ngModel)]="user.website">
@@ -224,16 +224,16 @@
 							</div>
 						</div>
 						<div *ngIf="config.stepTwo" class="infoBox">
-							<h3 class="mb-30 customanimate order-animate1">Notes</h3>
+							<h3 class="order-animate1 customanimate mb-30">Notes</h3>
 							<div class="row mt--21">
 								<div class="col-md-6">
-									<mat-form-field class="example-full-width customanimate order-animate2">
+									<mat-form-field class="order-animate2 customanimate example-full-width">
 										<mat-label>Internal Notes</mat-label>
 										<input matInput name="internalnotes" [(ngModel)]="user.internalNotes">
 									</mat-form-field>
 								</div>
 								<div class="col-md-6">
-									<mat-form-field class="example-full-width customanimate order-animate3">
+									<mat-form-field class="order-animate3 customanimate example-full-width">
 										<mat-label>External Notes</mat-label>
 
 										<input matInput name="externalnotes" [(ngModel)]="user.externalNotes">
@@ -243,19 +243,19 @@
 							</div>
 						</div>
 						<div *ngIf="config.stepThree" class="infoBox">
-							<h3 class="mb-30 customanimate order-animate1">Alias Information</h3>
+							<h3 class="order-animate1 customanimate mb-30">Alias Information</h3>
 							<div class="row">
-								<div class="col-md-4 customanimate order-animate2">
+								<div class="col-md-4 order-animate2 customanimate">
 									<label class="mb-2">Has Akias?</label>
-									<div class="custom-control custom-checkbox ">
-										<input type="checkbox" class="custom-control-input form-check-input m-0"
+									<div class="custom-checkbox custom-control">
+										<input type="checkbox" class="form-check-input m-0 custom-control-input"
 											id="defaultChecked2" name="check" (change)="changedCheck($event)"
 											[(ngModel)]="user.hasAlias">
-										<label class="custom-control-label form-check-label "
+										<label class="form-check-label custom-control-label"
 											for="defaultChecked2"></label>
 									</div>
 								</div>
-								<div class="col-md-4 customanimate order-animate3 mt--21">
+								<div class="col-md-4 order-animate3 customanimate mt--21">
 									<mat-form-field class="example-full-width">
 										<mat-label>Alias Name</mat-label>
 
@@ -265,18 +265,18 @@
 							</div>
 						</div>
 						<div *ngIf="config.stepFour" class="infoBox">
-							<h3 class="mb-30 customanimate order-animate1">Bank information</h3>
+							<h3 class="order-animate1 customanimate mb-30">Bank information</h3>
 							<div class="form-wrapper">
 								<div class="row mt--21">
 									<div class="col-md-4 mb-20">
-										<mat-form-field class="example-full-width customanimate order-animate2">
+										<mat-form-field class="order-animate2 customanimate example-full-width">
 											<mat-label>Bank Account Name</mat-label>
 
 											<input matInput name="bankaccountname" [(ngModel)]="user.bankAccountName">
 										</mat-form-field>
 									</div>
 									<div class="col-md-4 mb-20">
-										<mat-form-field class="example-full-width customanimate order-animate2">
+										<mat-form-field class="order-animate2 customanimate example-full-width">
 											<mat-label>Bank Account Number</mat-label>
 											<input matInput name="bankaccountnumber"
 												[(ngModel)]="user.bankAccountNumber">
@@ -284,23 +284,23 @@
 									</div>
 								</div>
 								<div class="mt--21">
-									<div class="row ">
+									<div class="row">
 										<div class="col-md-3 mb-20">
-											<mat-form-field class="example-full-width customanimate order-animate3">
+											<mat-form-field class="order-animate3 customanimate example-full-width">
 												<mat-label>Bank Name</mat-label>
 
 												<input matInput name="bankname" [(ngModel)]="user.bankName">
 											</mat-form-field>
 										</div>
 										<div class="col-md-3 mb-20">
-											<mat-form-field class="example-full-width customanimate order-animate4">
+											<mat-form-field class="order-animate4 customanimate example-full-width">
 												<mat-label>Bank Address</mat-label>
 
 												<input matInput name="bankaddress" [(ngModel)]="user.bankAddress">
 											</mat-form-field>
 										</div>
 										<div class="col-md-3 mb-20">
-											<mat-form-field class="example-full-width customanimate order-animate5">
+											<mat-form-field class="order-animate5 customanimate example-full-width">
 												<mat-label>Transfer Protocol</mat-label>
 
 												<input matInput name="transferprotocaol"
@@ -308,7 +308,7 @@
 											</mat-form-field>
 										</div>
 										<div class="col-md-3 mb-20">
-											<mat-form-field class="example-full-width customanimate order-animate6">
+											<mat-form-field class="order-animate6 customanimate example-full-width">
 												<mat-label>Transfer Code</mat-label>
 
 												<input matInput name="transfercode" [(ngModel)]="user.bankTransferCode">
@@ -317,7 +317,7 @@
 									</div>
 									<div class="row">
 										<div class="col-md-4 mb-20">
-											<div class="form-group customanimate order-animate7">
+											<div class="order-animate7 form-group customanimate">
 												<ng-select [clearable]="false" [(ngModel)]="user.sourceCurrency"
 													placeholder="Currenices" [items]="currencies" bindLabel="title"
 													name="currencies" id="currencies"
@@ -336,7 +336,7 @@
 		</div>
 
 	</div>
-	<div class="button-container text-end">
+	<div class="text-end button-container">
 		<button [disabled]="!user.title" class="btn btn-defult bg-none" (click)="createVendor()">
 			<i class="fa fa-floppy-o me-1"></i>Save changes </button>
 	</div>
@@ -353,7 +353,7 @@
 		<div class="col-md-6 mb-25">
 			<div class="card">
 				<div class="card-body py-3">
-					<div class="subheader file-upload">
+					<div class="file-upload subheader">
 						<h4 class="mb-4 mt-1">Select csv file to upload</h4>
 						<div class="row">
 							<div class="col-md-12 mb-20">
@@ -370,7 +370,7 @@
 						<div class="ng-binding">
 							{{fileName}}
 						</div>
-						<div class=" text-end">
+						<div class="text-end">
 							<a href="javaScript:;" (click)="downloadReport()" class="me-1">Download</a>Template to
 							import records.
 						</div>
@@ -379,7 +379,7 @@
 			</div>
 		</div>
 	</div>
-	<div *ngIf="showErr" class="alert alert-danger mt-10 col-md-6" role="alert">
+	<div *ngIf="showErr" class="col-md-6 alert alert-danger mt-10" role="alert">
 		Failed to import one or more records
 	</div>
 </div>

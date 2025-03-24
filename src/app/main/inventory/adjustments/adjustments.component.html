@@ -11,10 +11,10 @@
 	<div class="contentBox">
 		<div class="leftContent">
 			<div class="card">
-				<div class="table-box viewTable" data-infinite-scroll debounce (scrolled)="onScrollDown($event)">
+				<div class="table-box h-100 viewTable" data-infinite-scroll debounce (scroll)="onScroll($event)">
 					<table style="width:100%" class="table-hover default-to-custom ng-isolate-scope">
 						<tbody [@fadeIn]="listrecords?.length" fxLayout="row wrap" class="list">
-							<tr style="vertical-align:top;" class="x-animated fadeIn d-1 in"
+							<tr style="vertical-align:top;" class="d-1 fadeIn in x-animated"
 								*ngFor="let i of listrecords; index as j" fxFlex="100" fxFlex.lt-sm="200">
 								<td width="64px" class="text-center">
 									<h4 class="rownumber ng-binding">{{j+1}}</h4>
@@ -22,29 +22,29 @@
 								<td class="text-left">
 									<b>
 										<span class="ng-binding">{{i?.entryDate | date}}</span>&nbsp;</b>
-									<div class="small help-block line-divider">&nbsp;</div>
+									<div class="help-block line-divider small">&nbsp;</div>
 								</td>
 								<td class="text-left">
 									<b>
 										<span class="ng-binding">{{i?.product?.title}}</span>&nbsp;</b>
-									<div class="small help-block line-divider ng-binding">&nbsp;</div>
+									<div class="help-block line-divider ng-binding small">&nbsp;</div>
 								</td>
 								<td class="text-end">
 									<b>
 										<span class="ng-binding">{{i?.quantity}}</span>&nbsp;</b>
-									<div class="small help-block line-divider">&nbsp;</div>
+									<div class="help-block line-divider small">&nbsp;</div>
 								</td>
 								<td class="text-end">
 									<div>
 										<span class="ng-binding">{{i?.adjustmentCategory?.title}}</span>&nbsp;
 									</div>
-									<div class="small help-block line-divider">&nbsp;</div>
+									<div class="help-block line-divider small">&nbsp;</div>
 								</td>
 								<td class="text-end">
 									<div>
 										<span class="ng-binding">{{i?.notes}}</span>&nbsp;
 									</div>
-									<div class="small help-block line-divider">&nbsp;</div>
+									<div class="help-block line-divider small">&nbsp;</div>
 								</td>
 								<td width="100px" class="text-left">
 									<div class="rowactions">
@@ -52,7 +52,7 @@
 											<i class="fa fa-pencil"></i>
 										</a>
 										<a class="btn btn-link" hov-title="Delete" (click)="deleteAdjustment(i)">
-											<i class="fa fa-remove text-danger"></i>
+											<i class="text-danger fa fa-remove"></i>
 										</a>
 									</div>
 								</td>
@@ -64,14 +64,14 @@
 			</div>
 		</div>
 	</div>
-	<div class="rightSidebar-wrap rightSide-data-penal rightSidebar-wrap-right-0 comman-sidebar animated fadeInRight">
+	<div class="animated comman-sidebar fadeInRight rightSide-data-penal rightSidebar-wrap rightSidebar-wrap-right-0">
 		<!-- <div class="data-penal-header">
 			<h3>Manage Entry</h3>
 
 		</div> -->
 
 		<div class="data-penal-body">
-			<h3 class="rightSidebar-main_title mb-40">Manage Entry</h3>
+			<h3 class="mb-40 rightSidebar-main_title">Manage Entry</h3>
 			<form class="manageNote-form">
 				<div class="row">
 					<div class="col-12">
@@ -88,7 +88,7 @@
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-12 ">
+					<div class="col-12">
 						<div class="form-group custom-selectBox mb-20">
 							<!-- <label class="gray-label">Product</label> -->
 							<ng-select [clearable]="false" [(ngModel)]="user.product" placeholder="Product"
@@ -102,7 +102,7 @@
 				<div class="row">
 					<div class="col-12">
 						<div class="custom-selectBox mb-20">
-							<mat-form-field class="example-full-width disct2 adj-qty">
+							<mat-form-field class="adj-qty disct2 example-full-width">
 								<mat-label>Quantity</mat-label>
 
 								<input matInput name="quantity" id="quantity" [(ngModel)]="user.quantity"
@@ -125,7 +125,7 @@
 				</div>
 				<div class="row">
 					<div class="col-12 mb-20">
-						<mat-form-field class="example-full-width notes2 adjcomm">
+						<mat-form-field class="adjcomm example-full-width notes2">
 							<mat-label>Leave a comment</mat-label>
 							<textarea matInput name="comment" id="comment" [(ngModel)]="user.notes" required></textarea>
 						</mat-form-field>

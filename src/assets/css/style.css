@@ -23783,18 +23783,22 @@ span#iooo {
 /* Scrollbar */
 .table-box::-webkit-scrollbar,
 .table-respons::-webkit-scrollbar,
+.table-box-scroll-hs::-webkit-scrollbar,
+::-webkit-scrollbar,
 .list-div-main::-webkit-scrollbar {
   width: thin;
 }
 
 .table-box::-webkit-scrollbar-track,
 .table-respons::-webkit-scrollbar-track,
+.table-box-scroll-hs::-webkit-scrollbar-track,
 .list-div-main::-webkit-scrollbar-track {
   background-color: transparent;
 }
 
 .table-box::-webkit-scrollbar-thumb,
 .table-respons::-webkit-scrollbar-thumb,
+.table-box-scroll-hs::-webkit-scrollbar-thumb,
 .list-div-main::-webkit-scrollbar-thumb {
   background-color: transparent;
   border-radius: 3px;
@@ -23802,12 +23806,14 @@ span#iooo {
 }
 .table-box:hover::-webkit-scrollbar-track,
 .table-respons:hover::-webkit-scrollbar-track,
+.table-box-scroll-hs:hover::-webkit-scrollbar-track,
 .list-div-main:hover::-webkit-scrollbar-track {
   background-color: #f5f5f5;
 }
 
 .table-box:hover::-webkit-scrollbar-thumb,
 .table-respons:hover::-webkit-scrollbar-thumb,
+.table-box-scroll-hs:hover::-webkit-scrollbar-thumb,
 .list-div-main:hover::-webkit-scrollbar-thumb {
   background-color: #d3d3d3;
   border-radius: 3px;

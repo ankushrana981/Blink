@@ -460,6 +460,25 @@ export class TasksComponent extends BaseComponent implements OnInit {
       value.progressStatusText = 'Not Started';
     }
   }
+
+  onScroll(event: any) {
+    const target = event.target;
+    const atBottom =
+      target.scrollTop + target.clientHeight >= target.scrollHeight;
+    console.log('bottom');
+    if (atBottom) {
+      this.onScrollDown(event);
+      // console.log(
+      //   'scrollTop',
+      //   target.scrollTop,
+      //   'clientHeight',
+      //   target.clientHeight,
+      //   'scrollHeight ',
+      //   target.scrollHeight
+      // );
+    }
+  }
+
   onScrollDown(ev) {
     if (this.page < this.maxPage) {
       this.page++;

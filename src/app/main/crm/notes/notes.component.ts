@@ -5,10 +5,10 @@ import {
   TemplateRef,
   ElementRef,
   ViewChild,
-} from "@angular/core";
-import { BaseComponent } from "../../../common/commonComponent";
-import { InfiniteScrollDirective } from "ngx-infinite-scroll";
-import { Subject, Observable, of, concat } from "rxjs";
+} from '@angular/core';
+import { BaseComponent } from '../../../common/commonComponent';
+import { InfiniteScrollDirective } from 'ngx-infinite-scroll';
+import { Subject, Observable, of, concat } from 'rxjs';
 import {
   distinctUntilChanged,
   debounceTime,
@@ -19,31 +19,31 @@ import {
   map,
   startWith,
   mergeMap,
-} from "rxjs/operators";
+} from 'rxjs/operators';
 // import { MAT_DRAWER_DEFAULT_AUTOSIZE_FACTORY } from "@angular/material";
-import { trigger } from "@angular/animations";
-import { fadeIn, fadeOut } from "../../../reusable/fade-animations";
-import { BsModalService, BsModalRef } from "ngx-bootstrap/modal";
+import { trigger } from '@angular/animations';
+import { fadeIn, fadeOut } from '../../../reusable/fade-animations';
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 // import {
 //   PerfectScrollbarConfigInterface,
 //   PerfectScrollbarComponent,
 //   PerfectScrollbarDirective,
 // } from "ngx-perfect-scrollbar";
-import { CarouselConfig } from "ngx-bootstrap/carousel";
-import { FormControl, FormGroup, Validators } from "@angular/forms";
-import { DatePipe } from "@angular/common";
-import { BsDatepickerConfig } from "ngx-bootstrap/datepicker";
-import moment from "moment";
-import { NgSelectComponent } from "@ng-select/ng-select";
+import { CarouselConfig } from 'ngx-bootstrap/carousel';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { DatePipe } from '@angular/common';
+import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
+import moment from 'moment';
+import { NgSelectComponent } from '@ng-select/ng-select';
 // import { DATE } from "ngx-bootstrap/chronos/units/constants/";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute } from '@angular/router';
 @Component({
-  selector: "app-notes",
-  standalone:false,
-  templateUrl: "./notes.component.html",
+  selector: 'app-notes',
+  standalone: false,
+  templateUrl: './notes.component.html',
   animations: [
-    trigger("fadeOut", fadeOut()),
-    trigger("fadeIn", fadeIn(":enter")),
+    trigger('fadeOut', fadeOut()),
+    trigger('fadeIn', fadeIn(':enter')),
   ],
   providers: [
     {
@@ -62,11 +62,11 @@ export class NotesComponent extends BaseComponent implements OnInit {
   total: any;
   public user: any = {};
   public tasks = [
-    { type: 1, name: "General", id: 1 },
-    { type: 2, name: "Customer", id: 2 },
-    { type: 3, name: "Company", id: 3 },
-    { type: 4, name: "Contact", id: 4 },
-    { type: 5, name: "Task", id: 5 },
+    { type: 1, name: 'General', id: 1 },
+    { type: 2, name: 'Customer', id: 2 },
+    { type: 3, name: 'Company', id: 3 },
+    { type: 4, name: 'Contact', id: 4 },
+    { type: 5, name: 'Task', id: 5 },
   ];
 
   public icon1: boolean = false;
@@ -79,9 +79,9 @@ export class NotesComponent extends BaseComponent implements OnInit {
   public titleArr: any = [];
   public maxDate = new Date();
   modalRef: BsModalRef;
-  typeArray = ["", "General", "Customer", "Company", "Contact", "Task"];
+  typeArray = ['', 'General', 'Customer', 'Company', 'Contact', 'Task'];
   // @ViewChild("perfectScroll") perfectScroll: PerfectScrollbarComponent;
-  public type: string = "component";
+  public type: string = 'component';
   // public config: PerfectScrollbarConfigInterface = {};
   public page: number = 0;
   public showingPage: number = 0;
@@ -103,7 +103,7 @@ export class NotesComponent extends BaseComponent implements OnInit {
   createedDate: boolean = false;
   dueDate: boolean = false;
   taskdueDate: boolean = false;
-  customerNameCreateTask: any = "";
+  customerNameCreateTask: any = '';
   accessLevel: number;
   users: any = [];
   assignToData = null;
@@ -122,54 +122,54 @@ export class NotesComponent extends BaseComponent implements OnInit {
   activateSecondComapanyFilter: boolean = false;
   activateSecondFilter: boolean = false;
   filterData: any = {};
-  @ViewChild("filterName") filterName: NgSelectComponent;
+  @ViewChild('filterName') filterName: NgSelectComponent;
   isOpenFilter = false;
   tempArr = [];
   filterstart = [
     {
       id: 1,
-      title: "Date of Entry",
+      title: 'Date of Entry',
       option: [],
       async: false,
-      labelName: "Date of Entry",
-      bindedValue: "",
+      labelName: 'Date of Entry',
+      bindedValue: '',
     },
     {
       id: 2,
-      title: "Type of Note",
+      title: 'Type of Note',
       option: [],
       async: false,
-      labelName: "Type of Note",
-      bindedValue: "",
+      labelName: 'Type of Note',
+      bindedValue: '',
     },
     {
       id: 3,
-      title: "Title",
+      title: 'Title',
       option: [],
       async: false,
-      labelName: "Title",
-      bindedValue: "",
+      labelName: 'Title',
+      bindedValue: '',
     },
     {
       id: 4,
-      title: "Note",
+      title: 'Note',
       option: [],
       async: false,
-      labelName: "Note",
-      bindedValue: "",
+      labelName: 'Note',
+      bindedValue: '',
     },
     {
       id: 5,
-      title: "Branch",
+      title: 'Branch',
       option: [],
       async: false,
-      labelName: "Branch",
-      bindedValue: "",
+      labelName: 'Branch',
+      bindedValue: '',
     },
   ];
   branchrecords: any = [];
-  @ViewChild("secondFilter1") secondFilter: NgSelectComponent;
-  @ViewChild("secondFilter1") secondFilter1: ElementRef;
+  @ViewChild('secondFilter1') secondFilter: NgSelectComponent;
+  @ViewChild('secondFilter1') secondFilter1: ElementRef;
   taskTypeList = [];
   isOpen = false;
   presetActivities: [];
@@ -203,9 +203,9 @@ export class NotesComponent extends BaseComponent implements OnInit {
   contacts: Observable<any>;
   showDummySidebar: boolean = true;
   public scrollbarXOptions = {
-    axis: "x",
-    theme: "light",
-    scrollbarPosition: "inside",
+    axis: 'x',
+    theme: 'light',
+    scrollbarPosition: 'inside',
     autoHideScrollbar: true,
     callbacks: {
       onTotalScroll: () => {},
@@ -217,11 +217,11 @@ export class NotesComponent extends BaseComponent implements OnInit {
   noteDetailBusinessPartnerID: any;
   taskDetailBusinessPartnerID: any;
   crmTaskPopupData: any = {};
-  businessPartnerId: any = "";
-  listApiFilterType: any = "";
+  businessPartnerId: any = '';
+  listApiFilterType: any = '';
 
-taskDataObj: any;
-subListTask: any;
+  taskDataObj: any;
+  subListTask: any;
   constructor(
     inj: Injector,
     public override modalService: BsModalService,
@@ -230,21 +230,21 @@ subListTask: any;
   ) {
     super(inj);
     this.route.params.subscribe((params) => {
-      if (params["businessPartnerId"]) {
-        this.businessPartnerId = params["businessPartnerId"];
-        this.listApiFilterType = params["type"];
+      if (params['businessPartnerId']) {
+        this.businessPartnerId = params['businessPartnerId'];
+        this.listApiFilterType = params['type'];
       }
     });
   }
 
   addQuickModal(quickcustomer: TemplateRef<any>) {
     this.modalRef = this.modalService.show(quickcustomer, {
-      class: "modal-xl task-modal modal-dialog-centered quick-popup",
+      class: 'modal-xl task-modal modal-dialog-centered quick-popup',
     });
   }
 
   ngOnInit() {
-    if (this.businessPartnerId && this.businessPartnerId !== "") {
+    if (this.businessPartnerId && this.businessPartnerId !== '') {
       this.singleOutClient(this.businessPartnerId);
     } else {
       this.listApi();
@@ -312,21 +312,21 @@ subListTask: any;
     this.supplierLoading = true;
     let data = {};
     if (value) {
-      data["entityType"] = "client";
-      data["q"] = value;
+      data['entityType'] = 'client';
+      data['q'] = value;
     }
     let items;
     return this.commonService
-      .callApiObservable("api/clients/lookup", data)
+      .callApiObservable('api/clients/lookup', data)
       .pipe(
         catchError(() => of({ items: [] })),
         map((success) => {
           items = success;
           if (allow) {
-            this.clientNameItem = success["records"];
+            this.clientNameItem = success['records'];
           }
           if (items.length === 0) {
-            items.push({ title: "Add new ?", id: 0 });
+            items.push({ title: 'Add new ?', id: 0 });
           }
 
           this.supplierLoading = false;
@@ -340,13 +340,13 @@ subListTask: any;
         this.listrecords.map((record: any) => {
           if (record.notes !== null) {
             var ele = document.getElementById(
-              `table-text-${record.id}`
+              `table-text-${record?.id}`
             ) as HTMLElement;
             var ele1 = document.getElementById(
-              `table-text1-${record.id}`
+              `table-text1-${record?.id}`
             ) as HTMLElement;
-            ele.style.width = String(width - 40) + "px";
-            ele1.style.width = String(width) + "px";
+            ele.style.width = String(width - 40) + 'px';
+            ele1.style.width = String(width) + 'px';
           }
         });
       }
@@ -359,9 +359,9 @@ subListTask: any;
   *****************************************************/
   listApi() {
     var queryParams =
-      "ts=" + this.ts + "&offset=" + this.offset + "&limit=" + this.limit;
+      'ts=' + this.ts + '&offset=' + this.offset + '&limit=' + this.limit;
     this.commonService
-      .callApi("api/clients/notes?" + queryParams, "", "get")
+      .callApi('api/clients/notes?' + queryParams, '', 'get')
       .then((success) => {
         if (success) {
           this.listrecords = success.records;
@@ -379,11 +379,11 @@ subListTask: any;
             }
           }, 100);
         } else {
-          this.popToast("error", success.message);
+          this.popToast('error', success.message);
         }
       })
       .catch((e) => {
-        console.log("there is an error:", e);
+        console.log('there is an error:', e);
       });
   }
   /*****************************************************
@@ -392,36 +392,36 @@ subListTask: any;
   @return :
   *****************************************************/
   Taskdropdown() {
-    var queryParams1 = "includeActiveTasksForCurrentUser=" + true + "&q=";
+    var queryParams1 = 'includeActiveTasksForCurrentUser=' + true + '&q=';
     this.commonService
-      .callApi("api/clients/tasks/lookup?" + queryParams1, "", "get")
+      .callApi('api/clients/tasks/lookup?' + queryParams1, '', 'get')
       .then((success) => {
         if (success) {
           this.taskrecords = success;
         } else {
-          this.popToast("error", success.message);
+          this.popToast('error', success.message);
         }
       })
       .catch((e) => {
-        console.log("there is an error:", e);
+        console.log('there is an error:', e);
       });
   }
   changeIc(type) {
-    if (type == "dots") {
+    if (type == 'dots') {
       this.icon1 = true;
       this.sidemenu = true;
       this.user = {};
-      this.user["dateOfEntry"] = this.maxDate;
-      this.user["hourSelection"] = moment().format("HH");
-      this.user["minutesSelection"] = moment().format("mm");
+      this.user['dateOfEntry'] = this.maxDate;
+      this.user['hourSelection'] = moment().format('HH');
+      this.user['minutesSelection'] = moment().format('mm');
       this.showNoteDetailsDiv = false;
       this.showDummySidebar = false;
-    } else if (type == "edit") {
+    } else if (type == 'edit') {
       this.icon1 = true;
       this.sidemenu = true;
       this.showNoteDetailsDiv = false;
       this.showDummySidebar = false;
-    } else if (type == "details") {
+    } else if (type == 'details') {
       this.icon1 = true;
       this.sidemenu = true;
       this.showNoteDetailsDiv = true;
@@ -454,7 +454,7 @@ subListTask: any;
   changedCheck(event) {}
   Createdisnote(data) {
     this.commonService
-      .callApi("api/clients/notes", data, "post")
+      .callApi('api/clients/notes', data, 'post')
       // .callApi("api/clients/notes", data, "post")
       .then((success) => {
         if (success) {
@@ -466,11 +466,11 @@ subListTask: any;
             this.listApi();
           }
         } else {
-          this.popToast("error", success.message);
+          this.popToast('error', success.message);
         }
       })
       .catch((e) => {
-        console.log("there is an error:", e);
+        console.log('there is an error:', e);
       });
   }
 
@@ -478,12 +478,12 @@ subListTask: any;
     if (this.fileList.length > 0) {
       this.fileList.map((file: any) => {
         let formData: FormData = new FormData();
-        formData.append("file", file);
+        formData.append('file', file);
         this.commonService
           .callApi(
             `api/clients/notes/uploadImage/${noteId}`,
             formData,
-            "post",
+            'post',
             true
           )
           .then((success) => {});
@@ -499,7 +499,7 @@ subListTask: any;
   *****************************************************/
   updatedNote(data) {
     this.commonService
-      .callApi("api/clients/notes/" + data.id, data, "put")
+      .callApi('api/clients/notes/' + data.id, data, 'put')
       .then((success) => {
         if (success) {
           this.icon1 = false;
@@ -510,44 +510,44 @@ subListTask: any;
             this.listApi();
           }
         } else {
-          this.popToast("error", success.message);
+          this.popToast('error', success.message);
         }
       })
       .catch((e) => {
-        console.log("there is an error:", e);
+        console.log('there is an error:', e);
       });
   }
   presetTitle() {
     this.commonService
-      .callApi("api/tenants/presetactivities/lookup", "", "get")
+      .callApi('api/tenants/presetactivities/lookup', '', 'get')
       .then((success) => {
         if (success) {
           this.titleArr = success;
         } else {
-          this.popToast("error", success.message);
+          this.popToast('error', success.message);
         }
       })
       .catch((e) => {
-        console.log("there is an error:", e);
+        console.log('there is an error:', e);
       });
   }
   selected(event) {}
 
   deletenotes(i) {
- this.swal({
-      imageUrl: "assets/images/trash-bin1.png",
+    this.swal({
+      imageUrl: 'assets/images/trash-bin1.png',
       imageWidth: 155,
-      text: "Are you sure you want to delete this record?",
+      text: 'Are you sure you want to delete this record?',
       showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      cancelButtonText: "No",
-      confirmButtonText: "Yes",
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      cancelButtonText: 'No',
+      confirmButtonText: 'Yes',
       allowOutsideClick: false,
     }).then((result) => {
       if (result.value) {
         this.commonService
-          .callApi("api/clients/notes/" + i.id, "", "delete")
+          .callApi('api/clients/notes/' + i.id, '', 'delete')
           .then((success) => {
             if (this.total <= this.offset) {
               this.offset = 0;
@@ -559,21 +559,17 @@ subListTask: any;
 
             if (success) {
             } else {
-              this.popToast("error", success.message);
+              this.popToast('error', success.message);
             }
           })
           .catch((e) => {
-            console.log("there is an error:", e);
+            console.log('there is an error:', e);
           });
       }
     });
   }
-  onOpenCalendar(event:any){
-
-  }
-  onOpenyearCalendar(event:any){
-    
-  }
+  onOpenCalendar(event: any) {}
+  onOpenyearCalendar(event: any) {}
   recordSelected(event, addCustomerPopup?) {
     if (event.id === 0) {
       this.setAddCustomerBasicForm();
@@ -583,50 +579,68 @@ subListTask: any;
       this.displayStepFour = false;
       this.modalRef = this.modalService.show(addCustomerPopup, {
         class:
-          "modal-xl task-modal modal-dialog-centered quick-popup add-new-customer-popup",
+          'modal-xl task-modal modal-dialog-centered quick-popup add-new-customer-popup',
       });
     } else {
-      $("#notesname :input").blur();
-      $("#businessPartner :input").blur();
-      $("#taskname :input").blur();
+      $('#notesname :input').blur();
+      $('#businessPartner :input').blur();
+      $('#taskname :input').blur();
     }
   }
   setAddCustomerBasicForm() {
     this.addCustomerBasicInfo = new FormGroup({
-      title: new FormControl("", [Validators.required]),
-      address1: new FormControl("", []),
-      address2: new FormControl("", []),
-      city: new FormControl("", []),
-      state: new FormControl("", []),
-      country: new FormControl("", []),
-      zip: new FormControl("", []),
-      email: new FormControl("", []),
-      faceBook: new FormControl("", []),
-      instaGram: new FormControl("", []),
-      google: new FormControl("", []),
-      tiktok: new FormControl("", []),
-      webSite: new FormControl("", []),
-      contactPerson: new FormControl("", []),
-      company: new FormControl("", []),
-      internalNotes: new FormControl("", []),
-      externalNotes: new FormControl("", []),
-      paymentTermDuration: new FormControl("", []),
-      allowedCreditAmount: new FormControl("", []),
-      salesRepresentative: new FormControl("", []),
-      area: new FormControl("", []),
-      branch: new FormControl("", []),
-      establishmentType: new FormControl("", []),
+      title: new FormControl('', [Validators.required]),
+      address1: new FormControl('', []),
+      address2: new FormControl('', []),
+      city: new FormControl('', []),
+      state: new FormControl('', []),
+      country: new FormControl('', []),
+      zip: new FormControl('', []),
+      email: new FormControl('', []),
+      faceBook: new FormControl('', []),
+      instaGram: new FormControl('', []),
+      google: new FormControl('', []),
+      tiktok: new FormControl('', []),
+      webSite: new FormControl('', []),
+      contactPerson: new FormControl('', []),
+      company: new FormControl('', []),
+      internalNotes: new FormControl('', []),
+      externalNotes: new FormControl('', []),
+      paymentTermDuration: new FormControl('', []),
+      allowedCreditAmount: new FormControl('', []),
+      salesRepresentative: new FormControl('', []),
+      area: new FormControl('', []),
+      branch: new FormControl('', []),
+      establishmentType: new FormControl('', []),
     });
   }
   public onScrollEvent(event: any): void {}
+
+  onScroll(event: any) {
+    const target = event.target;
+    const atBottom =
+      target.scrollTop + target.clientHeight >= target.scrollHeight;
+    console.log('bottom');
+    if (atBottom) {
+      this.onScrollDown(event);
+      // console.log(
+      //   'scrollTop',
+      //   target.scrollTop,
+      //   'clientHeight',
+      //   target.clientHeight,
+      //   'scrollHeight ',
+      //   target.scrollHeight
+      // );
+    }
+  }
   onScrollDown(ev) {
     if (this.page < this.maxPage) {
       this.page++;
       this.offset = this.page * this.limit;
       var queryParams =
-        "ts=" + this.ts + "&offset=" + this.offset + "&limit=" + this.limit;
+        'ts=' + this.ts + '&offset=' + this.offset + '&limit=' + this.limit;
       this.commonService
-        .callApi("api/clients/notes?" + queryParams, "", "get")
+        .callApi('api/clients/notes?' + queryParams, '', 'get')
         .then((success) => {
           if (success) {
             if (success.records.length > 0) {
@@ -647,11 +661,11 @@ subListTask: any;
               }
             }, 100);
           } else {
-            this.popToast("error", success.message);
+            this.popToast('error', success.message);
           }
         })
         .catch((e) => {
-          console.log("there is an error:", e);
+          console.log('there is an error:', e);
         });
     }
   }
@@ -715,15 +729,15 @@ subListTask: any;
         if (image.image) {
           this.commonService
             .callApi(
-              "api/clients/notes/retriveNotesImage?name=" + image.image,
-              "",
-              "get"
+              'api/clients/notes/retriveNotesImage?name=' + image.image,
+              '',
+              'get'
             )
             .then((success) => {
               if (success) {
                 image.src = success;
               } else {
-                image.src = "";
+                image.src = '';
               }
             });
         }
@@ -736,7 +750,7 @@ subListTask: any;
           this.selectedNotesImagesObject = data.crmNoteImages;
           this.modalRef = this.modalService.show(notesPhots, {
             class:
-              "modal-xl task-modal modal-dialog-centered quick-popup gallery-popup",
+              'modal-xl task-modal modal-dialog-centered quick-popup gallery-popup',
           });
         }, 1000);
       }
@@ -744,16 +758,16 @@ subListTask: any;
   }
   fetchImage(url) {
     this.commonService
-      .callApi("api/clients/notes/retriveNotesImage?name=" + url, "", "get")
+      .callApi('api/clients/notes/retriveNotesImage?name=' + url, '', 'get')
       .then((success) => {
         if (success) {
           return success;
         } else {
-          return "";
+          return '';
         }
       })
       .catch((e) => {
-        console.log("there is an error:", e);
+        console.log('there is an error:', e);
       });
   }
   validateValue(event) {
@@ -774,10 +788,10 @@ subListTask: any;
     this.user = {};
     this.user = data;
     this.user.dateOfEntry = new Date(data.dateOfEntry);
-    this.user.hourSelection = Number(moment(data.dateOfEntry).format("H"));
-    this.user.minutesSelection = Number(moment(data.dateOfEntry).format("mm"));
+    this.user.hourSelection = Number(moment(data.dateOfEntry).format('H'));
+    this.user.minutesSelection = Number(moment(data.dateOfEntry).format('mm'));
     this.user.presetActivity = data.presetActivity;
-    this.changeIc("edit");
+    this.changeIc('edit');
   }
   setDeleteID(noteID) {
     this.deleteNoteId = noteID;
@@ -787,12 +801,12 @@ subListTask: any;
   }
   openDeletePopup(deleteNotesPopup: TemplateRef<any>) {
     this.modalRef = this.modalService.show(deleteNotesPopup, {
-      class: "modal-dialog-centered quick-popup delete-popup",
+      class: 'modal-dialog-centered quick-popup delete-popup',
     });
   }
   deleteThisNote() {
     this.commonService
-      .callApi("api/clients/notes/" + this.deleteNoteId, "", "delete")
+      .callApi('api/clients/notes/' + this.deleteNoteId, '', 'delete')
       .then((success) => {
         if (this.total <= this.offset) {
           this.offset = 0;
@@ -803,30 +817,30 @@ subListTask: any;
         }
         if (success) {
           this.deleteNoteId = 0;
-          this.popToast("success", "Notes deleted");
+          this.popToast('success', 'Notes deleted');
         } else {
           this.deleteNoteId = 0;
-          this.popToast("error", success.message);
+          this.popToast('error', success.message);
         }
       })
       .catch((e) => {
-        console.log("there is an error:", e);
+        console.log('there is an error:', e);
       });
   }
   singleOutClient(clientID) {
     this.offset = 0;
     var queryParams =
-      "ts=" +
+      'ts=' +
       this.ts +
-      "&offset=" +
+      '&offset=' +
       this.offset +
-      "&limit=" +
+      '&limit=' +
       this.limit +
-      "&businessPartnerId=" +
+      '&businessPartnerId=' +
       clientID +
-      "&type=2";
+      '&type=2';
     this.commonService
-      .callApi("api/clients/notes?" + queryParams, "", "get")
+      .callApi('api/clients/notes?' + queryParams, '', 'get')
       .then((success) => {
         if (success) {
           this.listrecords = success.records;
@@ -837,11 +851,11 @@ subListTask: any;
         } else {
           this.isSingledOut = false;
           this.singledOutUserID = 0;
-          this.popToast("error", success.message);
+          this.popToast('error', success.message);
         }
       })
       .catch((e) => {
-        console.log("there is an error:", e);
+        console.log('there is an error:', e);
       });
   }
   deSingleClient() {
@@ -852,7 +866,7 @@ subListTask: any;
   }
   showNoteDetails(data) {
     if (this.showNoteDetailsDiv === true) {
-      this.changeIc("");
+      this.changeIc('');
     } else if (this.showNoteDetailsDiv === false) {
       this.noteDetailsData = {};
       this.clientTasks = [];
@@ -867,16 +881,16 @@ subListTask: any;
       }
       this.noteDetailsData = data;
       setTimeout(() => {
-        this.changeIc("details");
+        this.changeIc('details');
       }, 1000);
     }
   }
   getClientTasksDetails(clientID) {
     this.commonService
       .callApi(
-        "api/clients/tasks?BusinessPartnerId=" + clientID + "&type=2",
-        "",
-        "get"
+        'api/clients/tasks?BusinessPartnerId=' + clientID + '&type=2',
+        '',
+        'get'
       )
       .then((success) => {
         if (success) {
@@ -890,11 +904,11 @@ subListTask: any;
             this.showTaskShowMore = true;
           }
         } else {
-          this.popToast("error", success.message);
+          this.popToast('error', success.message);
         }
       })
       .catch((e) => {
-        console.log("there is an error:", e);
+        console.log('there is an error:', e);
       });
   }
   showMoreTasks() {
@@ -910,9 +924,9 @@ subListTask: any;
   getClientNotesDetails(clientID) {
     this.commonService
       .callApi(
-        "api/clients/notes?BusinessPartnerId=" + clientID + "&type=2",
-        "",
-        "get"
+        'api/clients/notes?BusinessPartnerId=' + clientID + '&type=2',
+        '',
+        'get'
       )
       .then((success) => {
         if (success) {
@@ -926,11 +940,11 @@ subListTask: any;
             this.showNotesShowMore = true;
           }
         } else {
-          this.popToast("error", success.message);
+          this.popToast('error', success.message);
         }
       })
       .catch((e) => {
-        console.log("there is an error:", e);
+        console.log('there is an error:', e);
       });
   }
   showMoreNotes() {
@@ -946,7 +960,7 @@ subListTask: any;
   createTaskModal(createTask: TemplateRef<any>, customerName, businessPartner) {
     this.refreshUsers();
     this.addForm = new FormGroup({
-      dateOfEntry: new FormControl("", [Validators.required]),
+      dateOfEntry: new FormControl('', [Validators.required]),
       dueDate: new FormControl(),
       title: new FormControl(null, [Validators.required]),
       subTitle: new FormControl(),
@@ -958,33 +972,33 @@ subListTask: any;
       dateOfEntryTemp: new FormControl(),
     });
     this.addForm
-      .get("dateOfEntry")
-      .setValue(this.datePipe.transform(new Date(), "MMM d, y"));
+      .get('dateOfEntry')
+      .setValue(this.datePipe.transform(new Date(), 'MMM d, y'));
     this.addForm
-      .get("dateOfEntryTemp")
-      .setValue(this.datePipe.transform(new Date(), "MMM d, y"));
+      .get('dateOfEntryTemp')
+      .setValue(this.datePipe.transform(new Date(), 'MMM d, y'));
 
     // this.user.dateOfEntry = new Date();
     this.bsConfig = Object.assign(
       {},
       {
-        containerClass: "custom-picker theme-white theme-green",
+        containerClass: 'custom-picker theme-white theme-green',
         adaptivePosition: true,
-        dateInputFormat: "MM DD,YYYY",
+        dateInputFormat: 'MM DD,YYYY',
       }
     );
     this.bsConfigCreated_Date = Object.assign(
       {},
       {
-        containerClass: "custom-picker theme-white theme-green",
+        containerClass: 'custom-picker theme-white theme-green',
         adaptivePosition: true,
-        dateInputFormat: "MM DD,YYYY",
+        dateInputFormat: 'MM DD,YYYY',
       }
     );
     this.customerNameCreateTask = customerName;
     this.businessPartnerCreateTask = businessPartner;
     this.modalRef = this.modalService.show(createTask, {
-      class: "modal-lg modal-dialog-centered quick-task-modal",
+      class: 'modal-lg modal-dialog-centered quick-task-modal',
     });
   }
   createdDateClick() {
@@ -1008,24 +1022,24 @@ subListTask: any;
 
   refreshUsers() {
     this.commonService
-      .callApi("api/clients/tasks/getAssignedUsers?q=", "", "get")
+      .callApi('api/clients/tasks/getAssignedUsers?q=', '', 'get')
       .then((success) => {
         if (success) {
           this.users = success;
         } else {
-          this.popToast("error", success.message);
+          this.popToast('error', success.message);
         }
       })
       .catch((e) => {
-        console.log("there is an error:", e);
+        console.log('there is an error:', e);
       });
   }
   createdDateValueChange(e, bsConfig) {
     if (!bsConfig.adaptivePosition) {
       this.addForm
-        .get("dateOfEntry")
-        .setValue(this.datePipe.transform(e, "MMM d, y"));
-      this.addForm.get("dateOfEntryTemp").setValue(e);
+        .get('dateOfEntry')
+        .setValue(this.datePipe.transform(e, 'MMM d, y'));
+      this.addForm.get('dateOfEntryTemp').setValue(e);
       this.createedDate = false;
       this.created_Date = e;
       bsConfig.adaptivePosition = true;
@@ -1038,9 +1052,9 @@ subListTask: any;
   dueDateValueChange(e, bsConfig) {
     if (!bsConfig.adaptivePosition) {
       this.addForm
-        .get("dueDate")
-        .setValue(this.datePipe.transform(e, "MMM d, y"));
-      this.addForm.get("dueDateTemp").setValue(e);
+        .get('dueDate')
+        .setValue(this.datePipe.transform(e, 'MMM d, y'));
+      this.addForm.get('dueDateTemp').setValue(e);
       this.dueDate = false;
       this.due_date = e;
       bsConfig.adaptivePosition = true;
@@ -1052,53 +1066,53 @@ subListTask: any;
   }
   onChangepresetActivity(e) {
     this.presetActivity = e;
-    if (e.dueDays != null && e.dueDays != undefined && e.dueDays != "") {
+    if (e.dueDays != null && e.dueDays != undefined && e.dueDays != '') {
       this.due_date = new Date();
       var pastDate = this.due_date.getDate() + e.dueDays;
       this.due_date.setDate(pastDate);
       this.addForm
-        .get("dueDate")
-        .setValue(this.datePipe.transform(this.due_date, "MMM d, y"));
-      this.addForm.get("dueDateTemp").setValue(this.due_date);
+        .get('dueDate')
+        .setValue(this.datePipe.transform(this.due_date, 'MMM d, y'));
+      this.addForm.get('dueDateTemp').setValue(this.due_date);
     }
   }
   submitAddForm() {
     this.isSaveButtonDisabled = true;
     this.addForm.value.type = 2;
     var addTask = {
-      dateOfEntry: this.addForm.value["dateOfEntryTemp"],
-      dueDate: this.addForm.value["dueDateTemp"],
-      type: this.addForm.value["type"],
-      board: this.addForm.value["boardName"],
-      subTitle: this.addForm.value["subTitle"],
-      note: this.addForm.value["note"],
-      status: "1",
+      dateOfEntry: this.addForm.value['dateOfEntryTemp'],
+      dueDate: this.addForm.value['dueDateTemp'],
+      type: this.addForm.value['type'],
+      board: this.addForm.value['boardName'],
+      subTitle: this.addForm.value['subTitle'],
+      note: this.addForm.value['note'],
+      status: '1',
     };
-    addTask["businessPartner"] = this.businessPartnerCreateTask;
-    addTask["presetActivity"] = this.presetActivity;
-    let associatedUserIds = this.addForm.value["associatedUserIds"];
+    addTask['businessPartner'] = this.businessPartnerCreateTask;
+    addTask['presetActivity'] = this.presetActivity;
+    let associatedUserIds = this.addForm.value['associatedUserIds'];
     if (
       associatedUserIds != null &&
-      associatedUserIds != "" &&
+      associatedUserIds != '' &&
       associatedUserIds.length > 0
     ) {
-      addTask["associatedUserIds"] = associatedUserIds.toString();
+      addTask['associatedUserIds'] = associatedUserIds.toString();
     }
-    let user = this.addForm.value["user"];
-    if (user != null && user != "") {
-      addTask["user"] = this.assignToData;
+    let user = this.addForm.value['user'];
+    if (user != null && user != '') {
+      addTask['user'] = this.assignToData;
     }
     this.commonService
-      .callApi("api/clients/tasks", addTask, "post")
+      .callApi('api/clients/tasks', addTask, 'post')
       .then((success) => {
         this.isSaveButtonDisabled = false;
         if (success) {
           this.modalRef.hide();
           this.listApi();
           this.businessPartnerCreateTask = {};
-          this.customerNameCreateTask = "";
+          this.customerNameCreateTask = '';
         } else {
-          this.popToast("error", success.message);
+          this.popToast('error', success.message);
         }
       })
       .catch((e) => {
@@ -1121,36 +1135,36 @@ subListTask: any;
   }
   getBranches() {
     this.commonService
-      .callApi("api/tenants/branches/lookup?q=", "", "get")
+      .callApi('api/tenants/branches/lookup?q=', '', 'get')
       .then((success) => {
         if (success) {
           this.branchrecords = success;
         } else {
-          this.popToast("error", success.message);
+          this.popToast('error', success.message);
         }
       })
       .catch((e) => {
-        console.log("there is an error:", e);
+        console.log('there is an error:', e);
       });
   }
   changedParentFilter(event) {
-    $("#filterName :input").blur();
+    $('#filterName :input').blur();
     let options;
     if (event.id == 1) {
-      this.filterData.bindedValue = "";
+      this.filterData.bindedValue = '';
       options = [
-        { id: 1, title: "Specific Date" },
-        { id: 2, title: "Date Range" },
-        { id: 3, title: "Week to Date" },
-        { id: 4, title: "Past Week" },
-        { id: 5, title: "Past 2 Weeks" },
-        { id: 6, title: "Current Month" },
-        { id: 7, title: "Past Month" },
-        { id: 8, title: "YTD" },
-        { id: 9, title: "QTR 1" },
-        { id: 10, title: "QTR 2" },
-        { id: 11, title: "QTR 3" },
-        { id: 12, title: "QTR 4" },
+        { id: 1, title: 'Specific Date' },
+        { id: 2, title: 'Date Range' },
+        { id: 3, title: 'Week to Date' },
+        { id: 4, title: 'Past Week' },
+        { id: 5, title: 'Past 2 Weeks' },
+        { id: 6, title: 'Current Month' },
+        { id: 7, title: 'Past Month' },
+        { id: 8, title: 'YTD' },
+        { id: 9, title: 'QTR 1' },
+        { id: 10, title: 'QTR 2' },
+        { id: 11, title: 'QTR 3' },
+        { id: 12, title: 'QTR 4' },
       ];
       this.filterData.suboptions = [];
       if (this.filterData.date || this.filterData.enddate) {
@@ -1190,7 +1204,7 @@ subListTask: any;
     } else if (event.id == 4) {
       if (this.tempArr.length == 0) {
         setTimeout(() => {
-          $("#txtNotes").focus();
+          $('#txtNotes').focus();
         }, 100);
       }
     } else if (event.id == 5) {
@@ -1212,8 +1226,8 @@ subListTask: any;
     });
   }
   changedChildFilter(event) {
-    $("#secondFilter :input").blur();
-    $("#supplierName :input").blur();
+    $('#secondFilter :input').blur();
+    $('#supplierName :input').blur();
     if (this.filterData.id === 1) {
       if (this.filterData.bindedValue.id == 1) {
         this.filterData.suboptions = [];
@@ -1227,305 +1241,287 @@ subListTask: any;
         this.filterData.suboptions = [];
         this.filterData.date = true;
         this.filterData.enddate = true;
-        this.data["createdOnType"] = 10;
-        this.data["createdOnAfter"] = moment()
+        this.data['createdOnType'] = 10;
+        this.data['createdOnAfter'] = moment()
           .utc()
-          .startOf("isoWeek")
+          .startOf('isoWeek')
           .format();
-        this.data["createdOnBefore"] = moment()
-          .utc()
-          .format();
+        this.data['createdOnBefore'] = moment().utc().format();
         this.startDateInput = moment()
           .utc()
-          .startOf("isoWeek")
-          .format("DD-MM-YYYY");
-        this.endDateInput = moment()
-          .utc()
-          .format("DD-MM-YYYY");
-        this.applyFilter(this.data, "end");
+          .startOf('isoWeek')
+          .format('DD-MM-YYYY');
+        this.endDateInput = moment().utc().format('DD-MM-YYYY');
+        this.applyFilter(this.data, 'end');
       } else if (this.filterData.bindedValue.id == 4) {
         this.filterData.suboptions = [];
         this.filterData.date = true;
         this.filterData.enddate = true;
-        this.data["createdOnType"] = 7;
-        this.data["createdOnAfter"] = moment()
-          .subtract(1, "weeks")
+        this.data['createdOnType'] = 7;
+        this.data['createdOnAfter'] = moment()
+          .subtract(1, 'weeks')
           .utc()
-          .startOf("isoWeek")
+          .startOf('isoWeek')
           .format();
-        this.data["createdOnBefore"] = moment()
-          .subtract(1, "weeks")
-          .endOf("isoWeek")
+        this.data['createdOnBefore'] = moment()
+          .subtract(1, 'weeks')
+          .endOf('isoWeek')
           .utc()
           .format();
         this.startDateInput = moment()
-          .subtract(1, "weeks")
+          .subtract(1, 'weeks')
           .utc()
-          .startOf("isoWeek")
-          .format("DD-MM-YYYY");
+          .startOf('isoWeek')
+          .format('DD-MM-YYYY');
         this.endDateInput = moment()
-          .subtract(1, "weeks")
-          .endOf("isoWeek")
+          .subtract(1, 'weeks')
+          .endOf('isoWeek')
           .utc()
-          .format("DD-MM-YYYY");
-        this.applyFilter(this.data, "end");
+          .format('DD-MM-YYYY');
+        this.applyFilter(this.data, 'end');
       } else if (this.filterData.bindedValue.id == 5) {
         this.filterData.suboptions = [];
         this.filterData.date = true;
         this.filterData.enddate = true;
-        this.data["createdOnType"] = 8;
-        this.data["createdOnAfter"] = moment()
-          .subtract(2, "weeks")
+        this.data['createdOnType'] = 8;
+        this.data['createdOnAfter'] = moment()
+          .subtract(2, 'weeks')
           .utc()
-          .startOf("isoWeek")
+          .startOf('isoWeek')
           .format();
-        this.data["createdOnBefore"] = moment()
-          .subtract(1, "weeks")
-          .endOf("isoWeek")
+        this.data['createdOnBefore'] = moment()
+          .subtract(1, 'weeks')
+          .endOf('isoWeek')
           .utc()
           .format();
         this.startDateInput = moment()
-          .subtract(2, "weeks")
+          .subtract(2, 'weeks')
           .utc()
-          .startOf("isoWeek")
-          .format("DD-MM-YYYY");
+          .startOf('isoWeek')
+          .format('DD-MM-YYYY');
         this.endDateInput = moment()
-          .subtract(1, "weeks")
-          .endOf("isoWeek")
+          .subtract(1, 'weeks')
+          .endOf('isoWeek')
           .utc()
-          .format("DD-MM-YYYY");
-        this.applyFilter(this.data, "end");
+          .format('DD-MM-YYYY');
+        this.applyFilter(this.data, 'end');
       } else if (this.filterData.bindedValue.id == 6) {
         this.filterData.suboptions = [];
         this.filterData.date = true;
         this.filterData.enddate = true;
-        this.data["createdOnType"] = 2;
-        this.data["createdOnAfter"] = moment()
-          .startOf("month")
-          .utc()
-          .format();
-        this.data["createdOnBefore"] = moment()
-          .utc()
-          .format();
+        this.data['createdOnType'] = 2;
+        this.data['createdOnAfter'] = moment().startOf('month').utc().format();
+        this.data['createdOnBefore'] = moment().utc().format();
         this.startDateInput = moment()
-          .startOf("month")
+          .startOf('month')
           .utc()
-          .format("DD-MM-YYYY");
-        this.endDateInput = moment()
-          .utc()
-          .format("DD-MM-YYYY");
-        this.applyFilter(this.data, "end");
+          .format('DD-MM-YYYY');
+        this.endDateInput = moment().utc().format('DD-MM-YYYY');
+        this.applyFilter(this.data, 'end');
       } else if (this.filterData.bindedValue.id == 7) {
         this.filterData.suboptions = [];
         this.filterData.date = true;
         this.filterData.enddate = true;
-        this.data["createdOnType"] = 9;
-        this.data["createdOnAfter"] = moment()
-          .subtract(1, "months")
-          .startOf("month")
+        this.data['createdOnType'] = 9;
+        this.data['createdOnAfter'] = moment()
+          .subtract(1, 'months')
+          .startOf('month')
           .utc()
           .format();
-        this.data["createdOnBefore"] = moment()
-          .subtract(1, "months")
-          .endOf("month")
+        this.data['createdOnBefore'] = moment()
+          .subtract(1, 'months')
+          .endOf('month')
           .utc()
           .format();
         this.startDateInput = moment()
-          .subtract(1, "months")
-          .startOf("month")
+          .subtract(1, 'months')
+          .startOf('month')
           .utc()
-          .format("DD-MM-YYYY");
+          .format('DD-MM-YYYY');
         this.endDateInput = moment()
-          .subtract(1, "months")
-          .endOf("month")
+          .subtract(1, 'months')
+          .endOf('month')
           .utc()
-          .format("DD-MM-YYYY");
-        this.applyFilter(this.data, "end");
+          .format('DD-MM-YYYY');
+        this.applyFilter(this.data, 'end');
       } else if (this.filterData.bindedValue.id == 8) {
         this.filterData.suboptions = [];
         this.filterData.date = true;
         this.filterData.enddate = true;
-        this.data["createdOnType"] = 1;
-        this.data["createdOnAfter"] = moment()
-          .startOf("year")
-          .utc()
-          .format();
-        this.data["createdOnBefore"] = moment()
-          .utc()
-          .format();
+        this.data['createdOnType'] = 1;
+        this.data['createdOnAfter'] = moment().startOf('year').utc().format();
+        this.data['createdOnBefore'] = moment().utc().format();
         this.startDateInput = moment()
-          .startOf("year")
+          .startOf('year')
           .utc()
-          .format("DD-MM-YYYY");
-        this.endDateInput = moment()
-          .utc()
-          .format("DD-MM-YYYY");
-        this.applyFilter(this.data, "end");
+          .format('DD-MM-YYYY');
+        this.endDateInput = moment().utc().format('DD-MM-YYYY');
+        this.applyFilter(this.data, 'end');
       } else if (this.filterData.bindedValue.id == 9) {
         this.filterData.suboptions = [];
         this.filterData.date = true;
         this.filterData.enddate = true;
-        this.data["createdOnType"] = 3;
-        this.data["createdOnAfter"] = moment()
+        this.data['createdOnType'] = 3;
+        this.data['createdOnAfter'] = moment()
           .quarter(1)
-          .startOf("quarter")
+          .startOf('quarter')
           .utc()
           .format();
-        this.data["createdOnBefore"] = moment()
+        this.data['createdOnBefore'] = moment()
           .quarter(1)
-          .endOf("quarter")
+          .endOf('quarter')
           .utc()
           .format();
         this.startDateInput = moment()
           .quarter(1)
-          .startOf("quarter")
+          .startOf('quarter')
           .utc()
-          .format("DD-MM-YYYY");
+          .format('DD-MM-YYYY');
         this.endDateInput = moment()
           .quarter(1)
-          .endOf("quarter")
+          .endOf('quarter')
           .utc()
-          .format("DD-MM-YYYY");
-        this.applyFilter(this.data, "end");
+          .format('DD-MM-YYYY');
+        this.applyFilter(this.data, 'end');
       } else if (this.filterData.bindedValue.id == 10) {
         this.filterData.suboptions = [];
         this.filterData.date = true;
         this.filterData.enddate = true;
-        this.data["createdOnType"] = 4;
-        this.data["createdOnAfter"] = moment()
+        this.data['createdOnType'] = 4;
+        this.data['createdOnAfter'] = moment()
           .quarter(2)
-          .startOf("quarter")
+          .startOf('quarter')
           .utc()
           .format();
-        this.data["createdOnBefore"] = moment()
+        this.data['createdOnBefore'] = moment()
           .quarter(2)
-          .endOf("quarter")
+          .endOf('quarter')
           .utc()
           .format();
         this.startDateInput = moment()
           .quarter(2)
-          .startOf("quarter")
+          .startOf('quarter')
           .utc()
-          .format("DD-MM-YYYY");
+          .format('DD-MM-YYYY');
         this.endDateInput = moment()
           .quarter(2)
-          .endOf("quarter")
+          .endOf('quarter')
           .utc()
-          .format("DD-MM-YYYY");
-        this.applyFilter(this.data, "end");
+          .format('DD-MM-YYYY');
+        this.applyFilter(this.data, 'end');
       } else if (this.filterData.bindedValue.id == 11) {
         this.filterData.suboptions = [];
         this.filterData.date = true;
         this.filterData.enddate = true;
-        this.data["createdOnType"] = 5;
-        this.data["createdOnAfter"] = moment()
+        this.data['createdOnType'] = 5;
+        this.data['createdOnAfter'] = moment()
           .quarter(3)
-          .startOf("quarter")
+          .startOf('quarter')
           .utc()
           .format();
-        this.data["createdOnBefore"] = moment()
+        this.data['createdOnBefore'] = moment()
           .quarter(3)
-          .endOf("quarter")
+          .endOf('quarter')
           .utc()
           .format();
         this.startDateInput = moment()
           .quarter(3)
-          .startOf("quarter")
+          .startOf('quarter')
           .utc()
-          .format("DD-MM-YYYY");
+          .format('DD-MM-YYYY');
         this.endDateInput = moment()
           .quarter(3)
-          .endOf("quarter")
+          .endOf('quarter')
           .utc()
-          .format("DD-MM-YYYY");
-        this.applyFilter(this.data, "end");
+          .format('DD-MM-YYYY');
+        this.applyFilter(this.data, 'end');
       } else if (this.filterData.bindedValue.id == 12) {
         this.filterData.suboptions = [];
         this.filterData.date = true;
         this.filterData.enddate = true;
-        this.data["createdOnType"] = 6;
-        this.data["createdOnAfter"] = moment()
+        this.data['createdOnType'] = 6;
+        this.data['createdOnAfter'] = moment()
           .quarter(4)
-          .startOf("quarter")
+          .startOf('quarter')
           .utc()
           .format();
-        this.data["createdOnBefore"] = moment()
+        this.data['createdOnBefore'] = moment()
           .quarter(4)
-          .endOf("quarter")
+          .endOf('quarter')
           .utc()
           .format();
         this.startDateInput = moment()
           .quarter(4)
-          .startOf("quarter")
+          .startOf('quarter')
           .utc()
-          .format("DD-MM-YYYY");
+          .format('DD-MM-YYYY');
         this.endDateInput = moment()
           .quarter(4)
-          .endOf("quarter")
+          .endOf('quarter')
           .utc()
-          .format("DD-MM-YYYY");
-        this.applyFilter(this.data, "end");
+          .format('DD-MM-YYYY');
+        this.applyFilter(this.data, 'end');
       } else {
         this.filterData.suboptions = [];
         this.filterData.suboptions.push({
           options: [
-            { id: 1, title: "Year" },
-            { id: 2, title: "Month" },
-            { id: 3, title: "Date" },
+            { id: 1, title: 'Year' },
+            { id: 2, title: 'Month' },
+            { id: 3, title: 'Date' },
           ],
-          bindvalue: "",
-          type: "select",
-          labelName: "Filter By",
+          bindvalue: '',
+          type: 'select',
+          labelName: 'Filter By',
         });
       }
     } else if (this.filterData.id === 2) {
       this.filterData.suboptions = [];
       if (this.filterData.bindedValue.id === 1) {
-        this.data["type"] = this.filterData.bindedValue.id;
-        this.applyFilter(this.data, "end");
+        this.data['type'] = this.filterData.bindedValue.id;
+        this.applyFilter(this.data, 'end');
       } else if (this.filterData.bindedValue.id === 2) {
         this.filterData.suboptions.push({
           options: this.customers,
-          bindvalue: "",
+          bindvalue: '',
           async: true,
-          type: "select",
-          labelName: "Search Client",
+          type: 'select',
+          labelName: 'Search Client',
         });
       } else if (this.filterData.bindedValue.id === 3) {
         this.filterData.suboptions.push({
           options: this.companies,
           async: true,
-          bindvalue: "",
-          type: "select",
-          labelName: "Search company",
+          bindvalue: '',
+          type: 'select',
+          labelName: 'Search company',
         });
       } else if (this.filterData.bindedValue.id === 4) {
         this.filterData.suboptions.push({
           options: this.contacts,
           async: true,
-          bindvalue: "",
-          type: "select",
-          labelName: "Search contact",
+          bindvalue: '',
+          type: 'select',
+          labelName: 'Search contact',
         });
       } else if (this.filterData.bindedValue.id === 5) {
         this.filterData.suboptions.push({
           options: this.taskrecords,
-          bindvalue: "",
-          type: "select",
-          labelName: "Search tasks",
+          bindvalue: '',
+          type: 'select',
+          labelName: 'Search tasks',
         });
       }
     } else if (this.filterData.id === 3) {
-      this.data["presetActivityId"] = this.filterData.bindedValue.id;
-      this.applyFilter(this.data, "end");
+      this.data['presetActivityId'] = this.filterData.bindedValue.id;
+      this.applyFilter(this.data, 'end');
     } else if (this.filterData.id === 4) {
-      if (this.filterData.note != undefined && this.filterData.note != "") {
-        this.data["note"] = this.filterData.note;
-        this.applyFilter(this.data, "end");
+      if (this.filterData.note != undefined && this.filterData.note != '') {
+        this.data['note'] = this.filterData.note;
+        this.applyFilter(this.data, 'end');
       }
     } else if (this.filterData.id === 5) {
-      this.data["branchId"] = this.filterData.bindedValue.id;
-      this.applyFilter(this.data, "end");
+      this.data['branchId'] = this.filterData.bindedValue.id;
+      this.applyFilter(this.data, 'end');
     }
   }
   resetFilter(i) {
@@ -1565,9 +1561,9 @@ subListTask: any;
     this.page = 0;
     this.offset = 0;
     var queryParams1 =
-      "ts=" + this.ts + "&offset=" + this.offset + "&limit=" + this.limit;
+      'ts=' + this.ts + '&offset=' + this.offset + '&limit=' + this.limit;
     this.commonService
-      .callApi("api/clients/notes?" + queryParams1, queryParams, "get")
+      .callApi('api/clients/notes?' + queryParams1, queryParams, 'get')
       .then((success) => {
         if (success) {
           this.listrecords = success.records;
@@ -1584,36 +1580,36 @@ subListTask: any;
             }
           }, 100);
         } else {
-          this.popToast("error", success.message);
+          this.popToast('error', success.message);
         }
       })
       .catch((e) => {
-        console.log("there is an error:", e);
+        console.log('there is an error:', e);
       });
 
     if (terminate) {
       let tempconfig: any = {};
       if (this.filterData.id == 1) {
         if (this.filterData.bindedValue.id === 1) {
-          tempconfig["parentFilter"] = this.filterData.title;
-          tempconfig["secondFilter"] = this.filterData.bindedValue.title;
-          tempconfig["childFilter"] = moment(
+          tempconfig['parentFilter'] = this.filterData.title;
+          tempconfig['secondFilter'] = this.filterData.bindedValue.title;
+          tempconfig['childFilter'] = moment(
             this.startDateInput,
-            "DD-MM-YYYY"
+            'DD-MM-YYYY'
           ).toDate();
         } else if (this.filterData.bindedValue.id !== 1) {
-          tempconfig["parentFilter"] = this.filterData.title;
-          tempconfig["secondFilter"] = this.filterData.bindedValue.title;
-          tempconfig["childFilter"] = moment(
+          tempconfig['parentFilter'] = this.filterData.title;
+          tempconfig['secondFilter'] = this.filterData.bindedValue.title;
+          tempconfig['childFilter'] = moment(
             this.startDateInput,
-            "DD-MM-YYYY"
+            'DD-MM-YYYY'
           ).toDate();
-          tempconfig["subchildrange"] = moment(
+          tempconfig['subchildrange'] = moment(
             this.endDateInput,
-            "DD-MM-YYYY"
+            'DD-MM-YYYY'
           ).toDate();
         }
-        tempconfig["selectedObj"] = this.filterData;
+        tempconfig['selectedObj'] = this.filterData;
         this.tempArr.push(tempconfig);
         const index = this.filterstart
           .map((e) => {
@@ -1624,9 +1620,9 @@ subListTask: any;
         this.filterstart.splice(0, index + 1);
         this.filterstart = [...this.filterstart];
       } else if (this.filterData.id === 2) {
-        tempconfig["parentFilter"] = this.filterData.title;
-        tempconfig["secondFilter"] = this.filterData.bindedValue.title;
-        tempconfig["selectedObj"] = this.filterData;
+        tempconfig['parentFilter'] = this.filterData.title;
+        tempconfig['secondFilter'] = this.filterData.bindedValue.title;
+        tempconfig['selectedObj'] = this.filterData;
         this.tempArr.push(tempconfig);
         const index = this.filterstart
           .map((e) => {
@@ -1637,9 +1633,9 @@ subListTask: any;
         this.filterstart.splice(0, index + 1);
         this.filterstart = [...this.filterstart];
       } else if (this.filterData.id === 3) {
-        tempconfig["parentFilter"] = this.filterData.title;
-        tempconfig["secondFilter"] = this.filterData.bindedValue.title;
-        tempconfig["selectedObj"] = this.filterData;
+        tempconfig['parentFilter'] = this.filterData.title;
+        tempconfig['secondFilter'] = this.filterData.bindedValue.title;
+        tempconfig['selectedObj'] = this.filterData;
         this.tempArr.push(tempconfig);
         const index = this.filterstart
           .map((e) => {
@@ -1650,9 +1646,9 @@ subListTask: any;
         this.filterstart.splice(0, index + 1);
         this.filterstart = [...this.filterstart];
       } else if (this.filterData.id === 4) {
-        tempconfig["parentFilter"] = this.filterData.title;
-        tempconfig["secondFilter"] = this.filterData.note;
-        tempconfig["selectedObj"] = this.filterData;
+        tempconfig['parentFilter'] = this.filterData.title;
+        tempconfig['secondFilter'] = this.filterData.note;
+        tempconfig['selectedObj'] = this.filterData;
         this.tempArr.push(tempconfig);
         const index = this.filterstart
           .map((e) => {
@@ -1663,9 +1659,9 @@ subListTask: any;
         this.filterstart.splice(0, index + 1);
         this.filterstart = [...this.filterstart];
       } else if (this.filterData.id == 5) {
-        tempconfig["parentFilter"] = this.filterData.title;
-        tempconfig["secondFilter"] = this.filterData.bindedValue.title;
-        tempconfig["selectedObj"] = this.filterData;
+        tempconfig['parentFilter'] = this.filterData.title;
+        tempconfig['secondFilter'] = this.filterData.bindedValue.title;
+        tempconfig['selectedObj'] = this.filterData;
         this.tempArr.push(tempconfig);
         const index = this.filterstart
           .map((e) => {
@@ -1686,75 +1682,76 @@ subListTask: any;
   }
   modelDatepickerDate(event, type) {
     if (event !== null) {
-      $("#minDatepicker :input").blur();
-      $("#maxDatepicker :input").blur();
+      $('#minDatepicker :input').blur();
+      $('#maxDatepicker :input').blur();
       if (this.filterData.bindedValue.id == 1) {
         this.startDateFrom = moment.utc(event).format();
-        this.data["createdOnType"] = 11;
-        this.data["createdOn"] = this.startDateFrom;
+        this.data['createdOnType'] = 11;
+        this.data['createdOn'] = this.startDateFrom;
         this.startDateInput = event;
-        this.applyFilter(this.data, "end");
+        this.applyFilter(this.data, 'end');
       } else if (this.filterData.bindedValue.id == 2) {
-        if (type === "start") {
+        if (type === 'start') {
           this.startDateFrom = moment.utc(event).format();
-        } else if (type === "end") {
+        } else if (type === 'end') {
           this.startDateTo = moment.utc(event).format();
           this.endDateInput = event;
         }
-        this.data["createdOnType"] = 12;
-        this.data["createdOnAfter"] = this.startDateFrom;
-        this.data["createdOnBefore"] = this.startDateTo;
+        this.data['createdOnType'] = 12;
+        this.data['createdOnAfter'] = this.startDateFrom;
+        this.data['createdOnBefore'] = this.startDateTo;
         if (this.startDateFrom && this.startDateTo) {
-          this.applyFilter(this.data, "end");
+          this.applyFilter(this.data, 'end');
         }
       }
     }
   }
   getContactList() {
     this.commonService
-      .callApi("api/clients/lookup?clientType=2", "", "get")
+      .callApi('api/clients/lookup?clientType=2', '', 'get')
       .then((success) => {
         if (success) {
           this.contactList = success;
         } else {
-          this.popToast("error", success.message);
+          this.popToast('error', success.message);
         }
       })
       .catch((e) => {
-        console.log("there is an error:", e);
+        console.log('there is an error:', e);
       });
   }
   getCompanytList() {
     this.commonService
-      .callApi("api/clients/lookup?clientType=3", "", "get")
+      .callApi('api/clients/lookup?clientType=3', '', 'get')
       .then((success) => {
         if (success) {
           this.companyList = success;
         } else {
-          this.popToast("error", success.message);
+          this.popToast('error', success.message);
         }
       })
       .catch((e) => {
-        console.log("there is an error:", e);
+        console.log('there is an error:', e);
       });
   }
   addBasicInfo() {
     if (this.addCustomerBasicInfo.valid) {
       if (this.addCustomerBasicInfo.value.paymentTermDuration) {
-        this.addCustomerBasicInfo.value.paymentTermDuration = this.addCustomerBasicInfo.value.paymentTermDuration.days;
+        this.addCustomerBasicInfo.value.paymentTermDuration =
+          this.addCustomerBasicInfo.value.paymentTermDuration.days;
       }
       this.commonService
-        .callApi("/api/clients", this.addCustomerBasicInfo.value, "post")
+        .callApi('/api/clients', this.addCustomerBasicInfo.value, 'post')
         .then((success) => {
           if (success) {
             this.modalRef.hide();
             this.user.businessPartner = success.title;
           } else {
-            this.popToast("error", success.message);
+            this.popToast('error', success.message);
           }
         })
         .catch((e) => {
-          console.log("there is an error:", e);
+          console.log('there is an error:', e);
         });
     }
   }
@@ -1784,16 +1781,16 @@ subListTask: any;
   }
   getPaymentTerms() {
     this.commonService
-      .callApi("api/clients/PaymentTerms/lookup", "", "get")
+      .callApi('api/clients/PaymentTerms/lookup', '', 'get')
       .then((success) => {
         if (success) {
           this.paymentList = success;
         } else {
-          this.popToast("error", success.message);
+          this.popToast('error', success.message);
         }
       })
       .catch((e) => {
-        console.log("there is an error:", e);
+        console.log('there is an error:', e);
       });
   }
   numberOnly(event): boolean {
@@ -1805,75 +1802,75 @@ subListTask: any;
   }
   getTenantLookup() {
     this.commonService
-      .callApi("api/tenants/users/lookup", "", "get")
+      .callApi('api/tenants/users/lookup', '', 'get')
       .then((success) => {
         if (success) {
           this.tenantUsers = success;
         } else {
-          this.popToast("error", success.message);
+          this.popToast('error', success.message);
         }
       })
       .catch((e) => {
-        console.log("there is an error:", e);
+        console.log('there is an error:', e);
       });
   }
   getArearLookup() {
     this.commonService
-      .callApi("api/clients/areas/lookup", "", "get")
+      .callApi('api/clients/areas/lookup', '', 'get')
       .then((success) => {
         if (success) {
           this.areaLookup = success;
         } else {
-          this.popToast("error", success.message);
+          this.popToast('error', success.message);
         }
       })
       .catch((e) => {
-        console.log("there is an error:", e);
+        console.log('there is an error:', e);
       });
   }
   getRegionList() {
     this.commonService
-      .callApi("api/tenants/branches/lookup", "", "get")
+      .callApi('api/tenants/branches/lookup', '', 'get')
       .then((success) => {
         if (success) {
           this.regionList = success;
         } else {
-          this.popToast("error", success.message);
+          this.popToast('error', success.message);
         }
       })
       .catch((e) => {
-        console.log("there is an error:", e);
+        console.log('there is an error:', e);
       });
   }
   getEstablishmentType() {
     this.commonService
-      .callApi("api/clients/establishmenttypes/lookup", "", "get")
+      .callApi('api/clients/establishmenttypes/lookup', '', 'get')
       .then((success) => {
         if (success) {
           this.establishmentTypes = success;
         } else {
-          this.popToast("error", success.message);
+          this.popToast('error', success.message);
         }
       })
       .catch((e) => {
-        console.log("there is an error:", e);
+        console.log('there is an error:', e);
       });
   }
   refreshClients(value: string = null, allow): Observable<any[]> {
     let data = {};
     if (value) {
-      data["entityType"] = "client";
-      data["q"] = value;
+      data['entityType'] = 'client';
+      data['q'] = value;
     }
     let items;
     return this.commonService
-      .callApiObservable("api/clients/lookup", data)
+      .callApiObservable('api/clients/lookup', data)
       .pipe(
         catchError(() => of({ items: [] })),
         map((success) => {
           items = success;
           if (allow) {
-            this.customers = success["records"];
+            this.customers = success['records'];
           }
 
           return items ? items : [];
@@ -1922,19 +1919,19 @@ subListTask: any;
   refreshCompanies(value: string = null, allow): Observable<any[]> {
     let data = {};
     if (value) {
-      data["entityType"] = "client";
-      data["ClientType"] = "3";
-      data["q"] = value;
+      data['entityType'] = 'client';
+      data['ClientType'] = '3';
+      data['q'] = value;
     }
     let items;
     return this.commonService
-      .callApiObservable("api/clients/lookup", data)
+      .callApiObservable('api/clients/lookup', data)
       .pipe(
         catchError(() => of({ items: [] })),
         map((success) => {
           items = success;
           if (allow) {
-            this.companies = success["records"];
+            this.companies = success['records'];
           }
 
           return items ? items : [];
@@ -1944,19 +1941,19 @@ subListTask: any;
   refreshContacts(value: string = null, allow): Observable<any[]> {
     let data = {};
     if (value) {
-      data["entityType"] = "client";
-      data["ClientType"] = "2";
-      data["q"] = value;
+      data['entityType'] = 'client';
+      data['ClientType'] = '2';
+      data['q'] = value;
     }
     let items;
     return this.commonService
-      .callApiObservable("api/clients/lookup", data)
+      .callApiObservable('api/clients/lookup', data)
       .pipe(
         catchError(() => of({ items: [] })),
         map((success) => {
           items = success;
           if (allow) {
-            this.contacts = success["records"];
+            this.contacts = success['records'];
           }
 
           return items ? items : [];
@@ -1965,30 +1962,30 @@ subListTask: any;
   }
   changedsubChildFilter(event) {
     if (this.filterData.id === 2 && this.filterData.bindedValue.type !== 5) {
-      this.data["type"] = this.filterData.bindedValue.id;
-      this.data["businessPartnerId"] = event.id;
-      this.applyFilter(this.data, "end");
+      this.data['type'] = this.filterData.bindedValue.id;
+      this.data['businessPartnerId'] = event.id;
+      this.applyFilter(this.data, 'end');
     } else if (this.filterData.bindedValue.type === 5) {
-      this.data["type"] = 3;
-      this.data["taskId"] = event.id;
-      this.applyFilter(this.data, "end");
+      this.data['type'] = 3;
+      this.data['taskId'] = event.id;
+      this.applyFilter(this.data, 'end');
     }
   }
   showNotesDetails(data, crmNotePopup) {
     this.commonService
-      .callApi("api/clients/notes/" + data.id, "", "get")
+      .callApi('api/clients/notes/' + data.id, '', 'get')
       .then((success) => {
         if (success) {
           this.crmNotePopupData = success;
           this.modalRef = this.modalService.show(crmNotePopup, {
-            class: "modal-xl modal-dialog-centered crm-popup",
+            class: 'modal-xl modal-dialog-centered crm-popup',
           });
         } else {
-          this.popToast("error", success.message);
+          this.popToast('error', success.message);
         }
       })
       .catch((e) => {
-        console.log("there is an error:", e);
+        console.log('there is an error:', e);
       });
   }
   resetCRMNotesData() {
@@ -1996,19 +1993,19 @@ subListTask: any;
   }
   showTaskDetails(data, crmTaskPopup) {
     this.commonService
-      .callApi("api/clients/tasks/" + data.id, "", "get")
+      .callApi('api/clients/tasks/' + data.id, '', 'get')
       .then((success) => {
         if (success) {
           this.crmTaskPopupData = success;
           this.modalRef = this.modalService.show(crmTaskPopup, {
-            class: "modal-xl modal-dialog-centered crm-popup",
+            class: 'modal-xl modal-dialog-centered crm-popup',
           });
         } else {
-          this.popToast("error", success.message);
+          this.popToast('error', success.message);
         }
       })
       .catch((e) => {
-        console.log("there is an error:", e);
+        console.log('there is an error:', e);
       });
   }
   resetCRMTaskData() {

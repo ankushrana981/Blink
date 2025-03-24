@@ -92,6 +92,25 @@ export class VendorSetupComponent extends BaseComponent implements OnInit {
 @parameters : 
 @return :
 *****************************************************/
+
+onScroll(event: any) {
+  const target = event.target;
+  const atBottom =
+    target.scrollTop + target.clientHeight >= target.scrollHeight;
+  console.log('bottom');
+  if (atBottom) {
+    this.onScrollDown(event);
+    // console.log(
+    //   'scrollTop',
+    //   target.scrollTop,
+    //   'clientHeight',
+    //   target.clientHeight,
+    //   'scrollHeight ',
+    //   target.scrollHeight
+    // );
+  }
+}
+
   onScrollDown(ev) {
  this.data['offset'] = this.data['offset'] + 20;
     var queryParams = Object.keys(this.data).map(key => key + '=' + this.data[key]).join('&');

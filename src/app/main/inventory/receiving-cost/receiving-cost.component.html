@@ -2,11 +2,11 @@
     <!-- [ngClass]="(icon1 || icon2 || icon3)?'active':''" -->
     <div class="">
         <div class="">
-            <div class="contentBox task-page ">
+            <div class="contentBox task-page">
                 <!-- [ngClass]="(icon1 || icon2 || icon3)?'active':''" -->
 
                 <div class="leftContent overflow-0 task-board">
-                    <div class="viewdata-title task-title d-flex flex-wrap align-items-center justify-content-between">
+                    <div class="d-flex flex-wrap align-items-center justify-content-between task-title viewdata-title">
                         <h2>Vendor Order</h2>
                         <div class="d-flex flex-wrap">
                             <a class="icon-task" href="javascript:void(0)" icon-more title="More"></a>
@@ -16,7 +16,7 @@
                             <a class="icon-task" href="javascript:void(0)" icon-download title="Download"></a>
                         </div>
                     </div>
-                    <div class="card card-box pl-0 card-attention view-details-table wow fadeIn" data-wow-delay=".3s"
+                    <div class="card card-attention card-box fadeIn pl-0 view-details-table wow" data-wow-delay=".3s"
                         #tblDivElem>
                         <div class="detail">
                             <div class="left">
@@ -51,13 +51,13 @@
                                 </ul>
                             </div>
                         </div>
-                        <div malihu-scrollbar class="scrollbar">
+                        <div malihu-scrollbar class="table-box-scroll-hs overflow-y-scroll scrollbar">
                             <div class="table-box mb-20">
                                 <div class="table-respons">
                                     <table style="width:100%"
-                                        class="table-hover task-table-main default-to-custom first-padding-0">
+                                        class="table-hover default-to-custom first-padding-0 task-table-main">
                                         <tbody fxLayout="row wrap" class="list">
-                                            <tr class="x-animated fadeIn d-1 in">
+                                            <tr class="d-1 fadeIn in x-animated">
                                                 <td class="text-center" width="58px">
                                                     <h4 class="rownumber ng-binding">1</h4>
                                                 </td>
@@ -65,23 +65,23 @@
                                                     <b class="table-title">
                                                         <span>PC CPU Fan Cooler</span>
                                                     </b>
-                                                    <div class="small help-block line-divider">
+                                                    <div class="help-block line-divider small">
                                                         <span class="table-text">Thermaltake</span>
                                                     </div>
                                                 </td>
-                                                <td class="text-left text-desc">
+                                                <td class="text-desc text-left">
                                                     <b class="table-title">
                                                         <span>The one that would fit a 55mm processor size</span>
                                                     </b>
-                                                    <div class="small help-block line-divider">
+                                                    <div class="help-block line-divider small">
                                                         <span class="table-text">450gr Box</span>
                                                     </div>
                                                 </td>
-                                                <td class="text-left text-input">
+                                                <td class="text-input text-left">
                                                     <b class="table-title">
                                                         <span><input type="text" placeholder="26"></span>
                                                     </b>
-                                                    <div class="small help-block line-divider">
+                                                    <div class="help-block line-divider small">
                                                         <span class="table-text">$22.61</span>
                                                     </div>
                                                 </td>
@@ -92,14 +92,14 @@
                                                             </span>
                                                         </b>
                                                     </div>
-                                                    <div class="small help-block line-divider">
+                                                    <div class="help-block line-divider small">
                                                         <span class="table-text">-</span>
                                                     </div>
                                                 </td>
                                             </tr>
                                         </tbody>
                                         <tbody fxLayout="row wrap" class="list">
-                                            <tr class="x-animated fadeIn d-1 in">
+                                            <tr class="d-1 fadeIn in x-animated">
                                                 <td class="text-center" width="58px">
                                                     <h4 class="rownumber ng-binding">2</h4>
                                                 </td>
@@ -107,24 +107,24 @@
                                                     <b class="table-title">
                                                         <span>CUBE Gaming PC Casing</span>
                                                     </b>
-                                                    <div class="small help-block line-divider">
+                                                    <div class="help-block line-divider small">
                                                         <span class="table-text">CUBE Gaming</span>
                                                     </div>
                                                 </td>
-                                                <td class="text-left text-desc">
+                                                <td class="text-desc text-left">
                                                     <b class="table-title">
                                                         <span>RGB lights should be included</span>
                                                     </b>
-                                                    <div class="small help-block line-divider">
+                                                    <div class="help-block line-divider small">
                                                         <span class="table-text">1.8kg Box</span>
                                                     </div>
                                                 </td>
-                                                <td class="text-left text-input">
+                                                <td class="text-input text-left">
                                                     <b class="table-title">
                                                         <span><input type="text" placeholder="12"
                                                                 [(ngModel)]="input"></span>
                                                     </b>
-                                                    <div class="small help-block line-divider">
+                                                    <div class="help-block line-divider small">
                                                         <span class="table-text">$60</span>
                                                     </div>
                                                 </td>
@@ -135,14 +135,14 @@
                                                             </span>
                                                         </b>
                                                     </div>
-                                                    <div class="small help-block line-divider">
+                                                    <div class="help-block line-divider small">
                                                         <span class="table-text">-</span>
                                                     </div>
                                                 </td>
                                             </tr>
                                         </tbody>
                                         <tbody fxLayout="row wrap" class="list">
-                                            <tr class="x-animated fadeIn d-1 in">
+                                            <tr class="d-1 fadeIn in x-animated">
                                                 <td class="text-center" width="58px">
                                                     <h4 class="rownumber ng-binding">3</h4>
                                                 </td>
@@ -150,23 +150,23 @@
                                                     <b class="table-title">
                                                         <span>iPhone 16</span>
                                                     </b>
-                                                    <div class="small help-block line-divider">
+                                                    <div class="help-block line-divider small">
                                                         <span class="table-text">Apple</span>
                                                     </div>
                                                 </td>
-                                                <td class="text-left text-desc">
+                                                <td class="text-desc text-left">
                                                     <b class="table-title">
                                                         <span>-</span>
                                                     </b>
-                                                    <div class="small help-block line-divider">
+                                                    <div class="help-block line-divider small">
                                                         <span class="table-text">1kg Box</span>
                                                     </div>
                                                 </td>
-                                                <td class="text-left text-input">
+                                                <td class="text-input text-left">
                                                     <b class="table-title">
                                                         <span><input type="text" placeholder="5"></span>
                                                     </b>
-                                                    <div class="small help-block line-divider">
+                                                    <div class="help-block line-divider small">
                                                         <span class="table-text">$2,480</span>
                                                     </div>
                                                 </td>
@@ -177,7 +177,7 @@
                                                             </span>
                                                         </b>
                                                     </div>
-                                                    <div class="small help-block line-divider">
+                                                    <div class="help-block line-divider small">
                                                         <span class="table-text">-</span>
                                                     </div>
                                                 </td>
@@ -204,7 +204,7 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="d-flex flex-wrap justify-content-end align-items-center btn-task-main wow fadeIn"
+                    <div class="d-flex flex-wrap btn-task-main align-items-center justify-content-end fadeIn wow"
                         data-wow-delay="500ms">
                         <ul class="d-flex align-items-center vendor-btn">
                             <li>
@@ -221,7 +221,7 @@
                 </div>
 
 
-                <div class="rightSidebar-wrap rightSide-data-penal">
+                <div class="rightSide-data-penal rightSidebar-wrap">
                     <div class="data-penal-header">
                         <a href="/" class="icon-dot" (click)="changeIc('dots');$event.preventDefault()">
                             <i icon-more></i>
@@ -231,7 +231,7 @@
 
             </div>
         </div>
-        <div class="col-xl-3  wow fadeIn">
+        <div class="col-xl-3 fadeIn wow">
             <div class="contentBox task-page">
                 <div class="w-100">
                 </div>
@@ -239,14 +239,14 @@
         </div>
     </div>
 
-    <div class="rightSidebar-wrap rightSidebar-wrap-right-0 rightSide-data-penal comman-sidebar right-aside">
-        <div class="data-penal-body d-flex flex-column">
+    <div class="comman-sidebar right-aside rightSide-data-penal rightSidebar-wrap rightSidebar-wrap-right-0">
+        <div class="d-flex flex-column data-penal-body">
             <div class="">
                 <a href="jasvscript:void(0);" class="icon-dot" (click)="changeIc('arrow');$event.preventDefault()">
                     <i icon-more></i>
                 </a>
             </div>
-            <h3 class="rightSidebar-main_title mb-40">Product Detail</h3>
+            <h3 class="mb-40 rightSidebar-main_title">Product Detail</h3>
             <div class="data-block">
                 <h5 class="data-title">Description</h5>
                 <p class="data-discription">Text entry desc text that details the content of the task that will be shonw

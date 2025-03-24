@@ -1,32 +1,32 @@
-<div class="productSetup-Wrap invoiceView">
+<div class="invoiceView productSetup-Wrap">
 	<div class="viewdata-title">
 		<h2>Purchase Orders</h2>
 	</div>
 	<div class="contentBox"  [ngClass]="icon1?'active':''">
 		<div class="leftContent">
 			<div class="card">
-				<div class="table-box viewTable mb-20" data-infinite-scroll debounce  (scrolled)="onScrollDown($event)">
+				<div class="table-box h-100 mb-20 viewTable" data-infinite-scroll debounce  (scroll)="onScroll($event)">
 					<table style="width:100%" class="table-hover default-to-custom ng-isolate-scope">
                         <tbody [@fadeIn]="usersList?.length"  fxLayout="row wrap" class="list">
-                            <tr style="vertical-align:top;" *ngFor="let r of usersList; let i = index" class="x-animated fadeIn d-1 in" fxFlex="100" fxFlex.lt-sm="200">
+                            <tr style="vertical-align:top;" *ngFor="let r of usersList; let i = index" class="d-1 fadeIn in x-animated" fxFlex="100" fxFlex.lt-sm="200">
                                 <td width="64px" class="text-center"><h4 class="rownumber ng-binding">{{i+1}}</h4></td>
                                 <td class="text-left">
                                     <b><span class="ng-binding ng-hide"></span>&nbsp;</b>
                                     <b><span class="ng-binding ng-hide">&nbsp;</span>&nbsp;</b>
                                     <b><span class="ng-binding ng-hide"></span>&nbsp;</b>
-                                    <div class="small help-block line-divider">&nbsp;</div>
+                                    <div class="help-block line-divider small">&nbsp;</div>
                                 </td>
                                 <td class="text-left">
                                     <a class="ng-binding ng-hide" (click)="editing(r)">{{r?.docNumber}}</a>
-                                    <div class="small help-block line-divider ng-binding">{{r?.productQuantity}} </div>
+                                    <div class="help-block line-divider ng-binding small">{{r?.productQuantity}} </div>
                                 </td>
                                 <td class="text-left">
-                                    <div><span class="ng-binding ng-hide">{{r?.businessPartner?.title}} </span>&nbsp;</div>
-                                    <div class="small help-block line-divider ng-binding">&nbsp;</div>
+                                    <div><span czlass="ng-binding ng-hide">{{r?.businessPartner?.title}} </span>&nbsp;</div>
+                                    <div class="help-block line-divider ng-binding small">&nbsp;</div>
                                 </td>
                                 <td class="text-end">
                                     <b><span class="ng-binding ng-hide"></span>&nbsp;</b>
-                                    <div class="small help-block line-divider paymentstatus ng-binding red">{{r?.status?.title}}</div>
+                                    <div class="help-block line-divider ng-binding paymentstatus red small">{{r?.status?.title}}</div>
                                 </td>
                                 <td width="100px" class="text-left">
                                     <div class="rowactions">
@@ -41,7 +41,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="rightSidebar-wrap rightSide-data-penal">
+		<div class="rightSide-data-penal rightSidebar-wrap">
                
                     <div class="data-penal-header">
                         <button class="btn open-action-btn" (click)="changeIc('dots')">
@@ -53,21 +53,21 @@
                         </button>
                     </div>
 			<div class="data-penal-body">
-				<h2 class="title x-animated fadeIn d-3">Details</h2>
+				<h2 class="d-3 fadeIn title x-animated">Details</h2>
                 <div class="v-center-wrap">
-    				<div class="infoBox x-animated fadeIn d-5">
+    				<div class="d-5 fadeIn infoBox x-animated">
     					<label>Total Invoice</label>
     					<h3 class="main-color">0</h3>
     				</div>
-    				<div class="infoBox x-animated fadeIn d-6">
+    				<div class="d-6 fadeIn infoBox x-animated">
     					<label>30 DAY OVERDUE</label>
     					<h3 class="main-color">0</h3>
     				</div>
-    				<div class="infoBox3 x-animated fadeIn d-7">
+    				<div class="d-7 fadeIn infoBox3 x-animated">
     					<label>TOTAL INVOICE AMOUNT</label>
     					<h3 class="main-color">$0.00</h3>
                     </div>
-                    <div class="infoBox3 x-animated fadeIn d-8">
+                    <div class="d-8 fadeIn infoBox3 x-animated">
                             <label>PENDING PAYMENT</label>
                             <h3 class="main-color">$0.00</h3>
                         </div>

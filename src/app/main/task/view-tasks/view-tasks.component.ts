@@ -888,9 +888,21 @@ export class ViewTasksComponent extends BaseComponent implements OnInit {
     }
   }
   onScroll(event: any) {
+    console.log('onscroll');
     const target = event.target;
-    const atBottom = target.scrollTop + target.clientHeight >= target.scrollHeight - 5;
-    console.log("bottom")
+    if (!target) return;
+
+    const atBottom =
+      target.scrollTop + target.clientHeight >= target.scrollHeight - 10;
+
+    console.log(
+      'Scrolled to bottom:',
+      target.scrollTop,
+      target.clientHeight,
+      target.scrollHeight,
+      atBottom
+    );
+
     if (atBottom) {
       this.onScrollDown(event);
     }
@@ -1197,7 +1209,6 @@ export class ViewTasksComponent extends BaseComponent implements OnInit {
           //            console.log("there is an error:", e);
           //        });
           //}
-          
         }
       })
       .catch((e) => {

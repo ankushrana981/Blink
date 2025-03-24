@@ -1,9 +1,9 @@
-<div class="crm-Wrap notes-wrap crmnotes-wrap-h" [ngClass]="icon1?'active':''">
+<div class="crm-Wrap crmnotes-wrap-h notes-wrap" [ngClass]="icon1?'active':''">
 
   <div class="contentBox task-page">
-    <div class="leftContent overflow-0 task-board notes-dashboard-main notes-dashboard-main-h">
+    <div class="leftContent notes-dashboard-main notes-dashboard-main-h overflow-0 task-board">
       <div
-        class="viewdata-title task-title d-flex flex-wrap align-items-center justify-content-between notes-title-main-h">
+        class="d-flex flex-wrap align-items-center justify-content-between notes-title-main-h task-title viewdata-title">
         <div class="d-flex flex-wrap align-items-center notes-left-h">
           <div class="titleWith-filter">
             <h2>
@@ -38,7 +38,7 @@
             <div *ngIf="tempArr.length != 3" class="filter-btnBox" (click)="startingFilter()">
               <img src="assets/images/icon-filter.svg" height="25" width="25" style="margin-top: -3px;" alt="">
             </div>
-            <div class="selectBoxList fliter-task" *ngIf="fliterflag">
+            <div class="fliter-task selectBoxList" *ngIf="fliterflag">
               <div class="form-group" (clickOutside)="isOpenFilter = false">
                 <label class="gray-label">Filter</label>
                 <ng-select #filterName [clearable]="false" [items]="filterstart" bindLabel="title"
@@ -148,7 +148,7 @@
       <div class="maintable">
         <div>
           <b class="table-title"><span class="ng-tns-c4-1">Customer </span></b>
-          <div class="small help-block line-divider help-desc"><span class="table-text"><span class="ng-tns-c4-1">May 6,
+          <div class="help-block help-desc line-divider small"><span class="table-text"><span class="ng-tns-c4-1">May 6,
                 2022</span></span></div>
         </div>
         <div style="max-width: 75vw;">
@@ -164,17 +164,17 @@
         <div style="white-space: nowrap;">Customer 121</div>
       </div>
 
-      <div class="card card-box pl-0 card-attention view-details-table wow fadeIn" data-wow-delay=".3s" #tblDivElem>
+      <div class="card card-attention card-box fadeIn pl-0 view-details-table wow" data-wow-delay=".3s" #tblDivElem>
         <div class="table-sticky-header">
-          <table style="width:100%" class="table-hover table-dashboard default-to-custom first-padding-0">
+          <table style="width:100%" class="table-dashboard table-hover default-to-custom first-padding-0">
             <thead>
-              <tr class="x-animated fadeIn d-1 in">
+              <tr class="d-1 fadeIn in x-animated">
                 <th width="57"></th>
                 <th class="table-date">
                   <b class="table-title">
                     <span>Type</span>&nbsp;
                   </b>
-                  <div class="small help-block line-divider before-line type">
+                  <div class="before-line help-block line-divider small type">
                     <span class="table-text">Date</span>
                   </div>
                 </th>
@@ -182,7 +182,7 @@
                   <b class="table-title">
                     <span>Note Type - Title</span>&nbsp;
                   </b>
-                  <div class="small help-block line-divider before-line board">
+                  <div class="before-line board help-block line-divider small">
                     <span class="table-text">Description </span>
                   </div>
                 </th>
@@ -190,7 +190,7 @@
                   <b class="table-title">
                     <span>Created Date</span>&nbsp;
                   </b>
-                  <div class="small help-block line-divider before-line board">
+                  <div class="before-line board help-block line-divider small">
                     <span class="table-text">Created By</span>
                   </div>
                 </th>
@@ -200,13 +200,172 @@
           </table>
         </div>
 
+        <div class="table-box h-100 mb-20">
+          <div class="table-respons h-100 note-crm-table overflow-y-scroll task-note-table" (scroll)="onScroll($event)">
+            <table style="width:100%" class="table-hover default-to-custom">
+              <thead class="thead-none">
+                <tr class="d-1 fadeIn in x-animated">
+                  <th width="30"></th>
+                  <th class="table-date">
+                    <b class="table-title">
+                      <span>Type</span>&nbsp;
+                    </b>
+                    <div class="before-line help-block line-divider small type">
+                      <span class="table-text">Date</span>
+                    </div>
+                  </th>
+                  <th class="table-description">
+                    <b class="table-title">
+                      <span>Note Type - Title</span>&nbsp;
+                    </b>
+                    <div class="before-line board help-block line-divider small">
+                      <span class="table-text">Description</span>
+                    </div>
+                  </th>
+                  <th class="table-cdate">
+                    <b class="table-title">
+                      <span>Created Date</span>&nbsp;
+                    </b>
+                    <div class="before-line board help-block line-divider small">
+                      <span class="table-text">Created By</span>
+                    </div>
+                  </th>
+                  <th class="table-action" width="30"></th>
+                </tr>
+              </thead>
+              <tbody [@fadeIn]="listrecords?.length" fxLayout="row wrap" class="list">
+                <tr style="vertical-align:top;" class="d-1 cursor-pointer fadeIn in x-animated"
+                  *ngFor="let record of listrecords; index as j" fxFlex="100" fxFlex.lt-sm="200">
+                  <td width="57px" class="text-center" (click)="showNoteDetails(record)">
+                    <h4 ng-bind="($index + 1)" class="rownumber ng-binding">{{j+1}}</h4>
+                  </td>
+                  <td class="text-left" (click)="showNoteDetails(record)">
+                    <b class="table-title top-notes-td-h">
+                      <span>{{typeArray[record.type]}} </span>
+                    </b>
+                    <div class="bottom-notes-td-h help-block help-desc line-divider small">
+                      <span class="table-text">
+                        <span>{{record.dateOfEntry | date: 'MMM d, y'}}</span>
+                      </span>
+                    </div>
+                  </td>
+                  <td class="text-left des-main-td" (click)="showNoteDetails(record)" id="table-text1-{{record?.id}}">
+                    <b class="table-title help-block help-desc small top-notes-td-h">
+                      <span class="d-flex">
+                        <ng-container *ngIf="record.type == 2">
+                          <div class="btn-group" (clickOutside)="subClientDropdownClose()" style="position: static;">
+                            <a href="javascript:void(0)"
+                              (click)="subClientDropdownClose();$event.stopPropagation();clientDropdownClick(record.businessPartner.id, record.id);$event.stopPropagation()"
+                              class="des-link">{{record?.businessPartner?.title}}&nbsp;</a>
+                            <ul
+                              [ngClass]="(clientShowId == record?.businessPartner?.id && (clientTaskShowId == record?.id)) ? 'show' : ''"
+                              class="d-flex flex-column dropdown-progress dropdown-table align-items-center justify-content-center dark name-dropdown">
+                              <li class="show">
+                                <ul>
+                                  <li role="menuitem" class="new-option" *ngIf="!isSingledOut && singledOutUserID == 0">
+                                    <a class="dropdown-item" href="javascript:void(0);"
+                                      (click)="singleOutClient(record.businessPartner.id)">Single Out</a>
+                                  </li>
+                                  <li role="menuitem" class="new-option"
+                                    *ngIf="isSingledOut && (singledOutUserID == record.businessPartner.id)">
+                                    <a class="dropdown-item singled-out" href="javascript:void(0);"
+                                      (click)="deSingleClient()">Singled Out</a>
+                                  </li>
+                                  <li role="menuitem" class="new-option">
+                                    <a class="dropdown-item" href="javascript:void(0);"
+                                      (click)="createTaskModal(createTask, record?.businessPartner?.title, record?.businessPartner)">Create
+                                      Task</a>
+                                  </li>
+                                  <li role="menuitem" class="new-option">
+                                    <a class="dropdown-item" href="javascript:void(0);"
+                                      (click)="addQuickModal(quickcustomer);$event.preventDefault()">Analytics</a>
+                                  </li>
+                                  <li role="menuitem" class="new-option">
+                                    <a class="dropdown-item" href="javascript:void(0);">Query</a>
+                                  </li>
+                                </ul>
+                              </li>
+                            </ul>
+                          </div>
+                        </ng-container>
+                        <ng-container *ngIf="record.type != 2">
+                        </ng-container>
+                        <div class="initials">
+                          -&nbsp;<span>{{record?.presetActivity?.title}}</span>
+                          <ng-container *ngIf="record?.crmNoteImages.length > 0"><a href="javascript:void(0);"
+                              (click)="$event.stopPropagation();$event.stopPropagation();openNotePhotos(notesPhots, record)"
+                              class="camera camera-notes-h">
+                              <span>{{record?.crmNoteImages.length}}</span><i icon-camera></i>
+                            </a>
+                          </ng-container>
+                        </div>
+                      </span>
+                    </b>
+                    <div class="bottom-notes-td-h line-divider notes-des-h td-des">
+                      <ng-container *ngIf="record?.notes !== null">
+                        <p class="table-text notes-text-h" id="table-text-{{record?.id}}"
+                          *ngIf="record?.notes && record.notes.length > 0">
+                          {{record.notes}}
+                        </p>
+                        <div class="table-fulldesc" *ngIf="record.notes.length > 75">
+                          <span class="">{{record.notes}}</span>
+                        </div>
+                      </ng-container>
+                      <ng-container *ngIf="record?.notes == null || record?.notes == ''"> <span
+                          class="table-text">-</span></ng-container>
+                    </div>
+                  </td>
+                  <td class="text-left" (click)="showNoteDetails(record)">
+                    <b class="table-title top-notes-td-h">
+                      <span>{{record.createdOn | date: 'MMM d, y'}}</span>
+                    </b>
+                    <div class="bottom-notes-td-h help-block help-desc line-divider small">
+                      <span class="table-text">
+                        <span>{{record?.createdBy?.title}}</span>
+                      </span>
+                    </div>
+                  </td>
+                  <td class="action-td" width="30">
+                    <div class="d-flex justify-content-center">
+                      <div class="btn-group" (clickOutside)="dropdownClose()">
+                        <a *ngIf="showId != record.id" class="icon-more" href="javascript:void(0)" icon-more
+                          (click)="subDropdownClose();$event.stopPropagation();dropdownClick(record.id);$event.stopPropagation()"></a>
+                        <a *ngIf="showId == record.id" class="icon-more" href="javascript:void(0)" icon-more
+                          (click)="subDropdownClose();$event.stopPropagation();dropdownClose();$event.stopPropagation()"></a>
+                        <ul [ngClass]="(showId == record.id) ? 'show' : ''"
+                          class="d-flex flex-column dropdown-progress dropdown-table align-items-center justify-content-center dark more-dropdown right">
+                          <li>
+                            <ul>
+                              <li role="menuitem" class="new-option">
+                                <a class="dropdown-item" href="javascript:void(0);"
+                                  (click)="$event.preventDefault();editThisRecord(record)">Edit</a>
+                              </li>
+                              <li role="menuitem" class="new-option">
+                                <a class="dropdown-item" href="javascript:void(0);"
+                                  (click)="setDeleteID(record.id);openDeletePopup(deleteNotesPopup)">Delete</a>
+                              </li>
+                              <li role="menuitem" class="new-option">
+                                <a class="dropdown-item" href="javascript:void(0);">Query</a>
+                              </li>
+                            </ul>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
       </div>
-      <div class="notes-btn text-end btn-task-main wow fadeIn" data-wow-delay="500ms">
-        <a *ngIf="showAddNewTaskButton" class="btn btn-main btn-blue" (click)="changeIc('dots')">Add New Task</a>
+      <div class="btn-task-main text-end fadeIn notes-btn wow" data-wow-delay="500ms">
+        <a *ngIf="showAddNewTaskButton" class="btn btn-blue btn-main" (click)="changeIc('dots')">Add New Task</a>
       </div>
     </div>
   </div>
-  <div class="rightSidebar-wrap rightSide-data-penal" *ngIf="showDummySidebar">
+  <div class="rightSide-data-penal rightSidebar-wrap" *ngIf="showDummySidebar">
     <div class="data-penal-header">
       <a href="jasvscript:void(0);" class="icon-dot" (click)="changeIc('dots');$event.preventDefault()">
         <i icon-more></i>
@@ -214,7 +373,7 @@
     </div>
   </div>
   <div
-    class="rightSidebar-wrap rightSidebar-wrap-right-0 rightSide-data-penal comman-sidebar  notes-sidebar crmnotes-sidebar-h">
+    class="comman-sidebar crmnotes-sidebar-h notes-sidebar rightSide-data-penal rightSidebar-wrap rightSidebar-wrap-right-0">
     <div class="data-penal-body">
       <ng-container *ngIf="showNoteDetailsDiv">
         <a href="javascript:void(0);" class="icon-dot icon-notes" (click)="changeIc('')">
@@ -234,7 +393,7 @@
             <div class="col-12"></div>
           </div>
         </div>
-        <h3 class="rightSidebar-main_title mb-40" *ngIf="clientTasks.length > 0 || clientNotes.length > 0">
+        <h3 class="mb-40 rightSidebar-main_title" *ngIf="clientTasks.length > 0 || clientNotes.length > 0">
           Relevant Info
         </h3>
         <div class="row" *ngIf="clientTasks.length > 0">
@@ -273,12 +432,12 @@
           <a href="javascript:void(0);" class="icon-dot icon-notes" (click)="changeIc('')">
             <i icon-more></i>
           </a>
-          <h3 class="rightSidebar-main_title mb-40">
+          <h3 class="mb-40 rightSidebar-main_title">
             Manage Note
           </h3>
           <div class="row">
             <div class="col-12">
-              <div class="form-group datepicker-formGroup form-group-title mt-13 mb-2">
+              <div class="form-group form-group-title datepicker-formGroup mb-2 mt-13">
                 <label>Date of Entry</label>
                 <div class="datepickerInputBox">
                   <input class="form-control" name="minDatepicker" type="text" id="minDatepicker"
@@ -291,7 +450,7 @@
           </div>
           <div class="row">
             <div class="col-12">
-              <div class="form-group datepicker-formGroup form-group-title mb-20 mt-1">
+              <div class="form-group form-group-title datepicker-formGroup mb-20 mt-1">
                 <label>Time of Entry</label>
                 <div class="time-of-entry">
                   <mat-form-field class="example-full-width notes-hours">
@@ -339,7 +498,7 @@
               </div>
             </div>
           </div>
-          <div class="row d-none">
+          <div class="d-none row">
             <div class="col-12">
               <div class="form-group datepicker-formGroup mt-8">
                 <label>Next followup</label>
@@ -391,10 +550,10 @@
               </div>
             </div>
           </div>
-          <div class="row d-none">
+          <div class="d-none row">
             <div class="col-12">
               <div class="form-group">
-                <div class="custom-control custom-checkbox">
+                <div class="custom-checkbox custom-control">
                   <input type="checkbox" class="custom-control-input" id="defaultChecked2" name="check"
                     (change)="changedCheck($event)" [(ngModel)]="user.isComplete">
                   <label class="custom-control-label" for="defaultChecked2">Mark completed ?</label>
@@ -436,13 +595,13 @@
   <div class="modal-body p-0 delete-modal" (closeClick)="modalRef.hide()">
     <div class="d-flex flex-wrap position-relative quick-modal">
       <div class="d-flex flex-wrap w-100">
-        <div class="chart-header w-100 d-flex flex-wrap">
-          <div class="chart-right flex-1 d-flex flex-wrap align-items-center">
+        <div class="d-flex flex-wrap w-100 chart-header">
+          <div class="d-flex flex-1 flex-wrap align-items-center chart-right">
             <h3 class=text-title>Delete Confirmation</h3>
             <a href="javascript:void(0)" icon-close (click)="modalRef.hide()" class="close-ic"></a>
           </div>
         </div>
-        <div class="w-100 ">
+        <div class="w-100">
           <div class="task-body">
             <h3>Are you sure you want to delete this note ?</h3>
             <div class="footer-btn">
@@ -460,9 +619,9 @@
 <ng-template #notesPhots>
   <div class="modal-body p-0 galley-modal" (closeClick)="modalRef.hide()">
     <div class="d-flex flex-wrap position-relative">
-      <div class="chart-box d-flex flex-wrap w-100">
-        <div class="chart-header w-100 d-flex flex-wrap">
-          <div class="chart-right flex-1 d-flex flex-wrap align-items-center justify-content-between">
+      <div class="d-flex flex-wrap w-100 chart-box">
+        <div class="d-flex flex-wrap w-100 chart-header">
+          <div class="d-flex flex-1 flex-wrap align-items-center justify-content-between chart-right">
             <h3 class=text-title>Note Photos</h3>=
             <a href="javascript:void(0)" icon-close (click)="modalRef.hide()"></a>
           </div>
@@ -489,10 +648,10 @@
 
 <ng-template #createTask>
   <div class="modal-body p-0">
-    <div class="d-flex flex-wrap chart-form create-task-from position-relative">
-      <div class="chart-box d-flex flex-wrap w-100" [ngClass]="{'active-task': ''}">
-        <div class="chart-header w-100 d-flex flex-wrap">
-          <div class="chart-right flex-1 d-flex flex-wrap align-items-center justify-content-between">
+    <div class="d-flex flex-wrap position-relative chart-form create-task-from">
+      <div class="d-flex flex-wrap w-100 chart-box" [ngClass]="{'active-task': ''}">
+        <div class="d-flex flex-wrap w-100 chart-header">
+          <div class="d-flex flex-1 flex-wrap align-items-center justify-content-between chart-right">
             <h3 class=text-title>Quick Task Entry</h3>
             <a href="javascript:void(0)" icon-close (click)="modalRef.hide()"></a>
           </div>
@@ -503,8 +662,8 @@
               <form class="example-form" #formDir="ngForm" novalidate #taskform [formGroup]="addForm"
                 (ngSubmit)="submitAddForm()">
                 <div class="">
-                  <div class="step-block d-flex flex-wrap">
-                    <ul class="task-details d-flex flex-column">
+                  <div class="d-flex flex-wrap step-block">
+                    <ul class="d-flex flex-column task-details">
                       <li (clickOutside)="createdDateClose()">
                         <div class="form-group form-task remove-border">
                           <mat-form-field class="example-full-width mat-input" (click)="createdDateClick()">
@@ -522,7 +681,7 @@
                         </div>
                       </li>
                       <li>
-                        <div class="form-group form-task remove-border divide-two">
+                        <div class="form-group form-task divide-two remove-border">
                           <mat-form-field class="example-full-width mat-input">
                             <input matInput type="text" placeholder="Task Type" value="Customer" autocomplete="off"
                               readonly>
@@ -534,7 +693,7 @@
                         </div>
                       </li>
                       <li>
-                        <div class="form-group form-task remove-border bottom-line-title title-control ">
+                        <div class="form-group form-task bottom-line-title remove-border title-control">
                           <ng-select (change)="onChangepresetActivity($event)" formControlName="title" class="w-100"
                             [items]="titleArr" placeholder="Title" bindLabel="title" bindValue="id" [searchable]="false"
                             [hideSelected]="true">
@@ -549,7 +708,7 @@
                         </div>
                       </li>
                       <li>
-                        <div class="form-group form-task form-border focus-div">
+                        <div class="form-border form-group form-task focus-div">
                           <mat-form-field class="example-full-width mat-input">
                             <input name="subTitle" id="subTitle" formControlName="subTitle" matInput type="text"
                               placeholder="Focus" value="" autocomplete="off">
@@ -557,7 +716,7 @@
                         </div>
                       </li>
                       <li>
-                        <div class="form-group form-task form-border">
+                        <div class="form-border form-group form-task">
                           <mat-form-field class="example-full-width mat-input">
                             <input matInput type="text" formControlName="note" placeholder="Notes" value=""
                               autocomplete="off">
@@ -581,21 +740,21 @@
                         </div>
                       </li>
                     </ul>
-                    <div *ngIf="createedDate" class="custom-picker move theme-white theme-green">
+                    <div *ngIf="createedDate" class="custom-picker move theme-green theme-white">
                       <bs-datepicker-inline (bsValueChange)="createdDateValueChange($event,bsConfigCreated_Date)"
                         [bsConfig]="bsConfigCreated_Date" [bsValue]="created_Date">
                         <a icon-close (click)="createdDateClose()"></a>
                         <a icon-close (click)="createdDateClose()"></a>
                       </bs-datepicker-inline>
                     </div>
-                    <div *ngIf="dueDate" class="custom-picker move theme-white theme-green">
+                    <div *ngIf="dueDate" class="custom-picker move theme-green theme-white">
                       <bs-datepicker-inline (bsValueChange)="dueDateValueChange($event,bsConfig)" [bsConfig]="bsConfig"
                         [bsValue]="due_date">
                         <a icon-close (click)="dueDateClose()"></a>
                       </bs-datepicker-inline>
                     </div>
                   </div>
-                  <div class="task-btn-grp d-flex flex-wrap align-items-start justify-content-between">
+                  <div class="d-flex flex-wrap align-items-start justify-content-between task-btn-grp">
                     <button type="submit" class="btn-save assign-to-btn"
                       [ngClass]="(addForm.valid && isSaveButtonDisabled == false) ? '' : 'disabled'">
                       Assign to
@@ -618,16 +777,16 @@
 
 <ng-template #addCustomerPopup>
   <div class="modal-body p-0 delete-modal" (closeClick)="modalRef.hide()">
-    <div class="d-flex flex-wrap chart-form create-task-from position-relative">
-      <div class="chart-box d-flex flex-wrap w-100" [ngClass]="{'active-task': subListTask}">
-        <div class="chart-header w-100 d-flex flex-wrap">
-          <div class="chart-right flex-1 d-flex flex-wrap align-items-center justify-content-between">
+    <div class="d-flex flex-wrap position-relative chart-form create-task-from">
+      <div class="d-flex flex-wrap w-100 chart-box" [ngClass]="{'active-task': subListTask}">
+        <div class="d-flex flex-wrap w-100 chart-header">
+          <div class="d-flex flex-1 flex-wrap align-items-center justify-content-between chart-right">
             <h3 class=text-title>Add New Customer</h3>
             <a href="javascript:void(0)" icon-close (click)="modalRef.hide()"></a>
           </div>
         </div>
-        <div class="task-body w-100">
-          <div class="d-flex flex-wrap ">
+        <div class="w-100 task-body">
+          <div class="d-flex flex-wrap">
             <a class="btn-task active" href="javascript:void(0)" [ngClass]="{'active': displayStepOne}"
               (click)="showStepOne()">Basic
               Profile</a>
@@ -641,7 +800,7 @@
           <form class="example-form" [formGroup]="addCustomerBasicInfo" (ngSubmit)="addBasicInfo()">
             <div class="task-content" *ngIf="displayStepOne">
               <div class="">
-                <div class="step-block d-flex justify-content-between">
+                <div class="d-flex justify-content-between step-block">
                   <div class="left-section">
                     <div class="row">
                       <div class="col-md-12">
@@ -792,9 +951,9 @@
                 </div>
               </div>
             </div>
-            <div class="task-content small-form " *ngIf="displayStepTwo">
+            <div class="small-form task-content" *ngIf="displayStepTwo">
               <div class="">
-                <div class="step-block d-flex flex-wrap">
+                <div class="d-flex flex-wrap step-block">
                   <div class="left-section">
                     <div class="row">
                       <div class="col-md-12">
@@ -824,9 +983,9 @@
                 </div>
               </div>
             </div>
-            <div class="task-content small-form " *ngIf="displayStepThree">
+            <div class="small-form task-content" *ngIf="displayStepThree">
               <div class="">
-                <div class="step-block d-flex flex-wrap">
+                <div class="d-flex flex-wrap step-block">
                   <div class="left-section">
                     <div class="row">
                       <div class="col-md-12">
@@ -857,9 +1016,9 @@
                 </div>
               </div>
             </div>
-            <div class="task-content small-form " *ngIf="displayStepFour">
+            <div class="small-form task-content" *ngIf="displayStepFour">
               <div class="">
-                <div class="step-block d-flex flex-wrap">
+                <div class="d-flex flex-wrap step-block">
                   <div class="left-section">
                     <div class="row">
                       <div class="col-md-12">
@@ -907,7 +1066,7 @@
                 </div>
               </div>
             </div>
-            <div class="task-btn-grp d-flex flex-wrap align-items-start justify-content-between">
+            <div class="d-flex flex-wrap align-items-start justify-content-between task-btn-grp">
               <button type="submit" [ngClass]="addCustomerBasicInfo.valid  ? '' : 'disabled'" class="btn-save"
                 [disabled]="!addCustomerBasicInfo.valid">
                 Save
@@ -923,9 +1082,9 @@
 <ng-template #crmNotePopup>
   <div class="modal-body p-0 delete-modal" (closeClick)="modalRef.hide()">
     <div class="d-flex flex-wrap position-relative">
-      <div class="chart-box d-flex flex-wrap w-100">
-        <div class="chart-header w-100 d-flex flex-wrap">
-          <div class="chart-right flex-1 d-flex flex-wrap align-items-center justify-content-between">
+      <div class="d-flex flex-wrap w-100 chart-box">
+        <div class="d-flex flex-wrap w-100 chart-header">
+          <div class="d-flex flex-1 flex-wrap align-items-center justify-content-between chart-right">
             <h3 class=text-title>CRM - NOTE</h3>
             <a href="javascript:void(0)" icon-close (click)="modalRef.hide(); resetCRMNotesData();"></a>
           </div>
@@ -984,9 +1143,9 @@
 <ng-template #crmTaskPopup>
   <div class="modal-body p-0 delete-modal" (closeClick)="modalRef.hide()">
     <div class="d-flex flex-wrap position-relative">
-      <div class="chart-box d-flex flex-wrap w-100">
-        <div class="chart-header w-100 d-flex flex-wrap">
-          <div class="chart-right flex-1 d-flex flex-wrap align-items-center justify-content-between">
+      <div class="d-flex flex-wrap w-100 chart-box">
+        <div class="d-flex flex-wrap w-100 chart-header">
+          <div class="d-flex flex-1 flex-wrap align-items-center justify-content-between chart-right">
             <h3 class=text-title>CRM - TASK</h3>
             <a href="javascript:void(0)" icon-close (click)="modalRef.hide(); resetCRMTaskData();"></a>
           </div>

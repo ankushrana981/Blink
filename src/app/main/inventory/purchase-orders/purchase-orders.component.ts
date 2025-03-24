@@ -68,6 +68,16 @@ getlistUsers() {
 @parameters : 
 @return :
 *****************************************************/
+
+onScroll(event: any) {
+  const target = event.target;
+  const atBottom =
+    target.scrollTop + target.clientHeight >= target.scrollHeight;
+  console.log('bottom');
+  if (atBottom) {
+    this.onScrollDown(event);
+  }
+}
 onScrollDown(ev) {
 this.data['offset'] = this.data['offset'] + 20;
   if (this.total > this.data['offset']) {

@@ -123,6 +123,11 @@
   background-color: #888;
 } */
 
+.updated-mat-form.umf-vt mat-label {
+  color: #a0a3b9;
+  font-size: 12px;
+}
+
 @media only screen and (max-width: 997px) {
   .addNewTask {
     right: 180px;

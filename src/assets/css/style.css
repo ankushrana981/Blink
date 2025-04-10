@@ -23818,3 +23818,35 @@ span#iooo {
   background-color: #d3d3d3;
   border-radius: 3px;
 }
+
+.view-details-table .table-box.pe-0 {
+padding-right: 0 !important;
+}
+
+/* notes */
+.updated-mat-form.umf-notes mat-label {
+  letter-spacing: .08em !important;
+  font-size: 12px;
+}
+
+.updated-mat-form.umf-notes .mat-mdc-text-field-wrapper.mdc-text-field.mdc-text-field--filled {
+  height: 43px !important;
+}
+
+.updated-mat-form.umf-notes .mat-mdc-form-field-infix {
+
+padding: 18px 0 0 0 !important;
+  min-height: 43px !important;
+}
+
+.updated-mat-form.umf-notes .mdc-floating-label.mat-mdc-floating-label.mdc-floating-label--float-above{
+  bottom: 0 !important;
+}
+
+.umf-notes .mdc-line-ripple{
+  display: none;
+}
+
+.umf-notes .task-details{
+  padding-right: 0;
+}

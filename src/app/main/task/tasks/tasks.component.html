@@ -1471,13 +1471,13 @@
                                     <div class="col-md-6">
                                         <label class="time-label">Time</label>
                                         <div class="time-entry-change time-of-entry">
-                                            <mat-form-field class="example-full-width">
+                                            <mat-form-field class="example-full-width time-fd">
                                                 <input matInput value="" name="hours" type="number"
                                                     [(ngModel)]="calendar.hourSelection" min="0" max="23" required
                                                     (ngModelChange)="validateValue($event)">
                                             </mat-form-field>
                                             <span class="colon">:</span>
-                                            <mat-form-field class="example-full-width">
+                                            <mat-form-field class="example-full-width time-fd">
                                                 <input matInput value="" name="minutes" type="number"
                                                     [(ngModel)]="calendar.minuteSelection" min="0" max="59" required
                                                     (ngModelChange)="validateMinutesValue($event)">
@@ -1802,9 +1802,9 @@
                                 </div>
                             </div>
                             <div class="form-group form-task form-task-new">
-                                <mat-form-field class="example-full-width mat-input">
+                                <mat-form-field class="example-full-width mat-input hide-astr">
                                     <input formControlName="taskDetailText" id="taskChatDetailText" matInput type="text"
-                                        value="" autocomplete="off">
+                                        value="" autocomplete="off" autofocus="on">
                                     <mat-label>Message</mat-label>
                                 </mat-form-field>
                                 <div class="d-flex align-items-start img-btn task-btn-grp">

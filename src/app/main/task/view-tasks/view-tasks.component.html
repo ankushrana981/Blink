@@ -2567,7 +2567,7 @@
                                 (click)="showPopupDetails('chat')">Chat</a>
                         </div>
                         <div class="task-content" *ngIf="selectedTabType === 'query'">
-                            <form class="example-form" [formGroup]="addTaskQueryForm" (ngSubmit)="addTaskQuery()">
+                            <form class="example-form updated-mat-form umf-vt hide-astr" [formGroup]="addTaskQueryForm" (ngSubmit)="addTaskQuery()">
                                 <div class="w-100">
                                     <div class="task-board-field">
                                         <span class="fnt">Board Name</span>
@@ -2580,7 +2580,8 @@
                                     <div class="form-group form-task small-note">
                                         <mat-form-field class="example-full-width mat-input">
                                             <input formControlName="taskDetailText" id="queryTaskDetailText" matInput
-                                                type="text" placeholder="Query" value="" autocomplete="off">
+                                                type="text" value="" autocomplete="off">
+                                                <mat-label>Query</mat-label>
                                         </mat-form-field>
                                     </div>
                                     <div class="d-flex flex-wrap align-items-start justify-content-end task-btn-grp">
@@ -2594,7 +2595,7 @@
                             </form>
                         </div>
                         <div class="task-content" *ngIf="selectedTabType === 'chat'">
-                            <form class="example-form" [formGroup]="addTaskChatForm" (ngSubmit)="addTaskChat()">
+                            <form class="example-form updated-mat-form umf-vt hide-astr" [formGroup]="addTaskChatForm" (ngSubmit)="addTaskChat()">
                                 <div class="w-100">
                                     <div class="task-board-field">
                                         <span class="fnt">Board Name</span>
@@ -2667,7 +2668,8 @@
                                     <div class="form-group form-task form-task-new">
                                         <mat-form-field class="example-full-width mat-input">
                                             <input formControlName="taskDetailText" id="taskChatDetailText" matInput
-                                                type="text" placeholder="Message" value="" autocomplete="off">
+                                                type="text"  value="" autocomplete="off">
+                                                <mat-label>Message</mat-label>
                                         </mat-form-field>
                                         <div class="d-flex align-items-start img-btn task-btn-grp">
                                             <button type="submit" class="btn-save"

@@ -334,3 +334,19 @@ ul {
   flex-direction: column;
   justify-content: space-between;
 }
+
+.time-entry-change .time-fd .mat-mdc-form-field-infix{
+  min-height: auto !important;
+  padding: 0 !important;
+}
+.time-entry-change .time-fd .mdc-text-field, .time-entry-change .mdc-text-field{
+  height: auto !important;
+}
+
+.time-entry-change .mdc-line-ripple{
+  display: none;
+}
+
+.hide-astr .mat-mdc-form-field-required-marker {
+  display: none;
+}

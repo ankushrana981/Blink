@@ -289,9 +289,18 @@
 }
 .time-entry-change {
   justify-content: flex-start;
-  max-width: 20px;
+  /* max-width: 20px; */
   max-height: 50px;
 }
+
+.time-entry-change .time-fd .mat-mdc-form-field-infix{
+  height: auto !important;
+  padding: 0 !important;
+}
+.time-entry-change .time-fd .mdc-text-field{
+  height: auto;
+}
+
 .time-label {
   color: #a0a3b9;
   text-transform: uppercase;
@@ -431,4 +440,9 @@
 .list-div-main:hover::-webkit-scrollbar-thumb {
   background-color: #f1f0f5 !important;
   border-radius: 0 !important;
+}
+
+.task-tabing .list-div-main.folder-div-main {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }

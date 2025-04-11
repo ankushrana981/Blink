@@ -213,12 +213,12 @@
                                       </mat-form-field> -->
                                     <!-- <label class="title">Source Price</label>
                                     <input id="productname" type="text" class="form-control"> -->
-                                    <mat-form-field class="example-full-width mat-input label-style">
+                                    <mat-form-field class="example-full-width mat-input label-style rp_prefix">
                                         <mat-label>Source Price</mat-label>
                                         <!-- <mat-prefix>Rp. </mat-prefix> -->
                                         <input formControlName="focus" matInput type="text" value="" autocomplete="off"
-                                            prefix="Rp. " mask="separator" thousandSeparator="." id="innn">
-                                        <span matTextPrefix id="iooo">Rp. </span>
+                                            prefix="Rp. "  #inputRef (focus)="showDiv = true" (blur)="checkInput(inputRef)" mask="separator" thousandSeparator="." id="innn">
+                                        <span matTextPrefix id="iooo" *ngIf="showDiv">Rp. </span>
                                     </mat-form-field>
                                 </div>
                             </div>

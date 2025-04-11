@@ -11,8 +11,22 @@ export class AddProductComponent implements OnInit {
   setp2: boolean = false;
   setp3: boolean = false;
   assignto: boolean = false;
+  inputValue = '';
+  showDiv = false;
+
+
 
   @Output() closeClick = new EventEmitter();
+
+  checkInput(input: any) {
+    const rawValue = input.value; 
+  // console.log("object", rawValue)
+    if (rawValue == '') {
+      // console.log("object11", rawValue)
+
+      this.showDiv = false;
+    }
+  }
 
   closeTask() {
     this.closeClick.emit('close'); // Pass any payload as argument

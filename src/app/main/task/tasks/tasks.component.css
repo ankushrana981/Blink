@@ -446,3 +446,11 @@
   scrollbar-width: none;
   -ms-overflow-style: none;
 }
+
+.sideBar-noti .card-box .card-header {
+  padding: 28px 22px 0 25px;
+}
+
+.sideBar-noti .card-box {
+  padding: 0 2px 35px 20px;
+}

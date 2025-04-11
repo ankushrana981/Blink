@@ -659,13 +659,13 @@
         <div class="w-100 create-task-body">
           <div class="task-body">
             <div>
-              <form class="example-form updated-mat-form umf-notes" #formDir="ngForm" novalidate #taskform [formGroup]="addForm"
+              <form class="example-form updated-mat-form umf-notes " #formDir="ngForm" novalidate #taskform [formGroup]="addForm"
                 (ngSubmit)="submitAddForm()">
                 <div class="">
                   <div class="d-flex flex-wrap step-block">
                     <ul class="d-flex flex-column task-details">
                       <li (clickOutside)="createdDateClose()">
-                        <div class="form-group form-task remove-border">
+                        <div class="form-group form-task remove-border umf-noline">
                           <mat-form-field class="example-full-width mat-input" (click)="createdDateClick()">
                             <input formControlName="dateOfEntry" matInput type="text"
                               value="" autocomplete="off" readonly>
@@ -674,7 +674,7 @@
                         </div>
                       </li>
                       <li (clickOutside)="dueDateClose()" class="bottom-line">
-                        <div class="form-group form-task remove-border">
+                        <div class="form-group form-task remove-border umf-noline">
                           <mat-form-field class="example-full-width mat-input" (click)="dueDateClick()">
                             <input formControlName="dueDate" matInput type="text"  value=""
                               autocomplete="off" readonly>
@@ -683,13 +683,13 @@
                         </div>
                       </li>
                       <li>
-                        <div class="form-group form-task divide-two remove-border">
-                          <mat-form-field class="example-full-width mat-input">
+                        <div class="form-group form-task divide-two remove-border umf-noline">
+                          <mat-form-field class="example-full-width mat-input w-100">
                             <input matInput type="text" value="Customer" autocomplete="off"
                               readonly>
                               <mat-label>Task Type</mat-label>
                           </mat-form-field>
-                          <mat-form-field class="example-full-width mat-input">
+                          <mat-form-field class="example-full-width mat-input w-180">
                             <input matInput type="text"  [value]="customerNameCreateTask"
                               autocomplete="off" readonly>
                               <mat-label>Customer</mat-label>
@@ -723,7 +723,7 @@
                       <li>
                         <div class="form-border form-group form-task">
                           <mat-form-field class="example-full-width mat-input">
-                            <input matInput type="text" formControlName="note" placeholder="Notes" value=""
+                            <input matInput type="text" formControlName="note" value=""
                               autocomplete="off">
                               <mat-label>Notes</mat-label>
                           </mat-form-field>

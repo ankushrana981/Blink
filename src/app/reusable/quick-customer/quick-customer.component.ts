@@ -45,7 +45,9 @@ export type ChartOptions = {
     { provide: BsDropdownConfig, useValue: { isAnimated: true, autoClose: true }}
   ]
 })
-export class QuickCustomerComponent implements OnInit {   
+export class QuickCustomerComponent implements OnInit {  
+  @ViewChild('itemList', { read: ElementRef }) itemList!: ElementRef;
+  @ViewChild('alphabetList', { read: ElementRef }) alphabetList!: ElementRef; 
   mainright: boolean = false;
   public selectedFirst: boolean = false;
   public selectedSecond: boolean = false;
@@ -55,6 +57,11 @@ export class QuickCustomerComponent implements OnInit {
   showFullText3: boolean = false;
   showFullText4: boolean = false;
   activeSlideIndex = 0;
+  alphabet: string[] = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+  activeLetter: string | null = null;
+  availableLetters: Set<string> = new Set();
+  filteredItems: Array<any> = [];
+  searchQuery: string = '';
 
   selectedValue: any;
   @Output() closeClick = new EventEmitter();
@@ -231,7 +238,60 @@ export class QuickCustomerComponent implements OnInit {
       $('.alpha-search-input input').removeAttr('disabled')
     }, 500); 
   }
-  
+  searchItems() {
+    if (this.searchQuery.trim() === '') {
+      this.filteredItems = [...this.items];
+      return;
+    } else {
+      this.filteredItems = this.items.filter((item) =>
+        item.name.toLowerCase().includes(this.searchQuery.toLowerCase())
+      );
+    }
+
+    this.filteredItems = this.items.filter((item) =>
+      item.name.toLowerCase().includes(this.searchQuery.toLowerCase())
+    );
+
+    if (this.filteredItems.length > 0) {
+      const firstMatch = this.filteredItems[0];
+      const targetElement = document.getElementById(firstMatch.name);
+      if (targetElement && this.itemList) {
+        const listContainer = this.itemList.nativeElement;
+        listContainer.scrollTo({
+          top: targetElement.offsetTop - listContainer.offsetTop,
+          behavior: 'smooth',
+        });
+      }
+    }
+  }
+  filterByLetter(letter: string) {
+    if (!this.availableLetters.has(letter)) return;
+
+    this.activeLetter = letter;
+
+    // Find the first item that starts with the selected letter
+    const targetItem = this.items.find((item) => item.name.startsWith(letter));
+    if (targetItem) {
+      const targetElement = document.getElementById(targetItem.name);
+      if (targetElement && this.itemList) {
+        // Align the target element to the top of the container
+        const listContainer = this.itemList.nativeElement;
+        listContainer.scrollTo({
+          top: targetElement.offsetTop - listContainer.offsetTop, // Align to top
+          behavior: 'smooth',
+        });
+      }
+    }
+
+    // Scroll the alphabet list to keep the selected letter in view
+    const letterElement = document.getElementById(`letter-${letter}`);
+    if (letterElement && this.alphabetList) {
+      this.alphabetList.nativeElement.scrollTo({
+        top: letterElement.offsetTop - 20,
+        behavior: 'smooth',
+      });
+    }
+  }
   isSelected(step) {
     if (step == 'first') {
       this.selectedFirst = !this.selectedFirst;

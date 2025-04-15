@@ -18181,12 +18181,12 @@ table.default-to-custom .help-block.help-desc .table-fulldesc {
   z-index: 1;
 }
 
-.quick-popup .alpha-search .alpha-search-content .alpha-search-area > ul {
+.quick-popup .alphaMain .list-container > ul {
   border: none !important;
   padding: 0 !important;
 }
 
-.quick-popup .alpha-search .alpha-search-content .alpha-search-area > ul > li {
+.quick-popup .alphaMain .list-container > ul > li {
   position: relative;
   padding: 0 0 0 43px;
   max-width: 190px;
@@ -18194,9 +18194,8 @@ table.default-to-custom .help-block.help-desc .table-fulldesc {
 }
 
 .quick-popup
-  .alpha-search
-  .alpha-search-content
-  .alpha-search-area
+  .alphaMain
+  .list-container
   > ul
   > li:before {
   position: absolute;
@@ -18210,9 +18209,8 @@ table.default-to-custom .help-block.help-desc .table-fulldesc {
 }
 
 .quick-popup
-  .alpha-search
-  .alpha-search-content
-  .alpha-search-area
+  .alphaMain
+  .list-container
   > ul
   > li.active:before {
   background: #ffffff;
@@ -18222,9 +18220,8 @@ table.default-to-custom .help-block.help-desc .table-fulldesc {
 }
 
 .quick-popup
-  .alpha-search
-  .alpha-search-content
-  .alpha-search-area
+  .alphaMain
+  .list-container
   > ul
   > li
   + li {
@@ -18232,9 +18229,8 @@ table.default-to-custom .help-block.help-desc .table-fulldesc {
 }
 
 .quick-popup
-  .alpha-search
-  .alpha-search-content
-  .alpha-search-area
+  .alphaMain
+  .list-container
   > ul
   > li
   > span {
@@ -18242,9 +18238,8 @@ table.default-to-custom .help-block.help-desc .table-fulldesc {
 }
 
 .quick-popup
-  .alpha-search
-  .alpha-search-content
-  .alpha-search-area
+  .alphaMain
+  .list-container
   > ul
   > li
   .search-item-data {
@@ -18260,9 +18255,8 @@ table.default-to-custom .help-block.help-desc .table-fulldesc {
 }
 
 .quick-popup
-  .alpha-search
-  .alpha-search-content
-  .alpha-search-area
+  .alphaMain
+  .list-container
   > ul
   > li
   .search-item-data

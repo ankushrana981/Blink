@@ -16,8 +16,8 @@
                                 {{mainright ? "Potential Customers" : "Existing Customers"}}<span class="caret"></span>
                         </button>
                         <ul id="dropdown-animated" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-animated">
-                            <li role="menuitem" (click)="mainright = !mainright"><a class="dropdown-item" href="#">Existing Customers</a></li>
-                            <li role="menuitem" (click)="mainright = !mainright"><a class="dropdown-item" href="#">Potential Customers</a></li>
+                            <li role="menuitem" (click)="mainright = !mainright"><a class="dropdown-item" href="javascript:void">Existing Customers</a></li>
+                            <li role="menuitem" (click)="mainright = !mainright"><a class="dropdown-item" href="javascript:void">Potential Customers</a></li>
                         </ul>
                     </div>
                     <div class="customer-list">
@@ -37,6 +37,37 @@
                           </div>
                         </ng-template>
                       </alphabet-filter> -->
+                      <div class="alphaMain" style="width: auto;">
+                        <div class="alpha-container">
+                          <!-- Items List -->
+                          <div class="list-container" #itemList>
+                            <ul>
+                              <li *ngFor="let item of (searchQuery ? filteredItems : items)" [id]="item.name" [class.active]="item.name == selectedValue">
+                                <div class="search-item-data">
+                                    <div class="search-list-item" (click)="tabNum = item.name">
+                                      <span (click)="selectedItem(item)">{{ item.name }}</span>
+                                      <span class="sub">{{item.subname}}</span>
+                                    </div>
+                                </div>
+                              </li>
+                            </ul>
+                          </div>
+                          <!-- Alphabet List -->
+                          <div class="alphabet-container" #alphabetList>
+                            <span *ngFor="let letter of alphabet" [id]="'letter-' + letter"
+                              (click)="filterByLetter(letter)" [ngClass]="{
+                                'active': letter === activeLetter,
+                                'disabled': !availableLetters.has(letter)
+                              }">
+                              {{ letter }}
+                            </span>
+                          </div>
+                        </div>
+                        <div class="alpha-search-input fadeEnter d-flex">
+                          <input type="search" placeholder=" " class="" [(ngModel)]="searchQuery"
+                            (input)="searchItems()" />
+                        </div>
+                      </div>
                     </div>
                 </div>
                 <div class="quick-right" *ngIf="!mainright">

@@ -190,7 +190,7 @@ export class ManageCompositionsComponent implements OnInit, AfterViewInit {
     this.yourForm = new FormGroup({
       product_type: new FormControl(null),
       focus: new FormControl(''),
-      task_type: new FormControl(''),
+      task_type: new FormControl(null),
     });
   }
 

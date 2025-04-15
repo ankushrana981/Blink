@@ -19,6 +19,7 @@ export class ReceivingCostComponent implements OnInit {
   ngOnInit() {
   }
   changeIc(type) {
+    console.log(type, "type ")
     if (type == 'dots') {
       this.icon1 = true;
     } else {

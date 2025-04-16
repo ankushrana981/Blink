@@ -281,12 +281,12 @@
 
                                 <div class="task-btn-grp d-flex flex-wrap align-items-start justify-content-between">
                                     <div class="task-w-50">
-                                        <button type="button" *ngIf="subListTask == 'General' && accessLevel > 2"
+                                        <button type="button" *ngIf="subListTask == 'General' && accessLevel >= 2"
                                             (click)="assigntoClick();scroll(target)"
                                             [ngClass]="assignto ? '' : 'unclick'" class="btn-assign">
                                             Assign to
                                         </button>
-                                        <ul *ngIf="assignto == true && subListTask == 'General' && accessLevel > 2"
+                                        <ul *ngIf="assignto == true && subListTask == 'General' && accessLevel >= 2"
                                             class="task-details mt-2 d-flex flex-column remove-dropdown">
                                             <li>
                                                 <div class="form-group">

@@ -11881,8 +11881,8 @@ app-prodcut-view .crm-Wrap.active {
   color: #a0a3b9;
 }
 
-.mat-input.mat-form-field-appearance-legacy .mat-form-field-label {
-  color: #a0a3b9;
+.mat-input.mat-form-field-appearance-legacy .mat-form-field-label, .mat-mdc-form-field .mat-mdc-form-field-infix .mdc-floating-label {
+  color: #a0a3b9 !important;
   font-family: "SF UI Display Medium";
   font-size: 14px;
   line-height: 12px;
@@ -11890,7 +11890,7 @@ app-prodcut-view .crm-Wrap.active {
   text-transform: uppercase;
 }
 
-.form-task .mat-input.mat-form-field-appearance-legacy .mat-form-field-label {
+.form-task .mat-mdc-form-field .mdc-floating-label {
   font-family: "SF UI Display Bold";
   font-size: 12px;
   line-height: 14px;

@@ -1307,7 +1307,7 @@ export class ReladexComponent extends BaseComponent implements OnInit {
       dateOfEntry: new FormControl('', [Validators.required]),
       dueDate: new FormControl(),
       title: new FormControl(null, [Validators.required]),
-      subTitle: new FormControl(),
+      subTitle: new FormControl(null),
       note: new FormControl(),
       user: new FormControl(),
       associatedUserIds: new FormControl(),

@@ -17211,8 +17211,8 @@ table.default-to-custom .help-block.help-desc .table-fulldesc {
 .product-modifier
   .manage-detail
   .left-part
-  .alpha-search
-  .alpha-search-content {
+  .alphaMain
+  .alpha-container {
   border-right: 4px solid #3db39e;
   width: 100%;
 }

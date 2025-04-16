@@ -47,12 +47,13 @@
                           <div class="list-container" #itemList>
                             <ul>
                               <li *ngFor="let item of  items" [id]="item.name">
-                                <div class="search-list-item">
+                                <div class="search-list-item mb-2">
                                   <span (click)="selectedItem(item)">{{ item.name }}</span>
                                 </div>
                               </li>
                             </ul>
                           </div>
+                          
                           <!-- Alphabet List -->
                         </div>
                       </div>
@@ -85,192 +86,210 @@
                         <div class="triggers-list">
                           <ul class="nav nav-tabs">
                             <li class="nav-item">
-                              <a class="nav-link" data-toggle="pill" href="#price">Price</a>
+                            <a class="nav-link" [class.active]="activeTab === 'price'" (click)="activeTab = 'price'">Price</a>
                             </li>
                             <li class="nav-item">
-                              <a class="nav-link" data-toggle="pill" href="#size">Size</a>
+                            <a class="nav-link" [class.active]="activeTab === 'size'" (click)="activeTab = 'size'">Size</a>
                             </li>
                             <li class="nav-item">
-                              <a class="nav-link" data-toggle="pill" href="#recipe">Different recipe</a>
+                            <a class="nav-link" [class.active]="activeTab === 'recipe'" (click)="activeTab = 'recipe'">Different recipe</a>
                             </li>
                             <li class="nav-item">
-                              <a class="nav-link" data-toggle="pill" href="#alter">Alter Recipe</a>
+                                <a class="nav-link" [class.active]="activeTab === 'alter'" (click)="activeTab = 'alter'">Alter Recipe</a>
                             </li>
-                          </ul>
-                          <div class="tab-content">
-                            <div class="fade tab-pane" id="price">
-                              <div class="form-group">
-                                <ng-select class="w-100" [items]="tasks" placeholder="Raw Material" bindLabel="name"
+                        </ul>
+                        <div class="tab-content">
+                          <div class="tab-pane fade" [ngClass]="{'active show': activeTab === 'price'}"  *ngIf="activeTab === 'price'">
+                            <div class="form-group">
+                              <ng-select  class="w-100" [items]="tasks"
+                                  placeholder="Raw Material" bindLabel="name"
                                   (change)="chnageTypeValue($event)" bindValue="id" [searchable]="false"
-                                  [hideSelected]="true" [(ngModel)]="open1" [ngModelOptions]="{standalone: true}">
-                                  <ng-template ng-label-tmp let-item="item" let-clear="clear">
-                                    <span class="ng-value-label">{{item.name}}</span>
-                                    <span class="ng-value-icon right" (click)="clear(item);" aria-hidden="true">×</span>
+                                  [hideSelected]="true" [(ngModel)]="open1" [ngModelOptions]="{standalone: true}"> -->
+                                 <ng-template ng-label-tmp let-item="item" let-clear="clear">
+                                      <span class="ng-value-label">{{item.name}}</span>
+                                      <span class="ng-value-icon right" (click)="clear(item);"
+                                          aria-hidden="true">×</span>
                                   </ng-template>
                                   <ng-template ng-option-tmp let-item="item" let-index="index">
-                                    {{item.name}}
+                                      {{item.name}}
                                   </ng-template>
-                                </ng-select>
-                              </div>
-                              <div class="form-group">
-                                <ng-select class="w-100" [items]="effect" placeholder="Effect" bindLabel="name"
+                              </ng-select> 
+                            </div>
+                            <div class="form-group">
+                               <ng-select  class="w-100" [items]="effect"
+                                  placeholder="Effect" bindLabel="name"
                                   (change)="chnageToValue($event)" bindValue="id" [searchable]="false"
                                   [hideSelected]="true" [(ngModel)]="open2" [ngModelOptions]="{standalone: true}">
                                   <ng-template ng-label-tmp let-item="item" let-clear="clear">
-                                    <span class="ng-value-label">{{item.name}}</span>
-                                    <span class="ng-value-icon right" (click)="clear(item);" aria-hidden="true">×</span>
+                                      <span class="ng-value-label">{{item.name}}</span>
+                                      <span class="ng-value-icon right" (click)="clear(item);"
+                                          aria-hidden="true">×</span>
                                   </ng-template>
                                   <ng-template ng-option-tmp let-item="item" let-index="index">
-                                    {{item.name}}
+                                      {{item.name}}
                                   </ng-template>
-                                </ng-select>
-                              </div>
-                              <div class="form-group" *ngIf="openDiv == 'Replace'">
-                                <ng-select class="w-100" [items]="material" placeholder="Raw Material" bindLabel="name"
+                              </ng-select> 
+                            </div>
+                            <div class="form-group" *ngIf="openDiv == 'Replace'">
+                             <ng-select  class="w-100" [items]="material"
+                                  placeholder="Raw Material" bindLabel="name"
                                   (change)="chnageTypeValue($event)" bindValue="id" [searchable]="false"
                                   [hideSelected]="true" [(ngModel)]="open3" [ngModelOptions]="{standalone: true}">
                                   <ng-template ng-label-tmp let-item="item" let-clear="clear">
-                                    <span class="ng-value-label">{{item.name}}</span>
-                                    <span class="ng-value-icon right" (click)="clear(item);" aria-hidden="true">×</span>
+                                      <span class="ng-value-label">{{item.name}}</span>
+                                      <span class="ng-value-icon right" (click)="clear(item);"
+                                          aria-hidden="true">×</span>
                                   </ng-template>
                                   <ng-template ng-option-tmp let-item="item" let-index="index">
-                                    {{item.name}}
+                                      {{item.name}}
                                   </ng-template>
-                                </ng-select>
-                              </div>
-                              <div class="add-list from-group">
-                                <h2 class="sub-title">Amount</h2>
-                                <input autocomplete="off" class="from-control" formcontrolname="focus" placeholder=""
-                                  value="">
+                              </ng-select> 
+                            </div>
+                            <div class="from-group add-list">
+                              <h2 class="sub-title">Amount</h2>
+                                <input autocomplete="off" class="from-control" formcontrolname="focus" placeholder="" value="" >
                                 <ul class="list-btn">
                                   <li class="percent">
                                     <a class="common-btn">%</a>
                                   </li>
-                                  <li class="percent"><a class="common-btn"><span>gr</span></a></li>
+                                    <li class="percent"><a class="common-btn"><span>gr</span></a></li>
                                 </ul>
-                              </div>
-                              <div class="btn-green add-btn">
-                                <a (click)="variableShow=false;this.selectedthird = true">Add Effect</a>
-                              </div>
                             </div>
-                            <div class="fade tab-pane" id="size">
-                              <div class="form-group">
-                                <ng-select class="w-100" [items]="tasks" placeholder="Raw Material" bindLabel="name"
-                                  (change)="chnageTypeValue($event)" bindValue="id" [searchable]="false"
-                                  [hideSelected]="true" [(ngModel)]="open1" [ngModelOptions]="{standalone: true}">
-                                  <ng-template ng-label-tmp let-item="item" let-clear="clear">
-                                    <span class="ng-value-label">{{item.name}}</span>
-                                    <span class="ng-value-icon right" (click)="clear(item);" aria-hidden="true">×</span>
-                                  </ng-template>
-                                  <ng-template ng-option-tmp let-item="item" let-index="index">
-                                    {{item.name}}
-                                  </ng-template>
-                                </ng-select>
-                              </div>
-                              <div class="form-group">
-                                <ng-select class="w-100" [items]="effect" placeholder="Effect" bindLabel="name"
-                                  (change)="chnageTypeValue($event)" bindValue="id" [searchable]="false"
-                                  [hideSelected]="true" [(ngModel)]="open2" [ngModelOptions]="{standalone: true}">
-                                  <ng-template ng-label-tmp let-item="item" let-clear="clear">
-                                    <span class="ng-value-label">{{item.name}}</span>
-                                    <span class="ng-value-icon right" (click)="clear(item);" aria-hidden="true">×</span>
-                                  </ng-template>
-                                  <ng-template ng-option-tmp let-item="item" let-index="index">
-                                    {{item.name}}
-                                  </ng-template>
-                                </ng-select>
-                              </div>
-                              <div class="btn-green add-btn">
+                            <div class="add-btn btn-green">
                                 <a (click)="variableShow=false;this.selectedthird = true">Add Effect</a>
-                              </div>
-                            </div>
-                            <div class="fade tab-pane" id="recipe">
-                              <div class="form-group">
-                                <ng-select class="w-100" [items]="tasks" placeholder="Raw Material" bindLabel="name"
-                                  (change)="chnageTypeValue($event)" bindValue="id" [searchable]="false"
-                                  [hideSelected]="true" [(ngModel)]="open1" [ngModelOptions]="{standalone: true}">
-                                  <ng-template ng-label-tmp let-item="item" let-clear="clear">
-                                    <span class="ng-value-label">{{item.name}}</span>
-                                    <span class="ng-value-icon right" (click)="clear(item);" aria-hidden="true">×</span>
-                                  </ng-template>
-                                  <ng-template ng-option-tmp let-item="item" let-index="index">
-                                    {{item.name}}
-                                  </ng-template>
-                                </ng-select>
-                              </div>
-                              <div class="form-group">
-                                <ng-select class="w-100" [items]="effect" placeholder="Effect" bindLabel="name"
-                                  (change)="chnageTypeValue($event)" bindValue="id" [searchable]="false"
-                                  [hideSelected]="true" [(ngModel)]="open2" [ngModelOptions]="{standalone: true}">
-                                  <ng-template ng-label-tmp let-item="item" let-clear="clear">
-                                    <span class="ng-value-label">{{item.name}}</span>
-                                    <span class="ng-value-icon right" (click)="clear(item);" aria-hidden="true">×</span>
-                                  </ng-template>
-                                  <ng-template ng-option-tmp let-item="item" let-index="index">
-                                    {{item.name}}
-                                  </ng-template>
-                                </ng-select>
-                              </div>
-                              <div class="btn-green add-btn">
-                                <a (click)="variableShow=false;this.selectedthird = true">Add Effect</a>
-                              </div>
-                            </div>
-                            <div class="fade tab-pane" id="alter">
-                              <div class="form-group">
-                                <ng-select class="w-100" [items]="tasks" placeholder="Raw Material" bindLabel="name"
-                                  (change)="chnageTypeValue($event)" bindValue="id" [searchable]="false"
-                                  [hideSelected]="true" [(ngModel)]="open1" [ngModelOptions]="{standalone: true}">
-                                  <ng-template ng-label-tmp let-item="item" let-clear="clear">
-                                    <span class="ng-value-label">{{item.name}}</span>
-                                    <span class="ng-value-icon right" (click)="clear(item);" aria-hidden="true">×</span>
-                                  </ng-template>
-                                  <ng-template ng-option-tmp let-item="item" let-index="index">
-                                    {{item.name}}
-                                  </ng-template>
-                                </ng-select>
-                              </div>
-                              <div class="form-group">
-                                <ng-select class="w-100" [items]="effect" placeholder="Effect" bindLabel="name"
-                                  (change)="chnageToValue($event)" bindValue="id" [searchable]="false"
-                                  [hideSelected]="true" [(ngModel)]="open2" [ngModelOptions]="{standalone: true}">
-                                  <ng-template ng-label-tmp let-item="item" let-clear="clear">
-                                    <span class="ng-value-label">{{item.name}}</span>
-                                    <span class="ng-value-icon right" (click)="clear(item);" aria-hidden="true">×</span>
-                                  </ng-template>
-                                  <ng-template ng-option-tmp let-item="item" let-index="index">
-                                    {{item.name}}
-                                  </ng-template>
-                                </ng-select>
-                              </div>
-                              <div class="form-group" *ngIf="openDiv == 'Replace'">
-                                <ng-select class="w-100" [items]="material" placeholder="Raw Material" bindLabel="name"
-                                  (change)="chnageTypeValue($event)" bindValue="id" [searchable]="false"
-                                  [hideSelected]="true" [(ngModel)]="open3" [ngModelOptions]="{standalone: true}">
-                                  <ng-template ng-label-tmp let-item="item" let-clear="clear">
-                                    <span class="ng-value-label">{{item.name}}</span>
-                                    <span class="ng-value-icon right" (click)="clear(item);" aria-hidden="true">×</span>
-                                  </ng-template>
-                                  <ng-template ng-option-tmp let-item="item" let-index="index">
-                                    {{item.name}}
-                                  </ng-template>
-                                </ng-select>
-                              </div>
-                              <div class="add-list from-group">
-                                <h2 class="sub-title">Amount</h2>
-                                <input autocomplete="off" class="from-control" formcontrolname="focus" placeholder=""
-                                  value="">
-                                <ul class="list-btn">
-                                  <li class="percent">
-                                    <a class="common-btn">%</a>
-                                  </li>
-                                  <li class="percent"><a class="common-btn"><span>gr</span></a></li>
-                                </ul>
-                              </div>
-                              <div class="btn-green add-btn">
-                                <a (click)="variableShow=false;this.selectedthird = true">Add Effect</a>
-                              </div>
                             </div>
                           </div>
+                          <div class="tab-pane fade" [ngClass]="{'active show': activeTab === 'size'}"  *ngIf="activeTab === 'size'">
+                            <div class="form-group">
+                            <ng-select  class="w-100" [items]="tasks"
+                                  placeholder="Raw Material" bindLabel="name"
+                                  (change)="chnageTypeValue($event)" bindValue="id" [searchable]="false"
+                                  [hideSelected]="true" [(ngModel)]="open1" [ngModelOptions]="{standalone: true}">
+                                  <ng-template ng-label-tmp let-item="item" let-clear="clear">
+                                      <span class="ng-value-label">{{item.name}}</span>
+                                      <span class="ng-value-icon right" (click)="clear(item);"
+                                          aria-hidden="true">×</span>
+                                  </ng-template>
+                                  <ng-template ng-option-tmp let-item="item" let-index="index">
+                                      {{item.name}}
+                                  </ng-template>
+                              </ng-select> 
+                            </div>
+                            <div class="form-group">
+                             <ng-select  class="w-100" [items]="effect"
+                                  placeholder="Effect" bindLabel="name"
+                                  (change)="chnageTypeValue($event)" bindValue="id" [searchable]="false"
+                                  [hideSelected]="true" [(ngModel)]="open2" [ngModelOptions]="{standalone: true}">
+                                  <ng-template ng-label-tmp let-item="item" let-clear="clear">
+                                      <span class="ng-value-label">{{item.name}}</span>
+                                      <span class="ng-value-icon right" (click)="clear(item);"
+                                          aria-hidden="true">×</span>
+                                  </ng-template>
+                                  <ng-template ng-option-tmp let-item="item" let-index="index">
+                                      {{item.name}}
+                                  </ng-template>
+                              </ng-select>
+                            </div>
+                              <div class="add-btn btn-green">
+                                <a (click)="variableShow=false;this.selectedthird = true">Add Effect</a>
+                              </div>
+                          </div>
+                          <div class="tab-pane fade" [ngClass]="{'active show': activeTab === 'recipe'}"  *ngIf="activeTab === 'recipe'">
+                            <div class="form-group">
+                             <ng-select  class="w-100" [items]="tasks"
+                                  placeholder="Raw Material" bindLabel="name"
+                                  (change)="chnageTypeValue($event)" bindValue="id" [searchable]="false"
+                                  [hideSelected]="true" [(ngModel)]="open1" [ngModelOptions]="{standalone: true}">
+                                  <ng-template ng-label-tmp let-item="item" let-clear="clear">
+                                      <span class="ng-value-label">{{item.name}}</span>
+                                      <span class="ng-value-icon right" (click)="clear(item);"
+                                          aria-hidden="true">×</span>
+                                  </ng-template>
+                                  <ng-template ng-option-tmp let-item="item" let-index="index">
+                                      {{item.name}}
+                                  </ng-template>
+                              </ng-select> 
+                            </div>
+                            <div class="form-group">
+                               <ng-select  class="w-100" [items]="effect"
+                                  placeholder="Effect" bindLabel="name"
+                                  (change)="chnageTypeValue($event)" bindValue="id" [searchable]="false"
+                                  [hideSelected]="true" [(ngModel)]="open2" [ngModelOptions]="{standalone: true}">
+                                  <ng-template ng-label-tmp let-item="item" let-clear="clear">
+                                      <span class="ng-value-label">{{item.name}}</span>
+                                      <span class="ng-value-icon right" (click)="clear(item);"
+                                          aria-hidden="true">×</span>
+                                  </ng-template>
+                                  <ng-template ng-option-tmp let-item="item" let-index="index">
+                                      {{item.name}}
+                                  </ng-template>
+                              </ng-select> 
+                            </div>
+                              <div class="add-btn btn-green">
+                                <a (click)="variableShow=false;this.selectedthird = true">Add Effect</a>
+                              </div>
+                          </div>
+                          <div class="tab-pane fade" [ngClass]="{'active show': activeTab === 'alter'}"  *ngIf="activeTab === 'alter'">
+                            <div class="form-group">
+                              <ng-select  class="w-100" [items]="tasks"
+                                  placeholder="Raw Material" bindLabel="name"
+                                  (change)="chnageTypeValue($event)" bindValue="id" [searchable]="false"
+                                  [hideSelected]="true" [(ngModel)]="open1" [ngModelOptions]="{standalone: true}">
+                                  <ng-template ng-label-tmp let-item="item" let-clear="clear">
+                                      <span class="ng-value-label">{{item.name}}</span>
+                                      <span class="ng-value-icon right" (click)="clear(item);"
+                                          aria-hidden="true">×</span>
+                                  </ng-template>
+                                  <ng-template ng-option-tmp let-item="item" let-index="index">
+                                      {{item.name}}
+                                  </ng-template>
+                              </ng-select>
+                            </div>
+                            <div class="form-group">
+                               <ng-select  class="w-100" [items]="effect"
+                                  placeholder="Effect" bindLabel="name"
+                                  (change)="chnageToValue($event)" bindValue="id" [searchable]="false"
+                                  [hideSelected]="true" [(ngModel)]="open2" [ngModelOptions]="{standalone: true}">
+                                  <ng-template ng-label-tmp let-item="item" let-clear="clear">
+                                      <span class="ng-value-label">{{item.name}}</span>
+                                      <span class="ng-value-icon right" (click)="clear(item);"
+                                          aria-hidden="true">×</span>
+                                  </ng-template>
+                                  <ng-template ng-option-tmp let-item="item" let-index="index">
+                                      {{item.name}}
+                                  </ng-template>
+                              </ng-select> 
+                            </div>
+                            <div class="form-group" *ngIf="openDiv == 'Replace'">
+                              <ng-select  class="w-100" [items]="material"
+                                  placeholder="Raw Material" bindLabel="name"
+                                  (change)="chnageTypeValue($event)" bindValue="id" [searchable]="false"
+                                  [hideSelected]="true" [(ngModel)]="open3" [ngModelOptions]="{standalone: true}">
+                                  <ng-template ng-label-tmp let-item="item" let-clear="clear">
+                                      <span class="ng-value-label">{{item.name}}</span>
+                                      <span class="ng-value-icon right" (click)="clear(item);"
+                                          aria-hidden="true">×</span>
+                                  </ng-template>
+                                  <ng-template ng-option-tmp let-item="item" let-index="index">
+                                      {{item.name}}
+                                  </ng-template>
+                              </ng-select> 
+                            </div>
+                            <div class="from-group add-list">
+                              <h2 class="sub-title">Amount</h2>
+                                <input autocomplete="off" class="from-control" formcontrolname="focus" placeholder="" value="" >
+                                <ul class="list-btn">
+                                  <li class="percent">
+                                    <a class="common-btn">%</a>
+                                  </li>
+                                    <li class="percent"><a class="common-btn"><span>gr</span></a></li>
+                                </ul>
+                            </div>
+                            <div class="add-btn btn-green">
+                                <a (click)="variableShow=false;this.selectedthird = true">Add Effect</a>
+                            </div>
+                          </div>
+                      </div>
                         </div>
                         <!-- <tabset class="triggers-list">
                               <tab heading="Price" id="tab1">

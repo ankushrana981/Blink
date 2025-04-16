@@ -238,7 +238,7 @@ export class QuickCustomerComponent implements OnInit {
       $('.alpha-search-input input').removeAttr('disabled')
     }, 500); 
   }
-  searchItems() {
+   searchItems() {
     if (this.searchQuery.trim() === '') {
       this.filteredItems = [...this.items];
       return;

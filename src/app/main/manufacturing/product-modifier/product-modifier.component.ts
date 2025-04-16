@@ -19,6 +19,7 @@ export class ProductModifierComponent implements OnInit {
   public selectedthird: boolean = false;
   selectedValue: any;
   openDiv: string = '';
+  activeTab!:any;
 
   items: Array<any> = [
     { name: "Size" },

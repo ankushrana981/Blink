@@ -19,62 +19,347 @@
                         <div class="scrollbar">
                             <ng-scrollbar visibility="hover" #scrollEl thumbClass="custom-scrollbars"
                                 orientation="vertical">
-                                <!-- <ul class="flex-1 filter-main-selected-tag selected-tags">
-                                                <li *ngFor="let i of filterData;index as index" id="{{i?.id}}" class={{i?.class}}
-                                                    [@fadeIn]>
-                                                    <h6 (click)="filterReport()">
-                                                        <em *ngIf="i.filterId !== 3 && i.filterId !== 4">{{i?.parentFilter}}:</em>
-                                                        <em *ngIf="i.filterId === 3 || i.filterId === 4">{{i?.parentFilter}}</em>
-                                                        <ng-container
-                                                            *ngIf="(i.filterId === 1 || i.filterId === 2) && (!i.selectedObj.options[1] && (i.selectedObj.options[1].class != 'active' && i.selectedObj.month == false) && (i.selectedObj.options[2].class != 'active' && i.selectedObj.year == false))">
-                                                            {{i?.childFilter | date }}
-                                                            <ng-container *ngIf="i.selectedObj.bindedValue.id === 2">
-                                                                - {{i?.subchildrange | date}}
-                                                            </ng-container>
-                                                        </ng-container>
-                                                        <ng-container
-                                                            *ngIf="(i.filterId === 1 || i.filterId === 2) && (i.selectedObj.options[1] && (i.selectedObj.options[1].class == 'active' || i.selectedObj.month == true || i.selectedObj.endmonth == true))">
-                                                            {{i?.childFilter | date: 'MMM yyyy' }}
-                                                            <ng-container *ngIf="i.selectedObj.bindedValue.id === 2">
-                                                                - {{i?.subchildrange | date: 'MMM yyyy'}}
-                                                            </ng-container>
-                                                        </ng-container>
-                                                        <ng-container
-                                                            *ngIf="(i.filterId === 1 || i.filterId === 2) && (i.selectedObj.options[2] && (i.selectedObj.options[2].class == 'active' || i.selectedObj.year == true || i.selectedObj.endyear == true))">
-                                                            {{i?.childFilter | date: 'yyyy' }}
-                                                            <ng-container *ngIf="i.selectedObj.bindedValue.id === 2">
-                                                                - {{i?.subchildrange | date: 'MMM yyyy'}}
-                                                            </ng-container>
-                                                        </ng-container>
-                                                        <ng-container *ngIf="i.filterId === 3 || i.filterId === 4
-                        || i.filterId === 6 || i.filterId === 7 || i.filterId === 8 || i.filterId === 9">
-                                                            {{i?.childFilter}}
-                                                        </ng-container>
-                                                        <ng-container *ngIf="i.filterId === 5">
-                                                            {{i?.childFilter}}
-                                                            <ng-container
-                                                                *ngIf="i?.selectedObj != undefined && i?.selectedObj != ''">
-                                                                :
-                                                                {{i?.selectedObj}}
-                                                            </ng-container>
-                                                        </ng-container>
-                                                        <ng-container *ngIf="i.filterId === 10">
-                                                            {{i?.childFilter}}
-                                                        </ng-container>
-                                                    </h6>
-                                                    <span (click)="removeSelected(index,i)">
-                                                        <img src="assets/images/icon-close-dark.svg" alt="" width="10">
-                                                    </span>
-                                                </li>
-                                            </ul> -->
+                                <ul class="flex-1 filter-main-selected-tag selected-tags">
+                                
+                                    <li *ngFor="let i of filterData;index as index" id="{{i?.id}}" class={{i?.class}}
+                                        [@fadeIn]>
+                                        <h6 (click)="filterReport()">
+                                            <em *ngIf="i.filterId !== 3 && i.filterId !== 4">{{i?.parentFilter}}:</em>
+                                            <em *ngIf="i.filterId === 3 || i.filterId === 4">{{i?.parentFilter}}</em>
+                                            <ng-container
+                                                *ngIf="(i.filterId === 1 || i.filterId === 2) && (!i.selectedObj.options[1] && (i.selectedObj.options[1].class != 'active' && i.selectedObj.month == false) && (i.selectedObj.options[2].class != 'active' && i.selectedObj.year == false))">
+                                                {{i?.childFilter | date }}
+                                                <ng-container *ngIf="i.selectedObj.bindedValue.id === 2">
+                                                    - {{i?.subchildrange | date}}
+                                                </ng-container>
+                                            </ng-container>
+                                            <ng-container
+                                                *ngIf="(i.filterId === 1 || i.filterId === 2) && (i.selectedObj.options[1] && (i.selectedObj.options[1].class == 'active' || i.selectedObj.month == true || i.selectedObj.endmonth == true))">
+                                                {{i?.childFilter | date: 'MMM yyyy' }}
+                                                <ng-container *ngIf="i.selectedObj.bindedValue.id === 2">
+                                                    - {{i?.subchildrange | date: 'MMM yyyy'}}
+                                                </ng-container>
+                                            </ng-container>
+                                            <ng-container
+                                                *ngIf="(i.filterId === 1 || i.filterId === 2) && (i.selectedObj.options[2] && (i.selectedObj.options[2].class == 'active' || i.selectedObj.year == true || i.selectedObj.endyear == true))">
+                                                {{i?.childFilter | date: 'yyyy' }}
+                                                <ng-container *ngIf="i.selectedObj.bindedValue.id === 2">
+                                                    - {{i?.subchildrange | date: 'MMM yyyy'}}
+                                                </ng-container>
+                                            </ng-container>
+                                            <ng-container *ngIf="i.filterId === 3 || i.filterId === 4
+            || i.filterId === 6 || i.filterId === 7 || i.filterId === 8 || i.filterId === 9">
+                                                {{i?.childFilter}}
+                                            </ng-container>
+                                            <ng-container *ngIf="i.filterId === 5">
+                                                {{i?.childFilter}}
+                                                <ng-container
+                                                    *ngIf="i?.selectedObj != undefined && i?.selectedObj != ''">
+                                                    :
+                                                    {{i?.selectedObj}}
+                                                </ng-container>
+                                            </ng-container>
+                                            <ng-container *ngIf="i.filterId === 10">
+                                                {{i?.childFilter}}
+                                            </ng-container>
+                                        </h6>
+                                        <span (click)="removeSelected(index,i)">
+                                            <img src="assets/images/icon-close-dark.svg" alt="" width="10">
+                                        </span>
+                                    </li>
+                                </ul>
                             </ng-scrollbar>
                         </div>
                     </div>
                     <button type="btn" class="dropdown-btn" (click)="filterReport()"
                         *ngIf="filterstart.length > 0"></button>
                 </div>
+                <div class="order-animate1 card customanimate filternav-dropdown" [hidden]="!filterIReport"
+                    id="collapseExample">
+                    <ul class="navlist navlist-parent">
+                        <li *ngFor="let data of filterstart;let index=index;" [ngClass]="data.classname"
+                            class="order-animate1 customanimate">
+                            <a (click)="changedParentFilter(data)">{{data.title}}</a>
+                        </li>
+                    </ul>
+                    <ul class="navlist subnav" style="overflow: initial;" *ngIf="selectedFilterValue === 1">
+                        <ul class="flex-1 selected-tags selected-title">
+                            <li *ngFor="let subFilter of filterDataNew?.options;index as index"
+                                class={{subFilter?.class}} [@fadeIn]>
+                                <a (click)="changeNewSubFilter(subFilter)">{{subFilter?.title}}</a>
+                            </li>
+                        </ul>
+                        <ng-container *ngFor="let data of filterDataNew.suboptions;let index=index;">
+                            <div class="form-group right-side-selector"
+                                *ngIf="data?.options?.length && data.type==='select'">
+                                <label class="gray-label">{{data.labelName}}</label>
+                                <ng-select [clearable]="false" [items]="data?.options" [(ngModel)]="data.bindvalue"
+                                    bindLabel="title" name="{{'secondFilter'+index}}" id="{{'secondFilter'+index}}"
+                                    autocomplete="off" (change)="changedsubChildFilter($event)">
+                                </ng-select>
+                            </div>
+                        </ng-container>
+                        <div class="selected-month-main">
+                            <ul class="flex-1 right-side-selector selected-month selected-tags"
+                                *ngIf="showMonthsLIsting && monthsListingArray.length > 0">
+                                <li *ngFor="let month of monthsListingArray;index as index" [@fadeIn]>
+                                    <a (click)="applySelectedMOnthFilter(month)">{{month}}</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <ul class="flex-1 right-side-selector selected-tags"
+                            *ngIf="showYearsListing && yearsListingArray.length > 0">
+                            <li *ngFor="let year of yearsListingArray;index as index" [@fadeIn]>
+                                <a (click)="applySelectedYearFilter(year)">{{year}}</a>
+                            </li>
+                        </ul>
+
+                        <div class="form-group right-side-selector"
+                            *ngIf="filterDataNew?.date || filterDataNew?.enddate">
+                            <div class="custom-picker move theme-green theme-white">
+                                <bs-datepicker-inline name="minDatepicker" [maxDate]="maxDate" id="minDatepicker"
+                                    (bsValueChange)="modelDatepickerDate($event,'specific','date')"
+                                    [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY' }" [bsValue]="subTask_due_date">
+                                </bs-datepicker-inline>
+                            </div>
+                        </div>
+                        <div class="form-group right-side-selector" *ngIf="filterDataNew?.enddate">
+                            <label>End date</label>
+                            <div class="datepickerInputBox">
+                                <input class="form-control" name="maxDatepicker" type="text" id="maxDatepicker"
+                                    [maxDate]="maxDate" bsDatepicker placeholder=""
+                                    [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY' }"
+                                    (bsValueChange)="modelDatepickerDate($event,'range', 'date')">
+                                <i class="fa fa-calendar" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                        <div class="form-group right-side-selector"
+                            *ngIf="filterDataNew?.month || filterDataNew?.endmonth">
+                            <label>Start Month</label>
+                            <div class="datepickerInputBox">
+                                <input class="form-control" name="minDatepicker" type="text" id="minMonthDatepicker"
+                                    bsDatepicker placeholder="" [bsConfig]="{ dateInputFormat: 'MMM' }"
+                                    (onShown)="onOpenCalendar($event)"
+                                    (bsValueChange)="modelDatepickerMonth($event,'specific','date')">
+                                <i class="fa fa-calendar" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                        <div class="form-group right-side-selector" *ngIf="filterDataNew?.endmonth">
+                            <label>End Month</label>
+                            <div class="datepickerInputBox">
+                                <input class="form-control" name="maxDatepicker" type="text" id="maxMonthDatepicker"
+                                    bsDatepicker placeholder="" [bsConfig]="{ dateInputFormat: 'MMM' }"
+                                    (onShown)="onOpenCalendar($event)"
+                                    (bsValueChange)="modelDatepickerMonth($event,'range','date')">
+                                <i class="fa fa-calendar" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                        <div class="form-group right-side-selector"
+                            *ngIf="filterDataNew?.year || filterDataNew?.endyear">
+                            <label>Start Year</label>
+                            <div class="datepickerInputBox">
+                                <input class="form-control" name="minDatepicker" type="text" id="minYearDatepicker"
+                                    bsDatepicker placeholder="" [bsConfig]="{ dateInputFormat: 'YYYY' }"
+                                    (onShown)="onOpenyearCalendar($event)"
+                                    (bsValueChange)="modelDatepickerYear($event,'specific','date')">
+                                <i class="fa fa-calendar" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                        <div class="form-group right-side-selector" *ngIf="filterDataNew?.endyear">
+                            <label>End Year</label>
+                            <div class="datepickerInputBox">
+                                <input class="form-control" name="maxDatepicker" type="text" id="maxYearDatepicker"
+                                    bsDatepicker placeholder="" [bsConfig]="{ dateInputFormat: 'YYYY' }"
+                                    (onShown)="onOpenyearCalendar($event)"
+                                    (bsValueChange)="modelDatepickerYear($event,'range','date')">
+                                <i class="fa fa-calendar" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                    </ul>
+                    <ul class="navlist subnav subnav-due-date" style="overflow: initial;"
+                        *ngIf="selectedFilterValue === 2">
+                        <div class="form-group due-date">
+                            <label class="gray-label">DUE DATE</label>
+                            <ng-select [clearable]="false" [items]="filterDataNew.options"
+                                [(ngModel)]="filterDataNew.bindedValue" bindLabel="title" name="secondFilter"
+                                id="secondFilter" autocomplete="off" (change)="changedChildFilter($event)">
+                            </ng-select>
+                        </div>
+                        <ng-container *ngFor="let data of filterDataNew.suboptions;let index=index;">
+                            <div class="form-group" *ngIf="data?.options?.length && data.type==='select'">
+                                <label class="gray-label">{{data.labelName}}</label>
+                                <ng-select [clearable]="false" [items]="data?.options" [(ngModel)]="data.bindvalue"
+                                    bindLabel="title" name="{{'secondFilter'+index}}" id="{{'secondFilter'+index}}"
+                                    autocomplete="off" (change)="changedsubChildFilter($event)">
+                                </ng-select>
+                            </div>
+                        </ng-container>
+                        <div class="form-group" *ngIf="filterDataNew?.date || filterDataNew?.enddate">
+                            <label>Start DUE DATE</label>
+                            <div class="datepickerInputBox">
+                                <input class="form-control" name="minDatepicker" type="text" id="minDatepicker"
+                                    [maxDate]="maxDate" bsDatepicker placeholder=""
+                                    [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY' }"
+                                    (bsValueChange)="modelDatepickerDate($event,'specific','dueDate')">
+                                <i class="fa fa-calendar" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                        <div class="form-group" *ngIf="filterDataNew?.enddate">
+                            <label>End DUE DATE</label>
+                            <div class="datepickerInputBox">
+                                <input class="form-control" name="maxDatepicker" type="text" id="maxDatepicker"
+                                    [maxDate]="maxDate" bsDatepicker placeholder=""
+                                    [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY' }"
+                                    (bsValueChange)="modelDatepickerDate($event,'range','dueDate')">
+                                <i class="fa fa-calendar" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                        <div class="form-group" *ngIf="filterDataNew?.month || filterDataNew?.endmonth">
+                            <label>Start Month</label>
+                            <div class="datepickerInputBox">
+                                <input class="form-control" name="minDatepicker" type="text" id="minMonthDatepicker"
+                                    bsDatepicker placeholder="" [bsConfig]="{ dateInputFormat: 'MMM' }"
+                                    (onShown)="onOpenCalendar($event)"
+                                    (bsValueChange)="modelDatepickerMonth($event,'specific','dueDate')">
+                                <i class="fa fa-calendar" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                        <div class="form-group" *ngIf="filterDataNew?.endmonth">
+                            <label>End Month</label>
+                            <div class="datepickerInputBox">
+                                <input class="form-control" name="maxDatepicker" type="text" id="maxMonthDatepicker"
+                                    bsDatepicker placeholder="" [bsConfig]="{ dateInputFormat: 'MMM' }"
+                                    (onShown)="onOpenCalendar($event)"
+                                    (bsValueChange)="modelDatepickerMonth($event,'range','dueDate')">
+                                <i class="fa fa-calendar" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                        <div class="form-group" *ngIf="filterDataNew?.year || filterDataNew?.endyear">
+                            <label>Start Year</label>
+                            <div class="datepickerInputBox">
+                                <input class="form-control" name="minDatepicker" type="text" id="minYearDatepicker"
+                                    bsDatepicker placeholder="" [bsConfig]="{ dateInputFormat: 'YYYY' }"
+                                    (onShown)="onOpenyearCalendar($event)"
+                                    (bsValueChange)="modelDatepickerYear($event,'specific','dueDate')">
+                                <i class="fa fa-calendar" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                        <div class="form-group" *ngIf="filterDataNew?.endyear">
+                            <label>End Year</label>
+                            <div class="datepickerInputBox">
+                                <input class="form-control" name="maxDatepicker" type="text" id="maxYearDatepicker"
+                                    bsDatepicker placeholder="" [bsConfig]="{ dateInputFormat: 'YYYY' }"
+                                    (onShown)="onOpenyearCalendar($event)"
+                                    (bsValueChange)="modelDatepickerYear($event,'range','dueDate')">
+                                <i class="fa fa-calendar" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                    </ul>
+                    <ul class="navlist subnav" style="overflow: initial;" *ngIf="selectedFilterValue === 3">
+                        <div class="form-group">
+                            <div class="custom-checkbox custom-control">
+                                <label class="custom-control-label" for="defaultChecked2">PAST DUE</label>
+                                <input type="checkbox" class="custom-control-input" id="defaultChecked2" name="check"
+                                    (change)="changedChildFilter($event)" [(ngModel)]="filterDataNew.pastDue">
+
+                            </div>
+                        </div>
+                    </ul>
+                    <ul class="navlist subnav" style="overflow: initial;" *ngIf="selectedFilterValue === 4">
+                        <div class="form-group">
+                            <div class="custom-checkbox custom-control">
+                                <input type="checkbox" class="custom-control-input" id="defaultChecked2" name="check"
+                                    (change)="changedChildFilter($event)" [(ngModel)]="filterDataNew.completed">
+                                <label class="custom-control-label" for="defaultChecked2">COMPLETED</label>
+                            </div>
+                        </div>
+                    </ul>
+                    <ul class="navlist subnav subnav-due-date" style="overflow: initial;"
+                        *ngIf="selectedFilterValue === 5">
+                        <div class="form-group">
+                            <label class="gray-label">TYPE OF TASK</label>
+                            <ng-select [clearable]="false" [items]="taskTypeList" [(ngModel)]="filterDataNew.type"
+                                bindLabel="title" name="secondFilter" id="secondFilter" autocomplete="off"
+                                (change)="changeTaskTypeList($event); ">
+                            </ng-select>
+                        </div>
+                        <div class="form-group" *ngIf="filterDataNew.type?.id === 2">
+                            <label class="gray-label">Search Client</label>
+                            <ng-select [clearable]="true" [items]="customers"
+                                [(ngModel)]="filterDataNew.businessPartnerId" bindLabel="title" name="secondFilter"
+                                id="secondFilter" autocomplete="off" (change)="changedChildFilter($event)">
+                            </ng-select>
+                        </div>
+                        <div class="form-group" *ngIf="filterDataNew.type?.id === 6">
+                            <label class="gray-label">Search company</label>
+                            <ng-select [clearable]="false" [items]="clients | async" bindLabel="title"
+                                [(ngModel)]="filterDataNew.businessPartnerId" [loading]="companiesLoading"
+                                name="businessPartner" id="businessPartner" autocomplete="off"
+                                [typeahead]="MainSearchdataSourceClient" (change)="changedChildFilter($event)">
+                            </ng-select>
+                        </div>
+                        <div class="form-group" *ngIf="filterDataNew.type?.id === 7">
+                            <label class="gray-label">Search contact</label>
+                            <ng-select [clearable]="true" [items]="contacts"
+                                [(ngModel)]="filterDataNew.businessPartnerId" bindLabel="title" name="secondFilter"
+                                id="secondFilter" autocomplete="off" (change)="changedChildFilter($event)">
+                            </ng-select>
+                        </div>
+                        <div class="form-group" *ngIf="filterDataNew.type?.id === 4">
+                            <label class="gray-label">Search product</label>
+                            <ng-select [clearable]="true" [items]="productrecords" [(ngModel)]="filterDataNew.productId"
+                                bindLabel="title" name="secondFilter" id="secondFilter" autocomplete="off"
+                                (change)="changedChildFilter($event)">
+                            </ng-select>
+                        </div>
+                    </ul>
+                    <ul class="navlist selected-title-main subnav" style="overflow: initial;"
+                        *ngIf="selectedFilterValue === 6">
+                        <ul class="flex-1 selected-tags selected-title">
+                            <li *ngFor="let activites of presetActivities">
+                                <a (click)="changedChildFilter(activites, activites, activites)">{{activites}}</a>
+                            </li>
+                        </ul>
+                    </ul>
+                    <ul class="navlist subnav subnav-due-date" style="overflow: initial;"
+                        *ngIf="selectedFilterValue === 7">
+                        <div class="form-group">
+                            <label class="gray-label">Branch</label>
+                            <ng-select [clearable]="false" [items]="branches" [(ngModel)]="filterDataNew.branchId"
+                                bindLabel="title" name="secondFilter" id="secondFilter" autocomplete="off"
+                                (change)="changedChildFilter($event)">
+                            </ng-select>
+                        </div>
+                    </ul>
+                    <ul class="navlist subnav subnav-due-date" style="overflow: initial;"
+                        *ngIf="selectedFilterValue === 8">
+                        <div class="form-group">
+                            <label class="gray-label">Interaction By</label>
+                            <ng-select [clearable]="false" [items]="users" [(ngModel)]="filterDataNew.assignedTo"
+                                bindLabel="title" name="secondFilter" id="secondFilter" autocomplete="off"
+                                (change)="changedChildFilter($event)">
+                            </ng-select>
+                        </div>
+                    </ul>
+                    <ul class="navlist subnav" style="overflow: initial;" *ngIf="selectedFilterValue === 9">
+                        <div class="form-group">
+                            <mat-form-field class="example-full-width mat-input">
+                                <input [(ngModel)]="filterDataNew.note" matInput type="text" placeholder="Search"
+                                    value="" autocomplete="off" (keydown.enter)="changedChildFilter($event)">
+                            </mat-form-field>
+                        </div>
+                    </ul>
+                </div>
             </div>
         </div>
+
+
+
+
+
+
+
+
     </div>
     <div class="row space-10 task-height task-tab-main">
         <div class="col-xl-9 card card-box fadeIn task-tab wow">
@@ -102,11 +387,11 @@
                 </li>
                 <li class="nav-item" *ngIf="!isTaskDashboard">
                     <a class="nav-link" [ngClass]="{ 'active': selectedTab === 5 }" href="javascript:void(0);"
-                        role="tab" (click)="filterDashboardData(5)">Current</a>
+                        role="tab" (click)="filterDashboardData(5)">Initial</a>
                 </li>
                 <li class="nav-item" *ngIf="!isTaskDashboard">
                     <a class="nav-link" [ngClass]="{ 'active': selectedTab === 6 }" href="javascript:void(0);"
-                        role="tab" (click)="filterDashboardData(6)">Planned</a>
+                        role="tab" (click)="filterDashboardData(6)">Folow Up</a>
                 </li>
                 <li class="nav-item" *ngIf="!isTaskDashboard">
                     <a class="nav-link" [ngClass]="{ 'active': selectedTab === 7 }" href="javascript:void(0);"
@@ -114,11 +399,11 @@
                 </li>
                 <li class="nav-item" *ngIf="!isTaskDashboard">
                     <a class="nav-link" [ngClass]="{ 'active': selectedTab === 3 }" href="javascript:void(0);"
-                        role="tab" (click)="filterDashboardData(3)">Overdue</a>
+                        role="tab" (click)="filterDashboardData(3)">Negotiation</a>
                 </li>
                 <li class="nav-item" *ngIf="!isTaskDashboard">
                     <a class="nav-link" [ngClass]="{ 'active': selectedTab === 4 }" href="javascript:void(0);"
-                        role="tab" (click)="filterDashboardData(4)">Forgotten</a>
+                        role="tab" (click)="filterDashboardData(4)">Close</a>
                 </li>
             </ul>
             <!-- Tab panes -->
@@ -536,19 +821,21 @@
         </div>
         <div class="col-xl-3 Notification-calendar-section sideBar-noti">
             <div class="contentBox task-page task-page-margin">
-                <div class="h-100 w-100">
+                <div class="h-100 w-100 allCharts">
                     <div class="card card-box card-notifications fadeIn wow"
                         [ngClass]="showCalendar ? 'card-calendar' : ''" data-wow-delay="400ms">
                         <div id="chart">
-                            <apx-chart [series]="chartOptions.series" [chart]="chartOptions.chart"
+                            <h3>CRM Activity<span>Past 7 days</span></h3>
+                            <apx-chart class="d-flex" [series]="chartOptions.series" [chart]="chartOptions.chart"
                                 [dataLabels]="chartOptions.dataLabels" [plotOptions]="chartOptions.plotOptions"
                                 [responsive]="chartOptions.responsive" [xaxis]="chartOptions.xaxis"
                                 [legend]="chartOptions.legend" [fill]="chartOptions.fill"></apx-chart>
                         </div>
                     </div>
 
-                    <div class="card card-box card-notifications card-statistics fadeIn wow" data-wow-delay="1000ms">
-                        <div id="chart">
+                    <div class="pieChart card card-box card-notifications card-statistics fadeIn wow mt-2" data-wow-delay="1000ms">
+                        <div class="pt-4" id="chart">
+                            <h3>CRM Activity<span>Past 7 days</span></h3>
                             <apx-chart [series]="chartOptions2.series" [chart]="chartOptions2.chart"
                                 [labels]="chartOptions2.labels" [responsive]="chartOptions2.responsive"></apx-chart>
                         </div>

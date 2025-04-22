@@ -97,7 +97,7 @@ export class TasksComponent extends BaseComponent implements OnInit {
     {
       id: 3,
       time: '10.00',
-      description: '',
+      description: "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
       hourSelection: 0,
       minuteSelection: 0,
       timeDuration: 4,
@@ -107,8 +107,7 @@ export class TasksComponent extends BaseComponent implements OnInit {
     {
       id: 4,
       time: '11.00',
-      description:
-        "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+      description:"",
       hourSelection: 0,
       minuteSelection: 0,
       timeDuration: 4,

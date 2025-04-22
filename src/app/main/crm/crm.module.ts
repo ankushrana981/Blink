@@ -18,6 +18,8 @@ import { CarouselModule } from "ngx-bootstrap/carousel";
 import { TasksComponent } from "./tasks/tasks.component";
 import { ReladexComponent } from './reladex/reladex.component';
 import { ChatsComponent } from "../../reusable/chats/chats.component";
+import { CrmDashBoardComponent } from './crm-dash-board/crm-dash-board.component';
+import { NgApexchartsModule } from "ng-apexcharts";
 @NgModule({
   declarations: [
     AddCustomerSetupComponent,
@@ -32,10 +34,12 @@ import { ChatsComponent } from "../../reusable/chats/chats.component";
     NotesViewComponent,
     TasksComponent,
     ReladexComponent,
+    CrmDashBoardComponent,
   ],
   imports: [
     CommonModule,
     SharedModule,
+    NgApexchartsModule,
     ModalModule.forRoot(),
     NgSelectModule,
     CarouselModule,
@@ -65,6 +69,11 @@ import { ChatsComponent } from "../../reusable/chats/chats.component";
             pathMatch: "full",
           },
         ],
+      },
+      {
+        path: "dashboard",
+        component: CrmDashBoardComponent,
+        pathMatch: "full",
       },
       {
         path: "discount",

@@ -1,0 +1,561 @@
+<div class="dashboardWrap">
+    <div class="task-title-main">
+        <div class="viewdata-title" (clickOutside)="isWorkspaceSelection=false">
+            <h2>CRM Dashboard</h2>
+        </div>
+        <div class="rightSideFilter space-10" [ngClass]="{'filteropen': isFilterOpen, 'dayopen': addDayClass}">
+            <div class="nav-filter-wrap fadeIn max-w-100 wow" data-wow-delay="100ms">
+                <div class="card nav-filter-header align-items-center" href="#collapseExample" role="button"
+                    aria-controls="collapseExample">
+                    <div class="flex-1 filterednav">
+                        <span class="filter-icon" (click)="filterReport()" *ngIf="filterstart.length > 0">
+                            <svg width="15" height="15" viewBox="0 0 15 15" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                    d="M0 0H15V2.37455L9.88782 6.44969V12.6236L5.69979 15V6.46948L0 2.39435V0Z"
+                                    fill="white" />
+                            </svg>
+                        </span>
+                        <div class="scrollbar">
+                            <ng-scrollbar visibility="hover" #scrollEl thumbClass="custom-scrollbars"
+                                orientation="vertical">
+                                <!-- <ul class="flex-1 filter-main-selected-tag selected-tags">
+                                                <li *ngFor="let i of filterData;index as index" id="{{i?.id}}" class={{i?.class}}
+                                                    [@fadeIn]>
+                                                    <h6 (click)="filterReport()">
+                                                        <em *ngIf="i.filterId !== 3 && i.filterId !== 4">{{i?.parentFilter}}:</em>
+                                                        <em *ngIf="i.filterId === 3 || i.filterId === 4">{{i?.parentFilter}}</em>
+                                                        <ng-container
+                                                            *ngIf="(i.filterId === 1 || i.filterId === 2) && (!i.selectedObj.options[1] && (i.selectedObj.options[1].class != 'active' && i.selectedObj.month == false) && (i.selectedObj.options[2].class != 'active' && i.selectedObj.year == false))">
+                                                            {{i?.childFilter | date }}
+                                                            <ng-container *ngIf="i.selectedObj.bindedValue.id === 2">
+                                                                - {{i?.subchildrange | date}}
+                                                            </ng-container>
+                                                        </ng-container>
+                                                        <ng-container
+                                                            *ngIf="(i.filterId === 1 || i.filterId === 2) && (i.selectedObj.options[1] && (i.selectedObj.options[1].class == 'active' || i.selectedObj.month == true || i.selectedObj.endmonth == true))">
+                                                            {{i?.childFilter | date: 'MMM yyyy' }}
+                                                            <ng-container *ngIf="i.selectedObj.bindedValue.id === 2">
+                                                                - {{i?.subchildrange | date: 'MMM yyyy'}}
+                                                            </ng-container>
+                                                        </ng-container>
+                                                        <ng-container
+                                                            *ngIf="(i.filterId === 1 || i.filterId === 2) && (i.selectedObj.options[2] && (i.selectedObj.options[2].class == 'active' || i.selectedObj.year == true || i.selectedObj.endyear == true))">
+                                                            {{i?.childFilter | date: 'yyyy' }}
+                                                            <ng-container *ngIf="i.selectedObj.bindedValue.id === 2">
+                                                                - {{i?.subchildrange | date: 'MMM yyyy'}}
+                                                            </ng-container>
+                                                        </ng-container>
+                                                        <ng-container *ngIf="i.filterId === 3 || i.filterId === 4
+                        || i.filterId === 6 || i.filterId === 7 || i.filterId === 8 || i.filterId === 9">
+                                                            {{i?.childFilter}}
+                                                        </ng-container>
+                                                        <ng-container *ngIf="i.filterId === 5">
+                                                            {{i?.childFilter}}
+                                                            <ng-container
+                                                                *ngIf="i?.selectedObj != undefined && i?.selectedObj != ''">
+                                                                :
+                                                                {{i?.selectedObj}}
+                                                            </ng-container>
+                                                        </ng-container>
+                                                        <ng-container *ngIf="i.filterId === 10">
+                                                            {{i?.childFilter}}
+                                                        </ng-container>
+                                                    </h6>
+                                                    <span (click)="removeSelected(index,i)">
+                                                        <img src="assets/images/icon-close-dark.svg" alt="" width="10">
+                                                    </span>
+                                                </li>
+                                            </ul> -->
+                            </ng-scrollbar>
+                        </div>
+                    </div>
+                    <button type="btn" class="dropdown-btn" (click)="filterReport()"
+                        *ngIf="filterstart.length > 0"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row space-10 task-height task-tab-main">
+        <div class="col-xl-9 card card-box fadeIn task-tab wow">
+
+            <ul class="nav nav-tabs filterDashboardData" role="tablist">
+                <li class="nav-item" *ngIf="isTaskDashboard">
+                    <a class="nav-link" [ngClass]="{ 'active': selectedTab === 0 }" href="javascript:void(0);"
+                        role="tab" (click)="filterDashboardData(0)">All</a>
+                </li>
+                <li class="nav-item" *ngIf="isTaskDashboard">
+                    <a class="nav-link" [ngClass]="{ 'active': selectedTab === 1 }" href="javascript:void(0);"
+                        role="tab" (click)="filterDashboardData(1)">New</a>
+                </li>
+                <li class="nav-item" *ngIf="isTaskDashboard">
+                    <a class="nav-link" [ngClass]="{ 'active': selectedTab === 2 }" href="javascript:void(0);"
+                        role="tab" (click)="filterDashboardData(2)">Progressed</a>
+                </li>
+                <li class="nav-item" *ngIf="isTaskDashboard">
+                    <a class="nav-link" [ngClass]="{ 'active': selectedTab === 3 }" href="javascript:void(0);"
+                        role="tab" (click)="filterDashboardData(3)">Overdue</a>
+                </li>
+                <li class="nav-item" *ngIf="isTaskDashboard">
+                    <a class="nav-link" [ngClass]="{ 'active': selectedTab === 4 }" href="javascript:void(0);"
+                        role="tab" (click)="filterDashboardData(4)">Forgotten</a>
+                </li>
+                <li class="nav-item" *ngIf="!isTaskDashboard">
+                    <a class="nav-link" [ngClass]="{ 'active': selectedTab === 5 }" href="javascript:void(0);"
+                        role="tab" (click)="filterDashboardData(5)">Current</a>
+                </li>
+                <li class="nav-item" *ngIf="!isTaskDashboard">
+                    <a class="nav-link" [ngClass]="{ 'active': selectedTab === 6 }" href="javascript:void(0);"
+                        role="tab" (click)="filterDashboardData(6)">Planned</a>
+                </li>
+                <li class="nav-item" *ngIf="!isTaskDashboard">
+                    <a class="nav-link" [ngClass]="{ 'active': selectedTab === 7 }" href="javascript:void(0);"
+                        role="tab" (click)="filterDashboardData(7)">Due Soon</a>
+                </li>
+                <li class="nav-item" *ngIf="!isTaskDashboard">
+                    <a class="nav-link" [ngClass]="{ 'active': selectedTab === 3 }" href="javascript:void(0);"
+                        role="tab" (click)="filterDashboardData(3)">Overdue</a>
+                </li>
+                <li class="nav-item" *ngIf="!isTaskDashboard">
+                    <a class="nav-link" [ngClass]="{ 'active': selectedTab === 4 }" href="javascript:void(0);"
+                        role="tab" (click)="filterDashboardData(4)">Forgotten</a>
+                </li>
+            </ul>
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <div class="active tab-pane" role="tabpanel">
+                    <div
+                        class="h-424 px-5 shadow-none filterDashboardDataTable overflow-hidden overflow-x-hidden scrollbar scrollbar-table">
+
+                        <div class="table-box p-0 attension-table mb-20">
+                            <div class="table-respons h-100 overflow-x-hidden overflow-y-auto"
+                                (scroll)="onScroll($event)">
+                                <table style=" width:100%"
+                                    class="table-dashboard table-hover default-to-custom first-padding-0 task-list-table">
+                                    <thead class="task-list-head">
+                                        <tr class="d-1 fadeIn in x-animated">
+                                            <th class="table-date">
+                                                <b class="table-title">
+                                                    <span class="table-text">Date</span>
+                                                </b>
+                                                <div class="before-line help-block line-divider small type"></div>
+                                            </th>
+                                            <th class="table-date">
+                                                <b class="table-title">
+                                                    <span class="table-text">Customer</span>
+                                                </b>
+                                                <div class="before-line help-block line-divider small type"></div>
+                                            </th>
+                                            <th class="table-date">
+                                                <b class="table-title">
+                                                    <span class="table-text">Activity</span>
+                                                </b>
+                                                <div class="before-line help-block line-divider small type"></div>
+                                            </th>
+                                            <th class="table-date">
+                                                <b class="table-title">
+                                                    <span class="table-text">Notes</span>
+                                                </b>
+                                                <div class="before-line help-block line-divider small type"></div>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <!-- [@fadeIn]="listrecords?.length" -->
+                                    <tbody fxLayout="row wrap" class="list task-list-body">
+                                        <tr>
+                                            <td class="text-left task-board ps-0">
+                                                Feb 18, 2021
+                                            </td>
+                                            <td class="text-left task-description ps-4" style="position: relative;">
+                                                Customer
+                                            </td>
+                                            <td>
+                                                Initial
+                                            </td>
+                                            <td>Text entry desc text that details the content of the that details
+                                                content of the that ...</td>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <!-- </ng-scrollbar> -->
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-9 d-none fadeIn wow">
+            <div class="contentBox task-page">
+                <div class="h-100 w-100">
+                    <div class="card card-attention card-box fadeIn min-h-50 pl-0 wow" data-wow-delay="200ms">
+                        <div class="card-header">
+                            <h5>Needs Attention</h5>
+                        </div>
+                        <div class="h-211 scrollbar">
+                            <div class="table-box attension-table mb-20">
+                                <div class="table-respons table-sticky-header">
+                                    <table style="width:100%"
+                                        class="table-dashboard table-hover default-to-custom first-padding-0 heightOfTasks task-table-main">
+                                        <tbody [@fadeIn]="listrecords?.length" fxLayout="row wrap" class="list">
+                                            <tr style="vertical-align:top;"
+                                                class="d-1 cursor-pointer fadeIn in x-animated"
+                                                *ngFor="let i of listrecords; index as j" fxFlex="100"
+                                                fxFlex.lt-sm="200" (click)="onTaskClick(i.id)">
+                                                <td width="58px" class="text-center">
+                                                    <h4 ng-bind="($index + 1)" class="rownumber ng-binding">{{j+1}}</h4>
+                                                </td>
+                                                <td class="text-left">
+                                                    <b class="table-title">
+                                                        <span>{{i.dueDate | date: 'MMM d, y'}}</span>
+                                                    </b>
+                                                    <div class="help-block line-divider small">
+                                                        <span *ngIf="i.type === 1" class="table-text">General</span>
+                                                        <span *ngIf="i.type === 2" class="table-text">Customer</span>
+                                                        <span *ngIf="i.type === 6" class="table-text">Company</span>
+                                                        <span *ngIf="i.type === 7" class="table-text">Contact</span>
+                                                        <span *ngIf="i.type === 8" class="table-text">Product</span>
+                                                    </div>
+                                                </td>
+                                                <td class="text-left">
+                                                    <b class="table-title">
+                                                        <span>
+                                                            {{i?.note}}
+                                                            <ng-container>
+                                                                <br />
+                                                            </ng-container>
+                                                        </span>
+                                                    </b>
+                                                    <div class="help-block line-divider small">
+                                                        <span *ngIf="i.type != 1" class="table-text">{{i?.title}}</span>
+                                                        <span *ngIf="i.type === 1"
+                                                            class="table-text">{{i?.board}}</span>
+                                                    </div>
+                                                </td>
+                                                <td class="text-left">
+                                                    <b class="table-title">
+                                                        <span>
+                                                            {{i.progressStatusText}}
+                                                            <ng-container>
+                                                                <br />
+                                                            </ng-container>
+                                                        </span>
+                                                    </b>
+                                                    <div class="help-block line-divider small">
+                                                        <span class="table-text" *ngIf="i.InProgressPercentage != '-'">
+                                                            {{i.InProgressPercentage}}%
+                                                        </span>
+                                                        <span class="table-text" *ngIf="i.InProgressPercentage == '-'">
+                                                            -
+                                                        </span>
+                                                    </div>
+                                                </td>
+                                                <td class="text-left desc-modal">
+                                                    <div>
+                                                        <b class="table-title">
+                                                            <span>
+                                                                {{i.dateOfEntry | date: 'MMM d, y'}}
+                                                            </span>
+                                                        </b>
+                                                    </div>
+                                                    <div class="help-block help-desc line-divider small">
+                                                        <ng-container *ngIf="i.type === 1">
+                                                            <span class="table-text">
+                                                                <ng-container
+                                                                    *ngFor="let j of i?.associatedUserIdsIdTitle; index as q">
+                                                                    {{j?.title}}{{q ===
+                                                                    i.associatedUserIdsIdTitle.length - 1 ? '' : ','}}
+                                                                </ng-container>
+                                                            </span>
+                                                            <div class="table-fulldesc"
+                                                                *ngFor="let j of i?.associatedUserIdsIdTitle; index as q">
+                                                                <ng-container
+                                                                    *ngFor="let j of i?.associatedUserIdsIdTitle; index as q">
+                                                                    <span class="text"> {{j?.title}}{{q ===
+                                                                        i.associatedUserIdsIdTitle.length - 1 ? '' :
+                                                                        ','}}</span>
+                                                                </ng-container>
+
+                                                            </div>
+                                                        </ng-container>
+                                                        <span *ngIf="i.type != 1"
+                                                            class="table-text">{{i?.user?.title}}</span>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-none row min-h-50 space-5">
+                        <div class="col-md-6 h-100 chart-aside chat-streem-main">
+                            <div class="card card-box card-chat h-100 fadeIn wow" data-wow-delay="600ms"
+                                (click)="openChatModal()">
+                                <div class="card-header pl-25">
+                                    <h5>Chat Stream</h5>
+                                </div>
+                                <div class="card-body pb-0">
+                                    <div class="h-100 chart-scroll scrollbar">
+                                        <ul class="chat-ul">
+                                            <li class="d-flex flex-wrap chat-li">
+                                                <div>
+                                                    <span class="active user-activation user-img"
+                                                        style="background-image: url(assets/images/user-1.png);"></span>
+                                                </div>
+                                                <div class="flex-1">
+                                                    <div
+                                                        class="d-flex flex-wrap align-items-center justify-content-between w-100 user-header">
+                                                        <h4 class="flex-1 chart-name">John Doe</h4>
+                                                        <div class="d-flex flex-wrap align-items-center">
+                                                            <time class="chart-date">May 12, 2018</time>
+                                                            <time class="chart-time">4:41P</time>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="flex-1 chat-message">
+                                                        <p>
+                                                            When our power of choice is untrammelled and when nothing
+                                                            prevents our being able to do what we like best, every
+                                                            pleasure
+                                                            is to be welcomed
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li class="d-flex flex-wrap chat-li">
+                                                <div>
+                                                    <span class="active user-activation user-img"
+                                                        style="background-image: url(assets/images/user-1.png);">
+                                                    </span>
+                                                </div>
+                                                <div class="flex-1">
+                                                    <div
+                                                        class="d-flex flex-wrap align-items-center justify-content-between w-100 user-header">
+                                                        <h4 class="flex-1 chart-name">Bart Stathes</h4>
+                                                        <div class="d-flex flex-wrap align-items-center">
+                                                            <time class="chart-date">May 15, 2018</time>
+                                                            <time class="chart-time">9:46P</time>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="flex-1 chat-message">
+                                                        <p>
+                                                            Long t officiis debitis aut rerum necessitatibus saepe
+                                                            eveniet ut et voluptates
+                                                            repudiandae
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li class="d-flex flex-wrap chat-li">
+                                                <div>
+                                                    <span class="active user-activation user-img"
+                                                        style="background-image: url(assets/images/user-1.png);"></span>
+                                                </div>
+                                                <div class="flex-1">
+                                                    <div
+                                                        class="d-flex flex-wrap align-items-center justify-content-between w-100 user-header">
+                                                        <h4 class="flex-1 text-warning chart-name">Management Group</h4>
+                                                        <div class="d-flex flex-wrap align-items-center">
+                                                            <time class="chart-date">May 16, 2018</time>
+                                                            <time class="chart-time">12:41P</time>
+                                                        </div>
+                                                    </div>
+                                                    <div class="flex-1 chart-img chat-message">
+                                                        <img src="assets/images/chart-img.jpg" alt="Chart Image">
+                                                        <p>
+                                                            Suprele ehenderit qui in ea voluptate velit esse quam nihil
+                                                            molestiae consequatur,
+                                                            vel
+                                                            illum qui dolorem eum fugiat quo voluptas.
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li class="d-flex flex-wrap chat-li">
+                                                <div>
+                                                    <span class="active user-activation user-img"
+                                                        style="background-image: url(assets/images/user-1.png);"></span>
+                                                </div>
+                                                <div class="flex-1">
+                                                    <div
+                                                        class="d-flex flex-wrap align-items-center justify-content-between w-100 user-header">
+                                                        <h4 class="flex-1 chart-name">John Doe</h4>
+                                                        <div class="d-flex flex-wrap align-items-center">
+                                                            <time class="chart-date">May 12, 2018</time>
+                                                            <time class="chart-time">4:41P</time>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="flex-1 chat-message">
+                                                        <p>
+                                                            When our power of choice is untrammelled and when nothing
+                                                            prevents our being able to do what we like best, every
+                                                            pleasure
+                                                            is to be welcomed
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li class="d-flex flex-wrap chat-li">
+                                                <div>
+                                                    <span class="active user-activation user-img"
+                                                        style="background-image: url(assets/images/user-1.png);">
+                                                    </span>
+                                                </div>
+                                                <div class="flex-1">
+                                                    <div
+                                                        class="d-flex flex-wrap align-items-center justify-content-between w-100 user-header">
+                                                        <h4 class="flex-1 chart-name">Bart Stathes</h4>
+                                                        <div class="d-flex flex-wrap align-items-center">
+                                                            <time class="chart-date">May 15, 2018</time>
+                                                            <time class="chart-time">9:46P</time>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="flex-1 chat-message">
+                                                        <p>
+                                                            Long t officiis debitis aut rerum necessitatibus saepe
+                                                            eveniet ut et voluptates
+                                                            repudiandae
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li class="d-flex flex-wrap chat-li">
+                                                <div>
+                                                    <span class="active user-activation user-img"
+                                                        style="background-image: url(assets/images/user-1.png);"></span>
+                                                </div>
+                                                <div class="flex-1">
+                                                    <div
+                                                        class="d-flex flex-wrap align-items-center justify-content-between w-100 user-header">
+                                                        <h4 class="flex-1 chart-name">John Doe</h4>
+                                                        <div class="d-flex flex-wrap align-items-center">
+                                                            <time class="chart-date">May 12, 2018</time>
+                                                            <time class="chart-time">4:41P</time>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="flex-1 chat-message">
+                                                        <p>
+                                                            When our power of choice is untrammelled and when nothing
+                                                            prevents our being able to do what we like best, every
+                                                            pleasure
+                                                            is to be welcomed
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li class="d-flex flex-wrap chat-li">
+                                                <div>
+                                                    <span class="active user-activation user-img"
+                                                        style="background-image: url(assets/images/user-1.png);">
+                                                    </span>
+                                                </div>
+                                                <div class="flex-1">
+                                                    <div
+                                                        class="d-flex flex-wrap align-items-center justify-content-between w-100 user-header">
+                                                        <h4 class="flex-1 chart-name">Bart Stathes</h4>
+                                                        <div class="d-flex flex-wrap align-items-center">
+                                                            <time class="chart-date">May 15, 2018</time>
+                                                            <time class="chart-time">9:46P</time>
+                                                        </div>
+                                                    </div>
+                                                    <div class="flex-1 chat-message">
+                                                        <p>
+                                                            Long t officiis debitis aut rerum necessitatibus saepe
+                                                            eveniet ut et voluptates
+                                                            repudiandae
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 h-100">
+                            <div class="card card-box card-memos h-100 fadeIn wow" data-wow-delay="800ms">
+                                <div class="d-flex flex-wrap card-header justify-content-between pl-25">
+                                    <h5 class="position-relative" dropdown placement="auto">
+                                        Memos <a href="javascript:void(0);" class="text-info inventory-label"
+                                            dropdownToggle aria-controls="dropdown-basic2"
+                                            (click)="memoType=''">{{memoTypeName}}</a>
+                                        <ul id="dropdown-basic2" *dropdownMenu
+                                            class="dropdown-gray dropdown-menu dropdown-notifications w-140 left light"
+                                            role="menu" aria-labelledby="button-basic">
+
+                                            <li role="menuitem" *ngIf="memoType != 'Users'">
+                                                <a class="dropdown-item" href="javascript:void(0)"
+                                                    (click)="changeMemoFilter('Read', 'Read')">Read</a>
+                                            </li>
+                                            <li role="menuitem" *ngIf="memoType != 'Users'">
+                                                <a class="dropdown-item" href="javascript:void(0)"
+                                                    (click)="changeMemoFilter('UnRead', 'UnRead')">UnRead</a>
+                                            </li>
+                                            <li role="menuitem" *ngIf="memoType != 'Users'">
+                                                <a class="dropdown-item" href="javascript:void(0)"
+                                                    (click)="changeMemoFilter('Users', 'Users');$event.stopPropagation();">Users</a>
+                                            </li>
+                                            <div *ngIf="memoType == 'Users'" style="overflow: auto;height: 100px;">
+                                                <li *ngFor="let i of salesRepresentatives; index as index"
+                                                    role="menuitem">
+                                                    <a class="dropdown-item" href="javascript:void(0)"
+                                                        (click)="changeMemoFilterUsers(i);">{{i}}</a>
+                                                </li>
+                                            </div>
+                                        </ul>
+                                    </h5>
+                                </div>
+                                <div class="card-body pb-0">
+                                    <div class="h-100 scrollbar">
+                                        <ul class="memos-list">
+                                            <li *ngFor="let i of memoListRecords; index as index">
+                                                <div class="d-flex flex-wrap justify-content-between memos-header">
+                                                    <strong class="memos-date">{{i.createdOn}}</strong>
+                                                    <b class="memos-rules"> {{i.title}}</b>
+                                                </div>
+                                                <p>
+                                                    {{i.summary}}
+                                                </p>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 Notification-calendar-section sideBar-noti">
+            <div class="contentBox task-page task-page-margin">
+                <div class="h-100 w-100">
+                    <div class="card card-box card-notifications fadeIn wow"
+                        [ngClass]="showCalendar ? 'card-calendar' : ''" data-wow-delay="400ms">
+                        <div id="chart">
+                            <apx-chart [series]="chartOptions.series" [chart]="chartOptions.chart"
+                                [dataLabels]="chartOptions.dataLabels" [plotOptions]="chartOptions.plotOptions"
+                                [responsive]="chartOptions.responsive" [xaxis]="chartOptions.xaxis"
+                                [legend]="chartOptions.legend" [fill]="chartOptions.fill"></apx-chart>
+                        </div>
+                    </div>
+
+                    <div class="card card-box card-notifications card-statistics fadeIn wow" data-wow-delay="1000ms">
+                        <div id="chart">
+                            <apx-chart [series]="chartOptions2.series" [chart]="chartOptions2.chart"
+                                [labels]="chartOptions2.labels" [responsive]="chartOptions2.responsive"></apx-chart>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

@@ -114,7 +114,7 @@ import { ErrorMessages } from '../common/errorMessages';
               import('./invoicing/invoicing.module').then(
                 (m) => m.InvoicingModule
               ),
-          },
+          }, 
           {
             path: 'crm',
             loadChildren: () =>

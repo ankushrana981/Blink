@@ -35,6 +35,8 @@ export type ChartOptions = {
   xaxis: ApexXAxis;
   legend: ApexLegend;
   fill: ApexFill;
+  yaxis:ApexYAxis
+  grid:ApexGrid
 };
 
 @Component({
@@ -50,7 +52,7 @@ export type ChartOptions = {
 export class CrmDashBoardComponent extends BaseComponent implements OnInit {
   selectedTab: any;
   timeSelected = false;
-  isTaskDashboard;
+  public isTaskDashboard: boolean = true;
   showStatistics = true;
   showNotifications = true;
   public filterData: Array<any> = [];
@@ -123,6 +125,9 @@ export class CrmDashBoardComponent extends BaseComponent implements OnInit {
   public branches: [];
   public users = [];
   subTask_due_date: Date;
+  isDaily = false
+  isPipeline = false
+  
 
 
   public data = {
@@ -335,8 +340,8 @@ export class CrmDashBoardComponent extends BaseComponent implements OnInit {
       ],
       chart: {
         type: "bar",
-        height: 250,
-        width:290,
+        height: 275,
+        width:475,
         stacked: true,
 
         toolbar: {
@@ -378,23 +383,24 @@ export class CrmDashBoardComponent extends BaseComponent implements OnInit {
           "06/2011"
         ]
       },
+      
       legend: {
         position: "right",
         offsetY: 40
       },
       fill: {
         opacity: 1
+      },
+      grid: {
+        show: false   // ✅ This hides the background lines
       }
     };
     this.chartOptions2 = {
       series: [44, 55, 13, 43, 22],
       chart: {
         type: "donut",
-        width:275,
-        
-        
+        width: 250,
       },
-      
       labels: ["Team A", "Team B", "Team C", "Team D", "Team E"],
       responsive: [
         {
@@ -404,12 +410,12 @@ export class CrmDashBoardComponent extends BaseComponent implements OnInit {
               width: 300,
             },
             legend: {
-              position: "bottom"
+              show: false, // 💥 Also disable in responsive config
             }
           }
         }
       ]
-    };
+    };    
   }
   ngOnInit(): void {
     this.getTaskStatistics();
@@ -1926,5 +1932,22 @@ changedParentFilter(value) {
                   .catch((e) => {
                     console.log('there is an error:', e);
                   });
+              }
+
+              showWorkspaceSales() {
+                this.isWorkspaceSelection = !this.isWorkspaceSelection;
+                this.isDaily = false
+                this.isPipeline = false
+              }
+              showWorkspaceDaily(){
+                this.isDaily =  !this.isDaily
+                this.isWorkspaceSelection = false
+                this.isPipeline = false
+
+              }
+              showWorkspacePipeline(){
+                this.isPipeline = !this.isPipeline
+                this.isDaily = false
+                this.isWorkspaceSelection = false
               }
 }

@@ -1,7 +1,44 @@
 <div class="dashboardWrap">
     <div class="task-title-main">
         <div class="viewdata-title" (clickOutside)="isWorkspaceSelection=false">
-            <h2>CRM Dashboard</h2>
+            <h2>CRM Dashboard <span>
+            <span class="clickable title-span" *ngIf="isTaskDashboard" (click)="showWorkspaceSales()"> Sales Brief
+                <i class="fa" [ngClass]="isWorkspaceSelection ? 'fa-angle-down' : 'fa-angle-right'"></i> </span>
+                
+                <span class="clickable title-span" *ngIf="isTaskDashboard" (click)="showWorkspaceDaily()"> Daily
+                    <i class="fa" [ngClass]=" isDaily? 'fa-angle-down' : 'fa-angle-right'"></i> </span>
+                  
+                    <span class="clickable title-span" *ngIf="isTaskDashboard" (click)="showWorkspacePipeline()"> Pipeline
+                        <i class="fa" [ngClass]="isPipeline ? 'fa-angle-down' : 'fa-angle-right'"></i> </span>
+                        </span>
+            </h2>
+                
+                   <span *ngIf="isWorkspaceSelection" class="dark">
+                    <ul class="d-flex flex-column dropdown-table align-items-center dark right show workspace-list workspaceWidth"
+                        [ngClass]="isTaskDashboard ? 'taskDashboardSelectionPopUp' : 'workspaceSelectionPopUp'">
+                        <li class="mb-1">
+                            <span class="order-animate1 clickable customanimate">Customer Performance</span>
+                        </li>
+                    </ul>
+                </span>
+                
+                <span *ngIf="isDaily" class="dark">
+                    <ul class="d-flex flex-column dropdown-table align-items-center dark right show workspace-list workspaceWidth"
+                        [ngClass]="isTaskDashboard ? 'taskDashboardSelectionPopUp' : 'workspaceSelectionPopUp'">
+                        <li class="mb-1">
+                            <span class="order-animate1 clickable customanimate">Customer Daily</span>
+                        </li>
+                    </ul>
+                </span>
+                
+                <span *ngIf="isPipeline" class="dark">
+                    <ul class="d-flex flex-column dropdown-table align-items-center dark right show workspace-list workspaceWidth"
+                        [ngClass]="isTaskDashboard ? 'taskDashboardSelectionPopUp' : 'workspaceSelectionPopUp'">
+                        <li class="mb-1">
+                            <span class="order-animate1 clickable customanimate">Customer Pipeline</span>
+                        </li>
+                    </ul>
+                </span>
         </div>
         <div class="rightSideFilter space-10" [ngClass]="{'filteropen': isFilterOpen, 'dayopen': addDayClass}">
             <div class="nav-filter-wrap fadeIn max-w-100 wow" data-wow-delay="100ms">
@@ -825,19 +862,34 @@
                     <div class="card card-box card-notifications fadeIn wow"
                         [ngClass]="showCalendar ? 'card-calendar' : ''" data-wow-delay="400ms">
                         <div id="chart">
-                            <h3>CRM Activity<span>Past 7 days</span></h3>
+                            <h3 class="barChartHeading">CRM Activity<span > Past 7 days</span></h3>
                             <apx-chart class="d-flex" [series]="chartOptions.series" [chart]="chartOptions.chart"
                                 [dataLabels]="chartOptions.dataLabels" [plotOptions]="chartOptions.plotOptions"
                                 [responsive]="chartOptions.responsive" [xaxis]="chartOptions.xaxis"
-                                [legend]="chartOptions.legend" [fill]="chartOptions.fill"></apx-chart>
+                                [legend]="chartOptions.legend" [fill]="chartOptions.fill" [yaxis]="{ labels: { show: false } }" [grid]="chartOptions.grid"></apx-chart>
                         </div>
                     </div>
 
                     <div class="pieChart card card-box card-notifications card-statistics fadeIn wow mt-2" data-wow-delay="1000ms">
                         <div class="pt-4" id="chart">
-                            <h3>CRM Activity<span>Past 7 days</span></h3>
+                            
+                            <h3 class="chartHeading">Activity Breakdown</h3>
+                          <div class="con d-flex">
+                           
                             <apx-chart [series]="chartOptions2.series" [chart]="chartOptions2.chart"
-                                [labels]="chartOptions2.labels" [responsive]="chartOptions2.responsive"></apx-chart>
+                                [labels]="chartOptions2.labels" [responsive]="chartOptions2.responsive" [legend]="{ show: false }"></apx-chart>
+
+                                <div class="custom-legend">
+                                    <div class="legend-item text-color-initial "> <div class="dot bg-initial"></div><div><div>Initial</div><div class="value">55 / 48%</div></div></div>
+                                    <div class="legend-item text-color-initial "> <div class="dot bg-followup"></div><div><div>Followup</div><div class="value">55 / 48%</div></div></div>
+                                    <div class="legend-item text-color-initial "> <div class="dot bg-demo"></div><div><div>Demo</div><div class="value">55 / 48%</div></div></div>
+                                    <div class="legend-item text-color-initial "> <div class="dot bg-negotiation"></div><div><div>Negotiation</div><div class="value">55 / 48%</div></div></div>
+                                    <div class="legend-item text-color-initial "> <div class="dot bg-closing"></div><div><div>Closing</div><div class="value">55 / 48%</div></div></div>
+                                    <div class="legend-item text-color-initial "> <div class="dot bg-rejection"></div><div><div>Rejection</div><div class="value">55 / 48%</div></div></div>
+                                  </div>
+
+                          </div>
+     
                         </div>
                     </div>
                 </div>

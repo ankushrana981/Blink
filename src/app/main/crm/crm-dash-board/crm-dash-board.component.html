@@ -2,29 +2,29 @@
     <div class="task-title-main">
         <div class="viewdata-title" (clickOutside)="isWorkspaceSelection=false">
             <h2>CRM Dashboard <span>
-            <span class="clickable title-span" *ngIf="isTaskDashboard" (click)="showWorkspaceSales()"> Sales Brief
+            <span class="clickable title-span" *ngIf="isCRMDashborad" (click)="showWorkspaceSales()"> Sales Brief
                 <i class="fa" [ngClass]="isWorkspaceSelection ? 'fa-angle-down' : 'fa-angle-right'"></i> </span>
                 
-                <span class="clickable title-span" *ngIf="isTaskDashboard" (click)="showWorkspaceDaily()"> Daily
+                <span class="clickable title-span" *ngIf="isCRMDashborad" (click)="showWorkspaceDaily()"> Daily
                     <i class="fa" [ngClass]=" isDaily? 'fa-angle-down' : 'fa-angle-right'"></i> </span>
                   
-                    <span class="clickable title-span" *ngIf="isTaskDashboard" (click)="showWorkspacePipeline()"> Pipeline
+                    <span class="clickable title-span" *ngIf="isCRMDashborad" (click)="showWorkspacePipeline()"> Pipeline
                         <i class="fa" [ngClass]="isPipeline ? 'fa-angle-down' : 'fa-angle-right'"></i> </span>
                         </span>
             </h2>
                 
                    <span *ngIf="isWorkspaceSelection" class="dark">
                     <ul class="d-flex flex-column dropdown-table align-items-center dark right show workspace-list workspaceWidth"
-                        [ngClass]="isTaskDashboard ? 'taskDashboardSelectionPopUp' : 'workspaceSelectionPopUp'">
-                        <li class="mb-1">
-                            <span class="order-animate1 clickable customanimate">Customer Performance</span>
+                        [ngClass]="isCRMDashborad ? 'taskDashboardSelectionPopUp' : 'workspaceSelectionPopUp'">
+                        <li class="mb-1" (click)="changeToCustomerCenteric()">
+                            <span class="order-animate1 clickable customanimate">Customer Centric</span>
                         </li>
                     </ul>
                 </span>
                 
                 <span *ngIf="isDaily" class="dark">
                     <ul class="d-flex flex-column dropdown-table align-items-center dark right show workspace-list workspaceWidth"
-                        [ngClass]="isTaskDashboard ? 'taskDashboardSelectionPopUp' : 'workspaceSelectionPopUp'">
+                        [ngClass]="isCRMDashborad ? 'taskDashboardSelectionPopUp' : 'workspaceSelectionPopUp'">
                         <li class="mb-1">
                             <span class="order-animate1 clickable customanimate">Customer Daily</span>
                         </li>
@@ -33,7 +33,7 @@
                 
                 <span *ngIf="isPipeline" class="dark">
                     <ul class="d-flex flex-column dropdown-table align-items-center dark right show workspace-list workspaceWidth"
-                        [ngClass]="isTaskDashboard ? 'taskDashboardSelectionPopUp' : 'workspaceSelectionPopUp'">
+                        [ngClass]="isCRMDashborad ? 'taskDashboardSelectionPopUp' : 'workspaceSelectionPopUp'">
                         <li class="mb-1">
                             <span class="order-animate1 clickable customanimate">Customer Pipeline</span>
                         </li>
@@ -399,46 +399,46 @@
 
     </div>
     <div class="row space-10 task-height task-tab-main">
-        <div class="col-xl-9 card card-box fadeIn task-tab wow">
+        <div  *ngIf="showCustomerCentic" class="col-xl-9 card card-box fadeIn task-tab wow">
 
             <ul class="nav nav-tabs filterDashboardData" role="tablist">
-                <li class="nav-item" *ngIf="isTaskDashboard">
+                <li class="nav-item" *ngIf="isCRMDashborad">
                     <a class="nav-link" [ngClass]="{ 'active': selectedTab === 0 }" href="javascript:void(0);"
                         role="tab" (click)="filterDashboardData(0)">All</a>
                 </li>
-                <li class="nav-item" *ngIf="isTaskDashboard">
+                <li class="nav-item" *ngIf="isCRMDashborad">
                     <a class="nav-link" [ngClass]="{ 'active': selectedTab === 1 }" href="javascript:void(0);"
                         role="tab" (click)="filterDashboardData(1)">New</a>
                 </li>
-                <li class="nav-item" *ngIf="isTaskDashboard">
+                <li class="nav-item" *ngIf="isCRMDashborad">
                     <a class="nav-link" [ngClass]="{ 'active': selectedTab === 2 }" href="javascript:void(0);"
                         role="tab" (click)="filterDashboardData(2)">Progressed</a>
                 </li>
-                <li class="nav-item" *ngIf="isTaskDashboard">
+                <li class="nav-item" *ngIf="isCRMDashborad">
                     <a class="nav-link" [ngClass]="{ 'active': selectedTab === 3 }" href="javascript:void(0);"
                         role="tab" (click)="filterDashboardData(3)">Overdue</a>
                 </li>
-                <li class="nav-item" *ngIf="isTaskDashboard">
+                <li class="nav-item" *ngIf="isCRMDashborad">
                     <a class="nav-link" [ngClass]="{ 'active': selectedTab === 4 }" href="javascript:void(0);"
                         role="tab" (click)="filterDashboardData(4)">Forgotten</a>
                 </li>
-                <li class="nav-item" *ngIf="!isTaskDashboard">
+                <li class="nav-item" *ngIf="!isCRMDashborad">
                     <a class="nav-link" [ngClass]="{ 'active': selectedTab === 5 }" href="javascript:void(0);"
                         role="tab" (click)="filterDashboardData(5)">Initial</a>
                 </li>
-                <li class="nav-item" *ngIf="!isTaskDashboard">
+                <li class="nav-item" *ngIf="!isCRMDashborad">
                     <a class="nav-link" [ngClass]="{ 'active': selectedTab === 6 }" href="javascript:void(0);"
                         role="tab" (click)="filterDashboardData(6)">Folow Up</a>
                 </li>
-                <li class="nav-item" *ngIf="!isTaskDashboard">
+                <li class="nav-item" *ngIf="!isCRMDashborad">
                     <a class="nav-link" [ngClass]="{ 'active': selectedTab === 7 }" href="javascript:void(0);"
                         role="tab" (click)="filterDashboardData(7)">Due Soon</a>
                 </li>
-                <li class="nav-item" *ngIf="!isTaskDashboard">
+                <li class="nav-item" *ngIf="!isCRMDashborad">
                     <a class="nav-link" [ngClass]="{ 'active': selectedTab === 3 }" href="javascript:void(0);"
                         role="tab" (click)="filterDashboardData(3)">Negotiation</a>
                 </li>
-                <li class="nav-item" *ngIf="!isTaskDashboard">
+                <li class="nav-item" *ngIf="!isCRMDashborad">
                     <a class="nav-link" [ngClass]="{ 'active': selectedTab === 4 }" href="javascript:void(0);"
                         role="tab" (click)="filterDashboardData(4)">Close</a>
                 </li>
@@ -508,6 +508,163 @@
                 </div>
             </div>
         </div>
+
+
+        <div *ngIf="!showCustomerCentic" class="col-xl-9 card card-box fadeIn task-tab wow">
+
+            <ul class="nav nav-tabs filterDashboardData" role="tablist">
+                <li class="nav-item" *ngIf="isCRMDashborad">
+                    <a class="nav-link" [ngClass]="{ 'active': selectedTab === 1 }" href="javascript:void(0);"
+                        role="tab" (click)="filterDashboardData(1)">New</a>
+                </li>
+                <li class="nav-item" *ngIf="isCRMDashborad">
+                    <a class="nav-link" [ngClass]="{ 'active': selectedTab === 2 }" href="javascript:void(0);"
+                        role="tab" (click)="filterDashboardData(2)">Progressed</a>
+                </li>
+                <li class="nav-item" *ngIf="isCRMDashborad">
+                    <a class="nav-link" [ngClass]="{ 'active': selectedTab === 3 }" href="javascript:void(0);"
+                        role="tab" (click)="filterDashboardData(3)">Overdue</a>
+                </li>
+                <li class="nav-item" *ngIf="isCRMDashborad">
+                    <a class="nav-link" [ngClass]="{ 'active': selectedTab === 4 }" href="javascript:void(0);"
+                        role="tab" (click)="filterDashboardData(4)">Forgotten</a>
+                </li>
+                <li class="nav-item" *ngIf="!isCRMDashborad">
+                    <a class="nav-link" [ngClass]="{ 'active': selectedTab === 5 }" href="javascript:void(0);"
+                        role="tab" (click)="filterDashboardData(5)">Initial</a>
+                </li>
+                <li class="nav-item" *ngIf="!isCRMDashborad">
+                    <a class="nav-link" [ngClass]="{ 'active': selectedTab === 6 }" href="javascript:void(0);"
+                        role="tab" (click)="filterDashboardData(6)">Folow Up</a>
+                </li>
+                <li class="nav-item" *ngIf="!isCRMDashborad">
+                    <a class="nav-link" [ngClass]="{ 'active': selectedTab === 7 }" href="javascript:void(0);"
+                        role="tab" (click)="filterDashboardData(7)">Due Soon</a>
+                </li>
+                <li class="nav-item" *ngIf="!isCRMDashborad">
+                    <a class="nav-link" [ngClass]="{ 'active': selectedTab === 3 }" href="javascript:void(0);"
+                        role="tab" (click)="filterDashboardData(3)">Negotiation</a>
+                </li>
+                <li class="nav-item" *ngIf="!isCRMDashborad">
+                    <a class="nav-link" [ngClass]="{ 'active': selectedTab === 4 }" href="javascript:void(0);"
+                        role="tab" (click)="filterDashboardData(4)">Close</a>
+                </li>
+            </ul>
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <div class="active tab-pane" role="tabpanel">
+                    <div class="h-424 px-5 shadow-none filterDashboardDataTable overflow-hidden overflow-x-hidden scrollbar scrollbar-table">
+
+                        <div class="table-box p-0 attension-table mb-20">
+                            <div class="table-respons h-100 overflow-x-hidden overflow-y-auto"
+                                (scroll)="onScroll($event)">
+                                <table style=" width:100%"
+                                    class="table-dashboard table-hover default-to-custom first-padding-0 task-list-table">
+                                    <thead class="task-list-head position-relative">
+                                        <tr class="d-1 fadeIn in x-animated">
+                                            <th class="table-date ps-5">
+                                                <b class="table-title">
+                                                    <span class="table-text">Date</span>
+                                                </b>
+                                                <div class="before-line help-block line-divider small type divider"></div>
+                                                <b class="table-title">
+                                                    <span class="table-text">Customer</span>
+                                                </b>
+                                            </th>
+                                          
+                                            <th class="table-date">
+                                                <b class="table-title">
+                                                    <span class="table-text">Description</span>
+                                                </b>
+                                                <div class="before-line help-block line-divider small type divider"></div>
+                                                <b class="table-title">
+                                                    <span class="table-text">Pipeline</span>
+                                                </b>
+                                            </th>
+                                         
+                                          
+                                        </tr>
+                                      <tr class="tableHeading">
+                                        <th class="table-date pe-0">
+                                            <b class="table-title">
+                                                <span class="table-text">&nbsp;</span>
+                                            </b>
+
+                                            <div class="before-line help-block line-divider small type divider"></div>
+                                            <b class="table-title">
+                                                <span class="table-text">Interaction By</span>
+                                            </b>
+                                        </th>
+                                      </tr>
+                                        
+                                      
+                                       
+
+                                        
+                                    </thead>
+                                    <!-- [@fadeIn]="listrecords?.length" -->
+                                    <tbody fxLayout="row wrap" class="list task-list-body" *ngFor="let item of dummyArry ; let i = index">
+
+                                        <tr (click)="toggleRow(i)" >
+                                            <td class="text-left task-board ps-0 position-relative ps-5">
+                                                <span class="number">{{i+1}}</span>
+                                                <span class="baord">Feb 21, 2021</span>
+                                                <div class="before-line help-block line-divider small type divider large"></div>
+                                                <span class="subHeading">Apple </span>
+                                        
+                                            </td>
+                                            <td class="ps-4 text-left  task-board">
+                                                <span class="baord">Text entry desc text that details the content of the task desc text that details the content of the task  of the task ...</span>
+                                                <div class="before-line help-block line-divider small type divider large "></div>
+                                                <span  class="subHeading">Negotiations</span>
+                                            </td>
+                                            <td>
+                                                <span>&nbsp;</span>
+                                                <div class="before-line help-block line-divider small type divider "></div>
+                                                <span  class="subHeading ps-4">Sales Person</span>
+                                            </td>
+                                        
+                                        </tr>
+
+                                        <tr *ngIf="openedRowIndex === i" class="fadeIn">
+                                            <td class="text-left task-board ps-0 position-relative ps-5">
+                                                <span>Feb 21, 2021</span>
+                                                <div class="before-line help-block line-divider small type divider large"></div>
+                                                <span class="subHeading">&nbsp;</span>
+                                        
+                                            </td>
+                                            <td class="ps-4 text-left  task-board">
+                                                <span>We are hired to consult Iconic Coffee to create their store consult Coffee ...</span>
+                                                <div class="before-line help-block line-divider small type divider large "></div>
+                                                <span  class="subHeading">Negotiations</span>
+                                            </td>
+                                            <td class="ps-4">
+                                                <span>&nbsp;</span>
+                                                <div class="before-line help-block line-divider small type divider "></div>
+                                                <span  class="subHeading">Sales Person</span>
+                                            </td>
+                                        
+                                        </tr>
+                                        
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <!-- </ng-scrollbar> -->
+
+                    </div>
+                </div>
+            </div>
+
+
+
+            
+
+
+
+        </div>
+
+<!--         
         <div class="col-xl-9 d-none fadeIn wow">
             <div class="contentBox task-page">
                 <div class="h-100 w-100">
@@ -855,7 +1012,11 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
+
+
+
+
         <div class="col-xl-3 Notification-calendar-section sideBar-noti">
             <div class="contentBox task-page task-page-margin">
                 <div class="h-100 w-100 allCharts">
@@ -896,5 +1057,11 @@
             </div>
         </div>
     </div>
+
+
+
+
+
+
 
 </div>

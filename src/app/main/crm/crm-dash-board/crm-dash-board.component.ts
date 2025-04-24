@@ -52,7 +52,7 @@ export type ChartOptions = {
 export class CrmDashBoardComponent extends BaseComponent implements OnInit {
   selectedTab: any;
   timeSelected = false;
-  public isTaskDashboard: boolean = true;
+  public isCRMDashborad: boolean = true;
   showStatistics = true;
   showNotifications = true;
   public filterData: Array<any> = [];
@@ -127,7 +127,13 @@ export class CrmDashBoardComponent extends BaseComponent implements OnInit {
   subTask_due_date: Date;
   isDaily = false
   isPipeline = false
-  
+  showCustomerCentic:boolean = false
+  openedRowIndex: number | null = null;
+
+
+  // dummyArry to run loop and check the popup
+  dummyArry = [1,2,3]
+
 
 
   public data = {
@@ -1949,5 +1955,13 @@ changedParentFilter(value) {
                 this.isPipeline = !this.isPipeline
                 this.isDaily = false
                 this.isWorkspaceSelection = false
+              }
+              changeToCustomerCenteric(){
+                this.showCustomerCentic = !this.showCustomerCentic
+                console.log(this.showCustomerCentic)
+              }
+
+              toggleRow(index: number): void {
+                this.openedRowIndex = this.openedRowIndex === index ? null : index;
               }
 }

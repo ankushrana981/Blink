@@ -223,3 +223,55 @@ text-transform: capitalize;
   }
   
 }
+
+.divider{
+
+  min-height: 5px !important;
+  height: 5px !important;
+  width: 10px;
+}
+.tableHeading{
+  position: absolute;
+  right:0% ;
+  top: 0%;
+}
+.divBefore::before{
+  min-height: 5px !important;
+  width: 65px;
+}
+.number{
+  position: absolute;
+  left: 0%;
+  top: 20%;
+  border: 1px solid grey;
+  border-radius: 50%;
+  height: 35px;
+  text-align: center;
+  width: 35px;
+  align-content: center;
+  background-color: white;
+  z-index: 2;
+}
+
+.large{
+  margin-left: -15px !important;
+}
+.large::before{
+  width: 150vh;
+}
+span {
+  white-space: nowrap;
+}
+
+.baord{
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 100%;  
+
+}
+.subHeading{
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 100%;
+
+}
